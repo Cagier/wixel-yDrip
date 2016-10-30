@@ -101,10 +101,10 @@ baud rate of 9600, feel free to change that in the code if you need.
 # HUGE PROPS TO:
 Stephen Black for the orignal xDrip project and kudos to all the people that he thanked as per below:
 
-Adrien De Croy for writing most of this for his Dexterity Prject!
-Lorelai for pointing him to all of these great resources and then also allowing me to use large portions of her code.
-John Stevens for further improving on Adrians code, which he also then used!!
-Don Brown over at [dexwatch](http://dexwatch.blogspot.com/) for initially pointing out that this is a possibility to him.
+Adrien De Croy for writing most of this for his Dexterity Project!
+Lorelai for pointing him to all of these great resources and then also allowing us to use large portions of her code.
+John Stevens for further improving on Adrians code, which Stephen (and I) also then used!
+Don Brown over at [dexwatch](http://dexwatch.blogspot.com/) for initially pointing out that this was a possibility to him.
 Ben West, John Costik and Scott Leibrand their awesome work with Nightscout and various other projects!
 And all the other awesome people that helped him out and contributed to awesome projects like NightScout
 
