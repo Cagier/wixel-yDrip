@@ -91,10 +91,6 @@ wixel back into bootloader mode.
 
 * step 5: Done with this part! Now hook it up to something!!!
 
-The yDrip is built with the following wiring:
-
-![yDrip picture](./ydrip.png?raw=true "yDrip wiring diagram")
-
 * step 6: Set up a Dexie Server to get the data and send it to your uploader phone - see links below
 
 ##### NOTE:
@@ -116,10 +112,17 @@ And from me also, I need to thank kokke for the original AES-128-C code which I 
 
 
 # LINKS
-* [Project Site](http://stephenblackwasalreadytaken.github.io/xDrip/)
+* [The original xDrip Project Site](http://stephenblackwasalreadytaken.github.io/xDrip/)
 * [What you will need & Diagrams](https://github.com/StephenBlackWasAlreadyTaken/xDrip/blob/gh-pages/hardware_setup.md)
 * [Wixel App](https://github.com/StephenBlackWasAlreadyTaken/wixel-xDrip)
 * [Android App](https://github.com/StephenBlackWasAlreadyTaken/xDrip)
 * [Original AES algorithm] (https://github.com/kokke/tiny-AES128-C)
 
 I will update these later to include all the yDrip references and the Dexie application
+
+
+# WIRING DIAGRAM
+
+The yDrip is built with the following wiring:
+
+![yDrip picture](./ydrip.png?raw=true "yDrip wiring diagram")
