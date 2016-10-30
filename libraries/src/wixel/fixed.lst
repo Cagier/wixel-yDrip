@@ -1,0 +1,18 @@
+                              1 ; This file contains the addresses of certain pieces of information that are
+                              2 ; stored the Wixel's bootloader.
+                              3 
+                              4     .module delay
+                              5     .area CSEG (CODE)
+                              6 
+                              7     .globl _serialNumber
+                              8     .globl _serialNumberStringDescriptor
+                              9     .globl _bootloaderDeviceDescriptor
+                             10 
+                             11 ;; The USB device descriptor of the bootloader is stored at this address:
+                    03CC     12 _bootloaderDeviceDescriptor = 0x03CC
+                             13 
+                             14 ;; The four bytes of the serial number are stored in the bootloader at this address:
+                    03E0     15 _serialNumber = 0x03E0
+                             16 
+                             17 ;; The Serial Number String Descriptor is stored in the bootloader at this address:
+                    03E6     18 _serialNumberStringDescriptor = 0x03E6

@@ -1,0 +1,1412 @@
+/** WiFi xDrip for use with ESS2866 module running Lua:
+  == Description ==
+  The app uses the radio_queue libray to receive packets.  It does not
+  transmit any packets.
+
+  The output from this app normally takes the following format:
+  RAWREADING TRANSMITTERBATTERY WIXELBATTERY
+  
+  The green LED indicates that data was just sent
+
+  PLEASE BE SURE TO SET YOUR TRANSMITTER ID BELOW
+
+  == Parameters ==
+radio_channel: See description in radio_link.h.
+*/
+
+/** Dependencies **************************************************************/
+/*#define DEBUG*/
+#include <cc2511_map.h>
+#include <board.h>
+#include <random.h>
+#include <time.h>
+#include <usb.h>
+#include <usb_com.h>
+#include <radio_registers.h>
+#include <radio_queue.h>
+#include <gpio.h>
+#include <uart1.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <adc.h>
+#include <aes.h>
+// #define cli()
+// #define sei()
+
+// Following for AES	****************************************************************************************************
+#include <stdint.h>		// Not sure if I need this - try commenting it out
+static void phex(uint8_t* str);	// Temporarily use for testing but can probably include logic directly in code later
+// End of AES section	****************************************************************************************************
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                           SET THESE VARIABLES TO MEET YOUR NEEDS                                 //
+//                                   1 = TRUE       0 = FALSE                                       //
+//                                                                                                  //
+  static XDATA const char transmitter_id[] = "6F5YP";                                               
+
+
+//                                                                                                  //
+  static volatile BIT only_listen_for_my_transmitter = 0;                                           //
+// 1 is recommended                                                                                 //
+//                                                                                                  //
+  static volatile BIT status_lights = 1;                                                            //
+// if status_lights = 1; the yellow light flashes while actively scanning                           //
+// if a light is flashing for more than 10 minutes straight, it may not be picking up your dex      //
+//                                                                                                  //
+  static volatile BIT allow_alternate_usb_protocol = 0;
+// if set to 1 and plugged in to USB then protocol output is suitable for dexterity and similar     //
+//                                                                                                  //
+//                                                                                                  //
+  static volatile BIT debug_mode = 0;
+// if set to 0 then no packet read and just loops connecting and printing							//
+//                                                                                                  //
+//..................................................................................................//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                 Advanced Options, dont change unless you know what you are doing                 //
+//                                                                                                  //
+//                                                                                                  //
+  static volatile uint8 wake_earlier_for_next_miss = 20;                                            //
+// if a packet is missed, wake this many seconds earlier to try and get the next one                //
+// shorter means better bettery life but more likely to miss multiple packets in a row              //
+//                                                                                                  //
+  static volatile uint8 misses_until_failure = 0;                                                   //
+// after how many missed packets should we just start a nonstop scan?                               //
+// a high value is better for conserving batter life if you go out of wixel range a lot             //
+// but it could also mean missing packets for MUCH longer periods of time                           //
+// a value of zero is best if you dont care at all about battery life                               //
+//                                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+  static volatile BIT enable_wixfone = 1;	
+// if set to 1 then this is different hardware that uses a 2G Fona instead of bluetooth module		//
+//																									//
+  static volatile BIT encrypt_output = 1;
+// if set to 1 then encrypt using AES to send over public networks (requires decryption at far end) //
+//																									//
+  static CODE const char apnString[] = "internet";                                                 //
+// You only need to change this if using the fona - set your network provider's APN here            //
+// this is usually unique for each mobile phone provider and you will probably need to google it    //
+// In Ireland the provider 3 (or O2) use "internet" and Vodafone uses "live.vodafone.com"			//
+//                                                                                                  //
+  static XDATA const char dexie_host_address[] = "intersecting.DuckDNS.org";
+  static XDATA const char dexie_host_port[] = "17611";
+// You only need to change this if using the fona - set your Dexie server details here				//
+// This is the address and the port number of the Dexie server which will receive the WixFone data  //
+// It may be any address and port that you like but I use a dynamic DNS and recommend this port no. //
+
+//  static CODE const char wixFone_ID[] = "Geordan";												//
+//   XDATA char wixFone_ID[] = "Geordan";															//
+   XDATA char wixFone_ID[] = "GGyDrip";															//
+// Again, you only need to change this if using the fona.											//
+// Just identifies this WixFone.  Not really required but handy for seeing who is logging in.		//
+// Might use this for mapping Mongo connection strings or TXIDs at some later stage					//  
+//                                                                                                  //
+//..................................................................................................//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+static XDATA volatile int8 start_channel = 0;
+//uint32 XDATA asciiToDexcomSrc(char *addr);
+uint32 XDATA getSrcValue(char srcVal);
+//volatile uint32 dex_tx_id;
+#define NUM_CHANNELS        (4)
+static int8 fOffset[NUM_CHANNELS] = {0xCE,0xD5,0xE6,0xE5};
+static XDATA int8 defaultfOffset[NUM_CHANNELS] = {0xCE,0xD5,0xE6,0xE5};
+static uint8 nChannels[NUM_CHANNELS] = { 0, 100, 199, 209 };
+static uint32 waitTimes[NUM_CHANNELS] = { 13500, 500, 500, 500 };
+//Now lets try to crank down the channel 1 wait time, if we can 5000 works but it wont catch channel 4 ever
+static uint32 delayedWaitTimes[NUM_CHANNELS] = { 0, 700, 700, 700 };
+static uint32 catch_offsets[NUM_CHANNELS] = { 0, 0, 0, 0 };
+static uint8 last_catch_channel = 0;
+BIT needsTimingCalibration = 1;
+BIT usbEnabled = 1;
+static uint8 save_IEN0;
+static uint8 save_IEN1;
+static uint8 save_IEN2;
+unsigned char XDATA PM2_BUF[7] = {0x06,0x06,0x06,0x06,0x06,0x06,0x04};
+unsigned char XDATA dmaDesc[8] = {0x00,0x00,0xDF,0xBE,0x00,0x07,0x20,0x42};
+volatile uint8 sequential_missed_packets = 0;
+
+// Temp
+//    XDATA char responseString[80]={0};
+//	XDATA int responseInt;
+//	XDATA int responseInt2;
+//    XDATA char responseString2[80]={0};
+//    XDATA char responseString3[80]={0};
+
+
+uint8 intMaxStrLen = 80;
+//XDATA char strOK[3] = {'O', 'K', 13};
+//static XDATA char strOK[3] = {'O', 'K', 13};
+XDATA uint8 AT_TIMEOUT = 1; // Was 20!
+static XDATA uint32 defaultATWait = 1000; // Default time for AT command to respond - crank down to get reduce overall time to send out data
+
+//   ************* FOR AES ********************************************************
+// static XDATA uint8_t key[] = { 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c };
+static XDATA uint8_t key[] = { 'x', 'D', 'r', '|', 'P', '2', 'g', '&', 'A', 'E', 'S', 'r', '@', '[', 'K', '!' };  //  Place your 16 Character ASCII key here!  (And also in your dexie.java)
+
+//static XDATA uint8_t RoundKey[176];
+//static void phex(uint8_t* str);
+// static void test_encrypt_cbc(void);*/
+
+XDATA typedef struct _Dexcom_packet {
+    uint8   len;
+    uint32  dest_addr;
+    uint32  src_addr;
+    uint8   port;
+    uint8   device_info;
+    uint8   txId;
+    uint16  raw;
+    uint16  filtered;
+    uint8   battery;
+    uint8   unknown;
+    uint8   checksum;
+    int8    RSSI;
+    uint8   LQI;
+} Dexcom_packet;
+
+void sleepInit(void) {
+   WORIRQ  |= (1<<4);
+}
+
+ISR(ST, 1) {
+    IRCON &= 0x7F;
+    WORIRQ &= 0xFE;
+    SLEEP &= 0xFC;
+}
+
+void switchToRCOSC(void) {
+    SLEEP &= ~0x04;
+    while ( ! (SLEEP & 0x20) );
+    CLKCON = (CLKCON & ~0x07) | 0x40 | 0x01;
+    while ( !(CLKCON & 0x40) );
+    SLEEP |= 0x04;
+}
+
+void uartEnable() {
+//    U1UCR |= 0x40; //CTS/RTS ON
+    U1UCR &= ~0x40; //CTS/RTS Off
+	U1CSR |= 0x40;
+    delayMs(100);
+}
+
+void uartDisable() {
+    delayMs(100);
+    U1UCR &= ~0x40; //CTS/RTS Off
+    U1CSR &= ~0x40; // Receiver disable
+}
+
+void blink_yellow_led() {
+    if(status_lights) {
+        LED_YELLOW(((getMs()/250) % 2));//Blink quarter seconds
+    }
+}
+
+void blink_red_led() {
+    if(status_lights) {
+        LED_RED(((getMs()/500) % 2));//Blink half seconds
+    }
+}
+
+/* Commented out to save memory
+int8 getPacketRSSI(Dexcom_packet* p) {
+    return (p->RSSI/2)-73;
+}
+*/
+
+uint8 getPacketPassedChecksum(Dexcom_packet* p) {
+    return ((p->LQI & 0x80)==0x80) ? 1:0;
+}
+
+uint8 bit_reverse_byte(uint8 in) {
+    uint8 XDATA bRet = 0;
+    if(in & 0x01)
+        bRet |= 0x80;
+    if(in & 0x02)
+        bRet |= 0x40;
+    if(in & 0x04)
+        bRet |= 0x20;
+    if(in & 0x08)
+        bRet |= 0x10;
+    if(in & 0x10)
+        bRet |= 0x08;
+    if(in & 0x20)
+        bRet |= 0x04;
+    if(in & 0x40)
+        bRet |= 0x02;
+    if(in & 0x80)
+        bRet |= 0x01;
+    return bRet;
+}
+
+uint8 min8(uint8 a, uint8 b) {
+    if(a < b) return a;
+    return b;
+}
+
+void bit_reverse_bytes(uint8* buf, uint8 nLen) {
+    uint8 XDATA i = 0;
+    for(; i < nLen; i++) {
+        buf[i] = bit_reverse_byte(buf[i]);
+    }
+}
+
+uint32 dex_num_decoder(uint16 usShortFloat) {
+    uint16 XDATA usReversed = usShortFloat;
+    uint8 XDATA usExponent = 0;
+    uint32 XDATA usMantissa = 0;
+    bit_reverse_bytes((uint8*)&usReversed, 2);
+    usExponent = ((usReversed & 0xE000) >> 13);
+    usMantissa = (usReversed & 0x1FFF);
+    return usMantissa << usExponent;
+}
+
+char XDATA SrcNameTable[32] = { '0', '1', '2', '3', '4', '5', '6', '7',
+                                '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+                                'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P',
+                                'Q', 'R', 'S', 'T', 'U', 'W', 'X', 'Y' };
+
+void dexcom_src_to_ascii(XDATA uint32 src, XDATA char addr[6]) {
+    addr[0] = SrcNameTable[(src >> 20) & 0x1F];
+    addr[1] = SrcNameTable[(src >> 15) & 0x1F];
+    addr[2] = SrcNameTable[(src >> 10) & 0x1F];
+    addr[3] = SrcNameTable[(src >> 5) & 0x1F];
+    addr[4] = SrcNameTable[(src >> 0) & 0x1F];
+    addr[5] = 0;
+}
+
+void clearRxErrors() {	
+    if (uart1RxBufferFullOccurred)
+    {   uart1RxBufferFullOccurred = 0;							// Clear Buffer Full Errors
+		LED_RED(1);												// Error Indicator
+	}
+	if (uart1RxParityErrorOccurred)
+    {   uart1RxParityErrorOccurred = 0;							// Clear Parity Errors
+		LED_RED(1);												// Error Indicator
+	}
+    if (uart1RxFramingErrorOccurred)
+    {   uart1RxFramingErrorOccurred = 0;
+		LED_RED(1);												// Put the red LED on to show there was an error
+		uartDisable();
+ //		U1CSR &= ~0x40;										    // U1CSR.RE = 0.  Disables reception of bytes on the UART.
+		delayMs(250);											// Crude and will slow us down but we can take the small hit
+//      U1CSR |= 0x40;									        // The line has been high for long enough, so re-enable the receiver.
+//	It would be nice to check the uart status here before we switch it on again
+		uartEnable();
+    }
+		LED_RED(0);												// Error Indicator
+}
+
+void doServices() {
+    boardService();
+    if(usbPowerPresent()) {
+        usbComService();
+	    usbShowStatusWithGreenLed();
+//		LED_RED(usbComRxControlSignals() & ACM_CONTROL_LINE_DTR);
+//		clearRxErrors();		//	Tentatively added this as otherwise might freeze waiting for an RX or TX buffer but may unintentionally enable UART
+    }
+}
+
+void initUart1() {
+    uart1Init();
+    uart1SetBaudRate(9600);	// Reduced from 9600 to see if error rate improves
+// Try increasing Baudrate again as very few errors on production rig
+}
+
+/* This takes too much DSEG memory so will use Dex_To_ASCII instead
+
+uint32 asciiToDexcomSrc(char addr[6]) {
+    uint32 XDATA src = 0;
+    src |= (getSrcValue(addr[0]) << 20);
+    src |= (getSrcValue(addr[1]) << 15);
+    src |= (getSrcValue(addr[2]) << 10);
+    src |= (getSrcValue(addr[3]) << 5);
+    src |= getSrcValue(addr[4]);
+    return src;
+}
+*/
+
+uint32 getSrcValue(XDATA char srcVal) {
+    XDATA uint8 i = 0;
+    for(i = 0; i < 32; i++) {
+        if (SrcNameTable[i]==srcVal) break;
+    }
+    return i & 0xFF;
+}
+
+// getFonaString(XDATA char uartCharacters[80]) {					// Read the uart input buffer once character at a time
+// char uartCharacters[80] getFonaString() {					// Read the uart input buffer once character at a time
+XDATA char * getFonaString() {					// Read the uart input buffer once character at a time
+   XDATA char uartCharacters[80];
+   XDATA int8 i;
+   XDATA int32 stop;
+   XDATA int32 now;
+	i=0;
+
+// Wait for some response back from Fona
+	stop = (getMs() + (AT_TIMEOUT * 1000));
+	now  = getMs();
+//	while (uart1RxAvailable() == 0 && stop > getMs()) {
+	while (uart1RxAvailable() == 0 && stop > now) {				// This && is still using up some DSEG but is cheaper than comparing stop to getMS()
+		now  = getMs();
+		delayMs(10);
+	}  
+	
+	while (uart1RxAvailable() && i < 80) {
+//		cli();													// disable interrupts to avoid rx errors
+		uartCharacters[i] = uart1RxReceiveByte();
+//		sei();			// enable interrupts not what the rx is complete
+// Echo input received back out to USB also
+	    if (usbPowerPresent()) {
+			while(usbComTxAvailable() == 0) {							//  Loop until space in the TX buffer to send a character
+//				LED_RED(1);												// Error Indicator
+				doServices();
+			} ;
+			usbComTxSendByte(uartCharacters[i]);
+		}
+		delayMs(10);
+		i++;
+//		if (uart1RxAvailable() && i == 80) i=0;					// wrap around for another line if more text  (very crude) 
+	}
+	uartCharacters[i] = 0;										// Add an end-of-string character after copying the input into the character array
+	return uartCharacters;
+}
+
+void sendAT(XDATA char atString[40]) {
+    XDATA char ATresponse[80]={0};
+	uartEnable();
+//	cli();
+	printf(atString);
+//	sei();
+//	Don't need to do this twice any more	
+//	delayMs(100);
+//	cli();
+//	printf(atString);
+//	sei();
+	delayMs(defaultATWait);
+// So read the input buffer here and pass it back.  Initially put it in a global variable which you can access anywhere	
+//	responseStr = getFonaString();
+//	strcpy(ATresponse, getFonaString());
+
+//	We can make this an output later
+//	return responseString;
+
+// That will do for the moment	
+}	
+BIT enableFona() {
+	XDATA char rxstring[40] = {0};
+//	XDATA char atString[40];
+//	int8 i=0;
+    uartEnable();													// Enable the serial connection
+	printf("gpio.mode(3, gpio.OUTPUT)\r\n");						// Enable GPIO on ESP2866 for Red LED
+	delayMs(defaultATWait);
+	printf("gpio.write(3, gpio.LOW)\r\n");							// Switch on Red LED
+	delayMs(defaultATWait);
+	printf("gpio.mode(4, gpio.OUTPUT)\r\n");							// Enable GPIO for Blue LED 
+	delayMs(defaultATWait);
+
+	printf("wifi.setmode(wifi.STATION)\r\n");						// Set up ESP2866 as client
+	delayMs(defaultATWait);
+//	printf("wifi.sta.config(\"Intersect_1\",\"Alongkey123\")\r\n");	// Connect to WiFi
+//	delayMs(3000);													// Wait for WiFi Connection
+	return 1;
+}
+
+XDATA int16 getWifiStatus() {										// Get battery strength using Fona AT command - no extra resistors required!
+	XDATA static int16 i=0;
+//	XDATA int8 loop=1;		// Was 3 but always got errors so just slowing us down.  Fix the error and remove the loop...
+//	XDATA int8 rxCount=0;
+	XDATA int16 intStatus = 0;
+	XDATA char c[80] = {0};
+//	XDATA char atString[40] = {0};
+	
+//	strcpy(atString, "ATE0\r\n"); sendAT(atString); // delayMs(defaultATWait);					// Switch off echo of commands so that wixel can buffer responses properly
+
+	c[0]=0;														// And mark string as empty
+	clearRxErrors();
+
+	boardService();
+//	strcpy(atString, "print(wifi.sta.status())\r\n"); //  sendAT(atString); //delayMs(1000);	// Ask for battery info - charging state, percentage and millivolts
+
+
+	uartEnable();
+//	cli();
+//	printf(atString);
+//	sei();
+	strcpy(c, (getFonaString())); // Clear buffer
+	printf("print(wifi.sta.status())\r\n");
+	delayMs(defaultATWait);
+
+//	rxCount = uart1RxAvailable();
+	while (uart1RxAvailable() > 0) {
+	strcpy(c, (getFonaString()));
+	}
+	
+	i = strlen(c);
+/*	if  (i>3) {
+		return(c[i-3]);		// Bit of maths to work out the percentage from these two characters
+		} else {
+		return 'X';
+		} ;
+*/
+	if  (i>5) {
+		intStatus=(((c[i-5])-'0'));		// Bit of maths to work out the percentage from these two characters
+		} else {
+		intStatus=0;
+		} ;
+//		printf("**DEBUG - The received string is %d %d %s\r\n", intStatus, i, c);
+//		delayMs(defaultATWait);
+		
+	return intStatus;
+}
+
+void wifiFlash() {
+	printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
+	delayMs(500);
+	printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
+	delayMs(500);
+}
+
+BIT wifiConnect() {
+	XDATA char static atString[40];
+	XDATA int16 intWifiStatus = 0;
+	
+    uartEnable();													// Enable the serial connection
+	delayMs(100);													// Wait for WiFi Connection
+
+	printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
+	delayMs(defaultATWait);
+
+	printf("wifi.sta.connect()\r\n");
+	wifiFlash();
+	
+	intWifiStatus = getWifiStatus();
+
+//	HOME	
+	if (intWifiStatus != 5) {
+		printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (to make it flash)
+		delayMs(defaultATWait);
+		printf("wifi.sta.config(\"Intersect_1\",\"Alongkey123\")  wifi.sta.connect()\r\n");	// Connect to AP1
+		wifiFlash();
+		intWifiStatus = getWifiStatus();
+	}
+
+//	test
+//		intWifiStatus = 3;		// TEST ONLY
+
+		//	SCHOOL 1	
+	if (intWifiStatus != 5) {
+		printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
+		delayMs(defaultATWait);
+		printf("wifi.sta.config(\"TRENDnet653{downstairs}\",\"stonebr!dge\")  wifi.sta.connect()\r\n");	// Connect to AP1
+		wifiFlash();
+		wifiFlash();
+		intWifiStatus = getWifiStatus();
+	}
+
+		//	SCHOOL 2
+	if (intWifiStatus != 5) {
+		printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
+		delayMs(defaultATWait);
+		printf("wifi.sta.config(\"TRENDnet653{upstairs}\",\"stonebr!dge\")  wifi.sta.connect()\r\n");	// Connect to AP1
+		wifiFlash();
+		wifiFlash();
+		intWifiStatus = getWifiStatus();
+	}
+
+//	AVON RI
+	if (intWifiStatus != 5) {
+		printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (to make it flash)
+		delayMs(defaultATWait);
+		printf("wifi.sta.config(\"ARGUST\",\"arguest1\!\")  wifi.sta.connect()\r\n");	// Connect to AP1
+		wifiFlash();
+//		delayMs(5000);
+		intWifiStatus = getWifiStatus();
+	}
+
+//	HILLSIDE	
+	if (intWifiStatus != 5) {
+		printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
+		delayMs(defaultATWait);
+		printf("wifi.sta.config(\"Hillside\",\"VariousChars\")  wifi.sta.connect()\r\n");	// Connect to AP1
+		wifiFlash();
+//		delayMs(5000);
+		intWifiStatus = getWifiStatus();
+	}
+	
+//	MOBILE HOTSPOT
+	if (intWifiStatus != 5) {
+		printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (to make it flash)
+		delayMs(defaultATWait);
+		printf("wifi.sta.config(\"Cagey_HTC\",\"1234567890\")  wifi.sta.connect()\r\n");	// Connect to AP1
+		wifiFlash();
+//		delayMs(5000);
+		intWifiStatus = getWifiStatus();
+	}
+/*
+//	ALTERNATIVE SPELLING
+	if (intWifiStatus != 5) {
+		printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
+		delayMs(defaultATWait);
+		printf("wifi.sta.config(\"TRENDnet653{downstairs}\",\"Stonebr!dge\")  wifi.sta.connect()\r\n");	// Connect to AP1
+//		printf("wifi.sta.config(\"AnotherSSID\",\"AnotherPassword\")  wifi.sta.connect()\r\n");	// Connect to AP1
+		wifiFlash();
+//		delayMs(5000);
+		intWifiStatus = getWifiStatus();
+	}
+*/
+
+//	Connect to Dexie Server
+	if (intWifiStatus == 5) {
+		printf("gpio.write(4, gpio.LOW)\r\n");								// Make sure Blue LED is still on
+		delayMs(defaultATWait);
+		strcpy(atString, "sk=net.createConnection(net.TCP, 0)\r\n"); sendAT(atString); // delayMs(defaultATWait);					// Save changes
+		delayMs(defaultATWait);
+		strcpy(atString, "sk:on(\"receive\", function(sck, c) print(c) end )\r\n"); sendAT(atString); // print stuff you get back
+		delayMs(defaultATWait);
+
+		strcpy(atString, "sk:connect(");
+		strcat(atString, dexie_host_port);
+		strcat(atString, ",\"");
+		strcat(atString, dexie_host_address);
+		strcat(atString, "\")\r\n");
+		sendAT(atString);
+		delayMs(defaultATWait);
+		delayMs(defaultATWait);								        // another delay to be sure server is listening
+		return 1;
+	} else {
+		printf("gpio.write(4, gpio.HIGH)\r\n");delayMs(defaultATWait);			// Switch off Blue LED (to show no wifi connection)
+		return 0;
+	}
+	
+//  	printf("Hello - xDrip2G client for %s connected OK\r\n",wixFone_ID); // delayMs(defaultATWait);				// Just being polite really
+//	sendAT(atString);//	Now ready to send data to the Dexie server. It will all then be sent with a CTRL-Z (\032) in fonaDisable() before closing the connection.
+}
+
+
+//void getTimeBytes(XDATA uint8_t* iv[16]) {
+XDATA uint8_t* getTimeBytes(void) {
+//XDATA uint8_t* getTimeBytes(uint8_t[16]* tvector) {
+//XDATA void getTimeBytes(XDATA uint8_t* tVector[16]) {
+//static void getTimeBytes(uint8_t* str)
+//void getFonaGPS(GSMlocInfo* CIPGSMLOC)	
+	
+	XDATA uint8_t tVector[16];
+	XDATA char c[80];
+	XDATA int16 lenC;
+	XDATA int8 i;
+	XDATA char vmm[3];
+	tVector[0]='\0';
+	
+// Based on Code from Peter Jennings @ http://benlo.com/esp8266/esp8266Projects.html
+
+printf("connG=net.createConnection(net.TCP, 0)\r\n"); delayMs(defaultATWait);
+printf("connG:on(\"connection\",function(conn, payload)\r\n"); delayMs(defaultATWait);
+
+//printf("conn:send(\"HEAD / HTTP/1.1\\r\\n..\r\n");
+//printf(" \"Host: google.com\\r\\n\"..\r\n");
+//printf(" \"Accept: */*\\r\\n\"..\r\n");
+//printf(" \"User-Agent: Mozilla/4.0 (compatible; esp8266 Lua;)\"..\r\n");
+//printf(" \"\\r\\n\\r\\n\") \r\n");
+printf("connG:send(\"HEAD / HTTP/1.1\\r\\nHost: google.com\\r\\n\Accept: */*\\r\\n\"..\r\n"); delayMs(defaultATWait);
+printf("\"User-Agent: Mozilla/4.0 (compatible; esp8266 Lua;)\\r\\n\\r\\n\")\r\n"); delayMs(defaultATWait);
+
+printf(" end)\r\n"); delayMs(defaultATWait);
+
+//printf("conn:on(\"receive\", function(conn, payload)\r\n");
+//printf("print(payload)\r\n");
+
+
+/*
+printf("conn:on(\"receive\", function(conn, payload) print payload\r\n");
+
+printf("conn:close()\r\n");
+printf("end) \r\n");
+printf("conn:connect(80,'google.com') \r\n");	// think I need this to trigger above
+*/
+
+
+// if I ever get that working then I need to getFonaString to get the date back out
+// and then chop it up like I do with gsmloc in mdrip...
+// on that basis it may be better to hand back the sub string functions back to lua and just get 12 digits to stick in iv...
+
+
+//	print(string.sub(payload,string.find(payload,"Date: ")+12,string.find(payload,"Date: ")+14))
+//	print(string.sub(payload,string.find(payload,"Date: ")+16,string.find(payload,"Date: ")+18))
+// etc. etc.
+
+
+
+
+//From https://en.wikipedia.org/wiki/NodeMCU
+// -- A simple HTTP client
+//conn = net.createConnection(net.TCP, 0)
+//conn:on("receive", function(sck, payload) print(payload) end)
+//conn:on("connection", function(sck)
+//  sck:send("GET / HTTP/1.1\r\nHost: http://nodemcu.com/\r\n"
+//          .. "Connection: keep-alive\r\nAccept: */*\r\n\r\n")
+//end)
+//conn:connect(80, "http://nodemcu.com/")
+ 
+ 
+ 
+/* Original code from above page...
+// retrieve the current time from Google
+// tested on NodeMCU 0.9.5 build 20150108
+
+Ask Google for the Time
+
+This is an example of how to connect to Google using an ESP8266 running NodeMCU Lua and retrieve just the HEAD information, which happens to include the current time. 
+
+It would be possible to do this with NTP, but that would require more coding. The results wouldn't be any more accurate. I am pretty sure Google keeps the time on their servers well synchronized with the actual time. 
+
+-- retrieve the current time from Google
+-- tested on NodeMCU 0.9.5 build 20150108
+
+conn=net.createConnection(net.TCP, 0) 
+
+conn:on("connection",function(conn, payload)
+            conn:send("HEAD / HTTP/1.1\r\n".. 
+                      "Host: google.com\r\n"..
+*/
+//                      "Accept: */*\r\n"..	
+/*                      "User-Agent: Mozilla/4.0 (compatible; esp8266 Lua;)"..
+                      "\r\n\r\n") 
+            end)
+            
+conn:on("receive", function(conn, payload)
+    print('\nRetrieved in '..((tmr.now()-t)/1000)..' milliseconds.')
+    print('Google says it is '..string.sub(payload,string.find(payload,"Date: ")
+           +6,string.find(payload,"Date: ")+35))
+    conn:close()
+    end) 
+t = tmr.now()    
+conn:connect(80,'google.com') 
+
+
+
+
+Right click to download googleTime.lua 
+
+The program can be saved to a file, google.lua. Then, dofile("google.lua") will retrieve and print the time. From this location, the normal elapsed time from requesting to printing was under one tenth of a second. Pretty good. 
+program output
+
+
+> dofile("google.lua")
+> 
+Retrieved in 84 milliseconds
+Google says it is Wed, 21 Jan 2015 22:25:35 GMT
+                 678901234567890123456789012345 < from +6 to +35
+
+*/
+/*
+So Date: Wed, 21 Sep 2016 12:25:43 GMT
+   01234567890123456789012345678901234567890
+   0    +6   10        20        30   +35   
+
+
++
+    print('Google says it is '..string.sub(payload,string.find(payload,"Date: ")
+           +6,string.find(payload,"Date: ")+35))
+	From character 6 up to and including character 35 so presumably there is a space or CR there somewhere
+	This means for DDMMYY etc. I want 11-12, 14-16?, 18-21, 23-24, 25-26, 27-28
+	
+	14 in IV : YYYYMMDDHHMMSS00
+	
+	4 YYYY		18-21
+	6 MM		14-15
+	8 DD		11-12
+	10 HH		23-24
+	12 MM		26-27
+	14 SS		28-29
+	15 txid
+	16 checksum
+	
+
+*/
+
+/*
+printf('string.sub(payload,string.find(payload,"Date: ")+6,string.find(payload,"Date: ")+35));
+
+
+printf('string.sub(payload,string.find(payload,"Date: ")+18,string.find(payload,"Date: ")+21));
+printf('string.sub(payload,string.find(payload,"Date: ")+15,string.find(payload,"Date: ")+16));
+printf('string.sub(payload,string.find(payload,"Date: ")+11,string.find(payload,"Date: ")+12));
+printf('string.sub(payload,string.find(payload,"Date: ")+23,string.find(payload,"Date: ")+24));
+printf('string.sub(payload,string.find(payload,"Date: ")+26,string.find(payload,"Date: ")+27));
+printf('string.sub(payload,string.find(payload,"Date: ")+28,string.find(payload,"Date: ")+29));
+
+	
+
+printf("conn:on(\"receive\", function(conn, payload) print payload\r\n");
+	
+print('Google says it is '..string.sub(payload,string.find(payload,"Date: ")
+           +6,string.find(payload,"Date: ")+35))	
+	
+
+	printf("conn:on(\"receive\", function(conn, payload) print payload\r\n");
+*/ 	
+/*
+printf("conn:on(\"receive\", function(conn, txt) print string.sub(payload,string.find(txt,\"Date:\")+18,string.find(txt,\"Date:\")+21)\r\n");
+printf("conn:on(\"receive\", function(conn, txt) print string.sub(payload,string.find(txt,\"Date:\")+14,string.find(txt,\"Date:\")+15)\r\n");
+printf("conn:on(\"receive\", function(conn, txt) print string.sub(payload,string.find(txt,\"Date:\")+11,string.find(txt,\"Date:\")+12)\r\n");
+printf("conn:on(\"receive\", function(conn, txt) print string.sub(payload,string.find(txt,\"Date:\")+23,string.find(txt,\"Date:\")+24)\r\n");
+printf("conn:on(\"receive\", function(conn, txt) print string.sub(payload,string.find(txt,\"Date:\")+26,string.find(txt,\"Date:\")+27)\r\n");
+printf("conn:on(\"receive\", function(conn, txt) print string.sub(payload,string.find(txt,\"Date:\")+28,string.find(txt,\"Date:\")+29)\r\n");
+*/
+
+
+// Return pieces of the date required for the first 14 bytes of the AES Initialisation Vector (YYYYMMDDHHMMSS)
+// Unlike the Fona, MM in this case is sadly not numeric so we will have to see what the Dexie server makes of that
+// Later, byte 15 will be txid and byte 16 will be the checksum (from the dexcom packet)
+
+printf("connG:on(\"receive\", function(connG, payload) \r\n")													; delayMs(defaultATWait);
+printf("print(string.sub(payload,string.find(payload,\"Date:\")+18,string.find(payload,\"Date:\")+21)..\r\n")		; delayMs(defaultATWait);
+printf("string.sub(payload,string.find(payload,\"Date:\")+15,string.find(payload,\"Date:\")+16)..\r\n")		; delayMs(defaultATWait);
+printf("string.sub(payload,string.find(payload,\"Date:\")+11,string.find(payload,\"Date:\")+12)..\r\n")		; delayMs(defaultATWait);
+printf("string.sub(payload,string.find(payload,\"Date:\")+23,string.find(payload,\"Date:\")+24)..\r\n")		; delayMs(defaultATWait);
+printf("string.sub(payload,string.find(payload,\"Date:\")+26,string.find(payload,\"Date:\")+27)..\r\n")		; delayMs(defaultATWait);
+printf("string.sub(payload,string.find(payload,\"Date:\")+29,string.find(payload,\"Date:\")+30)..\"\\r\\n\")\r\n")	; delayMs(defaultATWait);
+																							// Don't really need the CRLF but cleaner print
+
+//	This gives Month as second and third characters (e.g. Jan is "an") as these are unique for each month
+//	Dexie can translate this afterwards to two digits MM (or maybe even here if I get chance and have enough memory)
+
+																							
+printf("connG:close()\r\n")						; delayMs(defaultATWait);
+printf("end) \r\n")								; delayMs(defaultATWait);
+
+while (uart1RxAvailable()) strcpy(c, getFonaString());										// Clear RX buffer
+
+printf("connG:connect(80,'google.com') \r\n")	; delayMs(defaultATWait);					// Make connection and trigger output of date
+
+strcpy(c, getFonaString());
+lenC=strlen(c);
+if (debug_mode) printf("-- **DEBUG** length of C is %d\r\n", lenC);
+
+printf("\r\n"); delayMs(defaultATWait);
+printf("\r\n"); delayMs(defaultATWait);
+
+
+i=0;
+while (i < 14) {
+//	strcpy(tVector[i], c[(lenC - 14) + i]);
+	tVector[i] = c[(lenC - 18) + i];
+//	if (debug_mode) printf("-- **DEBUG** tVector %d is %s\r\n", i, tVector[i]); delayMs(defaultATWait);
+	i++;
+}
+
+if (tVector[3] == 'n')	strcpy(vmm,"01");		// Jan		(June will overwrite this if this guess is wrong.)
+if (tVector[3] == 'b')	strcpy(vmm,"02");		// Feb
+if (tVector[3] == 'r')	strcpy(vmm,"03");		// Mar		(April will overwrite this if this guess is wrong.)
+if (tVector[2] == 'p')	strcpy(vmm,"04");		// Apr
+if (tVector[3] == 'y')	strcpy(vmm,"05");		// May
+if (tVector[2] == 'u')	strcpy(vmm,"06");		// Jun		(July will overwrite this if this guess is wrong.)
+if (tVector[3] == 'l')	strcpy(vmm,"07");		// Jul
+if (tVector[3] == 'g')	strcpy(vmm,"08");		// Aug
+if (tVector[3] == 'p')	strcpy(vmm,"09");		// Sep
+if (tVector[2] == 'c')	strcpy(vmm,"10");		// Oct
+if (tVector[3] == 'v')	strcpy(vmm,"11");		// Nov
+if (tVector[3] == 'c')	strcpy(vmm,"12");		// Dec
+
+tVector[2] = vmm[0];
+tVector[3] = vmm[1];
+
+if (debug_mode) printf("-- **DEBUG** tVector is %s\r\n", i, tVector); delayMs(defaultATWait);
+
+return tVector;
+
+//iv = getFonaString();
+
+// Think we need to return IV here in similar way to getFonaDateTime
+}
+
+	
+void fonaDisable () {
+/*	XDATA char static atString[40];
+	strcpy(atString, "sk:close()\r\n"); sendAT(atString);						// Close the TCP connection	- Response should be CLOSE OK
+//    strcpy(atString, "gpio.write(3, gpio.HIGH)\r\n"); sendAT(atString);		// Switch off Red LED
+	strcpy(atString, "node.dsleep(280000000)\r\n"); sendAT(atString); 			// Deep Sleep 15 Seconds - change to 240 later...
+*/
+	printf("sk:close()\r\n");										// Close the TCP connection	- Response should be CLOSE OK
+	delayMs(defaultATWait);
+	printf("node.dsleep(240000000)\r\n");							// Deep Sleep 240 Seconds - can probably tweak this a bit
+	delayMs(defaultATWait);
+	}
+
+
+//	XDATA int16 getFonaMillivolts(Dexcom_packet* pPkt) {										// Get battery strength using Fona AT command - no extra resistors required!
+
+XDATA 
+void print_packet(Dexcom_packet* pPkt) {
+    XDATA char transID[] = "BLANK"; 
+
+	// Secret Key - 16 bytes
+//	XDATA uint8_t key[] = { 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c };
+	// Initialisation Vector - non-repeating but not necessarily random.  Make this the date/time epoch and send in preamble
+//	XDATA uint8_t iv[]  = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+	XDATA uint8_t iv[16]  = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+//	XDATA uint8_t iv[16]  = { 0 };
+	// Input Text - 16 bytes
+
+	XDATA uint8_t i;
+	XDATA uint8_t sprintfBuffer[64];
+	XDATA uint8_t AESBuffer[64];
+	XDATA int prtlen;
+	
+//	XDATA uint8_t tempIV[16];
+//	XDATA BIT wifiConnected;
+	
+//	memset(sprintfBuffer,' ',64);
+
+    uartEnable();
+
+//	delayMs(60000);												//	Used for debugging - when I want to run downstairs and connect to the TTL cable
+	if(enable_wixfone==1) {
+	// Protocol suitable for WixFone/Dexie configuration. Data sent over 2G and then uploaded to mongo for subsequent pull down by xDrip
+		enableFona();
+		LED_YELLOW(0);
+		LED_RED(0);
+
+//		strcpy(fonaLatLong, getFonaGPS());						//	Get cell tower location
+//		pGPS = &fonaLatLong[0];
+//		pIV  = &iv[0];
+
+//		getFonaGPS(&fonaLatLong, &iv);							//	Get the GPS coordinates and first 14 characters of the 16 byte Initialisation Vector
+//		strcpy(debugString, getFonaGPS(pGPS, pIV));									//	Get the GPS coordinates and first 14 characters of the 16 byte Initialisation Vector
+
+//		malloc
+//		getFonaGPS( &CIPResponse );
+//		strcpy(fonaLatLong, CIPResponse.LatLong);
+
+//		strcpy(iv, CIPResponse.iv);
+
+		strcpy(iv, getTimeBytes());
+//		getTimeBytes(&tempIV);
+//		strcpy(iv, tempIV);
+		
+		if (debug_mode) printf("-- **DEBUG** iv is %s\r\n", iv);
+		
+//		strcpy(fonaLatLong, CIPResponse.LatLong);
+//		strcpy(iv, CIPResponse.iv);
+
+
+		iv[14]=pPkt->txId;										//	Randomise the IV further by updating this spare byte with the packet sequence number
+		iv[15]=pPkt->checksum;									//	Randomise the IV further by updating this other spare byte with the packet checksum
+		
+		
+//		*iv[15]=pPkt->txId;										//	Randomise the IV further by updating this spare byte with the packet sequence number
+//		*iv[16]=pPkt->checksum									//	Randomise the IV further by updating this other spare byte with the packet checksum
+
+//		strcpy(responseString3, fonaLatLong);
+//		fonaDisable();											// Disconnect and send the fona asleep
+//		enableFona();
+//	printf("Before Fonaconnect\r\n");
+
+		if (wifiConnect()) {		// Establish a connection to the Dexie server
+//		strcpy(wifiStatus, getFonaString());
+		LED_RED(1);
+//		fonaConnect();		// Establish a connection to the Dexie server
+//		printf("sk:send(\"Wifi Status String is %s", wifiStatus);
+//			printf("\r\n\")\r\n");						// CR/LF
+
+			//		printf("Wifi Status String is %s \r\n");
+		dexcom_src_to_ascii(pPkt->src_addr, transID);			// Get a human-readable version of the Dexcom Transmitter ID
+//		cli();
+/*	COMMENT OUT TEMPORARILY AS DSEG GETTING FULL
+	if (encrypt_output==0) {
+		if (pPkt->len==0) { 									// Check for empty packet and just send fonabat (and gps). Server will not update BG.
+//			printf("fs: %s %hhu %s %lu %lu %d %d %hhu  \r\n", wixFone_ID, 0, wixFone_ID, 0, 0, 0, 0, fonaBat);	//	Voltage percentage of WixFone battery (derived by Fona)
+//			printf("xDrip2g: %s %hhu %s %lu %lu %lu %lu %hhu %s \r\n", wixFone_ID, 0, "NoReading", 0, 0, 0, 0, fonaBat, fonaLatLong);	//	Blank values to accompany voltage and GPS
+			printf("xDrip2g: %s 0 NoReading 0 0 0 0 %hhu %s\r\n", wixFone_ID, fonaBat, fonaLatLong);	//	Blank values to accompany voltage and GPS
+		} else {												// Otherwise print the full packet details as normal
+//		printf("xDrip2g: %s %hhu %s %lu %lu %d %d %hhu %s \r\n",	// Send/Print the values to the Dexie server
+
+//				sk:send("xDrip2g: Geordan 24 69ESP 92256 88688 215 -60 54 -6.234567,53.123456\r\n")		
+		printf("sk:send(\"xDrip2g: %s %hhu %s %lu %lu %d %d %hhu \r\n\")\r\n",	// Send/Print the values to the Dexie server
+		wixFone_ID, 					 					// 		xDrip2g Device Identifier
+			pPkt->txId, 					 					// 		Transmission ID - unique-ish identifier
+			transID,						 					// 		Transmitter ID - from packet in case only_listen_for_my_transmitter false
+			dex_num_decoder(pPkt->raw),		 					// 		Raw BQ Value
+			dex_num_decoder(pPkt->filtered)*2,					// 		Filtered BG Value
+			pPkt->battery, 					 					// 		Dexcom Transmitter Battery
+//			getPacketRSSI(pPkt),			 					// 		It saves memory to do it directly in the next line instead of using this function
+			(((pPkt->RSSI)/2)-73),								//		Received Signal Strength Indicator
+			fonaBat,											// 		Voltage in Millivolts of WixFone battery (derived by Fona)
+			fonaLatLong);										//		GP Coordinates of cell tower
+		}
+	}
+*/		
+//		printf("Response was %s \r\n", responseString);
+//		printf("fonaLatLong was %s \r\n", fonaLatLong);
+// TEMP OUT		
+//		if (encrypt_output==1) {
+
+			prtlen = sprintf(sprintfBuffer, "%s %hhu %s %lu %lu %d %d 100 -6.127100,53.241300",		// Includes home GPS coordinates for Dexie	
+				wixFone_ID, 					 				// 		xDrip2g Device Identifier
+				pPkt->txId, 					 				// 		Transmission ID - unique-ish identifier
+				transID,						 				// 		Transmitter ID - from packet in case only_listen_for_my_transmitter false
+				dex_num_decoder(pPkt->raw),		 				// 		Raw BQ Value
+				dex_num_decoder(pPkt->filtered)*2,				// 		Filtered BG Value
+				pPkt->battery, 					 				// 		Dexcom Transmitter Battery
+				(((pPkt->RSSI)/2)-73));							//		Received Signal Strength Indicator
+//				fonaBat);										// 		Voltage in Millivolts of WixFone battery (derived by Fona)
+//				fonaLatLong);									//		GPS Coordinates of cell tower(derived by Fona)
+				
+//			printf("Input of %d chars is %s\r\n", prtlen, sprintfBuffer);
+			
+			for(i = prtlen; i < 64; ++i)
+				sprintfBuffer[i]=' ';							//		Fill rest of array with spaces
+			
+//			ADD IN GPS VALUES HERE CONDITIONALLY				
+
+//			encrypt(output, input, length, key, vector)
+			AES128_CBC_encrypt_buffer(AESBuffer, sprintfBuffer, 64, key, iv);   // swap prtlen for 64 here?
+																// If we don't use prtlen then do we need to pad this to prevent errors?
+//			AES128_CBC_encrypt_buffer(AESBuffer, sprintfBuffer, prtlen, key, iv);   // swap prtlen for 64
+//			uartEnable();										// Enable UART serial port to talk to Fona
+//			enableFona();										// Switch on Fona
+//			fonaConnect();										// Establish a connection to the Dexie server
+
+//			prtlen = strlen(AESBuffer);							// probably 48 as rounded up to next 16 byte block (but 64 with GPS)
+//			printf("Output is %d characters long\r\n", prtlen);
+//*/ //		End TEMP OUT
+//			printf("Debug2 - %s and %d\r\n", fonaLatLong, CIPResponse.returncode);
+//getFonaString();
+//printf("Debug3 - %s\r\n", responseString);
+//getFonaString();
+//printf("Debug4 - %d and %d\r\n", responseInt, responseInt2);
+//getFonaString();
+
+//				sk:send("xDrip2g: Geordan 24 69ESP 92256 88688 215 -60 54 -6.234567,53.123456\r\n")		
+		printf("sk:send(\"xDrip2g(AES): ");
+
+
+			
+//			printf("xDrip2g(AES): ");
+
+			for(i = 0; i < 16; ++i)
+				printf("%02x", iv[i]);							//		Print initialisation vector as this is not a secret, just unique
+
+			printf(" ");	
+
+			for(i = 0; i < 64; ++i) 
+				printf("%02x", AESBuffer[i]);
+
+//			\r\n\")\r\n"			
+			
+			printf("\\r\\n\")\r\n");						// CR/LF
+	delayMs(defaultATWait);
+
+//		}	// TEMP GO
+			printf("gpio.write(4, gpio.HIGH)\r\n"); // Switch off blue LED
+	delayMs(defaultATWait);
+
+//		sei();
+		delayMs(defaultATWait);									// Need to wait here also as sometimes missing ctrl-z
+		delayMs(defaultATWait);
+//		fonaDisable();											// Disconnect and send the fona asleep - do this after print as we want to sleep either way
+		}															// End of wixfone conditions
+	}
+    uartDisable();
+}
+
+void makeAllOutputs() {
+    int XDATA i;
+    for (i=1; i < 16; i++) { // in the future, this should be set to only the channels being used for output, and add the one for input
+        setDigitalOutput(i, LOW);
+    }
+}
+void makeAllOutputsLow() {
+    int XDATA i;
+    for (i=0; i < 16; i++) {
+        setDigitalOutput(i, LOW);
+    }
+}
+
+void reset_offsets() {
+    int XDATA i;
+    for(i=0; i<4; i++) {
+        fOffset[i] = defaultfOffset[i];
+    }
+}
+
+void killWithWatchdog() {
+    WDCTL = (WDCTL & ~0x03) | 0x00;
+    WDCTL = (WDCTL & ~0x04) | 0x08;
+}
+
+XDATA void goToSleep (XDATA int16 seconds) {
+    adcSetMillivoltCalibration(adcReadVddMillivolts());
+    makeAllOutputsLow();
+
+    if(!needsTimingCalibration) {
+        if(!usbPowerPresent()){
+            unsigned char temp;
+            unsigned char storedDescHigh, storedDescLow;
+            BIT storedDma0Armed;
+            unsigned char storedIEN0, storedIEN1, storedIEN2;
+
+            uint8 savedPICTL = PICTL;
+            BIT savedP0IE = P0IE;
+            uint8 savedP0SEL = P0SEL;
+            uint8 savedP0DIR = P0DIR;
+            uint8 savedP1SEL = P1SEL;
+            uint8 savedP1DIR = P1DIR;
+
+            sleepInit();
+
+            disableUsbPullup();
+            usbDeviceState = USB_STATE_DETACHED;
+            usbEnabled = 0;
+            SLEEP &= ~(1<<7);
+
+            WORCTRL |= 0x03; // 2^5 periods
+            switchToRCOSC();
+
+            storedDescHigh = DMA0CFGH;
+            storedDescLow = DMA0CFGL;
+            storedDma0Armed = DMAARM & 0x01;
+            DMAARM |= 0x81;
+            dmaDesc[0] = ((unsigned int)& PM2_BUF) >> 8;
+            dmaDesc[1] = (unsigned int)& PM2_BUF;
+
+            DMA0CFGH = ((unsigned int)&dmaDesc) >> 8;
+            DMA0CFGL = (unsigned int)&dmaDesc;
+            DMAARM = 0x01;
+
+            // save enabled interrupts
+            storedIEN0 = IEN0;
+            storedIEN1 = IEN1;
+            storedIEN2 = IEN2;
+
+            //enable sleep timer interrupt
+            IEN0 |= 0xA0;
+
+            //disable all interrupts except the sleep timer
+            IEN0 &= 0xA0;
+            IEN1 &= ~0x3F;
+            IEN2 &= ~0x3F;
+
+            WORCTRL |= 0x04;  // Reset
+            temp = WORTIME0;
+            while(temp == WORTIME0) {};
+            WOREVT1 = seconds >> 8;
+            WOREVT0 = seconds;
+
+            temp = WORTIME0;
+            while(temp == WORTIME0) {};
+
+            MEMCTR |= 0x02;
+            SLEEP = 0x06;
+            __asm nop __endasm;
+            __asm nop __endasm;
+            __asm nop __endasm;
+            if(SLEEP & 0x03){
+                __asm mov 0xD7, #0x01 __endasm;
+                __asm nop __endasm;
+                __asm orl 0x87, #0x01 __endasm;
+                __asm nop __endasm;
+            }
+            IEN0 = storedIEN0;
+            IEN1 = storedIEN1;
+            IEN2 = storedIEN2;
+            DMA0CFGH = storedDescHigh;
+            DMA0CFGL = storedDescLow;
+            if(storedDma0Armed){
+                DMAARM |= 0x01;
+            }
+            // Switch back to high speed
+            boardClockInit();
+
+            PICTL = savedPICTL;
+            P0IE = savedP0IE;
+            P0SEL = savedP0SEL;
+            P0DIR = savedP0DIR;
+            P1SEL = savedP1SEL;
+            P1DIR = savedP1DIR;
+            USBPOW = 1;
+            USBCIE = 0b0111;
+        } else {
+            uint32 start_waiting = getMs();
+            if(!usbEnabled) {
+                usbDeviceState = USB_STATE_POWERED;
+                enableUsbPullup();
+                usbEnabled = 1;
+            }
+            delayMs(100);
+            while((getMs() - start_waiting) < (seconds * 1000)) {
+                doServices();
+            }
+        }
+    }
+    makeAllOutputs();
+}
+
+
+void putchar(XDATA char c) {
+	while(uart1TxAvailable() == 0) {								//  Loop until space in the TX buffer to send a character
+		LED_RED(1);													// Error Indicator
+		boardService();
+	} ;
+//	cli();															// disable interrupts to avoid tx errors
+    uart1TxSendByte(c);
+//	sei();															// enable interrupts not what the tx is complete
+//	Try uncommenting these lines to see if they still work
+    if (usbPowerPresent()) {
+		while(usbComTxAvailable() == 0) {							//  Loop until space in the TX buffer to send a character
+//			LED_RED(1);												// Error Indicator
+			boardService();
+		} ;
+        usbComTxSendByte(c);
+		boardService();
+		}
+//	USB up to here	
+	LED_RED(0);														// Error gone
+}
+
+// void printfUSB(unit8 XDATA *buffer stringForUSB) {  // Used for usbComTxSend
+void printfUSB(char * stringForUSB) {
+	XDATA uint8 length, i;
+	
+    if (usbPowerPresent()) {
+	
+		length = strlen(stringForUSB);
+        stringForUSB[length++] = ('/r');
+        stringForUSB[length++] = ('/n');
+		
+		for(i = 0; i < length; ++i) {
+			while(usbComTxAvailable() == 0) {							//  Loop until space in the TX buffer to send each character
+				doServices();
+			} ;
+			usbComTxSendByte(stringForUSB[i]);		
+		}
+	}
+// Probably recreating usbComTxSend (const uint8 XDATA *buffer, uint8 size) here	
+// usbComTxSend(stringForUSB,length);
+
+}
+
+
+void swap_channel(XDATA uint8 channel, XDATA uint8 newFSCTRL0) {
+    do {
+        RFST = 4;   //SIDLE
+    } while (MARCSTATE != 0x01);
+
+    FSCTRL0 = newFSCTRL0;
+    CHANNR = channel;
+    RFST = 2;   //RX
+}
+
+void strobe_radio(int radio_chan) {
+    radioMacInit();
+    MCSM1 = 0;
+    radioMacStrobe();
+    swap_channel(nChannels[radio_chan], fOffset[radio_chan]);
+}
+
+
+int WaitForPacket(XDATA uint16 milliseconds, Dexcom_packet* pkt, XDATA uint8 channel) {
+    XDATA uint32 start = getMs();
+    XDATA uint8 * packet = 0;
+    XDATA uint32 i = 0;
+    XDATA uint32 six_minutes = 360000;						//	SWITCH TO 3600 WHEN DEBUGGING
+    XDATA int nRet = 0;
+    XDATA char transID[] = "BLANK"; 	// Line added
+    swap_channel(nChannels[channel], fOffset[channel]);
+	if (debug_mode) six_minutes = 3000;
+	
+	LED_RED(0);												// Error Indicator
+    while (!milliseconds || (getMs() - start) < milliseconds) {
+        doServices();
+        blink_yellow_led();
+        i++;
+        if(!(i % 40000)) {
+            strobe_radio(channel);
+        }
+        if(getMs() - start > six_minutes) {
+            killWithWatchdog();
+            delayMs(2000);
+			LED_RED(1);												// Error Indicator
+			}
+        if (packet = radioQueueRxCurrentPacket()) {
+            uint8 len = packet[0];
+            fOffset[channel] += FREQEST;
+            memcpy(pkt, packet, min8(len+2, sizeof(Dexcom_packet)));
+            if(radioCrcPassed()) {
+				dexcom_src_to_ascii(pkt->src_addr, transID);			// Get a human-readable version of the Dexcom Transmitter ID
+//                if(pkt->src_addr == dex_tx_id || dex_tx_id == 0 || only_listen_for_my_transmitter == 0) {  // Making dex_tx_id uses too much memory
+				if(strcmp(transID,transmitter_id) == 0 || only_listen_for_my_transmitter == 0) { // strcmp will be zero if they match
+                    pkt->txId -= channel;
+                    radioQueueRxDoneWithPacket();
+                    LED_YELLOW(0);
+                    last_catch_channel = channel;
+
+					return 1;
+                } else {
+                    radioQueueRxDoneWithPacket();
+                }
+            } else {
+                radioQueueRxDoneWithPacket();
+                LED_YELLOW(0);
+                return 0;
+            }
+        }
+    }
+    LED_YELLOW(0);
+    return nRet;
+}
+
+XDATA uint32 delayFor(XDATA int wait_chan) {
+    if(needsTimingCalibration) {
+        return delayedWaitTimes[wait_chan];
+    }
+    if(!wait_chan && sequential_missed_packets) {
+        return waitTimes[wait_chan] + (sequential_missed_packets * wake_earlier_for_next_miss * 2 * 1000);
+    } else {
+        return waitTimes[wait_chan];
+    }
+}
+
+BIT get_packet(Dexcom_packet* pPkt) {
+    int nChannel = 0;
+    for(nChannel = start_channel; nChannel < NUM_CHANNELS; nChannel++) {
+        switch(WaitForPacket(delayFor(nChannel), pPkt, nChannel)) {
+        case 1:
+            needsTimingCalibration = 0;
+            sequential_missed_packets = 0;
+            return 1;
+        case 0:
+            continue;
+        }
+    }
+    sequential_missed_packets ++;
+    if(sequential_missed_packets > misses_until_failure) {
+        sequential_missed_packets = 0;
+        needsTimingCalibration = 1;
+    }
+    reset_offsets();
+    last_catch_channel = 0;
+    return 0;
+}
+
+void setADCInputs() {
+    P0INP=0; //set pull resistors on pins 0_0 - 0_5 to low
+}
+
+void configBt() {
+    uartEnable();
+    printf("AT+NAMExDrip");
+    uartDisable();
+}
+
+void main() {
+    systemInit();
+    initUart1();
+//	usbInit();
+    P1DIR |= 0x08; // RTS
+    sleepInit();
+
+    makeAllOutputs();
+    setADCInputs();
+    delayMs(1000);
+
+//	I would really like to get the USB up as early as possible (for reprogramming, echoing etc.)  Let's see if this helps...
+//    LED_GREEN (1);
+//	if(!usbEnabled) {
+//		usbDeviceState = USB_STATE_POWERED;
+//		enableUsbPullup();
+//		usbEnabled = 1;
+//		doServices();
+//	}
+
+	if(enable_wixfone==0) { 										// Don't do Bluetooth piece if there is a Fona attached instead of a HM1x
+    configBt();
+//    dex_tx_id= asciiToDexcomSrc(transmitter_id);
+	} else {
+//	enableFona();
+
+// TEMP	configFona();
+	}																// Everything else the same after here
+    delayMs(1000);
+
+    radioQueueInit();
+    radioQueueAllowCrcErrors = 1;
+    MCSM1 = 0;
+
+
+    while(1) {
+        Dexcom_packet Pkt;
+        memset(&Pkt, 0, sizeof(Dexcom_packet));
+        boardService();
+//		boardService();	//Throw in an extra one to get it to compile again
+
+// COMMENT OUT NEXT TWO LINESFOR DEBUG
+
+		if (debug_mode) {
+			print_packet(&Pkt);	
+		} else {
+        if(get_packet(&Pkt)) {
+//			get_packet(&Pkt);		// Always try to get a packet but now print even if none received so we can still update devicestatus, etc.
+//			LED_YELLOW(0);
+//			LED_RED(0);
+            print_packet(&Pkt);
+			fonaDisable();											// Disconnect and send the fona asleep
+//			test_encrypt_cbc();		// Temporary Test for encryption.  This is make or break (probably break!)
+// COMMENT OUT NEXT TWO LINESFOR DEBUG
+        }
+		}
+
+		
+        RFST = 4;
+        delayMs(100);
+
+        radioMacSleep();
+        if(usbPowerPresent()){
+            sequential_missed_packets++;	// Why only increment this if usb connected?  It is incremented in get_packet also so a bit confusing
+        }
+ //       if(sequential_missed_packets > 0) {
+ //           int first_square = sequential_missed_packets * sequential_missed_packets * wake_earlier_for_next_miss;
+ //           int second_square = (sequential_missed_packets - 1) * (sequential_missed_packets - 1) * wake_earlier_for_next_miss;
+//			goToSleep(185 - first_square + second_square);
+ //           int sleep_time = (245 - first_square + second_square);
+ //           goToSleep(sleep_time);
+ //       } else {
+            goToSleep(220);		// Wixel sleep for 220 seconds
+ //       }
+        radioMacResume();
+        MCSM1 = 0;
+        radioMacStrobe();
+    }
+}

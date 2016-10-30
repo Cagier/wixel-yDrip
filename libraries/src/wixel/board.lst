@@ -1,0 +1,1085 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:08 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module board
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _dmaInit
+                             13 	.globl _delayMs
+                             14 	.globl _delayMicroseconds
+                             15 	.globl _getMs
+                             16 	.globl _timeInit
+                             17 	.globl _systemInit
+                             18 	.globl _boardService
+                             19 	.globl _boardClockInit
+                             20 	.globl _boardIoInit
+                             21 	.globl _boardStartBootloader
+                             22 	.globl _boardStartBootloaderIfNeeded
+                             23 	.globl _usbPowerPresent
+                             24 	.globl _vinPowerPresent
+                             25 	.globl _disableUsbPullup
+                             26 	.globl _enableUsbPullup
+                             27 ;--------------------------------------------------------
+                             28 ; special function registers
+                             29 ;--------------------------------------------------------
+                             30 	.area RSEG    (ABS,DATA)
+   0000                      31 	.org 0x0000
+                    0080     32 Fboard$P0$0$0 == 0x0080
+                    0080     33 _P0	=	0x0080
+                    0081     34 Fboard$SP$0$0 == 0x0081
+                    0081     35 _SP	=	0x0081
+                    0082     36 Fboard$DPL0$0$0 == 0x0082
+                    0082     37 _DPL0	=	0x0082
+                    0083     38 Fboard$DPH0$0$0 == 0x0083
+                    0083     39 _DPH0	=	0x0083
+                    0084     40 Fboard$DPL1$0$0 == 0x0084
+                    0084     41 _DPL1	=	0x0084
+                    0085     42 Fboard$DPH1$0$0 == 0x0085
+                    0085     43 _DPH1	=	0x0085
+                    0086     44 Fboard$U0CSR$0$0 == 0x0086
+                    0086     45 _U0CSR	=	0x0086
+                    0087     46 Fboard$PCON$0$0 == 0x0087
+                    0087     47 _PCON	=	0x0087
+                    0088     48 Fboard$TCON$0$0 == 0x0088
+                    0088     49 _TCON	=	0x0088
+                    0089     50 Fboard$P0IFG$0$0 == 0x0089
+                    0089     51 _P0IFG	=	0x0089
+                    008A     52 Fboard$P1IFG$0$0 == 0x008a
+                    008A     53 _P1IFG	=	0x008a
+                    008B     54 Fboard$P2IFG$0$0 == 0x008b
+                    008B     55 _P2IFG	=	0x008b
+                    008C     56 Fboard$PICTL$0$0 == 0x008c
+                    008C     57 _PICTL	=	0x008c
+                    008D     58 Fboard$P1IEN$0$0 == 0x008d
+                    008D     59 _P1IEN	=	0x008d
+                    008F     60 Fboard$P0INP$0$0 == 0x008f
+                    008F     61 _P0INP	=	0x008f
+                    0090     62 Fboard$P1$0$0 == 0x0090
+                    0090     63 _P1	=	0x0090
+                    0091     64 Fboard$RFIM$0$0 == 0x0091
+                    0091     65 _RFIM	=	0x0091
+                    0092     66 Fboard$DPS$0$0 == 0x0092
+                    0092     67 _DPS	=	0x0092
+                    0093     68 Fboard$MPAGE$0$0 == 0x0093
+                    0093     69 _MPAGE	=	0x0093
+                    0095     70 Fboard$ENDIAN$0$0 == 0x0095
+                    0095     71 _ENDIAN	=	0x0095
+                    0098     72 Fboard$S0CON$0$0 == 0x0098
+                    0098     73 _S0CON	=	0x0098
+                    009A     74 Fboard$IEN2$0$0 == 0x009a
+                    009A     75 _IEN2	=	0x009a
+                    009B     76 Fboard$S1CON$0$0 == 0x009b
+                    009B     77 _S1CON	=	0x009b
+                    009C     78 Fboard$T2CT$0$0 == 0x009c
+                    009C     79 _T2CT	=	0x009c
+                    009D     80 Fboard$T2PR$0$0 == 0x009d
+                    009D     81 _T2PR	=	0x009d
+                    009E     82 Fboard$T2CTL$0$0 == 0x009e
+                    009E     83 _T2CTL	=	0x009e
+                    00A0     84 Fboard$P2$0$0 == 0x00a0
+                    00A0     85 _P2	=	0x00a0
+                    00A1     86 Fboard$WORIRQ$0$0 == 0x00a1
+                    00A1     87 _WORIRQ	=	0x00a1
+                    00A2     88 Fboard$WORCTRL$0$0 == 0x00a2
+                    00A2     89 _WORCTRL	=	0x00a2
+                    00A3     90 Fboard$WOREVT0$0$0 == 0x00a3
+                    00A3     91 _WOREVT0	=	0x00a3
+                    00A4     92 Fboard$WOREVT1$0$0 == 0x00a4
+                    00A4     93 _WOREVT1	=	0x00a4
+                    00A5     94 Fboard$WORTIME0$0$0 == 0x00a5
+                    00A5     95 _WORTIME0	=	0x00a5
+                    00A6     96 Fboard$WORTIME1$0$0 == 0x00a6
+                    00A6     97 _WORTIME1	=	0x00a6
+                    00A8     98 Fboard$IEN0$0$0 == 0x00a8
+                    00A8     99 _IEN0	=	0x00a8
+                    00A9    100 Fboard$IP0$0$0 == 0x00a9
+                    00A9    101 _IP0	=	0x00a9
+                    00AB    102 Fboard$FWT$0$0 == 0x00ab
+                    00AB    103 _FWT	=	0x00ab
+                    00AC    104 Fboard$FADDRL$0$0 == 0x00ac
+                    00AC    105 _FADDRL	=	0x00ac
+                    00AD    106 Fboard$FADDRH$0$0 == 0x00ad
+                    00AD    107 _FADDRH	=	0x00ad
+                    00AE    108 Fboard$FCTL$0$0 == 0x00ae
+                    00AE    109 _FCTL	=	0x00ae
+                    00AF    110 Fboard$FWDATA$0$0 == 0x00af
+                    00AF    111 _FWDATA	=	0x00af
+                    00B1    112 Fboard$ENCDI$0$0 == 0x00b1
+                    00B1    113 _ENCDI	=	0x00b1
+                    00B2    114 Fboard$ENCDO$0$0 == 0x00b2
+                    00B2    115 _ENCDO	=	0x00b2
+                    00B3    116 Fboard$ENCCS$0$0 == 0x00b3
+                    00B3    117 _ENCCS	=	0x00b3
+                    00B4    118 Fboard$ADCCON1$0$0 == 0x00b4
+                    00B4    119 _ADCCON1	=	0x00b4
+                    00B5    120 Fboard$ADCCON2$0$0 == 0x00b5
+                    00B5    121 _ADCCON2	=	0x00b5
+                    00B6    122 Fboard$ADCCON3$0$0 == 0x00b6
+                    00B6    123 _ADCCON3	=	0x00b6
+                    00B8    124 Fboard$IEN1$0$0 == 0x00b8
+                    00B8    125 _IEN1	=	0x00b8
+                    00B9    126 Fboard$IP1$0$0 == 0x00b9
+                    00B9    127 _IP1	=	0x00b9
+                    00BA    128 Fboard$ADCL$0$0 == 0x00ba
+                    00BA    129 _ADCL	=	0x00ba
+                    00BB    130 Fboard$ADCH$0$0 == 0x00bb
+                    00BB    131 _ADCH	=	0x00bb
+                    00BC    132 Fboard$RNDL$0$0 == 0x00bc
+                    00BC    133 _RNDL	=	0x00bc
+                    00BD    134 Fboard$RNDH$0$0 == 0x00bd
+                    00BD    135 _RNDH	=	0x00bd
+                    00BE    136 Fboard$SLEEP$0$0 == 0x00be
+                    00BE    137 _SLEEP	=	0x00be
+                    00C0    138 Fboard$IRCON$0$0 == 0x00c0
+                    00C0    139 _IRCON	=	0x00c0
+                    00C1    140 Fboard$U0DBUF$0$0 == 0x00c1
+                    00C1    141 _U0DBUF	=	0x00c1
+                    00C2    142 Fboard$U0BAUD$0$0 == 0x00c2
+                    00C2    143 _U0BAUD	=	0x00c2
+                    00C4    144 Fboard$U0UCR$0$0 == 0x00c4
+                    00C4    145 _U0UCR	=	0x00c4
+                    00C5    146 Fboard$U0GCR$0$0 == 0x00c5
+                    00C5    147 _U0GCR	=	0x00c5
+                    00C6    148 Fboard$CLKCON$0$0 == 0x00c6
+                    00C6    149 _CLKCON	=	0x00c6
+                    00C7    150 Fboard$MEMCTR$0$0 == 0x00c7
+                    00C7    151 _MEMCTR	=	0x00c7
+                    00C9    152 Fboard$WDCTL$0$0 == 0x00c9
+                    00C9    153 _WDCTL	=	0x00c9
+                    00CA    154 Fboard$T3CNT$0$0 == 0x00ca
+                    00CA    155 _T3CNT	=	0x00ca
+                    00CB    156 Fboard$T3CTL$0$0 == 0x00cb
+                    00CB    157 _T3CTL	=	0x00cb
+                    00CC    158 Fboard$T3CCTL0$0$0 == 0x00cc
+                    00CC    159 _T3CCTL0	=	0x00cc
+                    00CD    160 Fboard$T3CC0$0$0 == 0x00cd
+                    00CD    161 _T3CC0	=	0x00cd
+                    00CE    162 Fboard$T3CCTL1$0$0 == 0x00ce
+                    00CE    163 _T3CCTL1	=	0x00ce
+                    00CF    164 Fboard$T3CC1$0$0 == 0x00cf
+                    00CF    165 _T3CC1	=	0x00cf
+                    00D0    166 Fboard$PSW$0$0 == 0x00d0
+                    00D0    167 _PSW	=	0x00d0
+                    00D1    168 Fboard$DMAIRQ$0$0 == 0x00d1
+                    00D1    169 _DMAIRQ	=	0x00d1
+                    00D2    170 Fboard$DMA1CFGL$0$0 == 0x00d2
+                    00D2    171 _DMA1CFGL	=	0x00d2
+                    00D3    172 Fboard$DMA1CFGH$0$0 == 0x00d3
+                    00D3    173 _DMA1CFGH	=	0x00d3
+                    00D4    174 Fboard$DMA0CFGL$0$0 == 0x00d4
+                    00D4    175 _DMA0CFGL	=	0x00d4
+                    00D5    176 Fboard$DMA0CFGH$0$0 == 0x00d5
+                    00D5    177 _DMA0CFGH	=	0x00d5
+                    00D6    178 Fboard$DMAARM$0$0 == 0x00d6
+                    00D6    179 _DMAARM	=	0x00d6
+                    00D7    180 Fboard$DMAREQ$0$0 == 0x00d7
+                    00D7    181 _DMAREQ	=	0x00d7
+                    00D8    182 Fboard$TIMIF$0$0 == 0x00d8
+                    00D8    183 _TIMIF	=	0x00d8
+                    00D9    184 Fboard$RFD$0$0 == 0x00d9
+                    00D9    185 _RFD	=	0x00d9
+                    00DA    186 Fboard$T1CC0L$0$0 == 0x00da
+                    00DA    187 _T1CC0L	=	0x00da
+                    00DB    188 Fboard$T1CC0H$0$0 == 0x00db
+                    00DB    189 _T1CC0H	=	0x00db
+                    00DC    190 Fboard$T1CC1L$0$0 == 0x00dc
+                    00DC    191 _T1CC1L	=	0x00dc
+                    00DD    192 Fboard$T1CC1H$0$0 == 0x00dd
+                    00DD    193 _T1CC1H	=	0x00dd
+                    00DE    194 Fboard$T1CC2L$0$0 == 0x00de
+                    00DE    195 _T1CC2L	=	0x00de
+                    00DF    196 Fboard$T1CC2H$0$0 == 0x00df
+                    00DF    197 _T1CC2H	=	0x00df
+                    00E0    198 Fboard$ACC$0$0 == 0x00e0
+                    00E0    199 _ACC	=	0x00e0
+                    00E1    200 Fboard$RFST$0$0 == 0x00e1
+                    00E1    201 _RFST	=	0x00e1
+                    00E2    202 Fboard$T1CNTL$0$0 == 0x00e2
+                    00E2    203 _T1CNTL	=	0x00e2
+                    00E3    204 Fboard$T1CNTH$0$0 == 0x00e3
+                    00E3    205 _T1CNTH	=	0x00e3
+                    00E4    206 Fboard$T1CTL$0$0 == 0x00e4
+                    00E4    207 _T1CTL	=	0x00e4
+                    00E5    208 Fboard$T1CCTL0$0$0 == 0x00e5
+                    00E5    209 _T1CCTL0	=	0x00e5
+                    00E6    210 Fboard$T1CCTL1$0$0 == 0x00e6
+                    00E6    211 _T1CCTL1	=	0x00e6
+                    00E7    212 Fboard$T1CCTL2$0$0 == 0x00e7
+                    00E7    213 _T1CCTL2	=	0x00e7
+                    00E8    214 Fboard$IRCON2$0$0 == 0x00e8
+                    00E8    215 _IRCON2	=	0x00e8
+                    00E9    216 Fboard$RFIF$0$0 == 0x00e9
+                    00E9    217 _RFIF	=	0x00e9
+                    00EA    218 Fboard$T4CNT$0$0 == 0x00ea
+                    00EA    219 _T4CNT	=	0x00ea
+                    00EB    220 Fboard$T4CTL$0$0 == 0x00eb
+                    00EB    221 _T4CTL	=	0x00eb
+                    00EC    222 Fboard$T4CCTL0$0$0 == 0x00ec
+                    00EC    223 _T4CCTL0	=	0x00ec
+                    00ED    224 Fboard$T4CC0$0$0 == 0x00ed
+                    00ED    225 _T4CC0	=	0x00ed
+                    00EE    226 Fboard$T4CCTL1$0$0 == 0x00ee
+                    00EE    227 _T4CCTL1	=	0x00ee
+                    00EF    228 Fboard$T4CC1$0$0 == 0x00ef
+                    00EF    229 _T4CC1	=	0x00ef
+                    00F0    230 Fboard$B$0$0 == 0x00f0
+                    00F0    231 _B	=	0x00f0
+                    00F1    232 Fboard$PERCFG$0$0 == 0x00f1
+                    00F1    233 _PERCFG	=	0x00f1
+                    00F2    234 Fboard$ADCCFG$0$0 == 0x00f2
+                    00F2    235 _ADCCFG	=	0x00f2
+                    00F3    236 Fboard$P0SEL$0$0 == 0x00f3
+                    00F3    237 _P0SEL	=	0x00f3
+                    00F4    238 Fboard$P1SEL$0$0 == 0x00f4
+                    00F4    239 _P1SEL	=	0x00f4
+                    00F5    240 Fboard$P2SEL$0$0 == 0x00f5
+                    00F5    241 _P2SEL	=	0x00f5
+                    00F6    242 Fboard$P1INP$0$0 == 0x00f6
+                    00F6    243 _P1INP	=	0x00f6
+                    00F7    244 Fboard$P2INP$0$0 == 0x00f7
+                    00F7    245 _P2INP	=	0x00f7
+                    00F8    246 Fboard$U1CSR$0$0 == 0x00f8
+                    00F8    247 _U1CSR	=	0x00f8
+                    00F9    248 Fboard$U1DBUF$0$0 == 0x00f9
+                    00F9    249 _U1DBUF	=	0x00f9
+                    00FA    250 Fboard$U1BAUD$0$0 == 0x00fa
+                    00FA    251 _U1BAUD	=	0x00fa
+                    00FB    252 Fboard$U1UCR$0$0 == 0x00fb
+                    00FB    253 _U1UCR	=	0x00fb
+                    00FC    254 Fboard$U1GCR$0$0 == 0x00fc
+                    00FC    255 _U1GCR	=	0x00fc
+                    00FD    256 Fboard$P0DIR$0$0 == 0x00fd
+                    00FD    257 _P0DIR	=	0x00fd
+                    00FE    258 Fboard$P1DIR$0$0 == 0x00fe
+                    00FE    259 _P1DIR	=	0x00fe
+                    00FF    260 Fboard$P2DIR$0$0 == 0x00ff
+                    00FF    261 _P2DIR	=	0x00ff
+                    FFFFD5D4    262 Fboard$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    263 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    264 Fboard$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    265 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    266 Fboard$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    267 _FADDR	=	0xffffadac
+                    FFFFBBBA    268 Fboard$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    269 _ADC	=	0xffffbbba
+                    FFFFDBDA    270 Fboard$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    271 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    272 Fboard$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    273 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    274 Fboard$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    275 _T1CC2	=	0xffffdfde
+                            276 ;--------------------------------------------------------
+                            277 ; special function bits
+                            278 ;--------------------------------------------------------
+                            279 	.area RSEG    (ABS,DATA)
+   0000                     280 	.org 0x0000
+                    0080    281 Fboard$P0_0$0$0 == 0x0080
+                    0080    282 _P0_0	=	0x0080
+                    0081    283 Fboard$P0_1$0$0 == 0x0081
+                    0081    284 _P0_1	=	0x0081
+                    0082    285 Fboard$P0_2$0$0 == 0x0082
+                    0082    286 _P0_2	=	0x0082
+                    0083    287 Fboard$P0_3$0$0 == 0x0083
+                    0083    288 _P0_3	=	0x0083
+                    0084    289 Fboard$P0_4$0$0 == 0x0084
+                    0084    290 _P0_4	=	0x0084
+                    0085    291 Fboard$P0_5$0$0 == 0x0085
+                    0085    292 _P0_5	=	0x0085
+                    0086    293 Fboard$P0_6$0$0 == 0x0086
+                    0086    294 _P0_6	=	0x0086
+                    0087    295 Fboard$P0_7$0$0 == 0x0087
+                    0087    296 _P0_7	=	0x0087
+                    0088    297 Fboard$_TCON_0$0$0 == 0x0088
+                    0088    298 __TCON_0	=	0x0088
+                    0089    299 Fboard$RFTXRXIF$0$0 == 0x0089
+                    0089    300 _RFTXRXIF	=	0x0089
+                    008A    301 Fboard$_TCON_2$0$0 == 0x008a
+                    008A    302 __TCON_2	=	0x008a
+                    008B    303 Fboard$URX0IF$0$0 == 0x008b
+                    008B    304 _URX0IF	=	0x008b
+                    008C    305 Fboard$_TCON_4$0$0 == 0x008c
+                    008C    306 __TCON_4	=	0x008c
+                    008D    307 Fboard$ADCIF$0$0 == 0x008d
+                    008D    308 _ADCIF	=	0x008d
+                    008E    309 Fboard$_TCON_6$0$0 == 0x008e
+                    008E    310 __TCON_6	=	0x008e
+                    008F    311 Fboard$URX1IF$0$0 == 0x008f
+                    008F    312 _URX1IF	=	0x008f
+                    0090    313 Fboard$P1_0$0$0 == 0x0090
+                    0090    314 _P1_0	=	0x0090
+                    0091    315 Fboard$P1_1$0$0 == 0x0091
+                    0091    316 _P1_1	=	0x0091
+                    0092    317 Fboard$P1_2$0$0 == 0x0092
+                    0092    318 _P1_2	=	0x0092
+                    0093    319 Fboard$P1_3$0$0 == 0x0093
+                    0093    320 _P1_3	=	0x0093
+                    0094    321 Fboard$P1_4$0$0 == 0x0094
+                    0094    322 _P1_4	=	0x0094
+                    0095    323 Fboard$P1_5$0$0 == 0x0095
+                    0095    324 _P1_5	=	0x0095
+                    0096    325 Fboard$P1_6$0$0 == 0x0096
+                    0096    326 _P1_6	=	0x0096
+                    0097    327 Fboard$P1_7$0$0 == 0x0097
+                    0097    328 _P1_7	=	0x0097
+                    0098    329 Fboard$ENCIF_0$0$0 == 0x0098
+                    0098    330 _ENCIF_0	=	0x0098
+                    0099    331 Fboard$ENCIF_1$0$0 == 0x0099
+                    0099    332 _ENCIF_1	=	0x0099
+                    009A    333 Fboard$_SOCON2$0$0 == 0x009a
+                    009A    334 __SOCON2	=	0x009a
+                    009B    335 Fboard$_SOCON3$0$0 == 0x009b
+                    009B    336 __SOCON3	=	0x009b
+                    009C    337 Fboard$_SOCON4$0$0 == 0x009c
+                    009C    338 __SOCON4	=	0x009c
+                    009D    339 Fboard$_SOCON5$0$0 == 0x009d
+                    009D    340 __SOCON5	=	0x009d
+                    009E    341 Fboard$_SOCON6$0$0 == 0x009e
+                    009E    342 __SOCON6	=	0x009e
+                    009F    343 Fboard$_SOCON7$0$0 == 0x009f
+                    009F    344 __SOCON7	=	0x009f
+                    00A0    345 Fboard$P2_0$0$0 == 0x00a0
+                    00A0    346 _P2_0	=	0x00a0
+                    00A1    347 Fboard$P2_1$0$0 == 0x00a1
+                    00A1    348 _P2_1	=	0x00a1
+                    00A2    349 Fboard$P2_2$0$0 == 0x00a2
+                    00A2    350 _P2_2	=	0x00a2
+                    00A3    351 Fboard$P2_3$0$0 == 0x00a3
+                    00A3    352 _P2_3	=	0x00a3
+                    00A4    353 Fboard$P2_4$0$0 == 0x00a4
+                    00A4    354 _P2_4	=	0x00a4
+                    00A5    355 Fboard$P2_5$0$0 == 0x00a5
+                    00A5    356 _P2_5	=	0x00a5
+                    00A6    357 Fboard$P2_6$0$0 == 0x00a6
+                    00A6    358 _P2_6	=	0x00a6
+                    00A7    359 Fboard$P2_7$0$0 == 0x00a7
+                    00A7    360 _P2_7	=	0x00a7
+                    00A8    361 Fboard$RFTXRXIE$0$0 == 0x00a8
+                    00A8    362 _RFTXRXIE	=	0x00a8
+                    00A9    363 Fboard$ADCIE$0$0 == 0x00a9
+                    00A9    364 _ADCIE	=	0x00a9
+                    00AA    365 Fboard$URX0IE$0$0 == 0x00aa
+                    00AA    366 _URX0IE	=	0x00aa
+                    00AB    367 Fboard$URX1IE$0$0 == 0x00ab
+                    00AB    368 _URX1IE	=	0x00ab
+                    00AC    369 Fboard$ENCIE$0$0 == 0x00ac
+                    00AC    370 _ENCIE	=	0x00ac
+                    00AD    371 Fboard$STIE$0$0 == 0x00ad
+                    00AD    372 _STIE	=	0x00ad
+                    00AE    373 Fboard$_IEN06$0$0 == 0x00ae
+                    00AE    374 __IEN06	=	0x00ae
+                    00AF    375 Fboard$EA$0$0 == 0x00af
+                    00AF    376 _EA	=	0x00af
+                    00B8    377 Fboard$DMAIE$0$0 == 0x00b8
+                    00B8    378 _DMAIE	=	0x00b8
+                    00B9    379 Fboard$T1IE$0$0 == 0x00b9
+                    00B9    380 _T1IE	=	0x00b9
+                    00BA    381 Fboard$T2IE$0$0 == 0x00ba
+                    00BA    382 _T2IE	=	0x00ba
+                    00BB    383 Fboard$T3IE$0$0 == 0x00bb
+                    00BB    384 _T3IE	=	0x00bb
+                    00BC    385 Fboard$T4IE$0$0 == 0x00bc
+                    00BC    386 _T4IE	=	0x00bc
+                    00BD    387 Fboard$P0IE$0$0 == 0x00bd
+                    00BD    388 _P0IE	=	0x00bd
+                    00BE    389 Fboard$_IEN16$0$0 == 0x00be
+                    00BE    390 __IEN16	=	0x00be
+                    00BF    391 Fboard$_IEN17$0$0 == 0x00bf
+                    00BF    392 __IEN17	=	0x00bf
+                    00C0    393 Fboard$DMAIF$0$0 == 0x00c0
+                    00C0    394 _DMAIF	=	0x00c0
+                    00C1    395 Fboard$T1IF$0$0 == 0x00c1
+                    00C1    396 _T1IF	=	0x00c1
+                    00C2    397 Fboard$T2IF$0$0 == 0x00c2
+                    00C2    398 _T2IF	=	0x00c2
+                    00C3    399 Fboard$T3IF$0$0 == 0x00c3
+                    00C3    400 _T3IF	=	0x00c3
+                    00C4    401 Fboard$T4IF$0$0 == 0x00c4
+                    00C4    402 _T4IF	=	0x00c4
+                    00C5    403 Fboard$P0IF$0$0 == 0x00c5
+                    00C5    404 _P0IF	=	0x00c5
+                    00C6    405 Fboard$_IRCON6$0$0 == 0x00c6
+                    00C6    406 __IRCON6	=	0x00c6
+                    00C7    407 Fboard$STIF$0$0 == 0x00c7
+                    00C7    408 _STIF	=	0x00c7
+                    00D0    409 Fboard$P$0$0 == 0x00d0
+                    00D0    410 _P	=	0x00d0
+                    00D1    411 Fboard$F1$0$0 == 0x00d1
+                    00D1    412 _F1	=	0x00d1
+                    00D2    413 Fboard$OV$0$0 == 0x00d2
+                    00D2    414 _OV	=	0x00d2
+                    00D3    415 Fboard$RS0$0$0 == 0x00d3
+                    00D3    416 _RS0	=	0x00d3
+                    00D4    417 Fboard$RS1$0$0 == 0x00d4
+                    00D4    418 _RS1	=	0x00d4
+                    00D5    419 Fboard$F0$0$0 == 0x00d5
+                    00D5    420 _F0	=	0x00d5
+                    00D6    421 Fboard$AC$0$0 == 0x00d6
+                    00D6    422 _AC	=	0x00d6
+                    00D7    423 Fboard$CY$0$0 == 0x00d7
+                    00D7    424 _CY	=	0x00d7
+                    00D8    425 Fboard$T3OVFIF$0$0 == 0x00d8
+                    00D8    426 _T3OVFIF	=	0x00d8
+                    00D9    427 Fboard$T3CH0IF$0$0 == 0x00d9
+                    00D9    428 _T3CH0IF	=	0x00d9
+                    00DA    429 Fboard$T3CH1IF$0$0 == 0x00da
+                    00DA    430 _T3CH1IF	=	0x00da
+                    00DB    431 Fboard$T4OVFIF$0$0 == 0x00db
+                    00DB    432 _T4OVFIF	=	0x00db
+                    00DC    433 Fboard$T4CH0IF$0$0 == 0x00dc
+                    00DC    434 _T4CH0IF	=	0x00dc
+                    00DD    435 Fboard$T4CH1IF$0$0 == 0x00dd
+                    00DD    436 _T4CH1IF	=	0x00dd
+                    00DE    437 Fboard$OVFIM$0$0 == 0x00de
+                    00DE    438 _OVFIM	=	0x00de
+                    00DF    439 Fboard$_TIMIF7$0$0 == 0x00df
+                    00DF    440 __TIMIF7	=	0x00df
+                    00E0    441 Fboard$ACC_0$0$0 == 0x00e0
+                    00E0    442 _ACC_0	=	0x00e0
+                    00E1    443 Fboard$ACC_1$0$0 == 0x00e1
+                    00E1    444 _ACC_1	=	0x00e1
+                    00E2    445 Fboard$ACC_2$0$0 == 0x00e2
+                    00E2    446 _ACC_2	=	0x00e2
+                    00E3    447 Fboard$ACC_3$0$0 == 0x00e3
+                    00E3    448 _ACC_3	=	0x00e3
+                    00E4    449 Fboard$ACC_4$0$0 == 0x00e4
+                    00E4    450 _ACC_4	=	0x00e4
+                    00E5    451 Fboard$ACC_5$0$0 == 0x00e5
+                    00E5    452 _ACC_5	=	0x00e5
+                    00E6    453 Fboard$ACC_6$0$0 == 0x00e6
+                    00E6    454 _ACC_6	=	0x00e6
+                    00E7    455 Fboard$ACC_7$0$0 == 0x00e7
+                    00E7    456 _ACC_7	=	0x00e7
+                    00E8    457 Fboard$P2IF$0$0 == 0x00e8
+                    00E8    458 _P2IF	=	0x00e8
+                    00E9    459 Fboard$UTX0IF$0$0 == 0x00e9
+                    00E9    460 _UTX0IF	=	0x00e9
+                    00EA    461 Fboard$UTX1IF$0$0 == 0x00ea
+                    00EA    462 _UTX1IF	=	0x00ea
+                    00EB    463 Fboard$P1IF$0$0 == 0x00eb
+                    00EB    464 _P1IF	=	0x00eb
+                    00EC    465 Fboard$WDTIF$0$0 == 0x00ec
+                    00EC    466 _WDTIF	=	0x00ec
+                    00ED    467 Fboard$_IRCON25$0$0 == 0x00ed
+                    00ED    468 __IRCON25	=	0x00ed
+                    00EE    469 Fboard$_IRCON26$0$0 == 0x00ee
+                    00EE    470 __IRCON26	=	0x00ee
+                    00EF    471 Fboard$_IRCON27$0$0 == 0x00ef
+                    00EF    472 __IRCON27	=	0x00ef
+                    00F0    473 Fboard$B_0$0$0 == 0x00f0
+                    00F0    474 _B_0	=	0x00f0
+                    00F1    475 Fboard$B_1$0$0 == 0x00f1
+                    00F1    476 _B_1	=	0x00f1
+                    00F2    477 Fboard$B_2$0$0 == 0x00f2
+                    00F2    478 _B_2	=	0x00f2
+                    00F3    479 Fboard$B_3$0$0 == 0x00f3
+                    00F3    480 _B_3	=	0x00f3
+                    00F4    481 Fboard$B_4$0$0 == 0x00f4
+                    00F4    482 _B_4	=	0x00f4
+                    00F5    483 Fboard$B_5$0$0 == 0x00f5
+                    00F5    484 _B_5	=	0x00f5
+                    00F6    485 Fboard$B_6$0$0 == 0x00f6
+                    00F6    486 _B_6	=	0x00f6
+                    00F7    487 Fboard$B_7$0$0 == 0x00f7
+                    00F7    488 _B_7	=	0x00f7
+                    00F8    489 Fboard$U1ACTIVE$0$0 == 0x00f8
+                    00F8    490 _U1ACTIVE	=	0x00f8
+                    00F9    491 Fboard$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    492 _U1TX_BYTE	=	0x00f9
+                    00FA    493 Fboard$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    494 _U1RX_BYTE	=	0x00fa
+                    00FB    495 Fboard$U1ERR$0$0 == 0x00fb
+                    00FB    496 _U1ERR	=	0x00fb
+                    00FC    497 Fboard$U1FE$0$0 == 0x00fc
+                    00FC    498 _U1FE	=	0x00fc
+                    00FD    499 Fboard$U1SLAVE$0$0 == 0x00fd
+                    00FD    500 _U1SLAVE	=	0x00fd
+                    00FE    501 Fboard$U1RE$0$0 == 0x00fe
+                    00FE    502 _U1RE	=	0x00fe
+                    00FF    503 Fboard$U1MODE$0$0 == 0x00ff
+                    00FF    504 _U1MODE	=	0x00ff
+                            505 ;--------------------------------------------------------
+                            506 ; overlayable register banks
+                            507 ;--------------------------------------------------------
+                            508 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     509 	.ds 8
+                            510 ;--------------------------------------------------------
+                            511 ; internal ram data
+                            512 ;--------------------------------------------------------
+                            513 	.area DSEG    (DATA)
+                            514 ;--------------------------------------------------------
+                            515 ; overlayable items in internal ram 
+                            516 ;--------------------------------------------------------
+                            517 	.area OSEG    (OVR,DATA)
+                            518 ;--------------------------------------------------------
+                            519 ; indirectly addressable internal ram data
+                            520 ;--------------------------------------------------------
+                            521 	.area ISEG    (DATA)
+                            522 ;--------------------------------------------------------
+                            523 ; absolute internal ram data
+                            524 ;--------------------------------------------------------
+                            525 	.area IABS    (ABS,DATA)
+                            526 	.area IABS    (ABS,DATA)
+                            527 ;--------------------------------------------------------
+                            528 ; bit data
+                            529 ;--------------------------------------------------------
+                            530 	.area BSEG    (BIT)
+                    0000    531 Fboard$vbusHighBit$0$0==.
+   0000                     532 _vbusHighBit:
+   0000                     533 	.ds 1
+                    0001    534 Lboard.boardDetectVbus$savedState$2$2==.
+   0001                     535 _boardDetectVbus_savedState_2_2:
+   0001                     536 	.ds 1
+                            537 ;--------------------------------------------------------
+                            538 ; paged external ram data
+                            539 ;--------------------------------------------------------
+                            540 	.area PSEG    (PAG,XDATA)
+                    0000    541 Lboard.boardDetectVbus$lastCheck$1$1==.
+   0000                     542 _boardDetectVbus_lastCheck_1_1:
+   0000                     543 	.ds 1
+                            544 ;--------------------------------------------------------
+                            545 ; external ram data
+                            546 ;--------------------------------------------------------
+                            547 	.area XSEG    (XDATA)
+                    DF00    548 Fboard$SYNC1$0$0 == 0xdf00
+                    DF00    549 _SYNC1	=	0xdf00
+                    DF01    550 Fboard$SYNC0$0$0 == 0xdf01
+                    DF01    551 _SYNC0	=	0xdf01
+                    DF02    552 Fboard$PKTLEN$0$0 == 0xdf02
+                    DF02    553 _PKTLEN	=	0xdf02
+                    DF03    554 Fboard$PKTCTRL1$0$0 == 0xdf03
+                    DF03    555 _PKTCTRL1	=	0xdf03
+                    DF04    556 Fboard$PKTCTRL0$0$0 == 0xdf04
+                    DF04    557 _PKTCTRL0	=	0xdf04
+                    DF05    558 Fboard$ADDR$0$0 == 0xdf05
+                    DF05    559 _ADDR	=	0xdf05
+                    DF06    560 Fboard$CHANNR$0$0 == 0xdf06
+                    DF06    561 _CHANNR	=	0xdf06
+                    DF07    562 Fboard$FSCTRL1$0$0 == 0xdf07
+                    DF07    563 _FSCTRL1	=	0xdf07
+                    DF08    564 Fboard$FSCTRL0$0$0 == 0xdf08
+                    DF08    565 _FSCTRL0	=	0xdf08
+                    DF09    566 Fboard$FREQ2$0$0 == 0xdf09
+                    DF09    567 _FREQ2	=	0xdf09
+                    DF0A    568 Fboard$FREQ1$0$0 == 0xdf0a
+                    DF0A    569 _FREQ1	=	0xdf0a
+                    DF0B    570 Fboard$FREQ0$0$0 == 0xdf0b
+                    DF0B    571 _FREQ0	=	0xdf0b
+                    DF0C    572 Fboard$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    573 _MDMCFG4	=	0xdf0c
+                    DF0D    574 Fboard$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    575 _MDMCFG3	=	0xdf0d
+                    DF0E    576 Fboard$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    577 _MDMCFG2	=	0xdf0e
+                    DF0F    578 Fboard$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    579 _MDMCFG1	=	0xdf0f
+                    DF10    580 Fboard$MDMCFG0$0$0 == 0xdf10
+                    DF10    581 _MDMCFG0	=	0xdf10
+                    DF11    582 Fboard$DEVIATN$0$0 == 0xdf11
+                    DF11    583 _DEVIATN	=	0xdf11
+                    DF12    584 Fboard$MCSM2$0$0 == 0xdf12
+                    DF12    585 _MCSM2	=	0xdf12
+                    DF13    586 Fboard$MCSM1$0$0 == 0xdf13
+                    DF13    587 _MCSM1	=	0xdf13
+                    DF14    588 Fboard$MCSM0$0$0 == 0xdf14
+                    DF14    589 _MCSM0	=	0xdf14
+                    DF15    590 Fboard$FOCCFG$0$0 == 0xdf15
+                    DF15    591 _FOCCFG	=	0xdf15
+                    DF16    592 Fboard$BSCFG$0$0 == 0xdf16
+                    DF16    593 _BSCFG	=	0xdf16
+                    DF17    594 Fboard$AGCCTRL2$0$0 == 0xdf17
+                    DF17    595 _AGCCTRL2	=	0xdf17
+                    DF18    596 Fboard$AGCCTRL1$0$0 == 0xdf18
+                    DF18    597 _AGCCTRL1	=	0xdf18
+                    DF19    598 Fboard$AGCCTRL0$0$0 == 0xdf19
+                    DF19    599 _AGCCTRL0	=	0xdf19
+                    DF1A    600 Fboard$FREND1$0$0 == 0xdf1a
+                    DF1A    601 _FREND1	=	0xdf1a
+                    DF1B    602 Fboard$FREND0$0$0 == 0xdf1b
+                    DF1B    603 _FREND0	=	0xdf1b
+                    DF1C    604 Fboard$FSCAL3$0$0 == 0xdf1c
+                    DF1C    605 _FSCAL3	=	0xdf1c
+                    DF1D    606 Fboard$FSCAL2$0$0 == 0xdf1d
+                    DF1D    607 _FSCAL2	=	0xdf1d
+                    DF1E    608 Fboard$FSCAL1$0$0 == 0xdf1e
+                    DF1E    609 _FSCAL1	=	0xdf1e
+                    DF1F    610 Fboard$FSCAL0$0$0 == 0xdf1f
+                    DF1F    611 _FSCAL0	=	0xdf1f
+                    DF23    612 Fboard$TEST2$0$0 == 0xdf23
+                    DF23    613 _TEST2	=	0xdf23
+                    DF24    614 Fboard$TEST1$0$0 == 0xdf24
+                    DF24    615 _TEST1	=	0xdf24
+                    DF25    616 Fboard$TEST0$0$0 == 0xdf25
+                    DF25    617 _TEST0	=	0xdf25
+                    DF2E    618 Fboard$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    619 _PA_TABLE0	=	0xdf2e
+                    DF2F    620 Fboard$IOCFG2$0$0 == 0xdf2f
+                    DF2F    621 _IOCFG2	=	0xdf2f
+                    DF30    622 Fboard$IOCFG1$0$0 == 0xdf30
+                    DF30    623 _IOCFG1	=	0xdf30
+                    DF31    624 Fboard$IOCFG0$0$0 == 0xdf31
+                    DF31    625 _IOCFG0	=	0xdf31
+                    DF36    626 Fboard$PARTNUM$0$0 == 0xdf36
+                    DF36    627 _PARTNUM	=	0xdf36
+                    DF37    628 Fboard$VERSION$0$0 == 0xdf37
+                    DF37    629 _VERSION	=	0xdf37
+                    DF38    630 Fboard$FREQEST$0$0 == 0xdf38
+                    DF38    631 _FREQEST	=	0xdf38
+                    DF39    632 Fboard$LQI$0$0 == 0xdf39
+                    DF39    633 _LQI	=	0xdf39
+                    DF3A    634 Fboard$RSSI$0$0 == 0xdf3a
+                    DF3A    635 _RSSI	=	0xdf3a
+                    DF3B    636 Fboard$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    637 _MARCSTATE	=	0xdf3b
+                    DF3C    638 Fboard$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    639 _PKTSTATUS	=	0xdf3c
+                    DF3D    640 Fboard$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    641 _VCO_VC_DAC	=	0xdf3d
+                    DF40    642 Fboard$I2SCFG0$0$0 == 0xdf40
+                    DF40    643 _I2SCFG0	=	0xdf40
+                    DF41    644 Fboard$I2SCFG1$0$0 == 0xdf41
+                    DF41    645 _I2SCFG1	=	0xdf41
+                    DF42    646 Fboard$I2SDATL$0$0 == 0xdf42
+                    DF42    647 _I2SDATL	=	0xdf42
+                    DF43    648 Fboard$I2SDATH$0$0 == 0xdf43
+                    DF43    649 _I2SDATH	=	0xdf43
+                    DF44    650 Fboard$I2SWCNT$0$0 == 0xdf44
+                    DF44    651 _I2SWCNT	=	0xdf44
+                    DF45    652 Fboard$I2SSTAT$0$0 == 0xdf45
+                    DF45    653 _I2SSTAT	=	0xdf45
+                    DF46    654 Fboard$I2SCLKF0$0$0 == 0xdf46
+                    DF46    655 _I2SCLKF0	=	0xdf46
+                    DF47    656 Fboard$I2SCLKF1$0$0 == 0xdf47
+                    DF47    657 _I2SCLKF1	=	0xdf47
+                    DF48    658 Fboard$I2SCLKF2$0$0 == 0xdf48
+                    DF48    659 _I2SCLKF2	=	0xdf48
+                    DE00    660 Fboard$USBADDR$0$0 == 0xde00
+                    DE00    661 _USBADDR	=	0xde00
+                    DE01    662 Fboard$USBPOW$0$0 == 0xde01
+                    DE01    663 _USBPOW	=	0xde01
+                    DE02    664 Fboard$USBIIF$0$0 == 0xde02
+                    DE02    665 _USBIIF	=	0xde02
+                    DE04    666 Fboard$USBOIF$0$0 == 0xde04
+                    DE04    667 _USBOIF	=	0xde04
+                    DE06    668 Fboard$USBCIF$0$0 == 0xde06
+                    DE06    669 _USBCIF	=	0xde06
+                    DE07    670 Fboard$USBIIE$0$0 == 0xde07
+                    DE07    671 _USBIIE	=	0xde07
+                    DE09    672 Fboard$USBOIE$0$0 == 0xde09
+                    DE09    673 _USBOIE	=	0xde09
+                    DE0B    674 Fboard$USBCIE$0$0 == 0xde0b
+                    DE0B    675 _USBCIE	=	0xde0b
+                    DE0C    676 Fboard$USBFRML$0$0 == 0xde0c
+                    DE0C    677 _USBFRML	=	0xde0c
+                    DE0D    678 Fboard$USBFRMH$0$0 == 0xde0d
+                    DE0D    679 _USBFRMH	=	0xde0d
+                    DE0E    680 Fboard$USBINDEX$0$0 == 0xde0e
+                    DE0E    681 _USBINDEX	=	0xde0e
+                    DE10    682 Fboard$USBMAXI$0$0 == 0xde10
+                    DE10    683 _USBMAXI	=	0xde10
+                    DE11    684 Fboard$USBCSIL$0$0 == 0xde11
+                    DE11    685 _USBCSIL	=	0xde11
+                    DE12    686 Fboard$USBCSIH$0$0 == 0xde12
+                    DE12    687 _USBCSIH	=	0xde12
+                    DE13    688 Fboard$USBMAXO$0$0 == 0xde13
+                    DE13    689 _USBMAXO	=	0xde13
+                    DE14    690 Fboard$USBCSOL$0$0 == 0xde14
+                    DE14    691 _USBCSOL	=	0xde14
+                    DE15    692 Fboard$USBCSOH$0$0 == 0xde15
+                    DE15    693 _USBCSOH	=	0xde15
+                    DE16    694 Fboard$USBCNTL$0$0 == 0xde16
+                    DE16    695 _USBCNTL	=	0xde16
+                    DE17    696 Fboard$USBCNTH$0$0 == 0xde17
+                    DE17    697 _USBCNTH	=	0xde17
+                    DE20    698 Fboard$USBF0$0$0 == 0xde20
+                    DE20    699 _USBF0	=	0xde20
+                    DE22    700 Fboard$USBF1$0$0 == 0xde22
+                    DE22    701 _USBF1	=	0xde22
+                    DE24    702 Fboard$USBF2$0$0 == 0xde24
+                    DE24    703 _USBF2	=	0xde24
+                    DE26    704 Fboard$USBF3$0$0 == 0xde26
+                    DE26    705 _USBF3	=	0xde26
+                    DE28    706 Fboard$USBF4$0$0 == 0xde28
+                    DE28    707 _USBF4	=	0xde28
+                    DE2A    708 Fboard$USBF5$0$0 == 0xde2a
+                    DE2A    709 _USBF5	=	0xde2a
+                            710 ;--------------------------------------------------------
+                            711 ; absolute external ram data
+                            712 ;--------------------------------------------------------
+                            713 	.area XABS    (ABS,XDATA)
+                            714 ;--------------------------------------------------------
+                            715 ; external initialized ram data
+                            716 ;--------------------------------------------------------
+                            717 	.area XISEG   (XDATA)
+                            718 	.area HOME    (CODE)
+                            719 	.area GSINIT0 (CODE)
+                            720 	.area GSINIT1 (CODE)
+                            721 	.area GSINIT2 (CODE)
+                            722 	.area GSINIT3 (CODE)
+                            723 	.area GSINIT4 (CODE)
+                            724 	.area GSINIT5 (CODE)
+                            725 	.area GSINIT  (CODE)
+                            726 	.area GSFINAL (CODE)
+                            727 	.area CSEG    (CODE)
+                            728 ;--------------------------------------------------------
+                            729 ; global & static initialisations
+                            730 ;--------------------------------------------------------
+                            731 	.area HOME    (CODE)
+                            732 	.area GSINIT  (CODE)
+                            733 	.area GSFINAL (CODE)
+                            734 	.area GSINIT  (CODE)
+                            735 ;------------------------------------------------------------
+                            736 ;Allocation info for local variables in function 'boardDetectVbus'
+                            737 ;------------------------------------------------------------
+                    0000    738 	Fboard$boardDetectVbus$0$0 ==.
+                    0000    739 	C$board.c$86$2$1 ==.
+                            740 ;	libraries/src/wixel/board.c:86: static uint8 lastCheck = 128;
+   0000 78r00               741 	mov	r0,#_boardDetectVbus_lastCheck_1_1
+   0002 74 80               742 	mov	a,#0x80
+   0004 F2                  743 	movx	@r0,a
+                            744 ;--------------------------------------------------------
+                            745 ; Home
+                            746 ;--------------------------------------------------------
+                            747 	.area HOME    (CODE)
+                            748 	.area HOME    (CODE)
+                            749 ;--------------------------------------------------------
+                            750 ; code
+                            751 ;--------------------------------------------------------
+                            752 	.area CSEG    (CODE)
+                            753 ;------------------------------------------------------------
+                            754 ;Allocation info for local variables in function 'systemInit'
+                            755 ;------------------------------------------------------------
+                    0000    756 	G$systemInit$0$0 ==.
+                    0000    757 	C$board.c$29$0$0 ==.
+                            758 ;	libraries/src/wixel/board.c:29: void systemInit()
+                            759 ;	-----------------------------------------
+                            760 ;	 function systemInit
+                            761 ;	-----------------------------------------
+   0000                     762 _systemInit:
+                    0007    763 	ar7 = 0x07
+                    0006    764 	ar6 = 0x06
+                    0005    765 	ar5 = 0x05
+                    0004    766 	ar4 = 0x04
+                    0003    767 	ar3 = 0x03
+                    0002    768 	ar2 = 0x02
+                    0001    769 	ar1 = 0x01
+                    0000    770 	ar0 = 0x00
+                    0000    771 	C$board.c$31$1$1 ==.
+                            772 ;	libraries/src/wixel/board.c:31: boardIoInit();
+   0000 12s00r27            773 	lcall	_boardIoInit
+                    0003    774 	C$board.c$32$1$1 ==.
+                            775 ;	libraries/src/wixel/board.c:32: boardClockInit();
+   0003 12s00r11            776 	lcall	_boardClockInit
+                    0006    777 	C$board.c$33$1$1 ==.
+                            778 ;	libraries/src/wixel/board.c:33: timeInit();
+   0006 12s00r00            779 	lcall	_timeInit
+                    0009    780 	C$board.c$34$1$1 ==.
+                            781 ;	libraries/src/wixel/board.c:34: dmaInit();
+   0009 12s00r00            782 	lcall	_dmaInit
+                    000C    783 	C$board.c$35$1$1 ==.
+                    000C    784 	XG$systemInit$0$0 ==.
+   000C 22                  785 	ret
+                            786 ;------------------------------------------------------------
+                            787 ;Allocation info for local variables in function 'boardService'
+                            788 ;------------------------------------------------------------
+                    000D    789 	G$boardService$0$0 ==.
+                    000D    790 	C$board.c$37$1$1 ==.
+                            791 ;	libraries/src/wixel/board.c:37: void boardService()
+                            792 ;	-----------------------------------------
+                            793 ;	 function boardService
+                            794 ;	-----------------------------------------
+   000D                     795 _boardService:
+                    000D    796 	C$board.c$39$1$1 ==.
+                            797 ;	libraries/src/wixel/board.c:39: boardStartBootloaderIfNeeded();
+   000D 12s00rB2            798 	lcall	_boardStartBootloaderIfNeeded
+                    0010    799 	C$board.c$40$1$1 ==.
+                    0010    800 	XG$boardService$0$0 ==.
+   0010 22                  801 	ret
+                            802 ;------------------------------------------------------------
+                            803 ;Allocation info for local variables in function 'boardClockInit'
+                            804 ;------------------------------------------------------------
+                    0011    805 	G$boardClockInit$0$0 ==.
+                    0011    806 	C$board.c$45$1$1 ==.
+                            807 ;	libraries/src/wixel/board.c:45: void boardClockInit()
+                            808 ;	-----------------------------------------
+                            809 ;	 function boardClockInit
+                            810 ;	-----------------------------------------
+   0011                     811 _boardClockInit:
+                    0011    812 	C$board.c$48$1$1 ==.
+                            813 ;	libraries/src/wixel/board.c:48: SLEEP &= ~0x04;
+   0011 AF BE               814 	mov	r7,_SLEEP
+   0013 53 07 FB            815 	anl	ar7,#0xFB
+   0016 8F BE               816 	mov	_SLEEP,r7
+                    0018    817 	C$board.c$53$1$1 ==.
+                            818 ;	libraries/src/wixel/board.c:53: while(!(SLEEP & 0x40));
+   0018                     819 00101$:
+   0018 E5 BE               820 	mov	a,_SLEEP
+   001A 30 E6 FB            821 	jnb	acc.6,00101$
+                    001D    822 	C$board.c$60$1$1 ==.
+                            823 ;	libraries/src/wixel/board.c:60: CLKCON = 0x80;
+   001D 75 C6 80            824 	mov	_CLKCON,#0x80
+                    0020    825 	C$board.c$64$1$1 ==.
+                            826 ;	libraries/src/wixel/board.c:64: SLEEP |= 0x04;
+   0020 43 BE 04            827 	orl	_SLEEP,#0x04
+                    0023    828 	C$board.c$68$1$1 ==.
+                            829 ;	libraries/src/wixel/board.c:68: MEMCTR = 0;
+   0023 75 C7 00            830 	mov	_MEMCTR,#0x00
+                    0026    831 	C$board.c$69$1$1 ==.
+                    0026    832 	XG$boardClockInit$0$0 ==.
+   0026 22                  833 	ret
+                            834 ;------------------------------------------------------------
+                            835 ;Allocation info for local variables in function 'boardIoInit'
+                            836 ;------------------------------------------------------------
+                    0027    837 	G$boardIoInit$0$0 ==.
+                    0027    838 	C$board.c$71$1$1 ==.
+                            839 ;	libraries/src/wixel/board.c:71: void boardIoInit()
+                            840 ;	-----------------------------------------
+                            841 ;	 function boardIoInit
+                            842 ;	-----------------------------------------
+   0027                     843 _boardIoInit:
+                    0027    844 	C$board.c$73$1$1 ==.
+                            845 ;	libraries/src/wixel/board.c:73: P2DIR = 0;           // Make all the Port 2 pins be inputs.
+   0027 75 FF 00            846 	mov	_P2DIR,#0x00
+                    002A    847 	C$board.c$74$1$1 ==.
+                            848 ;	libraries/src/wixel/board.c:74: P2 = 0b00000110;     // P2_1 = 1: drive the red LED line high LATER (when LED_RED(1) is called)
+   002A 75 A0 06            849 	mov	_P2,#0x06
+                    002D    850 	C$board.c$77$1$1 ==.
+                            851 ;	libraries/src/wixel/board.c:77: P2INP = 0b10011001;  // Pull down LED pins (P2_2, P2_1), and tristate the other Port 2 pins.
+   002D 75 F7 99            852 	mov	_P2INP,#0x99
+                    0030    853 	C$board.c$78$1$1 ==.
+                    0030    854 	XG$boardIoInit$0$0 ==.
+   0030 22                  855 	ret
+                            856 ;------------------------------------------------------------
+                            857 ;Allocation info for local variables in function 'boardDetectVbus'
+                            858 ;------------------------------------------------------------
+                    0031    859 	Fboard$boardDetectVbus$0$0 ==.
+                    0031    860 	C$board.c$84$1$1 ==.
+                            861 ;	libraries/src/wixel/board.c:84: static void boardDetectVbus()
+                            862 ;	-----------------------------------------
+                            863 ;	 function boardDetectVbus
+                            864 ;	-----------------------------------------
+   0031                     865 _boardDetectVbus:
+                    0031    866 	C$board.c$87$1$1 ==.
+                            867 ;	libraries/src/wixel/board.c:87: if ((uint8)(getMs() - lastCheck) > 25)
+   0031 12s00r00            868 	lcall	_getMs
+   0034 AC 82               869 	mov	r4,dpl
+   0036 AD 83               870 	mov	r5,dph
+   0038 AE F0               871 	mov	r6,b
+   003A FF                  872 	mov	r7,a
+   003B 78r00               873 	mov	r0,#_boardDetectVbus_lastCheck_1_1
+   003D D3                  874 	setb	c
+   003E E2                  875 	movx	a,@r0
+   003F 9C                  876 	subb	a,r4
+   0040 F4                  877 	cpl	a
+   0041 FC                  878 	mov  r4,a
+   0042 24 E6               879 	add	a,#0xff - 0x19
+   0044 50 44               880 	jnc	00107$
+                    0046    881 	C$board.c$89$2$1 ==.
+                            882 ;	libraries/src/wixel/board.c:89: BIT savedState = (P2DIR >> 4) & 1;
+   0046 E5 FF               883 	mov	a,_P2DIR
+   0048 C4                  884 	swap	a
+   0049 54 01               885 	anl	a,#0x01
+   004B FF                  886 	mov	r7,a
+   004C 24 FF               887 	add	a,#0xff
+                    004E    888 	C$board.c$90$2$2 ==.
+                            889 ;	libraries/src/wixel/board.c:90: if (savedState == 0)
+   004E 92*01               890 	mov	_boardDetectVbus_savedState_2_2,c
+   0050 40 09               891 	jc	00102$
+                    0052    892 	C$board.c$92$3$3 ==.
+                            893 ;	libraries/src/wixel/board.c:92: P2DIR |= (1<<4);       // Drive the VBUS_IN low
+   0052 43 FF 10            894 	orl	_P2DIR,#0x10
+                    0055    895 	C$board.c$93$3$3 ==.
+                            896 ;	libraries/src/wixel/board.c:93: delayMicroseconds(2);
+   0055 75 82 02            897 	mov	dpl,#0x02
+   0058 12s00r00            898 	lcall	_delayMicroseconds
+   005B                     899 00102$:
+                    005B    900 	C$board.c$95$2$2 ==.
+                            901 ;	libraries/src/wixel/board.c:95: P2INP &= ~(1<<4);          // Set input mode to pull-down
+   005B AF F7               902 	mov	r7,_P2INP
+   005D 53 07 EF            903 	anl	ar7,#0xEF
+   0060 8F F7               904 	mov	_P2INP,r7
+                    0062    905 	C$board.c$96$2$2 ==.
+                            906 ;	libraries/src/wixel/board.c:96: P2DIR &= ~(1<<4);          // Make the line an input.
+   0062 AF FF               907 	mov	r7,_P2DIR
+   0064 53 07 EF            908 	anl	ar7,#0xEF
+   0067 8F FF               909 	mov	_P2DIR,r7
+                    0069    910 	C$board.c$97$2$2 ==.
+                            911 ;	libraries/src/wixel/board.c:97: delayMicroseconds(1);
+   0069 75 82 01            912 	mov	dpl,#0x01
+   006C 12s00r00            913 	lcall	_delayMicroseconds
+                    006F    914 	C$board.c$99$2$2 ==.
+                            915 ;	libraries/src/wixel/board.c:99: vbusHighBit = P2_4;           // Measure the voltage.
+   006F A2 A4               916 	mov	c,_P2_4
+   0071 92*00               917 	mov	_vbusHighBit,c
+                    0073    918 	C$board.c$101$2$2 ==.
+                            919 ;	libraries/src/wixel/board.c:101: P2INP |= (1<<4);           // Set input mode to tristate.
+   0073 43 F7 10            920 	orl	_P2INP,#0x10
+                    0076    921 	C$board.c$102$2$2 ==.
+                            922 ;	libraries/src/wixel/board.c:102: if (savedState)
+   0076 30*01 03            923 	jnb	_boardDetectVbus_savedState_2_2,00104$
+                    0079    924 	C$board.c$104$3$4 ==.
+                            925 ;	libraries/src/wixel/board.c:104: P2DIR |= (1<<4);  // LED was on previously so turn it back on.
+   0079 43 FF 10            926 	orl	_P2DIR,#0x10
+   007C                     927 00104$:
+                    007C    928 	C$board.c$107$2$2 ==.
+                            929 ;	libraries/src/wixel/board.c:107: lastCheck = getMs();
+   007C 12s00r00            930 	lcall	_getMs
+   007F AC 82               931 	mov	r4,dpl
+   0081 AD 83               932 	mov	r5,dph
+   0083 AE F0               933 	mov	r6,b
+   0085 FF                  934 	mov	r7,a
+   0086 78r00               935 	mov	r0,#_boardDetectVbus_lastCheck_1_1
+   0088 EC                  936 	mov	a,r4
+   0089 F2                  937 	movx	@r0,a
+   008A                     938 00107$:
+                    008A    939 	C$board.c$109$2$1 ==.
+                    008A    940 	XFboard$boardDetectVbus$0$0 ==.
+   008A 22                  941 	ret
+                            942 ;------------------------------------------------------------
+                            943 ;Allocation info for local variables in function 'boardStartBootloader'
+                            944 ;------------------------------------------------------------
+                    008B    945 	G$boardStartBootloader$0$0 ==.
+                    008B    946 	C$board.c$111$2$1 ==.
+                            947 ;	libraries/src/wixel/board.c:111: void boardStartBootloader()
+                            948 ;	-----------------------------------------
+                            949 ;	 function boardStartBootloader
+                            950 ;	-----------------------------------------
+   008B                     951 _boardStartBootloader:
+                    008B    952 	C$board.c$113$1$1 ==.
+                            953 ;	libraries/src/wixel/board.c:113: EA = 0;             // Disable interrupts.
+   008B C2 AF               954 	clr	_EA
+                    008D    955 	C$board.c$115$1$1 ==.
+                            956 ;	libraries/src/wixel/board.c:115: DMAARM = 0x9F;      // Disarm all DMA channels.
+   008D 75 D6 9F            957 	mov	_DMAARM,#0x9F
+                    0090    958 	C$board.c$117$1$1 ==.
+                            959 ;	libraries/src/wixel/board.c:117: delayMicroseconds(10);  // Probably not necessary anymore.  Used to be 10 milliseconds.
+   0090 75 82 0A            960 	mov	dpl,#0x0A
+   0093 12s00r00            961 	lcall	_delayMicroseconds
+                    0096    962 	C$board.c$123$1$1 ==.
+                            963 ;	libraries/src/wixel/board.c:123: P0DIR = P1DIR = P2DIR = 0;
+   0096 75 FF 00            964 	mov	_P2DIR,#0x00
+   0099 75 FE 00            965 	mov	_P1DIR,#0x00
+   009C 75 FD 00            966 	mov	_P0DIR,#0x00
+                    009F    967 	C$board.c$124$1$1 ==.
+                            968 ;	libraries/src/wixel/board.c:124: P0SEL = P1SEL = P2SEL = 0;
+   009F 75 F5 00            969 	mov	_P2SEL,#0x00
+   00A2 75 F4 00            970 	mov	_P1SEL,#0x00
+   00A5 75 F3 00            971 	mov	_P0SEL,#0x00
+                    00A8    972 	C$board.c$126$1$1 ==.
+                            973 ;	libraries/src/wixel/board.c:126: delayMs(100);       // Delay to give the USB host a chance to detect that we disconnected.
+   00A8 90 00 64            974 	mov	dptr,#0x0064
+   00AB 12s00r00            975 	lcall	_delayMs
+                    00AE    976 	C$board.c$127$1$1 ==.
+                            977 ;	libraries/src/wixel/board.c:127: __asm ljmp 6 __endasm;
+   00AE 02 00 06            978 	 ljmp 6 
+                    00B1    979 	C$board.c$128$1$1 ==.
+                    00B1    980 	XG$boardStartBootloader$0$0 ==.
+   00B1 22                  981 	ret
+                            982 ;------------------------------------------------------------
+                            983 ;Allocation info for local variables in function 'boardStartBootloaderIfNeeded'
+                            984 ;------------------------------------------------------------
+                    00B2    985 	G$boardStartBootloaderIfNeeded$0$0 ==.
+                    00B2    986 	C$board.c$130$1$1 ==.
+                            987 ;	libraries/src/wixel/board.c:130: void boardStartBootloaderIfNeeded()
+                            988 ;	-----------------------------------------
+                            989 ;	 function boardStartBootloaderIfNeeded
+                            990 ;	-----------------------------------------
+   00B2                     991 _boardStartBootloaderIfNeeded:
+                    00B2    992 	C$board.c$132$1$1 ==.
+                            993 ;	libraries/src/wixel/board.c:132: if (!(P2DIR & (1<<2)))       // If the yellow LED is off...
+   00B2 E5 FF               994 	mov	a,_P2DIR
+   00B4 20 E2 0C            995 	jb	acc.2,00105$
+                    00B7    996 	C$board.c$134$2$2 ==.
+                            997 ;	libraries/src/wixel/board.c:134: delayMicroseconds(10);
+   00B7 75 82 0A            998 	mov	dpl,#0x0A
+   00BA 12s00r00            999 	lcall	_delayMicroseconds
+                    00BD   1000 	C$board.c$135$2$2 ==.
+                           1001 ;	libraries/src/wixel/board.c:135: if (P2_2)
+   00BD 30 A2 03           1002 	jnb	_P2_2,00105$
+                    00C0   1003 	C$board.c$137$3$3 ==.
+                           1004 ;	libraries/src/wixel/board.c:137: boardStartBootloader();
+   00C0 12s00r8B           1005 	lcall	_boardStartBootloader
+   00C3                    1006 00105$:
+                    00C3   1007 	C$board.c$140$1$1 ==.
+                    00C3   1008 	XG$boardStartBootloaderIfNeeded$0$0 ==.
+   00C3 22                 1009 	ret
+                           1010 ;------------------------------------------------------------
+                           1011 ;Allocation info for local variables in function 'usbPowerPresent'
+                           1012 ;------------------------------------------------------------
+                    00C4   1013 	G$usbPowerPresent$0$0 ==.
+                    00C4   1014 	C$board.c$142$1$1 ==.
+                           1015 ;	libraries/src/wixel/board.c:142: BIT usbPowerPresent()
+                           1016 ;	-----------------------------------------
+                           1017 ;	 function usbPowerPresent
+                           1018 ;	-----------------------------------------
+   00C4                    1019 _usbPowerPresent:
+                    00C4   1020 	C$board.c$144$1$1 ==.
+                           1021 ;	libraries/src/wixel/board.c:144: boardDetectVbus();
+   00C4 12s00r31           1022 	lcall	_boardDetectVbus
+                    00C7   1023 	C$board.c$145$1$1 ==.
+                           1024 ;	libraries/src/wixel/board.c:145: return vbusHighBit;
+   00C7 A2*00              1025 	mov	c,_vbusHighBit
+                    00C9   1026 	C$board.c$146$1$1 ==.
+                    00C9   1027 	XG$usbPowerPresent$0$0 ==.
+   00C9 22                 1028 	ret
+                           1029 ;------------------------------------------------------------
+                           1030 ;Allocation info for local variables in function 'vinPowerPresent'
+                           1031 ;------------------------------------------------------------
+                    00CA   1032 	G$vinPowerPresent$0$0 ==.
+                    00CA   1033 	C$board.c$148$1$1 ==.
+                           1034 ;	libraries/src/wixel/board.c:148: BIT vinPowerPresent()
+                           1035 ;	-----------------------------------------
+                           1036 ;	 function vinPowerPresent
+                           1037 ;	-----------------------------------------
+   00CA                    1038 _vinPowerPresent:
+                    00CA   1039 	C$board.c$150$1$1 ==.
+                           1040 ;	libraries/src/wixel/board.c:150: return P2_3;       // Read VIN_IN.
+   00CA A2 A3              1041 	mov	c,_P2_3
+                    00CC   1042 	C$board.c$151$1$1 ==.
+                    00CC   1043 	XG$vinPowerPresent$0$0 ==.
+   00CC 22                 1044 	ret
+                           1045 ;------------------------------------------------------------
+                           1046 ;Allocation info for local variables in function 'disableUsbPullup'
+                           1047 ;------------------------------------------------------------
+                    00CD   1048 	G$disableUsbPullup$0$0 ==.
+                    00CD   1049 	C$board.c$153$1$1 ==.
+                           1050 ;	libraries/src/wixel/board.c:153: void disableUsbPullup()
+                           1051 ;	-----------------------------------------
+                           1052 ;	 function disableUsbPullup
+                           1053 ;	-----------------------------------------
+   00CD                    1054 _disableUsbPullup:
+                    00CD   1055 	C$board.c$155$1$1 ==.
+                           1056 ;	libraries/src/wixel/board.c:155: P2DIR &= ~(1<<0);  // Make P2_0 be a floating input.
+   00CD AF FF              1057 	mov	r7,_P2DIR
+   00CF 53 07 FE           1058 	anl	ar7,#0xFE
+   00D2 8F FF              1059 	mov	_P2DIR,r7
+                    00D4   1060 	C$board.c$156$1$1 ==.
+                    00D4   1061 	XG$disableUsbPullup$0$0 ==.
+   00D4 22                 1062 	ret
+                           1063 ;------------------------------------------------------------
+                           1064 ;Allocation info for local variables in function 'enableUsbPullup'
+                           1065 ;------------------------------------------------------------
+                    00D5   1066 	G$enableUsbPullup$0$0 ==.
+                    00D5   1067 	C$board.c$158$1$1 ==.
+                           1068 ;	libraries/src/wixel/board.c:158: void enableUsbPullup()
+                           1069 ;	-----------------------------------------
+                           1070 ;	 function enableUsbPullup
+                           1071 ;	-----------------------------------------
+   00D5                    1072 _enableUsbPullup:
+                    00D5   1073 	C$board.c$160$1$1 ==.
+                           1074 ;	libraries/src/wixel/board.c:160: P2_0 = 1;
+   00D5 D2 A0              1075 	setb	_P2_0
+                    00D7   1076 	C$board.c$161$1$1 ==.
+                           1077 ;	libraries/src/wixel/board.c:161: P2DIR |= (1<<0);   // Drive P2_0 high.
+   00D7 43 FF 01           1078 	orl	_P2DIR,#0x01
+                    00DA   1079 	C$board.c$162$1$1 ==.
+                    00DA   1080 	XG$enableUsbPullup$0$0 ==.
+   00DA 22                 1081 	ret
+                           1082 	.area CSEG    (CODE)
+                           1083 	.area CONST   (CODE)
+                           1084 	.area XINIT   (CODE)
+                           1085 	.area CABS    (ABS,CODE)

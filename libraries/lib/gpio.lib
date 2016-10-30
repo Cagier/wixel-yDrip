@@ -1,0 +1,2476 @@
+<SDCCLIB>
+
+<INDEX>
+     11027
+<MODULE>
+gpio 11
+Fgpio$I2SCLKF1$0$0
+Fgpio$MDMCFG1$0$0
+Fgpio$FREQ1$0$0
+Fgpio$URX1IF$0$0
+Fgpio$P0DIR$0$0
+Fgpio$T4CC1$0$0
+Fgpio$USBF0$0$0
+Fgpio$USBPOW$0$0
+Fgpio$I2SCLKF2$0$0
+Fgpio$MCSM0$0$0
+Fgpio$MDMCFG2$0$0
+Fgpio$FREQ2$0$0
+Fgpio$UTX0IF$0$0
+Fgpio$P1DIR$0$0
+Fgpio$P0$0$0
+Fgpio$USBF1$0$0
+Fgpio$MCSM1$0$0
+Fgpio$MDMCFG3$0$0
+Fgpio$_IRCON25$0$0
+Fgpio$UTX1IF$0$0
+Fgpio$OVFIM$0$0
+Fgpio$P2DIR$0$0
+Fgpio$U0GCR$0$0
+Fgpio$P1$0$0
+Fgpio$USBF2$0$0
+Fgpio$USBINDEX$0$0
+Fgpio$MCSM2$0$0
+Fgpio$MDMCFG4$0$0
+Fgpio$U1ACTIVE$0$0
+Fgpio$_IRCON26$0$0
+Fgpio$_TCON_0$0$0
+Fgpio$U1GCR$0$0
+Fgpio$B$0$0
+Fgpio$P2$0$0
+Fgpio$USBF3$0$0
+Fgpio$U1RX_BYTE$0$0
+Fgpio$_IRCON27$0$0
+Fgpio$S0CON$0$0
+Fgpio$SP$0$0
+Fgpio$USBF4$0$0
+Fgpio$_TCON_2$0$0
+Fgpio$P0SEL$0$0
+Fgpio$WORIRQ$0$0
+Fgpio$S1CON$0$0
+Fgpio$USBF5$0$0
+Fgpio$USBADDR$0$0
+Fgpio$U1TX_BYTE$0$0
+Fgpio$OV$0$0
+Fgpio$P1SEL$0$0
+Fgpio$_TCON_4$0$0
+Fgpio$P2SEL$0$0
+Fgpio$RFIF$0$0
+Fgpio$ACC$0$0
+Fgpio$P0INP$0$0
+Fgpio$PA_TABLE0$0$0
+Fgpio$FOCCFG$0$0
+Fgpio$_TCON_6$0$0
+Fgpio$ADC$0$0
+Fgpio$P1INP$0$0
+Fgpio$T1CTL$0$0
+Fgpio$P2INP$0$0
+Fgpio$FCTL$0$0
+Fgpio$FADDRH$0$0
+Fgpio$T2CTL$0$0
+Fgpio$T3CTL$0$0
+Fgpio$DEVIATN$0$0
+Fgpio$T4CTL$0$0
+Fgpio$T3CNT$0$0
+Fgpio$RNDH$0$0
+Fgpio$IEN0$0$0
+Fgpio$DPH0$0$0
+Fgpio$SYNC0$0$0
+Fgpio$T4CNT$0$0
+Fgpio$IEN1$0$0
+Fgpio$FADDRL$0$0
+Fgpio$U0CSR$0$0
+Fgpio$DPH1$0$0
+Fgpio$I2SCFG0$0$0
+Fgpio$SYNC1$0$0
+Fgpio$P0IE$0$0
+Fgpio$U1CSR$0$0
+Fgpio$IEN2$0$0
+Fgpio$RFIM$0$0
+Fgpio$I2SDATH$0$0
+Fgpio$I2SCFG1$0$0
+Fgpio$U1ERR$0$0
+Fgpio$_TIMIF7$0$0
+Fgpio$P0IF$0$0
+Fgpio$P0_0$0$0
+Fgpio$U0UCR$0$0
+Fgpio$ENDIAN$0$0
+Fgpio$TEST0$0$0
+Fgpio$P1IF$0$0
+Fgpio$P$0$0
+Fgpio$_IRCON6$0$0
+Fgpio$P1_0$0$0
+Fgpio$P0_1$0$0
+Fgpio$U1UCR$0$0
+Fgpio$RNDL$0$0
+Fgpio$PCON$0$0
+Fgpio$DPL0$0$0
+Fgpio$USBCSIH$0$0
+Fgpio$TEST1$0$0
+Fgpio$U1FE$0$0
+Fgpio$B_0$0$0
+Fgpio$P2IF$0$0
+Fgpio$T3CH0IF$0$0
+Fgpio$P2_0$0$0
+Fgpio$P1_1$0$0
+Fgpio$P0_2$0$0
+Fgpio$DPL1$0$0
+Fgpio$TEST2$0$0
+Fgpio$B_1$0$0
+Fgpio$T4CH0IF$0$0
+Fgpio$T3CH1IF$0$0
+Fgpio$P2_1$0$0
+Fgpio$P1_2$0$0
+Fgpio$P0_3$0$0
+Fgpio$DMAARM$0$0
+Fgpio$I2SDATL$0$0
+Fgpio$PKTSTATUS$0$0
+Fgpio$B_2$0$0
+Fgpio$T4CH1IF$0$0
+Fgpio$T1IE$0$0
+Fgpio$P2_2$0$0
+Fgpio$_SOCON2$0$0
+Fgpio$P1_3$0$0
+Fgpio$P0_4$0$0
+Fgpio$PKTCTRL0$0$0
+Fgpio$B_3$0$0
+Fgpio$T1IF$0$0
+Fgpio$T2IE$0$0
+Fgpio$P2_3$0$0
+Fgpio$_SOCON3$0$0
+Fgpio$P1_4$0$0
+Fgpio$P0_5$0$0
+Fgpio$TCON$0$0
+Fgpio$USBCSIL$0$0
+Fgpio$PKTCTRL1$0$0
+Fgpio$B_4$0$0
+Fgpio$T2IF$0$0
+Fgpio$T3IE$0$0
+Fgpio$STIE$0$0
+Fgpio$P2_4$0$0
+Fgpio$_SOCON4$0$0
+Fgpio$P1_5$0$0
+Fgpio$P0_6$0$0
+Fgpio$B_5$0$0
+Fgpio$ACC_0$0$0
+Fgpio$STIF$0$0
+Fgpio$T3IF$0$0
+Fgpio$T4IE$0$0
+Fgpio$ADCIE$0$0
+Fgpio$P2_5$0$0
+Fgpio$_SOCON5$0$0
+Fgpio$P1_6$0$0
+Fgpio$P0_7$0$0
+Fgpio$USBCNTH$0$0
+Fgpio$USBCSOH$0$0
+Fgpio$USBFRMH$0$0
+Fgpio$B_6$0$0
+Fgpio$ACC_1$0$0
+Fgpio$T4IF$0$0
+Fgpio$P2_6$0$0
+Fgpio$_SOCON6$0$0
+Fgpio$P1_7$0$0
+Fgpio$ADCIF$0$0
+Fgpio$PERCFG$0$0
+Fgpio$FWDATA$0$0
+Fgpio$WORTIME0$0$0
+Fgpio$IOCFG0$0$0
+Fgpio$B_7$0$0
+Fgpio$ACC_2$0$0
+Fgpio$P2_7$0$0
+Fgpio$_SOCON7$0$0
+Fgpio$WORTIME1$0$0
+Fgpio$USBMAXI$0$0
+Fgpio$IOCFG1$0$0
+Fgpio$FSCAL0$0$0
+Fgpio$ACC_3$0$0
+Fgpio$FREQEST$0$0
+Fgpio$IOCFG2$0$0
+Fgpio$FSCAL1$0$0
+Fgpio$CHANNR$0$0
+Fgpio$ACC_4$0$0
+Fgpio$DMAREQ$0$0
+Fgpio$DMA0CFGH$0$0
+Fgpio$CLKCON$0$0
+Fgpio$USBCNTL$0$0
+Fgpio$USBCSOL$0$0
+Fgpio$USBFRML$0$0
+Fgpio$USBCIE$0$0
+Fgpio$FSCAL2$0$0
+Fgpio$ACC_5$0$0
+Fgpio$T1CCTL0$0$0
+Fgpio$DMA1CFGH$0$0
+Fgpio$USBCIF$0$0
+Fgpio$FSCAL3$0$0
+Fgpio$ACC_6$0$0
+Fgpio$RFTXRXIE$0$0
+Fgpio$T1CCTL1$0$0
+Fgpio$RFD$0$0
+Fgpio$U1RE$0$0
+Fgpio$ACC_7$0$0
+Fgpio$RFTXRXIF$0$0
+Fgpio$T1CCTL2$0$0
+Fgpio$T3CCTL0$0$0
+Fgpio$T2CT$0$0
+Fgpio$FSCTRL0$0$0
+Fgpio$T4CCTL0$0$0
+Fgpio$DMA0CFGL$0$0
+Fgpio$DMAIRQ$0$0
+Fgpio$T3CCTL1$0$0
+Fgpio$USBMAXO$0$0
+Fgpio$FREND0$0$0
+Fgpio$FSCTRL1$0$0
+Fgpio$T4CCTL1$0$0
+Fgpio$RFST$0$0
+Fgpio$DMA1CFGL$0$0
+Fgpio$FREND1$0$0
+Fgpio$DMAIE$0$0
+Fgpio$USBIIE$0$0
+Fgpio$RSSI$0$0
+Fgpio$U1SLAVE$0$0
+Fgpio$T3OVFIF$0$0
+Fgpio$DMAIF$0$0
+Fgpio$_IEN06$0$0
+Fgpio$FADDR$0$0
+Fgpio$U0BAUD$0$0
+Fgpio$USBIIF$0$0
+Fgpio$T4OVFIF$0$0
+Fgpio$_IEN16$0$0
+Fgpio$U1BAUD$0$0
+Fgpio$_IEN17$0$0
+Fgpio$T1CC0H$0$0
+Fgpio$ENCDI$0$0
+Fgpio$MARCSTATE$0$0
+Fgpio$AC$0$0
+Fgpio$ENCIE$0$0
+Fgpio$T1CC1H$0$0
+Fgpio$BSCFG$0$0
+Fgpio$T1CC2H$0$0
+Fgpio$LQI$0$0
+Fgpio$VERSION$0$0
+Fgpio$EA$0$0
+Fgpio$U0DBUF$0$0
+Fgpio$USBOIE$0$0
+Fgpio$VCO_VC_DAC$0$0
+Fgpio$PARTNUM$0$0
+Fgpio$U1DBUF$0$0
+Fgpio$T1CC0L$0$0
+Fgpio$DPS$0$0
+Fgpio$USBOIF$0$0
+Fgpio$T1CC1L$0$0
+Fgpio$MEMCTR$0$0
+Fgpio$T2PR$0$0
+Fgpio$T1CC2L$0$0
+Fgpio$ENCDO$0$0
+Fgpio$IP0$0$0
+Fgpio$I2SSTAT$0$0
+Fgpio$I2SWCNT$0$0
+Fgpio$IP1$0$0
+Fgpio$MPAGE$0$0
+Fgpio$U1MODE$0$0
+Fgpio$ENCCS$0$0
+Fgpio$IRCON2$0$0
+Fgpio$WORCTRL$0$0
+Fgpio$PKTLEN$0$0
+Fgpio$AGCCTRL0$0$0
+Fgpio$ADCH$0$0
+Fgpio$AGCCTRL1$0$0
+Fgpio$FWT$0$0
+Fgpio$AGCCTRL2$0$0
+Fgpio$DMA0CFG$0$0
+Fgpio$T1CNTH$0$0
+Fgpio$DMA1CFG$0$0
+Fgpio$ENCIF_0$0$0
+Fgpio$ADCL$0$0
+Fgpio$RS0$0$0
+Fgpio$ENCIF_1$0$0
+Fgpio$F0$0$0
+Fgpio$RS1$0$0
+Fgpio$T1CNTL$0$0
+Fgpio$P0IFG$0$0
+Fgpio$F1$0$0
+Fgpio$WOREVT0$0$0
+Fgpio$P1IFG$0$0
+Fgpio$ADCCFG$0$0
+Fgpio$WOREVT1$0$0
+Fgpio$P2IFG$0$0
+Fgpio$TIMIF$0$0
+Fgpio$SLEEP$0$0
+Fgpio$ADCCON1$0$0
+Fgpio$PSW$0$0
+Fgpio$ADCCON2$0$0
+Fgpio$ADDR$0$0
+Fgpio$T1CC0$0$0
+Fgpio$IRCON$0$0
+Fgpio$ADCCON3$0$0
+Fgpio$CY$0$0
+Fgpio$T1CC1$0$0
+Fgpio$PICTL$0$0
+Fgpio$URX0IE$0$0
+Fgpio$T1CC2$0$0
+Fgpio$T3CC0$0$0
+Fgpio$P1IEN$0$0
+.__.ABS.
+Fgpio$I2SCLKF0$0$0
+Fgpio$MDMCFG0$0$0
+Fgpio$FREQ0$0$0
+Fgpio$WDTIF$0$0
+Fgpio$URX1IE$0$0
+Fgpio$URX0IF$0$0
+Fgpio$T4CC0$0$0
+Fgpio$T3CC1$0$0
+Fgpio$WDCTL$0$0
+A$gpio$897
+A$gpio$888
+A$gpio$879
+C$gpio.c$56$1$1
+C$gpio.c$38$1$1
+A$gpio$898
+A$gpio$889
+C$gpio.c$66$1$1
+C$gpio.c$48$1$1
+C$gpio.c$39$1$1
+A$gpio$899
+C$gpio.c$58$1$1
+C$gpio.c$55$2$3
+C$gpio.c$49$1$1
+C$gpio.c$68$1$1
+C$gpio.c$67$2$3
+XG$setDigitalInput$0$0
+XG$setDigitalOutput$0$0
+G$setDigitalInput$0$0
+G$setDigitalOutput$0$0
+A$gpio$1100
+A$gpio$1200
+A$gpio$1101
+A$gpio$1020
+A$gpio$1210
+A$gpio$1120
+A$gpio$1111
+A$gpio$1021
+A$gpio$1012
+A$gpio$1220
+A$gpio$1211
+A$gpio$1202
+A$gpio$1130
+A$gpio$1112
+A$gpio$1103
+A$gpio$1040
+A$gpio$1031
+A$gpio$1022
+A$gpio$1013
+A$gpio$1230
+A$gpio$1221
+A$gpio$1203
+A$gpio$1140
+A$gpio$1131
+A$gpio$1122
+A$gpio$1113
+A$gpio$1104
+A$gpio$1041
+A$gpio$1023
+A$gpio$1014
+A$gpio$1231
+A$gpio$1222
+A$gpio$1213
+A$gpio$1204
+A$gpio$1150
+A$gpio$1132
+A$gpio$1114
+A$gpio$1105
+A$gpio$1060
+A$gpio$1051
+A$gpio$1042
+A$gpio$1033
+A$gpio$1015
+_setPort0PullType
+A$gpio$1430
+A$gpio$1403
+A$gpio$1250
+A$gpio$1241
+A$gpio$1223
+A$gpio$1205
+A$gpio$1151
+A$gpio$1142
+A$gpio$1133
+A$gpio$1124
+A$gpio$1106
+A$gpio$1070
+A$gpio$1061
+A$gpio$1052
+A$gpio$1034
+A$gpio$1025
+A$gpio$1016
+_setPort1PullType
+A$gpio$1422
+A$gpio$1350
+A$gpio$1242
+A$gpio$1233
+A$gpio$1224
+A$gpio$1215
+A$gpio$1170
+A$gpio$1161
+A$gpio$1152
+A$gpio$1143
+A$gpio$1125
+A$gpio$1116
+A$gpio$1107
+A$gpio$1080
+A$gpio$1062
+A$gpio$1053
+A$gpio$1044
+A$gpio$1035
+A$gpio$1026
+_setPort2PullType
+A$gpio$1450
+A$gpio$1423
+A$gpio$1360
+A$gpio$1351
+A$gpio$1261
+A$gpio$1252
+A$gpio$1243
+A$gpio$1234
+A$gpio$1216
+A$gpio$1207
+A$gpio$1171
+A$gpio$1153
+A$gpio$1144
+A$gpio$1135
+A$gpio$1126
+A$gpio$1117
+A$gpio$1090
+A$gpio$1081
+A$gpio$1072
+A$gpio$1054
+A$gpio$1036
+A$gpio$1027
+A$gpio$1018
+_isPinHigh
+A$gpio$1451
+A$gpio$1424
+A$gpio$1280
+A$gpio$1244
+A$gpio$1235
+A$gpio$1226
+A$gpio$1217
+A$gpio$1208
+A$gpio$1190
+A$gpio$1181
+A$gpio$1172
+A$gpio$1163
+A$gpio$1145
+A$gpio$1127
+A$gpio$1118
+A$gpio$1109
+A$gpio$1091
+A$gpio$1073
+A$gpio$1064
+A$gpio$1055
+A$gpio$1046
+A$gpio$1028
+A$gpio$1461
+A$gpio$1452
+A$gpio$1434
+A$gpio$1425
+A$gpio$1407
+A$gpio$1380
+A$gpio$1371
+A$gpio$1362
+A$gpio$1353
+A$gpio$1344
+A$gpio$1290
+A$gpio$1254
+A$gpio$1236
+A$gpio$1218
+A$gpio$1209
+A$gpio$1191
+A$gpio$1182
+A$gpio$1164
+A$gpio$1155
+A$gpio$1146
+A$gpio$1137
+A$gpio$1119
+A$gpio$1092
+A$gpio$1083
+A$gpio$1074
+A$gpio$1065
+A$gpio$1047
+A$gpio$1038
+A$gpio$1029
+A$gpio$1480
+A$gpio$1453
+A$gpio$1426
+A$gpio$1390
+A$gpio$1381
+A$gpio$1372
+A$gpio$1363
+A$gpio$1354
+A$gpio$1345
+A$gpio$1282
+A$gpio$1255
+A$gpio$1246
+A$gpio$1237
+A$gpio$1228
+A$gpio$1192
+A$gpio$1183
+A$gpio$1174
+A$gpio$1165
+A$gpio$1156
+A$gpio$1138
+A$gpio$1129
+A$gpio$1093
+A$gpio$1075
+A$gpio$1066
+A$gpio$1057
+A$gpio$1048
+A$gpio$1039
+A$gpio$1283
+A$gpio$1256
+A$gpio$1247
+A$gpio$1229
+A$gpio$1184
+A$gpio$1166
+A$gpio$1157
+A$gpio$1148
+A$gpio$1139
+A$gpio$1094
+A$gpio$1085
+A$gpio$1067
+A$gpio$1049
+A$gpio$1392
+A$gpio$1383
+A$gpio$1374
+A$gpio$1365
+A$gpio$1356
+A$gpio$1347
+A$gpio$1284
+A$gpio$1248
+A$gpio$1239
+A$gpio$1194
+A$gpio$1185
+A$gpio$1176
+A$gpio$1158
+A$gpio$1086
+A$gpio$1077
+A$gpio$1068
+A$gpio$1059
+A$gpio$1393
+A$gpio$1384
+A$gpio$1375
+A$gpio$1366
+A$gpio$1357
+A$gpio$1348
+A$gpio$1285
+A$gpio$1276
+A$gpio$1249
+A$gpio$1195
+A$gpio$1177
+A$gpio$1168
+A$gpio$1159
+A$gpio$1096
+A$gpio$1087
+A$gpio$1078
+A$gpio$1484
+A$gpio$1457
+A$gpio$1286
+A$gpio$1277
+A$gpio$1196
+A$gpio$1187
+A$gpio$1178
+A$gpio$1169
+A$gpio$1088
+A$gpio$1079
+A$gpio$1476
+A$gpio$1449
+A$gpio$1395
+A$gpio$1386
+A$gpio$1377
+A$gpio$1368
+A$gpio$1359
+A$gpio$1287
+A$gpio$1278
+A$gpio$1197
+A$gpio$1179
+A$gpio$1098
+A$gpio$1477
+A$gpio$1396
+A$gpio$1387
+A$gpio$1378
+A$gpio$1369
+A$gpio$1288
+A$gpio$1279
+A$gpio$1198
+A$gpio$1189
+A$gpio$1099
+XG$setPort0PullType$0$0
+A$gpio$1478
+A$gpio$1289
+XG$setPort1PullType$0$0
+A$gpio$1488
+A$gpio$1479
+A$gpio$1398
+A$gpio$1389
+XG$setPort2PullType$0$0
+A$gpio$1399
+XG$isPinHigh$0$0
+A$gpio$901
+A$gpio$911
+A$gpio$902
+G$setPort0PullType$0$0
+A$gpio$921
+A$gpio$912
+A$gpio$903
+A$gpio$831
+G$setPort1PullType$0$0
+A$gpio$922
+A$gpio$913
+A$gpio$904
+A$gpio$841
+A$gpio$832
+G$setPort2PullType$0$0
+A$gpio$950
+A$gpio$923
+A$gpio$914
+A$gpio$851
+A$gpio$842
+A$gpio$833
+A$gpio$770
+G$isPinHigh$0$0
+A$gpio$951
+A$gpio$906
+A$gpio$861
+A$gpio$852
+A$gpio$843
+A$gpio$834
+A$gpio$771
+A$gpio$952
+A$gpio$916
+A$gpio$907
+A$gpio$871
+A$gpio$862
+A$gpio$853
+A$gpio$844
+A$gpio$772
+A$gpio$763
+A$gpio$953
+A$gpio$944
+A$gpio$917
+A$gpio$908
+A$gpio$881
+A$gpio$872
+A$gpio$863
+A$gpio$854
+A$gpio$836
+A$gpio$773
+A$gpio$764
+_setDigitalInput
+A$gpio$954
+A$gpio$945
+A$gpio$918
+A$gpio$909
+A$gpio$891
+A$gpio$882
+A$gpio$873
+A$gpio$864
+A$gpio$846
+A$gpio$837
+A$gpio$774
+A$gpio$765
+C$gpio.c$50$1$1
+C$gpio.c$41$1$1
+_setDigitalOutput
+A$gpio$955
+A$gpio$946
+A$gpio$928
+A$gpio$919
+A$gpio$892
+A$gpio$883
+A$gpio$874
+A$gpio$856
+A$gpio$847
+A$gpio$838
+A$gpio$775
+A$gpio$766
+C$gpio.c$60$1$1
+A$gpio$956
+A$gpio$947
+A$gpio$893
+A$gpio$884
+A$gpio$866
+A$gpio$857
+A$gpio$848
+A$gpio$839
+A$gpio$776
+A$gpio$767
+C$gpio.c$52$1$1
+C$gpio.c$43$1$1
+C$gpio.c$36$0$0
+A$gpio$957
+A$gpio$948
+A$gpio$894
+A$gpio$876
+A$gpio$867
+A$gpio$858
+A$gpio$849
+A$gpio$777
+C$gpio.c$62$1$1
+C$gpio.c$44$1$1
+A$gpio$958
+A$gpio$886
+A$gpio$877
+A$gpio$868
+A$gpio$859
+A$gpio$769
+C$gpio.c$54$1$1
+A$gpio$896
+A$gpio$887
+A$gpio$878
+A$gpio$869
+C$gpio.c$64$1$1
+C$gpio.c$61$2$3
+C$gpio.c$46$1$1
+</MODULE>
+
+</INDEX>
+
+<FILES>
+
+<FILE>
+gpio
+<REL>
+;!FILE libraries/src/gpio/gpio.asm
+XH
+H 1C areas 2D5 global symbols
+M gpio
+O -mmcs51 --model-medium
+S Fgpio$I2SCLKF1$0$0 DefDF47
+S Fgpio$MDMCFG1$0$0 DefDF0F
+S Fgpio$FREQ1$0$0 DefDF0A
+S Fgpio$URX1IF$0$0 Def008F
+S Fgpio$P0DIR$0$0 Def00FD
+S Fgpio$T4CC1$0$0 Def00EF
+S Fgpio$USBF0$0$0 DefDE20
+S Fgpio$USBPOW$0$0 DefDE01
+S Fgpio$I2SCLKF2$0$0 DefDF48
+S Fgpio$MCSM0$0$0 DefDF14
+S Fgpio$MDMCFG2$0$0 DefDF0E
+S Fgpio$FREQ2$0$0 DefDF09
+S Fgpio$UTX0IF$0$0 Def00E9
+S Fgpio$P1DIR$0$0 Def00FE
+S Fgpio$P0$0$0 Def0080
+S Fgpio$USBF1$0$0 DefDE22
+S Fgpio$MCSM1$0$0 DefDF13
+S Fgpio$MDMCFG3$0$0 DefDF0D
+S Fgpio$_IRCON25$0$0 Def00ED
+S Fgpio$UTX1IF$0$0 Def00EA
+S Fgpio$OVFIM$0$0 Def00DE
+S Fgpio$P2DIR$0$0 Def00FF
+S Fgpio$U0GCR$0$0 Def00C5
+S Fgpio$P1$0$0 Def0090
+S Fgpio$USBF2$0$0 DefDE24
+S Fgpio$USBINDEX$0$0 DefDE0E
+S Fgpio$MCSM2$0$0 DefDF12
+S Fgpio$MDMCFG4$0$0 DefDF0C
+S Fgpio$U1ACTIVE$0$0 Def00F8
+S Fgpio$_IRCON26$0$0 Def00EE
+S Fgpio$_TCON_0$0$0 Def0088
+S Fgpio$U1GCR$0$0 Def00FC
+S Fgpio$B$0$0 Def00F0
+S Fgpio$P2$0$0 Def00A0
+S Fgpio$USBF3$0$0 DefDE26
+S Fgpio$U1RX_BYTE$0$0 Def00FA
+S Fgpio$_IRCON27$0$0 Def00EF
+S Fgpio$S0CON$0$0 Def0098
+S Fgpio$SP$0$0 Def0081
+S Fgpio$USBF4$0$0 DefDE28
+S Fgpio$_TCON_2$0$0 Def008A
+S Fgpio$P0SEL$0$0 Def00F3
+S Fgpio$WORIRQ$0$0 Def00A1
+S Fgpio$S1CON$0$0 Def009B
+S Fgpio$USBF5$0$0 DefDE2A
+S Fgpio$USBADDR$0$0 DefDE00
+S Fgpio$U1TX_BYTE$0$0 Def00F9
+S Fgpio$OV$0$0 Def00D2
+S Fgpio$P1SEL$0$0 Def00F4
+S Fgpio$_TCON_4$0$0 Def008C
+S Fgpio$P2SEL$0$0 Def00F5
+S Fgpio$RFIF$0$0 Def00E9
+S Fgpio$ACC$0$0 Def00E0
+S Fgpio$P0INP$0$0 Def008F
+S Fgpio$PA_TABLE0$0$0 DefDF2E
+S Fgpio$FOCCFG$0$0 DefDF15
+S Fgpio$_TCON_6$0$0 Def008E
+S Fgpio$ADC$0$0 DefFFFFBBBA
+S Fgpio$P1INP$0$0 Def00F6
+S Fgpio$T1CTL$0$0 Def00E4
+S Fgpio$P2INP$0$0 Def00F7
+S Fgpio$FCTL$0$0 Def00AE
+S Fgpio$FADDRH$0$0 Def00AD
+S Fgpio$T2CTL$0$0 Def009E
+S Fgpio$T3CTL$0$0 Def00CB
+S Fgpio$DEVIATN$0$0 DefDF11
+S Fgpio$T4CTL$0$0 Def00EB
+S Fgpio$T3CNT$0$0 Def00CA
+S Fgpio$RNDH$0$0 Def00BD
+S Fgpio$IEN0$0$0 Def00A8
+S Fgpio$DPH0$0$0 Def0083
+S Fgpio$SYNC0$0$0 DefDF01
+S Fgpio$T4CNT$0$0 Def00EA
+S Fgpio$IEN1$0$0 Def00B8
+S Fgpio$FADDRL$0$0 Def00AC
+S Fgpio$U0CSR$0$0 Def0086
+S Fgpio$DPH1$0$0 Def0085
+S Fgpio$I2SCFG0$0$0 DefDF40
+S Fgpio$SYNC1$0$0 DefDF00
+S Fgpio$P0IE$0$0 Def00BD
+S Fgpio$U1CSR$0$0 Def00F8
+S Fgpio$IEN2$0$0 Def009A
+S Fgpio$RFIM$0$0 Def0091
+S Fgpio$I2SDATH$0$0 DefDF43
+S Fgpio$I2SCFG1$0$0 DefDF41
+S Fgpio$U1ERR$0$0 Def00FB
+S Fgpio$_TIMIF7$0$0 Def00DF
+S Fgpio$P0IF$0$0 Def00C5
+S Fgpio$P0_0$0$0 Def0080
+S Fgpio$U0UCR$0$0 Def00C4
+S Fgpio$ENDIAN$0$0 Def0095
+S Fgpio$TEST0$0$0 DefDF25
+S Fgpio$P1IF$0$0 Def00EB
+S Fgpio$P$0$0 Def00D0
+S Fgpio$_IRCON6$0$0 Def00C6
+S Fgpio$P1_0$0$0 Def0090
+S Fgpio$P0_1$0$0 Def0081
+S Fgpio$U1UCR$0$0 Def00FB
+S Fgpio$RNDL$0$0 Def00BC
+S Fgpio$PCON$0$0 Def0087
+S Fgpio$DPL0$0$0 Def0082
+S Fgpio$USBCSIH$0$0 DefDE12
+S Fgpio$TEST1$0$0 DefDF24
+S Fgpio$U1FE$0$0 Def00FC
+S Fgpio$B_0$0$0 Def00F0
+S Fgpio$P2IF$0$0 Def00E8
+S Fgpio$T3CH0IF$0$0 Def00D9
+S Fgpio$P2_0$0$0 Def00A0
+S Fgpio$P1_1$0$0 Def0091
+S Fgpio$P0_2$0$0 Def0082
+S Fgpio$DPL1$0$0 Def0084
+S Fgpio$TEST2$0$0 DefDF23
+S Fgpio$B_1$0$0 Def00F1
+S Fgpio$T4CH0IF$0$0 Def00DC
+S Fgpio$T3CH1IF$0$0 Def00DA
+S Fgpio$P2_1$0$0 Def00A1
+S Fgpio$P1_2$0$0 Def0092
+S Fgpio$P0_3$0$0 Def0083
+S Fgpio$DMAARM$0$0 Def00D6
+S Fgpio$I2SDATL$0$0 DefDF42
+S Fgpio$PKTSTATUS$0$0 DefDF3C
+S Fgpio$B_2$0$0 Def00F2
+S Fgpio$T4CH1IF$0$0 Def00DD
+S Fgpio$T1IE$0$0 Def00B9
+S Fgpio$P2_2$0$0 Def00A2
+S Fgpio$_SOCON2$0$0 Def009A
+S Fgpio$P1_3$0$0 Def0093
+S Fgpio$P0_4$0$0 Def0084
+S Fgpio$PKTCTRL0$0$0 DefDF04
+S Fgpio$B_3$0$0 Def00F3
+S Fgpio$T1IF$0$0 Def00C1
+S Fgpio$T2IE$0$0 Def00BA
+S Fgpio$P2_3$0$0 Def00A3
+S Fgpio$_SOCON3$0$0 Def009B
+S Fgpio$P1_4$0$0 Def0094
+S Fgpio$P0_5$0$0 Def0085
+S Fgpio$TCON$0$0 Def0088
+S Fgpio$USBCSIL$0$0 DefDE11
+S Fgpio$PKTCTRL1$0$0 DefDF03
+S Fgpio$B_4$0$0 Def00F4
+S Fgpio$T2IF$0$0 Def00C2
+S Fgpio$T3IE$0$0 Def00BB
+S Fgpio$STIE$0$0 Def00AD
+S Fgpio$P2_4$0$0 Def00A4
+S Fgpio$_SOCON4$0$0 Def009C
+S Fgpio$P1_5$0$0 Def0095
+S Fgpio$P0_6$0$0 Def0086
+S Fgpio$B_5$0$0 Def00F5
+S Fgpio$ACC_0$0$0 Def00E0
+S Fgpio$STIF$0$0 Def00C7
+S Fgpio$T3IF$0$0 Def00C3
+S Fgpio$T4IE$0$0 Def00BC
+S Fgpio$ADCIE$0$0 Def00A9
+S Fgpio$P2_5$0$0 Def00A5
+S Fgpio$_SOCON5$0$0 Def009D
+S Fgpio$P1_6$0$0 Def0096
+S Fgpio$P0_7$0$0 Def0087
+S Fgpio$USBCNTH$0$0 DefDE17
+S Fgpio$USBCSOH$0$0 DefDE15
+S Fgpio$USBFRMH$0$0 DefDE0D
+S Fgpio$B_6$0$0 Def00F6
+S Fgpio$ACC_1$0$0 Def00E1
+S Fgpio$T4IF$0$0 Def00C4
+S Fgpio$P2_6$0$0 Def00A6
+S Fgpio$_SOCON6$0$0 Def009E
+S Fgpio$P1_7$0$0 Def0097
+S Fgpio$ADCIF$0$0 Def008D
+S Fgpio$PERCFG$0$0 Def00F1
+S Fgpio$FWDATA$0$0 Def00AF
+S Fgpio$WORTIME0$0$0 Def00A5
+S Fgpio$IOCFG0$0$0 DefDF31
+S Fgpio$B_7$0$0 Def00F7
+S Fgpio$ACC_2$0$0 Def00E2
+S Fgpio$P2_7$0$0 Def00A7
+S Fgpio$_SOCON7$0$0 Def009F
+S Fgpio$WORTIME1$0$0 Def00A6
+S Fgpio$USBMAXI$0$0 DefDE10
+S Fgpio$IOCFG1$0$0 DefDF30
+S Fgpio$FSCAL0$0$0 DefDF1F
+S Fgpio$ACC_3$0$0 Def00E3
+S Fgpio$FREQEST$0$0 DefDF38
+S Fgpio$IOCFG2$0$0 DefDF2F
+S Fgpio$FSCAL1$0$0 DefDF1E
+S Fgpio$CHANNR$0$0 DefDF06
+S Fgpio$ACC_4$0$0 Def00E4
+S Fgpio$DMAREQ$0$0 Def00D7
+S Fgpio$DMA0CFGH$0$0 Def00D5
+S Fgpio$CLKCON$0$0 Def00C6
+S Fgpio$USBCNTL$0$0 DefDE16
+S Fgpio$USBCSOL$0$0 DefDE14
+S Fgpio$USBFRML$0$0 DefDE0C
+S Fgpio$USBCIE$0$0 DefDE0B
+S Fgpio$FSCAL2$0$0 DefDF1D
+S Fgpio$ACC_5$0$0 Def00E5
+S Fgpio$T1CCTL0$0$0 Def00E5
+S Fgpio$DMA1CFGH$0$0 Def00D3
+S Fgpio$USBCIF$0$0 DefDE06
+S Fgpio$FSCAL3$0$0 DefDF1C
+S Fgpio$ACC_6$0$0 Def00E6
+S Fgpio$RFTXRXIE$0$0 Def00A8
+S Fgpio$T1CCTL1$0$0 Def00E6
+S Fgpio$RFD$0$0 Def00D9
+S Fgpio$U1RE$0$0 Def00FE
+S Fgpio$ACC_7$0$0 Def00E7
+S Fgpio$RFTXRXIF$0$0 Def0089
+S Fgpio$T1CCTL2$0$0 Def00E7
+S Fgpio$T3CCTL0$0$0 Def00CC
+S Fgpio$T2CT$0$0 Def009C
+S Fgpio$FSCTRL0$0$0 DefDF08
+S Fgpio$T4CCTL0$0$0 Def00EC
+S Fgpio$DMA0CFGL$0$0 Def00D4
+S Fgpio$DMAIRQ$0$0 Def00D1
+S Fgpio$T3CCTL1$0$0 Def00CE
+S Fgpio$USBMAXO$0$0 DefDE13
+S Fgpio$FREND0$0$0 DefDF1B
+S Fgpio$FSCTRL1$0$0 DefDF07
+S Fgpio$T4CCTL1$0$0 Def00EE
+S Fgpio$RFST$0$0 Def00E1
+S Fgpio$DMA1CFGL$0$0 Def00D2
+S Fgpio$FREND1$0$0 DefDF1A
+S Fgpio$DMAIE$0$0 Def00B8
+S Fgpio$USBIIE$0$0 DefDE07
+S Fgpio$RSSI$0$0 DefDF3A
+S Fgpio$U1SLAVE$0$0 Def00FD
+S Fgpio$T3OVFIF$0$0 Def00D8
+S Fgpio$DMAIF$0$0 Def00C0
+S Fgpio$_IEN06$0$0 Def00AE
+S Fgpio$FADDR$0$0 DefFFFFADAC
+S Fgpio$U0BAUD$0$0 Def00C2
+S Fgpio$USBIIF$0$0 DefDE02
+S Fgpio$T4OVFIF$0$0 Def00DB
+S Fgpio$_IEN16$0$0 Def00BE
+S Fgpio$U1BAUD$0$0 Def00FA
+S Fgpio$_IEN17$0$0 Def00BF
+S Fgpio$T1CC0H$0$0 Def00DB
+S Fgpio$ENCDI$0$0 Def00B1
+S Fgpio$MARCSTATE$0$0 DefDF3B
+S Fgpio$AC$0$0 Def00D6
+S Fgpio$ENCIE$0$0 Def00AC
+S Fgpio$T1CC1H$0$0 Def00DD
+S Fgpio$BSCFG$0$0 DefDF16
+S Fgpio$T1CC2H$0$0 Def00DF
+S Fgpio$LQI$0$0 DefDF39
+S Fgpio$VERSION$0$0 DefDF37
+S Fgpio$EA$0$0 Def00AF
+S Fgpio$U0DBUF$0$0 Def00C1
+S Fgpio$USBOIE$0$0 DefDE09
+S Fgpio$VCO_VC_DAC$0$0 DefDF3D
+S Fgpio$PARTNUM$0$0 DefDF36
+S Fgpio$U1DBUF$0$0 Def00F9
+S Fgpio$T1CC0L$0$0 Def00DA
+S Fgpio$DPS$0$0 Def0092
+S Fgpio$USBOIF$0$0 DefDE04
+S Fgpio$T1CC1L$0$0 Def00DC
+S Fgpio$MEMCTR$0$0 Def00C7
+S Fgpio$T2PR$0$0 Def009D
+S Fgpio$T1CC2L$0$0 Def00DE
+S Fgpio$ENCDO$0$0 Def00B2
+S Fgpio$IP0$0$0 Def00A9
+S Fgpio$I2SSTAT$0$0 DefDF45
+S Fgpio$I2SWCNT$0$0 DefDF44
+S Fgpio$IP1$0$0 Def00B9
+S Fgpio$MPAGE$0$0 Def0093
+S Fgpio$U1MODE$0$0 Def00FF
+S Fgpio$ENCCS$0$0 Def00B3
+S Fgpio$IRCON2$0$0 Def00E8
+S Fgpio$WORCTRL$0$0 Def00A2
+S Fgpio$PKTLEN$0$0 DefDF02
+S Fgpio$AGCCTRL0$0$0 DefDF19
+S Fgpio$ADCH$0$0 Def00BB
+S Fgpio$AGCCTRL1$0$0 DefDF18
+S Fgpio$FWT$0$0 Def00AB
+S Fgpio$AGCCTRL2$0$0 DefDF17
+S Fgpio$DMA0CFG$0$0 DefFFFFD5D4
+S Fgpio$T1CNTH$0$0 Def00E3
+S Fgpio$DMA1CFG$0$0 DefFFFFD3D2
+S Fgpio$ENCIF_0$0$0 Def0098
+S Fgpio$ADCL$0$0 Def00BA
+S Fgpio$RS0$0$0 Def00D3
+S Fgpio$ENCIF_1$0$0 Def0099
+S Fgpio$F0$0$0 Def00D5
+S Fgpio$RS1$0$0 Def00D4
+S Fgpio$T1CNTL$0$0 Def00E2
+S Fgpio$P0IFG$0$0 Def0089
+S Fgpio$F1$0$0 Def00D1
+S Fgpio$WOREVT0$0$0 Def00A3
+S Fgpio$P1IFG$0$0 Def008A
+S Fgpio$ADCCFG$0$0 Def00F2
+S Fgpio$WOREVT1$0$0 Def00A4
+S Fgpio$P2IFG$0$0 Def008B
+S Fgpio$TIMIF$0$0 Def00D8
+S Fgpio$SLEEP$0$0 Def00BE
+S Fgpio$ADCCON1$0$0 Def00B4
+S Fgpio$PSW$0$0 Def00D0
+S Fgpio$ADCCON2$0$0 Def00B5
+S Fgpio$ADDR$0$0 DefDF05
+S Fgpio$T1CC0$0$0 DefFFFFDBDA
+S Fgpio$IRCON$0$0 Def00C0
+S Fgpio$ADCCON3$0$0 Def00B6
+S Fgpio$CY$0$0 Def00D7
+S Fgpio$T1CC1$0$0 DefFFFFDDDC
+S Fgpio$PICTL$0$0 Def008C
+S Fgpio$URX0IE$0$0 Def00AA
+S Fgpio$T1CC2$0$0 DefFFFFDFDE
+S Fgpio$T3CC0$0$0 Def00CD
+S Fgpio$P1IEN$0$0 Def008D
+S .__.ABS. Def0000
+S Fgpio$I2SCLKF0$0$0 DefDF46
+S Fgpio$MDMCFG0$0$0 DefDF10
+S Fgpio$FREQ0$0$0 DefDF0B
+S Fgpio$WDTIF$0$0 Def00EC
+S Fgpio$URX1IE$0$0 Def00AB
+S Fgpio$URX0IF$0$0 Def008B
+S Fgpio$T4CC0$0$0 Def00ED
+S Fgpio$T3CC1$0$0 Def00CF
+S Fgpio$WDCTL$0$0 Def00C9
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A BIT_BANK size 1 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A OSEG size 0 flags 4 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 0 flags 80 addr 0
+A PSEG size 0 flags 50 addr 0
+A XSEG size 0 flags 40 addr 0
+A XABS size 0 flags 48 addr 0
+A XISEG size 0 flags 40 addr 0
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size 3DE flags 20 addr 0
+S A$gpio$897 Def00C6
+S A$gpio$888 Def00B6
+S A$gpio$879 Def00A7
+S C$gpio.c$56$1$1 Def03BD
+S C$gpio.c$38$1$1 Def0000
+S A$gpio$898 Def00C8
+S A$gpio$889 Def00B9
+S C$gpio.c$66$1$1 Def03CE
+S C$gpio.c$48$1$1 Def0317
+S C$gpio.c$39$1$1 Def00F8
+S A$gpio$899 Def00CB
+S C$gpio.c$58$1$1 Def03BE
+S C$gpio.c$55$2$3 Def03BA
+S C$gpio.c$49$1$1 Def03AC
+S C$gpio.c$68$1$1 Def03DD
+S C$gpio.c$67$2$3 Def03DA
+S XG$setDigitalInput$0$0 Def0316
+S XG$setDigitalOutput$0$0 Def00F8
+S G$setDigitalInput$0$0 Def00F9
+S G$setDigitalOutput$0$0 Def0000
+S A$gpio$1100 Def01EC
+S A$gpio$1200 Def02AC
+S A$gpio$1101 Def01EE
+S A$gpio$1020 Def0151
+S A$gpio$1210 Def02C0
+S A$gpio$1120 Def0214
+S A$gpio$1111 Def0200
+S A$gpio$1021 Def0153
+S A$gpio$1012 Def0142
+S A$gpio$1220 Def02D0
+S A$gpio$1211 Def02C2
+S A$gpio$1202 Def02AF
+S A$gpio$1130 Def0226
+S A$gpio$1112 Def0202
+S A$gpio$1103 Def01F1
+S A$gpio$1040 Def0179
+S A$gpio$1031 Def0167
+S A$gpio$1022 Def0156
+S A$gpio$1013 Def0145
+S A$gpio$1230 Def02E4
+S A$gpio$1221 Def02D3
+S A$gpio$1203 Def02B1
+S A$gpio$1140 Def0239
+S A$gpio$1131 Def0228
+S A$gpio$1122 Def0216
+S A$gpio$1113 Def0205
+S A$gpio$1104 Def01F4
+S A$gpio$1041 Def017C
+S A$gpio$1023 Def0158
+S A$gpio$1014 Def0147
+S A$gpio$1231 Def02E6
+S A$gpio$1222 Def02D5
+S A$gpio$1213 Def02C4
+S A$gpio$1204 Def02B4
+S A$gpio$1150 Def024B
+S A$gpio$1132 Def022B
+S A$gpio$1114 Def0207
+S A$gpio$1105 Def01F6
+S A$gpio$1060 Def019E
+S A$gpio$1051 Def018D
+S A$gpio$1042 Def017E
+S A$gpio$1033 Def016A
+S A$gpio$1015 Def014A
+S _setPort0PullType Def03AE
+S A$gpio$1430 Def03BA
+S A$gpio$1403 Def03AC
+S A$gpio$1250 Def030A
+S A$gpio$1241 Def02F7
+S A$gpio$1223 Def02D8
+S A$gpio$1205 Def02B6
+S A$gpio$1151 Def024D
+S A$gpio$1142 Def023C
+S A$gpio$1133 Def022D
+S A$gpio$1124 Def0219
+S A$gpio$1106 Def01F9
+S A$gpio$1070 Def01B2
+S A$gpio$1061 Def01A1
+S A$gpio$1052 Def0190
+S A$gpio$1034 Def016C
+S A$gpio$1025 Def015B
+S A$gpio$1016 Def014C
+S _setPort1PullType Def03BE
+S A$gpio$1422 Def03AE
+S A$gpio$1350 Def0368
+S A$gpio$1242 Def02F9
+S A$gpio$1233 Def02E8
+S A$gpio$1224 Def02DA
+S A$gpio$1215 Def02C7
+S A$gpio$1170 Def0273
+S A$gpio$1161 Def0261
+S A$gpio$1152 Def0250
+S A$gpio$1143 Def023F
+S A$gpio$1125 Def021B
+S A$gpio$1116 Def020A
+S A$gpio$1107 Def01FB
+S A$gpio$1080 Def01C7
+S A$gpio$1062 Def01A3
+S A$gpio$1053 Def0192
+S A$gpio$1044 Def0180
+S A$gpio$1035 Def016F
+S A$gpio$1026 Def015E
+S _setPort2PullType Def03CE
+S A$gpio$1450 Def03C1
+S A$gpio$1423 Def03B1
+S A$gpio$1360 Def0376
+S A$gpio$1351 Def036A
+S A$gpio$1261 Def0316
+S A$gpio$1252 Def030C
+S A$gpio$1243 Def02FC
+S A$gpio$1234 Def02EB
+S A$gpio$1216 Def02C9
+S A$gpio$1207 Def02B8
+S A$gpio$1171 Def0276
+S A$gpio$1153 Def0252
+S A$gpio$1144 Def0241
+S A$gpio$1135 Def022F
+S A$gpio$1126 Def021E
+S A$gpio$1117 Def020D
+S A$gpio$1090 Def01D8
+S A$gpio$1081 Def01C9
+S A$gpio$1072 Def01B5
+S A$gpio$1054 Def0195
+S A$gpio$1036 Def0171
+S A$gpio$1027 Def0160
+S A$gpio$1018 Def014E
+S _isPinHigh Def0317
+S A$gpio$1451 Def03C3
+S A$gpio$1424 Def03B3
+S A$gpio$1280 Def031E
+S A$gpio$1244 Def02FE
+S A$gpio$1235 Def02ED
+S A$gpio$1226 Def02DC
+S A$gpio$1217 Def02CC
+S A$gpio$1208 Def02BB
+S A$gpio$1190 Def0298
+S A$gpio$1181 Def0287
+S A$gpio$1172 Def0278
+S A$gpio$1163 Def0264
+S A$gpio$1145 Def0244
+S A$gpio$1127 Def0220
+S A$gpio$1118 Def020F
+S A$gpio$1109 Def01FD
+S A$gpio$1091 Def01DB
+S A$gpio$1073 Def01B7
+S A$gpio$1064 Def01A6
+S A$gpio$1055 Def0197
+S A$gpio$1046 Def0183
+S A$gpio$1028 Def0163
+S A$gpio$1461 Def03CD
+S A$gpio$1452 Def03C6
+S A$gpio$1434 Def03BD
+S A$gpio$1425 Def03B6
+S A$gpio$1407 Def03AD
+S A$gpio$1380 Def0390
+S A$gpio$1371 Def0384
+S A$gpio$1362 Def0378
+S A$gpio$1353 Def036C
+S A$gpio$1344 Def0360
+S A$gpio$1290 Def032D
+S A$gpio$1254 Def030F
+S A$gpio$1236 Def02F0
+S A$gpio$1218 Def02CE
+S A$gpio$1209 Def02BD
+S A$gpio$1191 Def029B
+S A$gpio$1182 Def028A
+S A$gpio$1164 Def0266
+S A$gpio$1155 Def0255
+S A$gpio$1146 Def0246
+S A$gpio$1137 Def0232
+S A$gpio$1119 Def0212
+S A$gpio$1092 Def01DD
+S A$gpio$1083 Def01CB
+S A$gpio$1074 Def01BA
+S A$gpio$1065 Def01A9
+S A$gpio$1047 Def0185
+S A$gpio$1038 Def0174
+S A$gpio$1029 Def0165
+S A$gpio$1480 Def03D8
+S A$gpio$1453 Def03C8
+S A$gpio$1426 Def03B8
+S A$gpio$1390 Def039E
+S A$gpio$1381 Def0392
+S A$gpio$1372 Def0386
+S A$gpio$1363 Def037A
+S A$gpio$1354 Def036E
+S A$gpio$1345 Def0362
+S A$gpio$1282 Def0321
+S A$gpio$1255 Def0311
+S A$gpio$1246 Def0300
+S A$gpio$1237 Def02F2
+S A$gpio$1228 Def02DF
+S A$gpio$1192 Def029D
+S A$gpio$1183 Def028C
+S A$gpio$1174 Def027A
+S A$gpio$1165 Def0269
+S A$gpio$1156 Def0258
+S A$gpio$1138 Def0234
+S A$gpio$1129 Def0223
+S A$gpio$1093 Def01E0
+S A$gpio$1075 Def01BC
+S A$gpio$1066 Def01AB
+S A$gpio$1057 Def0199
+S A$gpio$1048 Def0188
+S A$gpio$1039 Def0177
+S A$gpio$1283 Def0322
+S A$gpio$1256 Def0314
+S A$gpio$1247 Def0303
+S A$gpio$1229 Def02E1
+S A$gpio$1184 Def028F
+S A$gpio$1166 Def026B
+S A$gpio$1157 Def025A
+S A$gpio$1148 Def0248
+S A$gpio$1139 Def0237
+S A$gpio$1094 Def01E2
+S A$gpio$1085 Def01CE
+S A$gpio$1067 Def01AE
+S A$gpio$1049 Def018A
+S A$gpio$1392 Def03A0
+S A$gpio$1383 Def0394
+S A$gpio$1374 Def0388
+S A$gpio$1365 Def037C
+S A$gpio$1356 Def0370
+S A$gpio$1347 Def0364
+S A$gpio$1284 Def0324
+S A$gpio$1248 Def0305
+S A$gpio$1239 Def02F4
+S A$gpio$1194 Def02A0
+S A$gpio$1185 Def0291
+S A$gpio$1176 Def027D
+S A$gpio$1158 Def025D
+S A$gpio$1086 Def01D0
+S A$gpio$1077 Def01BF
+S A$gpio$1068 Def01B0
+S A$gpio$1059 Def019C
+S A$gpio$1393 Def03A2
+S A$gpio$1384 Def0396
+S A$gpio$1375 Def038A
+S A$gpio$1366 Def037E
+S A$gpio$1357 Def0372
+S A$gpio$1348 Def0366
+S A$gpio$1285 Def0325
+S A$gpio$1276 Def0317
+S A$gpio$1249 Def0308
+S A$gpio$1195 Def02A3
+S A$gpio$1177 Def027F
+S A$gpio$1168 Def026E
+S A$gpio$1159 Def025F
+S A$gpio$1096 Def01E4
+S A$gpio$1087 Def01D3
+S A$gpio$1078 Def01C2
+S A$gpio$1484 Def03DA
+S A$gpio$1457 Def03CA
+S A$gpio$1286 Def0327
+S A$gpio$1277 Def0319
+S A$gpio$1196 Def02A5
+S A$gpio$1187 Def0293
+S A$gpio$1178 Def0282
+S A$gpio$1169 Def0271
+S A$gpio$1088 Def01D5
+S A$gpio$1079 Def01C4
+S A$gpio$1476 Def03CE
+S A$gpio$1449 Def03BE
+S A$gpio$1395 Def03A4
+S A$gpio$1386 Def0398
+S A$gpio$1377 Def038C
+S A$gpio$1368 Def0380
+S A$gpio$1359 Def0374
+S A$gpio$1287 Def0328
+S A$gpio$1278 Def031A
+S A$gpio$1197 Def02A8
+S A$gpio$1179 Def0284
+S A$gpio$1098 Def01E7
+S A$gpio$1477 Def03D1
+S A$gpio$1396 Def03A6
+S A$gpio$1387 Def039A
+S A$gpio$1378 Def038E
+S A$gpio$1369 Def0382
+S A$gpio$1288 Def032A
+S A$gpio$1279 Def031C
+S A$gpio$1198 Def02AA
+S A$gpio$1189 Def0296
+S A$gpio$1099 Def01E9
+S XG$setPort0PullType$0$0 Def03BD
+S A$gpio$1478 Def03D3
+S A$gpio$1289 Def032B
+S XG$setPort1PullType$0$0 Def03CD
+S A$gpio$1488 Def03DD
+S A$gpio$1479 Def03D6
+S A$gpio$1398 Def03A8
+S A$gpio$1389 Def039C
+S XG$setPort2PullType$0$0 Def03DD
+S A$gpio$1399 Def03AA
+S XG$isPinHigh$0$0 Def03AD
+S A$gpio$901 Def00CD
+S A$gpio$911 Def00DF
+S A$gpio$902 Def00CF
+S G$setPort0PullType$0$0 Def03AE
+S A$gpio$921 Def00F1
+S A$gpio$912 Def00E1
+S A$gpio$903 Def00D1
+S A$gpio$831 Def0049
+S G$setPort1PullType$0$0 Def03BE
+S A$gpio$922 Def00F3
+S A$gpio$913 Def00E3
+S A$gpio$904 Def00D4
+S A$gpio$841 Def005D
+S A$gpio$832 Def004B
+S G$setPort2PullType$0$0 Def03CE
+S A$gpio$950 Def0103
+S A$gpio$923 Def00F5
+S A$gpio$914 Def00E6
+S A$gpio$851 Def0071
+S A$gpio$842 Def005F
+S A$gpio$833 Def004D
+S A$gpio$770 Def000B
+S G$isPinHigh$0$0 Def0317
+S A$gpio$951 Def0104
+S A$gpio$906 Def00D6
+S A$gpio$861 Def0085
+S A$gpio$852 Def0073
+S A$gpio$843 Def0061
+S A$gpio$834 Def0050
+S A$gpio$771 Def000D
+S A$gpio$952 Def0106
+S A$gpio$916 Def00E8
+S A$gpio$907 Def00D8
+S A$gpio$871 Def0097
+S A$gpio$862 Def0087
+S A$gpio$853 Def0075
+S A$gpio$844 Def0064
+S A$gpio$772 Def000E
+S A$gpio$763 Def0000
+S A$gpio$953 Def0107
+S A$gpio$944 Def00F9
+S A$gpio$917 Def00EA
+S A$gpio$908 Def00DA
+S A$gpio$881 Def00A9
+S A$gpio$872 Def0099
+S A$gpio$863 Def0089
+S A$gpio$854 Def0078
+S A$gpio$836 Def0053
+S A$gpio$773 Def0010
+S A$gpio$764 Def0002
+S _setDigitalInput Def00F9
+S A$gpio$954 Def0109
+S A$gpio$945 Def00FB
+S A$gpio$918 Def00EC
+S A$gpio$909 Def00DD
+S A$gpio$891 Def00BB
+S A$gpio$882 Def00AB
+S A$gpio$873 Def009B
+S A$gpio$864 Def008C
+S A$gpio$846 Def0067
+S A$gpio$837 Def0055
+S A$gpio$774 Def0011
+S A$gpio$765 Def0003
+S C$gpio.c$50$1$1 Def03AD
+S C$gpio.c$41$1$1 Def00F9
+S _setDigitalOutput Def0000
+S A$gpio$955 Def010A
+S A$gpio$946 Def00FC
+S A$gpio$928 Def00F8
+S A$gpio$919 Def00EF
+S A$gpio$892 Def00BD
+S A$gpio$883 Def00AD
+S A$gpio$874 Def009E
+S A$gpio$856 Def007B
+S A$gpio$847 Def0069
+S A$gpio$838 Def0057
+S A$gpio$775 Def0013
+S A$gpio$766 Def0005
+S C$gpio.c$60$1$1 Def03BE
+S A$gpio$956 Def010C
+S A$gpio$947 Def00FE
+S A$gpio$893 Def00BF
+S A$gpio$884 Def00B0
+S A$gpio$866 Def008E
+S A$gpio$857 Def007D
+S A$gpio$848 Def006B
+S A$gpio$839 Def005A
+S A$gpio$776 Def0014
+S A$gpio$767 Def0007
+S C$gpio.c$52$1$1 Def03AE
+S C$gpio.c$43$1$1 Def00F9
+S C$gpio.c$36$0$0 Def0000
+S A$gpio$957 Def010D
+S A$gpio$948 Def0100
+S A$gpio$894 Def00C2
+S A$gpio$876 Def00A0
+S A$gpio$867 Def0090
+S A$gpio$858 Def007F
+S A$gpio$849 Def006E
+S A$gpio$777 Def0016
+S C$gpio.c$62$1$1 Def03CD
+S C$gpio.c$44$1$1 Def0316
+S A$gpio$958 Def010F
+S A$gpio$886 Def00B2
+S A$gpio$877 Def00A2
+S A$gpio$868 Def0092
+S A$gpio$859 Def0082
+S A$gpio$769 Def000A
+S C$gpio.c$54$1$1 Def03AE
+S A$gpio$896 Def00C4
+S A$gpio$887 Def00B4
+S A$gpio$878 Def00A4
+S A$gpio$869 Def0095
+S C$gpio.c$64$1$1 Def03CE
+S C$gpio.c$61$2$3 Def03CA
+S C$gpio.c$46$1$1 Def0317
+A CONST size 0 flags 20 addr 0
+A XINIT size 0 flags 20 addr 0
+A CABS size 0 flags 28 addr 0
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00
+R 00 00 00 04
+T 00 00
+R 00 00 00 05
+T 00 00
+R 00 00 00 05
+T 00 00
+R 00 00 00 18
+T 00 00 E5 82 FF 24 E7 50 03 02 00 F8
+R 00 00 00 18 00 0A 00 18
+T 00 0A
+R 00 00 00 18
+T 00 0A EF 24 09 83 C0 E0 EF 24 1C 83 C0 E0 22
+R 00 00 00 18
+T 00 17
+R 00 00 00 18
+T 00 17 00 00 49 00 00 53
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 19 00 00 5D 00 00 67
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 1B 00 00 71 00 00 7B
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 1D 00 00 F8 00 00 F8
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 1F 00 00 F8 00 00 F8
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 21 00 00 85 00 00 8E
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 23 00 00 97 00 00 A0
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 25 00 00 A9 00 00 B2
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 27 00 00 BB 00 00 C4
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 29 00 00 F8 00 00 F8
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 2B 00 00 CD 00 00 D6
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 2D 00 00 DF 00 00 E8
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 00 2F 00 00 F1
+R 00 00 00 18 F1 01 02 00 18
+T 00 30
+R 00 00 00 18
+T 00 30 00 00 49 00 00 53
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 32 00 00 5D 00 00 67
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 34 00 00 71 00 00 7B
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 36 00 00 F8 00 00 F8
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 38 00 00 F8 00 00 F8
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 3A 00 00 85 00 00 8E
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 3C 00 00 97 00 00 A0
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 3E 00 00 A9 00 00 B2
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 40 00 00 BB 00 00 C4
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 42 00 00 F8 00 00 F8
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 44 00 00 CD 00 00 D6
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 46 00 00 DF 00 00 E8
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 00 48 00 00 F1
+R 00 00 00 18 F1 81 02 00 18
+T 00 49
+R 00 00 00 18
+T 00 49 A2 00 80 00 92 80 43 FD 01 02 00 F8
+R 00 00 00 18 F5 29 03 00 05 00 0C 00 18
+T 00 53
+R 00 00 00 18
+T 00 53 A2 00 80 00 92 81 43 FD 02 02 00 F8
+R 00 00 00 18 F5 29 03 00 05 00 0C 00 18
+T 00 5D
+R 00 00 00 18
+T 00 5D A2 00 80 00 92 82 43 FD 04 02 00 F8
+R 00 00 00 18 F5 29 03 00 05 00 0C 00 18
+T 00 67
+R 00 00 00 18
+T 00 67 A2 00 80 00 92 83 43 FD 08 02 00 F8
+R 00 00 00 18 F5 29 03 00 05 00 0C 00 18
+T 00 71
+R 00 00 00 18
+T 00 71 A2 00 80 00 92 84 43 FD 10 02 00 F8
+R 00 00 00 18 F5 29 03 00 05 00 0C 00 18
+T 00 7B
+R 00 00 00 18
+T 00 7B A2 00 80 00 92 85 43 FD 20 02 00 F8
+R 00 00 00 18 F5 29 03 00 05 00 0C 00 18
+T 00 85
+R 00 00 00 18
+T 00 85 A2 00 80 00 92 90 43 FE 01 80 6A
+R 00 00 00 18 F5 29 03 00 05
+T 00 8E
+R 00 00 00 18
+T 00 8E A2 00 80 00 92 91 43 FE 02 80 61
+R 00 00 00 18 F5 29 03 00 05
+T 00 97
+R 00 00 00 18
+T 00 97 A2 00 80 00 92 92 43 FE 04 80 58
+R 00 00 00 18 F5 29 03 00 05
+T 00 A0
+R 00 00 00 18
+T 00 A0 A2 00 80 00 92 93 43 FE 08 80 4F
+R 00 00 00 18 F5 29 03 00 05
+T 00 A9
+R 00 00 00 18
+T 00 A9 A2 00 80 00 92 94 43 FE 10 80 46
+R 00 00 00 18 F5 29 03 00 05
+T 00 B2
+R 00 00 00 18
+T 00 B2 A2 00 80 00 92 95 43 FE 20 80 3D
+R 00 00 00 18 F5 29 03 00 05
+T 00 BB
+R 00 00 00 18
+T 00 BB A2 00 80 00 92 96 43 FE 40 80 34
+R 00 00 00 18 F5 29 03 00 05
+T 00 C4
+R 00 00 00 18
+T 00 C4 A2 00 80 00 92 97 43 FE 80 80 2B
+R 00 00 00 18 F5 29 03 00 05
+T 00 CD
+R 00 00 00 18
+T 00 CD A2 00 80 00 92 A0 43 FF 01 80 22
+R 00 00 00 18 F5 29 03 00 05
+T 00 D6
+R 00 00 00 18
+T 00 D6 A2 00 80 00 92 A1 43 FF 02 80 19
+R 00 00 00 18 F5 29 03 00 05
+T 00 DF
+R 00 00 00 18
+T 00 DF A2 00 80 00 92 A2 43 FF 04 80 10
+R 00 00 00 18 F5 29 03 00 05
+T 00 E8
+R 00 00 00 18
+T 00 E8 A2 00 80 00 92 A3 43 FF 08 80 07
+R 00 00 00 18 F5 29 03 00 05
+T 00 F1
+R 00 00 00 18
+T 00 F1 A2 00 80 00 92 A4 43 FF 10
+R 00 00 00 18 F5 29 03 00 05
+T 00 F8
+R 00 00 00 18
+T 00 F8
+R 00 00 00 18
+T 00 F8 22
+R 00 00 00 18
+T 00 F9
+R 00 00 00 18
+T 00 F9 E5 82 FF 24 E7 50 03 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 01 03
+R 00 00 00 18
+T 01 03 EF 24 09 83 C0 E0 EF 24 1C 83 C0 E0 22
+R 00 00 00 18
+T 01 10
+R 00 00 00 18
+T 01 10 00 01 42 00 01 5B
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 12 00 01 74 00 01 8D
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 14 00 01 A6 00 01 BF
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 16 00 03 16 00 03 16
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 18 00 03 16 00 03 16
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 1A 00 01 D8 00 01 F1
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 1C 00 02 0A 00 02 23
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 1E 00 02 3C 00 02 55
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 20 00 02 6E 00 02 87
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 22 00 03 16 00 03 16
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 24 00 02 A0 00 02 B8
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 26 00 02 D0 00 02 E8
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 01 28 00 03 00
+R 00 00 00 18 F1 01 02 00 18
+T 01 29
+R 00 00 00 18
+T 01 29 00 01 42 00 01 5B
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 2B 00 01 74 00 01 8D
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 2D 00 01 A6 00 01 BF
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 2F 00 03 16 00 03 16
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 31 00 03 16 00 03 16
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 33 00 01 D8 00 01 F1
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 35 00 02 0A 00 02 23
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 37 00 02 3C 00 02 55
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 39 00 02 6E 00 02 87
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 3B 00 03 16 00 03 16
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 3D 00 02 A0 00 02 B8
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 3F 00 02 D0 00 02 E8
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 01 41 00 03 00
+R 00 00 00 18 F1 81 02 00 18
+T 01 42
+R 00 00 00 18
+T 01 42 30 00 80 00 09 AF 8F 53 07 FE 8F 8F 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 01 4E
+R 00 00 00 18
+T 01 4E 43 8F 01
+R 00 00 00 18
+T 01 51
+R 00 00 00 18
+T 01 51 AF FD 53 07 FE 8F FD 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 01 5B
+R 00 00 00 18
+T 01 5B 30 00 80 00 09 AF 8F 53 07 FD 8F 8F 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 01 67
+R 00 00 00 18
+T 01 67 43 8F 02
+R 00 00 00 18
+T 01 6A
+R 00 00 00 18
+T 01 6A AF FD 53 07 FD 8F FD 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 01 74
+R 00 00 00 18
+T 01 74 30 00 80 00 09 AF 8F 53 07 FB 8F 8F 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 01 80
+R 00 00 00 18
+T 01 80 43 8F 04
+R 00 00 00 18
+T 01 83
+R 00 00 00 18
+T 01 83 AF FD 53 07 FB 8F FD 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 01 8D
+R 00 00 00 18
+T 01 8D 30 00 80 00 09 AF 8F 53 07 F7 8F 8F 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 01 99
+R 00 00 00 18
+T 01 99 43 8F 08
+R 00 00 00 18
+T 01 9C
+R 00 00 00 18
+T 01 9C AF FD 53 07 F7 8F FD 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 01 A6
+R 00 00 00 18
+T 01 A6 30 00 80 00 09 AF 8F 53 07 EF 8F 8F 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 01 B2
+R 00 00 00 18
+T 01 B2 43 8F 10
+R 00 00 00 18
+T 01 B5
+R 00 00 00 18
+T 01 B5 AF FD 53 07 EF 8F FD 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 01 BF
+R 00 00 00 18
+T 01 BF 30 00 80 00 09 AF 8F 53 07 DF 8F 8F 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 01 CB
+R 00 00 00 18
+T 01 CB 43 8F 20
+R 00 00 00 18
+T 01 CE
+R 00 00 00 18
+T 01 CE AF FD 53 07 DF 8F FD 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 01 D8
+R 00 00 00 18
+T 01 D8 30 00 80 00 09 AF F6 53 07 FE 8F F6 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 01 E4
+R 00 00 00 18
+T 01 E4 43 F6 01
+R 00 00 00 18
+T 01 E7
+R 00 00 00 18
+T 01 E7 AF FE 53 07 FE 8F FE 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 01 F1
+R 00 00 00 18
+T 01 F1 30 00 80 00 09 AF F6 53 07 FD 8F F6 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 01 FD
+R 00 00 00 18
+T 01 FD 43 F6 02
+R 00 00 00 18
+T 02 00
+R 00 00 00 18
+T 02 00 AF FE 53 07 FD 8F FE 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 02 0A
+R 00 00 00 18
+T 02 0A 30 00 80 00 09 AF F6 53 07 FB 8F F6 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 16
+R 00 00 00 18
+T 02 16 43 F6 04
+R 00 00 00 18
+T 02 19
+R 00 00 00 18
+T 02 19 AF FE 53 07 FB 8F FE 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 02 23
+R 00 00 00 18
+T 02 23 30 00 80 00 09 AF F6 53 07 F7 8F F6 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 2F
+R 00 00 00 18
+T 02 2F 43 F6 08
+R 00 00 00 18
+T 02 32
+R 00 00 00 18
+T 02 32 AF FE 53 07 F7 8F FE 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 02 3C
+R 00 00 00 18
+T 02 3C 30 00 80 00 09 AF F6 53 07 EF 8F F6 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 48
+R 00 00 00 18
+T 02 48 43 F6 10
+R 00 00 00 18
+T 02 4B
+R 00 00 00 18
+T 02 4B AF FE 53 07 EF 8F FE 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 02 55
+R 00 00 00 18
+T 02 55 30 00 80 00 09 AF F6 53 07 DF 8F F6 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 61
+R 00 00 00 18
+T 02 61 43 F6 20
+R 00 00 00 18
+T 02 64
+R 00 00 00 18
+T 02 64 AF FE 53 07 DF 8F FE 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 02 6E
+R 00 00 00 18
+T 02 6E 30 00 80 00 09 AF F6 53 07 BF 8F F6 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 7A
+R 00 00 00 18
+T 02 7A 43 F6 40
+R 00 00 00 18
+T 02 7D
+R 00 00 00 18
+T 02 7D AF FE 53 07 BF 8F FE 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 02 87
+R 00 00 00 18
+T 02 87 30 00 80 00 09 AF F6 53 07 7F 8F F6 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 93
+R 00 00 00 18
+T 02 93 43 F6 80
+R 00 00 00 18
+T 02 96
+R 00 00 00 18
+T 02 96 AF FE 53 07 7F 8F FE 02 03 16
+R 00 00 00 18 00 0A 00 18
+T 02 A0
+R 00 00 00 18
+T 02 A0 30 00 80 00 09 AF F7 53 07 FE 8F F7 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 AC
+R 00 00 00 18
+T 02 AC 43 F7 01
+R 00 00 00 18
+T 02 AF
+R 00 00 00 18
+T 02 AF AF FF 53 07 FE 8F FF 80 5E
+R 00 00 00 18
+T 02 B8
+R 00 00 00 18
+T 02 B8 30 00 80 00 09 AF F7 53 07 FD 8F F7 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 C4
+R 00 00 00 18
+T 02 C4 43 F7 02
+R 00 00 00 18
+T 02 C7
+R 00 00 00 18
+T 02 C7 AF FF 53 07 FD 8F FF 80 46
+R 00 00 00 18
+T 02 D0
+R 00 00 00 18
+T 02 D0 30 00 80 00 09 AF F7 53 07 FB 8F F7 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 DC
+R 00 00 00 18
+T 02 DC 43 F7 04
+R 00 00 00 18
+T 02 DF
+R 00 00 00 18
+T 02 DF AF FF 53 07 FB 8F FF 80 2E
+R 00 00 00 18
+T 02 E8
+R 00 00 00 18
+T 02 E8 30 00 80 00 09 AF F7 53 07 F7 8F F7 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 02 F4
+R 00 00 00 18
+T 02 F4 43 F7 08
+R 00 00 00 18
+T 02 F7
+R 00 00 00 18
+T 02 F7 AF FF 53 07 F7 8F FF 80 16
+R 00 00 00 18
+T 03 00
+R 00 00 00 18
+T 03 00 30 00 80 00 09 AF F7 53 07 EF 8F F7 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 03 0C
+R 00 00 00 18
+T 03 0C 43 F7 10
+R 00 00 00 18
+T 03 0F
+R 00 00 00 18
+T 03 0F AF FF 53 07 EF 8F FF
+R 00 00 00 18
+T 03 16
+R 00 00 00 18
+T 03 16
+R 00 00 00 18
+T 03 16 22
+R 00 00 00 18
+T 03 17
+R 00 00 00 18
+T 03 17 E5 82 FF 24 E7 50 03 02 03 AC
+R 00 00 00 18 00 0A 00 18
+T 03 21
+R 00 00 00 18
+T 03 21 EF 24 09 83 C0 E0 EF 24 1C 83 C0 E0 22
+R 00 00 00 18
+T 03 2E
+R 00 00 00 18
+T 03 2E 00 03 60 00 03 64
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 30 00 03 68 00 03 6C
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 32 00 03 70 00 03 74
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 34 00 03 AC 00 03 AC
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 36 00 03 AC 00 03 AC
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 38 00 03 78 00 03 7C
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 3A 00 03 80 00 03 84
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 3C 00 03 88 00 03 8C
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 3E 00 03 90 00 03 94
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 40 00 03 AC 00 03 AC
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 42 00 03 98 00 03 9C
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 44 00 03 A0 00 03 A4
+R 00 00 00 18 F1 01 02 00 18 F1 01 05 00 18
+T 03 46 00 03 A8
+R 00 00 00 18 F1 01 02 00 18
+T 03 47
+R 00 00 00 18
+T 03 47 00 03 60 00 03 64
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 49 00 03 68 00 03 6C
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 4B 00 03 70 00 03 74
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 4D 00 03 AC 00 03 AC
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 4F 00 03 AC 00 03 AC
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 51 00 03 78 00 03 7C
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 53 00 03 80 00 03 84
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 55 00 03 88 00 03 8C
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 57 00 03 90 00 03 94
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 59 00 03 AC 00 03 AC
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 5B 00 03 98 00 03 9C
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 5D 00 03 A0 00 03 A4
+R 00 00 00 18 F1 81 02 00 18 F1 81 05 00 18
+T 03 5F 00 03 A8
+R 00 00 00 18 F1 81 02 00 18
+T 03 60
+R 00 00 00 18
+T 03 60 A2 80 80 49
+R 00 00 00 18
+T 03 64
+R 00 00 00 18
+T 03 64 A2 81 80 45
+R 00 00 00 18
+T 03 68
+R 00 00 00 18
+T 03 68 A2 82 80 41
+R 00 00 00 18
+T 03 6C
+R 00 00 00 18
+T 03 6C A2 83 80 3D
+R 00 00 00 18
+T 03 70
+R 00 00 00 18
+T 03 70 A2 84 80 39
+R 00 00 00 18
+T 03 74
+R 00 00 00 18
+T 03 74 A2 85 80 35
+R 00 00 00 18
+T 03 78
+R 00 00 00 18
+T 03 78 A2 90 80 31
+R 00 00 00 18
+T 03 7C
+R 00 00 00 18
+T 03 7C A2 91 80 2D
+R 00 00 00 18
+T 03 80
+R 00 00 00 18
+T 03 80 A2 92 80 29
+R 00 00 00 18
+T 03 84
+R 00 00 00 18
+T 03 84 A2 93 80 25
+R 00 00 00 18
+T 03 88
+R 00 00 00 18
+T 03 88 A2 94 80 21
+R 00 00 00 18
+T 03 8C
+R 00 00 00 18
+T 03 8C A2 95 80 1D
+R 00 00 00 18
+T 03 90
+R 00 00 00 18
+T 03 90 A2 96 80 19
+R 00 00 00 18
+T 03 94
+R 00 00 00 18
+T 03 94 A2 97 80 15
+R 00 00 00 18
+T 03 98
+R 00 00 00 18
+T 03 98 A2 A0 80 11
+R 00 00 00 18
+T 03 9C
+R 00 00 00 18
+T 03 9C A2 A1 80 0D
+R 00 00 00 18
+T 03 A0
+R 00 00 00 18
+T 03 A0 A2 A2 80 09
+R 00 00 00 18
+T 03 A4
+R 00 00 00 18
+T 03 A4 A2 A3 80 05
+R 00 00 00 18
+T 03 A8
+R 00 00 00 18
+T 03 A8 A2 A4 80 01
+R 00 00 00 18
+T 03 AC
+R 00 00 00 18
+T 03 AC C3
+R 00 00 00 18
+T 03 AD
+R 00 00 00 18
+T 03 AD 22
+R 00 00 00 18
+T 03 AE
+R 00 00 00 18
+T 03 AE 30 00 80 00 09 AF F7 53 07 DF 8F F7 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 03 BA
+R 00 00 00 18
+T 03 BA 43 F7 20
+R 00 00 00 18
+T 03 BD
+R 00 00 00 18
+T 03 BD 22
+R 00 00 00 18
+T 03 BE
+R 00 00 00 18
+T 03 BE 30 00 80 00 09 AF F7 53 07 BF 8F F7 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 03 CA
+R 00 00 00 18
+T 03 CA 43 F7 40
+R 00 00 00 18
+T 03 CD
+R 00 00 00 18
+T 03 CD 22
+R 00 00 00 18
+T 03 CE
+R 00 00 00 18
+T 03 CE 30 00 80 00 09 AF F7 53 07 7F 8F F7 80 03
+R 00 00 00 18 F5 29 03 00 05
+T 03 DA
+R 00 00 00 18
+T 03 DA 43 F7 80
+R 00 00 00 18
+T 03 DD
+R 00 00 00 18
+T 03 DD 22
+R 00 00 00 18
+</REL>
+<ADB>
+M:gpio
+F:G$setDigitalOutput$0$0({2}DF,SV:S),Z,0,0,0,0,0
+S:Lgpio.setDigitalOutput$value$1$1({1}SB0$1:U),R,0,0,[b0]
+S:Lgpio.setDigitalOutput$pinNumber$1$1({1}SC:U),R,0,0,[r7]
+F:G$setDigitalInput$0$0({2}DF,SV:S),Z,0,0,0,0,0
+S:Lgpio.setDigitalInput$pulled$1$1({1}SB0$1:U),R,0,0,[b0]
+S:Lgpio.setDigitalInput$pinNumber$1$1({1}SC:U),R,0,0,[r7]
+F:G$isPinHigh$0$0({2}DF,SB0$1:U),Z,0,0,0,0,0
+S:Lgpio.isPinHigh$pinNumber$1$1({1}SC:U),R,0,0,[r7]
+F:G$setPort0PullType$0$0({2}DF,SV:S),Z,0,0,0,0,0
+S:Lgpio.setPort0PullType$pullType$1$1({1}SB0$1:U),R,0,0,[b0]
+F:G$setPort1PullType$0$0({2}DF,SV:S),Z,0,0,0,0,0
+S:Lgpio.setPort1PullType$pullType$1$1({1}SB0$1:U),R,0,0,[b0]
+F:G$setPort2PullType$0$0({2}DF,SV:S),Z,0,0,0,0,0
+S:Lgpio.setPort2PullType$pullType$1$1({1}SB0$1:U),R,0,0,[b0]
+T:Fgpio$__00010000[({0}S:S$SRCADDRH$0$0({1}SC:U),Z,0,0)({1}S:S$SRCADDRL$0$0({1}SC:U),Z,0,0)({2}S:S$DESTADDRH$0$0({1}SC:U),Z,0,0)({3}S:S$DESTADDRL$0$0({1}SC:U),Z,0,0)({4}S:S$VLEN_LENH$0$0({1}SC:U),Z,0,0)({5}S:S$LENL$0$0({1}SC:U),Z,0,0)({6}S:S$DC6$0$0({1}
+SC:U),Z,0,0)({7}S:S$DC7$0$0({1}SC:U),Z,0,0)]
+S:Fgpio$SYNC1$0$0({1}SC:U),F,0,0
+S:Fgpio$SYNC0$0$0({1}SC:U),F,0,0
+S:Fgpio$PKTLEN$0$0({1}SC:U),F,0,0
+S:Fgpio$PKTCTRL1$0$0({1}SC:U),F,0,0
+S:Fgpio$PKTCTRL0$0$0({1}SC:U),F,0,0
+S:Fgpio$ADDR$0$0({1}SC:U),F,0,0
+S:Fgpio$CHANNR$0$0({1}SC:U),F,0,0
+S:Fgpio$FSCTRL1$0$0({1}SC:U),F,0,0
+S:Fgpio$FSCTRL0$0$0({1}SC:U),F,0,0
+S:Fgpio$FREQ2$0$0({1}SC:U),F,0,0
+S:Fgpio$FREQ1$0$0({1}SC:U),F,0,0
+S:Fgpio$FREQ0$0$0({1}SC:U),F,0,0
+S:Fgpio$MDMCFG4$0$0({1}SC:U),F,0,0
+S:Fgpio$MDMCFG3$0$0({1}SC:U),F,0,0
+S:Fgpio$MDMCFG2$0$0({1}SC:U),F,0,0
+S:Fgpio$MDMCFG1$0$0({1}SC:U),F,0,0
+S:Fgpio$MDMCFG0$0$0({1}SC:U),F,0,0
+S:Fgpio$DEVIATN$0$0({1}SC:U),F,0,0
+S:Fgpio$MCSM2$0$0({1}SC:U),F,0,0
+S:Fgpio$MCSM1$0$0({1}SC:U),F,0,0
+S:Fgpio$MCSM0$0$0({1}SC:U),F,0,0
+S:Fgpio$FOCCFG$0$0({1}SC:U),F,0,0
+S:Fgpio$BSCFG$0$0({1}SC:U),F,0,0
+S:Fgpio$AGCCTRL2$0$0({1}SC:U),F,0,0
+S:Fgpio$AGCCTRL1$0$0({1}SC:U),F,0,0
+S:Fgpio$AGCCTRL0$0$0({1}SC:U),F,0,0
+S:Fgpio$FREND1$0$0({1}SC:U),F,0,0
+S:Fgpio$FREND0$0$0({1}SC:U),F,0,0
+S:Fgpio$FSCAL3$0$0({1}SC:U),F,0,0
+S:Fgpio$FSCAL2$0$0({1}SC:U),F,0,0
+S:Fgpio$FSCAL1$0$0({1}SC:U),F,0,0
+S:Fgpio$FSCAL0$0$0({1}SC:U),F,0,0
+S:Fgpio$TEST2$0$0({1}SC:U),F,0,0
+S:Fgpio$TEST1$0$0({1}SC:U),F,0,0
+S:Fgpio$TEST0$0$0({1}SC:U),F,0,0
+S:Fgpio$PA_TABLE0$0$0({1}SC:U),F,0,0
+S:Fgpio$IOCFG2$0$0({1}SC:U),F,0,0
+S:Fgpio$IOCFG1$0$0({1}SC:U),F,0,0
+S:Fgpio$IOCFG0$0$0({1}SC:U),F,0,0
+S:Fgpio$PARTNUM$0$0({1}SC:U),F,0,0
+S:Fgpio$VERSION$0$0({1}SC:U),F,0,0
+S:Fgpio$FREQEST$0$0({1}SC:U),F,0,0
+S:Fgpio$LQI$0$0({1}SC:U),F,0,0
+S:Fgpio$RSSI$0$0({1}SC:U),F,0,0
+S:Fgpio$MARCSTATE$0$0({1}SC:U),F,0,0
+S:Fgpio$PKTSTATUS$0$0({1}SC:U),F,0,0
+S:Fgpio$VCO_VC_DAC$0$0({1}SC:U),F,0,0
+S:Fgpio$I2SCFG0$0$0({1}SC:U),F,0,0
+S:Fgpio$I2SCFG1$0$0({1}SC:U),F,0,0
+S:Fgpio$I2SDATL$0$0({1}SC:U),F,0,0
+S:Fgpio$I2SDATH$0$0({1}SC:U),F,0,0
+S:Fgpio$I2SWCNT$0$0({1}SC:U),F,0,0
+S:Fgpio$I2SSTAT$0$0({1}SC:U),F,0,0
+S:Fgpio$I2SCLKF0$0$0({1}SC:U),F,0,0
+S:Fgpio$I2SCLKF1$0$0({1}SC:U),F,0,0
+S:Fgpio$I2SCLKF2$0$0({1}SC:U),F,0,0
+S:Fgpio$USBADDR$0$0({1}SC:U),F,0,0
+S:Fgpio$USBPOW$0$0({1}SC:U),F,0,0
+S:Fgpio$USBIIF$0$0({1}SC:U),F,0,0
+S:Fgpio$USBOIF$0$0({1}SC:U),F,0,0
+S:Fgpio$USBCIF$0$0({1}SC:U),F,0,0
+S:Fgpio$USBIIE$0$0({1}SC:U),F,0,0
+S:Fgpio$USBOIE$0$0({1}SC:U),F,0,0
+S:Fgpio$USBCIE$0$0({1}SC:U),F,0,0
+S:Fgpio$USBFRML$0$0({1}SC:U),F,0,0
+S:Fgpio$USBFRMH$0$0({1}SC:U),F,0,0
+S:Fgpio$USBINDEX$0$0({1}SC:U),F,0,0
+S:Fgpio$USBMAXI$0$0({1}SC:U),F,0,0
+S:Fgpio$USBCSIL$0$0({1}SC:U),F,0,0
+S:Fgpio$USBCSIH$0$0({1}SC:U),F,0,0
+S:Fgpio$USBMAXO$0$0({1}SC:U),F,0,0
+S:Fgpio$USBCSOL$0$0({1}SC:U),F,0,0
+S:Fgpio$USBCSOH$0$0({1}SC:U),F,0,0
+S:Fgpio$USBCNTL$0$0({1}SC:U),F,0,0
+S:Fgpio$USBCNTH$0$0({1}SC:U),F,0,0
+S:Fgpio$USBF0$0$0({1}SC:U),F,0,0
+S:Fgpio$USBF1$0$0({1}SC:U),F,0,0
+S:Fgpio$USBF2$0$0({1}SC:U),F,0,0
+S:Fgpio$USBF3$0$0({1}SC:U),F,0,0
+S:Fgpio$USBF4$0$0({1}SC:U),F,0,0
+S:Fgpio$USBF5$0$0({1}SC:U),F,0,0
+S:Fgpio$P0$0$0({1}SC:U),I,0,0
+S:Fgpio$SP$0$0({1}SC:U),I,0,0
+S:Fgpio$DPL0$0$0({1}SC:U),I,0,0
+S:Fgpio$DPH0$0$0({1}SC:U),I,0,0
+S:Fgpio$DPL1$0$0({1}SC:U),I,0,0
+S:Fgpio$DPH1$0$0({1}SC:U),I,0,0
+S:Fgpio$U0CSR$0$0({1}SC:U),I,0,0
+S:Fgpio$PCON$0$0({1}SC:U),I,0,0
+S:Fgpio$TCON$0$0({1}SC:U),I,0,0
+S:Fgpio$P0IFG$0$0({1}SC:U),I,0,0
+S:Fgpio$P1IFG$0$0({1}SC:U),I,0,0
+S:Fgpio$P2IFG$0$0({1}SC:U),I,0,0
+S:Fgpio$PICTL$0$0({1}SC:U),I,0,0
+S:Fgpio$P1IEN$0$0({1}SC:U),I,0,0
+S:Fgpio$P0INP$0$0({1}SC:U),I,0,0
+S:Fgpio$P1$0$0({1}SC:U),I,0,0
+S:Fgpio$RFIM$0$0({1}SC:U),I,0,0
+S:Fgpio$DPS$0$0({1}SC:U),I,0,0
+S:Fgpio$MPAGE$0$0({1}SC:U),I,0,0
+S:Fgpio$ENDIAN$0$0({1}SC:U),I,0,0
+S:Fgpio$S0CON$0$0({1}SC:U),I,0,0
+S:Fgpio$IEN2$0$0({1}SC:U),I,0,0
+S:Fgpio$S1CON$0$0({1}SC:U),I,0,0
+S:Fgpio$T2CT$0$0({1}SC:U),I,0,0
+S:Fgpio$T2PR$0$0({1}SC:U),I,0,0
+S:Fgpio$T2CTL$0$0({1}SC:U),I,0,0
+S:Fgpio$P2$0$0({1}SC:U),I,0,0
+S:Fgpio$WORIRQ$0$0({1}SC:U),I,0,0
+S:Fgpio$WORCTRL$0$0({1}SC:U),I,0,0
+S:Fgpio$WOREVT0$0$0({1}SC:U),I,0,0
+S:Fgpio$WOREVT1$0$0({1}SC:U),I,0,0
+S:Fgpio$WORTIME0$0$0({1}SC:U),I,0,0
+S:Fgpio$WORTIME1$0$0({1}SC:U),I,0,0
+S:Fgpio$IEN0$0$0({1}SC:U),I,0,0
+S:Fgpio$IP0$0$0({1}SC:U),I,0,0
+S:Fgpio$FWT$0$0({1}SC:U),I,0,0
+S:Fgpio$FADDRL$0$0({1}SC:U),I,0,0
+S:Fgpio$FADDRH$0$0({1}SC:U),I,0,0
+S:Fgpio$FCTL$0$0({1}SC:U),I,0,0
+S:Fgpio$FWDATA$0$0({1}SC:U),I,0,0
+S:Fgpio$ENCDI$0$0({1}SC:U),I,0,0
+S:Fgpio$ENCDO$0$0({1}SC:U),I,0,0
+S:Fgpio$ENCCS$0$0({1}SC:U),I,0,0
+S:Fgpio$ADCCON1$0$0({1}SC:U),I,0,0
+S:Fgpio$ADCCON2$0$0({1}SC:U),I,0,0
+S:Fgpio$ADCCON3$0$0({1}SC:U),I,0,0
+S:Fgpio$IEN1$0$0({1}SC:U),I,0,0
+S:Fgpio$IP1$0$0({1}SC:U),I,0,0
+S:Fgpio$ADCL$0$0({1}SC:U),I,0,0
+S:Fgpio$ADCH$0$0({1}SC:U),I,0,0
+S:Fgpio$RNDL$0$0({1}SC:U),I,0,0
+S:Fgpio$RNDH$0$0({1}SC:U),I,0,0
+S:Fgpio$SLEEP$0$0({1}SC:U),I,0,0
+S:Fgpio$IRCON$0$0({1}SC:U),I,0,0
+S:Fgpio$U0DBUF$0$0({1}SC:U),I,0,0
+S:Fgpio$U0BAUD$0$0({1}SC:U),I,0,0
+S:Fgpio$U0UCR$0$0({1}SC:U),I,0,0
+S:Fgpio$U0GCR$0$0({1}SC:U),I,0,0
+S:Fgpio$CLKCON$0$0({1}SC:U),I,0,0
+S:Fgpio$MEMCTR$0$0({1}SC:U),I,0,0
+S:Fgpio$WDCTL$0$0({1}SC:U),I,0,0
+S:Fgpio$T3CNT$0$0({1}SC:U),I,0,0
+S:Fgpio$T3CTL$0$0({1}SC:U),I,0,0
+S:Fgpio$T3CCTL0$0$0({1}SC:U),I,0,0
+S:Fgpio$T3CC0$0$0({1}SC:U),I,0,0
+S:Fgpio$T3CCTL1$0$0({1}SC:U),I,0,0
+S:Fgpio$T3CC1$0$0({1}SC:U),I,0,0
+S:Fgpio$PSW$0$0({1}SC:U),I,0,0
+S:Fgpio$DMAIRQ$0$0({1}SC:U),I,0,0
+S:Fgpio$DMA1CFGL$0$0({1}SC:U),I,0,0
+S:Fgpio$DMA1CFGH$0$0({1}SC:U),I,0,0
+S:Fgpio$DMA0CFGL$0$0({1}SC:U),I,0,0
+S:Fgpio$DMA0CFGH$0$0({1}SC:U),I,0,0
+S:Fgpio$DMAARM$0$0({1}SC:U),I,0,0
+S:Fgpio$DMAREQ$0$0({1}SC:U),I,0,0
+S:Fgpio$TIMIF$0$0({1}SC:U),I,0,0
+S:Fgpio$RFD$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CC0L$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CC0H$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CC1L$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CC1H$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CC2L$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CC2H$0$0({1}SC:U),I,0,0
+S:Fgpio$ACC$0$0({1}SC:U),I,0,0
+S:Fgpio$RFST$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CNTL$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CNTH$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CTL$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CCTL0$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CCTL1$0$0({1}SC:U),I,0,0
+S:Fgpio$T1CCTL2$0$0({1}SC:U),I,0,0
+S:Fgpio$IRCON2$0$0({1}SC:U),I,0,0
+S:Fgpio$RFIF$0$0({1}SC:U),I,0,0
+S:Fgpio$T4CNT$0$0({1}SC:U),I,0,0
+S:Fgpio$T4CTL$0$0({1}SC:U),I,0,0
+S:Fgpio$T4CCTL0$0$0({1}SC:U),I,0,0
+S:Fgpio$T4CC0$0$0({1}SC:U),I,0,0
+S:Fgpio$T4CCTL1$0$0({1}SC:U),I,0,0
+S:Fgpio$T4CC1$0$0({1}SC:U),I,0,0
+S:Fgpio$B$0$0({1}SC:U),I,0,0
+S:Fgpio$PERCFG$0$0({1}SC:U),I,0,0
+S:Fgpio$ADCCFG$0$0({1}SC:U),I,0,0
+S:Fgpio$P0SEL$0$0({1}SC:U),I,0,0
+S:Fgpio$P1SEL$0$0({1}SC:U),I,0,0
+S:Fgpio$P2SEL$0$0({1}SC:U),I,0,0
+S:Fgpio$P1INP$0$0({1}SC:U),I,0,0
+S:Fgpio$P2INP$0$0({1}SC:U),I,0,0
+S:Fgpio$U1CSR$0$0({1}SC:U),I,0,0
+S:Fgpio$U1DBUF$0$0({1}SC:U),I,0,0
+S:Fgpio$U1BAUD$0$0({1}SC:U),I,0,0
+S:Fgpio$U1UCR$0$0({1}SC:U),I,0,0
+S:Fgpio$U1GCR$0$0({1}SC:U),I,0,0
+S:Fgpio$P0DIR$0$0({1}SC:U),I,0,0
+S:Fgpio$P1DIR$0$0({1}SC:U),I,0,0
+S:Fgpio$P2DIR$0$0({1}SC:U),I,0,0
+S:Fgpio$DMA0CFG$0$0({2}SI:U),I,0,0
+S:Fgpio$DMA1CFG$0$0({2}SI:U),I,0,0
+S:Fgpio$FADDR$0$0({2}SI:U),I,0,0
+S:Fgpio$ADC$0$0({2}SI:U),I,0,0
+S:Fgpio$T1CC0$0$0({2}SI:U),I,0,0
+S:Fgpio$T1CC1$0$0({2}SI:U),I,0,0
+S:Fgpio$T1CC2$0$0({2}SI:U),I,0,0
+S:Fgpio$P0_0$0$0({1}SX:U),J,0,0
+S:Fgpio$P0_1$0$0({1}SX:U),J,0,0
+S:Fgpio$P0_2$0$0({1}SX:U),J,0,0
+S:Fgpio$P0_3$0$0({1}SX:U),J,0,0
+S:Fgpio$P0_4$0$0({1}SX:U),J,0,0
+S:Fgpio$P0_5$0$0({1}SX:U),J,0,0
+S:Fgpio$P0_6$0$0({1}SX:U),J,0,0
+S:Fgpio$P0_7$0$0({1}SX:U),J,0,0
+S:Fgpio$_TCON_0$0$0({1}SX:U),J,0,0
+S:Fgpio$RFTXRXIF$0$0({1}SX:U),J,0,0
+S:Fgpio$_TCON_2$0$0({1}SX:U),J,0,0
+S:Fgpio$URX0IF$0$0({1}SX:U),J,0,0
+S:Fgpio$_TCON_4$0$0({1}SX:U),J,0,0
+S:Fgpio$ADCIF$0$0({1}SX:U),J,0,0
+S:Fgpio$_TCON_6$0$0({1}SX:U),J,0,0
+S:Fgpio$URX1IF$0$0({1}SX:U),J,0,0
+S:Fgpio$P1_0$0$0({1}SX:U),J,0,0
+S:Fgpio$P1_1$0$0({1}SX:U),J,0,0
+S:Fgpio$P1_2$0$0({1}SX:U),J,0,0
+S:Fgpio$P1_3$0$0({1}SX:U),J,0,0
+S:Fgpio$P1_4$0$0({1}SX:U),J,0,0
+S:Fgpio$P1_5$0$0({1}SX:U),J,0,0
+S:Fgpio$P1_6$0$0({1}SX:U),J,0,0
+S:Fgpio$P1_7$0$0({1}SX:U),J,0,0
+S:Fgpio$ENCIF_0$0$0({1}SX:U),J,0,0
+S:Fgpio$ENCIF_1$0$0({1}SX:U),J,0,0
+S:Fgpio$_SOCON2$0$0({1}SX:U),J,0,0
+S:Fgpio$_SOCON3$0$0({1}SX:U),J,0,0
+S:Fgpio$_SOCON4$0$0({1}SX:U),J,0,0
+S:Fgpio$_SOCON5$0$0({1}SX:U),J,0,0
+S:Fgpio$_SOCON6$0$0({1}SX:U),J,0,0
+S:Fgpio$_SOCON7$0$0({1}SX:U),J,0,0
+S:Fgpio$P2_0$0$0({1}SX:U),J,0,0
+S:Fgpio$P2_1$0$0({1}SX:U),J,0,0
+S:Fgpio$P2_2$0$0({1}SX:U),J,0,0
+S:Fgpio$P2_3$0$0({1}SX:U),J,0,0
+S:Fgpio$P2_4$0$0({1}SX:U),J,0,0
+S:Fgpio$P2_5$0$0({1}SX:U),J,0,0
+S:Fgpio$P2_6$0$0({1}SX:U),J,0,0
+S:Fgpio$P2_7$0$0({1}SX:U),J,0,0
+S:Fgpio$RFTXRXIE$0$0({1}SX:U),J,0,0
+S:Fgpio$ADCIE$0$0({1}SX:U),J,0,0
+S:Fgpio$URX0IE$0$0({1}SX:U),J,0,0
+S:Fgpio$URX1IE$0$0({1}SX:U),J,0,0
+S:Fgpio$ENCIE$0$0({1}SX:U),J,0,0
+S:Fgpio$STIE$0$0({1}SX:U),J,0,0
+S:Fgpio$_IEN06$0$0({1}SX:U),J,0,0
+S:Fgpio$EA$0$0({1}SX:U),J,0,0
+S:Fgpio$DMAIE$0$0({1}SX:U),J,0,0
+S:Fgpio$T1IE$0$0({1}SX:U),J,0,0
+S:Fgpio$T2IE$0$0({1}SX:U),J,0,0
+S:Fgpio$T3IE$0$0({1}SX:U),J,0,0
+S:Fgpio$T4IE$0$0({1}SX:U),J,0,0
+S:Fgpio$P0IE$0$0({1}SX:U),J,0,0
+S:Fgpio$_IEN16$0$0({1}SX:U),J,0,0
+S:Fgpio$_IEN17$0$0({1}SX:U),J,0,0
+S:Fgpio$DMAIF$0$0({1}SX:U),J,0,0
+S:Fgpio$T1IF$0$0({1}SX:U),J,0,0
+S:Fgpio$T2IF$0$0({1}SX:U),J,0,0
+S:Fgpio$T3IF$0$0({1}SX:U),J,0,0
+S:Fgpio$T4IF$0$0({1}SX:U),J,0,0
+S:Fgpio$P0IF$0$0({1}SX:U),J,0,0
+S:Fgpio$_IRCON6$0$0({1}SX:U),J,0,0
+S:Fgpio$STIF$0$0({1}SX:U),J,0,0
+S:Fgpio$P$0$0({1}SX:U),J,0,0
+S:Fgpio$F1$0$0({1}SX:U),J,0,0
+S:Fgpio$OV$0$0({1}SX:U),J,0,0
+S:Fgpio$RS0$0$0({1}SX:U),J,0,0
+S:Fgpio$RS1$0$0({1}SX:U),J,0,0
+S:Fgpio$F0$0$0({1}SX:U),J,0,0
+S:Fgpio$AC$0$0({1}SX:U),J,0,0
+S:Fgpio$CY$0$0({1}SX:U),J,0,0
+S:Fgpio$T3OVFIF$0$0({1}SX:U),J,0,0
+S:Fgpio$T3CH0IF$0$0({1}SX:U),J,0,0
+S:Fgpio$T3CH1IF$0$0({1}SX:U),J,0,0
+S:Fgpio$T4OVFIF$0$0({1}SX:U),J,0,0
+S:Fgpio$T4CH0IF$0$0({1}SX:U),J,0,0
+S:Fgpio$T4CH1IF$0$0({1}SX:U),J,0,0
+S:Fgpio$OVFIM$0$0({1}SX:U),J,0,0
+S:Fgpio$_TIMIF7$0$0({1}SX:U),J,0,0
+S:Fgpio$ACC_0$0$0({1}SX:U),J,0,0
+S:Fgpio$ACC_1$0$0({1}SX:U),J,0,0
+S:Fgpio$ACC_2$0$0({1}SX:U),J,0,0
+S:Fgpio$ACC_3$0$0({1}SX:U),J,0,0
+S:Fgpio$ACC_4$0$0({1}SX:U),J,0,0
+S:Fgpio$ACC_5$0$0({1}SX:U),J,0,0
+S:Fgpio$ACC_6$0$0({1}SX:U),J,0,0
+S:Fgpio$ACC_7$0$0({1}SX:U),J,0,0
+S:Fgpio$P2IF$0$0({1}SX:U),J,0,0
+S:Fgpio$UTX0IF$0$0({1}SX:U),J,0,0
+S:Fgpio$UTX1IF$0$0({1}SX:U),J,0,0
+S:Fgpio$P1IF$0$0({1}SX:U),J,0,0
+S:Fgpio$WDTIF$0$0({1}SX:U),J,0,0
+S:Fgpio$_IRCON25$0$0({1}SX:U),J,0,0
+S:Fgpio$_IRCON26$0$0({1}SX:U),J,0,0
+S:Fgpio$_IRCON27$0$0({1}SX:U),J,0,0
+S:Fgpio$B_0$0$0({1}SX:U),J,0,0
+S:Fgpio$B_1$0$0({1}SX:U),J,0,0
+S:Fgpio$B_2$0$0({1}SX:U),J,0,0
+S:Fgpio$B_3$0$0({1}SX:U),J,0,0
+S:Fgpio$B_4$0$0({1}SX:U),J,0,0
+S:Fgpio$B_5$0$0({1}SX:U),J,0,0
+S:Fgpio$B_6$0$0({1}SX:U),J,0,0
+S:Fgpio$B_7$0$0({1}SX:U),J,0,0
+S:Fgpio$U1ACTIVE$0$0({1}SX:U),J,0,0
+S:Fgpio$U1TX_BYTE$0$0({1}SX:U),J,0,0
+S:Fgpio$U1RX_BYTE$0$0({1}SX:U),J,0,0
+S:Fgpio$U1ERR$0$0({1}SX:U),J,0,0
+S:Fgpio$U1FE$0$0({1}SX:U),J,0,0
+S:Fgpio$U1SLAVE$0$0({1}SX:U),J,0,0
+S:Fgpio$U1RE$0$0({1}SX:U),J,0,0
+S:Fgpio$U1MODE$0$0({1}SX:U),J,0,0
+</ADB>
+</FILE>
+
+</FILES>
+
+</SDCCLIB>

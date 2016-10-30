@@ -1,0 +1,880 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:07 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module green_led
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _getMs
+                             13 	.globl _usbSuspended
+                             14 	.globl _usbBlinkStart
+                             15 	.globl _usbLastActivity
+                             16 	.globl _usbBlinkActive
+                             17 	.globl _usbShowStatusWithGreenLed
+                             18 ;--------------------------------------------------------
+                             19 ; special function registers
+                             20 ;--------------------------------------------------------
+                             21 	.area RSEG    (ABS,DATA)
+   0000                      22 	.org 0x0000
+                    0080     23 Fgreen_led$P0$0$0 == 0x0080
+                    0080     24 _P0	=	0x0080
+                    0081     25 Fgreen_led$SP$0$0 == 0x0081
+                    0081     26 _SP	=	0x0081
+                    0082     27 Fgreen_led$DPL0$0$0 == 0x0082
+                    0082     28 _DPL0	=	0x0082
+                    0083     29 Fgreen_led$DPH0$0$0 == 0x0083
+                    0083     30 _DPH0	=	0x0083
+                    0084     31 Fgreen_led$DPL1$0$0 == 0x0084
+                    0084     32 _DPL1	=	0x0084
+                    0085     33 Fgreen_led$DPH1$0$0 == 0x0085
+                    0085     34 _DPH1	=	0x0085
+                    0086     35 Fgreen_led$U0CSR$0$0 == 0x0086
+                    0086     36 _U0CSR	=	0x0086
+                    0087     37 Fgreen_led$PCON$0$0 == 0x0087
+                    0087     38 _PCON	=	0x0087
+                    0088     39 Fgreen_led$TCON$0$0 == 0x0088
+                    0088     40 _TCON	=	0x0088
+                    0089     41 Fgreen_led$P0IFG$0$0 == 0x0089
+                    0089     42 _P0IFG	=	0x0089
+                    008A     43 Fgreen_led$P1IFG$0$0 == 0x008a
+                    008A     44 _P1IFG	=	0x008a
+                    008B     45 Fgreen_led$P2IFG$0$0 == 0x008b
+                    008B     46 _P2IFG	=	0x008b
+                    008C     47 Fgreen_led$PICTL$0$0 == 0x008c
+                    008C     48 _PICTL	=	0x008c
+                    008D     49 Fgreen_led$P1IEN$0$0 == 0x008d
+                    008D     50 _P1IEN	=	0x008d
+                    008F     51 Fgreen_led$P0INP$0$0 == 0x008f
+                    008F     52 _P0INP	=	0x008f
+                    0090     53 Fgreen_led$P1$0$0 == 0x0090
+                    0090     54 _P1	=	0x0090
+                    0091     55 Fgreen_led$RFIM$0$0 == 0x0091
+                    0091     56 _RFIM	=	0x0091
+                    0092     57 Fgreen_led$DPS$0$0 == 0x0092
+                    0092     58 _DPS	=	0x0092
+                    0093     59 Fgreen_led$MPAGE$0$0 == 0x0093
+                    0093     60 _MPAGE	=	0x0093
+                    0095     61 Fgreen_led$ENDIAN$0$0 == 0x0095
+                    0095     62 _ENDIAN	=	0x0095
+                    0098     63 Fgreen_led$S0CON$0$0 == 0x0098
+                    0098     64 _S0CON	=	0x0098
+                    009A     65 Fgreen_led$IEN2$0$0 == 0x009a
+                    009A     66 _IEN2	=	0x009a
+                    009B     67 Fgreen_led$S1CON$0$0 == 0x009b
+                    009B     68 _S1CON	=	0x009b
+                    009C     69 Fgreen_led$T2CT$0$0 == 0x009c
+                    009C     70 _T2CT	=	0x009c
+                    009D     71 Fgreen_led$T2PR$0$0 == 0x009d
+                    009D     72 _T2PR	=	0x009d
+                    009E     73 Fgreen_led$T2CTL$0$0 == 0x009e
+                    009E     74 _T2CTL	=	0x009e
+                    00A0     75 Fgreen_led$P2$0$0 == 0x00a0
+                    00A0     76 _P2	=	0x00a0
+                    00A1     77 Fgreen_led$WORIRQ$0$0 == 0x00a1
+                    00A1     78 _WORIRQ	=	0x00a1
+                    00A2     79 Fgreen_led$WORCTRL$0$0 == 0x00a2
+                    00A2     80 _WORCTRL	=	0x00a2
+                    00A3     81 Fgreen_led$WOREVT0$0$0 == 0x00a3
+                    00A3     82 _WOREVT0	=	0x00a3
+                    00A4     83 Fgreen_led$WOREVT1$0$0 == 0x00a4
+                    00A4     84 _WOREVT1	=	0x00a4
+                    00A5     85 Fgreen_led$WORTIME0$0$0 == 0x00a5
+                    00A5     86 _WORTIME0	=	0x00a5
+                    00A6     87 Fgreen_led$WORTIME1$0$0 == 0x00a6
+                    00A6     88 _WORTIME1	=	0x00a6
+                    00A8     89 Fgreen_led$IEN0$0$0 == 0x00a8
+                    00A8     90 _IEN0	=	0x00a8
+                    00A9     91 Fgreen_led$IP0$0$0 == 0x00a9
+                    00A9     92 _IP0	=	0x00a9
+                    00AB     93 Fgreen_led$FWT$0$0 == 0x00ab
+                    00AB     94 _FWT	=	0x00ab
+                    00AC     95 Fgreen_led$FADDRL$0$0 == 0x00ac
+                    00AC     96 _FADDRL	=	0x00ac
+                    00AD     97 Fgreen_led$FADDRH$0$0 == 0x00ad
+                    00AD     98 _FADDRH	=	0x00ad
+                    00AE     99 Fgreen_led$FCTL$0$0 == 0x00ae
+                    00AE    100 _FCTL	=	0x00ae
+                    00AF    101 Fgreen_led$FWDATA$0$0 == 0x00af
+                    00AF    102 _FWDATA	=	0x00af
+                    00B1    103 Fgreen_led$ENCDI$0$0 == 0x00b1
+                    00B1    104 _ENCDI	=	0x00b1
+                    00B2    105 Fgreen_led$ENCDO$0$0 == 0x00b2
+                    00B2    106 _ENCDO	=	0x00b2
+                    00B3    107 Fgreen_led$ENCCS$0$0 == 0x00b3
+                    00B3    108 _ENCCS	=	0x00b3
+                    00B4    109 Fgreen_led$ADCCON1$0$0 == 0x00b4
+                    00B4    110 _ADCCON1	=	0x00b4
+                    00B5    111 Fgreen_led$ADCCON2$0$0 == 0x00b5
+                    00B5    112 _ADCCON2	=	0x00b5
+                    00B6    113 Fgreen_led$ADCCON3$0$0 == 0x00b6
+                    00B6    114 _ADCCON3	=	0x00b6
+                    00B8    115 Fgreen_led$IEN1$0$0 == 0x00b8
+                    00B8    116 _IEN1	=	0x00b8
+                    00B9    117 Fgreen_led$IP1$0$0 == 0x00b9
+                    00B9    118 _IP1	=	0x00b9
+                    00BA    119 Fgreen_led$ADCL$0$0 == 0x00ba
+                    00BA    120 _ADCL	=	0x00ba
+                    00BB    121 Fgreen_led$ADCH$0$0 == 0x00bb
+                    00BB    122 _ADCH	=	0x00bb
+                    00BC    123 Fgreen_led$RNDL$0$0 == 0x00bc
+                    00BC    124 _RNDL	=	0x00bc
+                    00BD    125 Fgreen_led$RNDH$0$0 == 0x00bd
+                    00BD    126 _RNDH	=	0x00bd
+                    00BE    127 Fgreen_led$SLEEP$0$0 == 0x00be
+                    00BE    128 _SLEEP	=	0x00be
+                    00C0    129 Fgreen_led$IRCON$0$0 == 0x00c0
+                    00C0    130 _IRCON	=	0x00c0
+                    00C1    131 Fgreen_led$U0DBUF$0$0 == 0x00c1
+                    00C1    132 _U0DBUF	=	0x00c1
+                    00C2    133 Fgreen_led$U0BAUD$0$0 == 0x00c2
+                    00C2    134 _U0BAUD	=	0x00c2
+                    00C4    135 Fgreen_led$U0UCR$0$0 == 0x00c4
+                    00C4    136 _U0UCR	=	0x00c4
+                    00C5    137 Fgreen_led$U0GCR$0$0 == 0x00c5
+                    00C5    138 _U0GCR	=	0x00c5
+                    00C6    139 Fgreen_led$CLKCON$0$0 == 0x00c6
+                    00C6    140 _CLKCON	=	0x00c6
+                    00C7    141 Fgreen_led$MEMCTR$0$0 == 0x00c7
+                    00C7    142 _MEMCTR	=	0x00c7
+                    00C9    143 Fgreen_led$WDCTL$0$0 == 0x00c9
+                    00C9    144 _WDCTL	=	0x00c9
+                    00CA    145 Fgreen_led$T3CNT$0$0 == 0x00ca
+                    00CA    146 _T3CNT	=	0x00ca
+                    00CB    147 Fgreen_led$T3CTL$0$0 == 0x00cb
+                    00CB    148 _T3CTL	=	0x00cb
+                    00CC    149 Fgreen_led$T3CCTL0$0$0 == 0x00cc
+                    00CC    150 _T3CCTL0	=	0x00cc
+                    00CD    151 Fgreen_led$T3CC0$0$0 == 0x00cd
+                    00CD    152 _T3CC0	=	0x00cd
+                    00CE    153 Fgreen_led$T3CCTL1$0$0 == 0x00ce
+                    00CE    154 _T3CCTL1	=	0x00ce
+                    00CF    155 Fgreen_led$T3CC1$0$0 == 0x00cf
+                    00CF    156 _T3CC1	=	0x00cf
+                    00D0    157 Fgreen_led$PSW$0$0 == 0x00d0
+                    00D0    158 _PSW	=	0x00d0
+                    00D1    159 Fgreen_led$DMAIRQ$0$0 == 0x00d1
+                    00D1    160 _DMAIRQ	=	0x00d1
+                    00D2    161 Fgreen_led$DMA1CFGL$0$0 == 0x00d2
+                    00D2    162 _DMA1CFGL	=	0x00d2
+                    00D3    163 Fgreen_led$DMA1CFGH$0$0 == 0x00d3
+                    00D3    164 _DMA1CFGH	=	0x00d3
+                    00D4    165 Fgreen_led$DMA0CFGL$0$0 == 0x00d4
+                    00D4    166 _DMA0CFGL	=	0x00d4
+                    00D5    167 Fgreen_led$DMA0CFGH$0$0 == 0x00d5
+                    00D5    168 _DMA0CFGH	=	0x00d5
+                    00D6    169 Fgreen_led$DMAARM$0$0 == 0x00d6
+                    00D6    170 _DMAARM	=	0x00d6
+                    00D7    171 Fgreen_led$DMAREQ$0$0 == 0x00d7
+                    00D7    172 _DMAREQ	=	0x00d7
+                    00D8    173 Fgreen_led$TIMIF$0$0 == 0x00d8
+                    00D8    174 _TIMIF	=	0x00d8
+                    00D9    175 Fgreen_led$RFD$0$0 == 0x00d9
+                    00D9    176 _RFD	=	0x00d9
+                    00DA    177 Fgreen_led$T1CC0L$0$0 == 0x00da
+                    00DA    178 _T1CC0L	=	0x00da
+                    00DB    179 Fgreen_led$T1CC0H$0$0 == 0x00db
+                    00DB    180 _T1CC0H	=	0x00db
+                    00DC    181 Fgreen_led$T1CC1L$0$0 == 0x00dc
+                    00DC    182 _T1CC1L	=	0x00dc
+                    00DD    183 Fgreen_led$T1CC1H$0$0 == 0x00dd
+                    00DD    184 _T1CC1H	=	0x00dd
+                    00DE    185 Fgreen_led$T1CC2L$0$0 == 0x00de
+                    00DE    186 _T1CC2L	=	0x00de
+                    00DF    187 Fgreen_led$T1CC2H$0$0 == 0x00df
+                    00DF    188 _T1CC2H	=	0x00df
+                    00E0    189 Fgreen_led$ACC$0$0 == 0x00e0
+                    00E0    190 _ACC	=	0x00e0
+                    00E1    191 Fgreen_led$RFST$0$0 == 0x00e1
+                    00E1    192 _RFST	=	0x00e1
+                    00E2    193 Fgreen_led$T1CNTL$0$0 == 0x00e2
+                    00E2    194 _T1CNTL	=	0x00e2
+                    00E3    195 Fgreen_led$T1CNTH$0$0 == 0x00e3
+                    00E3    196 _T1CNTH	=	0x00e3
+                    00E4    197 Fgreen_led$T1CTL$0$0 == 0x00e4
+                    00E4    198 _T1CTL	=	0x00e4
+                    00E5    199 Fgreen_led$T1CCTL0$0$0 == 0x00e5
+                    00E5    200 _T1CCTL0	=	0x00e5
+                    00E6    201 Fgreen_led$T1CCTL1$0$0 == 0x00e6
+                    00E6    202 _T1CCTL1	=	0x00e6
+                    00E7    203 Fgreen_led$T1CCTL2$0$0 == 0x00e7
+                    00E7    204 _T1CCTL2	=	0x00e7
+                    00E8    205 Fgreen_led$IRCON2$0$0 == 0x00e8
+                    00E8    206 _IRCON2	=	0x00e8
+                    00E9    207 Fgreen_led$RFIF$0$0 == 0x00e9
+                    00E9    208 _RFIF	=	0x00e9
+                    00EA    209 Fgreen_led$T4CNT$0$0 == 0x00ea
+                    00EA    210 _T4CNT	=	0x00ea
+                    00EB    211 Fgreen_led$T4CTL$0$0 == 0x00eb
+                    00EB    212 _T4CTL	=	0x00eb
+                    00EC    213 Fgreen_led$T4CCTL0$0$0 == 0x00ec
+                    00EC    214 _T4CCTL0	=	0x00ec
+                    00ED    215 Fgreen_led$T4CC0$0$0 == 0x00ed
+                    00ED    216 _T4CC0	=	0x00ed
+                    00EE    217 Fgreen_led$T4CCTL1$0$0 == 0x00ee
+                    00EE    218 _T4CCTL1	=	0x00ee
+                    00EF    219 Fgreen_led$T4CC1$0$0 == 0x00ef
+                    00EF    220 _T4CC1	=	0x00ef
+                    00F0    221 Fgreen_led$B$0$0 == 0x00f0
+                    00F0    222 _B	=	0x00f0
+                    00F1    223 Fgreen_led$PERCFG$0$0 == 0x00f1
+                    00F1    224 _PERCFG	=	0x00f1
+                    00F2    225 Fgreen_led$ADCCFG$0$0 == 0x00f2
+                    00F2    226 _ADCCFG	=	0x00f2
+                    00F3    227 Fgreen_led$P0SEL$0$0 == 0x00f3
+                    00F3    228 _P0SEL	=	0x00f3
+                    00F4    229 Fgreen_led$P1SEL$0$0 == 0x00f4
+                    00F4    230 _P1SEL	=	0x00f4
+                    00F5    231 Fgreen_led$P2SEL$0$0 == 0x00f5
+                    00F5    232 _P2SEL	=	0x00f5
+                    00F6    233 Fgreen_led$P1INP$0$0 == 0x00f6
+                    00F6    234 _P1INP	=	0x00f6
+                    00F7    235 Fgreen_led$P2INP$0$0 == 0x00f7
+                    00F7    236 _P2INP	=	0x00f7
+                    00F8    237 Fgreen_led$U1CSR$0$0 == 0x00f8
+                    00F8    238 _U1CSR	=	0x00f8
+                    00F9    239 Fgreen_led$U1DBUF$0$0 == 0x00f9
+                    00F9    240 _U1DBUF	=	0x00f9
+                    00FA    241 Fgreen_led$U1BAUD$0$0 == 0x00fa
+                    00FA    242 _U1BAUD	=	0x00fa
+                    00FB    243 Fgreen_led$U1UCR$0$0 == 0x00fb
+                    00FB    244 _U1UCR	=	0x00fb
+                    00FC    245 Fgreen_led$U1GCR$0$0 == 0x00fc
+                    00FC    246 _U1GCR	=	0x00fc
+                    00FD    247 Fgreen_led$P0DIR$0$0 == 0x00fd
+                    00FD    248 _P0DIR	=	0x00fd
+                    00FE    249 Fgreen_led$P1DIR$0$0 == 0x00fe
+                    00FE    250 _P1DIR	=	0x00fe
+                    00FF    251 Fgreen_led$P2DIR$0$0 == 0x00ff
+                    00FF    252 _P2DIR	=	0x00ff
+                    FFFFD5D4    253 Fgreen_led$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    254 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    255 Fgreen_led$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    256 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    257 Fgreen_led$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    258 _FADDR	=	0xffffadac
+                    FFFFBBBA    259 Fgreen_led$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    260 _ADC	=	0xffffbbba
+                    FFFFDBDA    261 Fgreen_led$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    262 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    263 Fgreen_led$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    264 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    265 Fgreen_led$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    266 _T1CC2	=	0xffffdfde
+                            267 ;--------------------------------------------------------
+                            268 ; special function bits
+                            269 ;--------------------------------------------------------
+                            270 	.area RSEG    (ABS,DATA)
+   0000                     271 	.org 0x0000
+                    0080    272 Fgreen_led$P0_0$0$0 == 0x0080
+                    0080    273 _P0_0	=	0x0080
+                    0081    274 Fgreen_led$P0_1$0$0 == 0x0081
+                    0081    275 _P0_1	=	0x0081
+                    0082    276 Fgreen_led$P0_2$0$0 == 0x0082
+                    0082    277 _P0_2	=	0x0082
+                    0083    278 Fgreen_led$P0_3$0$0 == 0x0083
+                    0083    279 _P0_3	=	0x0083
+                    0084    280 Fgreen_led$P0_4$0$0 == 0x0084
+                    0084    281 _P0_4	=	0x0084
+                    0085    282 Fgreen_led$P0_5$0$0 == 0x0085
+                    0085    283 _P0_5	=	0x0085
+                    0086    284 Fgreen_led$P0_6$0$0 == 0x0086
+                    0086    285 _P0_6	=	0x0086
+                    0087    286 Fgreen_led$P0_7$0$0 == 0x0087
+                    0087    287 _P0_7	=	0x0087
+                    0088    288 Fgreen_led$_TCON_0$0$0 == 0x0088
+                    0088    289 __TCON_0	=	0x0088
+                    0089    290 Fgreen_led$RFTXRXIF$0$0 == 0x0089
+                    0089    291 _RFTXRXIF	=	0x0089
+                    008A    292 Fgreen_led$_TCON_2$0$0 == 0x008a
+                    008A    293 __TCON_2	=	0x008a
+                    008B    294 Fgreen_led$URX0IF$0$0 == 0x008b
+                    008B    295 _URX0IF	=	0x008b
+                    008C    296 Fgreen_led$_TCON_4$0$0 == 0x008c
+                    008C    297 __TCON_4	=	0x008c
+                    008D    298 Fgreen_led$ADCIF$0$0 == 0x008d
+                    008D    299 _ADCIF	=	0x008d
+                    008E    300 Fgreen_led$_TCON_6$0$0 == 0x008e
+                    008E    301 __TCON_6	=	0x008e
+                    008F    302 Fgreen_led$URX1IF$0$0 == 0x008f
+                    008F    303 _URX1IF	=	0x008f
+                    0090    304 Fgreen_led$P1_0$0$0 == 0x0090
+                    0090    305 _P1_0	=	0x0090
+                    0091    306 Fgreen_led$P1_1$0$0 == 0x0091
+                    0091    307 _P1_1	=	0x0091
+                    0092    308 Fgreen_led$P1_2$0$0 == 0x0092
+                    0092    309 _P1_2	=	0x0092
+                    0093    310 Fgreen_led$P1_3$0$0 == 0x0093
+                    0093    311 _P1_3	=	0x0093
+                    0094    312 Fgreen_led$P1_4$0$0 == 0x0094
+                    0094    313 _P1_4	=	0x0094
+                    0095    314 Fgreen_led$P1_5$0$0 == 0x0095
+                    0095    315 _P1_5	=	0x0095
+                    0096    316 Fgreen_led$P1_6$0$0 == 0x0096
+                    0096    317 _P1_6	=	0x0096
+                    0097    318 Fgreen_led$P1_7$0$0 == 0x0097
+                    0097    319 _P1_7	=	0x0097
+                    0098    320 Fgreen_led$ENCIF_0$0$0 == 0x0098
+                    0098    321 _ENCIF_0	=	0x0098
+                    0099    322 Fgreen_led$ENCIF_1$0$0 == 0x0099
+                    0099    323 _ENCIF_1	=	0x0099
+                    009A    324 Fgreen_led$_SOCON2$0$0 == 0x009a
+                    009A    325 __SOCON2	=	0x009a
+                    009B    326 Fgreen_led$_SOCON3$0$0 == 0x009b
+                    009B    327 __SOCON3	=	0x009b
+                    009C    328 Fgreen_led$_SOCON4$0$0 == 0x009c
+                    009C    329 __SOCON4	=	0x009c
+                    009D    330 Fgreen_led$_SOCON5$0$0 == 0x009d
+                    009D    331 __SOCON5	=	0x009d
+                    009E    332 Fgreen_led$_SOCON6$0$0 == 0x009e
+                    009E    333 __SOCON6	=	0x009e
+                    009F    334 Fgreen_led$_SOCON7$0$0 == 0x009f
+                    009F    335 __SOCON7	=	0x009f
+                    00A0    336 Fgreen_led$P2_0$0$0 == 0x00a0
+                    00A0    337 _P2_0	=	0x00a0
+                    00A1    338 Fgreen_led$P2_1$0$0 == 0x00a1
+                    00A1    339 _P2_1	=	0x00a1
+                    00A2    340 Fgreen_led$P2_2$0$0 == 0x00a2
+                    00A2    341 _P2_2	=	0x00a2
+                    00A3    342 Fgreen_led$P2_3$0$0 == 0x00a3
+                    00A3    343 _P2_3	=	0x00a3
+                    00A4    344 Fgreen_led$P2_4$0$0 == 0x00a4
+                    00A4    345 _P2_4	=	0x00a4
+                    00A5    346 Fgreen_led$P2_5$0$0 == 0x00a5
+                    00A5    347 _P2_5	=	0x00a5
+                    00A6    348 Fgreen_led$P2_6$0$0 == 0x00a6
+                    00A6    349 _P2_6	=	0x00a6
+                    00A7    350 Fgreen_led$P2_7$0$0 == 0x00a7
+                    00A7    351 _P2_7	=	0x00a7
+                    00A8    352 Fgreen_led$RFTXRXIE$0$0 == 0x00a8
+                    00A8    353 _RFTXRXIE	=	0x00a8
+                    00A9    354 Fgreen_led$ADCIE$0$0 == 0x00a9
+                    00A9    355 _ADCIE	=	0x00a9
+                    00AA    356 Fgreen_led$URX0IE$0$0 == 0x00aa
+                    00AA    357 _URX0IE	=	0x00aa
+                    00AB    358 Fgreen_led$URX1IE$0$0 == 0x00ab
+                    00AB    359 _URX1IE	=	0x00ab
+                    00AC    360 Fgreen_led$ENCIE$0$0 == 0x00ac
+                    00AC    361 _ENCIE	=	0x00ac
+                    00AD    362 Fgreen_led$STIE$0$0 == 0x00ad
+                    00AD    363 _STIE	=	0x00ad
+                    00AE    364 Fgreen_led$_IEN06$0$0 == 0x00ae
+                    00AE    365 __IEN06	=	0x00ae
+                    00AF    366 Fgreen_led$EA$0$0 == 0x00af
+                    00AF    367 _EA	=	0x00af
+                    00B8    368 Fgreen_led$DMAIE$0$0 == 0x00b8
+                    00B8    369 _DMAIE	=	0x00b8
+                    00B9    370 Fgreen_led$T1IE$0$0 == 0x00b9
+                    00B9    371 _T1IE	=	0x00b9
+                    00BA    372 Fgreen_led$T2IE$0$0 == 0x00ba
+                    00BA    373 _T2IE	=	0x00ba
+                    00BB    374 Fgreen_led$T3IE$0$0 == 0x00bb
+                    00BB    375 _T3IE	=	0x00bb
+                    00BC    376 Fgreen_led$T4IE$0$0 == 0x00bc
+                    00BC    377 _T4IE	=	0x00bc
+                    00BD    378 Fgreen_led$P0IE$0$0 == 0x00bd
+                    00BD    379 _P0IE	=	0x00bd
+                    00BE    380 Fgreen_led$_IEN16$0$0 == 0x00be
+                    00BE    381 __IEN16	=	0x00be
+                    00BF    382 Fgreen_led$_IEN17$0$0 == 0x00bf
+                    00BF    383 __IEN17	=	0x00bf
+                    00C0    384 Fgreen_led$DMAIF$0$0 == 0x00c0
+                    00C0    385 _DMAIF	=	0x00c0
+                    00C1    386 Fgreen_led$T1IF$0$0 == 0x00c1
+                    00C1    387 _T1IF	=	0x00c1
+                    00C2    388 Fgreen_led$T2IF$0$0 == 0x00c2
+                    00C2    389 _T2IF	=	0x00c2
+                    00C3    390 Fgreen_led$T3IF$0$0 == 0x00c3
+                    00C3    391 _T3IF	=	0x00c3
+                    00C4    392 Fgreen_led$T4IF$0$0 == 0x00c4
+                    00C4    393 _T4IF	=	0x00c4
+                    00C5    394 Fgreen_led$P0IF$0$0 == 0x00c5
+                    00C5    395 _P0IF	=	0x00c5
+                    00C6    396 Fgreen_led$_IRCON6$0$0 == 0x00c6
+                    00C6    397 __IRCON6	=	0x00c6
+                    00C7    398 Fgreen_led$STIF$0$0 == 0x00c7
+                    00C7    399 _STIF	=	0x00c7
+                    00D0    400 Fgreen_led$P$0$0 == 0x00d0
+                    00D0    401 _P	=	0x00d0
+                    00D1    402 Fgreen_led$F1$0$0 == 0x00d1
+                    00D1    403 _F1	=	0x00d1
+                    00D2    404 Fgreen_led$OV$0$0 == 0x00d2
+                    00D2    405 _OV	=	0x00d2
+                    00D3    406 Fgreen_led$RS0$0$0 == 0x00d3
+                    00D3    407 _RS0	=	0x00d3
+                    00D4    408 Fgreen_led$RS1$0$0 == 0x00d4
+                    00D4    409 _RS1	=	0x00d4
+                    00D5    410 Fgreen_led$F0$0$0 == 0x00d5
+                    00D5    411 _F0	=	0x00d5
+                    00D6    412 Fgreen_led$AC$0$0 == 0x00d6
+                    00D6    413 _AC	=	0x00d6
+                    00D7    414 Fgreen_led$CY$0$0 == 0x00d7
+                    00D7    415 _CY	=	0x00d7
+                    00D8    416 Fgreen_led$T3OVFIF$0$0 == 0x00d8
+                    00D8    417 _T3OVFIF	=	0x00d8
+                    00D9    418 Fgreen_led$T3CH0IF$0$0 == 0x00d9
+                    00D9    419 _T3CH0IF	=	0x00d9
+                    00DA    420 Fgreen_led$T3CH1IF$0$0 == 0x00da
+                    00DA    421 _T3CH1IF	=	0x00da
+                    00DB    422 Fgreen_led$T4OVFIF$0$0 == 0x00db
+                    00DB    423 _T4OVFIF	=	0x00db
+                    00DC    424 Fgreen_led$T4CH0IF$0$0 == 0x00dc
+                    00DC    425 _T4CH0IF	=	0x00dc
+                    00DD    426 Fgreen_led$T4CH1IF$0$0 == 0x00dd
+                    00DD    427 _T4CH1IF	=	0x00dd
+                    00DE    428 Fgreen_led$OVFIM$0$0 == 0x00de
+                    00DE    429 _OVFIM	=	0x00de
+                    00DF    430 Fgreen_led$_TIMIF7$0$0 == 0x00df
+                    00DF    431 __TIMIF7	=	0x00df
+                    00E0    432 Fgreen_led$ACC_0$0$0 == 0x00e0
+                    00E0    433 _ACC_0	=	0x00e0
+                    00E1    434 Fgreen_led$ACC_1$0$0 == 0x00e1
+                    00E1    435 _ACC_1	=	0x00e1
+                    00E2    436 Fgreen_led$ACC_2$0$0 == 0x00e2
+                    00E2    437 _ACC_2	=	0x00e2
+                    00E3    438 Fgreen_led$ACC_3$0$0 == 0x00e3
+                    00E3    439 _ACC_3	=	0x00e3
+                    00E4    440 Fgreen_led$ACC_4$0$0 == 0x00e4
+                    00E4    441 _ACC_4	=	0x00e4
+                    00E5    442 Fgreen_led$ACC_5$0$0 == 0x00e5
+                    00E5    443 _ACC_5	=	0x00e5
+                    00E6    444 Fgreen_led$ACC_6$0$0 == 0x00e6
+                    00E6    445 _ACC_6	=	0x00e6
+                    00E7    446 Fgreen_led$ACC_7$0$0 == 0x00e7
+                    00E7    447 _ACC_7	=	0x00e7
+                    00E8    448 Fgreen_led$P2IF$0$0 == 0x00e8
+                    00E8    449 _P2IF	=	0x00e8
+                    00E9    450 Fgreen_led$UTX0IF$0$0 == 0x00e9
+                    00E9    451 _UTX0IF	=	0x00e9
+                    00EA    452 Fgreen_led$UTX1IF$0$0 == 0x00ea
+                    00EA    453 _UTX1IF	=	0x00ea
+                    00EB    454 Fgreen_led$P1IF$0$0 == 0x00eb
+                    00EB    455 _P1IF	=	0x00eb
+                    00EC    456 Fgreen_led$WDTIF$0$0 == 0x00ec
+                    00EC    457 _WDTIF	=	0x00ec
+                    00ED    458 Fgreen_led$_IRCON25$0$0 == 0x00ed
+                    00ED    459 __IRCON25	=	0x00ed
+                    00EE    460 Fgreen_led$_IRCON26$0$0 == 0x00ee
+                    00EE    461 __IRCON26	=	0x00ee
+                    00EF    462 Fgreen_led$_IRCON27$0$0 == 0x00ef
+                    00EF    463 __IRCON27	=	0x00ef
+                    00F0    464 Fgreen_led$B_0$0$0 == 0x00f0
+                    00F0    465 _B_0	=	0x00f0
+                    00F1    466 Fgreen_led$B_1$0$0 == 0x00f1
+                    00F1    467 _B_1	=	0x00f1
+                    00F2    468 Fgreen_led$B_2$0$0 == 0x00f2
+                    00F2    469 _B_2	=	0x00f2
+                    00F3    470 Fgreen_led$B_3$0$0 == 0x00f3
+                    00F3    471 _B_3	=	0x00f3
+                    00F4    472 Fgreen_led$B_4$0$0 == 0x00f4
+                    00F4    473 _B_4	=	0x00f4
+                    00F5    474 Fgreen_led$B_5$0$0 == 0x00f5
+                    00F5    475 _B_5	=	0x00f5
+                    00F6    476 Fgreen_led$B_6$0$0 == 0x00f6
+                    00F6    477 _B_6	=	0x00f6
+                    00F7    478 Fgreen_led$B_7$0$0 == 0x00f7
+                    00F7    479 _B_7	=	0x00f7
+                    00F8    480 Fgreen_led$U1ACTIVE$0$0 == 0x00f8
+                    00F8    481 _U1ACTIVE	=	0x00f8
+                    00F9    482 Fgreen_led$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    483 _U1TX_BYTE	=	0x00f9
+                    00FA    484 Fgreen_led$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    485 _U1RX_BYTE	=	0x00fa
+                    00FB    486 Fgreen_led$U1ERR$0$0 == 0x00fb
+                    00FB    487 _U1ERR	=	0x00fb
+                    00FC    488 Fgreen_led$U1FE$0$0 == 0x00fc
+                    00FC    489 _U1FE	=	0x00fc
+                    00FD    490 Fgreen_led$U1SLAVE$0$0 == 0x00fd
+                    00FD    491 _U1SLAVE	=	0x00fd
+                    00FE    492 Fgreen_led$U1RE$0$0 == 0x00fe
+                    00FE    493 _U1RE	=	0x00fe
+                    00FF    494 Fgreen_led$U1MODE$0$0 == 0x00ff
+                    00FF    495 _U1MODE	=	0x00ff
+                            496 ;--------------------------------------------------------
+                            497 ; overlayable register banks
+                            498 ;--------------------------------------------------------
+                            499 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     500 	.ds 8
+                            501 ;--------------------------------------------------------
+                            502 ; internal ram data
+                            503 ;--------------------------------------------------------
+                            504 	.area DSEG    (DATA)
+                            505 ;--------------------------------------------------------
+                            506 ; overlayable items in internal ram 
+                            507 ;--------------------------------------------------------
+                            508 	.area OSEG    (OVR,DATA)
+                            509 ;--------------------------------------------------------
+                            510 ; indirectly addressable internal ram data
+                            511 ;--------------------------------------------------------
+                            512 	.area ISEG    (DATA)
+                            513 ;--------------------------------------------------------
+                            514 ; absolute internal ram data
+                            515 ;--------------------------------------------------------
+                            516 	.area IABS    (ABS,DATA)
+                            517 	.area IABS    (ABS,DATA)
+                            518 ;--------------------------------------------------------
+                            519 ; bit data
+                            520 ;--------------------------------------------------------
+                            521 	.area BSEG    (BIT)
+                    0000    522 G$usbBlinkActive$0$0==.
+   0000                     523 _usbBlinkActive::
+   0000                     524 	.ds 1
+                            525 ;--------------------------------------------------------
+                            526 ; paged external ram data
+                            527 ;--------------------------------------------------------
+                            528 	.area PSEG    (PAG,XDATA)
+                    0000    529 G$usbLastActivity$0$0==.
+   0000                     530 _usbLastActivity::
+   0000                     531 	.ds 1
+                    0001    532 G$usbBlinkStart$0$0==.
+   0001                     533 _usbBlinkStart::
+   0001                     534 	.ds 1
+                            535 ;--------------------------------------------------------
+                            536 ; external ram data
+                            537 ;--------------------------------------------------------
+                            538 	.area XSEG    (XDATA)
+                    DF00    539 Fgreen_led$SYNC1$0$0 == 0xdf00
+                    DF00    540 _SYNC1	=	0xdf00
+                    DF01    541 Fgreen_led$SYNC0$0$0 == 0xdf01
+                    DF01    542 _SYNC0	=	0xdf01
+                    DF02    543 Fgreen_led$PKTLEN$0$0 == 0xdf02
+                    DF02    544 _PKTLEN	=	0xdf02
+                    DF03    545 Fgreen_led$PKTCTRL1$0$0 == 0xdf03
+                    DF03    546 _PKTCTRL1	=	0xdf03
+                    DF04    547 Fgreen_led$PKTCTRL0$0$0 == 0xdf04
+                    DF04    548 _PKTCTRL0	=	0xdf04
+                    DF05    549 Fgreen_led$ADDR$0$0 == 0xdf05
+                    DF05    550 _ADDR	=	0xdf05
+                    DF06    551 Fgreen_led$CHANNR$0$0 == 0xdf06
+                    DF06    552 _CHANNR	=	0xdf06
+                    DF07    553 Fgreen_led$FSCTRL1$0$0 == 0xdf07
+                    DF07    554 _FSCTRL1	=	0xdf07
+                    DF08    555 Fgreen_led$FSCTRL0$0$0 == 0xdf08
+                    DF08    556 _FSCTRL0	=	0xdf08
+                    DF09    557 Fgreen_led$FREQ2$0$0 == 0xdf09
+                    DF09    558 _FREQ2	=	0xdf09
+                    DF0A    559 Fgreen_led$FREQ1$0$0 == 0xdf0a
+                    DF0A    560 _FREQ1	=	0xdf0a
+                    DF0B    561 Fgreen_led$FREQ0$0$0 == 0xdf0b
+                    DF0B    562 _FREQ0	=	0xdf0b
+                    DF0C    563 Fgreen_led$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    564 _MDMCFG4	=	0xdf0c
+                    DF0D    565 Fgreen_led$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    566 _MDMCFG3	=	0xdf0d
+                    DF0E    567 Fgreen_led$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    568 _MDMCFG2	=	0xdf0e
+                    DF0F    569 Fgreen_led$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    570 _MDMCFG1	=	0xdf0f
+                    DF10    571 Fgreen_led$MDMCFG0$0$0 == 0xdf10
+                    DF10    572 _MDMCFG0	=	0xdf10
+                    DF11    573 Fgreen_led$DEVIATN$0$0 == 0xdf11
+                    DF11    574 _DEVIATN	=	0xdf11
+                    DF12    575 Fgreen_led$MCSM2$0$0 == 0xdf12
+                    DF12    576 _MCSM2	=	0xdf12
+                    DF13    577 Fgreen_led$MCSM1$0$0 == 0xdf13
+                    DF13    578 _MCSM1	=	0xdf13
+                    DF14    579 Fgreen_led$MCSM0$0$0 == 0xdf14
+                    DF14    580 _MCSM0	=	0xdf14
+                    DF15    581 Fgreen_led$FOCCFG$0$0 == 0xdf15
+                    DF15    582 _FOCCFG	=	0xdf15
+                    DF16    583 Fgreen_led$BSCFG$0$0 == 0xdf16
+                    DF16    584 _BSCFG	=	0xdf16
+                    DF17    585 Fgreen_led$AGCCTRL2$0$0 == 0xdf17
+                    DF17    586 _AGCCTRL2	=	0xdf17
+                    DF18    587 Fgreen_led$AGCCTRL1$0$0 == 0xdf18
+                    DF18    588 _AGCCTRL1	=	0xdf18
+                    DF19    589 Fgreen_led$AGCCTRL0$0$0 == 0xdf19
+                    DF19    590 _AGCCTRL0	=	0xdf19
+                    DF1A    591 Fgreen_led$FREND1$0$0 == 0xdf1a
+                    DF1A    592 _FREND1	=	0xdf1a
+                    DF1B    593 Fgreen_led$FREND0$0$0 == 0xdf1b
+                    DF1B    594 _FREND0	=	0xdf1b
+                    DF1C    595 Fgreen_led$FSCAL3$0$0 == 0xdf1c
+                    DF1C    596 _FSCAL3	=	0xdf1c
+                    DF1D    597 Fgreen_led$FSCAL2$0$0 == 0xdf1d
+                    DF1D    598 _FSCAL2	=	0xdf1d
+                    DF1E    599 Fgreen_led$FSCAL1$0$0 == 0xdf1e
+                    DF1E    600 _FSCAL1	=	0xdf1e
+                    DF1F    601 Fgreen_led$FSCAL0$0$0 == 0xdf1f
+                    DF1F    602 _FSCAL0	=	0xdf1f
+                    DF23    603 Fgreen_led$TEST2$0$0 == 0xdf23
+                    DF23    604 _TEST2	=	0xdf23
+                    DF24    605 Fgreen_led$TEST1$0$0 == 0xdf24
+                    DF24    606 _TEST1	=	0xdf24
+                    DF25    607 Fgreen_led$TEST0$0$0 == 0xdf25
+                    DF25    608 _TEST0	=	0xdf25
+                    DF2E    609 Fgreen_led$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    610 _PA_TABLE0	=	0xdf2e
+                    DF2F    611 Fgreen_led$IOCFG2$0$0 == 0xdf2f
+                    DF2F    612 _IOCFG2	=	0xdf2f
+                    DF30    613 Fgreen_led$IOCFG1$0$0 == 0xdf30
+                    DF30    614 _IOCFG1	=	0xdf30
+                    DF31    615 Fgreen_led$IOCFG0$0$0 == 0xdf31
+                    DF31    616 _IOCFG0	=	0xdf31
+                    DF36    617 Fgreen_led$PARTNUM$0$0 == 0xdf36
+                    DF36    618 _PARTNUM	=	0xdf36
+                    DF37    619 Fgreen_led$VERSION$0$0 == 0xdf37
+                    DF37    620 _VERSION	=	0xdf37
+                    DF38    621 Fgreen_led$FREQEST$0$0 == 0xdf38
+                    DF38    622 _FREQEST	=	0xdf38
+                    DF39    623 Fgreen_led$LQI$0$0 == 0xdf39
+                    DF39    624 _LQI	=	0xdf39
+                    DF3A    625 Fgreen_led$RSSI$0$0 == 0xdf3a
+                    DF3A    626 _RSSI	=	0xdf3a
+                    DF3B    627 Fgreen_led$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    628 _MARCSTATE	=	0xdf3b
+                    DF3C    629 Fgreen_led$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    630 _PKTSTATUS	=	0xdf3c
+                    DF3D    631 Fgreen_led$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    632 _VCO_VC_DAC	=	0xdf3d
+                    DF40    633 Fgreen_led$I2SCFG0$0$0 == 0xdf40
+                    DF40    634 _I2SCFG0	=	0xdf40
+                    DF41    635 Fgreen_led$I2SCFG1$0$0 == 0xdf41
+                    DF41    636 _I2SCFG1	=	0xdf41
+                    DF42    637 Fgreen_led$I2SDATL$0$0 == 0xdf42
+                    DF42    638 _I2SDATL	=	0xdf42
+                    DF43    639 Fgreen_led$I2SDATH$0$0 == 0xdf43
+                    DF43    640 _I2SDATH	=	0xdf43
+                    DF44    641 Fgreen_led$I2SWCNT$0$0 == 0xdf44
+                    DF44    642 _I2SWCNT	=	0xdf44
+                    DF45    643 Fgreen_led$I2SSTAT$0$0 == 0xdf45
+                    DF45    644 _I2SSTAT	=	0xdf45
+                    DF46    645 Fgreen_led$I2SCLKF0$0$0 == 0xdf46
+                    DF46    646 _I2SCLKF0	=	0xdf46
+                    DF47    647 Fgreen_led$I2SCLKF1$0$0 == 0xdf47
+                    DF47    648 _I2SCLKF1	=	0xdf47
+                    DF48    649 Fgreen_led$I2SCLKF2$0$0 == 0xdf48
+                    DF48    650 _I2SCLKF2	=	0xdf48
+                    DE00    651 Fgreen_led$USBADDR$0$0 == 0xde00
+                    DE00    652 _USBADDR	=	0xde00
+                    DE01    653 Fgreen_led$USBPOW$0$0 == 0xde01
+                    DE01    654 _USBPOW	=	0xde01
+                    DE02    655 Fgreen_led$USBIIF$0$0 == 0xde02
+                    DE02    656 _USBIIF	=	0xde02
+                    DE04    657 Fgreen_led$USBOIF$0$0 == 0xde04
+                    DE04    658 _USBOIF	=	0xde04
+                    DE06    659 Fgreen_led$USBCIF$0$0 == 0xde06
+                    DE06    660 _USBCIF	=	0xde06
+                    DE07    661 Fgreen_led$USBIIE$0$0 == 0xde07
+                    DE07    662 _USBIIE	=	0xde07
+                    DE09    663 Fgreen_led$USBOIE$0$0 == 0xde09
+                    DE09    664 _USBOIE	=	0xde09
+                    DE0B    665 Fgreen_led$USBCIE$0$0 == 0xde0b
+                    DE0B    666 _USBCIE	=	0xde0b
+                    DE0C    667 Fgreen_led$USBFRML$0$0 == 0xde0c
+                    DE0C    668 _USBFRML	=	0xde0c
+                    DE0D    669 Fgreen_led$USBFRMH$0$0 == 0xde0d
+                    DE0D    670 _USBFRMH	=	0xde0d
+                    DE0E    671 Fgreen_led$USBINDEX$0$0 == 0xde0e
+                    DE0E    672 _USBINDEX	=	0xde0e
+                    DE10    673 Fgreen_led$USBMAXI$0$0 == 0xde10
+                    DE10    674 _USBMAXI	=	0xde10
+                    DE11    675 Fgreen_led$USBCSIL$0$0 == 0xde11
+                    DE11    676 _USBCSIL	=	0xde11
+                    DE12    677 Fgreen_led$USBCSIH$0$0 == 0xde12
+                    DE12    678 _USBCSIH	=	0xde12
+                    DE13    679 Fgreen_led$USBMAXO$0$0 == 0xde13
+                    DE13    680 _USBMAXO	=	0xde13
+                    DE14    681 Fgreen_led$USBCSOL$0$0 == 0xde14
+                    DE14    682 _USBCSOL	=	0xde14
+                    DE15    683 Fgreen_led$USBCSOH$0$0 == 0xde15
+                    DE15    684 _USBCSOH	=	0xde15
+                    DE16    685 Fgreen_led$USBCNTL$0$0 == 0xde16
+                    DE16    686 _USBCNTL	=	0xde16
+                    DE17    687 Fgreen_led$USBCNTH$0$0 == 0xde17
+                    DE17    688 _USBCNTH	=	0xde17
+                    DE20    689 Fgreen_led$USBF0$0$0 == 0xde20
+                    DE20    690 _USBF0	=	0xde20
+                    DE22    691 Fgreen_led$USBF1$0$0 == 0xde22
+                    DE22    692 _USBF1	=	0xde22
+                    DE24    693 Fgreen_led$USBF2$0$0 == 0xde24
+                    DE24    694 _USBF2	=	0xde24
+                    DE26    695 Fgreen_led$USBF3$0$0 == 0xde26
+                    DE26    696 _USBF3	=	0xde26
+                    DE28    697 Fgreen_led$USBF4$0$0 == 0xde28
+                    DE28    698 _USBF4	=	0xde28
+                    DE2A    699 Fgreen_led$USBF5$0$0 == 0xde2a
+                    DE2A    700 _USBF5	=	0xde2a
+                            701 ;--------------------------------------------------------
+                            702 ; absolute external ram data
+                            703 ;--------------------------------------------------------
+                            704 	.area XABS    (ABS,XDATA)
+                            705 ;--------------------------------------------------------
+                            706 ; external initialized ram data
+                            707 ;--------------------------------------------------------
+                            708 	.area XISEG   (XDATA)
+                            709 	.area HOME    (CODE)
+                            710 	.area GSINIT0 (CODE)
+                            711 	.area GSINIT1 (CODE)
+                            712 	.area GSINIT2 (CODE)
+                            713 	.area GSINIT3 (CODE)
+                            714 	.area GSINIT4 (CODE)
+                            715 	.area GSINIT5 (CODE)
+                            716 	.area GSINIT  (CODE)
+                            717 	.area GSFINAL (CODE)
+                            718 	.area CSEG    (CODE)
+                            719 ;--------------------------------------------------------
+                            720 ; global & static initialisations
+                            721 ;--------------------------------------------------------
+                            722 	.area HOME    (CODE)
+                            723 	.area GSINIT  (CODE)
+                            724 	.area GSFINAL (CODE)
+                            725 	.area GSINIT  (CODE)
+                    0000    726 	G$usbShowStatusWithGreenLed$0$0 ==.
+                    0000    727 	C$green_led.c$9$1$1 ==.
+                            728 ;	libraries/src/usb/green_led.c:9: BIT usbBlinkActive = 0;
+   0000 C2*00               729 	clr	_usbBlinkActive
+                            730 ;--------------------------------------------------------
+                            731 ; Home
+                            732 ;--------------------------------------------------------
+                            733 	.area HOME    (CODE)
+                            734 	.area HOME    (CODE)
+                            735 ;--------------------------------------------------------
+                            736 ; code
+                            737 ;--------------------------------------------------------
+                            738 	.area CSEG    (CODE)
+                            739 ;------------------------------------------------------------
+                            740 ;Allocation info for local variables in function 'usbShowStatusWithGreenLed'
+                            741 ;------------------------------------------------------------
+                    0000    742 	G$usbShowStatusWithGreenLed$0$0 ==.
+                    0000    743 	C$green_led.c$13$0$0 ==.
+                            744 ;	libraries/src/usb/green_led.c:13: void usbShowStatusWithGreenLed()
+                            745 ;	-----------------------------------------
+                            746 ;	 function usbShowStatusWithGreenLed
+                            747 ;	-----------------------------------------
+   0000                     748 _usbShowStatusWithGreenLed:
+                    0007    749 	ar7 = 0x07
+                    0006    750 	ar6 = 0x06
+                    0005    751 	ar5 = 0x05
+                    0004    752 	ar4 = 0x04
+                    0003    753 	ar3 = 0x03
+                    0002    754 	ar2 = 0x02
+                    0001    755 	ar1 = 0x01
+                    0000    756 	ar0 = 0x00
+                    0000    757 	C$green_led.c$15$1$1 ==.
+                            758 ;	libraries/src/usb/green_led.c:15: if (usbActivityFlag)
+                    0000    759 	C$green_led.c$18$2$2 ==.
+                            760 ;	libraries/src/usb/green_led.c:18: usbActivityFlag = 0;
+   0000 10*00 02            761 	jbc	_usbActivityFlag,00131$
+   0003 80 15               762 	sjmp	00104$
+   0005                     763 00131$:
+                    0005    764 	C$green_led.c$21$2$2 ==.
+                            765 ;	libraries/src/usb/green_led.c:21: usbLastActivity = USBFRML;
+   0005 90 DE 0C            766 	mov	dptr,#_USBFRML
+   0008 E0                  767 	movx	a,@dptr
+   0009 FF                  768 	mov	r7,a
+   000A 78r00               769 	mov	r0,#_usbLastActivity
+   000C F2                  770 	movx	@r0,a
+                    000D    771 	C$green_led.c$25$2$2 ==.
+                            772 ;	libraries/src/usb/green_led.c:25: if (!usbBlinkActive)
+   000D 20*00 0A            773 	jb	_usbBlinkActive,00104$
+                    0010    774 	C$green_led.c$27$3$3 ==.
+                            775 ;	libraries/src/usb/green_led.c:27: usbBlinkActive = 1;
+   0010 D2*00               776 	setb	_usbBlinkActive
+                    0012    777 	C$green_led.c$28$3$3 ==.
+                            778 ;	libraries/src/usb/green_led.c:28: usbBlinkStart = USBFRML;
+   0012 90 DE 0C            779 	mov	dptr,#_USBFRML
+   0015 E0                  780 	movx	a,@dptr
+   0016 FF                  781 	mov	r7,a
+   0017 78r01               782 	mov	r0,#_usbBlinkStart
+   0019 F2                  783 	movx	@r0,a
+   001A                     784 00104$:
+                    001A    785 	C$green_led.c$32$1$1 ==.
+                            786 ;	libraries/src/usb/green_led.c:32: if (usbSuspended() || usbDeviceState == USB_STATE_DETACHED)
+   001A 12s00r00            787 	lcall	_usbSuspended
+   001D 40 07               788 	jc	00113$
+   001F 90s00r00            789 	mov	dptr,#_usbDeviceState
+   0022 E0                  790 	movx	a,@dptr
+   0023 FF                  791 	mov	r7,a
+   0024 70 09               792 	jnz	00114$
+   0026                     793 00113$:
+                    0026    794 	C$green_led.c$34$3$5 ==.
+                            795 ;	libraries/src/usb/green_led.c:34: LED_GREEN(0);                         // We aren't connected to USB, or we are in suspend
+   0026 AE FF               796 	mov	r6,_P2DIR
+   0028 53 06 EF            797 	anl	ar6,#0xEF
+   002B 8E FF               798 	mov	_P2DIR,r6
+   002D 80 5E               799 	sjmp	00117$
+   002F                     800 00114$:
+                    002F    801 	C$green_led.c$37$1$1 ==.
+                            802 ;	libraries/src/usb/green_led.c:37: else if (usbDeviceState == USB_STATE_CONFIGURED)
+   002F BF 10 40            803 	cjne	r7,#0x10,00111$
+                    0032    804 	C$green_led.c$39$2$6 ==.
+                            805 ;	libraries/src/usb/green_led.c:39: if (usbBlinkActive)
+   0032 30*00 38            806 	jnb	_usbBlinkActive,00108$
+                    0035    807 	C$green_led.c$41$4$8 ==.
+                            808 ;	libraries/src/usb/green_led.c:41: LED_GREEN((USBFRML - usbBlinkStart) & 64);
+   0035 90 DE 0C            809 	mov	dptr,#_USBFRML
+   0038 E0                  810 	movx	a,@dptr
+   0039 FF                  811 	mov	r7,a
+   003A 7E 00               812 	mov	r6,#0x00
+   003C 78r01               813 	mov	r0,#_usbBlinkStart
+   003E E2                  814 	movx	a,@r0
+   003F FC                  815 	mov	r4,a
+   0040 7D 00               816 	mov	r5,#0x00
+   0042 EF                  817 	mov	a,r7
+   0043 C3                  818 	clr	c
+   0044 9C                  819 	subb	a,r4
+   0045 FF                  820 	mov	r7,a
+   0046 EE                  821 	mov	a,r6
+   0047 9D                  822 	subb	a,r5
+   0048 FE                  823 	mov	r6,a
+   0049 EF                  824 	mov	a,r7
+   004A 30 E6 05            825 	jnb	acc.6,00119$
+   004D 43 FF 10            826 	orl	_P2DIR,#0x10
+   0050 80 07               827 	sjmp	00120$
+   0052                     828 00119$:
+   0052 AF FF               829 	mov	r7,_P2DIR
+   0054 53 07 EF            830 	anl	ar7,#0xEF
+   0057 8F FF               831 	mov	_P2DIR,r7
+   0059                     832 00120$:
+                    0059    833 	C$green_led.c$43$3$7 ==.
+                            834 ;	libraries/src/usb/green_led.c:43: if ((uint8)(USBFRML - usbLastActivity) > 96)
+   0059 90 DE 0C            835 	mov	dptr,#_USBFRML
+   005C E0                  836 	movx	a,@dptr
+   005D FF                  837 	mov	r7,a
+   005E 78r00               838 	mov	r0,#_usbLastActivity
+   0060 D3                  839 	setb	c
+   0061 E2                  840 	movx	a,@r0
+   0062 9F                  841 	subb	a,r7
+   0063 F4                  842 	cpl	a
+   0064 FF                  843 	mov  r7,a
+   0065 24 9F               844 	add	a,#0xff - 0x60
+   0067 50 24               845 	jnc	00117$
+                    0069    846 	C$green_led.c$45$4$9 ==.
+                            847 ;	libraries/src/usb/green_led.c:45: usbBlinkActive = 0;
+   0069 C2*00               848 	clr	_usbBlinkActive
+   006B 80 20               849 	sjmp	00117$
+   006D                     850 00108$:
+                    006D    851 	C$green_led.c$50$4$11 ==.
+                            852 ;	libraries/src/usb/green_led.c:50: LED_GREEN(1);  // On solid because we are properly connected.
+   006D 43 FF 10            853 	orl	_P2DIR,#0x10
+   0070 80 1B               854 	sjmp	00117$
+   0072                     855 00111$:
+                    0072    856 	C$green_led.c$57$3$13 ==.
+                            857 ;	libraries/src/usb/green_led.c:57: LED_GREEN(getMs() >> 9 & 1);           // Blink with a period of 1024 ms.
+   0072 12s00r00            858 	lcall	_getMs
+   0075 AD 83               859 	mov	r5,dph
+   0077 AE F0               860 	mov	r6,b
+   0079 FF                  861 	mov	r7,a
+   007A ED                  862 	mov	a,r5
+   007B 03                  863 	rr	a
+   007C 54 01               864 	anl	a,#0x01
+   007E FC                  865 	mov	r4,a
+   007F 60 05               866 	jz	00121$
+   0081 43 FF 10            867 	orl	_P2DIR,#0x10
+   0084 80 07               868 	sjmp	00117$
+   0086                     869 00121$:
+   0086 AF FF               870 	mov	r7,_P2DIR
+   0088 53 07 EF            871 	anl	ar7,#0xEF
+   008B 8F FF               872 	mov	_P2DIR,r7
+   008D                     873 00117$:
+                    008D    874 	C$green_led.c$59$1$1 ==.
+                    008D    875 	XG$usbShowStatusWithGreenLed$0$0 ==.
+   008D 22                  876 	ret
+                            877 	.area CSEG    (CODE)
+                            878 	.area CONST   (CODE)
+                            879 	.area XINIT   (CODE)
+                            880 	.area CABS    (ABS,CODE)

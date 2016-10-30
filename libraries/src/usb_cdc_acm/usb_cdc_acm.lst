@@ -1,0 +1,1770 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:07 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module usb_cdc_acm
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _usbStringDescriptors
+                             13 	.globl _usbStringDescriptorCount
+                             14 	.globl _usbConfigurationDescriptor
+                             15 	.globl _usbDeviceDescriptor
+                             16 	.globl _boardStartBootloader
+                             17 	.globl _getMs
+                             18 	.globl _usbReadFifo
+                             19 	.globl _usbWriteFifo
+                             20 	.globl _usbInitEndpointOut
+                             21 	.globl _usbInitEndpointIn
+                             22 	.globl _usbControlAcknowledge
+                             23 	.globl _usbControlWrite
+                             24 	.globl _usbControlRead
+                             25 	.globl _usbPoll
+                             26 	.globl _usbComLineCoding
+                             27 	.globl _usbComTxSend_PARM_2
+                             28 	.globl _usbComRxReceive_PARM_2
+                             29 	.globl _usbComLineCodingChangeHandler
+                             30 	.globl _usbComSerialState
+                             31 	.globl _usbComControlLineState
+                             32 	.globl _usbCallbackInitEndpoints
+                             33 	.globl _usbCallbackSetupHandler
+                             34 	.globl _usbCallbackClassDescriptorHandler
+                             35 	.globl _usbCallbackControlWriteHandler
+                             36 	.globl _usbComRxAvailable
+                             37 	.globl _usbComRxReceiveByte
+                             38 	.globl _usbComRxReceive
+                             39 	.globl _usbComService
+                             40 	.globl _usbComTxAvailable
+                             41 	.globl _usbComTxSend
+                             42 	.globl _usbComTxSendByte
+                             43 	.globl _usbComRxControlSignals
+                             44 	.globl _usbComTxControlSignals
+                             45 	.globl _usbComTxControlSignalEvents
+                             46 ;--------------------------------------------------------
+                             47 ; special function registers
+                             48 ;--------------------------------------------------------
+                             49 	.area RSEG    (ABS,DATA)
+   0000                      50 	.org 0x0000
+                    0080     51 Fusb_cdc_acm$P0$0$0 == 0x0080
+                    0080     52 _P0	=	0x0080
+                    0081     53 Fusb_cdc_acm$SP$0$0 == 0x0081
+                    0081     54 _SP	=	0x0081
+                    0082     55 Fusb_cdc_acm$DPL0$0$0 == 0x0082
+                    0082     56 _DPL0	=	0x0082
+                    0083     57 Fusb_cdc_acm$DPH0$0$0 == 0x0083
+                    0083     58 _DPH0	=	0x0083
+                    0084     59 Fusb_cdc_acm$DPL1$0$0 == 0x0084
+                    0084     60 _DPL1	=	0x0084
+                    0085     61 Fusb_cdc_acm$DPH1$0$0 == 0x0085
+                    0085     62 _DPH1	=	0x0085
+                    0086     63 Fusb_cdc_acm$U0CSR$0$0 == 0x0086
+                    0086     64 _U0CSR	=	0x0086
+                    0087     65 Fusb_cdc_acm$PCON$0$0 == 0x0087
+                    0087     66 _PCON	=	0x0087
+                    0088     67 Fusb_cdc_acm$TCON$0$0 == 0x0088
+                    0088     68 _TCON	=	0x0088
+                    0089     69 Fusb_cdc_acm$P0IFG$0$0 == 0x0089
+                    0089     70 _P0IFG	=	0x0089
+                    008A     71 Fusb_cdc_acm$P1IFG$0$0 == 0x008a
+                    008A     72 _P1IFG	=	0x008a
+                    008B     73 Fusb_cdc_acm$P2IFG$0$0 == 0x008b
+                    008B     74 _P2IFG	=	0x008b
+                    008C     75 Fusb_cdc_acm$PICTL$0$0 == 0x008c
+                    008C     76 _PICTL	=	0x008c
+                    008D     77 Fusb_cdc_acm$P1IEN$0$0 == 0x008d
+                    008D     78 _P1IEN	=	0x008d
+                    008F     79 Fusb_cdc_acm$P0INP$0$0 == 0x008f
+                    008F     80 _P0INP	=	0x008f
+                    0090     81 Fusb_cdc_acm$P1$0$0 == 0x0090
+                    0090     82 _P1	=	0x0090
+                    0091     83 Fusb_cdc_acm$RFIM$0$0 == 0x0091
+                    0091     84 _RFIM	=	0x0091
+                    0092     85 Fusb_cdc_acm$DPS$0$0 == 0x0092
+                    0092     86 _DPS	=	0x0092
+                    0093     87 Fusb_cdc_acm$MPAGE$0$0 == 0x0093
+                    0093     88 _MPAGE	=	0x0093
+                    0095     89 Fusb_cdc_acm$ENDIAN$0$0 == 0x0095
+                    0095     90 _ENDIAN	=	0x0095
+                    0098     91 Fusb_cdc_acm$S0CON$0$0 == 0x0098
+                    0098     92 _S0CON	=	0x0098
+                    009A     93 Fusb_cdc_acm$IEN2$0$0 == 0x009a
+                    009A     94 _IEN2	=	0x009a
+                    009B     95 Fusb_cdc_acm$S1CON$0$0 == 0x009b
+                    009B     96 _S1CON	=	0x009b
+                    009C     97 Fusb_cdc_acm$T2CT$0$0 == 0x009c
+                    009C     98 _T2CT	=	0x009c
+                    009D     99 Fusb_cdc_acm$T2PR$0$0 == 0x009d
+                    009D    100 _T2PR	=	0x009d
+                    009E    101 Fusb_cdc_acm$T2CTL$0$0 == 0x009e
+                    009E    102 _T2CTL	=	0x009e
+                    00A0    103 Fusb_cdc_acm$P2$0$0 == 0x00a0
+                    00A0    104 _P2	=	0x00a0
+                    00A1    105 Fusb_cdc_acm$WORIRQ$0$0 == 0x00a1
+                    00A1    106 _WORIRQ	=	0x00a1
+                    00A2    107 Fusb_cdc_acm$WORCTRL$0$0 == 0x00a2
+                    00A2    108 _WORCTRL	=	0x00a2
+                    00A3    109 Fusb_cdc_acm$WOREVT0$0$0 == 0x00a3
+                    00A3    110 _WOREVT0	=	0x00a3
+                    00A4    111 Fusb_cdc_acm$WOREVT1$0$0 == 0x00a4
+                    00A4    112 _WOREVT1	=	0x00a4
+                    00A5    113 Fusb_cdc_acm$WORTIME0$0$0 == 0x00a5
+                    00A5    114 _WORTIME0	=	0x00a5
+                    00A6    115 Fusb_cdc_acm$WORTIME1$0$0 == 0x00a6
+                    00A6    116 _WORTIME1	=	0x00a6
+                    00A8    117 Fusb_cdc_acm$IEN0$0$0 == 0x00a8
+                    00A8    118 _IEN0	=	0x00a8
+                    00A9    119 Fusb_cdc_acm$IP0$0$0 == 0x00a9
+                    00A9    120 _IP0	=	0x00a9
+                    00AB    121 Fusb_cdc_acm$FWT$0$0 == 0x00ab
+                    00AB    122 _FWT	=	0x00ab
+                    00AC    123 Fusb_cdc_acm$FADDRL$0$0 == 0x00ac
+                    00AC    124 _FADDRL	=	0x00ac
+                    00AD    125 Fusb_cdc_acm$FADDRH$0$0 == 0x00ad
+                    00AD    126 _FADDRH	=	0x00ad
+                    00AE    127 Fusb_cdc_acm$FCTL$0$0 == 0x00ae
+                    00AE    128 _FCTL	=	0x00ae
+                    00AF    129 Fusb_cdc_acm$FWDATA$0$0 == 0x00af
+                    00AF    130 _FWDATA	=	0x00af
+                    00B1    131 Fusb_cdc_acm$ENCDI$0$0 == 0x00b1
+                    00B1    132 _ENCDI	=	0x00b1
+                    00B2    133 Fusb_cdc_acm$ENCDO$0$0 == 0x00b2
+                    00B2    134 _ENCDO	=	0x00b2
+                    00B3    135 Fusb_cdc_acm$ENCCS$0$0 == 0x00b3
+                    00B3    136 _ENCCS	=	0x00b3
+                    00B4    137 Fusb_cdc_acm$ADCCON1$0$0 == 0x00b4
+                    00B4    138 _ADCCON1	=	0x00b4
+                    00B5    139 Fusb_cdc_acm$ADCCON2$0$0 == 0x00b5
+                    00B5    140 _ADCCON2	=	0x00b5
+                    00B6    141 Fusb_cdc_acm$ADCCON3$0$0 == 0x00b6
+                    00B6    142 _ADCCON3	=	0x00b6
+                    00B8    143 Fusb_cdc_acm$IEN1$0$0 == 0x00b8
+                    00B8    144 _IEN1	=	0x00b8
+                    00B9    145 Fusb_cdc_acm$IP1$0$0 == 0x00b9
+                    00B9    146 _IP1	=	0x00b9
+                    00BA    147 Fusb_cdc_acm$ADCL$0$0 == 0x00ba
+                    00BA    148 _ADCL	=	0x00ba
+                    00BB    149 Fusb_cdc_acm$ADCH$0$0 == 0x00bb
+                    00BB    150 _ADCH	=	0x00bb
+                    00BC    151 Fusb_cdc_acm$RNDL$0$0 == 0x00bc
+                    00BC    152 _RNDL	=	0x00bc
+                    00BD    153 Fusb_cdc_acm$RNDH$0$0 == 0x00bd
+                    00BD    154 _RNDH	=	0x00bd
+                    00BE    155 Fusb_cdc_acm$SLEEP$0$0 == 0x00be
+                    00BE    156 _SLEEP	=	0x00be
+                    00C0    157 Fusb_cdc_acm$IRCON$0$0 == 0x00c0
+                    00C0    158 _IRCON	=	0x00c0
+                    00C1    159 Fusb_cdc_acm$U0DBUF$0$0 == 0x00c1
+                    00C1    160 _U0DBUF	=	0x00c1
+                    00C2    161 Fusb_cdc_acm$U0BAUD$0$0 == 0x00c2
+                    00C2    162 _U0BAUD	=	0x00c2
+                    00C4    163 Fusb_cdc_acm$U0UCR$0$0 == 0x00c4
+                    00C4    164 _U0UCR	=	0x00c4
+                    00C5    165 Fusb_cdc_acm$U0GCR$0$0 == 0x00c5
+                    00C5    166 _U0GCR	=	0x00c5
+                    00C6    167 Fusb_cdc_acm$CLKCON$0$0 == 0x00c6
+                    00C6    168 _CLKCON	=	0x00c6
+                    00C7    169 Fusb_cdc_acm$MEMCTR$0$0 == 0x00c7
+                    00C7    170 _MEMCTR	=	0x00c7
+                    00C9    171 Fusb_cdc_acm$WDCTL$0$0 == 0x00c9
+                    00C9    172 _WDCTL	=	0x00c9
+                    00CA    173 Fusb_cdc_acm$T3CNT$0$0 == 0x00ca
+                    00CA    174 _T3CNT	=	0x00ca
+                    00CB    175 Fusb_cdc_acm$T3CTL$0$0 == 0x00cb
+                    00CB    176 _T3CTL	=	0x00cb
+                    00CC    177 Fusb_cdc_acm$T3CCTL0$0$0 == 0x00cc
+                    00CC    178 _T3CCTL0	=	0x00cc
+                    00CD    179 Fusb_cdc_acm$T3CC0$0$0 == 0x00cd
+                    00CD    180 _T3CC0	=	0x00cd
+                    00CE    181 Fusb_cdc_acm$T3CCTL1$0$0 == 0x00ce
+                    00CE    182 _T3CCTL1	=	0x00ce
+                    00CF    183 Fusb_cdc_acm$T3CC1$0$0 == 0x00cf
+                    00CF    184 _T3CC1	=	0x00cf
+                    00D0    185 Fusb_cdc_acm$PSW$0$0 == 0x00d0
+                    00D0    186 _PSW	=	0x00d0
+                    00D1    187 Fusb_cdc_acm$DMAIRQ$0$0 == 0x00d1
+                    00D1    188 _DMAIRQ	=	0x00d1
+                    00D2    189 Fusb_cdc_acm$DMA1CFGL$0$0 == 0x00d2
+                    00D2    190 _DMA1CFGL	=	0x00d2
+                    00D3    191 Fusb_cdc_acm$DMA1CFGH$0$0 == 0x00d3
+                    00D3    192 _DMA1CFGH	=	0x00d3
+                    00D4    193 Fusb_cdc_acm$DMA0CFGL$0$0 == 0x00d4
+                    00D4    194 _DMA0CFGL	=	0x00d4
+                    00D5    195 Fusb_cdc_acm$DMA0CFGH$0$0 == 0x00d5
+                    00D5    196 _DMA0CFGH	=	0x00d5
+                    00D6    197 Fusb_cdc_acm$DMAARM$0$0 == 0x00d6
+                    00D6    198 _DMAARM	=	0x00d6
+                    00D7    199 Fusb_cdc_acm$DMAREQ$0$0 == 0x00d7
+                    00D7    200 _DMAREQ	=	0x00d7
+                    00D8    201 Fusb_cdc_acm$TIMIF$0$0 == 0x00d8
+                    00D8    202 _TIMIF	=	0x00d8
+                    00D9    203 Fusb_cdc_acm$RFD$0$0 == 0x00d9
+                    00D9    204 _RFD	=	0x00d9
+                    00DA    205 Fusb_cdc_acm$T1CC0L$0$0 == 0x00da
+                    00DA    206 _T1CC0L	=	0x00da
+                    00DB    207 Fusb_cdc_acm$T1CC0H$0$0 == 0x00db
+                    00DB    208 _T1CC0H	=	0x00db
+                    00DC    209 Fusb_cdc_acm$T1CC1L$0$0 == 0x00dc
+                    00DC    210 _T1CC1L	=	0x00dc
+                    00DD    211 Fusb_cdc_acm$T1CC1H$0$0 == 0x00dd
+                    00DD    212 _T1CC1H	=	0x00dd
+                    00DE    213 Fusb_cdc_acm$T1CC2L$0$0 == 0x00de
+                    00DE    214 _T1CC2L	=	0x00de
+                    00DF    215 Fusb_cdc_acm$T1CC2H$0$0 == 0x00df
+                    00DF    216 _T1CC2H	=	0x00df
+                    00E0    217 Fusb_cdc_acm$ACC$0$0 == 0x00e0
+                    00E0    218 _ACC	=	0x00e0
+                    00E1    219 Fusb_cdc_acm$RFST$0$0 == 0x00e1
+                    00E1    220 _RFST	=	0x00e1
+                    00E2    221 Fusb_cdc_acm$T1CNTL$0$0 == 0x00e2
+                    00E2    222 _T1CNTL	=	0x00e2
+                    00E3    223 Fusb_cdc_acm$T1CNTH$0$0 == 0x00e3
+                    00E3    224 _T1CNTH	=	0x00e3
+                    00E4    225 Fusb_cdc_acm$T1CTL$0$0 == 0x00e4
+                    00E4    226 _T1CTL	=	0x00e4
+                    00E5    227 Fusb_cdc_acm$T1CCTL0$0$0 == 0x00e5
+                    00E5    228 _T1CCTL0	=	0x00e5
+                    00E6    229 Fusb_cdc_acm$T1CCTL1$0$0 == 0x00e6
+                    00E6    230 _T1CCTL1	=	0x00e6
+                    00E7    231 Fusb_cdc_acm$T1CCTL2$0$0 == 0x00e7
+                    00E7    232 _T1CCTL2	=	0x00e7
+                    00E8    233 Fusb_cdc_acm$IRCON2$0$0 == 0x00e8
+                    00E8    234 _IRCON2	=	0x00e8
+                    00E9    235 Fusb_cdc_acm$RFIF$0$0 == 0x00e9
+                    00E9    236 _RFIF	=	0x00e9
+                    00EA    237 Fusb_cdc_acm$T4CNT$0$0 == 0x00ea
+                    00EA    238 _T4CNT	=	0x00ea
+                    00EB    239 Fusb_cdc_acm$T4CTL$0$0 == 0x00eb
+                    00EB    240 _T4CTL	=	0x00eb
+                    00EC    241 Fusb_cdc_acm$T4CCTL0$0$0 == 0x00ec
+                    00EC    242 _T4CCTL0	=	0x00ec
+                    00ED    243 Fusb_cdc_acm$T4CC0$0$0 == 0x00ed
+                    00ED    244 _T4CC0	=	0x00ed
+                    00EE    245 Fusb_cdc_acm$T4CCTL1$0$0 == 0x00ee
+                    00EE    246 _T4CCTL1	=	0x00ee
+                    00EF    247 Fusb_cdc_acm$T4CC1$0$0 == 0x00ef
+                    00EF    248 _T4CC1	=	0x00ef
+                    00F0    249 Fusb_cdc_acm$B$0$0 == 0x00f0
+                    00F0    250 _B	=	0x00f0
+                    00F1    251 Fusb_cdc_acm$PERCFG$0$0 == 0x00f1
+                    00F1    252 _PERCFG	=	0x00f1
+                    00F2    253 Fusb_cdc_acm$ADCCFG$0$0 == 0x00f2
+                    00F2    254 _ADCCFG	=	0x00f2
+                    00F3    255 Fusb_cdc_acm$P0SEL$0$0 == 0x00f3
+                    00F3    256 _P0SEL	=	0x00f3
+                    00F4    257 Fusb_cdc_acm$P1SEL$0$0 == 0x00f4
+                    00F4    258 _P1SEL	=	0x00f4
+                    00F5    259 Fusb_cdc_acm$P2SEL$0$0 == 0x00f5
+                    00F5    260 _P2SEL	=	0x00f5
+                    00F6    261 Fusb_cdc_acm$P1INP$0$0 == 0x00f6
+                    00F6    262 _P1INP	=	0x00f6
+                    00F7    263 Fusb_cdc_acm$P2INP$0$0 == 0x00f7
+                    00F7    264 _P2INP	=	0x00f7
+                    00F8    265 Fusb_cdc_acm$U1CSR$0$0 == 0x00f8
+                    00F8    266 _U1CSR	=	0x00f8
+                    00F9    267 Fusb_cdc_acm$U1DBUF$0$0 == 0x00f9
+                    00F9    268 _U1DBUF	=	0x00f9
+                    00FA    269 Fusb_cdc_acm$U1BAUD$0$0 == 0x00fa
+                    00FA    270 _U1BAUD	=	0x00fa
+                    00FB    271 Fusb_cdc_acm$U1UCR$0$0 == 0x00fb
+                    00FB    272 _U1UCR	=	0x00fb
+                    00FC    273 Fusb_cdc_acm$U1GCR$0$0 == 0x00fc
+                    00FC    274 _U1GCR	=	0x00fc
+                    00FD    275 Fusb_cdc_acm$P0DIR$0$0 == 0x00fd
+                    00FD    276 _P0DIR	=	0x00fd
+                    00FE    277 Fusb_cdc_acm$P1DIR$0$0 == 0x00fe
+                    00FE    278 _P1DIR	=	0x00fe
+                    00FF    279 Fusb_cdc_acm$P2DIR$0$0 == 0x00ff
+                    00FF    280 _P2DIR	=	0x00ff
+                    FFFFD5D4    281 Fusb_cdc_acm$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    282 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    283 Fusb_cdc_acm$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    284 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    285 Fusb_cdc_acm$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    286 _FADDR	=	0xffffadac
+                    FFFFBBBA    287 Fusb_cdc_acm$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    288 _ADC	=	0xffffbbba
+                    FFFFDBDA    289 Fusb_cdc_acm$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    290 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    291 Fusb_cdc_acm$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    292 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    293 Fusb_cdc_acm$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    294 _T1CC2	=	0xffffdfde
+                            295 ;--------------------------------------------------------
+                            296 ; special function bits
+                            297 ;--------------------------------------------------------
+                            298 	.area RSEG    (ABS,DATA)
+   0000                     299 	.org 0x0000
+                    0080    300 Fusb_cdc_acm$P0_0$0$0 == 0x0080
+                    0080    301 _P0_0	=	0x0080
+                    0081    302 Fusb_cdc_acm$P0_1$0$0 == 0x0081
+                    0081    303 _P0_1	=	0x0081
+                    0082    304 Fusb_cdc_acm$P0_2$0$0 == 0x0082
+                    0082    305 _P0_2	=	0x0082
+                    0083    306 Fusb_cdc_acm$P0_3$0$0 == 0x0083
+                    0083    307 _P0_3	=	0x0083
+                    0084    308 Fusb_cdc_acm$P0_4$0$0 == 0x0084
+                    0084    309 _P0_4	=	0x0084
+                    0085    310 Fusb_cdc_acm$P0_5$0$0 == 0x0085
+                    0085    311 _P0_5	=	0x0085
+                    0086    312 Fusb_cdc_acm$P0_6$0$0 == 0x0086
+                    0086    313 _P0_6	=	0x0086
+                    0087    314 Fusb_cdc_acm$P0_7$0$0 == 0x0087
+                    0087    315 _P0_7	=	0x0087
+                    0088    316 Fusb_cdc_acm$_TCON_0$0$0 == 0x0088
+                    0088    317 __TCON_0	=	0x0088
+                    0089    318 Fusb_cdc_acm$RFTXRXIF$0$0 == 0x0089
+                    0089    319 _RFTXRXIF	=	0x0089
+                    008A    320 Fusb_cdc_acm$_TCON_2$0$0 == 0x008a
+                    008A    321 __TCON_2	=	0x008a
+                    008B    322 Fusb_cdc_acm$URX0IF$0$0 == 0x008b
+                    008B    323 _URX0IF	=	0x008b
+                    008C    324 Fusb_cdc_acm$_TCON_4$0$0 == 0x008c
+                    008C    325 __TCON_4	=	0x008c
+                    008D    326 Fusb_cdc_acm$ADCIF$0$0 == 0x008d
+                    008D    327 _ADCIF	=	0x008d
+                    008E    328 Fusb_cdc_acm$_TCON_6$0$0 == 0x008e
+                    008E    329 __TCON_6	=	0x008e
+                    008F    330 Fusb_cdc_acm$URX1IF$0$0 == 0x008f
+                    008F    331 _URX1IF	=	0x008f
+                    0090    332 Fusb_cdc_acm$P1_0$0$0 == 0x0090
+                    0090    333 _P1_0	=	0x0090
+                    0091    334 Fusb_cdc_acm$P1_1$0$0 == 0x0091
+                    0091    335 _P1_1	=	0x0091
+                    0092    336 Fusb_cdc_acm$P1_2$0$0 == 0x0092
+                    0092    337 _P1_2	=	0x0092
+                    0093    338 Fusb_cdc_acm$P1_3$0$0 == 0x0093
+                    0093    339 _P1_3	=	0x0093
+                    0094    340 Fusb_cdc_acm$P1_4$0$0 == 0x0094
+                    0094    341 _P1_4	=	0x0094
+                    0095    342 Fusb_cdc_acm$P1_5$0$0 == 0x0095
+                    0095    343 _P1_5	=	0x0095
+                    0096    344 Fusb_cdc_acm$P1_6$0$0 == 0x0096
+                    0096    345 _P1_6	=	0x0096
+                    0097    346 Fusb_cdc_acm$P1_7$0$0 == 0x0097
+                    0097    347 _P1_7	=	0x0097
+                    0098    348 Fusb_cdc_acm$ENCIF_0$0$0 == 0x0098
+                    0098    349 _ENCIF_0	=	0x0098
+                    0099    350 Fusb_cdc_acm$ENCIF_1$0$0 == 0x0099
+                    0099    351 _ENCIF_1	=	0x0099
+                    009A    352 Fusb_cdc_acm$_SOCON2$0$0 == 0x009a
+                    009A    353 __SOCON2	=	0x009a
+                    009B    354 Fusb_cdc_acm$_SOCON3$0$0 == 0x009b
+                    009B    355 __SOCON3	=	0x009b
+                    009C    356 Fusb_cdc_acm$_SOCON4$0$0 == 0x009c
+                    009C    357 __SOCON4	=	0x009c
+                    009D    358 Fusb_cdc_acm$_SOCON5$0$0 == 0x009d
+                    009D    359 __SOCON5	=	0x009d
+                    009E    360 Fusb_cdc_acm$_SOCON6$0$0 == 0x009e
+                    009E    361 __SOCON6	=	0x009e
+                    009F    362 Fusb_cdc_acm$_SOCON7$0$0 == 0x009f
+                    009F    363 __SOCON7	=	0x009f
+                    00A0    364 Fusb_cdc_acm$P2_0$0$0 == 0x00a0
+                    00A0    365 _P2_0	=	0x00a0
+                    00A1    366 Fusb_cdc_acm$P2_1$0$0 == 0x00a1
+                    00A1    367 _P2_1	=	0x00a1
+                    00A2    368 Fusb_cdc_acm$P2_2$0$0 == 0x00a2
+                    00A2    369 _P2_2	=	0x00a2
+                    00A3    370 Fusb_cdc_acm$P2_3$0$0 == 0x00a3
+                    00A3    371 _P2_3	=	0x00a3
+                    00A4    372 Fusb_cdc_acm$P2_4$0$0 == 0x00a4
+                    00A4    373 _P2_4	=	0x00a4
+                    00A5    374 Fusb_cdc_acm$P2_5$0$0 == 0x00a5
+                    00A5    375 _P2_5	=	0x00a5
+                    00A6    376 Fusb_cdc_acm$P2_6$0$0 == 0x00a6
+                    00A6    377 _P2_6	=	0x00a6
+                    00A7    378 Fusb_cdc_acm$P2_7$0$0 == 0x00a7
+                    00A7    379 _P2_7	=	0x00a7
+                    00A8    380 Fusb_cdc_acm$RFTXRXIE$0$0 == 0x00a8
+                    00A8    381 _RFTXRXIE	=	0x00a8
+                    00A9    382 Fusb_cdc_acm$ADCIE$0$0 == 0x00a9
+                    00A9    383 _ADCIE	=	0x00a9
+                    00AA    384 Fusb_cdc_acm$URX0IE$0$0 == 0x00aa
+                    00AA    385 _URX0IE	=	0x00aa
+                    00AB    386 Fusb_cdc_acm$URX1IE$0$0 == 0x00ab
+                    00AB    387 _URX1IE	=	0x00ab
+                    00AC    388 Fusb_cdc_acm$ENCIE$0$0 == 0x00ac
+                    00AC    389 _ENCIE	=	0x00ac
+                    00AD    390 Fusb_cdc_acm$STIE$0$0 == 0x00ad
+                    00AD    391 _STIE	=	0x00ad
+                    00AE    392 Fusb_cdc_acm$_IEN06$0$0 == 0x00ae
+                    00AE    393 __IEN06	=	0x00ae
+                    00AF    394 Fusb_cdc_acm$EA$0$0 == 0x00af
+                    00AF    395 _EA	=	0x00af
+                    00B8    396 Fusb_cdc_acm$DMAIE$0$0 == 0x00b8
+                    00B8    397 _DMAIE	=	0x00b8
+                    00B9    398 Fusb_cdc_acm$T1IE$0$0 == 0x00b9
+                    00B9    399 _T1IE	=	0x00b9
+                    00BA    400 Fusb_cdc_acm$T2IE$0$0 == 0x00ba
+                    00BA    401 _T2IE	=	0x00ba
+                    00BB    402 Fusb_cdc_acm$T3IE$0$0 == 0x00bb
+                    00BB    403 _T3IE	=	0x00bb
+                    00BC    404 Fusb_cdc_acm$T4IE$0$0 == 0x00bc
+                    00BC    405 _T4IE	=	0x00bc
+                    00BD    406 Fusb_cdc_acm$P0IE$0$0 == 0x00bd
+                    00BD    407 _P0IE	=	0x00bd
+                    00BE    408 Fusb_cdc_acm$_IEN16$0$0 == 0x00be
+                    00BE    409 __IEN16	=	0x00be
+                    00BF    410 Fusb_cdc_acm$_IEN17$0$0 == 0x00bf
+                    00BF    411 __IEN17	=	0x00bf
+                    00C0    412 Fusb_cdc_acm$DMAIF$0$0 == 0x00c0
+                    00C0    413 _DMAIF	=	0x00c0
+                    00C1    414 Fusb_cdc_acm$T1IF$0$0 == 0x00c1
+                    00C1    415 _T1IF	=	0x00c1
+                    00C2    416 Fusb_cdc_acm$T2IF$0$0 == 0x00c2
+                    00C2    417 _T2IF	=	0x00c2
+                    00C3    418 Fusb_cdc_acm$T3IF$0$0 == 0x00c3
+                    00C3    419 _T3IF	=	0x00c3
+                    00C4    420 Fusb_cdc_acm$T4IF$0$0 == 0x00c4
+                    00C4    421 _T4IF	=	0x00c4
+                    00C5    422 Fusb_cdc_acm$P0IF$0$0 == 0x00c5
+                    00C5    423 _P0IF	=	0x00c5
+                    00C6    424 Fusb_cdc_acm$_IRCON6$0$0 == 0x00c6
+                    00C6    425 __IRCON6	=	0x00c6
+                    00C7    426 Fusb_cdc_acm$STIF$0$0 == 0x00c7
+                    00C7    427 _STIF	=	0x00c7
+                    00D0    428 Fusb_cdc_acm$P$0$0 == 0x00d0
+                    00D0    429 _P	=	0x00d0
+                    00D1    430 Fusb_cdc_acm$F1$0$0 == 0x00d1
+                    00D1    431 _F1	=	0x00d1
+                    00D2    432 Fusb_cdc_acm$OV$0$0 == 0x00d2
+                    00D2    433 _OV	=	0x00d2
+                    00D3    434 Fusb_cdc_acm$RS0$0$0 == 0x00d3
+                    00D3    435 _RS0	=	0x00d3
+                    00D4    436 Fusb_cdc_acm$RS1$0$0 == 0x00d4
+                    00D4    437 _RS1	=	0x00d4
+                    00D5    438 Fusb_cdc_acm$F0$0$0 == 0x00d5
+                    00D5    439 _F0	=	0x00d5
+                    00D6    440 Fusb_cdc_acm$AC$0$0 == 0x00d6
+                    00D6    441 _AC	=	0x00d6
+                    00D7    442 Fusb_cdc_acm$CY$0$0 == 0x00d7
+                    00D7    443 _CY	=	0x00d7
+                    00D8    444 Fusb_cdc_acm$T3OVFIF$0$0 == 0x00d8
+                    00D8    445 _T3OVFIF	=	0x00d8
+                    00D9    446 Fusb_cdc_acm$T3CH0IF$0$0 == 0x00d9
+                    00D9    447 _T3CH0IF	=	0x00d9
+                    00DA    448 Fusb_cdc_acm$T3CH1IF$0$0 == 0x00da
+                    00DA    449 _T3CH1IF	=	0x00da
+                    00DB    450 Fusb_cdc_acm$T4OVFIF$0$0 == 0x00db
+                    00DB    451 _T4OVFIF	=	0x00db
+                    00DC    452 Fusb_cdc_acm$T4CH0IF$0$0 == 0x00dc
+                    00DC    453 _T4CH0IF	=	0x00dc
+                    00DD    454 Fusb_cdc_acm$T4CH1IF$0$0 == 0x00dd
+                    00DD    455 _T4CH1IF	=	0x00dd
+                    00DE    456 Fusb_cdc_acm$OVFIM$0$0 == 0x00de
+                    00DE    457 _OVFIM	=	0x00de
+                    00DF    458 Fusb_cdc_acm$_TIMIF7$0$0 == 0x00df
+                    00DF    459 __TIMIF7	=	0x00df
+                    00E0    460 Fusb_cdc_acm$ACC_0$0$0 == 0x00e0
+                    00E0    461 _ACC_0	=	0x00e0
+                    00E1    462 Fusb_cdc_acm$ACC_1$0$0 == 0x00e1
+                    00E1    463 _ACC_1	=	0x00e1
+                    00E2    464 Fusb_cdc_acm$ACC_2$0$0 == 0x00e2
+                    00E2    465 _ACC_2	=	0x00e2
+                    00E3    466 Fusb_cdc_acm$ACC_3$0$0 == 0x00e3
+                    00E3    467 _ACC_3	=	0x00e3
+                    00E4    468 Fusb_cdc_acm$ACC_4$0$0 == 0x00e4
+                    00E4    469 _ACC_4	=	0x00e4
+                    00E5    470 Fusb_cdc_acm$ACC_5$0$0 == 0x00e5
+                    00E5    471 _ACC_5	=	0x00e5
+                    00E6    472 Fusb_cdc_acm$ACC_6$0$0 == 0x00e6
+                    00E6    473 _ACC_6	=	0x00e6
+                    00E7    474 Fusb_cdc_acm$ACC_7$0$0 == 0x00e7
+                    00E7    475 _ACC_7	=	0x00e7
+                    00E8    476 Fusb_cdc_acm$P2IF$0$0 == 0x00e8
+                    00E8    477 _P2IF	=	0x00e8
+                    00E9    478 Fusb_cdc_acm$UTX0IF$0$0 == 0x00e9
+                    00E9    479 _UTX0IF	=	0x00e9
+                    00EA    480 Fusb_cdc_acm$UTX1IF$0$0 == 0x00ea
+                    00EA    481 _UTX1IF	=	0x00ea
+                    00EB    482 Fusb_cdc_acm$P1IF$0$0 == 0x00eb
+                    00EB    483 _P1IF	=	0x00eb
+                    00EC    484 Fusb_cdc_acm$WDTIF$0$0 == 0x00ec
+                    00EC    485 _WDTIF	=	0x00ec
+                    00ED    486 Fusb_cdc_acm$_IRCON25$0$0 == 0x00ed
+                    00ED    487 __IRCON25	=	0x00ed
+                    00EE    488 Fusb_cdc_acm$_IRCON26$0$0 == 0x00ee
+                    00EE    489 __IRCON26	=	0x00ee
+                    00EF    490 Fusb_cdc_acm$_IRCON27$0$0 == 0x00ef
+                    00EF    491 __IRCON27	=	0x00ef
+                    00F0    492 Fusb_cdc_acm$B_0$0$0 == 0x00f0
+                    00F0    493 _B_0	=	0x00f0
+                    00F1    494 Fusb_cdc_acm$B_1$0$0 == 0x00f1
+                    00F1    495 _B_1	=	0x00f1
+                    00F2    496 Fusb_cdc_acm$B_2$0$0 == 0x00f2
+                    00F2    497 _B_2	=	0x00f2
+                    00F3    498 Fusb_cdc_acm$B_3$0$0 == 0x00f3
+                    00F3    499 _B_3	=	0x00f3
+                    00F4    500 Fusb_cdc_acm$B_4$0$0 == 0x00f4
+                    00F4    501 _B_4	=	0x00f4
+                    00F5    502 Fusb_cdc_acm$B_5$0$0 == 0x00f5
+                    00F5    503 _B_5	=	0x00f5
+                    00F6    504 Fusb_cdc_acm$B_6$0$0 == 0x00f6
+                    00F6    505 _B_6	=	0x00f6
+                    00F7    506 Fusb_cdc_acm$B_7$0$0 == 0x00f7
+                    00F7    507 _B_7	=	0x00f7
+                    00F8    508 Fusb_cdc_acm$U1ACTIVE$0$0 == 0x00f8
+                    00F8    509 _U1ACTIVE	=	0x00f8
+                    00F9    510 Fusb_cdc_acm$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    511 _U1TX_BYTE	=	0x00f9
+                    00FA    512 Fusb_cdc_acm$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    513 _U1RX_BYTE	=	0x00fa
+                    00FB    514 Fusb_cdc_acm$U1ERR$0$0 == 0x00fb
+                    00FB    515 _U1ERR	=	0x00fb
+                    00FC    516 Fusb_cdc_acm$U1FE$0$0 == 0x00fc
+                    00FC    517 _U1FE	=	0x00fc
+                    00FD    518 Fusb_cdc_acm$U1SLAVE$0$0 == 0x00fd
+                    00FD    519 _U1SLAVE	=	0x00fd
+                    00FE    520 Fusb_cdc_acm$U1RE$0$0 == 0x00fe
+                    00FE    521 _U1RE	=	0x00fe
+                    00FF    522 Fusb_cdc_acm$U1MODE$0$0 == 0x00ff
+                    00FF    523 _U1MODE	=	0x00ff
+                            524 ;--------------------------------------------------------
+                            525 ; overlayable register banks
+                            526 ;--------------------------------------------------------
+                            527 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     528 	.ds 8
+                            529 ;--------------------------------------------------------
+                            530 ; internal ram data
+                            531 ;--------------------------------------------------------
+                            532 	.area DSEG    (DATA)
+                    0000    533 Fusb_cdc_acm$inFifoBytesLoaded$0$0==.
+   0000                     534 _inFifoBytesLoaded:
+   0000                     535 	.ds 1
+                            536 ;--------------------------------------------------------
+                            537 ; overlayable items in internal ram 
+                            538 ;--------------------------------------------------------
+                            539 	.area OSEG    (OVR,DATA)
+                            540 ;--------------------------------------------------------
+                            541 ; indirectly addressable internal ram data
+                            542 ;--------------------------------------------------------
+                            543 	.area ISEG    (DATA)
+                            544 ;--------------------------------------------------------
+                            545 ; absolute internal ram data
+                            546 ;--------------------------------------------------------
+                            547 	.area IABS    (ABS,DATA)
+                            548 	.area IABS    (ABS,DATA)
+                            549 ;--------------------------------------------------------
+                            550 ; bit data
+                            551 ;--------------------------------------------------------
+                            552 	.area BSEG    (BIT)
+                    0000    553 Fusb_cdc_acm$sendEmptyPacketSoon$0$0==.
+   0000                     554 _sendEmptyPacketSoon:
+   0000                     555 	.ds 1
+                    0001    556 Fusb_cdc_acm$startBootloaderSoon$0$0==.
+   0001                     557 _startBootloaderSoon:
+   0001                     558 	.ds 1
+                    0002    559 Lusb_cdc_acm.sendPacketNow$sloc0$1$0==.
+   0002                     560 _sendPacketNow_sloc0_1_0:
+   0002                     561 	.ds 1
+                            562 ;--------------------------------------------------------
+                            563 ; paged external ram data
+                            564 ;--------------------------------------------------------
+                            565 	.area PSEG    (PAG,XDATA)
+                    0000    566 G$usbComControlLineState$0$0==.
+   0000                     567 _usbComControlLineState::
+   0000                     568 	.ds 1
+                    0001    569 G$usbComSerialState$0$0==.
+   0001                     570 _usbComSerialState::
+   0001                     571 	.ds 1
+                    0002    572 Fusb_cdc_acm$lastReportedSerialState$0$0==.
+   0002                     573 _lastReportedSerialState:
+   0002                     574 	.ds 1
+                    0003    575 G$usbComLineCodingChangeHandler$0$0==.
+   0003                     576 _usbComLineCodingChangeHandler::
+   0003                     577 	.ds 2
+                    0005    578 Lusb_cdc_acm.usbComRxReceive$size$1$1==.
+   0005                     579 _usbComRxReceive_PARM_2:
+   0005                     580 	.ds 1
+                    0006    581 Lusb_cdc_acm.usbComTxSend$size$1$1==.
+   0006                     582 _usbComTxSend_PARM_2:
+   0006                     583 	.ds 1
+                            584 ;--------------------------------------------------------
+                            585 ; external ram data
+                            586 ;--------------------------------------------------------
+                            587 	.area XSEG    (XDATA)
+                    DF00    588 Fusb_cdc_acm$SYNC1$0$0 == 0xdf00
+                    DF00    589 _SYNC1	=	0xdf00
+                    DF01    590 Fusb_cdc_acm$SYNC0$0$0 == 0xdf01
+                    DF01    591 _SYNC0	=	0xdf01
+                    DF02    592 Fusb_cdc_acm$PKTLEN$0$0 == 0xdf02
+                    DF02    593 _PKTLEN	=	0xdf02
+                    DF03    594 Fusb_cdc_acm$PKTCTRL1$0$0 == 0xdf03
+                    DF03    595 _PKTCTRL1	=	0xdf03
+                    DF04    596 Fusb_cdc_acm$PKTCTRL0$0$0 == 0xdf04
+                    DF04    597 _PKTCTRL0	=	0xdf04
+                    DF05    598 Fusb_cdc_acm$ADDR$0$0 == 0xdf05
+                    DF05    599 _ADDR	=	0xdf05
+                    DF06    600 Fusb_cdc_acm$CHANNR$0$0 == 0xdf06
+                    DF06    601 _CHANNR	=	0xdf06
+                    DF07    602 Fusb_cdc_acm$FSCTRL1$0$0 == 0xdf07
+                    DF07    603 _FSCTRL1	=	0xdf07
+                    DF08    604 Fusb_cdc_acm$FSCTRL0$0$0 == 0xdf08
+                    DF08    605 _FSCTRL0	=	0xdf08
+                    DF09    606 Fusb_cdc_acm$FREQ2$0$0 == 0xdf09
+                    DF09    607 _FREQ2	=	0xdf09
+                    DF0A    608 Fusb_cdc_acm$FREQ1$0$0 == 0xdf0a
+                    DF0A    609 _FREQ1	=	0xdf0a
+                    DF0B    610 Fusb_cdc_acm$FREQ0$0$0 == 0xdf0b
+                    DF0B    611 _FREQ0	=	0xdf0b
+                    DF0C    612 Fusb_cdc_acm$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    613 _MDMCFG4	=	0xdf0c
+                    DF0D    614 Fusb_cdc_acm$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    615 _MDMCFG3	=	0xdf0d
+                    DF0E    616 Fusb_cdc_acm$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    617 _MDMCFG2	=	0xdf0e
+                    DF0F    618 Fusb_cdc_acm$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    619 _MDMCFG1	=	0xdf0f
+                    DF10    620 Fusb_cdc_acm$MDMCFG0$0$0 == 0xdf10
+                    DF10    621 _MDMCFG0	=	0xdf10
+                    DF11    622 Fusb_cdc_acm$DEVIATN$0$0 == 0xdf11
+                    DF11    623 _DEVIATN	=	0xdf11
+                    DF12    624 Fusb_cdc_acm$MCSM2$0$0 == 0xdf12
+                    DF12    625 _MCSM2	=	0xdf12
+                    DF13    626 Fusb_cdc_acm$MCSM1$0$0 == 0xdf13
+                    DF13    627 _MCSM1	=	0xdf13
+                    DF14    628 Fusb_cdc_acm$MCSM0$0$0 == 0xdf14
+                    DF14    629 _MCSM0	=	0xdf14
+                    DF15    630 Fusb_cdc_acm$FOCCFG$0$0 == 0xdf15
+                    DF15    631 _FOCCFG	=	0xdf15
+                    DF16    632 Fusb_cdc_acm$BSCFG$0$0 == 0xdf16
+                    DF16    633 _BSCFG	=	0xdf16
+                    DF17    634 Fusb_cdc_acm$AGCCTRL2$0$0 == 0xdf17
+                    DF17    635 _AGCCTRL2	=	0xdf17
+                    DF18    636 Fusb_cdc_acm$AGCCTRL1$0$0 == 0xdf18
+                    DF18    637 _AGCCTRL1	=	0xdf18
+                    DF19    638 Fusb_cdc_acm$AGCCTRL0$0$0 == 0xdf19
+                    DF19    639 _AGCCTRL0	=	0xdf19
+                    DF1A    640 Fusb_cdc_acm$FREND1$0$0 == 0xdf1a
+                    DF1A    641 _FREND1	=	0xdf1a
+                    DF1B    642 Fusb_cdc_acm$FREND0$0$0 == 0xdf1b
+                    DF1B    643 _FREND0	=	0xdf1b
+                    DF1C    644 Fusb_cdc_acm$FSCAL3$0$0 == 0xdf1c
+                    DF1C    645 _FSCAL3	=	0xdf1c
+                    DF1D    646 Fusb_cdc_acm$FSCAL2$0$0 == 0xdf1d
+                    DF1D    647 _FSCAL2	=	0xdf1d
+                    DF1E    648 Fusb_cdc_acm$FSCAL1$0$0 == 0xdf1e
+                    DF1E    649 _FSCAL1	=	0xdf1e
+                    DF1F    650 Fusb_cdc_acm$FSCAL0$0$0 == 0xdf1f
+                    DF1F    651 _FSCAL0	=	0xdf1f
+                    DF23    652 Fusb_cdc_acm$TEST2$0$0 == 0xdf23
+                    DF23    653 _TEST2	=	0xdf23
+                    DF24    654 Fusb_cdc_acm$TEST1$0$0 == 0xdf24
+                    DF24    655 _TEST1	=	0xdf24
+                    DF25    656 Fusb_cdc_acm$TEST0$0$0 == 0xdf25
+                    DF25    657 _TEST0	=	0xdf25
+                    DF2E    658 Fusb_cdc_acm$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    659 _PA_TABLE0	=	0xdf2e
+                    DF2F    660 Fusb_cdc_acm$IOCFG2$0$0 == 0xdf2f
+                    DF2F    661 _IOCFG2	=	0xdf2f
+                    DF30    662 Fusb_cdc_acm$IOCFG1$0$0 == 0xdf30
+                    DF30    663 _IOCFG1	=	0xdf30
+                    DF31    664 Fusb_cdc_acm$IOCFG0$0$0 == 0xdf31
+                    DF31    665 _IOCFG0	=	0xdf31
+                    DF36    666 Fusb_cdc_acm$PARTNUM$0$0 == 0xdf36
+                    DF36    667 _PARTNUM	=	0xdf36
+                    DF37    668 Fusb_cdc_acm$VERSION$0$0 == 0xdf37
+                    DF37    669 _VERSION	=	0xdf37
+                    DF38    670 Fusb_cdc_acm$FREQEST$0$0 == 0xdf38
+                    DF38    671 _FREQEST	=	0xdf38
+                    DF39    672 Fusb_cdc_acm$LQI$0$0 == 0xdf39
+                    DF39    673 _LQI	=	0xdf39
+                    DF3A    674 Fusb_cdc_acm$RSSI$0$0 == 0xdf3a
+                    DF3A    675 _RSSI	=	0xdf3a
+                    DF3B    676 Fusb_cdc_acm$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    677 _MARCSTATE	=	0xdf3b
+                    DF3C    678 Fusb_cdc_acm$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    679 _PKTSTATUS	=	0xdf3c
+                    DF3D    680 Fusb_cdc_acm$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    681 _VCO_VC_DAC	=	0xdf3d
+                    DF40    682 Fusb_cdc_acm$I2SCFG0$0$0 == 0xdf40
+                    DF40    683 _I2SCFG0	=	0xdf40
+                    DF41    684 Fusb_cdc_acm$I2SCFG1$0$0 == 0xdf41
+                    DF41    685 _I2SCFG1	=	0xdf41
+                    DF42    686 Fusb_cdc_acm$I2SDATL$0$0 == 0xdf42
+                    DF42    687 _I2SDATL	=	0xdf42
+                    DF43    688 Fusb_cdc_acm$I2SDATH$0$0 == 0xdf43
+                    DF43    689 _I2SDATH	=	0xdf43
+                    DF44    690 Fusb_cdc_acm$I2SWCNT$0$0 == 0xdf44
+                    DF44    691 _I2SWCNT	=	0xdf44
+                    DF45    692 Fusb_cdc_acm$I2SSTAT$0$0 == 0xdf45
+                    DF45    693 _I2SSTAT	=	0xdf45
+                    DF46    694 Fusb_cdc_acm$I2SCLKF0$0$0 == 0xdf46
+                    DF46    695 _I2SCLKF0	=	0xdf46
+                    DF47    696 Fusb_cdc_acm$I2SCLKF1$0$0 == 0xdf47
+                    DF47    697 _I2SCLKF1	=	0xdf47
+                    DF48    698 Fusb_cdc_acm$I2SCLKF2$0$0 == 0xdf48
+                    DF48    699 _I2SCLKF2	=	0xdf48
+                    DE00    700 Fusb_cdc_acm$USBADDR$0$0 == 0xde00
+                    DE00    701 _USBADDR	=	0xde00
+                    DE01    702 Fusb_cdc_acm$USBPOW$0$0 == 0xde01
+                    DE01    703 _USBPOW	=	0xde01
+                    DE02    704 Fusb_cdc_acm$USBIIF$0$0 == 0xde02
+                    DE02    705 _USBIIF	=	0xde02
+                    DE04    706 Fusb_cdc_acm$USBOIF$0$0 == 0xde04
+                    DE04    707 _USBOIF	=	0xde04
+                    DE06    708 Fusb_cdc_acm$USBCIF$0$0 == 0xde06
+                    DE06    709 _USBCIF	=	0xde06
+                    DE07    710 Fusb_cdc_acm$USBIIE$0$0 == 0xde07
+                    DE07    711 _USBIIE	=	0xde07
+                    DE09    712 Fusb_cdc_acm$USBOIE$0$0 == 0xde09
+                    DE09    713 _USBOIE	=	0xde09
+                    DE0B    714 Fusb_cdc_acm$USBCIE$0$0 == 0xde0b
+                    DE0B    715 _USBCIE	=	0xde0b
+                    DE0C    716 Fusb_cdc_acm$USBFRML$0$0 == 0xde0c
+                    DE0C    717 _USBFRML	=	0xde0c
+                    DE0D    718 Fusb_cdc_acm$USBFRMH$0$0 == 0xde0d
+                    DE0D    719 _USBFRMH	=	0xde0d
+                    DE0E    720 Fusb_cdc_acm$USBINDEX$0$0 == 0xde0e
+                    DE0E    721 _USBINDEX	=	0xde0e
+                    DE10    722 Fusb_cdc_acm$USBMAXI$0$0 == 0xde10
+                    DE10    723 _USBMAXI	=	0xde10
+                    DE11    724 Fusb_cdc_acm$USBCSIL$0$0 == 0xde11
+                    DE11    725 _USBCSIL	=	0xde11
+                    DE12    726 Fusb_cdc_acm$USBCSIH$0$0 == 0xde12
+                    DE12    727 _USBCSIH	=	0xde12
+                    DE13    728 Fusb_cdc_acm$USBMAXO$0$0 == 0xde13
+                    DE13    729 _USBMAXO	=	0xde13
+                    DE14    730 Fusb_cdc_acm$USBCSOL$0$0 == 0xde14
+                    DE14    731 _USBCSOL	=	0xde14
+                    DE15    732 Fusb_cdc_acm$USBCSOH$0$0 == 0xde15
+                    DE15    733 _USBCSOH	=	0xde15
+                    DE16    734 Fusb_cdc_acm$USBCNTL$0$0 == 0xde16
+                    DE16    735 _USBCNTL	=	0xde16
+                    DE17    736 Fusb_cdc_acm$USBCNTH$0$0 == 0xde17
+                    DE17    737 _USBCNTH	=	0xde17
+                    DE20    738 Fusb_cdc_acm$USBF0$0$0 == 0xde20
+                    DE20    739 _USBF0	=	0xde20
+                    DE22    740 Fusb_cdc_acm$USBF1$0$0 == 0xde22
+                    DE22    741 _USBF1	=	0xde22
+                    DE24    742 Fusb_cdc_acm$USBF2$0$0 == 0xde24
+                    DE24    743 _USBF2	=	0xde24
+                    DE26    744 Fusb_cdc_acm$USBF3$0$0 == 0xde26
+                    DE26    745 _USBF3	=	0xde26
+                    DE28    746 Fusb_cdc_acm$USBF4$0$0 == 0xde28
+                    DE28    747 _USBF4	=	0xde28
+                    DE2A    748 Fusb_cdc_acm$USBF5$0$0 == 0xde2a
+                    DE2A    749 _USBF5	=	0xde2a
+                    0000    750 Fusb_cdc_acm$startBootloaderRequestTime$0$0==.
+   0000                     751 _startBootloaderRequestTime:
+   0000                     752 	.ds 1
+                            753 ;--------------------------------------------------------
+                            754 ; absolute external ram data
+                            755 ;--------------------------------------------------------
+                            756 	.area XABS    (ABS,XDATA)
+                            757 ;--------------------------------------------------------
+                            758 ; external initialized ram data
+                            759 ;--------------------------------------------------------
+                            760 	.area XISEG   (XDATA)
+                    0000    761 G$usbComLineCoding$0$0==.
+   0000                     762 _usbComLineCoding::
+   0000                     763 	.ds 7
+                            764 	.area HOME    (CODE)
+                            765 	.area GSINIT0 (CODE)
+                            766 	.area GSINIT1 (CODE)
+                            767 	.area GSINIT2 (CODE)
+                            768 	.area GSINIT3 (CODE)
+                            769 	.area GSINIT4 (CODE)
+                            770 	.area GSINIT5 (CODE)
+                            771 	.area GSINIT  (CODE)
+                            772 	.area GSFINAL (CODE)
+                            773 	.area CSEG    (CODE)
+                            774 ;--------------------------------------------------------
+                            775 ; global & static initialisations
+                            776 ;--------------------------------------------------------
+                            777 	.area HOME    (CODE)
+                            778 	.area GSINIT  (CODE)
+                            779 	.area GSFINAL (CODE)
+                            780 	.area GSINIT  (CODE)
+                    0000    781 	G$usbComTxControlSignalEvents$0$0 ==.
+                    0000    782 	C$usb_cdc_acm.c$97$1$1 ==.
+                            783 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:97: static uint8 DATA inFifoBytesLoaded = 0;
+   0000 75*00 00            784 	mov	_inFifoBytesLoaded,#0x00
+                    0003    785 	G$usbComTxControlSignalEvents$0$0 ==.
+                    0003    786 	C$usb_cdc_acm.c$92$1$1 ==.
+                            787 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:92: static BIT sendEmptyPacketSoon = 0;
+   0003 C2*00               788 	clr	_sendEmptyPacketSoon
+                    0005    789 	G$usbComTxControlSignalEvents$0$0 ==.
+                    0005    790 	C$usb_cdc_acm.c$100$1$1 ==.
+                            791 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:100: static BIT startBootloaderSoon = 0;
+   0005 C2*01               792 	clr	_startBootloaderSoon
+                    0007    793 	G$usbComTxControlSignalEvents$0$0 ==.
+                    0007    794 	C$usb_cdc_acm.c$71$1$1 ==.
+                            795 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:71: uint8 usbComControlLineState = 0;
+   0007 78r00               796 	mov	r0,#_usbComControlLineState
+   0009 E4                  797 	clr	a
+   000A F2                  798 	movx	@r0,a
+                    000B    799 	G$usbComTxControlSignalEvents$0$0 ==.
+                    000B    800 	C$usb_cdc_acm.c$73$1$1 ==.
+                            801 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:73: uint8 usbComSerialState = 0;
+   000B 78r01               802 	mov	r0,#_usbComSerialState
+   000D E4                  803 	clr	a
+   000E F2                  804 	movx	@r0,a
+                    000F    805 	G$usbComTxControlSignalEvents$0$0 ==.
+                    000F    806 	C$usb_cdc_acm.c$77$1$1 ==.
+                            807 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:77: static uint8 lastReportedSerialState = 0xFF;
+   000F 78r02               808 	mov	r0,#_lastReportedSerialState
+   0011 74 FF               809 	mov	a,#0xFF
+   0013 F2                  810 	movx	@r0,a
+                    0014    811 	G$usbComTxControlSignalEvents$0$0 ==.
+                    0014    812 	C$usb_cdc_acm.c$87$1$1 ==.
+                            813 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:87: HandlerFunction * usbComLineCodingChangeHandler = doNothing;
+   0014 7Er89               814 	mov	r6,#_doNothing
+   0016 7Fs00               815 	mov	r7,#(_doNothing >> 8)
+   0018 78r03               816 	mov	r0,#_usbComLineCodingChangeHandler
+   001A EE                  817 	mov	a,r6
+   001B F2                  818 	movx	@r0,a
+   001C 08                  819 	inc	r0
+   001D EF                  820 	mov	a,r7
+   001E F2                  821 	movx	@r0,a
+                            822 ;--------------------------------------------------------
+                            823 ; Home
+                            824 ;--------------------------------------------------------
+                            825 	.area HOME    (CODE)
+                            826 	.area HOME    (CODE)
+                            827 ;--------------------------------------------------------
+                            828 ; code
+                            829 ;--------------------------------------------------------
+                            830 	.area CSEG    (CODE)
+                            831 ;------------------------------------------------------------
+                            832 ;Allocation info for local variables in function 'usbCallbackInitEndpoints'
+                            833 ;------------------------------------------------------------
+                    0000    834 	G$usbCallbackInitEndpoints$0$0 ==.
+                    0000    835 	C$usb_cdc_acm.c$234$0$0 ==.
+                            836 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:234: void usbCallbackInitEndpoints()
+                            837 ;	-----------------------------------------
+                            838 ;	 function usbCallbackInitEndpoints
+                            839 ;	-----------------------------------------
+   0000                     840 _usbCallbackInitEndpoints:
+                    0007    841 	ar7 = 0x07
+                    0006    842 	ar6 = 0x06
+                    0005    843 	ar5 = 0x05
+                    0004    844 	ar4 = 0x04
+                    0003    845 	ar3 = 0x03
+                    0002    846 	ar2 = 0x02
+                    0001    847 	ar1 = 0x01
+                    0000    848 	ar0 = 0x00
+                    0000    849 	C$usb_cdc_acm.c$236$1$1 ==.
+                            850 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:236: usbInitEndpointIn(CDC_NOTIFICATION_ENDPOINT, 10);
+   0000 78r00               851 	mov	r0,#_usbInitEndpointIn_PARM_2
+   0002 74 0A               852 	mov	a,#0x0A
+   0004 F2                  853 	movx	@r0,a
+   0005 75 82 01            854 	mov	dpl,#0x01
+   0008 12s00r00            855 	lcall	_usbInitEndpointIn
+                    000B    856 	C$usb_cdc_acm.c$237$1$1 ==.
+                            857 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:237: usbInitEndpointOut(CDC_DATA_ENDPOINT, CDC_OUT_PACKET_SIZE);
+   000B 78r00               858 	mov	r0,#_usbInitEndpointOut_PARM_2
+   000D 74 40               859 	mov	a,#0x40
+   000F F2                  860 	movx	@r0,a
+   0010 75 82 04            861 	mov	dpl,#0x04
+   0013 12s00r00            862 	lcall	_usbInitEndpointOut
+                    0016    863 	C$usb_cdc_acm.c$238$1$1 ==.
+                            864 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:238: usbInitEndpointIn(CDC_DATA_ENDPOINT, CDC_IN_PACKET_SIZE);
+   0016 78r00               865 	mov	r0,#_usbInitEndpointIn_PARM_2
+   0018 74 40               866 	mov	a,#0x40
+   001A F2                  867 	movx	@r0,a
+   001B 75 82 04            868 	mov	dpl,#0x04
+   001E 12s00r00            869 	lcall	_usbInitEndpointIn
+                    0021    870 	C$usb_cdc_acm.c$241$1$1 ==.
+                            871 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:241: lastReportedSerialState = 0xFF;
+   0021 78r02               872 	mov	r0,#_lastReportedSerialState
+   0023 74 FF               873 	mov	a,#0xFF
+   0025 F2                  874 	movx	@r0,a
+                    0026    875 	C$usb_cdc_acm.c$242$1$1 ==.
+                    0026    876 	XG$usbCallbackInitEndpoints$0$0 ==.
+   0026 22                  877 	ret
+                            878 ;------------------------------------------------------------
+                            879 ;Allocation info for local variables in function 'usbCallbackSetupHandler'
+                            880 ;------------------------------------------------------------
+                    0027    881 	G$usbCallbackSetupHandler$0$0 ==.
+                    0027    882 	C$usb_cdc_acm.c$246$1$1 ==.
+                            883 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:246: void usbCallbackSetupHandler()
+                            884 ;	-----------------------------------------
+                            885 ;	 function usbCallbackSetupHandler
+                            886 ;	-----------------------------------------
+   0027                     887 _usbCallbackSetupHandler:
+                    0027    888 	C$usb_cdc_acm.c$248$1$1 ==.
+                            889 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:248: if ((usbSetupPacket.bmRequestType & 0x7F) != 0x21)   // Require Type==Class and Recipient==Interface.
+   0027 90s00r00            890 	mov	dptr,#_usbSetupPacket
+   002A E0                  891 	movx	a,@dptr
+   002B FF                  892 	mov	r7,a
+   002C 53 07 7F            893 	anl	ar7,#0x7F
+                    002F    894 	C$usb_cdc_acm.c$249$1$1 ==.
+                            895 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:249: return;
+   002F BF 21 55            896 	cjne	r7,#0x21,00110$
+                    0032    897 	C$usb_cdc_acm.c$251$1$1 ==.
+                            898 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:251: if (!(usbSetupPacket.wIndex == CDC_CONTROL_INTERFACE_NUMBER || usbSetupPacket.wIndex == CDC_DATA_INTERFACE_NUMBER))
+   0032 90s00r04            899 	mov	dptr,#(_usbSetupPacket + 0x0004)
+   0035 E0                  900 	movx	a,@dptr
+   0036 FE                  901 	mov	r6,a
+   0037 A3                  902 	inc	dptr
+   0038 E0                  903 	movx	a,@dptr
+   0039 FF                  904 	mov	r7,a
+   003A 4E                  905 	orl	a,r6
+   003B 60 06               906 	jz	00104$
+                    003D    907 	C$usb_cdc_acm.c$252$1$1 ==.
+                            908 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:252: return;
+   003D BE 01 47            909 	cjne	r6,#0x01,00110$
+   0040 BF 00 44            910 	cjne	r7,#0x00,00110$
+   0043                     911 00104$:
+                    0043    912 	C$usb_cdc_acm.c$254$1$1 ==.
+                            913 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:254: switch(usbSetupPacket.bRequest)
+   0043 90s00r01            914 	mov	dptr,#(_usbSetupPacket + 0x0001)
+   0046 E0                  915 	movx	a,@dptr
+   0047 FF                  916 	mov	r7,a
+   0048 BF 20 02            917 	cjne	r7,#0x20,00121$
+   004B 80 0A               918 	sjmp	00106$
+   004D                     919 00121$:
+   004D BF 21 02            920 	cjne	r7,#0x21,00122$
+   0050 80 16               921 	sjmp	00107$
+   0052                     922 00122$:
+                    0052    923 	C$usb_cdc_acm.c$256$2$2 ==.
+                            924 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:256: case ACM_REQUEST_SET_LINE_CODING:                          // SetLineCoding (USBPSTN1.20 Section 6.3.10 SetLineCoding)
+   0052 BF 22 32            925 	cjne	r7,#0x22,00110$
+   0055 80 22               926 	sjmp	00108$
+   0057                     927 00106$:
+                    0057    928 	C$usb_cdc_acm.c$257$2$2 ==.
+                            929 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:257: usbControlWrite(sizeof(usbComLineCoding), (uint8 XDATA *)&usbComLineCoding);
+   0057 78r00               930 	mov	r0,#_usbControlWrite_PARM_2
+   0059 74r00               931 	mov	a,#_usbComLineCoding
+   005B F2                  932 	movx	@r0,a
+   005C 08                  933 	inc	r0
+   005D 74s00               934 	mov	a,#(_usbComLineCoding >> 8)
+   005F F2                  935 	movx	@r0,a
+   0060 90 00 07            936 	mov	dptr,#0x0007
+   0063 12s00r00            937 	lcall	_usbControlWrite
+                    0066    938 	C$usb_cdc_acm.c$258$2$2 ==.
+                            939 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:258: break;
+                    0066    940 	C$usb_cdc_acm.c$260$2$2 ==.
+                            941 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:260: case ACM_REQUEST_GET_LINE_CODING:                          // GetLineCoding (USBPSTN1.20 Section 6.3.11 GetLineCoding)
+   0066 80 1F               942 	sjmp	00110$
+   0068                     943 00107$:
+                    0068    944 	C$usb_cdc_acm.c$261$2$2 ==.
+                            945 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:261: usbControlRead(sizeof(usbComLineCoding), (uint8 XDATA *)&usbComLineCoding);
+   0068 78r00               946 	mov	r0,#_usbControlRead_PARM_2
+   006A 74r00               947 	mov	a,#_usbComLineCoding
+   006C F2                  948 	movx	@r0,a
+   006D 08                  949 	inc	r0
+   006E 74s00               950 	mov	a,#(_usbComLineCoding >> 8)
+   0070 F2                  951 	movx	@r0,a
+   0071 90 00 07            952 	mov	dptr,#0x0007
+   0074 12s00r00            953 	lcall	_usbControlRead
+                    0077    954 	C$usb_cdc_acm.c$262$2$2 ==.
+                            955 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:262: break;
+                    0077    956 	C$usb_cdc_acm.c$264$2$2 ==.
+                            957 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:264: case ACM_REQUEST_SET_CONTROL_LINE_STATE:                   // SetControlLineState (USBPSTN1.20 Section 6.3.12 SetControlLineState)
+   0077 80 0E               958 	sjmp	00110$
+   0079                     959 00108$:
+                    0079    960 	C$usb_cdc_acm.c$265$2$2 ==.
+                            961 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:265: usbComControlLineState = usbSetupPacket.wValue;
+   0079 90s00r02            962 	mov	dptr,#(_usbSetupPacket + 0x0002)
+   007C E0                  963 	movx	a,@dptr
+   007D FE                  964 	mov	r6,a
+   007E A3                  965 	inc	dptr
+   007F E0                  966 	movx	a,@dptr
+   0080 78r00               967 	mov	r0,#_usbComControlLineState
+   0082 EE                  968 	mov	a,r6
+   0083 F2                  969 	movx	@r0,a
+                    0084    970 	C$usb_cdc_acm.c$266$2$2 ==.
+                            971 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:266: usbControlAcknowledge();
+   0084 12s00r00            972 	lcall	_usbControlAcknowledge
+                    0087    973 	C$usb_cdc_acm.c$268$1$1 ==.
+                            974 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:268: }
+   0087                     975 00110$:
+                    0087    976 	C$usb_cdc_acm.c$269$1$1 ==.
+                    0087    977 	XG$usbCallbackSetupHandler$0$0 ==.
+   0087 22                  978 	ret
+                            979 ;------------------------------------------------------------
+                            980 ;Allocation info for local variables in function 'usbCallbackClassDescriptorHandler'
+                            981 ;------------------------------------------------------------
+                    0088    982 	G$usbCallbackClassDescriptorHandler$0$0 ==.
+                    0088    983 	C$usb_cdc_acm.c$271$1$1 ==.
+                            984 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:271: void usbCallbackClassDescriptorHandler(void)
+                            985 ;	-----------------------------------------
+                            986 ;	 function usbCallbackClassDescriptorHandler
+                            987 ;	-----------------------------------------
+   0088                     988 _usbCallbackClassDescriptorHandler:
+                    0088    989 	C$usb_cdc_acm.c$274$1$1 ==.
+                            990 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:274: }
+                    0088    991 	C$usb_cdc_acm.c$274$1$1 ==.
+                    0088    992 	XG$usbCallbackClassDescriptorHandler$0$0 ==.
+   0088 22                  993 	ret
+                            994 ;------------------------------------------------------------
+                            995 ;Allocation info for local variables in function 'doNothing'
+                            996 ;------------------------------------------------------------
+                    0089    997 	Fusb_cdc_acm$doNothing$0$0 ==.
+                    0089    998 	C$usb_cdc_acm.c$276$1$1 ==.
+                            999 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:276: static void doNothing(void)
+                           1000 ;	-----------------------------------------
+                           1001 ;	 function doNothing
+                           1002 ;	-----------------------------------------
+   0089                    1003 _doNothing:
+                    0089   1004 	C$usb_cdc_acm.c$279$1$1 ==.
+                           1005 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:279: }
+                    0089   1006 	C$usb_cdc_acm.c$279$1$1 ==.
+                    0089   1007 	XFusb_cdc_acm$doNothing$0$0 ==.
+   0089 22                 1008 	ret
+                           1009 ;------------------------------------------------------------
+                           1010 ;Allocation info for local variables in function 'usbCallbackControlWriteHandler'
+                           1011 ;------------------------------------------------------------
+                    008A   1012 	G$usbCallbackControlWriteHandler$0$0 ==.
+                    008A   1013 	C$usb_cdc_acm.c$281$1$1 ==.
+                           1014 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:281: void usbCallbackControlWriteHandler()
+                           1015 ;	-----------------------------------------
+                           1016 ;	 function usbCallbackControlWriteHandler
+                           1017 ;	-----------------------------------------
+   008A                    1018 _usbCallbackControlWriteHandler:
+                    008A   1019 	C$usb_cdc_acm.c$283$1$1 ==.
+                           1020 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:283: usbComLineCodingChangeHandler();
+   008A 78r03              1021 	mov	r0,#_usbComLineCodingChangeHandler
+   008C E2                 1022 	movx	a,@r0
+   008D F5 82              1023 	mov	dpl,a
+   008F 08                 1024 	inc	r0
+   0090 E2                 1025 	movx	a,@r0
+   0091 F5 83              1026 	mov	dph,a
+   0093 12s00r00           1027 	lcall	__sdcc_call_dptr
+                    0096   1028 	C$usb_cdc_acm.c$285$1$1 ==.
+                           1029 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:285: if (usbComLineCoding.dwDTERate == 333 && !startBootloaderSoon)
+   0096 90s00r00           1030 	mov	dptr,#_usbComLineCoding
+   0099 E0                 1031 	movx	a,@dptr
+   009A FC                 1032 	mov	r4,a
+   009B A3                 1033 	inc	dptr
+   009C E0                 1034 	movx	a,@dptr
+   009D FD                 1035 	mov	r5,a
+   009E A3                 1036 	inc	dptr
+   009F E0                 1037 	movx	a,@dptr
+   00A0 FE                 1038 	mov	r6,a
+   00A1 A3                 1039 	inc	dptr
+   00A2 E0                 1040 	movx	a,@dptr
+   00A3 FF                 1041 	mov	r7,a
+   00A4 BC 4D 1D           1042 	cjne	r4,#0x4D,00104$
+   00A7 BD 01 1A           1043 	cjne	r5,#0x01,00104$
+   00AA BE 00 17           1044 	cjne	r6,#0x00,00104$
+   00AD BF 00 14           1045 	cjne	r7,#0x00,00104$
+   00B0 20*01 11           1046 	jb	_startBootloaderSoon,00104$
+                    00B3   1047 	C$usb_cdc_acm.c$290$2$2 ==.
+                           1048 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:290: startBootloaderSoon = 1;
+   00B3 D2*01              1049 	setb	_startBootloaderSoon
+                    00B5   1050 	C$usb_cdc_acm.c$291$2$2 ==.
+                           1051 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:291: startBootloaderRequestTime = (uint8)getMs();
+   00B5 12s00r00           1052 	lcall	_getMs
+   00B8 AC 82              1053 	mov	r4,dpl
+   00BA AD 83              1054 	mov	r5,dph
+   00BC AE F0              1055 	mov	r6,b
+   00BE FF                 1056 	mov	r7,a
+   00BF 90s00r00           1057 	mov	dptr,#_startBootloaderRequestTime
+   00C2 EC                 1058 	mov	a,r4
+   00C3 F0                 1059 	movx	@dptr,a
+   00C4                    1060 00104$:
+                    00C4   1061 	C$usb_cdc_acm.c$293$2$1 ==.
+                    00C4   1062 	XG$usbCallbackControlWriteHandler$0$0 ==.
+   00C4 22                 1063 	ret
+                           1064 ;------------------------------------------------------------
+                           1065 ;Allocation info for local variables in function 'usbComRxAvailable'
+                           1066 ;------------------------------------------------------------
+                    00C5   1067 	G$usbComRxAvailable$0$0 ==.
+                    00C5   1068 	C$usb_cdc_acm.c$299$2$1 ==.
+                           1069 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:299: uint8 usbComRxAvailable()
+                           1070 ;	-----------------------------------------
+                           1071 ;	 function usbComRxAvailable
+                           1072 ;	-----------------------------------------
+   00C5                    1073 _usbComRxAvailable:
+                    00C5   1074 	C$usb_cdc_acm.c$301$1$1 ==.
+                           1075 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:301: if (usbDeviceState != USB_STATE_CONFIGURED)
+   00C5 90s00r00           1076 	mov	dptr,#_usbDeviceState
+   00C8 E0                 1077 	movx	a,@dptr
+   00C9 FF                 1078 	mov	r7,a
+   00CA BF 10 02           1079 	cjne	r7,#0x10,00110$
+   00CD 80 05              1080 	sjmp	00102$
+   00CF                    1081 00110$:
+                    00CF   1082 	C$usb_cdc_acm.c$304$2$2 ==.
+                           1083 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:304: return 0;
+   00CF 75 82 00           1084 	mov	dpl,#0x00
+   00D2 80 1A              1085 	sjmp	00106$
+   00D4                    1086 00102$:
+                    00D4   1087 	C$usb_cdc_acm.c$307$1$1 ==.
+                           1088 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:307: USBINDEX = CDC_DATA_ENDPOINT;      // Select the data endpoint.
+   00D4 90 DE 0E           1089 	mov	dptr,#_USBINDEX
+   00D7 74 04              1090 	mov	a,#0x04
+   00D9 F0                 1091 	movx	@dptr,a
+                    00DA   1092 	C$usb_cdc_acm.c$308$1$1 ==.
+                           1093 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:308: if (USBCSOL & USBCSOL_OUTPKT_RDY)  // Check the OUTPKT_RDY flag because USBCNTL is only valid when it is 1.
+   00DA 90 DE 14           1094 	mov	dptr,#_USBCSOL
+   00DD E0                 1095 	movx	a,@dptr
+   00DE FF                 1096 	mov	r7,a
+   00DF 30 E0 09           1097 	jnb	acc.0,00104$
+                    00E2   1098 	C$usb_cdc_acm.c$312$2$3 ==.
+                           1099 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:312: return USBCNTL;
+   00E2 90 DE 16           1100 	mov	dptr,#_USBCNTL
+   00E5 E0                 1101 	movx	a,@dptr
+   00E6 FF                 1102 	mov	r7,a
+   00E7 F5 82              1103 	mov	dpl,a
+   00E9 80 03              1104 	sjmp	00106$
+   00EB                    1105 00104$:
+                    00EB   1106 	C$usb_cdc_acm.c$316$2$4 ==.
+                           1107 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:316: return 0;
+   00EB 75 82 00           1108 	mov	dpl,#0x00
+   00EE                    1109 00106$:
+                    00EE   1110 	C$usb_cdc_acm.c$318$1$1 ==.
+                    00EE   1111 	XG$usbComRxAvailable$0$0 ==.
+   00EE 22                 1112 	ret
+                           1113 ;------------------------------------------------------------
+                           1114 ;Allocation info for local variables in function 'usbComRxReceiveByte'
+                           1115 ;------------------------------------------------------------
+                    00EF   1116 	G$usbComRxReceiveByte$0$0 ==.
+                    00EF   1117 	C$usb_cdc_acm.c$325$1$1 ==.
+                           1118 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:325: uint8 usbComRxReceiveByte()
+                           1119 ;	-----------------------------------------
+                           1120 ;	 function usbComRxReceiveByte
+                           1121 ;	-----------------------------------------
+   00EF                    1122 _usbComRxReceiveByte:
+                    00EF   1123 	C$usb_cdc_acm.c$329$1$1 ==.
+                           1124 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:329: USBINDEX = CDC_DATA_ENDPOINT;         // Select the CDC data endpoint.
+   00EF 90 DE 0E           1125 	mov	dptr,#_USBINDEX
+   00F2 74 04              1126 	mov	a,#0x04
+   00F4 F0                 1127 	movx	@dptr,a
+                    00F5   1128 	C$usb_cdc_acm.c$330$1$1 ==.
+                           1129 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:330: tmp = CDC_DATA_FIFO;                  // Read one byte from the FIFO.
+   00F5 90 DE 28           1130 	mov	dptr,#_USBF4
+   00F8 E0                 1131 	movx	a,@dptr
+   00F9 FF                 1132 	mov	r7,a
+                    00FA   1133 	C$usb_cdc_acm.c$332$1$1 ==.
+                           1134 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:332: if (USBCNTL == 0)                     // If there are no bytes left in this packet...
+   00FA 90 DE 16           1135 	mov	dptr,#_USBCNTL
+   00FD E0                 1136 	movx	a,@dptr
+   00FE FE                 1137 	mov	r6,a
+   00FF 70 08              1138 	jnz	00102$
+                    0101   1139 	C$usb_cdc_acm.c$334$2$2 ==.
+                           1140 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:334: USBCSOL &= ~USBCSOL_OUTPKT_RDY;   // Tell the USB module we are done reading this packet, so it can receive more.
+   0101 90 DE 14           1141 	mov	dptr,#_USBCSOL
+   0104 E0                 1142 	movx	a,@dptr
+   0105 54 FE              1143 	anl	a,#0xFE
+   0107 FE                 1144 	mov	r6,a
+   0108 F0                 1145 	movx	@dptr,a
+   0109                    1146 00102$:
+                    0109   1147 	C$usb_cdc_acm.c$337$1$1 ==.
+                           1148 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:337: usbActivityFlag = 1;
+   0109 D2*00              1149 	setb	_usbActivityFlag
+                    010B   1150 	C$usb_cdc_acm.c$338$1$1 ==.
+                           1151 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:338: return tmp;
+   010B 8F 82              1152 	mov	dpl,r7
+                    010D   1153 	C$usb_cdc_acm.c$339$1$1 ==.
+                    010D   1154 	XG$usbComRxReceiveByte$0$0 ==.
+   010D 22                 1155 	ret
+                           1156 ;------------------------------------------------------------
+                           1157 ;Allocation info for local variables in function 'usbComRxReceive'
+                           1158 ;------------------------------------------------------------
+                    010E   1159 	G$usbComRxReceive$0$0 ==.
+                    010E   1160 	C$usb_cdc_acm.c$343$1$1 ==.
+                           1161 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:343: void usbComRxReceive(uint8 XDATA * buffer, uint8 size)
+                           1162 ;	-----------------------------------------
+                           1163 ;	 function usbComRxReceive
+                           1164 ;	-----------------------------------------
+   010E                    1165 _usbComRxReceive:
+   010E AE 82              1166 	mov	r6,dpl
+   0110 AF 83              1167 	mov	r7,dph
+                    0112   1168 	C$usb_cdc_acm.c$345$1$1 ==.
+                           1169 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:345: usbReadFifo(CDC_DATA_ENDPOINT, size, buffer);
+   0112 78r05              1170 	mov	r0,#_usbComRxReceive_PARM_2
+   0114 79r00              1171 	mov	r1,#_usbReadFifo_PARM_2
+   0116 E2                 1172 	movx	a,@r0
+   0117 F3                 1173 	movx	@r1,a
+   0118 78r00              1174 	mov	r0,#_usbReadFifo_PARM_3
+   011A EE                 1175 	mov	a,r6
+   011B F2                 1176 	movx	@r0,a
+   011C 08                 1177 	inc	r0
+   011D EF                 1178 	mov	a,r7
+   011E F2                 1179 	movx	@r0,a
+   011F 75 82 04           1180 	mov	dpl,#0x04
+   0122 12s00r00           1181 	lcall	_usbReadFifo
+                    0125   1182 	C$usb_cdc_acm.c$347$1$1 ==.
+                           1183 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:347: if (USBCNTL == 0)
+   0125 90 DE 16           1184 	mov	dptr,#_USBCNTL
+   0128 E0                 1185 	movx	a,@dptr
+   0129 FF                 1186 	mov	r7,a
+   012A 70 08              1187 	jnz	00103$
+                    012C   1188 	C$usb_cdc_acm.c$349$2$2 ==.
+                           1189 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:349: USBCSOL &= ~USBCSOL_OUTPKT_RDY;   // Tell the USB module we are done reading this packet, so it can receive more.
+   012C 90 DE 14           1190 	mov	dptr,#_USBCSOL
+   012F E0                 1191 	movx	a,@dptr
+   0130 54 FE              1192 	anl	a,#0xFE
+   0132 FF                 1193 	mov	r7,a
+   0133 F0                 1194 	movx	@dptr,a
+   0134                    1195 00103$:
+                    0134   1196 	C$usb_cdc_acm.c$351$2$1 ==.
+                    0134   1197 	XG$usbComRxReceive$0$0 ==.
+   0134 22                 1198 	ret
+                           1199 ;------------------------------------------------------------
+                           1200 ;Allocation info for local variables in function 'sendPacketNow'
+                           1201 ;------------------------------------------------------------
+                    0135   1202 	Fusb_cdc_acm$sendPacketNow$0$0 ==.
+                    0135   1203 	C$usb_cdc_acm.c$358$2$1 ==.
+                           1204 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:358: static void sendPacketNow()
+                           1205 ;	-----------------------------------------
+                           1206 ;	 function sendPacketNow
+                           1207 ;	-----------------------------------------
+   0135                    1208 _sendPacketNow:
+                    0135   1209 	C$usb_cdc_acm.c$360$1$1 ==.
+                           1210 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:360: USBINDEX = CDC_DATA_ENDPOINT;
+   0135 90 DE 0E           1211 	mov	dptr,#_USBINDEX
+   0138 74 04              1212 	mov	a,#0x04
+   013A F0                 1213 	movx	@dptr,a
+                    013B   1214 	C$usb_cdc_acm.c$361$1$1 ==.
+                           1215 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:361: USBCSIL |= USBCSIL_INPKT_RDY;                      // Send the packet.
+   013B 90 DE 11           1216 	mov	dptr,#_USBCSIL
+   013E E0                 1217 	movx	a,@dptr
+   013F FF                 1218 	mov	r7,a
+   0140 44 01              1219 	orl	a,#0x01
+   0142 F0                 1220 	movx	@dptr,a
+                    0143   1221 	C$usb_cdc_acm.c$364$1$1 ==.
+                           1222 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:364: sendEmptyPacketSoon = (inFifoBytesLoaded == CDC_IN_PACKET_SIZE);
+   0143 74 40              1223 	mov	a,#0x40
+   0145 B5*00 03           1224 	cjne	a,_inFifoBytesLoaded,00103$
+   0148 D3                 1225 	setb	c
+   0149 80 01              1226 	sjmp	00104$
+   014B                    1227 00103$:
+   014B C3                 1228 	clr	c
+   014C                    1229 00104$:
+   014C 92*02              1230 	mov  _sendPacketNow_sloc0_1_0,c
+   014E 92*00              1231 	mov	_sendEmptyPacketSoon,c
+                    0150   1232 	C$usb_cdc_acm.c$367$1$1 ==.
+                           1233 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:367: inFifoBytesLoaded = 0;
+   0150 75*00 00           1234 	mov	_inFifoBytesLoaded,#0x00
+                    0153   1235 	C$usb_cdc_acm.c$370$1$1 ==.
+                           1236 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:370: usbActivityFlag = 1;
+   0153 D2*00              1237 	setb	_usbActivityFlag
+                    0155   1238 	C$usb_cdc_acm.c$371$1$1 ==.
+                    0155   1239 	XFusb_cdc_acm$sendPacketNow$0$0 ==.
+   0155 22                 1240 	ret
+                           1241 ;------------------------------------------------------------
+                           1242 ;Allocation info for local variables in function 'usbComService'
+                           1243 ;------------------------------------------------------------
+                    0156   1244 	G$usbComService$0$0 ==.
+                    0156   1245 	C$usb_cdc_acm.c$373$1$1 ==.
+                           1246 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:373: void usbComService(void)
+                           1247 ;	-----------------------------------------
+                           1248 ;	 function usbComService
+                           1249 ;	-----------------------------------------
+   0156                    1250 _usbComService:
+                    0156   1251 	C$usb_cdc_acm.c$375$1$1 ==.
+                           1252 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:375: usbPoll();
+   0156 12s00r00           1253 	lcall	_usbPoll
+                    0159   1254 	C$usb_cdc_acm.c$378$1$1 ==.
+                           1255 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:378: if (startBootloaderSoon && (uint8)(getMs() - startBootloaderRequestTime) > 70)
+   0159 30*01 19           1256 	jnb	_startBootloaderSoon,00102$
+   015C 12s00r00           1257 	lcall	_getMs
+   015F AC 82              1258 	mov	r4,dpl
+   0161 AD 83              1259 	mov	r5,dph
+   0163 AE F0              1260 	mov	r6,b
+   0165 90s00r00           1261 	mov	dptr,#_startBootloaderRequestTime
+   0168 E0                 1262 	movx	a,@dptr
+   0169 FF                 1263 	mov	r7,a
+   016A EC                 1264 	mov	a,r4
+   016B C3                 1265 	clr	c
+   016C 9F                 1266 	subb	a,r7
+   016D FC                 1267 	mov  r4,a
+   016E 24 B9              1268 	add	a,#0xff - 0x46
+   0170 50 03              1269 	jnc	00102$
+                    0172   1270 	C$usb_cdc_acm.c$388$2$2 ==.
+                           1271 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:388: boardStartBootloader();
+   0172 12s00r00           1272 	lcall	_boardStartBootloader
+   0175                    1273 00102$:
+                    0175   1274 	C$usb_cdc_acm.c$391$1$1 ==.
+                           1275 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:391: if (usbDeviceState != USB_STATE_CONFIGURED)
+   0175 90s00r00           1276 	mov	dptr,#_usbDeviceState
+   0178 E0                 1277 	movx	a,@dptr
+   0179 FF                 1278 	mov	r7,a
+   017A BF 10 02           1279 	cjne	r7,#0x10,00124$
+   017D 80 02              1280 	sjmp	00105$
+   017F                    1281 00124$:
+                    017F   1282 	C$usb_cdc_acm.c$394$2$3 ==.
+                           1283 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:394: return;
+   017F 80 79              1284 	sjmp	00113$
+   0181                    1285 00105$:
+                    0181   1286 	C$usb_cdc_acm.c$402$1$1 ==.
+                           1287 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:402: USBINDEX = CDC_DATA_ENDPOINT;
+   0181 90 DE 0E           1288 	mov	dptr,#_USBINDEX
+   0184 74 04              1289 	mov	a,#0x04
+   0186 F0                 1290 	movx	@dptr,a
+                    0187   1291 	C$usb_cdc_acm.c$403$1$1 ==.
+                           1292 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:403: if (inFifoBytesLoaded || ( sendEmptyPacketSoon && !(USBCSIL & USBCSIL_PKT_PRESENT) ) )
+   0187 E5*00              1293 	mov	a,_inFifoBytesLoaded
+   0189 70 0B              1294 	jnz	00106$
+   018B 30*00 0B           1295 	jnb	_sendEmptyPacketSoon,00107$
+   018E 90 DE 11           1296 	mov	dptr,#_USBCSIL
+   0191 E0                 1297 	movx	a,@dptr
+   0192 FF                 1298 	mov	r7,a
+   0193 20 E1 03           1299 	jb	acc.1,00107$
+   0196                    1300 00106$:
+                    0196   1301 	C$usb_cdc_acm.c$405$2$4 ==.
+                           1302 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:405: sendPacketNow();
+   0196 12s01r35           1303 	lcall	_sendPacketNow
+   0199                    1304 00107$:
+                    0199   1305 	C$usb_cdc_acm.c$409$1$1 ==.
+                           1306 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:409: USBINDEX = CDC_NOTIFICATION_ENDPOINT;
+   0199 90 DE 0E           1307 	mov	dptr,#_USBINDEX
+   019C 74 01              1308 	mov	a,#0x01
+   019E F0                 1309 	movx	@dptr,a
+                    019F   1310 	C$usb_cdc_acm.c$410$1$1 ==.
+                           1311 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:410: if (usbComSerialState != lastReportedSerialState && !(USBCSIL & USBCSIL_INPKT_RDY))
+   019F 78r01              1312 	mov	r0,#_usbComSerialState
+   01A1 79r02              1313 	mov	r1,#_lastReportedSerialState
+   01A3 E2                 1314 	movx	a,@r0
+   01A4 F5 F0              1315 	mov	b,a
+   01A6 E3                 1316 	movx	a,@r1
+   01A7 B5 F0 02           1317 	cjne	a,b,00128$
+   01AA 80 4E              1318 	sjmp	00113$
+   01AC                    1319 00128$:
+   01AC 90 DE 11           1320 	mov	dptr,#_USBCSIL
+   01AF E0                 1321 	movx	a,@dptr
+   01B0 FF                 1322 	mov	r7,a
+   01B1 20 E0 46           1323 	jb	acc.0,00113$
+                    01B4   1324 	C$usb_cdc_acm.c$416$2$5 ==.
+                           1325 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:416: CDC_NOTIFICATION_FIFO = 0b10100001;   // bRequestType: Direction=IN, Type=Class, Sender=Interface
+                    01B4   1326 	C$usb_cdc_acm.c$417$2$5 ==.
+                           1327 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:417: CDC_NOTIFICATION_FIFO = ACM_NOTIFICATION_SERIAL_STATE; // bRequest
+                    01B4   1328 	C$usb_cdc_acm.c$420$2$5 ==.
+                           1329 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:420: CDC_NOTIFICATION_FIFO = 0;
+   01B4 90 DE 22           1330 	mov	dptr,#_USBF1
+   01B7 74 A1              1331 	mov	a,#0xA1
+   01B9 F0                 1332 	movx	@dptr,a
+   01BA 74 20              1333 	mov	a,#0x20
+   01BC F0                 1334 	movx	@dptr,a
+                    01BD   1335 	C$usb_cdc_acm.c$421$2$5 ==.
+                           1336 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:421: CDC_NOTIFICATION_FIFO = 0;
+                    01BD   1337 	C$usb_cdc_acm.c$424$2$5 ==.
+                           1338 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:424: CDC_NOTIFICATION_FIFO = CDC_CONTROL_INTERFACE_NUMBER;
+                    01BD   1339 	C$usb_cdc_acm.c$425$2$5 ==.
+                           1340 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:425: CDC_NOTIFICATION_FIFO = 0;
+   01BD E4                 1341 	clr	a
+   01BE F0                 1342 	movx	@dptr,a
+   01BF 90 DE 22           1343 	mov	dptr,#_USBF1
+   01C2 F0                 1344 	movx	@dptr,a
+   01C3 90 DE 22           1345 	mov	dptr,#_USBF1
+   01C6 F0                 1346 	movx	@dptr,a
+   01C7 90 DE 22           1347 	mov	dptr,#_USBF1
+   01CA F0                 1348 	movx	@dptr,a
+                    01CB   1349 	C$usb_cdc_acm.c$428$2$5 ==.
+                           1350 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:428: CDC_NOTIFICATION_FIFO = 2;
+                    01CB   1351 	C$usb_cdc_acm.c$429$2$5 ==.
+                           1352 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:429: CDC_NOTIFICATION_FIFO = 0;
+   01CB 90 DE 22           1353 	mov	dptr,#_USBF1
+   01CE 74 02              1354 	mov	a,#0x02
+   01D0 F0                 1355 	movx	@dptr,a
+   01D1 E4                 1356 	clr	a
+   01D2 F0                 1357 	movx	@dptr,a
+                    01D3   1358 	C$usb_cdc_acm.c$432$2$5 ==.
+                           1359 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:432: CDC_NOTIFICATION_FIFO = usbComSerialState;
+   01D3 78r01              1360 	mov	r0,#_usbComSerialState
+   01D5 90 DE 22           1361 	mov	dptr,#_USBF1
+   01D8 E2                 1362 	movx	a,@r0
+   01D9 F0                 1363 	movx	@dptr,a
+                    01DA   1364 	C$usb_cdc_acm.c$433$2$5 ==.
+                           1365 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:433: CDC_NOTIFICATION_FIFO = 0;
+   01DA 90 DE 22           1366 	mov	dptr,#_USBF1
+   01DD E4                 1367 	clr	a
+   01DE F0                 1368 	movx	@dptr,a
+                    01DF   1369 	C$usb_cdc_acm.c$435$2$5 ==.
+                           1370 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:435: USBCSIL |= USBCSIL_INPKT_RDY;
+   01DF 90 DE 11           1371 	mov	dptr,#_USBCSIL
+   01E2 E0                 1372 	movx	a,@dptr
+   01E3 44 01              1373 	orl	a,#0x01
+   01E5 F0                 1374 	movx	@dptr,a
+                    01E6   1375 	C$usb_cdc_acm.c$438$2$5 ==.
+                           1376 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:438: usbComSerialState &= ~ACM_IRREGULAR_SIGNAL_MASK;
+   01E6 78r01              1377 	mov	r0,#_usbComSerialState
+   01E8 E2                 1378 	movx	a,@r0
+   01E9 FF                 1379 	mov	r7,a
+   01EA 53 07 83           1380 	anl	ar7,#0x83
+   01ED 78r01              1381 	mov	r0,#_usbComSerialState
+   01EF EF                 1382 	mov	a,r7
+   01F0 F2                 1383 	movx	@r0,a
+                    01F1   1384 	C$usb_cdc_acm.c$440$2$5 ==.
+                           1385 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:440: lastReportedSerialState = usbComSerialState;
+   01F1 78r01              1386 	mov	r0,#_usbComSerialState
+   01F3 E2                 1387 	movx	a,@r0
+   01F4 FF                 1388 	mov	r7,a
+   01F5 78r02              1389 	mov	r0,#_lastReportedSerialState
+   01F7 F2                 1390 	movx	@r0,a
+                    01F8   1391 	C$usb_cdc_acm.c$443$2$5 ==.
+                           1392 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:443: usbActivityFlag = 1;
+   01F8 D2*00              1393 	setb	_usbActivityFlag
+   01FA                    1394 00113$:
+                    01FA   1395 	C$usb_cdc_acm.c$445$2$1 ==.
+                    01FA   1396 	XG$usbComService$0$0 ==.
+   01FA 22                 1397 	ret
+                           1398 ;------------------------------------------------------------
+                           1399 ;Allocation info for local variables in function 'usbComTxAvailable'
+                           1400 ;------------------------------------------------------------
+                    01FB   1401 	G$usbComTxAvailable$0$0 ==.
+                    01FB   1402 	C$usb_cdc_acm.c$449$2$1 ==.
+                           1403 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:449: uint8 usbComTxAvailable()
+                           1404 ;	-----------------------------------------
+                           1405 ;	 function usbComTxAvailable
+                           1406 ;	-----------------------------------------
+   01FB                    1407 _usbComTxAvailable:
+                    01FB   1408 	C$usb_cdc_acm.c$453$1$1 ==.
+                           1409 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:453: if (usbDeviceState != USB_STATE_CONFIGURED)
+   01FB 90s00r00           1410 	mov	dptr,#_usbDeviceState
+   01FE E0                 1411 	movx	a,@dptr
+   01FF FF                 1412 	mov	r7,a
+   0200 BF 10 02           1413 	cjne	r7,#0x10,00113$
+   0203 80 05              1414 	sjmp	00102$
+   0205                    1415 00113$:
+                    0205   1416 	C$usb_cdc_acm.c$456$2$2 ==.
+                           1417 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:456: return 0;
+   0205 75 82 00           1418 	mov	dpl,#0x00
+   0208 80 27              1419 	sjmp	00108$
+   020A                    1420 00102$:
+                    020A   1421 	C$usb_cdc_acm.c$459$1$1 ==.
+                           1422 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:459: USBINDEX = CDC_DATA_ENDPOINT;
+   020A 90 DE 0E           1423 	mov	dptr,#_USBINDEX
+   020D 74 04              1424 	mov	a,#0x04
+   020F F0                 1425 	movx	@dptr,a
+                    0210   1426 	C$usb_cdc_acm.c$460$1$1 ==.
+                           1427 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:460: tmp = USBCSIL;
+   0210 90 DE 11           1428 	mov	dptr,#_USBCSIL
+   0213 E0                 1429 	movx	a,@dptr
+                    0214   1430 	C$usb_cdc_acm.c$461$1$1 ==.
+                           1431 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:461: if (tmp & USBCSIL_PKT_PRESENT)
+   0214 FF                 1432 	mov	r7,a
+   0215 30 E1 12           1433 	jnb	acc.1,00106$
+                    0218   1434 	C$usb_cdc_acm.c$463$2$3 ==.
+                           1435 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:463: if (tmp & USBCSIL_INPKT_RDY)
+   0218 EF                 1436 	mov	a,r7
+   0219 30 E0 05           1437 	jnb	acc.0,00104$
+                    021C   1438 	C$usb_cdc_acm.c$465$3$4 ==.
+                           1439 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:465: return 0;                                       // 2 packets are in the FIFO, so no room
+   021C 75 82 00           1440 	mov	dpl,#0x00
+   021F 80 10              1441 	sjmp	00108$
+   0221                    1442 00104$:
+                    0221   1443 	C$usb_cdc_acm.c$467$2$3 ==.
+                           1444 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:467: return CDC_IN_PACKET_SIZE - inFifoBytesLoaded;      // 1 packet is in the FIFO, so there is room for 1 more
+   0221 74 40              1445 	mov	a,#0x40
+   0223 C3                 1446 	clr	c
+   0224 95*00              1447 	subb	a,_inFifoBytesLoaded
+   0226 F5 82              1448 	mov	dpl,a
+   0228 80 07              1449 	sjmp	00108$
+   022A                    1450 00106$:
+                    022A   1451 	C$usb_cdc_acm.c$471$2$5 ==.
+                           1452 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:471: return (CDC_IN_PACKET_SIZE<<1) - inFifoBytesLoaded; // 0 packets are in the FIFO, so there is room for 2 more
+   022A 74 80              1453 	mov	a,#0x80
+   022C C3                 1454 	clr	c
+   022D 95*00              1455 	subb	a,_inFifoBytesLoaded
+   022F F5 82              1456 	mov	dpl,a
+   0231                    1457 00108$:
+                    0231   1458 	C$usb_cdc_acm.c$473$1$1 ==.
+                    0231   1459 	XG$usbComTxAvailable$0$0 ==.
+   0231 22                 1460 	ret
+                           1461 ;------------------------------------------------------------
+                           1462 ;Allocation info for local variables in function 'usbComTxSend'
+                           1463 ;------------------------------------------------------------
+                    0232   1464 	G$usbComTxSend$0$0 ==.
+                    0232   1465 	C$usb_cdc_acm.c$477$1$1 ==.
+                           1466 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:477: void usbComTxSend(const uint8 XDATA * buffer, uint8 size)
+                           1467 ;	-----------------------------------------
+                           1468 ;	 function usbComTxSend
+                           1469 ;	-----------------------------------------
+   0232                    1470 _usbComTxSend:
+   0232 AE 82              1471 	mov	r6,dpl
+   0234 AF 83              1472 	mov	r7,dph
+                    0236   1473 	C$usb_cdc_acm.c$480$1$1 ==.
+                           1474 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:480: while(size)
+   0236                    1475 00105$:
+   0236 78r06              1476 	mov	r0,#_usbComTxSend_PARM_2
+   0238 E2                 1477 	movx	a,@r0
+   0239 60 51              1478 	jz	00108$
+                    023B   1479 	C$usb_cdc_acm.c$482$2$2 ==.
+                           1480 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:482: packetSize = CDC_IN_PACKET_SIZE - inFifoBytesLoaded;   // Decide how many bytes to send in this packet (packetSize).
+   023B 74 40              1481 	mov	a,#0x40
+   023D C3                 1482 	clr	c
+   023E 95*00              1483 	subb	a,_inFifoBytesLoaded
+   0240 FD                 1484 	mov	r5,a
+                    0241   1485 	C$usb_cdc_acm.c$483$2$2 ==.
+                           1486 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:483: if (packetSize > size){ packetSize = size; }
+   0241 78r06              1487 	mov	r0,#_usbComTxSend_PARM_2
+   0243 C3                 1488 	clr	c
+   0244 E2                 1489 	movx	a,@r0
+   0245 9D                 1490 	subb	a,r5
+   0246 50 04              1491 	jnc	00102$
+   0248 78r06              1492 	mov	r0,#_usbComTxSend_PARM_2
+   024A E2                 1493 	movx	a,@r0
+   024B FD                 1494 	mov	r5,a
+   024C                    1495 00102$:
+                    024C   1496 	C$usb_cdc_acm.c$485$2$2 ==.
+                           1497 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:485: usbWriteFifo(CDC_DATA_ENDPOINT, packetSize, buffer);    // Write those bytes to the USB FIFO.
+   024C 78r00              1498 	mov	r0,#_usbWriteFifo_PARM_2
+   024E ED                 1499 	mov	a,r5
+   024F F2                 1500 	movx	@r0,a
+   0250 78r00              1501 	mov	r0,#_usbWriteFifo_PARM_3
+   0252 EE                 1502 	mov	a,r6
+   0253 F2                 1503 	movx	@r0,a
+   0254 08                 1504 	inc	r0
+   0255 EF                 1505 	mov	a,r7
+   0256 F2                 1506 	movx	@r0,a
+   0257 75 82 04           1507 	mov	dpl,#0x04
+   025A C0 07              1508 	push	ar7
+   025C C0 06              1509 	push	ar6
+   025E C0 05              1510 	push	ar5
+   0260 12s00r00           1511 	lcall	_usbWriteFifo
+   0263 D0 05              1512 	pop	ar5
+   0265 D0 06              1513 	pop	ar6
+   0267 D0 07              1514 	pop	ar7
+                    0269   1515 	C$usb_cdc_acm.c$487$2$2 ==.
+                           1516 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:487: buffer += packetSize;                                   // Update pointers.
+   0269 ED                 1517 	mov	a,r5
+   026A 2E                 1518 	add	a,r6
+   026B FE                 1519 	mov	r6,a
+   026C E4                 1520 	clr	a
+   026D 3F                 1521 	addc	a,r7
+   026E FF                 1522 	mov	r7,a
+                    026F   1523 	C$usb_cdc_acm.c$488$2$2 ==.
+                           1524 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:488: size -= packetSize;
+   026F 78r06              1525 	mov	r0,#_usbComTxSend_PARM_2
+   0271 E2                 1526 	movx	a,@r0
+   0272 C3                 1527 	clr	c
+   0273 9D                 1528 	subb	a,r5
+   0274 F2                 1529 	movx	@r0,a
+                    0275   1530 	C$usb_cdc_acm.c$489$2$2 ==.
+                           1531 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:489: inFifoBytesLoaded += packetSize;
+   0275 ED                 1532 	mov	a,r5
+   0276 25*00              1533 	add	a,_inFifoBytesLoaded
+   0278 F5*00              1534 	mov	_inFifoBytesLoaded,a
+                    027A   1535 	C$usb_cdc_acm.c$491$2$2 ==.
+                           1536 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:491: if (inFifoBytesLoaded == CDC_IN_PACKET_SIZE)
+   027A 74 40              1537 	mov	a,#0x40
+   027C B5*00 B7           1538 	cjne	a,_inFifoBytesLoaded,00105$
+                    027F   1539 	C$usb_cdc_acm.c$493$3$4 ==.
+                           1540 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:493: sendPacketNow();
+   027F C0 07              1541 	push	ar7
+   0281 C0 06              1542 	push	ar6
+   0283 12s01r35           1543 	lcall	_sendPacketNow
+   0286 D0 06              1544 	pop	ar6
+   0288 D0 07              1545 	pop	ar7
+   028A 80 AA              1546 	sjmp	00105$
+   028C                    1547 00108$:
+                    028C   1548 	C$usb_cdc_acm.c$496$1$1 ==.
+                    028C   1549 	XG$usbComTxSend$0$0 ==.
+   028C 22                 1550 	ret
+                           1551 ;------------------------------------------------------------
+                           1552 ;Allocation info for local variables in function 'usbComTxSendByte'
+                           1553 ;------------------------------------------------------------
+                    028D   1554 	G$usbComTxSendByte$0$0 ==.
+                    028D   1555 	C$usb_cdc_acm.c$498$1$1 ==.
+                           1556 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:498: void usbComTxSendByte(uint8 byte)
+                           1557 ;	-----------------------------------------
+                           1558 ;	 function usbComTxSendByte
+                           1559 ;	-----------------------------------------
+   028D                    1560 _usbComTxSendByte:
+   028D E5 82              1561 	mov	a,dpl
+   028F 90 DE 28           1562 	mov	dptr,#_USBF4
+   0292 F0                 1563 	movx	@dptr,a
+                    0293   1564 	C$usb_cdc_acm.c$503$1$1 ==.
+                           1565 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:503: inFifoBytesLoaded++;
+   0293 05*00              1566 	inc	_inFifoBytesLoaded
+                    0295   1567 	C$usb_cdc_acm.c$505$1$1 ==.
+                           1568 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:505: if (inFifoBytesLoaded == CDC_IN_PACKET_SIZE)
+   0295 74 40              1569 	mov	a,#0x40
+   0297 B5*00 03           1570 	cjne	a,_inFifoBytesLoaded,00103$
+                    029A   1571 	C$usb_cdc_acm.c$507$2$2 ==.
+                           1572 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:507: sendPacketNow();
+   029A 12s01r35           1573 	lcall	_sendPacketNow
+   029D                    1574 00103$:
+                    029D   1575 	C$usb_cdc_acm.c$511$2$1 ==.
+                    029D   1576 	XG$usbComTxSendByte$0$0 ==.
+   029D 22                 1577 	ret
+                           1578 ;------------------------------------------------------------
+                           1579 ;Allocation info for local variables in function 'usbComRxControlSignals'
+                           1580 ;------------------------------------------------------------
+                    029E   1581 	G$usbComRxControlSignals$0$0 ==.
+                    029E   1582 	C$usb_cdc_acm.c$515$2$1 ==.
+                           1583 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:515: uint8 usbComRxControlSignals()
+                           1584 ;	-----------------------------------------
+                           1585 ;	 function usbComRxControlSignals
+                           1586 ;	-----------------------------------------
+   029E                    1587 _usbComRxControlSignals:
+                    029E   1588 	C$usb_cdc_acm.c$517$1$1 ==.
+                           1589 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:517: return usbComControlLineState;
+   029E 78r00              1590 	mov	r0,#_usbComControlLineState
+   02A0 E2                 1591 	movx	a,@r0
+   02A1 F5 82              1592 	mov	dpl,a
+                    02A3   1593 	C$usb_cdc_acm.c$518$1$1 ==.
+                    02A3   1594 	XG$usbComRxControlSignals$0$0 ==.
+   02A3 22                 1595 	ret
+                           1596 ;------------------------------------------------------------
+                           1597 ;Allocation info for local variables in function 'usbComTxControlSignals'
+                           1598 ;------------------------------------------------------------
+                    02A4   1599 	G$usbComTxControlSignals$0$0 ==.
+                    02A4   1600 	C$usb_cdc_acm.c$520$1$1 ==.
+                           1601 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:520: void usbComTxControlSignals(uint8 signals)
+                           1602 ;	-----------------------------------------
+                           1603 ;	 function usbComTxControlSignals
+                           1604 ;	-----------------------------------------
+   02A4                    1605 _usbComTxControlSignals:
+   02A4 AF 82              1606 	mov	r7,dpl
+                    02A6   1607 	C$usb_cdc_acm.c$522$1$1 ==.
+                           1608 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:522: usbComSerialState = (usbComSerialState & ACM_IRREGULAR_SIGNAL_MASK) | signals;
+   02A6 78r01              1609 	mov	r0,#_usbComSerialState
+   02A8 E2                 1610 	movx	a,@r0
+   02A9 54 7C              1611 	anl	a,#0x7C
+   02AB 4F                 1612 	orl	a,r7
+   02AC 78r01              1613 	mov	r0,#_usbComSerialState
+   02AE F2                 1614 	movx	@r0,a
+                    02AF   1615 	C$usb_cdc_acm.c$523$1$1 ==.
+                    02AF   1616 	XG$usbComTxControlSignals$0$0 ==.
+   02AF 22                 1617 	ret
+                           1618 ;------------------------------------------------------------
+                           1619 ;Allocation info for local variables in function 'usbComTxControlSignalEvents'
+                           1620 ;------------------------------------------------------------
+                    02B0   1621 	G$usbComTxControlSignalEvents$0$0 ==.
+                    02B0   1622 	C$usb_cdc_acm.c$525$1$1 ==.
+                           1623 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:525: void usbComTxControlSignalEvents(uint8 signalEvents)
+                           1624 ;	-----------------------------------------
+                           1625 ;	 function usbComTxControlSignalEvents
+                           1626 ;	-----------------------------------------
+   02B0                    1627 _usbComTxControlSignalEvents:
+   02B0 AF 82              1628 	mov	r7,dpl
+                    02B2   1629 	C$usb_cdc_acm.c$527$1$1 ==.
+                           1630 ;	libraries/src/usb_cdc_acm/usb_cdc_acm.c:527: usbComSerialState |= signalEvents;
+   02B2 78r01              1631 	mov	r0,#_usbComSerialState
+   02B4 E2                 1632 	movx	a,@r0
+   02B5 4F                 1633 	orl	a,r7
+   02B6 F2                 1634 	movx	@r0,a
+                    02B7   1635 	C$usb_cdc_acm.c$528$1$1 ==.
+                    02B7   1636 	XG$usbComTxControlSignalEvents$0$0 ==.
+   02B7 22                 1637 	ret
+                           1638 	.area CSEG    (CODE)
+                           1639 	.area CONST   (CODE)
+                    0000   1640 G$usbDeviceDescriptor$0$0 == .
+   0000                    1641 _usbDeviceDescriptor:
+   0000 12                 1642 	.db #0x12	; 18
+   0001 01                 1643 	.db #0x01	; 1
+   0002 00 02              1644 	.byte #0x00,#0x02	; 512
+   0004 02                 1645 	.db #0x02	; 2
+   0005 00                 1646 	.db #0x00	; 0
+   0006 00                 1647 	.db #0x00	; 0
+   0007 20                 1648 	.db #0x20	; 32
+   0008 FB 1F              1649 	.byte #0xFB,#0x1F	; 8187
+   000A 00 22              1650 	.byte #0x00,#0x22	; 8704
+   000C 00 00              1651 	.byte #0x00,#0x00	; 0
+   000E 01                 1652 	.db #0x01	; 1
+   000F 02                 1653 	.db #0x02	; 2
+   0010 03                 1654 	.db #0x03	; 3
+   0011 01                 1655 	.db #0x01	; 1
+                    0012   1656 G$usbConfigurationDescriptor$0$0 == .
+   0012                    1657 _usbConfigurationDescriptor:
+   0012 09                 1658 	.db #0x09	; 9
+   0013 02                 1659 	.db #0x02	; 2
+   0014 43 00              1660 	.byte #0x43,#0x00	; 67
+   0016 02                 1661 	.db #0x02	; 2
+   0017 01                 1662 	.db #0x01	; 1
+   0018 00                 1663 	.db #0x00	; 0
+   0019 C0                 1664 	.db #0xC0	; 192
+   001A 32                 1665 	.db #0x32	; 50	'2'
+   001B 09                 1666 	.db #0x09	; 9
+   001C 04                 1667 	.db #0x04	; 4
+   001D 00                 1668 	.db #0x00	; 0
+   001E 00                 1669 	.db #0x00	; 0
+   001F 01                 1670 	.db #0x01	; 1
+   0020 02                 1671 	.db #0x02	; 2
+   0021 02                 1672 	.db #0x02	; 2
+   0022 01                 1673 	.db #0x01	; 1
+   0023 00                 1674 	.db #0x00	; 0
+   0024 05                 1675 	.db #0x05	; 5
+   0025 24                 1676 	.db #0x24	; 36
+   0026 00                 1677 	.db #0x00	; 0
+   0027 20                 1678 	.db #0x20	; 32
+   0028 01                 1679 	.db #0x01	; 1
+   0029 04                 1680 	.db #0x04	; 4
+   002A 24                 1681 	.db #0x24	; 36
+   002B 02                 1682 	.db #0x02	; 2
+   002C 02                 1683 	.db #0x02	; 2
+   002D 05                 1684 	.db #0x05	; 5
+   002E 24                 1685 	.db #0x24	; 36
+   002F 06                 1686 	.db #0x06	; 6
+   0030 00                 1687 	.db #0x00	; 0
+   0031 01                 1688 	.db #0x01	; 1
+   0032 05                 1689 	.db #0x05	; 5
+   0033 24                 1690 	.db #0x24	; 36
+   0034 01                 1691 	.db #0x01	; 1
+   0035 00                 1692 	.db #0x00	; 0
+   0036 01                 1693 	.db #0x01	; 1
+   0037 07                 1694 	.db #0x07	; 7
+   0038 05                 1695 	.db #0x05	; 5
+   0039 81                 1696 	.db #0x81	; 129
+   003A 03                 1697 	.db #0x03	; 3
+   003B 0A 00              1698 	.byte #0x0A,#0x00	; 10
+   003D 01                 1699 	.db #0x01	; 1
+   003E 09                 1700 	.db #0x09	; 9
+   003F 04                 1701 	.db #0x04	; 4
+   0040 01                 1702 	.db #0x01	; 1
+   0041 00                 1703 	.db #0x00	; 0
+   0042 02                 1704 	.db #0x02	; 2
+   0043 0A                 1705 	.db #0x0A	; 10
+   0044 00                 1706 	.db #0x00	; 0
+   0045 00                 1707 	.db #0x00	; 0
+   0046 00                 1708 	.db #0x00	; 0
+   0047 07                 1709 	.db #0x07	; 7
+   0048 05                 1710 	.db #0x05	; 5
+   0049 04                 1711 	.db #0x04	; 4
+   004A 02                 1712 	.db #0x02	; 2
+   004B 40 00              1713 	.byte #0x40,#0x00	; 64
+   004D 00                 1714 	.db #0x00	; 0
+   004E 07                 1715 	.db #0x07	; 7
+   004F 05                 1716 	.db #0x05	; 5
+   0050 84                 1717 	.db #0x84	; 132
+   0051 02                 1718 	.db #0x02	; 2
+   0052 40 00              1719 	.byte #0x40,#0x00	; 64
+   0054 00                 1720 	.db #0x00	; 0
+                    0055   1721 G$usbStringDescriptorCount$0$0 == .
+   0055                    1722 _usbStringDescriptorCount:
+   0055 04                 1723 	.db #0x04	; 4
+                    0056   1724 Fusb_cdc_acm$languages$0$0 == .
+   0056                    1725 _languages:
+   0056 04 03              1726 	.byte #0x04,#0x03	; 772
+   0058 09 04              1727 	.byte #0x09,#0x04	; 1033
+                    005A   1728 Fusb_cdc_acm$manufacturer$0$0 == .
+   005A                    1729 _manufacturer:
+   005A 26 03              1730 	.byte #0x26,#0x03	; 806
+   005C 50 00              1731 	.byte #0x50,#0x00	; 80
+   005E 6F 00              1732 	.byte #0x6F,#0x00	; 111
+   0060 6C 00              1733 	.byte #0x6C,#0x00	; 108
+   0062 6F 00              1734 	.byte #0x6F,#0x00	; 111
+   0064 6C 00              1735 	.byte #0x6C,#0x00	; 108
+   0066 75 00              1736 	.byte #0x75,#0x00	; 117
+   0068 20 00              1737 	.byte #0x20,#0x00	; 32
+   006A 43 00              1738 	.byte #0x43,#0x00	; 67
+   006C 6F 00              1739 	.byte #0x6F,#0x00	; 111
+   006E 72 00              1740 	.byte #0x72,#0x00	; 114
+   0070 70 00              1741 	.byte #0x70,#0x00	; 112
+   0072 6F 00              1742 	.byte #0x6F,#0x00	; 111
+   0074 72 00              1743 	.byte #0x72,#0x00	; 114
+   0076 61 00              1744 	.byte #0x61,#0x00	; 97
+   0078 74 00              1745 	.byte #0x74,#0x00	; 116
+   007A 69 00              1746 	.byte #0x69,#0x00	; 105
+   007C 6F 00              1747 	.byte #0x6F,#0x00	; 111
+   007E 6E 00              1748 	.byte #0x6E,#0x00	; 110
+                    0080   1749 Fusb_cdc_acm$product$0$0 == .
+   0080                    1750 _product:
+   0080 0C 03              1751 	.byte #0x0C,#0x03	; 780
+   0082 57 00              1752 	.byte #0x57,#0x00	; 87
+   0084 69 00              1753 	.byte #0x69,#0x00	; 105
+   0086 78 00              1754 	.byte #0x78,#0x00	; 120
+   0088 65 00              1755 	.byte #0x65,#0x00	; 101
+   008A 6C 00              1756 	.byte #0x6C,#0x00	; 108
+                    008C   1757 G$usbStringDescriptors$0$0 == .
+   008C                    1758 _usbStringDescriptors:
+   008Cr56s00              1759 	.byte _languages,(_languages >> 8)
+   008Er5As00              1760 	.byte _manufacturer,(_manufacturer >> 8)
+   0090r80s00              1761 	.byte _product,(_product >> 8)
+   0092r00s00              1762 	.byte _serialNumberStringDescriptor,(_serialNumberStringDescriptor >> 8)
+                           1763 	.area XINIT   (CODE)
+                    0000   1764 Fusb_cdc_acm$__xinit_usbComLineCoding$0$0 == .
+   0000                    1765 __xinit__usbComLineCoding:
+   0000 80 25 00 00        1766 	.byte #0x80,#0x25,#0x00,#0x00	; 9600
+   0004 00                 1767 	.db #0x00	; 0
+   0005 00                 1768 	.db #0x00	; 0
+   0006 08                 1769 	.db #0x08	; 8
+                           1770 	.area CABS    (ABS,CODE)

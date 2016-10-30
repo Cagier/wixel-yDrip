@@ -1,0 +1,1481 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:10 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module uart1
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _uartTxPendingBytes
+                             13 	.globl _uart1TxSend_PARM_2
+                             14 	.globl _uart1RxBufferFullOccurred
+                             15 	.globl _uart1RxFramingErrorOccurred
+                             16 	.globl _uart1RxParityErrorOccurred
+                             17 	.globl _uart1Init
+                             18 	.globl _uart1SetBaudRate
+                             19 	.globl _uart1SetParity
+                             20 	.globl _uart1SetStopBits
+                             21 	.globl _uart1TxAvailable
+                             22 	.globl _uart1TxSend
+                             23 	.globl _uart1TxSendByte
+                             24 	.globl _uart1RxAvailable
+                             25 	.globl _uart1RxReceiveByte
+                             26 	.globl _ISR_UTX1
+                             27 	.globl _ISR_URX1
+                             28 ;--------------------------------------------------------
+                             29 ; special function registers
+                             30 ;--------------------------------------------------------
+                             31 	.area RSEG    (ABS,DATA)
+   0000                      32 	.org 0x0000
+                    0080     33 Fuart1$P0$0$0 == 0x0080
+                    0080     34 _P0	=	0x0080
+                    0081     35 Fuart1$SP$0$0 == 0x0081
+                    0081     36 _SP	=	0x0081
+                    0082     37 Fuart1$DPL0$0$0 == 0x0082
+                    0082     38 _DPL0	=	0x0082
+                    0083     39 Fuart1$DPH0$0$0 == 0x0083
+                    0083     40 _DPH0	=	0x0083
+                    0084     41 Fuart1$DPL1$0$0 == 0x0084
+                    0084     42 _DPL1	=	0x0084
+                    0085     43 Fuart1$DPH1$0$0 == 0x0085
+                    0085     44 _DPH1	=	0x0085
+                    0086     45 Fuart1$U0CSR$0$0 == 0x0086
+                    0086     46 _U0CSR	=	0x0086
+                    0087     47 Fuart1$PCON$0$0 == 0x0087
+                    0087     48 _PCON	=	0x0087
+                    0088     49 Fuart1$TCON$0$0 == 0x0088
+                    0088     50 _TCON	=	0x0088
+                    0089     51 Fuart1$P0IFG$0$0 == 0x0089
+                    0089     52 _P0IFG	=	0x0089
+                    008A     53 Fuart1$P1IFG$0$0 == 0x008a
+                    008A     54 _P1IFG	=	0x008a
+                    008B     55 Fuart1$P2IFG$0$0 == 0x008b
+                    008B     56 _P2IFG	=	0x008b
+                    008C     57 Fuart1$PICTL$0$0 == 0x008c
+                    008C     58 _PICTL	=	0x008c
+                    008D     59 Fuart1$P1IEN$0$0 == 0x008d
+                    008D     60 _P1IEN	=	0x008d
+                    008F     61 Fuart1$P0INP$0$0 == 0x008f
+                    008F     62 _P0INP	=	0x008f
+                    0090     63 Fuart1$P1$0$0 == 0x0090
+                    0090     64 _P1	=	0x0090
+                    0091     65 Fuart1$RFIM$0$0 == 0x0091
+                    0091     66 _RFIM	=	0x0091
+                    0092     67 Fuart1$DPS$0$0 == 0x0092
+                    0092     68 _DPS	=	0x0092
+                    0093     69 Fuart1$MPAGE$0$0 == 0x0093
+                    0093     70 _MPAGE	=	0x0093
+                    0095     71 Fuart1$ENDIAN$0$0 == 0x0095
+                    0095     72 _ENDIAN	=	0x0095
+                    0098     73 Fuart1$S0CON$0$0 == 0x0098
+                    0098     74 _S0CON	=	0x0098
+                    009A     75 Fuart1$IEN2$0$0 == 0x009a
+                    009A     76 _IEN2	=	0x009a
+                    009B     77 Fuart1$S1CON$0$0 == 0x009b
+                    009B     78 _S1CON	=	0x009b
+                    009C     79 Fuart1$T2CT$0$0 == 0x009c
+                    009C     80 _T2CT	=	0x009c
+                    009D     81 Fuart1$T2PR$0$0 == 0x009d
+                    009D     82 _T2PR	=	0x009d
+                    009E     83 Fuart1$T2CTL$0$0 == 0x009e
+                    009E     84 _T2CTL	=	0x009e
+                    00A0     85 Fuart1$P2$0$0 == 0x00a0
+                    00A0     86 _P2	=	0x00a0
+                    00A1     87 Fuart1$WORIRQ$0$0 == 0x00a1
+                    00A1     88 _WORIRQ	=	0x00a1
+                    00A2     89 Fuart1$WORCTRL$0$0 == 0x00a2
+                    00A2     90 _WORCTRL	=	0x00a2
+                    00A3     91 Fuart1$WOREVT0$0$0 == 0x00a3
+                    00A3     92 _WOREVT0	=	0x00a3
+                    00A4     93 Fuart1$WOREVT1$0$0 == 0x00a4
+                    00A4     94 _WOREVT1	=	0x00a4
+                    00A5     95 Fuart1$WORTIME0$0$0 == 0x00a5
+                    00A5     96 _WORTIME0	=	0x00a5
+                    00A6     97 Fuart1$WORTIME1$0$0 == 0x00a6
+                    00A6     98 _WORTIME1	=	0x00a6
+                    00A8     99 Fuart1$IEN0$0$0 == 0x00a8
+                    00A8    100 _IEN0	=	0x00a8
+                    00A9    101 Fuart1$IP0$0$0 == 0x00a9
+                    00A9    102 _IP0	=	0x00a9
+                    00AB    103 Fuart1$FWT$0$0 == 0x00ab
+                    00AB    104 _FWT	=	0x00ab
+                    00AC    105 Fuart1$FADDRL$0$0 == 0x00ac
+                    00AC    106 _FADDRL	=	0x00ac
+                    00AD    107 Fuart1$FADDRH$0$0 == 0x00ad
+                    00AD    108 _FADDRH	=	0x00ad
+                    00AE    109 Fuart1$FCTL$0$0 == 0x00ae
+                    00AE    110 _FCTL	=	0x00ae
+                    00AF    111 Fuart1$FWDATA$0$0 == 0x00af
+                    00AF    112 _FWDATA	=	0x00af
+                    00B1    113 Fuart1$ENCDI$0$0 == 0x00b1
+                    00B1    114 _ENCDI	=	0x00b1
+                    00B2    115 Fuart1$ENCDO$0$0 == 0x00b2
+                    00B2    116 _ENCDO	=	0x00b2
+                    00B3    117 Fuart1$ENCCS$0$0 == 0x00b3
+                    00B3    118 _ENCCS	=	0x00b3
+                    00B4    119 Fuart1$ADCCON1$0$0 == 0x00b4
+                    00B4    120 _ADCCON1	=	0x00b4
+                    00B5    121 Fuart1$ADCCON2$0$0 == 0x00b5
+                    00B5    122 _ADCCON2	=	0x00b5
+                    00B6    123 Fuart1$ADCCON3$0$0 == 0x00b6
+                    00B6    124 _ADCCON3	=	0x00b6
+                    00B8    125 Fuart1$IEN1$0$0 == 0x00b8
+                    00B8    126 _IEN1	=	0x00b8
+                    00B9    127 Fuart1$IP1$0$0 == 0x00b9
+                    00B9    128 _IP1	=	0x00b9
+                    00BA    129 Fuart1$ADCL$0$0 == 0x00ba
+                    00BA    130 _ADCL	=	0x00ba
+                    00BB    131 Fuart1$ADCH$0$0 == 0x00bb
+                    00BB    132 _ADCH	=	0x00bb
+                    00BC    133 Fuart1$RNDL$0$0 == 0x00bc
+                    00BC    134 _RNDL	=	0x00bc
+                    00BD    135 Fuart1$RNDH$0$0 == 0x00bd
+                    00BD    136 _RNDH	=	0x00bd
+                    00BE    137 Fuart1$SLEEP$0$0 == 0x00be
+                    00BE    138 _SLEEP	=	0x00be
+                    00C0    139 Fuart1$IRCON$0$0 == 0x00c0
+                    00C0    140 _IRCON	=	0x00c0
+                    00C1    141 Fuart1$U0DBUF$0$0 == 0x00c1
+                    00C1    142 _U0DBUF	=	0x00c1
+                    00C2    143 Fuart1$U0BAUD$0$0 == 0x00c2
+                    00C2    144 _U0BAUD	=	0x00c2
+                    00C4    145 Fuart1$U0UCR$0$0 == 0x00c4
+                    00C4    146 _U0UCR	=	0x00c4
+                    00C5    147 Fuart1$U0GCR$0$0 == 0x00c5
+                    00C5    148 _U0GCR	=	0x00c5
+                    00C6    149 Fuart1$CLKCON$0$0 == 0x00c6
+                    00C6    150 _CLKCON	=	0x00c6
+                    00C7    151 Fuart1$MEMCTR$0$0 == 0x00c7
+                    00C7    152 _MEMCTR	=	0x00c7
+                    00C9    153 Fuart1$WDCTL$0$0 == 0x00c9
+                    00C9    154 _WDCTL	=	0x00c9
+                    00CA    155 Fuart1$T3CNT$0$0 == 0x00ca
+                    00CA    156 _T3CNT	=	0x00ca
+                    00CB    157 Fuart1$T3CTL$0$0 == 0x00cb
+                    00CB    158 _T3CTL	=	0x00cb
+                    00CC    159 Fuart1$T3CCTL0$0$0 == 0x00cc
+                    00CC    160 _T3CCTL0	=	0x00cc
+                    00CD    161 Fuart1$T3CC0$0$0 == 0x00cd
+                    00CD    162 _T3CC0	=	0x00cd
+                    00CE    163 Fuart1$T3CCTL1$0$0 == 0x00ce
+                    00CE    164 _T3CCTL1	=	0x00ce
+                    00CF    165 Fuart1$T3CC1$0$0 == 0x00cf
+                    00CF    166 _T3CC1	=	0x00cf
+                    00D0    167 Fuart1$PSW$0$0 == 0x00d0
+                    00D0    168 _PSW	=	0x00d0
+                    00D1    169 Fuart1$DMAIRQ$0$0 == 0x00d1
+                    00D1    170 _DMAIRQ	=	0x00d1
+                    00D2    171 Fuart1$DMA1CFGL$0$0 == 0x00d2
+                    00D2    172 _DMA1CFGL	=	0x00d2
+                    00D3    173 Fuart1$DMA1CFGH$0$0 == 0x00d3
+                    00D3    174 _DMA1CFGH	=	0x00d3
+                    00D4    175 Fuart1$DMA0CFGL$0$0 == 0x00d4
+                    00D4    176 _DMA0CFGL	=	0x00d4
+                    00D5    177 Fuart1$DMA0CFGH$0$0 == 0x00d5
+                    00D5    178 _DMA0CFGH	=	0x00d5
+                    00D6    179 Fuart1$DMAARM$0$0 == 0x00d6
+                    00D6    180 _DMAARM	=	0x00d6
+                    00D7    181 Fuart1$DMAREQ$0$0 == 0x00d7
+                    00D7    182 _DMAREQ	=	0x00d7
+                    00D8    183 Fuart1$TIMIF$0$0 == 0x00d8
+                    00D8    184 _TIMIF	=	0x00d8
+                    00D9    185 Fuart1$RFD$0$0 == 0x00d9
+                    00D9    186 _RFD	=	0x00d9
+                    00DA    187 Fuart1$T1CC0L$0$0 == 0x00da
+                    00DA    188 _T1CC0L	=	0x00da
+                    00DB    189 Fuart1$T1CC0H$0$0 == 0x00db
+                    00DB    190 _T1CC0H	=	0x00db
+                    00DC    191 Fuart1$T1CC1L$0$0 == 0x00dc
+                    00DC    192 _T1CC1L	=	0x00dc
+                    00DD    193 Fuart1$T1CC1H$0$0 == 0x00dd
+                    00DD    194 _T1CC1H	=	0x00dd
+                    00DE    195 Fuart1$T1CC2L$0$0 == 0x00de
+                    00DE    196 _T1CC2L	=	0x00de
+                    00DF    197 Fuart1$T1CC2H$0$0 == 0x00df
+                    00DF    198 _T1CC2H	=	0x00df
+                    00E0    199 Fuart1$ACC$0$0 == 0x00e0
+                    00E0    200 _ACC	=	0x00e0
+                    00E1    201 Fuart1$RFST$0$0 == 0x00e1
+                    00E1    202 _RFST	=	0x00e1
+                    00E2    203 Fuart1$T1CNTL$0$0 == 0x00e2
+                    00E2    204 _T1CNTL	=	0x00e2
+                    00E3    205 Fuart1$T1CNTH$0$0 == 0x00e3
+                    00E3    206 _T1CNTH	=	0x00e3
+                    00E4    207 Fuart1$T1CTL$0$0 == 0x00e4
+                    00E4    208 _T1CTL	=	0x00e4
+                    00E5    209 Fuart1$T1CCTL0$0$0 == 0x00e5
+                    00E5    210 _T1CCTL0	=	0x00e5
+                    00E6    211 Fuart1$T1CCTL1$0$0 == 0x00e6
+                    00E6    212 _T1CCTL1	=	0x00e6
+                    00E7    213 Fuart1$T1CCTL2$0$0 == 0x00e7
+                    00E7    214 _T1CCTL2	=	0x00e7
+                    00E8    215 Fuart1$IRCON2$0$0 == 0x00e8
+                    00E8    216 _IRCON2	=	0x00e8
+                    00E9    217 Fuart1$RFIF$0$0 == 0x00e9
+                    00E9    218 _RFIF	=	0x00e9
+                    00EA    219 Fuart1$T4CNT$0$0 == 0x00ea
+                    00EA    220 _T4CNT	=	0x00ea
+                    00EB    221 Fuart1$T4CTL$0$0 == 0x00eb
+                    00EB    222 _T4CTL	=	0x00eb
+                    00EC    223 Fuart1$T4CCTL0$0$0 == 0x00ec
+                    00EC    224 _T4CCTL0	=	0x00ec
+                    00ED    225 Fuart1$T4CC0$0$0 == 0x00ed
+                    00ED    226 _T4CC0	=	0x00ed
+                    00EE    227 Fuart1$T4CCTL1$0$0 == 0x00ee
+                    00EE    228 _T4CCTL1	=	0x00ee
+                    00EF    229 Fuart1$T4CC1$0$0 == 0x00ef
+                    00EF    230 _T4CC1	=	0x00ef
+                    00F0    231 Fuart1$B$0$0 == 0x00f0
+                    00F0    232 _B	=	0x00f0
+                    00F1    233 Fuart1$PERCFG$0$0 == 0x00f1
+                    00F1    234 _PERCFG	=	0x00f1
+                    00F2    235 Fuart1$ADCCFG$0$0 == 0x00f2
+                    00F2    236 _ADCCFG	=	0x00f2
+                    00F3    237 Fuart1$P0SEL$0$0 == 0x00f3
+                    00F3    238 _P0SEL	=	0x00f3
+                    00F4    239 Fuart1$P1SEL$0$0 == 0x00f4
+                    00F4    240 _P1SEL	=	0x00f4
+                    00F5    241 Fuart1$P2SEL$0$0 == 0x00f5
+                    00F5    242 _P2SEL	=	0x00f5
+                    00F6    243 Fuart1$P1INP$0$0 == 0x00f6
+                    00F6    244 _P1INP	=	0x00f6
+                    00F7    245 Fuart1$P2INP$0$0 == 0x00f7
+                    00F7    246 _P2INP	=	0x00f7
+                    00F8    247 Fuart1$U1CSR$0$0 == 0x00f8
+                    00F8    248 _U1CSR	=	0x00f8
+                    00F9    249 Fuart1$U1DBUF$0$0 == 0x00f9
+                    00F9    250 _U1DBUF	=	0x00f9
+                    00FA    251 Fuart1$U1BAUD$0$0 == 0x00fa
+                    00FA    252 _U1BAUD	=	0x00fa
+                    00FB    253 Fuart1$U1UCR$0$0 == 0x00fb
+                    00FB    254 _U1UCR	=	0x00fb
+                    00FC    255 Fuart1$U1GCR$0$0 == 0x00fc
+                    00FC    256 _U1GCR	=	0x00fc
+                    00FD    257 Fuart1$P0DIR$0$0 == 0x00fd
+                    00FD    258 _P0DIR	=	0x00fd
+                    00FE    259 Fuart1$P1DIR$0$0 == 0x00fe
+                    00FE    260 _P1DIR	=	0x00fe
+                    00FF    261 Fuart1$P2DIR$0$0 == 0x00ff
+                    00FF    262 _P2DIR	=	0x00ff
+                    FFFFD5D4    263 Fuart1$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    264 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    265 Fuart1$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    266 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    267 Fuart1$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    268 _FADDR	=	0xffffadac
+                    FFFFBBBA    269 Fuart1$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    270 _ADC	=	0xffffbbba
+                    FFFFDBDA    271 Fuart1$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    272 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    273 Fuart1$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    274 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    275 Fuart1$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    276 _T1CC2	=	0xffffdfde
+                            277 ;--------------------------------------------------------
+                            278 ; special function bits
+                            279 ;--------------------------------------------------------
+                            280 	.area RSEG    (ABS,DATA)
+   0000                     281 	.org 0x0000
+                    0080    282 Fuart1$P0_0$0$0 == 0x0080
+                    0080    283 _P0_0	=	0x0080
+                    0081    284 Fuart1$P0_1$0$0 == 0x0081
+                    0081    285 _P0_1	=	0x0081
+                    0082    286 Fuart1$P0_2$0$0 == 0x0082
+                    0082    287 _P0_2	=	0x0082
+                    0083    288 Fuart1$P0_3$0$0 == 0x0083
+                    0083    289 _P0_3	=	0x0083
+                    0084    290 Fuart1$P0_4$0$0 == 0x0084
+                    0084    291 _P0_4	=	0x0084
+                    0085    292 Fuart1$P0_5$0$0 == 0x0085
+                    0085    293 _P0_5	=	0x0085
+                    0086    294 Fuart1$P0_6$0$0 == 0x0086
+                    0086    295 _P0_6	=	0x0086
+                    0087    296 Fuart1$P0_7$0$0 == 0x0087
+                    0087    297 _P0_7	=	0x0087
+                    0088    298 Fuart1$_TCON_0$0$0 == 0x0088
+                    0088    299 __TCON_0	=	0x0088
+                    0089    300 Fuart1$RFTXRXIF$0$0 == 0x0089
+                    0089    301 _RFTXRXIF	=	0x0089
+                    008A    302 Fuart1$_TCON_2$0$0 == 0x008a
+                    008A    303 __TCON_2	=	0x008a
+                    008B    304 Fuart1$URX0IF$0$0 == 0x008b
+                    008B    305 _URX0IF	=	0x008b
+                    008C    306 Fuart1$_TCON_4$0$0 == 0x008c
+                    008C    307 __TCON_4	=	0x008c
+                    008D    308 Fuart1$ADCIF$0$0 == 0x008d
+                    008D    309 _ADCIF	=	0x008d
+                    008E    310 Fuart1$_TCON_6$0$0 == 0x008e
+                    008E    311 __TCON_6	=	0x008e
+                    008F    312 Fuart1$URX1IF$0$0 == 0x008f
+                    008F    313 _URX1IF	=	0x008f
+                    0090    314 Fuart1$P1_0$0$0 == 0x0090
+                    0090    315 _P1_0	=	0x0090
+                    0091    316 Fuart1$P1_1$0$0 == 0x0091
+                    0091    317 _P1_1	=	0x0091
+                    0092    318 Fuart1$P1_2$0$0 == 0x0092
+                    0092    319 _P1_2	=	0x0092
+                    0093    320 Fuart1$P1_3$0$0 == 0x0093
+                    0093    321 _P1_3	=	0x0093
+                    0094    322 Fuart1$P1_4$0$0 == 0x0094
+                    0094    323 _P1_4	=	0x0094
+                    0095    324 Fuart1$P1_5$0$0 == 0x0095
+                    0095    325 _P1_5	=	0x0095
+                    0096    326 Fuart1$P1_6$0$0 == 0x0096
+                    0096    327 _P1_6	=	0x0096
+                    0097    328 Fuart1$P1_7$0$0 == 0x0097
+                    0097    329 _P1_7	=	0x0097
+                    0098    330 Fuart1$ENCIF_0$0$0 == 0x0098
+                    0098    331 _ENCIF_0	=	0x0098
+                    0099    332 Fuart1$ENCIF_1$0$0 == 0x0099
+                    0099    333 _ENCIF_1	=	0x0099
+                    009A    334 Fuart1$_SOCON2$0$0 == 0x009a
+                    009A    335 __SOCON2	=	0x009a
+                    009B    336 Fuart1$_SOCON3$0$0 == 0x009b
+                    009B    337 __SOCON3	=	0x009b
+                    009C    338 Fuart1$_SOCON4$0$0 == 0x009c
+                    009C    339 __SOCON4	=	0x009c
+                    009D    340 Fuart1$_SOCON5$0$0 == 0x009d
+                    009D    341 __SOCON5	=	0x009d
+                    009E    342 Fuart1$_SOCON6$0$0 == 0x009e
+                    009E    343 __SOCON6	=	0x009e
+                    009F    344 Fuart1$_SOCON7$0$0 == 0x009f
+                    009F    345 __SOCON7	=	0x009f
+                    00A0    346 Fuart1$P2_0$0$0 == 0x00a0
+                    00A0    347 _P2_0	=	0x00a0
+                    00A1    348 Fuart1$P2_1$0$0 == 0x00a1
+                    00A1    349 _P2_1	=	0x00a1
+                    00A2    350 Fuart1$P2_2$0$0 == 0x00a2
+                    00A2    351 _P2_2	=	0x00a2
+                    00A3    352 Fuart1$P2_3$0$0 == 0x00a3
+                    00A3    353 _P2_3	=	0x00a3
+                    00A4    354 Fuart1$P2_4$0$0 == 0x00a4
+                    00A4    355 _P2_4	=	0x00a4
+                    00A5    356 Fuart1$P2_5$0$0 == 0x00a5
+                    00A5    357 _P2_5	=	0x00a5
+                    00A6    358 Fuart1$P2_6$0$0 == 0x00a6
+                    00A6    359 _P2_6	=	0x00a6
+                    00A7    360 Fuart1$P2_7$0$0 == 0x00a7
+                    00A7    361 _P2_7	=	0x00a7
+                    00A8    362 Fuart1$RFTXRXIE$0$0 == 0x00a8
+                    00A8    363 _RFTXRXIE	=	0x00a8
+                    00A9    364 Fuart1$ADCIE$0$0 == 0x00a9
+                    00A9    365 _ADCIE	=	0x00a9
+                    00AA    366 Fuart1$URX0IE$0$0 == 0x00aa
+                    00AA    367 _URX0IE	=	0x00aa
+                    00AB    368 Fuart1$URX1IE$0$0 == 0x00ab
+                    00AB    369 _URX1IE	=	0x00ab
+                    00AC    370 Fuart1$ENCIE$0$0 == 0x00ac
+                    00AC    371 _ENCIE	=	0x00ac
+                    00AD    372 Fuart1$STIE$0$0 == 0x00ad
+                    00AD    373 _STIE	=	0x00ad
+                    00AE    374 Fuart1$_IEN06$0$0 == 0x00ae
+                    00AE    375 __IEN06	=	0x00ae
+                    00AF    376 Fuart1$EA$0$0 == 0x00af
+                    00AF    377 _EA	=	0x00af
+                    00B8    378 Fuart1$DMAIE$0$0 == 0x00b8
+                    00B8    379 _DMAIE	=	0x00b8
+                    00B9    380 Fuart1$T1IE$0$0 == 0x00b9
+                    00B9    381 _T1IE	=	0x00b9
+                    00BA    382 Fuart1$T2IE$0$0 == 0x00ba
+                    00BA    383 _T2IE	=	0x00ba
+                    00BB    384 Fuart1$T3IE$0$0 == 0x00bb
+                    00BB    385 _T3IE	=	0x00bb
+                    00BC    386 Fuart1$T4IE$0$0 == 0x00bc
+                    00BC    387 _T4IE	=	0x00bc
+                    00BD    388 Fuart1$P0IE$0$0 == 0x00bd
+                    00BD    389 _P0IE	=	0x00bd
+                    00BE    390 Fuart1$_IEN16$0$0 == 0x00be
+                    00BE    391 __IEN16	=	0x00be
+                    00BF    392 Fuart1$_IEN17$0$0 == 0x00bf
+                    00BF    393 __IEN17	=	0x00bf
+                    00C0    394 Fuart1$DMAIF$0$0 == 0x00c0
+                    00C0    395 _DMAIF	=	0x00c0
+                    00C1    396 Fuart1$T1IF$0$0 == 0x00c1
+                    00C1    397 _T1IF	=	0x00c1
+                    00C2    398 Fuart1$T2IF$0$0 == 0x00c2
+                    00C2    399 _T2IF	=	0x00c2
+                    00C3    400 Fuart1$T3IF$0$0 == 0x00c3
+                    00C3    401 _T3IF	=	0x00c3
+                    00C4    402 Fuart1$T4IF$0$0 == 0x00c4
+                    00C4    403 _T4IF	=	0x00c4
+                    00C5    404 Fuart1$P0IF$0$0 == 0x00c5
+                    00C5    405 _P0IF	=	0x00c5
+                    00C6    406 Fuart1$_IRCON6$0$0 == 0x00c6
+                    00C6    407 __IRCON6	=	0x00c6
+                    00C7    408 Fuart1$STIF$0$0 == 0x00c7
+                    00C7    409 _STIF	=	0x00c7
+                    00D0    410 Fuart1$P$0$0 == 0x00d0
+                    00D0    411 _P	=	0x00d0
+                    00D1    412 Fuart1$F1$0$0 == 0x00d1
+                    00D1    413 _F1	=	0x00d1
+                    00D2    414 Fuart1$OV$0$0 == 0x00d2
+                    00D2    415 _OV	=	0x00d2
+                    00D3    416 Fuart1$RS0$0$0 == 0x00d3
+                    00D3    417 _RS0	=	0x00d3
+                    00D4    418 Fuart1$RS1$0$0 == 0x00d4
+                    00D4    419 _RS1	=	0x00d4
+                    00D5    420 Fuart1$F0$0$0 == 0x00d5
+                    00D5    421 _F0	=	0x00d5
+                    00D6    422 Fuart1$AC$0$0 == 0x00d6
+                    00D6    423 _AC	=	0x00d6
+                    00D7    424 Fuart1$CY$0$0 == 0x00d7
+                    00D7    425 _CY	=	0x00d7
+                    00D8    426 Fuart1$T3OVFIF$0$0 == 0x00d8
+                    00D8    427 _T3OVFIF	=	0x00d8
+                    00D9    428 Fuart1$T3CH0IF$0$0 == 0x00d9
+                    00D9    429 _T3CH0IF	=	0x00d9
+                    00DA    430 Fuart1$T3CH1IF$0$0 == 0x00da
+                    00DA    431 _T3CH1IF	=	0x00da
+                    00DB    432 Fuart1$T4OVFIF$0$0 == 0x00db
+                    00DB    433 _T4OVFIF	=	0x00db
+                    00DC    434 Fuart1$T4CH0IF$0$0 == 0x00dc
+                    00DC    435 _T4CH0IF	=	0x00dc
+                    00DD    436 Fuart1$T4CH1IF$0$0 == 0x00dd
+                    00DD    437 _T4CH1IF	=	0x00dd
+                    00DE    438 Fuart1$OVFIM$0$0 == 0x00de
+                    00DE    439 _OVFIM	=	0x00de
+                    00DF    440 Fuart1$_TIMIF7$0$0 == 0x00df
+                    00DF    441 __TIMIF7	=	0x00df
+                    00E0    442 Fuart1$ACC_0$0$0 == 0x00e0
+                    00E0    443 _ACC_0	=	0x00e0
+                    00E1    444 Fuart1$ACC_1$0$0 == 0x00e1
+                    00E1    445 _ACC_1	=	0x00e1
+                    00E2    446 Fuart1$ACC_2$0$0 == 0x00e2
+                    00E2    447 _ACC_2	=	0x00e2
+                    00E3    448 Fuart1$ACC_3$0$0 == 0x00e3
+                    00E3    449 _ACC_3	=	0x00e3
+                    00E4    450 Fuart1$ACC_4$0$0 == 0x00e4
+                    00E4    451 _ACC_4	=	0x00e4
+                    00E5    452 Fuart1$ACC_5$0$0 == 0x00e5
+                    00E5    453 _ACC_5	=	0x00e5
+                    00E6    454 Fuart1$ACC_6$0$0 == 0x00e6
+                    00E6    455 _ACC_6	=	0x00e6
+                    00E7    456 Fuart1$ACC_7$0$0 == 0x00e7
+                    00E7    457 _ACC_7	=	0x00e7
+                    00E8    458 Fuart1$P2IF$0$0 == 0x00e8
+                    00E8    459 _P2IF	=	0x00e8
+                    00E9    460 Fuart1$UTX0IF$0$0 == 0x00e9
+                    00E9    461 _UTX0IF	=	0x00e9
+                    00EA    462 Fuart1$UTX1IF$0$0 == 0x00ea
+                    00EA    463 _UTX1IF	=	0x00ea
+                    00EB    464 Fuart1$P1IF$0$0 == 0x00eb
+                    00EB    465 _P1IF	=	0x00eb
+                    00EC    466 Fuart1$WDTIF$0$0 == 0x00ec
+                    00EC    467 _WDTIF	=	0x00ec
+                    00ED    468 Fuart1$_IRCON25$0$0 == 0x00ed
+                    00ED    469 __IRCON25	=	0x00ed
+                    00EE    470 Fuart1$_IRCON26$0$0 == 0x00ee
+                    00EE    471 __IRCON26	=	0x00ee
+                    00EF    472 Fuart1$_IRCON27$0$0 == 0x00ef
+                    00EF    473 __IRCON27	=	0x00ef
+                    00F0    474 Fuart1$B_0$0$0 == 0x00f0
+                    00F0    475 _B_0	=	0x00f0
+                    00F1    476 Fuart1$B_1$0$0 == 0x00f1
+                    00F1    477 _B_1	=	0x00f1
+                    00F2    478 Fuart1$B_2$0$0 == 0x00f2
+                    00F2    479 _B_2	=	0x00f2
+                    00F3    480 Fuart1$B_3$0$0 == 0x00f3
+                    00F3    481 _B_3	=	0x00f3
+                    00F4    482 Fuart1$B_4$0$0 == 0x00f4
+                    00F4    483 _B_4	=	0x00f4
+                    00F5    484 Fuart1$B_5$0$0 == 0x00f5
+                    00F5    485 _B_5	=	0x00f5
+                    00F6    486 Fuart1$B_6$0$0 == 0x00f6
+                    00F6    487 _B_6	=	0x00f6
+                    00F7    488 Fuart1$B_7$0$0 == 0x00f7
+                    00F7    489 _B_7	=	0x00f7
+                    00F8    490 Fuart1$U1ACTIVE$0$0 == 0x00f8
+                    00F8    491 _U1ACTIVE	=	0x00f8
+                    00F9    492 Fuart1$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    493 _U1TX_BYTE	=	0x00f9
+                    00FA    494 Fuart1$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    495 _U1RX_BYTE	=	0x00fa
+                    00FB    496 Fuart1$U1ERR$0$0 == 0x00fb
+                    00FB    497 _U1ERR	=	0x00fb
+                    00FC    498 Fuart1$U1FE$0$0 == 0x00fc
+                    00FC    499 _U1FE	=	0x00fc
+                    00FD    500 Fuart1$U1SLAVE$0$0 == 0x00fd
+                    00FD    501 _U1SLAVE	=	0x00fd
+                    00FE    502 Fuart1$U1RE$0$0 == 0x00fe
+                    00FE    503 _U1RE	=	0x00fe
+                    00FF    504 Fuart1$U1MODE$0$0 == 0x00ff
+                    00FF    505 _U1MODE	=	0x00ff
+                            506 ;--------------------------------------------------------
+                            507 ; overlayable register banks
+                            508 ;--------------------------------------------------------
+                            509 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     510 	.ds 8
+                            511 ;--------------------------------------------------------
+                            512 ; internal ram data
+                            513 ;--------------------------------------------------------
+                            514 	.area DSEG    (DATA)
+                    0000    515 Fuart1$uartTxBufferMainLoopIndex$0$0==.
+   0000                     516 _uartTxBufferMainLoopIndex:
+   0000                     517 	.ds 1
+                    0001    518 Fuart1$uartTxBufferInterruptIndex$0$0==.
+   0001                     519 _uartTxBufferInterruptIndex:
+   0001                     520 	.ds 1
+                    0002    521 Fuart1$uartRxBufferMainLoopIndex$0$0==.
+   0002                     522 _uartRxBufferMainLoopIndex:
+   0002                     523 	.ds 1
+                    0003    524 Fuart1$uartRxBufferInterruptIndex$0$0==.
+   0003                     525 _uartRxBufferInterruptIndex:
+   0003                     526 	.ds 1
+                    0004    527 Luart1.uart1SetBaudRate$sloc0$1$0==.
+   0004                     528 _uart1SetBaudRate_sloc0_1_0:
+   0004                     529 	.ds 4
+                            530 ;--------------------------------------------------------
+                            531 ; overlayable items in internal ram 
+                            532 ;--------------------------------------------------------
+                            533 	.area OSEG    (OVR,DATA)
+                            534 ;--------------------------------------------------------
+                            535 ; indirectly addressable internal ram data
+                            536 ;--------------------------------------------------------
+                            537 	.area ISEG    (DATA)
+                            538 ;--------------------------------------------------------
+                            539 ; absolute internal ram data
+                            540 ;--------------------------------------------------------
+                            541 	.area IABS    (ABS,DATA)
+                            542 	.area IABS    (ABS,DATA)
+                            543 ;--------------------------------------------------------
+                            544 ; bit data
+                            545 ;--------------------------------------------------------
+                            546 	.area BSEG    (BIT)
+                    0000    547 G$uart1RxParityErrorOccurred$0$0==.
+   0000                     548 _uart1RxParityErrorOccurred::
+   0000                     549 	.ds 1
+                    0001    550 G$uart1RxFramingErrorOccurred$0$0==.
+   0001                     551 _uart1RxFramingErrorOccurred::
+   0001                     552 	.ds 1
+                    0002    553 G$uart1RxBufferFullOccurred$0$0==.
+   0002                     554 _uart1RxBufferFullOccurred::
+   0002                     555 	.ds 1
+                            556 ;--------------------------------------------------------
+                            557 ; paged external ram data
+                            558 ;--------------------------------------------------------
+                            559 	.area PSEG    (PAG,XDATA)
+                    0000    560 Luart1.uart1TxSend$size$1$1==.
+   0000                     561 _uart1TxSend_PARM_2:
+   0000                     562 	.ds 1
+                            563 ;--------------------------------------------------------
+                            564 ; external ram data
+                            565 ;--------------------------------------------------------
+                            566 	.area XSEG    (XDATA)
+                    DF00    567 Fuart1$SYNC1$0$0 == 0xdf00
+                    DF00    568 _SYNC1	=	0xdf00
+                    DF01    569 Fuart1$SYNC0$0$0 == 0xdf01
+                    DF01    570 _SYNC0	=	0xdf01
+                    DF02    571 Fuart1$PKTLEN$0$0 == 0xdf02
+                    DF02    572 _PKTLEN	=	0xdf02
+                    DF03    573 Fuart1$PKTCTRL1$0$0 == 0xdf03
+                    DF03    574 _PKTCTRL1	=	0xdf03
+                    DF04    575 Fuart1$PKTCTRL0$0$0 == 0xdf04
+                    DF04    576 _PKTCTRL0	=	0xdf04
+                    DF05    577 Fuart1$ADDR$0$0 == 0xdf05
+                    DF05    578 _ADDR	=	0xdf05
+                    DF06    579 Fuart1$CHANNR$0$0 == 0xdf06
+                    DF06    580 _CHANNR	=	0xdf06
+                    DF07    581 Fuart1$FSCTRL1$0$0 == 0xdf07
+                    DF07    582 _FSCTRL1	=	0xdf07
+                    DF08    583 Fuart1$FSCTRL0$0$0 == 0xdf08
+                    DF08    584 _FSCTRL0	=	0xdf08
+                    DF09    585 Fuart1$FREQ2$0$0 == 0xdf09
+                    DF09    586 _FREQ2	=	0xdf09
+                    DF0A    587 Fuart1$FREQ1$0$0 == 0xdf0a
+                    DF0A    588 _FREQ1	=	0xdf0a
+                    DF0B    589 Fuart1$FREQ0$0$0 == 0xdf0b
+                    DF0B    590 _FREQ0	=	0xdf0b
+                    DF0C    591 Fuart1$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    592 _MDMCFG4	=	0xdf0c
+                    DF0D    593 Fuart1$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    594 _MDMCFG3	=	0xdf0d
+                    DF0E    595 Fuart1$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    596 _MDMCFG2	=	0xdf0e
+                    DF0F    597 Fuart1$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    598 _MDMCFG1	=	0xdf0f
+                    DF10    599 Fuart1$MDMCFG0$0$0 == 0xdf10
+                    DF10    600 _MDMCFG0	=	0xdf10
+                    DF11    601 Fuart1$DEVIATN$0$0 == 0xdf11
+                    DF11    602 _DEVIATN	=	0xdf11
+                    DF12    603 Fuart1$MCSM2$0$0 == 0xdf12
+                    DF12    604 _MCSM2	=	0xdf12
+                    DF13    605 Fuart1$MCSM1$0$0 == 0xdf13
+                    DF13    606 _MCSM1	=	0xdf13
+                    DF14    607 Fuart1$MCSM0$0$0 == 0xdf14
+                    DF14    608 _MCSM0	=	0xdf14
+                    DF15    609 Fuart1$FOCCFG$0$0 == 0xdf15
+                    DF15    610 _FOCCFG	=	0xdf15
+                    DF16    611 Fuart1$BSCFG$0$0 == 0xdf16
+                    DF16    612 _BSCFG	=	0xdf16
+                    DF17    613 Fuart1$AGCCTRL2$0$0 == 0xdf17
+                    DF17    614 _AGCCTRL2	=	0xdf17
+                    DF18    615 Fuart1$AGCCTRL1$0$0 == 0xdf18
+                    DF18    616 _AGCCTRL1	=	0xdf18
+                    DF19    617 Fuart1$AGCCTRL0$0$0 == 0xdf19
+                    DF19    618 _AGCCTRL0	=	0xdf19
+                    DF1A    619 Fuart1$FREND1$0$0 == 0xdf1a
+                    DF1A    620 _FREND1	=	0xdf1a
+                    DF1B    621 Fuart1$FREND0$0$0 == 0xdf1b
+                    DF1B    622 _FREND0	=	0xdf1b
+                    DF1C    623 Fuart1$FSCAL3$0$0 == 0xdf1c
+                    DF1C    624 _FSCAL3	=	0xdf1c
+                    DF1D    625 Fuart1$FSCAL2$0$0 == 0xdf1d
+                    DF1D    626 _FSCAL2	=	0xdf1d
+                    DF1E    627 Fuart1$FSCAL1$0$0 == 0xdf1e
+                    DF1E    628 _FSCAL1	=	0xdf1e
+                    DF1F    629 Fuart1$FSCAL0$0$0 == 0xdf1f
+                    DF1F    630 _FSCAL0	=	0xdf1f
+                    DF23    631 Fuart1$TEST2$0$0 == 0xdf23
+                    DF23    632 _TEST2	=	0xdf23
+                    DF24    633 Fuart1$TEST1$0$0 == 0xdf24
+                    DF24    634 _TEST1	=	0xdf24
+                    DF25    635 Fuart1$TEST0$0$0 == 0xdf25
+                    DF25    636 _TEST0	=	0xdf25
+                    DF2E    637 Fuart1$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    638 _PA_TABLE0	=	0xdf2e
+                    DF2F    639 Fuart1$IOCFG2$0$0 == 0xdf2f
+                    DF2F    640 _IOCFG2	=	0xdf2f
+                    DF30    641 Fuart1$IOCFG1$0$0 == 0xdf30
+                    DF30    642 _IOCFG1	=	0xdf30
+                    DF31    643 Fuart1$IOCFG0$0$0 == 0xdf31
+                    DF31    644 _IOCFG0	=	0xdf31
+                    DF36    645 Fuart1$PARTNUM$0$0 == 0xdf36
+                    DF36    646 _PARTNUM	=	0xdf36
+                    DF37    647 Fuart1$VERSION$0$0 == 0xdf37
+                    DF37    648 _VERSION	=	0xdf37
+                    DF38    649 Fuart1$FREQEST$0$0 == 0xdf38
+                    DF38    650 _FREQEST	=	0xdf38
+                    DF39    651 Fuart1$LQI$0$0 == 0xdf39
+                    DF39    652 _LQI	=	0xdf39
+                    DF3A    653 Fuart1$RSSI$0$0 == 0xdf3a
+                    DF3A    654 _RSSI	=	0xdf3a
+                    DF3B    655 Fuart1$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    656 _MARCSTATE	=	0xdf3b
+                    DF3C    657 Fuart1$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    658 _PKTSTATUS	=	0xdf3c
+                    DF3D    659 Fuart1$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    660 _VCO_VC_DAC	=	0xdf3d
+                    DF40    661 Fuart1$I2SCFG0$0$0 == 0xdf40
+                    DF40    662 _I2SCFG0	=	0xdf40
+                    DF41    663 Fuart1$I2SCFG1$0$0 == 0xdf41
+                    DF41    664 _I2SCFG1	=	0xdf41
+                    DF42    665 Fuart1$I2SDATL$0$0 == 0xdf42
+                    DF42    666 _I2SDATL	=	0xdf42
+                    DF43    667 Fuart1$I2SDATH$0$0 == 0xdf43
+                    DF43    668 _I2SDATH	=	0xdf43
+                    DF44    669 Fuart1$I2SWCNT$0$0 == 0xdf44
+                    DF44    670 _I2SWCNT	=	0xdf44
+                    DF45    671 Fuart1$I2SSTAT$0$0 == 0xdf45
+                    DF45    672 _I2SSTAT	=	0xdf45
+                    DF46    673 Fuart1$I2SCLKF0$0$0 == 0xdf46
+                    DF46    674 _I2SCLKF0	=	0xdf46
+                    DF47    675 Fuart1$I2SCLKF1$0$0 == 0xdf47
+                    DF47    676 _I2SCLKF1	=	0xdf47
+                    DF48    677 Fuart1$I2SCLKF2$0$0 == 0xdf48
+                    DF48    678 _I2SCLKF2	=	0xdf48
+                    DE00    679 Fuart1$USBADDR$0$0 == 0xde00
+                    DE00    680 _USBADDR	=	0xde00
+                    DE01    681 Fuart1$USBPOW$0$0 == 0xde01
+                    DE01    682 _USBPOW	=	0xde01
+                    DE02    683 Fuart1$USBIIF$0$0 == 0xde02
+                    DE02    684 _USBIIF	=	0xde02
+                    DE04    685 Fuart1$USBOIF$0$0 == 0xde04
+                    DE04    686 _USBOIF	=	0xde04
+                    DE06    687 Fuart1$USBCIF$0$0 == 0xde06
+                    DE06    688 _USBCIF	=	0xde06
+                    DE07    689 Fuart1$USBIIE$0$0 == 0xde07
+                    DE07    690 _USBIIE	=	0xde07
+                    DE09    691 Fuart1$USBOIE$0$0 == 0xde09
+                    DE09    692 _USBOIE	=	0xde09
+                    DE0B    693 Fuart1$USBCIE$0$0 == 0xde0b
+                    DE0B    694 _USBCIE	=	0xde0b
+                    DE0C    695 Fuart1$USBFRML$0$0 == 0xde0c
+                    DE0C    696 _USBFRML	=	0xde0c
+                    DE0D    697 Fuart1$USBFRMH$0$0 == 0xde0d
+                    DE0D    698 _USBFRMH	=	0xde0d
+                    DE0E    699 Fuart1$USBINDEX$0$0 == 0xde0e
+                    DE0E    700 _USBINDEX	=	0xde0e
+                    DE10    701 Fuart1$USBMAXI$0$0 == 0xde10
+                    DE10    702 _USBMAXI	=	0xde10
+                    DE11    703 Fuart1$USBCSIL$0$0 == 0xde11
+                    DE11    704 _USBCSIL	=	0xde11
+                    DE12    705 Fuart1$USBCSIH$0$0 == 0xde12
+                    DE12    706 _USBCSIH	=	0xde12
+                    DE13    707 Fuart1$USBMAXO$0$0 == 0xde13
+                    DE13    708 _USBMAXO	=	0xde13
+                    DE14    709 Fuart1$USBCSOL$0$0 == 0xde14
+                    DE14    710 _USBCSOL	=	0xde14
+                    DE15    711 Fuart1$USBCSOH$0$0 == 0xde15
+                    DE15    712 _USBCSOH	=	0xde15
+                    DE16    713 Fuart1$USBCNTL$0$0 == 0xde16
+                    DE16    714 _USBCNTL	=	0xde16
+                    DE17    715 Fuart1$USBCNTH$0$0 == 0xde17
+                    DE17    716 _USBCNTH	=	0xde17
+                    DE20    717 Fuart1$USBF0$0$0 == 0xde20
+                    DE20    718 _USBF0	=	0xde20
+                    DE22    719 Fuart1$USBF1$0$0 == 0xde22
+                    DE22    720 _USBF1	=	0xde22
+                    DE24    721 Fuart1$USBF2$0$0 == 0xde24
+                    DE24    722 _USBF2	=	0xde24
+                    DE26    723 Fuart1$USBF3$0$0 == 0xde26
+                    DE26    724 _USBF3	=	0xde26
+                    DE28    725 Fuart1$USBF4$0$0 == 0xde28
+                    DE28    726 _USBF4	=	0xde28
+                    DE2A    727 Fuart1$USBF5$0$0 == 0xde2a
+                    DE2A    728 _USBF5	=	0xde2a
+                    0000    729 Fuart1$uartTxBuffer$0$0==.
+   0000                     730 _uartTxBuffer:
+   0000                     731 	.ds 256
+                    0100    732 Fuart1$uartRxBuffer$0$0==.
+   0100                     733 _uartRxBuffer:
+   0100                     734 	.ds 256
+                            735 ;--------------------------------------------------------
+                            736 ; absolute external ram data
+                            737 ;--------------------------------------------------------
+                            738 	.area XABS    (ABS,XDATA)
+                            739 ;--------------------------------------------------------
+                            740 ; external initialized ram data
+                            741 ;--------------------------------------------------------
+                            742 	.area XISEG   (XDATA)
+                            743 	.area HOME    (CODE)
+                            744 	.area GSINIT0 (CODE)
+                            745 	.area GSINIT1 (CODE)
+                            746 	.area GSINIT2 (CODE)
+                            747 	.area GSINIT3 (CODE)
+                            748 	.area GSINIT4 (CODE)
+                            749 	.area GSINIT5 (CODE)
+                            750 	.area GSINIT  (CODE)
+                            751 	.area GSFINAL (CODE)
+                            752 	.area CSEG    (CODE)
+                            753 ;--------------------------------------------------------
+                            754 ; global & static initialisations
+                            755 ;--------------------------------------------------------
+                            756 	.area HOME    (CODE)
+                            757 	.area GSINIT  (CODE)
+                            758 	.area GSFINAL (CODE)
+                            759 	.area GSINIT  (CODE)
+                            760 ;--------------------------------------------------------
+                            761 ; Home
+                            762 ;--------------------------------------------------------
+                            763 	.area HOME    (CODE)
+                            764 	.area HOME    (CODE)
+                            765 ;--------------------------------------------------------
+                            766 ; code
+                            767 ;--------------------------------------------------------
+                            768 	.area CSEG    (CODE)
+                            769 ;------------------------------------------------------------
+                            770 ;Allocation info for local variables in function 'uart1Init'
+                            771 ;------------------------------------------------------------
+                    0000    772 	G$uart1Init$0$0 ==.
+                    0000    773 	C$uart1.c$87$0$0 ==.
+                            774 ;	libraries/src/uart/uart1.c:87: void uartNInit(void)
+                            775 ;	-----------------------------------------
+                            776 ;	 function uart1Init
+                            777 ;	-----------------------------------------
+   0000                     778 _uart1Init:
+                    0007    779 	ar7 = 0x07
+                    0006    780 	ar6 = 0x06
+                    0005    781 	ar5 = 0x05
+                    0004    782 	ar4 = 0x04
+                    0003    783 	ar3 = 0x03
+                    0002    784 	ar2 = 0x02
+                    0001    785 	ar1 = 0x01
+                    0000    786 	ar0 = 0x00
+                    0000    787 	C$uart1.c$99$1$1 ==.
+                            788 ;	libraries/src/uart/uart1.c:99: uartTxBufferMainLoopIndex = 0;
+   0000 75*00 00            789 	mov	_uartTxBufferMainLoopIndex,#0x00
+                    0003    790 	C$uart1.c$100$1$1 ==.
+                            791 ;	libraries/src/uart/uart1.c:100: uartTxBufferInterruptIndex = 0;
+   0003 75*01 00            792 	mov	_uartTxBufferInterruptIndex,#0x00
+                    0006    793 	C$uart1.c$101$1$1 ==.
+                            794 ;	libraries/src/uart/uart1.c:101: uartRxBufferMainLoopIndex = 0;
+   0006 75*02 00            795 	mov	_uartRxBufferMainLoopIndex,#0x00
+                    0009    796 	C$uart1.c$102$1$1 ==.
+                            797 ;	libraries/src/uart/uart1.c:102: uartRxBufferInterruptIndex = 0;
+   0009 75*03 00            798 	mov	_uartRxBufferInterruptIndex,#0x00
+                    000C    799 	C$uart1.c$103$1$1 ==.
+                            800 ;	libraries/src/uart/uart1.c:103: uartNRxParityErrorOccurred = 0;
+   000C C2*00               801 	clr	_uart1RxParityErrorOccurred
+                    000E    802 	C$uart1.c$104$1$1 ==.
+                            803 ;	libraries/src/uart/uart1.c:104: uartNRxFramingErrorOccurred = 0;
+   000E C2*01               804 	clr	_uart1RxFramingErrorOccurred
+                    0010    805 	C$uart1.c$105$1$1 ==.
+                            806 ;	libraries/src/uart/uart1.c:105: uartNRxBufferFullOccurred = 0;
+   0010 C2*02               807 	clr	_uart1RxBufferFullOccurred
+                    0012    808 	C$uart1.c$115$1$1 ==.
+                            809 ;	libraries/src/uart/uart1.c:115: P2SEL |= 0x40;   // USART1 takes priority over USART0 on Port 1.
+   0012 43 F5 40            810 	orl	_P2SEL,#0x40
+                    0015    811 	C$uart1.c$116$1$1 ==.
+                            812 ;	libraries/src/uart/uart1.c:116: PERCFG |= 0x02;  // PERCFG.U1CFG (1) = 1 (Alt. 2) : USART1 uses alt. location 2.
+   0015 43 F1 02            813 	orl	_PERCFG,#0x02
+                    0018    814 	C$uart1.c$119$1$1 ==.
+                            815 ;	libraries/src/uart/uart1.c:119: UNUCR = 0x82;    // Stops the "current operation" and resets settings to their defaults.
+   0018 75 FB 82            816 	mov	_U1UCR,#0x82
+                    001B    817 	C$uart1.c$120$1$1 ==.
+                            818 ;	libraries/src/uart/uart1.c:120: UNCSR |= 0xc0;   // Enable UART mode and enable receiver.  TODO: change '|=' to '='
+   001B 43 F8 C0            819 	orl	_U1CSR,#0xC0
+                    001E    820 	C$uart1.c$127$1$1 ==.
+                            821 ;	libraries/src/uart/uart1.c:127: P1SEL |= (1<<6); // P1SEL.SELP1_6 = 1
+   001E 43 F4 40            822 	orl	_P1SEL,#0x40
+                    0021    823 	C$uart1.c$134$1$1 ==.
+                            824 ;	libraries/src/uart/uart1.c:134: IP0 |= (1<<INTERRUPT_PRIORITY_GROUP);
+   0021 43 A9 08            825 	orl	_IP0,#0x08
+                    0024    826 	C$uart1.c$135$1$1 ==.
+                            827 ;	libraries/src/uart/uart1.c:135: IP1 &= ~(1<<INTERRUPT_PRIORITY_GROUP);
+   0024 AF B9               828 	mov	r7,_IP1
+   0026 53 07 F7            829 	anl	ar7,#0xF7
+   0029 8F B9               830 	mov	_IP1,r7
+                    002B    831 	C$uart1.c$137$1$1 ==.
+                            832 ;	libraries/src/uart/uart1.c:137: UTXNIF = 1; // Set TX flag so the interrupt fires when we enable it for the first time.
+   002B D2 EA               833 	setb	_UTX1IF
+                    002D    834 	C$uart1.c$138$1$1 ==.
+                            835 ;	libraries/src/uart/uart1.c:138: URXNIF = 0; // Clear RX flag.
+   002D C2 8F               836 	clr	_URX1IF
+                    002F    837 	C$uart1.c$139$1$1 ==.
+                            838 ;	libraries/src/uart/uart1.c:139: URXNIE = 1; // Enable Rx interrupt.
+   002F D2 AB               839 	setb	_URX1IE
+                    0031    840 	C$uart1.c$140$1$1 ==.
+                            841 ;	libraries/src/uart/uart1.c:140: EA = 1;     // Enable interrupts in general.
+   0031 D2 AF               842 	setb	_EA
+                    0033    843 	C$uart1.c$141$1$1 ==.
+                    0033    844 	XG$uart1Init$0$0 ==.
+   0033 22                  845 	ret
+                            846 ;------------------------------------------------------------
+                            847 ;Allocation info for local variables in function 'uart1SetBaudRate'
+                            848 ;------------------------------------------------------------
+                            849 ;sloc0                     Allocated with name '_uart1SetBaudRate_sloc0_1_0'
+                            850 ;------------------------------------------------------------
+                    0034    851 	G$uart1SetBaudRate$0$0 ==.
+                    0034    852 	C$uart1.c$143$1$1 ==.
+                            853 ;	libraries/src/uart/uart1.c:143: void uartNSetBaudRate(uint32 baud)
+                            854 ;	-----------------------------------------
+                            855 ;	 function uart1SetBaudRate
+                            856 ;	-----------------------------------------
+   0034                     857 _uart1SetBaudRate:
+   0034 AF 82               858 	mov	r7,dpl
+   0036 AE 83               859 	mov	r6,dph
+   0038 AD F0               860 	mov	r5,b
+   003A FC                  861 	mov	r4,a
+                    003B    862 	C$uart1.c$149$1$1 ==.
+                            863 ;	libraries/src/uart/uart1.c:149: if (baud < 23 || baud > 1500000)
+   003B C3                  864 	clr	c
+   003C EF                  865 	mov	a,r7
+   003D 94 17               866 	subb	a,#0x17
+   003F EE                  867 	mov	a,r6
+   0040 94 00               868 	subb	a,#0x00
+   0042 ED                  869 	mov	a,r5
+   0043 94 00               870 	subb	a,#0x00
+   0045 EC                  871 	mov	a,r4
+   0046 94 00               872 	subb	a,#0x00
+   0048 40 0D               873 	jc	00101$
+   004A 74 60               874 	mov	a,#0x60
+   004C 9F                  875 	subb	a,r7
+   004D 74 E3               876 	mov	a,#0xE3
+   004F 9E                  877 	subb	a,r6
+   0050 74 16               878 	mov	a,#0x16
+   0052 9D                  879 	subb	a,r5
+   0053 E4                  880 	clr	a
+   0054 9C                  881 	subb	a,r4
+   0055 50 03               882 	jnc	00114$
+   0057                     883 00101$:
+                    0057    884 	C$uart1.c$150$1$1 ==.
+                            885 ;	libraries/src/uart/uart1.c:150: return;
+   0057 02s01r1E            886 	ljmp	00110$
+                    005A    887 	C$uart1.c$153$1$1 ==.
+                            888 ;	libraries/src/uart/uart1.c:153: while (baud > 495782)
+   005A                     889 00114$:
+   005A 7B 00               890 	mov	r3,#0x00
+   005C                     891 00104$:
+   005C C3                  892 	clr	c
+   005D 74 A6               893 	mov	a,#0xA6
+   005F 9F                  894 	subb	a,r7
+   0060 74 90               895 	mov	a,#0x90
+   0062 9E                  896 	subb	a,r6
+   0063 74 07               897 	mov	a,#0x07
+   0065 9D                  898 	subb	a,r5
+   0066 E4                  899 	clr	a
+   0067 9C                  900 	subb	a,r4
+   0068 50 10               901 	jnc	00106$
+                    006A    902 	C$uart1.c$155$2$2 ==.
+                            903 ;	libraries/src/uart/uart1.c:155: baudE++;
+   006A 0B                  904 	inc	r3
+                    006B    905 	C$uart1.c$156$2$2 ==.
+                            906 ;	libraries/src/uart/uart1.c:156: baud /= 2;
+   006B EC                  907 	mov	a,r4
+   006C C3                  908 	clr	c
+   006D 13                  909 	rrc	a
+   006E FC                  910 	mov	r4,a
+   006F ED                  911 	mov	a,r5
+   0070 13                  912 	rrc	a
+   0071 FD                  913 	mov	r5,a
+   0072 EE                  914 	mov	a,r6
+   0073 13                  915 	rrc	a
+   0074 FE                  916 	mov	r6,a
+   0075 EF                  917 	mov	a,r7
+   0076 13                  918 	rrc	a
+   0077 FF                  919 	mov	r7,a
+   0078 80 E2               920 	sjmp	00104$
+   007A                     921 00106$:
+                    007A    922 	C$uart1.c$161$1$1 ==.
+                            923 ;	libraries/src/uart/uart1.c:161: baudMPlus256 = (baud * 11) + (baud * 8663 / 46875);
+   007A 78r00               924 	mov	r0,#__mullong_PARM_2
+   007C EF                  925 	mov	a,r7
+   007D F2                  926 	movx	@r0,a
+   007E 08                  927 	inc	r0
+   007F EE                  928 	mov	a,r6
+   0080 F2                  929 	movx	@r0,a
+   0081 08                  930 	inc	r0
+   0082 ED                  931 	mov	a,r5
+   0083 F2                  932 	movx	@r0,a
+   0084 08                  933 	inc	r0
+   0085 EC                  934 	mov	a,r4
+   0086 F2                  935 	movx	@r0,a
+   0087 90 00 0B            936 	mov	dptr,#(0x0B&0x00ff)
+   008A E4                  937 	clr	a
+   008B F5 F0               938 	mov	b,a
+   008D C0 07               939 	push	ar7
+   008F C0 06               940 	push	ar6
+   0091 C0 05               941 	push	ar5
+   0093 C0 04               942 	push	ar4
+   0095 C0 03               943 	push	ar3
+   0097 12s00r00            944 	lcall	__mullong
+   009A 85 82*04            945 	mov	_uart1SetBaudRate_sloc0_1_0,dpl
+   009D 85 83*05            946 	mov	(_uart1SetBaudRate_sloc0_1_0 + 1),dph
+   00A0 85 F0*06            947 	mov	(_uart1SetBaudRate_sloc0_1_0 + 2),b
+   00A3 F5*07               948 	mov	(_uart1SetBaudRate_sloc0_1_0 + 3),a
+   00A5 D0 03               949 	pop	ar3
+   00A7 D0 04               950 	pop	ar4
+   00A9 D0 05               951 	pop	ar5
+   00AB D0 06               952 	pop	ar6
+   00AD D0 07               953 	pop	ar7
+   00AF 78r00               954 	mov	r0,#__mullong_PARM_2
+   00B1 EF                  955 	mov	a,r7
+   00B2 F2                  956 	movx	@r0,a
+   00B3 08                  957 	inc	r0
+   00B4 EE                  958 	mov	a,r6
+   00B5 F2                  959 	movx	@r0,a
+   00B6 08                  960 	inc	r0
+   00B7 ED                  961 	mov	a,r5
+   00B8 F2                  962 	movx	@r0,a
+   00B9 08                  963 	inc	r0
+   00BA EC                  964 	mov	a,r4
+   00BB F2                  965 	movx	@r0,a
+   00BC 90 21 D7            966 	mov	dptr,#0x21D7
+   00BF E4                  967 	clr	a
+   00C0 F5 F0               968 	mov	b,a
+   00C2 C0 03               969 	push	ar3
+   00C4 12s00r00            970 	lcall	__mullong
+   00C7 AC 82               971 	mov	r4,dpl
+   00C9 AD 83               972 	mov	r5,dph
+   00CB AE F0               973 	mov	r6,b
+   00CD FF                  974 	mov	r7,a
+   00CE 78r00               975 	mov	r0,#__divulong_PARM_2
+   00D0 74 1B               976 	mov	a,#0x1B
+   00D2 F2                  977 	movx	@r0,a
+   00D3 08                  978 	inc	r0
+   00D4 74 B7               979 	mov	a,#0xB7
+   00D6 F2                  980 	movx	@r0,a
+   00D7 08                  981 	inc	r0
+   00D8 E4                  982 	clr	a
+   00D9 F2                  983 	movx	@r0,a
+   00DA 08                  984 	inc	r0
+   00DB F2                  985 	movx	@r0,a
+   00DC 8C 82               986 	mov	dpl,r4
+   00DE 8D 83               987 	mov	dph,r5
+   00E0 8E F0               988 	mov	b,r6
+   00E2 EF                  989 	mov	a,r7
+   00E3 12s00r00            990 	lcall	__divulong
+   00E6 AC 82               991 	mov	r4,dpl
+   00E8 AD 83               992 	mov	r5,dph
+   00EA AE F0               993 	mov	r6,b
+   00EC FF                  994 	mov	r7,a
+   00ED D0 03               995 	pop	ar3
+   00EF EC                  996 	mov	a,r4
+   00F0 25*04               997 	add	a,_uart1SetBaudRate_sloc0_1_0
+   00F2 FC                  998 	mov	r4,a
+   00F3 ED                  999 	mov	a,r5
+   00F4 35*05              1000 	addc	a,(_uart1SetBaudRate_sloc0_1_0 + 1)
+   00F6 FD                 1001 	mov	r5,a
+   00F7 EE                 1002 	mov	a,r6
+   00F8 35*06              1003 	addc	a,(_uart1SetBaudRate_sloc0_1_0 + 2)
+   00FA FE                 1004 	mov	r6,a
+   00FB EF                 1005 	mov	a,r7
+   00FC 35*07              1006 	addc	a,(_uart1SetBaudRate_sloc0_1_0 + 3)
+   00FE FF                 1007 	mov	r7,a
+                    00FF   1008 	C$uart1.c$164$1$1 ==.
+                           1009 ;	libraries/src/uart/uart1.c:164: while (baudMPlus256 > 0x1ff)
+   00FF                    1010 00107$:
+   00FF ED                 1011 	mov	a,r5
+   0100 54 FE              1012 	anl	a,#0xFE
+   0102 70 06              1013 	jnz	00122$
+   0104 EE                 1014 	mov	a,r6
+   0105 70 03              1015 	jnz	00122$
+   0107 EF                 1016 	mov	a,r7
+   0108 60 10              1017 	jz	00109$
+   010A                    1018 00122$:
+                    010A   1019 	C$uart1.c$166$2$3 ==.
+                           1020 ;	libraries/src/uart/uart1.c:166: baudE++;
+   010A 0B                 1021 	inc	r3
+                    010B   1022 	C$uart1.c$167$2$3 ==.
+                           1023 ;	libraries/src/uart/uart1.c:167: baudMPlus256 /= 2;
+   010B EF                 1024 	mov	a,r7
+   010C C3                 1025 	clr	c
+   010D 13                 1026 	rrc	a
+   010E FF                 1027 	mov	r7,a
+   010F EE                 1028 	mov	a,r6
+   0110 13                 1029 	rrc	a
+   0111 FE                 1030 	mov	r6,a
+   0112 ED                 1031 	mov	a,r5
+   0113 13                 1032 	rrc	a
+   0114 FD                 1033 	mov	r5,a
+   0115 EC                 1034 	mov	a,r4
+   0116 13                 1035 	rrc	a
+   0117 FC                 1036 	mov	r4,a
+   0118 80 E5              1037 	sjmp	00107$
+   011A                    1038 00109$:
+                    011A   1039 	C$uart1.c$169$1$1 ==.
+                           1040 ;	libraries/src/uart/uart1.c:169: UNGCR = baudE; // UNGCR.BAUD_E (4:0)
+   011A 8B FC              1041 	mov	_U1GCR,r3
+                    011C   1042 	C$uart1.c$170$1$1 ==.
+                           1043 ;	libraries/src/uart/uart1.c:170: UNBAUD = baudMPlus256; // UNBAUD.BAUD_M (7:0) - only the lowest 8 bits of baudMPlus256 are used, so this is effectively baudMPlus256 - 256
+   011C 8C FA              1044 	mov	_U1BAUD,r4
+   011E                    1045 00110$:
+                    011E   1046 	C$uart1.c$171$1$1 ==.
+                    011E   1047 	XG$uart1SetBaudRate$0$0 ==.
+   011E 22                 1048 	ret
+                           1049 ;------------------------------------------------------------
+                           1050 ;Allocation info for local variables in function 'uart1SetParity'
+                           1051 ;------------------------------------------------------------
+                    011F   1052 	G$uart1SetParity$0$0 ==.
+                    011F   1053 	C$uart1.c$173$1$1 ==.
+                           1054 ;	libraries/src/uart/uart1.c:173: void uartNSetParity(uint8 parity)
+                           1055 ;	-----------------------------------------
+                           1056 ;	 function uart1SetParity
+                           1057 ;	-----------------------------------------
+   011F                    1058 _uart1SetParity:
+   011F AF 82              1059 	mov	r7,dpl
+                    0121   1060 	C$uart1.c$182$1$1 ==.
+                           1061 ;	libraries/src/uart/uart1.c:182: uint8 tmp = 0;
+   0121 7E 00              1062 	mov	r6,#0x00
+                    0123   1063 	C$uart1.c$184$1$1 ==.
+                           1064 ;	libraries/src/uart/uart1.c:184: switch(parity)
+   0123 BF 01 02           1065 	cjne	r7,#0x01,00112$
+   0126 80 0F              1066 	sjmp	00101$
+   0128                    1067 00112$:
+   0128 BF 02 02           1068 	cjne	r7,#0x02,00113$
+   012B 80 0E              1069 	sjmp	00102$
+   012D                    1070 00113$:
+   012D BF 03 02           1071 	cjne	r7,#0x03,00114$
+   0130 80 0D              1072 	sjmp	00103$
+   0132                    1073 00114$:
+                    0132   1074 	C$uart1.c$186$2$2 ==.
+                           1075 ;	libraries/src/uart/uart1.c:186: case PARITY_ODD:   tmp = 0b111 << 3; break;
+   0132 BF 04 10           1076 	cjne	r7,#0x04,00105$
+   0135 80 0C              1077 	sjmp	00104$
+   0137                    1078 00101$:
+   0137 7E 38              1079 	mov	r6,#0x38
+                    0139   1080 	C$uart1.c$187$2$2 ==.
+                           1081 ;	libraries/src/uart/uart1.c:187: case PARITY_EVEN:  tmp = 0b011 << 3; break;
+   0139 80 0A              1082 	sjmp	00105$
+   013B                    1083 00102$:
+   013B 7E 18              1084 	mov	r6,#0x18
+                    013D   1085 	C$uart1.c$188$2$2 ==.
+                           1086 ;	libraries/src/uart/uart1.c:188: case PARITY_MARK:  tmp = 0b110 << 3; break;
+   013D 80 06              1087 	sjmp	00105$
+   013F                    1088 00103$:
+   013F 7E 30              1089 	mov	r6,#0x30
+                    0141   1090 	C$uart1.c$189$2$2 ==.
+                           1091 ;	libraries/src/uart/uart1.c:189: case PARITY_SPACE: tmp = 0b010 << 3; break;
+   0141 80 02              1092 	sjmp	00105$
+   0143                    1093 00104$:
+   0143 7E 10              1094 	mov	r6,#0x10
+                    0145   1095 	C$uart1.c$190$1$1 ==.
+                           1096 ;	libraries/src/uart/uart1.c:190: }
+   0145                    1097 00105$:
+                    0145   1098 	C$uart1.c$192$1$1 ==.
+                           1099 ;	libraries/src/uart/uart1.c:192: UNUCR = (UNUCR & 0b01000111) | tmp;
+   0145 74 47              1100 	mov	a,#0x47
+   0147 55 FB              1101 	anl	a,_U1UCR
+   0149 4E                 1102 	orl	a,r6
+   014A F5 FB              1103 	mov	_U1UCR,a
+                    014C   1104 	C$uart1.c$193$1$1 ==.
+                    014C   1105 	XG$uart1SetParity$0$0 ==.
+   014C 22                 1106 	ret
+                           1107 ;------------------------------------------------------------
+                           1108 ;Allocation info for local variables in function 'uart1SetStopBits'
+                           1109 ;------------------------------------------------------------
+                    014D   1110 	G$uart1SetStopBits$0$0 ==.
+                    014D   1111 	C$uart1.c$195$1$1 ==.
+                           1112 ;	libraries/src/uart/uart1.c:195: void uartNSetStopBits(uint8 stopBits)
+                           1113 ;	-----------------------------------------
+                           1114 ;	 function uart1SetStopBits
+                           1115 ;	-----------------------------------------
+   014D                    1116 _uart1SetStopBits:
+   014D AF 82              1117 	mov	r7,dpl
+                    014F   1118 	C$uart1.c$197$1$1 ==.
+                           1119 ;	libraries/src/uart/uart1.c:197: if (stopBits == STOP_BITS_2)
+   014F BF 02 05           1120 	cjne	r7,#0x02,00102$
+                    0152   1121 	C$uart1.c$199$2$2 ==.
+                           1122 ;	libraries/src/uart/uart1.c:199: UNUCR |= (1<<2);    // 2 stop bits
+   0152 43 FB 04           1123 	orl	_U1UCR,#0x04
+   0155 80 07              1124 	sjmp	00104$
+   0157                    1125 00102$:
+                    0157   1126 	C$uart1.c$203$2$3 ==.
+                           1127 ;	libraries/src/uart/uart1.c:203: UNUCR &= ~(1<<2);   // 1 stop bit
+   0157 AF FB              1128 	mov	r7,_U1UCR
+   0159 53 07 FB           1129 	anl	ar7,#0xFB
+   015C 8F FB              1130 	mov	_U1UCR,r7
+   015E                    1131 00104$:
+                    015E   1132 	C$uart1.c$206$1$1 ==.
+                    015E   1133 	XG$uart1SetStopBits$0$0 ==.
+   015E 22                 1134 	ret
+                           1135 ;------------------------------------------------------------
+                           1136 ;Allocation info for local variables in function 'uart1TxAvailable'
+                           1137 ;------------------------------------------------------------
+                    015F   1138 	G$uart1TxAvailable$0$0 ==.
+                    015F   1139 	C$uart1.c$208$1$1 ==.
+                           1140 ;	libraries/src/uart/uart1.c:208: uint8 uartNTxAvailable(void)
+                           1141 ;	-----------------------------------------
+                           1142 ;	 function uart1TxAvailable
+                           1143 ;	-----------------------------------------
+   015F                    1144 _uart1TxAvailable:
+                    015F   1145 	C$uart1.c$210$1$1 ==.
+                           1146 ;	libraries/src/uart/uart1.c:210: return UART_TX_BUFFER_FREE_BYTES();
+   015F E5*01              1147 	mov	a,_uartTxBufferInterruptIndex
+   0161 C3                 1148 	clr	c
+   0162 95*00              1149 	subb	a,_uartTxBufferMainLoopIndex
+   0164 14                 1150 	dec	a
+                    0165   1151 	C$uart1.c$211$1$1 ==.
+                    0165   1152 	XG$uart1TxAvailable$0$0 ==.
+   0165 F5 82              1153 	mov	dpl,a
+   0167 22                 1154 	ret
+                           1155 ;------------------------------------------------------------
+                           1156 ;Allocation info for local variables in function 'uart1TxSend'
+                           1157 ;------------------------------------------------------------
+                    0168   1158 	G$uart1TxSend$0$0 ==.
+                    0168   1159 	C$uart1.c$213$1$1 ==.
+                           1160 ;	libraries/src/uart/uart1.c:213: void uartNTxSend(const uint8 XDATA * buffer, uint8 size)
+                           1161 ;	-----------------------------------------
+                           1162 ;	 function uart1TxSend
+                           1163 ;	-----------------------------------------
+   0168                    1164 _uart1TxSend:
+   0168 AE 82              1165 	mov	r6,dpl
+   016A AF 83              1166 	mov	r7,dph
+                    016C   1167 	C$uart1.c$218$1$1 ==.
+                           1168 ;	libraries/src/uart/uart1.c:218: while (size)
+   016C 78r00              1169 	mov	r0,#_uart1TxSend_PARM_2
+   016E E2                 1170 	movx	a,@r0
+   016F FD                 1171 	mov	r5,a
+   0170                    1172 00101$:
+   0170 ED                 1173 	mov	a,r5
+   0171 60 26              1174 	jz	00104$
+                    0173   1175 	C$uart1.c$220$2$2 ==.
+                           1176 ;	libraries/src/uart/uart1.c:220: uartTxBuffer[uartTxBufferMainLoopIndex] = *buffer;
+   0173 E5*00              1177 	mov	a,_uartTxBufferMainLoopIndex
+   0175 24r00              1178 	add	a,#_uartTxBuffer
+   0177 FB                 1179 	mov	r3,a
+   0178 E4                 1180 	clr	a
+   0179 34s00              1181 	addc	a,#(_uartTxBuffer >> 8)
+   017B FC                 1182 	mov	r4,a
+   017C 8E 82              1183 	mov	dpl,r6
+   017E 8F 83              1184 	mov	dph,r7
+   0180 E0                 1185 	movx	a,@dptr
+   0181 FA                 1186 	mov	r2,a
+   0182 A3                 1187 	inc	dptr
+   0183 AE 82              1188 	mov	r6,dpl
+   0185 AF 83              1189 	mov	r7,dph
+   0187 8B 82              1190 	mov	dpl,r3
+   0189 8C 83              1191 	mov	dph,r4
+   018B EA                 1192 	mov	a,r2
+   018C F0                 1193 	movx	@dptr,a
+                    018D   1194 	C$uart1.c$222$2$2 ==.
+                           1195 ;	libraries/src/uart/uart1.c:222: buffer++;
+                    018D   1196 	C$uart1.c$223$2$2 ==.
+                           1197 ;	libraries/src/uart/uart1.c:223: uartTxBufferMainLoopIndex = (uartTxBufferMainLoopIndex + 1) & (sizeof(uartTxBuffer) - 1);
+   018D E5*00              1198 	mov	a,_uartTxBufferMainLoopIndex
+   018F 04                 1199 	inc	a
+   0190 FC                 1200 	mov	r4,a
+   0191 8C*00              1201 	mov	_uartTxBufferMainLoopIndex,r4
+                    0193   1202 	C$uart1.c$224$2$2 ==.
+                           1203 ;	libraries/src/uart/uart1.c:224: size--;
+   0193 1D                 1204 	dec	r5
+                    0194   1205 	C$uart1.c$226$2$2 ==.
+                           1206 ;	libraries/src/uart/uart1.c:226: IEN2 |= BV_UTXNIE; // Enable TX interrupt
+   0194 43 9A 08           1207 	orl	_IEN2,#0x08
+   0197 80 D7              1208 	sjmp	00101$
+   0199                    1209 00104$:
+                    0199   1210 	C$uart1.c$228$1$1 ==.
+                    0199   1211 	XG$uart1TxSend$0$0 ==.
+   0199 22                 1212 	ret
+                           1213 ;------------------------------------------------------------
+                           1214 ;Allocation info for local variables in function 'uart1TxSendByte'
+                           1215 ;------------------------------------------------------------
+                    019A   1216 	G$uart1TxSendByte$0$0 ==.
+                    019A   1217 	C$uart1.c$230$1$1 ==.
+                           1218 ;	libraries/src/uart/uart1.c:230: void uartNTxSendByte(uint8 byte)
+                           1219 ;	-----------------------------------------
+                           1220 ;	 function uart1TxSendByte
+                           1221 ;	-----------------------------------------
+   019A                    1222 _uart1TxSendByte:
+   019A AF 82              1223 	mov	r7,dpl
+                    019C   1224 	C$uart1.c$234$1$1 ==.
+                           1225 ;	libraries/src/uart/uart1.c:234: uartTxBuffer[uartTxBufferMainLoopIndex] = byte;
+   019C E5*00              1226 	mov	a,_uartTxBufferMainLoopIndex
+   019E 24r00              1227 	add	a,#_uartTxBuffer
+   01A0 F5 82              1228 	mov	dpl,a
+   01A2 E4                 1229 	clr	a
+   01A3 34s00              1230 	addc	a,#(_uartTxBuffer >> 8)
+   01A5 F5 83              1231 	mov	dph,a
+   01A7 EF                 1232 	mov	a,r7
+   01A8 F0                 1233 	movx	@dptr,a
+                    01A9   1234 	C$uart1.c$235$1$1 ==.
+                           1235 ;	libraries/src/uart/uart1.c:235: uartTxBufferMainLoopIndex = (uartTxBufferMainLoopIndex + 1) & (sizeof(uartTxBuffer) - 1);
+   01A9 E5*00              1236 	mov	a,_uartTxBufferMainLoopIndex
+   01AB 04                 1237 	inc	a
+   01AC FF                 1238 	mov	r7,a
+   01AD 8F*00              1239 	mov	_uartTxBufferMainLoopIndex,r7
+                    01AF   1240 	C$uart1.c$237$1$1 ==.
+                           1241 ;	libraries/src/uart/uart1.c:237: IEN2 |= BV_UTXNIE; // Enable TX interrupt
+   01AF 43 9A 08           1242 	orl	_IEN2,#0x08
+                    01B2   1243 	C$uart1.c$238$1$1 ==.
+                    01B2   1244 	XG$uart1TxSendByte$0$0 ==.
+   01B2 22                 1245 	ret
+                           1246 ;------------------------------------------------------------
+                           1247 ;Allocation info for local variables in function 'uart1RxAvailable'
+                           1248 ;------------------------------------------------------------
+                    01B3   1249 	G$uart1RxAvailable$0$0 ==.
+                    01B3   1250 	C$uart1.c$240$1$1 ==.
+                           1251 ;	libraries/src/uart/uart1.c:240: uint8 uartNRxAvailable(void)
+                           1252 ;	-----------------------------------------
+                           1253 ;	 function uart1RxAvailable
+                           1254 ;	-----------------------------------------
+   01B3                    1255 _uart1RxAvailable:
+                    01B3   1256 	C$uart1.c$242$1$1 ==.
+                           1257 ;	libraries/src/uart/uart1.c:242: return UART_RX_BUFFER_USED_BYTES();
+   01B3 E5*03              1258 	mov	a,_uartRxBufferInterruptIndex
+   01B5 C3                 1259 	clr	c
+   01B6 95*02              1260 	subb	a,_uartRxBufferMainLoopIndex
+                    01B8   1261 	C$uart1.c$243$1$1 ==.
+                    01B8   1262 	XG$uart1RxAvailable$0$0 ==.
+   01B8 F5 82              1263 	mov	dpl,a
+   01BA 22                 1264 	ret
+                           1265 ;------------------------------------------------------------
+                           1266 ;Allocation info for local variables in function 'uart1RxReceiveByte'
+                           1267 ;------------------------------------------------------------
+                    01BB   1268 	G$uart1RxReceiveByte$0$0 ==.
+                    01BB   1269 	C$uart1.c$245$1$1 ==.
+                           1270 ;	libraries/src/uart/uart1.c:245: uint8 uartNRxReceiveByte(void)
+                           1271 ;	-----------------------------------------
+                           1272 ;	 function uart1RxReceiveByte
+                           1273 ;	-----------------------------------------
+   01BB                    1274 _uart1RxReceiveByte:
+                    01BB   1275 	C$uart1.c$249$1$1 ==.
+                           1276 ;	libraries/src/uart/uart1.c:249: uint8 byte = uartRxBuffer[uartRxBufferMainLoopIndex];
+   01BB E5*02              1277 	mov	a,_uartRxBufferMainLoopIndex
+   01BD 24r00              1278 	add	a,#_uartRxBuffer
+   01BF F5 82              1279 	mov	dpl,a
+   01C1 E4                 1280 	clr	a
+   01C2 34s01              1281 	addc	a,#(_uartRxBuffer >> 8)
+   01C4 F5 83              1282 	mov	dph,a
+   01C6 E0                 1283 	movx	a,@dptr
+   01C7 FF                 1284 	mov	r7,a
+                    01C8   1285 	C$uart1.c$250$1$1 ==.
+                           1286 ;	libraries/src/uart/uart1.c:250: uartRxBufferMainLoopIndex = (uartRxBufferMainLoopIndex + 1) & (sizeof(uartRxBuffer) - 1);
+   01C8 E5*02              1287 	mov	a,_uartRxBufferMainLoopIndex
+   01CA 04                 1288 	inc	a
+   01CB FE                 1289 	mov	r6,a
+   01CC 8E*02              1290 	mov	_uartRxBufferMainLoopIndex,r6
+                    01CE   1291 	C$uart1.c$251$1$1 ==.
+                           1292 ;	libraries/src/uart/uart1.c:251: return byte;
+   01CE 8F 82              1293 	mov	dpl,r7
+                    01D0   1294 	C$uart1.c$252$1$1 ==.
+                    01D0   1295 	XG$uart1RxReceiveByte$0$0 ==.
+   01D0 22                 1296 	ret
+                           1297 ;------------------------------------------------------------
+                           1298 ;Allocation info for local variables in function 'ISR_UTX1'
+                           1299 ;------------------------------------------------------------
+                    01D1   1300 	G$ISR_UTX1$0$0 ==.
+                    01D1   1301 	C$uart1.c$254$1$1 ==.
+                           1302 ;	libraries/src/uart/uart1.c:254: ISR_UTX()
+                           1303 ;	-----------------------------------------
+                           1304 ;	 function ISR_UTX1
+                           1305 ;	-----------------------------------------
+   01D1                    1306 _ISR_UTX1:
+   01D1 C0 E0              1307 	push	acc
+   01D3 C0 82              1308 	push	dpl
+   01D5 C0 83              1309 	push	dph
+   01D7 C0 07              1310 	push	ar7
+   01D9 C0 D0              1311 	push	psw
+   01DB 75 D0 00           1312 	mov	psw,#0x00
+                    01DE   1313 	C$uart1.c$259$1$1 ==.
+                           1314 ;	libraries/src/uart/uart1.c:259: if (uartTxBufferInterruptIndex != uartTxBufferMainLoopIndex)
+   01DE E5*00              1315 	mov	a,_uartTxBufferMainLoopIndex
+   01E0 B5*01 02           1316 	cjne	a,_uartTxBufferInterruptIndex,00107$
+   01E3 80 18              1317 	sjmp	00102$
+   01E5                    1318 00107$:
+                    01E5   1319 	C$uart1.c$264$2$2 ==.
+                           1320 ;	libraries/src/uart/uart1.c:264: UTXNIF = 0;
+   01E5 C2 EA              1321 	clr	_UTX1IF
+                    01E7   1322 	C$uart1.c$266$2$2 ==.
+                           1323 ;	libraries/src/uart/uart1.c:266: UNDBUF = uartTxBuffer[uartTxBufferInterruptIndex];
+   01E7 E5*01              1324 	mov	a,_uartTxBufferInterruptIndex
+   01E9 24r00              1325 	add	a,#_uartTxBuffer
+   01EB F5 82              1326 	mov	dpl,a
+   01ED E4                 1327 	clr	a
+   01EE 34s00              1328 	addc	a,#(_uartTxBuffer >> 8)
+   01F0 F5 83              1329 	mov	dph,a
+   01F2 E0                 1330 	movx	a,@dptr
+   01F3 F5 F9              1331 	mov	_U1DBUF,a
+                    01F5   1332 	C$uart1.c$267$2$2 ==.
+                           1333 ;	libraries/src/uart/uart1.c:267: uartTxBufferInterruptIndex = (uartTxBufferInterruptIndex + 1) & (sizeof(uartTxBuffer) - 1);
+   01F5 E5*01              1334 	mov	a,_uartTxBufferInterruptIndex
+   01F7 04                 1335 	inc	a
+   01F8 FF                 1336 	mov	r7,a
+   01F9 8F*01              1337 	mov	_uartTxBufferInterruptIndex,r7
+   01FB 80 07              1338 	sjmp	00104$
+   01FD                    1339 00102$:
+                    01FD   1340 	C$uart1.c$272$2$3 ==.
+                           1341 ;	libraries/src/uart/uart1.c:272: IEN2 &= ~BV_UTXNIE;
+   01FD AF 9A              1342 	mov	r7,_IEN2
+   01FF 53 07 F7           1343 	anl	ar7,#0xF7
+   0202 8F 9A              1344 	mov	_IEN2,r7
+   0204                    1345 00104$:
+   0204 D0 D0              1346 	pop	psw
+   0206 D0 07              1347 	pop	ar7
+   0208 D0 83              1348 	pop	dph
+   020A D0 82              1349 	pop	dpl
+   020C D0 E0              1350 	pop	acc
+                    020E   1351 	C$uart1.c$274$1$1 ==.
+                    020E   1352 	XG$ISR_UTX1$0$0 ==.
+   020E 32                 1353 	reti
+                           1354 ;	eliminated unneeded push/pop b
+                           1355 ;------------------------------------------------------------
+                           1356 ;Allocation info for local variables in function 'ISR_URX1'
+                           1357 ;------------------------------------------------------------
+                    020F   1358 	G$ISR_URX1$0$0 ==.
+                    020F   1359 	C$uart1.c$276$1$1 ==.
+                           1360 ;	libraries/src/uart/uart1.c:276: ISR_URX()
+                           1361 ;	-----------------------------------------
+                           1362 ;	 function ISR_URX1
+                           1363 ;	-----------------------------------------
+   020F                    1364 _ISR_URX1:
+   020F C0 E0              1365 	push	acc
+   0211 C0 82              1366 	push	dpl
+   0213 C0 83              1367 	push	dph
+   0215 C0 07              1368 	push	ar7
+   0217 C0 06              1369 	push	ar6
+   0219 C0 05              1370 	push	ar5
+   021B C0 04              1371 	push	ar4
+   021D C0 03              1372 	push	ar3
+   021F C0 D0              1373 	push	psw
+   0221 75 D0 00           1374 	mov	psw,#0x00
+                    0224   1375 	C$uart1.c$280$1$1 ==.
+                           1376 ;	libraries/src/uart/uart1.c:280: URXNIF = 0;
+   0224 C2 8F              1377 	clr	_URX1IF
+                    0226   1378 	C$uart1.c$285$1$1 ==.
+                           1379 ;	libraries/src/uart/uart1.c:285: csr = UNCSR;
+                    0226   1380 	C$uart1.c$288$1$1 ==.
+                           1381 ;	libraries/src/uart/uart1.c:288: if (!(csr & 0x18)) // UNCSR.FE (4) == 0; UNCSR.ERR (3) == 0
+   0226 E5 F8              1382 	mov	a,_U1CSR
+   0228 FF                 1383 	mov	r7,a
+   0229 54 18              1384 	anl	a,#0x18
+   022B 60 02              1385 	jz	00118$
+   022D 80 31              1386 	sjmp	00109$
+   022F                    1387 00118$:
+                    022F   1388 	C$uart1.c$292$2$2 ==.
+                           1389 ;	libraries/src/uart/uart1.c:292: if (UART_RX_BUFFER_FREE_BYTES())
+   022F AD*02              1390 	mov	r5,_uartRxBufferMainLoopIndex
+   0231 7E 00              1391 	mov	r6,#0x00
+   0233 AB*03              1392 	mov	r3,_uartRxBufferInterruptIndex
+   0235 7C 00              1393 	mov	r4,#0x00
+   0237 ED                 1394 	mov	a,r5
+   0238 C3                 1395 	clr	c
+   0239 9B                 1396 	subb	a,r3
+   023A FD                 1397 	mov	r5,a
+   023B EE                 1398 	mov	a,r6
+   023C 9C                 1399 	subb	a,r4
+   023D FE                 1400 	mov	r6,a
+   023E 1D                 1401 	dec	r5
+   023F BD FF 01           1402 	cjne	r5,#0xFF,00119$
+   0242 1E                 1403 	dec	r6
+   0243                    1404 00119$:
+   0243 ED                 1405 	mov	a,r5
+   0244 60 16              1406 	jz	00102$
+                    0246   1407 	C$uart1.c$295$3$3 ==.
+                           1408 ;	libraries/src/uart/uart1.c:295: uartRxBuffer[uartRxBufferInterruptIndex] = UNDBUF;
+   0246 E5*03              1409 	mov	a,_uartRxBufferInterruptIndex
+   0248 24r00              1410 	add	a,#_uartRxBuffer
+   024A F5 82              1411 	mov	dpl,a
+   024C E4                 1412 	clr	a
+   024D 34s01              1413 	addc	a,#(_uartRxBuffer >> 8)
+   024F F5 83              1414 	mov	dph,a
+   0251 E5 F9              1415 	mov	a,_U1DBUF
+   0253 F0                 1416 	movx	@dptr,a
+                    0254   1417 	C$uart1.c$296$3$3 ==.
+                           1418 ;	libraries/src/uart/uart1.c:296: uartRxBufferInterruptIndex = (uartRxBufferInterruptIndex + 1) & (sizeof(uartRxBuffer) - 1);
+   0254 E5*03              1419 	mov	a,_uartRxBufferInterruptIndex
+   0256 04                 1420 	inc	a
+   0257 FE                 1421 	mov	r6,a
+   0258 8E*03              1422 	mov	_uartRxBufferInterruptIndex,r6
+   025A 80 10              1423 	sjmp	00111$
+   025C                    1424 00102$:
+                    025C   1425 	C$uart1.c$301$3$4 ==.
+                           1426 ;	libraries/src/uart/uart1.c:301: uartNRxBufferFullOccurred = 1;
+   025C D2*02              1427 	setb	_uart1RxBufferFullOccurred
+   025E 80 0C              1428 	sjmp	00111$
+   0260                    1429 00109$:
+                    0260   1430 	C$uart1.c$306$2$5 ==.
+                           1431 ;	libraries/src/uart/uart1.c:306: if (csr & 0x10) // UNCSR.FE (4) == 1
+   0260 EF                 1432 	mov	a,r7
+   0261 30 E4 02           1433 	jnb	acc.4,00105$
+                    0264   1434 	C$uart1.c$308$3$6 ==.
+                           1435 ;	libraries/src/uart/uart1.c:308: uartNRxFramingErrorOccurred = 1;
+   0264 D2*01              1436 	setb	_uart1RxFramingErrorOccurred
+   0266                    1437 00105$:
+                    0266   1438 	C$uart1.c$310$2$5 ==.
+                           1439 ;	libraries/src/uart/uart1.c:310: if (csr & 0x08) // UNCSR.ERR (3) == 1
+   0266 EF                 1440 	mov	a,r7
+   0267 30 E3 02           1441 	jnb	acc.3,00111$
+                    026A   1442 	C$uart1.c$312$3$7 ==.
+                           1443 ;	libraries/src/uart/uart1.c:312: uartNRxParityErrorOccurred = 1;
+   026A D2*00              1444 	setb	_uart1RxParityErrorOccurred
+   026C                    1445 00111$:
+   026C D0 D0              1446 	pop	psw
+   026E D0 03              1447 	pop	ar3
+   0270 D0 04              1448 	pop	ar4
+   0272 D0 05              1449 	pop	ar5
+   0274 D0 06              1450 	pop	ar6
+   0276 D0 07              1451 	pop	ar7
+   0278 D0 83              1452 	pop	dph
+   027A D0 82              1453 	pop	dpl
+   027C D0 E0              1454 	pop	acc
+                    027E   1455 	C$uart1.c$315$1$1 ==.
+                    027E   1456 	XG$ISR_URX1$0$0 ==.
+   027E 32                 1457 	reti
+                           1458 ;	eliminated unneeded push/pop b
+                           1459 ;------------------------------------------------------------
+                           1460 ;Allocation info for local variables in function 'uartTxPendingBytes'
+                           1461 ;------------------------------------------------------------
+                    027F   1462 	G$uartTxPendingBytes$0$0 ==.
+                    027F   1463 	C$uart1.c$317$1$1 ==.
+                           1464 ;	libraries/src/uart/uart1.c:317: uint8 uartTxPendingBytes() {
+                           1465 ;	-----------------------------------------
+                           1466 ;	 function uartTxPendingBytes
+                           1467 ;	-----------------------------------------
+   027F                    1468 _uartTxPendingBytes:
+                    027F   1469 	C$uart1.c$318$1$1 ==.
+                           1470 ;	libraries/src/uart/uart1.c:318: return uartTxBufferInterruptIndex - uartTxBufferMainLoopIndex;
+   027F E5*01              1471 	mov	a,_uartTxBufferInterruptIndex
+   0281 C3                 1472 	clr	c
+   0282 95*00              1473 	subb	a,_uartTxBufferMainLoopIndex
+   0284 F5 82              1474 	mov	dpl,a
+                    0286   1475 	C$uart1.c$319$1$1 ==.
+                    0286   1476 	XG$uartTxPendingBytes$0$0 ==.
+   0286 22                 1477 	ret
+                           1478 	.area CSEG    (CODE)
+                           1479 	.area CONST   (CODE)
+                           1480 	.area XINIT   (CODE)
+                           1481 	.area CABS    (ABS,CODE)

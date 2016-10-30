@@ -1,0 +1,1449 @@
+<SDCCLIB>
+
+<INDEX>
+     13595
+<MODULE>
+radio_registers 11
+Fradio_registers$USBOIF$0$0
+Fradio_registers$T1CC1L$0$0
+Fradio_registers$MEMCTR$0$0
+Fradio_registers$T2PR$0$0
+Fradio_registers$T1CC2L$0$0
+Fradio_registers$ENCDO$0$0
+Fradio_registers$IP0$0$0
+Fradio_registers$I2SSTAT$0$0
+Fradio_registers$I2SWCNT$0$0
+Fradio_registers$IP1$0$0
+Fradio_registers$MPAGE$0$0
+Fradio_registers$U1MODE$0$0
+Fradio_registers$ENCCS$0$0
+Fradio_registers$IRCON2$0$0
+Fradio_registers$WORCTRL$0$0
+Fradio_registers$PKTLEN$0$0
+Fradio_registers$AGCCTRL0$0$0
+Fradio_registers$ADCH$0$0
+Fradio_registers$AGCCTRL1$0$0
+Fradio_registers$FWT$0$0
+Fradio_registers$AGCCTRL2$0$0
+Fradio_registers$DMA0CFG$0$0
+Fradio_registers$T1CNTH$0$0
+Fradio_registers$DMA1CFG$0$0
+Fradio_registers$ENCIF_0$0$0
+Fradio_registers$ADCL$0$0
+Fradio_registers$RS0$0$0
+Fradio_registers$ENCIF_1$0$0
+Fradio_registers$F0$0$0
+Fradio_registers$RS1$0$0
+Fradio_registers$T1CNTL$0$0
+Fradio_registers$P0IFG$0$0
+Fradio_registers$F1$0$0
+Fradio_registers$WOREVT0$0$0
+Fradio_registers$P1IFG$0$0
+Fradio_registers$ADCCFG$0$0
+Fradio_registers$WOREVT1$0$0
+Fradio_registers$P2IFG$0$0
+Fradio_registers$TIMIF$0$0
+Fradio_registers$SLEEP$0$0
+Fradio_registers$ADCCON1$0$0
+Fradio_registers$PSW$0$0
+Fradio_registers$ADCCON2$0$0
+Fradio_registers$ADDR$0$0
+Fradio_registers$T1CC0$0$0
+Fradio_registers$IRCON$0$0
+Fradio_registers$ADCCON3$0$0
+Fradio_registers$CY$0$0
+Fradio_registers$T1CC1$0$0
+Fradio_registers$PICTL$0$0
+Fradio_registers$URX0IE$0$0
+Fradio_registers$T1CC2$0$0
+Fradio_registers$T3CC0$0$0
+Fradio_registers$P1IEN$0$0
+Fradio_registers$I2SCLKF0$0$0
+Fradio_registers$MDMCFG0$0$0
+Fradio_registers$FREQ0$0$0
+Fradio_registers$WDTIF$0$0
+Fradio_registers$URX1IE$0$0
+Fradio_registers$URX0IF$0$0
+Fradio_registers$T4CC0$0$0
+Fradio_registers$T3CC1$0$0
+Fradio_registers$WDCTL$0$0
+Fradio_registers$I2SCLKF1$0$0
+Fradio_registers$MDMCFG1$0$0
+Fradio_registers$FREQ1$0$0
+Fradio_registers$URX1IF$0$0
+Fradio_registers$P0DIR$0$0
+Fradio_registers$T4CC1$0$0
+Fradio_registers$USBF0$0$0
+Fradio_registers$USBPOW$0$0
+Fradio_registers$I2SCLKF2$0$0
+Fradio_registers$MCSM0$0$0
+Fradio_registers$MDMCFG2$0$0
+Fradio_registers$FREQ2$0$0
+Fradio_registers$UTX0IF$0$0
+Fradio_registers$P1DIR$0$0
+Fradio_registers$P0$0$0
+Fradio_registers$USBF1$0$0
+Fradio_registers$MCSM1$0$0
+Fradio_registers$MDMCFG3$0$0
+Fradio_registers$_IRCON25$0$0
+Fradio_registers$UTX1IF$0$0
+Fradio_registers$OVFIM$0$0
+Fradio_registers$P2DIR$0$0
+Fradio_registers$U0GCR$0$0
+Fradio_registers$P1$0$0
+Fradio_registers$USBF2$0$0
+Fradio_registers$USBINDEX$0$0
+Fradio_registers$MCSM2$0$0
+Fradio_registers$MDMCFG4$0$0
+Fradio_registers$U1ACTIVE$0$0
+Fradio_registers$_IRCON26$0$0
+Fradio_registers$_TCON_0$0$0
+Fradio_registers$U1GCR$0$0
+Fradio_registers$B$0$0
+Fradio_registers$P2$0$0
+Fradio_registers$USBF3$0$0
+Fradio_registers$U1RX_BYTE$0$0
+Fradio_registers$_IRCON27$0$0
+Fradio_registers$S0CON$0$0
+Fradio_registers$SP$0$0
+Fradio_registers$USBF4$0$0
+Fradio_registers$_TCON_2$0$0
+Fradio_registers$P0SEL$0$0
+Fradio_registers$WORIRQ$0$0
+Fradio_registers$S1CON$0$0
+Fradio_registers$USBF5$0$0
+Fradio_registers$USBADDR$0$0
+Fradio_registers$U1TX_BYTE$0$0
+Fradio_registers$OV$0$0
+Fradio_registers$P1SEL$0$0
+Fradio_registers$_TCON_4$0$0
+Fradio_registers$P2SEL$0$0
+Fradio_registers$RFIF$0$0
+Fradio_registers$ACC$0$0
+Fradio_registers$P0INP$0$0
+Fradio_registers$PA_TABLE0$0$0
+Fradio_registers$FOCCFG$0$0
+Fradio_registers$_TCON_6$0$0
+Fradio_registers$ADC$0$0
+Fradio_registers$P1INP$0$0
+Fradio_registers$T1CTL$0$0
+Fradio_registers$P2INP$0$0
+Fradio_registers$FCTL$0$0
+Fradio_registers$FADDRH$0$0
+Fradio_registers$T2CTL$0$0
+Fradio_registers$T3CTL$0$0
+Fradio_registers$DEVIATN$0$0
+Fradio_registers$T4CTL$0$0
+Fradio_registers$T3CNT$0$0
+Fradio_registers$RNDH$0$0
+Fradio_registers$IEN0$0$0
+Fradio_registers$DPH0$0$0
+Fradio_registers$SYNC0$0$0
+Fradio_registers$T4CNT$0$0
+Fradio_registers$IEN1$0$0
+Fradio_registers$FADDRL$0$0
+Fradio_registers$U0CSR$0$0
+Fradio_registers$DPH1$0$0
+Fradio_registers$I2SCFG0$0$0
+Fradio_registers$SYNC1$0$0
+Fradio_registers$P0IE$0$0
+Fradio_registers$U1CSR$0$0
+Fradio_registers$IEN2$0$0
+Fradio_registers$RFIM$0$0
+Fradio_registers$I2SDATH$0$0
+Fradio_registers$I2SCFG1$0$0
+Fradio_registers$U1ERR$0$0
+Fradio_registers$_TIMIF7$0$0
+Fradio_registers$P0IF$0$0
+Fradio_registers$P0_0$0$0
+Fradio_registers$U0UCR$0$0
+Fradio_registers$ENDIAN$0$0
+Fradio_registers$TEST0$0$0
+Fradio_registers$P1IF$0$0
+Fradio_registers$P$0$0
+Fradio_registers$_IRCON6$0$0
+Fradio_registers$P1_0$0$0
+Fradio_registers$P0_1$0$0
+Fradio_registers$U1UCR$0$0
+Fradio_registers$RNDL$0$0
+Fradio_registers$PCON$0$0
+Fradio_registers$DPL0$0$0
+Fradio_registers$USBCSIH$0$0
+Fradio_registers$TEST1$0$0
+Fradio_registers$U1FE$0$0
+Fradio_registers$B_0$0$0
+Fradio_registers$P2IF$0$0
+Fradio_registers$T3CH0IF$0$0
+Fradio_registers$P2_0$0$0
+Fradio_registers$P1_1$0$0
+Fradio_registers$P0_2$0$0
+Fradio_registers$DPL1$0$0
+Fradio_registers$TEST2$0$0
+Fradio_registers$B_1$0$0
+Fradio_registers$T4CH0IF$0$0
+Fradio_registers$T3CH1IF$0$0
+Fradio_registers$P2_1$0$0
+Fradio_registers$P1_2$0$0
+Fradio_registers$P0_3$0$0
+Fradio_registers$DMAARM$0$0
+Fradio_registers$I2SDATL$0$0
+Fradio_registers$PKTSTATUS$0$0
+Fradio_registers$B_2$0$0
+Fradio_registers$T4CH1IF$0$0
+Fradio_registers$T1IE$0$0
+Fradio_registers$P2_2$0$0
+Fradio_registers$_SOCON2$0$0
+Fradio_registers$P1_3$0$0
+Fradio_registers$P0_4$0$0
+Fradio_registers$PKTCTRL0$0$0
+Fradio_registers$B_3$0$0
+Fradio_registers$T1IF$0$0
+Fradio_registers$T2IE$0$0
+Fradio_registers$P2_3$0$0
+Fradio_registers$_SOCON3$0$0
+Fradio_registers$P1_4$0$0
+Fradio_registers$P0_5$0$0
+Fradio_registers$TCON$0$0
+Fradio_registers$USBCSIL$0$0
+Fradio_registers$PKTCTRL1$0$0
+Fradio_registers$B_4$0$0
+Fradio_registers$T2IF$0$0
+Fradio_registers$T3IE$0$0
+Fradio_registers$STIE$0$0
+Fradio_registers$P2_4$0$0
+Fradio_registers$_SOCON4$0$0
+Fradio_registers$P1_5$0$0
+Fradio_registers$P0_6$0$0
+Fradio_registers$B_5$0$0
+Fradio_registers$ACC_0$0$0
+Fradio_registers$STIF$0$0
+Fradio_registers$T3IF$0$0
+Fradio_registers$T4IE$0$0
+Fradio_registers$ADCIE$0$0
+Fradio_registers$P2_5$0$0
+Fradio_registers$_SOCON5$0$0
+Fradio_registers$P1_6$0$0
+Fradio_registers$P0_7$0$0
+Fradio_registers$USBCNTH$0$0
+Fradio_registers$USBCSOH$0$0
+Fradio_registers$USBFRMH$0$0
+Fradio_registers$B_6$0$0
+Fradio_registers$ACC_1$0$0
+Fradio_registers$T4IF$0$0
+Fradio_registers$P2_6$0$0
+Fradio_registers$_SOCON6$0$0
+Fradio_registers$P1_7$0$0
+Fradio_registers$ADCIF$0$0
+Fradio_registers$PERCFG$0$0
+Fradio_registers$FWDATA$0$0
+Fradio_registers$WORTIME0$0$0
+Fradio_registers$IOCFG0$0$0
+Fradio_registers$B_7$0$0
+Fradio_registers$ACC_2$0$0
+Fradio_registers$P2_7$0$0
+Fradio_registers$_SOCON7$0$0
+Fradio_registers$WORTIME1$0$0
+Fradio_registers$USBMAXI$0$0
+Fradio_registers$IOCFG1$0$0
+Fradio_registers$FSCAL0$0$0
+Fradio_registers$ACC_3$0$0
+Fradio_registers$FREQEST$0$0
+Fradio_registers$IOCFG2$0$0
+Fradio_registers$FSCAL1$0$0
+Fradio_registers$CHANNR$0$0
+Fradio_registers$ACC_4$0$0
+Fradio_registers$DMAREQ$0$0
+Fradio_registers$DMA0CFGH$0$0
+Fradio_registers$CLKCON$0$0
+Fradio_registers$USBCNTL$0$0
+Fradio_registers$USBCSOL$0$0
+Fradio_registers$USBFRML$0$0
+Fradio_registers$USBCIE$0$0
+Fradio_registers$FSCAL2$0$0
+Fradio_registers$ACC_5$0$0
+Fradio_registers$T1CCTL0$0$0
+Fradio_registers$DMA1CFGH$0$0
+Fradio_registers$USBCIF$0$0
+Fradio_registers$FSCAL3$0$0
+Fradio_registers$ACC_6$0$0
+Fradio_registers$RFTXRXIE$0$0
+Fradio_registers$T1CCTL1$0$0
+Fradio_registers$RFD$0$0
+Fradio_registers$U1RE$0$0
+Fradio_registers$ACC_7$0$0
+Fradio_registers$RFTXRXIF$0$0
+Fradio_registers$T1CCTL2$0$0
+Fradio_registers$T3CCTL0$0$0
+Fradio_registers$T2CT$0$0
+Fradio_registers$FSCTRL0$0$0
+Fradio_registers$T4CCTL0$0$0
+Fradio_registers$DMA0CFGL$0$0
+Fradio_registers$DMAIRQ$0$0
+Fradio_registers$T3CCTL1$0$0
+Fradio_registers$USBMAXO$0$0
+Fradio_registers$FREND0$0$0
+Fradio_registers$FSCTRL1$0$0
+Fradio_registers$T4CCTL1$0$0
+Fradio_registers$RFST$0$0
+Fradio_registers$DMA1CFGL$0$0
+Fradio_registers$FREND1$0$0
+Fradio_registers$DMAIE$0$0
+Fradio_registers$USBIIE$0$0
+Fradio_registers$RSSI$0$0
+Fradio_registers$U1SLAVE$0$0
+Fradio_registers$T3OVFIF$0$0
+Fradio_registers$DMAIF$0$0
+Fradio_registers$_IEN06$0$0
+Fradio_registers$FADDR$0$0
+Fradio_registers$U0BAUD$0$0
+Fradio_registers$USBIIF$0$0
+Fradio_registers$T4OVFIF$0$0
+Fradio_registers$_IEN16$0$0
+Fradio_registers$U1BAUD$0$0
+Fradio_registers$_IEN17$0$0
+Fradio_registers$T1CC0H$0$0
+Fradio_registers$ENCDI$0$0
+Fradio_registers$MARCSTATE$0$0
+Fradio_registers$AC$0$0
+Fradio_registers$ENCIE$0$0
+Fradio_registers$T1CC1H$0$0
+Fradio_registers$BSCFG$0$0
+Fradio_registers$T1CC2H$0$0
+Fradio_registers$LQI$0$0
+Fradio_registers$VERSION$0$0
+Fradio_registers$EA$0$0
+Fradio_registers$U0DBUF$0$0
+.__.ABS.
+Fradio_registers$USBOIE$0$0
+Fradio_registers$VCO_VC_DAC$0$0
+Fradio_registers$PARTNUM$0$0
+Fradio_registers$U1DBUF$0$0
+Fradio_registers$T1CC0L$0$0
+Fradio_registers$DPS$0$0
+XG$radioLqi$0$0
+G$radioRssi$0$0
+XG$radioRegistersInit$0$0
+A$radio_registers$800
+A$radio_registers$900
+A$radio_registers$810
+A$radio_registers$801
+G$radioLqi$0$0
+A$radio_registers$910
+A$radio_registers$901
+A$radio_registers$820
+A$radio_registers$811
+A$radio_registers$911
+A$radio_registers$830
+A$radio_registers$821
+A$radio_registers$930
+A$radio_registers$840
+A$radio_registers$831
+A$radio_registers$804
+A$radio_registers$750
+A$radio_registers$931
+A$radio_registers$904
+A$radio_registers$850
+A$radio_registers$841
+A$radio_registers$814
+A$radio_registers$805
+A$radio_registers$760
+A$radio_registers$751
+A$radio_registers$950
+A$radio_registers$914
+A$radio_registers$905
+A$radio_registers$860
+A$radio_registers$851
+A$radio_registers$824
+A$radio_registers$815
+A$radio_registers$806
+A$radio_registers$770
+A$radio_registers$761
+C$radio_registers.c$10$1$1
+A$radio_registers$951
+A$radio_registers$906
+A$radio_registers$870
+A$radio_registers$861
+A$radio_registers$834
+A$radio_registers$825
+A$radio_registers$816
+A$radio_registers$780
+A$radio_registers$771
+A$radio_registers$744
+C$radio_registers.c$20$1$1
+C$radio_registers.c$11$1$1
+G$radioRegistersInit$0$0
+A$radio_registers$970
+A$radio_registers$952
+A$radio_registers$934
+A$radio_registers$880
+A$radio_registers$871
+A$radio_registers$844
+A$radio_registers$835
+A$radio_registers$826
+A$radio_registers$790
+A$radio_registers$781
+A$radio_registers$754
+A$radio_registers$745
+C$radio_registers.c$30$1$1
+C$radio_registers.c$21$1$1
+C$radio_registers.c$12$1$1
+A$radio_registers$980
+A$radio_registers$971
+A$radio_registers$890
+A$radio_registers$881
+A$radio_registers$854
+A$radio_registers$845
+A$radio_registers$836
+A$radio_registers$809
+A$radio_registers$791
+A$radio_registers$764
+A$radio_registers$755
+A$radio_registers$746
+C$radio_registers.c$40$1$1
+C$radio_registers.c$31$1$1
+C$radio_registers.c$22$1$1
+C$radio_registers.c$13$1$1
+A$radio_registers$981
+A$radio_registers$972
+A$radio_registers$927
+A$radio_registers$909
+A$radio_registers$891
+A$radio_registers$864
+A$radio_registers$855
+A$radio_registers$846
+A$radio_registers$819
+A$radio_registers$774
+A$radio_registers$765
+A$radio_registers$756
+C$radio_registers.c$41$1$1
+C$radio_registers.c$14$1$1
+A$radio_registers$982
+A$radio_registers$973
+A$radio_registers$955
+A$radio_registers$928
+A$radio_registers$874
+A$radio_registers$865
+A$radio_registers$856
+A$radio_registers$829
+A$radio_registers$784
+A$radio_registers$775
+A$radio_registers$766
+C$radio_registers.c$51$1$1
+C$radio_registers.c$33$1$1
+C$radio_registers.c$24$1$1
+C$radio_registers.c$15$1$1
+A$radio_registers$974
+A$radio_registers$947
+A$radio_registers$929
+A$radio_registers$884
+A$radio_registers$875
+A$radio_registers$866
+A$radio_registers$839
+A$radio_registers$794
+A$radio_registers$785
+A$radio_registers$776
+A$radio_registers$749
+C$radio_registers.c$61$1$1
+C$radio_registers.c$43$1$1
+C$radio_registers.c$25$1$1
+C$radio_registers.c$16$1$1
+A$radio_registers$984
+A$radio_registers$975
+A$radio_registers$948
+A$radio_registers$894
+A$radio_registers$885
+A$radio_registers$876
+A$radio_registers$849
+A$radio_registers$795
+A$radio_registers$786
+A$radio_registers$759
+C$radio_registers.c$71$1$1
+C$radio_registers.c$62$1$1
+C$radio_registers.c$35$1$1
+C$radio_registers.c$26$1$1
+C$radio_registers.c$17$1$1
+A$radio_registers$985
+A$radio_registers$976
+A$radio_registers$949
+A$radio_registers$895
+A$radio_registers$886
+A$radio_registers$859
+A$radio_registers$796
+A$radio_registers$769
+C$radio_registers.c$72$1$1
+C$radio_registers.c$54$1$1
+C$radio_registers.c$45$1$1
+C$radio_registers.c$36$1$1
+C$radio_registers.c$27$1$1
+C$radio_registers.c$18$1$1
+A$radio_registers$977
+A$radio_registers$968
+A$radio_registers$896
+A$radio_registers$869
+A$radio_registers$779
+C$radio_registers.c$64$1$1
+C$radio_registers.c$55$1$1
+C$radio_registers.c$19$1$1
+A$radio_registers$969
+A$radio_registers$879
+A$radio_registers$789
+C$radio_registers.c$47$1$1
+C$radio_registers.c$38$1$1
+C$radio_registers.c$29$1$1
+A$radio_registers$988
+A$radio_registers$979
+A$radio_registers$889
+A$radio_registers$799
+C$radio_registers.c$66$1$1
+C$radio_registers.c$57$1$1
+A$radio_registers$899
+C$radio_registers.c$67$1$1
+C$radio_registers.c$59$1$1
+C$radio_registers.c$69$1$1
+C$radio_registers.c$4$0$0
+C$radio_registers.c$8$1$1
+C$radio_registers.c$9$1$1
+_radioCrcPassed
+_radioRssi
+XG$radioCrcPassed$0$0
+_radioLqi
+G$radioCrcPassed$0$0
+_radioRegistersInit
+XG$radioRssi$0$0
+</MODULE>
+
+</INDEX>
+
+<FILES>
+
+<FILE>
+radio_registers
+<REL>
+;!FILE libraries/src/radio_registers/radio_registers.asm
+XH
+H 1B areas 1FA global symbols
+M radio_registers
+O -mmcs51 --model-medium
+S Fradio_registers$USBOIF$0$0 DefDE04
+S Fradio_registers$T1CC1L$0$0 Def00DC
+S Fradio_registers$MEMCTR$0$0 Def00C7
+S Fradio_registers$T2PR$0$0 Def009D
+S Fradio_registers$T1CC2L$0$0 Def00DE
+S Fradio_registers$ENCDO$0$0 Def00B2
+S Fradio_registers$IP0$0$0 Def00A9
+S Fradio_registers$I2SSTAT$0$0 DefDF45
+S Fradio_registers$I2SWCNT$0$0 DefDF44
+S Fradio_registers$IP1$0$0 Def00B9
+S Fradio_registers$MPAGE$0$0 Def0093
+S Fradio_registers$U1MODE$0$0 Def00FF
+S Fradio_registers$ENCCS$0$0 Def00B3
+S Fradio_registers$IRCON2$0$0 Def00E8
+S Fradio_registers$WORCTRL$0$0 Def00A2
+S Fradio_registers$PKTLEN$0$0 DefDF02
+S Fradio_registers$AGCCTRL0$0$0 DefDF19
+S Fradio_registers$ADCH$0$0 Def00BB
+S Fradio_registers$AGCCTRL1$0$0 DefDF18
+S Fradio_registers$FWT$0$0 Def00AB
+S Fradio_registers$AGCCTRL2$0$0 DefDF17
+S Fradio_registers$DMA0CFG$0$0 DefFFFFD5D4
+S Fradio_registers$T1CNTH$0$0 Def00E3
+S Fradio_registers$DMA1CFG$0$0 DefFFFFD3D2
+S Fradio_registers$ENCIF_0$0$0 Def0098
+S Fradio_registers$ADCL$0$0 Def00BA
+S Fradio_registers$RS0$0$0 Def00D3
+S Fradio_registers$ENCIF_1$0$0 Def0099
+S Fradio_registers$F0$0$0 Def00D5
+S Fradio_registers$RS1$0$0 Def00D4
+S Fradio_registers$T1CNTL$0$0 Def00E2
+S Fradio_registers$P0IFG$0$0 Def0089
+S Fradio_registers$F1$0$0 Def00D1
+S Fradio_registers$WOREVT0$0$0 Def00A3
+S Fradio_registers$P1IFG$0$0 Def008A
+S Fradio_registers$ADCCFG$0$0 Def00F2
+S Fradio_registers$WOREVT1$0$0 Def00A4
+S Fradio_registers$P2IFG$0$0 Def008B
+S Fradio_registers$TIMIF$0$0 Def00D8
+S Fradio_registers$SLEEP$0$0 Def00BE
+S Fradio_registers$ADCCON1$0$0 Def00B4
+S Fradio_registers$PSW$0$0 Def00D0
+S Fradio_registers$ADCCON2$0$0 Def00B5
+S Fradio_registers$ADDR$0$0 DefDF05
+S Fradio_registers$T1CC0$0$0 DefFFFFDBDA
+S Fradio_registers$IRCON$0$0 Def00C0
+S Fradio_registers$ADCCON3$0$0 Def00B6
+S Fradio_registers$CY$0$0 Def00D7
+S Fradio_registers$T1CC1$0$0 DefFFFFDDDC
+S Fradio_registers$PICTL$0$0 Def008C
+S Fradio_registers$URX0IE$0$0 Def00AA
+S Fradio_registers$T1CC2$0$0 DefFFFFDFDE
+S Fradio_registers$T3CC0$0$0 Def00CD
+S Fradio_registers$P1IEN$0$0 Def008D
+S Fradio_registers$I2SCLKF0$0$0 DefDF46
+S Fradio_registers$MDMCFG0$0$0 DefDF10
+S Fradio_registers$FREQ0$0$0 DefDF0B
+S Fradio_registers$WDTIF$0$0 Def00EC
+S Fradio_registers$URX1IE$0$0 Def00AB
+S Fradio_registers$URX0IF$0$0 Def008B
+S Fradio_registers$T4CC0$0$0 Def00ED
+S Fradio_registers$T3CC1$0$0 Def00CF
+S Fradio_registers$WDCTL$0$0 Def00C9
+S Fradio_registers$I2SCLKF1$0$0 DefDF47
+S Fradio_registers$MDMCFG1$0$0 DefDF0F
+S Fradio_registers$FREQ1$0$0 DefDF0A
+S Fradio_registers$URX1IF$0$0 Def008F
+S Fradio_registers$P0DIR$0$0 Def00FD
+S Fradio_registers$T4CC1$0$0 Def00EF
+S Fradio_registers$USBF0$0$0 DefDE20
+S Fradio_registers$USBPOW$0$0 DefDE01
+S Fradio_registers$I2SCLKF2$0$0 DefDF48
+S Fradio_registers$MCSM0$0$0 DefDF14
+S Fradio_registers$MDMCFG2$0$0 DefDF0E
+S Fradio_registers$FREQ2$0$0 DefDF09
+S Fradio_registers$UTX0IF$0$0 Def00E9
+S Fradio_registers$P1DIR$0$0 Def00FE
+S Fradio_registers$P0$0$0 Def0080
+S Fradio_registers$USBF1$0$0 DefDE22
+S Fradio_registers$MCSM1$0$0 DefDF13
+S Fradio_registers$MDMCFG3$0$0 DefDF0D
+S Fradio_registers$_IRCON25$0$0 Def00ED
+S Fradio_registers$UTX1IF$0$0 Def00EA
+S Fradio_registers$OVFIM$0$0 Def00DE
+S Fradio_registers$P2DIR$0$0 Def00FF
+S Fradio_registers$U0GCR$0$0 Def00C5
+S Fradio_registers$P1$0$0 Def0090
+S Fradio_registers$USBF2$0$0 DefDE24
+S Fradio_registers$USBINDEX$0$0 DefDE0E
+S Fradio_registers$MCSM2$0$0 DefDF12
+S Fradio_registers$MDMCFG4$0$0 DefDF0C
+S Fradio_registers$U1ACTIVE$0$0 Def00F8
+S Fradio_registers$_IRCON26$0$0 Def00EE
+S Fradio_registers$_TCON_0$0$0 Def0088
+S Fradio_registers$U1GCR$0$0 Def00FC
+S Fradio_registers$B$0$0 Def00F0
+S Fradio_registers$P2$0$0 Def00A0
+S Fradio_registers$USBF3$0$0 DefDE26
+S Fradio_registers$U1RX_BYTE$0$0 Def00FA
+S Fradio_registers$_IRCON27$0$0 Def00EF
+S Fradio_registers$S0CON$0$0 Def0098
+S Fradio_registers$SP$0$0 Def0081
+S Fradio_registers$USBF4$0$0 DefDE28
+S Fradio_registers$_TCON_2$0$0 Def008A
+S Fradio_registers$P0SEL$0$0 Def00F3
+S Fradio_registers$WORIRQ$0$0 Def00A1
+S Fradio_registers$S1CON$0$0 Def009B
+S Fradio_registers$USBF5$0$0 DefDE2A
+S Fradio_registers$USBADDR$0$0 DefDE00
+S Fradio_registers$U1TX_BYTE$0$0 Def00F9
+S Fradio_registers$OV$0$0 Def00D2
+S Fradio_registers$P1SEL$0$0 Def00F4
+S Fradio_registers$_TCON_4$0$0 Def008C
+S Fradio_registers$P2SEL$0$0 Def00F5
+S Fradio_registers$RFIF$0$0 Def00E9
+S Fradio_registers$ACC$0$0 Def00E0
+S Fradio_registers$P0INP$0$0 Def008F
+S Fradio_registers$PA_TABLE0$0$0 DefDF2E
+S Fradio_registers$FOCCFG$0$0 DefDF15
+S Fradio_registers$_TCON_6$0$0 Def008E
+S Fradio_registers$ADC$0$0 DefFFFFBBBA
+S Fradio_registers$P1INP$0$0 Def00F6
+S Fradio_registers$T1CTL$0$0 Def00E4
+S Fradio_registers$P2INP$0$0 Def00F7
+S Fradio_registers$FCTL$0$0 Def00AE
+S Fradio_registers$FADDRH$0$0 Def00AD
+S Fradio_registers$T2CTL$0$0 Def009E
+S Fradio_registers$T3CTL$0$0 Def00CB
+S Fradio_registers$DEVIATN$0$0 DefDF11
+S Fradio_registers$T4CTL$0$0 Def00EB
+S Fradio_registers$T3CNT$0$0 Def00CA
+S Fradio_registers$RNDH$0$0 Def00BD
+S Fradio_registers$IEN0$0$0 Def00A8
+S Fradio_registers$DPH0$0$0 Def0083
+S Fradio_registers$SYNC0$0$0 DefDF01
+S Fradio_registers$T4CNT$0$0 Def00EA
+S Fradio_registers$IEN1$0$0 Def00B8
+S Fradio_registers$FADDRL$0$0 Def00AC
+S Fradio_registers$U0CSR$0$0 Def0086
+S Fradio_registers$DPH1$0$0 Def0085
+S Fradio_registers$I2SCFG0$0$0 DefDF40
+S Fradio_registers$SYNC1$0$0 DefDF00
+S Fradio_registers$P0IE$0$0 Def00BD
+S Fradio_registers$U1CSR$0$0 Def00F8
+S Fradio_registers$IEN2$0$0 Def009A
+S Fradio_registers$RFIM$0$0 Def0091
+S Fradio_registers$I2SDATH$0$0 DefDF43
+S Fradio_registers$I2SCFG1$0$0 DefDF41
+S Fradio_registers$U1ERR$0$0 Def00FB
+S Fradio_registers$_TIMIF7$0$0 Def00DF
+S Fradio_registers$P0IF$0$0 Def00C5
+S Fradio_registers$P0_0$0$0 Def0080
+S Fradio_registers$U0UCR$0$0 Def00C4
+S Fradio_registers$ENDIAN$0$0 Def0095
+S Fradio_registers$TEST0$0$0 DefDF25
+S Fradio_registers$P1IF$0$0 Def00EB
+S Fradio_registers$P$0$0 Def00D0
+S Fradio_registers$_IRCON6$0$0 Def00C6
+S Fradio_registers$P1_0$0$0 Def0090
+S Fradio_registers$P0_1$0$0 Def0081
+S Fradio_registers$U1UCR$0$0 Def00FB
+S Fradio_registers$RNDL$0$0 Def00BC
+S Fradio_registers$PCON$0$0 Def0087
+S Fradio_registers$DPL0$0$0 Def0082
+S Fradio_registers$USBCSIH$0$0 DefDE12
+S Fradio_registers$TEST1$0$0 DefDF24
+S Fradio_registers$U1FE$0$0 Def00FC
+S Fradio_registers$B_0$0$0 Def00F0
+S Fradio_registers$P2IF$0$0 Def00E8
+S Fradio_registers$T3CH0IF$0$0 Def00D9
+S Fradio_registers$P2_0$0$0 Def00A0
+S Fradio_registers$P1_1$0$0 Def0091
+S Fradio_registers$P0_2$0$0 Def0082
+S Fradio_registers$DPL1$0$0 Def0084
+S Fradio_registers$TEST2$0$0 DefDF23
+S Fradio_registers$B_1$0$0 Def00F1
+S Fradio_registers$T4CH0IF$0$0 Def00DC
+S Fradio_registers$T3CH1IF$0$0 Def00DA
+S Fradio_registers$P2_1$0$0 Def00A1
+S Fradio_registers$P1_2$0$0 Def0092
+S Fradio_registers$P0_3$0$0 Def0083
+S Fradio_registers$DMAARM$0$0 Def00D6
+S Fradio_registers$I2SDATL$0$0 DefDF42
+S Fradio_registers$PKTSTATUS$0$0 DefDF3C
+S Fradio_registers$B_2$0$0 Def00F2
+S Fradio_registers$T4CH1IF$0$0 Def00DD
+S Fradio_registers$T1IE$0$0 Def00B9
+S Fradio_registers$P2_2$0$0 Def00A2
+S Fradio_registers$_SOCON2$0$0 Def009A
+S Fradio_registers$P1_3$0$0 Def0093
+S Fradio_registers$P0_4$0$0 Def0084
+S Fradio_registers$PKTCTRL0$0$0 DefDF04
+S Fradio_registers$B_3$0$0 Def00F3
+S Fradio_registers$T1IF$0$0 Def00C1
+S Fradio_registers$T2IE$0$0 Def00BA
+S Fradio_registers$P2_3$0$0 Def00A3
+S Fradio_registers$_SOCON3$0$0 Def009B
+S Fradio_registers$P1_4$0$0 Def0094
+S Fradio_registers$P0_5$0$0 Def0085
+S Fradio_registers$TCON$0$0 Def0088
+S Fradio_registers$USBCSIL$0$0 DefDE11
+S Fradio_registers$PKTCTRL1$0$0 DefDF03
+S Fradio_registers$B_4$0$0 Def00F4
+S Fradio_registers$T2IF$0$0 Def00C2
+S Fradio_registers$T3IE$0$0 Def00BB
+S Fradio_registers$STIE$0$0 Def00AD
+S Fradio_registers$P2_4$0$0 Def00A4
+S Fradio_registers$_SOCON4$0$0 Def009C
+S Fradio_registers$P1_5$0$0 Def0095
+S Fradio_registers$P0_6$0$0 Def0086
+S Fradio_registers$B_5$0$0 Def00F5
+S Fradio_registers$ACC_0$0$0 Def00E0
+S Fradio_registers$STIF$0$0 Def00C7
+S Fradio_registers$T3IF$0$0 Def00C3
+S Fradio_registers$T4IE$0$0 Def00BC
+S Fradio_registers$ADCIE$0$0 Def00A9
+S Fradio_registers$P2_5$0$0 Def00A5
+S Fradio_registers$_SOCON5$0$0 Def009D
+S Fradio_registers$P1_6$0$0 Def0096
+S Fradio_registers$P0_7$0$0 Def0087
+S Fradio_registers$USBCNTH$0$0 DefDE17
+S Fradio_registers$USBCSOH$0$0 DefDE15
+S Fradio_registers$USBFRMH$0$0 DefDE0D
+S Fradio_registers$B_6$0$0 Def00F6
+S Fradio_registers$ACC_1$0$0 Def00E1
+S Fradio_registers$T4IF$0$0 Def00C4
+S Fradio_registers$P2_6$0$0 Def00A6
+S Fradio_registers$_SOCON6$0$0 Def009E
+S Fradio_registers$P1_7$0$0 Def0097
+S Fradio_registers$ADCIF$0$0 Def008D
+S Fradio_registers$PERCFG$0$0 Def00F1
+S Fradio_registers$FWDATA$0$0 Def00AF
+S Fradio_registers$WORTIME0$0$0 Def00A5
+S Fradio_registers$IOCFG0$0$0 DefDF31
+S Fradio_registers$B_7$0$0 Def00F7
+S Fradio_registers$ACC_2$0$0 Def00E2
+S Fradio_registers$P2_7$0$0 Def00A7
+S Fradio_registers$_SOCON7$0$0 Def009F
+S Fradio_registers$WORTIME1$0$0 Def00A6
+S Fradio_registers$USBMAXI$0$0 DefDE10
+S Fradio_registers$IOCFG1$0$0 DefDF30
+S Fradio_registers$FSCAL0$0$0 DefDF1F
+S Fradio_registers$ACC_3$0$0 Def00E3
+S Fradio_registers$FREQEST$0$0 DefDF38
+S Fradio_registers$IOCFG2$0$0 DefDF2F
+S Fradio_registers$FSCAL1$0$0 DefDF1E
+S Fradio_registers$CHANNR$0$0 DefDF06
+S Fradio_registers$ACC_4$0$0 Def00E4
+S Fradio_registers$DMAREQ$0$0 Def00D7
+S Fradio_registers$DMA0CFGH$0$0 Def00D5
+S Fradio_registers$CLKCON$0$0 Def00C6
+S Fradio_registers$USBCNTL$0$0 DefDE16
+S Fradio_registers$USBCSOL$0$0 DefDE14
+S Fradio_registers$USBFRML$0$0 DefDE0C
+S Fradio_registers$USBCIE$0$0 DefDE0B
+S Fradio_registers$FSCAL2$0$0 DefDF1D
+S Fradio_registers$ACC_5$0$0 Def00E5
+S Fradio_registers$T1CCTL0$0$0 Def00E5
+S Fradio_registers$DMA1CFGH$0$0 Def00D3
+S Fradio_registers$USBCIF$0$0 DefDE06
+S Fradio_registers$FSCAL3$0$0 DefDF1C
+S Fradio_registers$ACC_6$0$0 Def00E6
+S Fradio_registers$RFTXRXIE$0$0 Def00A8
+S Fradio_registers$T1CCTL1$0$0 Def00E6
+S Fradio_registers$RFD$0$0 Def00D9
+S Fradio_registers$U1RE$0$0 Def00FE
+S Fradio_registers$ACC_7$0$0 Def00E7
+S Fradio_registers$RFTXRXIF$0$0 Def0089
+S Fradio_registers$T1CCTL2$0$0 Def00E7
+S Fradio_registers$T3CCTL0$0$0 Def00CC
+S Fradio_registers$T2CT$0$0 Def009C
+S Fradio_registers$FSCTRL0$0$0 DefDF08
+S Fradio_registers$T4CCTL0$0$0 Def00EC
+S Fradio_registers$DMA0CFGL$0$0 Def00D4
+S Fradio_registers$DMAIRQ$0$0 Def00D1
+S Fradio_registers$T3CCTL1$0$0 Def00CE
+S Fradio_registers$USBMAXO$0$0 DefDE13
+S Fradio_registers$FREND0$0$0 DefDF1B
+S Fradio_registers$FSCTRL1$0$0 DefDF07
+S Fradio_registers$T4CCTL1$0$0 Def00EE
+S Fradio_registers$RFST$0$0 Def00E1
+S Fradio_registers$DMA1CFGL$0$0 Def00D2
+S Fradio_registers$FREND1$0$0 DefDF1A
+S Fradio_registers$DMAIE$0$0 Def00B8
+S Fradio_registers$USBIIE$0$0 DefDE07
+S Fradio_registers$RSSI$0$0 DefDF3A
+S Fradio_registers$U1SLAVE$0$0 Def00FD
+S Fradio_registers$T3OVFIF$0$0 Def00D8
+S Fradio_registers$DMAIF$0$0 Def00C0
+S Fradio_registers$_IEN06$0$0 Def00AE
+S Fradio_registers$FADDR$0$0 DefFFFFADAC
+S Fradio_registers$U0BAUD$0$0 Def00C2
+S Fradio_registers$USBIIF$0$0 DefDE02
+S Fradio_registers$T4OVFIF$0$0 Def00DB
+S Fradio_registers$_IEN16$0$0 Def00BE
+S Fradio_registers$U1BAUD$0$0 Def00FA
+S Fradio_registers$_IEN17$0$0 Def00BF
+S Fradio_registers$T1CC0H$0$0 Def00DB
+S Fradio_registers$ENCDI$0$0 Def00B1
+S Fradio_registers$MARCSTATE$0$0 DefDF3B
+S Fradio_registers$AC$0$0 Def00D6
+S Fradio_registers$ENCIE$0$0 Def00AC
+S Fradio_registers$T1CC1H$0$0 Def00DD
+S Fradio_registers$BSCFG$0$0 DefDF16
+S Fradio_registers$T1CC2H$0$0 Def00DF
+S Fradio_registers$LQI$0$0 DefDF39
+S Fradio_registers$VERSION$0$0 DefDF37
+S Fradio_registers$EA$0$0 Def00AF
+S Fradio_registers$U0DBUF$0$0 Def00C1
+S .__.ABS. Def0000
+S Fradio_registers$USBOIE$0$0 DefDE09
+S Fradio_registers$VCO_VC_DAC$0$0 DefDF3D
+S Fradio_registers$PARTNUM$0$0 DefDF36
+S Fradio_registers$U1DBUF$0$0 Def00F9
+S Fradio_registers$T1CC0L$0$0 Def00DA
+S Fradio_registers$DPS$0$0 Def0092
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A OSEG size 0 flags 4 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 0 flags 80 addr 0
+A PSEG size 0 flags 50 addr 0
+A XSEG size 0 flags 40 addr 0
+A XABS size 0 flags 48 addr 0
+A XISEG size 0 flags 40 addr 0
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size F9 flags 20 addr 0
+S XG$radioLqi$0$0 Def00DB
+S G$radioRssi$0$0 Def00DC
+S XG$radioRegistersInit$0$0 Def00C6
+S A$radio_registers$800 Def0043
+S A$radio_registers$900 Def00B7
+S A$radio_registers$810 Def004E
+S A$radio_registers$801 Def0045
+S G$radioLqi$0$0 Def00D1
+S A$radio_registers$910 Def00C3
+S A$radio_registers$901 Def00B9
+S A$radio_registers$820 Def005A
+S A$radio_registers$811 Def0050
+S A$radio_registers$911 Def00C5
+S A$radio_registers$830 Def0066
+S A$radio_registers$821 Def005C
+S A$radio_registers$930 Def00CC
+S A$radio_registers$840 Def0072
+S A$radio_registers$831 Def0068
+S A$radio_registers$804 Def0046
+S A$radio_registers$750 Def0009
+S A$radio_registers$931 Def00CE
+S A$radio_registers$904 Def00BA
+S A$radio_registers$850 Def007E
+S A$radio_registers$841 Def0074
+S A$radio_registers$814 Def0051
+S A$radio_registers$805 Def0049
+S A$radio_registers$760 Def0014
+S A$radio_registers$751 Def000A
+S A$radio_registers$950 Def00D6
+S A$radio_registers$914 Def00C6
+S A$radio_registers$905 Def00BD
+S A$radio_registers$860 Def0089
+S A$radio_registers$851 Def0080
+S A$radio_registers$824 Def005D
+S A$radio_registers$815 Def0054
+S A$radio_registers$806 Def004A
+S A$radio_registers$770 Def001F
+S A$radio_registers$761 Def0015
+S C$radio_registers.c$10$1$1 Def000B
+S A$radio_registers$951 Def00D8
+S A$radio_registers$906 Def00BF
+S A$radio_registers$870 Def0095
+S A$radio_registers$861 Def008B
+S A$radio_registers$834 Def0069
+S A$radio_registers$825 Def0060
+S A$radio_registers$816 Def0056
+S A$radio_registers$780 Def002B
+S A$radio_registers$771 Def0021
+S A$radio_registers$744 Def0000
+S C$radio_registers.c$20$1$1 Def0046
+S C$radio_registers.c$11$1$1 Def0011
+S G$radioRegistersInit$0$0 Def0000
+S A$radio_registers$970 Def00E0
+S A$radio_registers$952 Def00D9
+S A$radio_registers$934 Def00D0
+S A$radio_registers$880 Def00A0
+S A$radio_registers$871 Def0096
+S A$radio_registers$844 Def0075
+S A$radio_registers$835 Def006C
+S A$radio_registers$826 Def0062
+S A$radio_registers$790 Def0037
+S A$radio_registers$781 Def002D
+S A$radio_registers$754 Def000B
+S A$radio_registers$745 Def0003
+S C$radio_registers.c$30$1$1 Def0075
+S C$radio_registers.c$21$1$1 Def004B
+S C$radio_registers.c$12$1$1 Def0016
+S A$radio_registers$980 Def00EF
+S A$radio_registers$971 Def00E1
+S A$radio_registers$890 Def00AC
+S A$radio_registers$881 Def00A2
+S A$radio_registers$854 Def0081
+S A$radio_registers$845 Def0078
+S A$radio_registers$836 Def006E
+S A$radio_registers$809 Def004B
+S A$radio_registers$791 Def0039
+S A$radio_registers$764 Def0016
+S A$radio_registers$755 Def000E
+S A$radio_registers$746 Def0005
+S C$radio_registers.c$40$1$1 Def0097
+S C$radio_registers.c$31$1$1 Def007B
+S C$radio_registers.c$22$1$1 Def0051
+S C$radio_registers.c$13$1$1 Def001C
+S A$radio_registers$981 Def00F2
+S A$radio_registers$972 Def00E3
+S A$radio_registers$927 Def00C7
+S A$radio_registers$909 Def00C0
+S A$radio_registers$891 Def00AE
+S A$radio_registers$864 Def008C
+S A$radio_registers$855 Def0084
+S A$radio_registers$846 Def007A
+S A$radio_registers$819 Def0057
+S A$radio_registers$774 Def0022
+S A$radio_registers$765 Def0019
+S A$radio_registers$756 Def0010
+S C$radio_registers.c$41$1$1 Def009D
+S C$radio_registers.c$14$1$1 Def0022
+S A$radio_registers$982 Def00F3
+S A$radio_registers$973 Def00E6
+S A$radio_registers$955 Def00DB
+S A$radio_registers$928 Def00CA
+S A$radio_registers$874 Def0097
+S A$radio_registers$865 Def008F
+S A$radio_registers$856 Def0085
+S A$radio_registers$829 Def0063
+S A$radio_registers$784 Def002E
+S A$radio_registers$775 Def0025
+S A$radio_registers$766 Def001B
+S C$radio_registers.c$51$1$1 Def00B4
+S C$radio_registers.c$33$1$1 Def0081
+S C$radio_registers.c$24$1$1 Def0057
+S C$radio_registers.c$15$1$1 Def0028
+S A$radio_registers$974 Def00E7
+S A$radio_registers$947 Def00D1
+S A$radio_registers$929 Def00CB
+S A$radio_registers$884 Def00A3
+S A$radio_registers$875 Def009A
+S A$radio_registers$866 Def0091
+S A$radio_registers$839 Def006F
+S A$radio_registers$794 Def003A
+S A$radio_registers$785 Def0031
+S A$radio_registers$776 Def0027
+S A$radio_registers$749 Def0006
+S C$radio_registers.c$61$1$1 Def00C7
+S C$radio_registers.c$43$1$1 Def00A3
+S C$radio_registers.c$25$1$1 Def005D
+S C$radio_registers.c$16$1$1 Def002E
+S A$radio_registers$984 Def00F4
+S A$radio_registers$975 Def00EA
+S A$radio_registers$948 Def00D4
+S A$radio_registers$894 Def00AF
+S A$radio_registers$885 Def00A6
+S A$radio_registers$876 Def009C
+S A$radio_registers$849 Def007B
+S A$radio_registers$795 Def003D
+S A$radio_registers$786 Def0033
+S A$radio_registers$759 Def0011
+S C$radio_registers.c$71$1$1 Def00DC
+S C$radio_registers.c$62$1$1 Def00D0
+S C$radio_registers.c$35$1$1 Def0086
+S C$radio_registers.c$26$1$1 Def0063
+S C$radio_registers.c$17$1$1 Def0034
+S A$radio_registers$985 Def00F6
+S A$radio_registers$976 Def00EC
+S A$radio_registers$949 Def00D5
+S A$radio_registers$895 Def00B2
+S A$radio_registers$886 Def00A8
+S A$radio_registers$859 Def0086
+S A$radio_registers$796 Def003F
+S A$radio_registers$769 Def001C
+S C$radio_registers.c$72$1$1 Def00F8
+S C$radio_registers.c$54$1$1 Def00BA
+S C$radio_registers.c$45$1$1 Def00A9
+S C$radio_registers.c$36$1$1 Def008C
+S C$radio_registers.c$27$1$1 Def0069
+S C$radio_registers.c$18$1$1 Def003A
+S A$radio_registers$977 Def00ED
+S A$radio_registers$968 Def00DC
+S A$radio_registers$896 Def00B3
+S A$radio_registers$869 Def0092
+S A$radio_registers$779 Def0028
+S C$radio_registers.c$64$1$1 Def00D1
+S C$radio_registers.c$55$1$1 Def00C0
+S C$radio_registers.c$19$1$1 Def0040
+S A$radio_registers$969 Def00DF
+S A$radio_registers$879 Def009D
+S A$radio_registers$789 Def0034
+S C$radio_registers.c$47$1$1 Def00AF
+S C$radio_registers.c$38$1$1 Def0092
+S C$radio_registers.c$29$1$1 Def006F
+S A$radio_registers$988 Def00F8
+S A$radio_registers$979 Def00EE
+S A$radio_registers$889 Def00A9
+S A$radio_registers$799 Def0040
+S C$radio_registers.c$66$1$1 Def00D1
+S C$radio_registers.c$57$1$1 Def00C6
+S A$radio_registers$899 Def00B4
+S C$radio_registers.c$67$1$1 Def00DB
+S C$radio_registers.c$59$1$1 Def00C7
+S C$radio_registers.c$69$1$1 Def00DC
+S C$radio_registers.c$4$0$0 Def0000
+S C$radio_registers.c$8$1$1 Def0000
+S C$radio_registers.c$9$1$1 Def0006
+S _radioCrcPassed Def00C7
+S _radioRssi Def00DC
+S XG$radioCrcPassed$0$0 Def00D0
+S _radioLqi Def00D1
+S G$radioCrcPassed$0$0 Def00C7
+S _radioRegistersInit Def0000
+S XG$radioRssi$0$0 Def00F8
+A CONST size 0 flags 20 addr 0
+A XINIT size 0 flags 20 addr 0
+A CABS size 0 flags 28 addr 0
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00
+R 00 00 00 04
+T 00 00
+R 00 00 00 17
+T 00 00 90 DF 31 74 0E F0 90 DF 06 E4 F0 90 DF 07
+R 00 00 00 17
+T 00 0E 74 0A F0 90 DF 08 E4 F0 90 DF 09 74 65 F0
+R 00 00 00 17
+T 00 1C 90 DF 0A 74 0A F0 90 DF 0B 74 AA F0 90
+R 00 00 00 17
+T 00 29 DF 0C 74 4B F0 90 DF 0D 74 11 F0 90 DF 0E
+R 00 00 00 17
+T 00 37 74 73 F0 90 DF 0F 74 03 F0 90 DF 10 74 55
+R 00 00 00 17
+T 00 45 F0 90 DF 11 E4 F0 90 DF 14 74 14 F0 90
+R 00 00 00 17
+T 00 52 DF 15 74 0A F0 90 DF 1C 74 A9 F0 90 DF 1D
+R 00 00 00 17
+T 00 60 74 0A F0 90 DF 1E 74 20 F0 90 DF 1F 74 0D
+R 00 00 00 17
+T 00 6E F0 90 DF 23 74 81 F0 90 DF 24 74 35 F0 90
+R 00 00 00 17
+T 00 7C DF 25 74 0B F0 90 DF 2E E4 F0 90 DF 00 74
+R 00 00 00 17
+T 00 8A D3 F0 90 DF 01 74 91 F0 90 DF 05 E4 F0 90
+R 00 00 00 17
+T 00 98 DF 1A 74 B6 F0 90 DF 1B 74 10 F0 90 DF 16
+R 00 00 00 17
+T 00 A6 74 6C F0 90 DF 17 74 44 F0 90 DF 18 E4 F0
+R 00 00 00 17
+T 00 B4 90 DF 19 74 B2 F0 90 DF 03 74 04 F0 90
+R 00 00 00 17
+T 00 C1 DF 04 74 05 F0 22
+R 00 00 00 17
+T 00 C7
+R 00 00 00 17
+T 00 C7 90 DF 39 E0 23 54 01 24 FF 22
+R 00 00 00 17
+T 00 D1
+R 00 00 00 17
+T 00 D1 90 DF 39 E0 FF 74 7F 5F F5 82 22
+R 00 00 00 17
+T 00 DC
+R 00 00 00 17
+T 00 DC 90 DF 3A E0 FF C2 D5 75 F0 02 EF 30 E7 04
+R 00 00 00 17
+T 00 EA B2 D5 F4 04
+R 00 00 00 17
+T 00 EE
+R 00 00 00 17
+T 00 EE 84 30 D5 02 F4 04
+R 00 00 00 17
+T 00 F4
+R 00 00 00 17
+T 00 F4 24 B9 F5 82 22
+R 00 00 00 17
+</REL>
+<ADB>
+M:radio_registers
+F:G$radioRegistersInit$0$0({2}DF,SV:S),Z,0,0,0,0,0
+F:G$radioCrcPassed$0$0({2}DF,SB0$1:U),Z,0,0,0,0,0
+F:G$radioLqi$0$0({2}DF,SC:U),Z,0,0,0,0,0
+F:G$radioRssi$0$0({2}DF,SC:S),Z,0,0,0,0,0
+T:Fradio_registers$__00010000[({0}S:S$SRCADDRH$0$0({1}SC:U),Z,0,0)({1}S:S$SRCADDRL$0$0({1}SC:U),Z,0,0)({2}S:S$DESTADDRH$0$0({1}SC:U),Z,0,0)({3}S:S$DESTADDRL$0$0({1}SC:U),Z,0,0)({4}S:S$VLEN_LENH$0$0({1}SC:U),Z,0,0)({5}S:S$LENL$0$0({1}SC:U),Z,0,0)({6}S:S$
+DC6$0$0({1}SC:U),Z,0,0)({7}S:S$DC7$0$0({1}SC:U),Z,0,0)]
+S:Fradio_registers$SYNC1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$SYNC0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$PKTLEN$0$0({1}SC:U),F,0,0
+S:Fradio_registers$PKTCTRL1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$PKTCTRL0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$ADDR$0$0({1}SC:U),F,0,0
+S:Fradio_registers$CHANNR$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FSCTRL1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FSCTRL0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FREQ2$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FREQ1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FREQ0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$MDMCFG4$0$0({1}SC:U),F,0,0
+S:Fradio_registers$MDMCFG3$0$0({1}SC:U),F,0,0
+S:Fradio_registers$MDMCFG2$0$0({1}SC:U),F,0,0
+S:Fradio_registers$MDMCFG1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$MDMCFG0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$DEVIATN$0$0({1}SC:U),F,0,0
+S:Fradio_registers$MCSM2$0$0({1}SC:U),F,0,0
+S:Fradio_registers$MCSM1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$MCSM0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FOCCFG$0$0({1}SC:U),F,0,0
+S:Fradio_registers$BSCFG$0$0({1}SC:U),F,0,0
+S:Fradio_registers$AGCCTRL2$0$0({1}SC:U),F,0,0
+S:Fradio_registers$AGCCTRL1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$AGCCTRL0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FREND1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FREND0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FSCAL3$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FSCAL2$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FSCAL1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FSCAL0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$TEST2$0$0({1}SC:U),F,0,0
+S:Fradio_registers$TEST1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$TEST0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$PA_TABLE0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$IOCFG2$0$0({1}SC:U),F,0,0
+S:Fradio_registers$IOCFG1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$IOCFG0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$PARTNUM$0$0({1}SC:U),F,0,0
+S:Fradio_registers$VERSION$0$0({1}SC:U),F,0,0
+S:Fradio_registers$FREQEST$0$0({1}SC:U),F,0,0
+S:Fradio_registers$LQI$0$0({1}SC:U),F,0,0
+S:Fradio_registers$RSSI$0$0({1}SC:U),F,0,0
+S:Fradio_registers$MARCSTATE$0$0({1}SC:U),F,0,0
+S:Fradio_registers$PKTSTATUS$0$0({1}SC:U),F,0,0
+S:Fradio_registers$VCO_VC_DAC$0$0({1}SC:U),F,0,0
+S:Fradio_registers$I2SCFG0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$I2SCFG1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$I2SDATL$0$0({1}SC:U),F,0,0
+S:Fradio_registers$I2SDATH$0$0({1}SC:U),F,0,0
+S:Fradio_registers$I2SWCNT$0$0({1}SC:U),F,0,0
+S:Fradio_registers$I2SSTAT$0$0({1}SC:U),F,0,0
+S:Fradio_registers$I2SCLKF0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$I2SCLKF1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$I2SCLKF2$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBADDR$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBPOW$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBIIF$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBOIF$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBCIF$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBIIE$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBOIE$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBCIE$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBFRML$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBFRMH$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBINDEX$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBMAXI$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBCSIL$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBCSIH$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBMAXO$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBCSOL$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBCSOH$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBCNTL$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBCNTH$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBF0$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBF1$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBF2$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBF3$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBF4$0$0({1}SC:U),F,0,0
+S:Fradio_registers$USBF5$0$0({1}SC:U),F,0,0
+S:Fradio_registers$P0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$SP$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DPL0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DPH0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DPL1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DPH1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U0CSR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$PCON$0$0({1}SC:U),I,0,0
+S:Fradio_registers$TCON$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P0IFG$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P1IFG$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P2IFG$0$0({1}SC:U),I,0,0
+S:Fradio_registers$PICTL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P1IEN$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P0INP$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$RFIM$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DPS$0$0({1}SC:U),I,0,0
+S:Fradio_registers$MPAGE$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ENDIAN$0$0({1}SC:U),I,0,0
+S:Fradio_registers$S0CON$0$0({1}SC:U),I,0,0
+S:Fradio_registers$IEN2$0$0({1}SC:U),I,0,0
+S:Fradio_registers$S1CON$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T2CT$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T2PR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T2CTL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P2$0$0({1}SC:U),I,0,0
+S:Fradio_registers$WORIRQ$0$0({1}SC:U),I,0,0
+S:Fradio_registers$WORCTRL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$WOREVT0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$WOREVT1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$WORTIME0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$WORTIME1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$IEN0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$IP0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$FWT$0$0({1}SC:U),I,0,0
+S:Fradio_registers$FADDRL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$FADDRH$0$0({1}SC:U),I,0,0
+S:Fradio_registers$FCTL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$FWDATA$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ENCDI$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ENCDO$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ENCCS$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ADCCON1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ADCCON2$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ADCCON3$0$0({1}SC:U),I,0,0
+S:Fradio_registers$IEN1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$IP1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ADCL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ADCH$0$0({1}SC:U),I,0,0
+S:Fradio_registers$RNDL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$RNDH$0$0({1}SC:U),I,0,0
+S:Fradio_registers$SLEEP$0$0({1}SC:U),I,0,0
+S:Fradio_registers$IRCON$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U0DBUF$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U0BAUD$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U0UCR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U0GCR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$CLKCON$0$0({1}SC:U),I,0,0
+S:Fradio_registers$MEMCTR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$WDCTL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T3CNT$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T3CTL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T3CCTL0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T3CC0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T3CCTL1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T3CC1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$PSW$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DMAIRQ$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DMA1CFGL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DMA1CFGH$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DMA0CFGL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DMA0CFGH$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DMAARM$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DMAREQ$0$0({1}SC:U),I,0,0
+S:Fradio_registers$TIMIF$0$0({1}SC:U),I,0,0
+S:Fradio_registers$RFD$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CC0L$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CC0H$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CC1L$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CC1H$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CC2L$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CC2H$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ACC$0$0({1}SC:U),I,0,0
+S:Fradio_registers$RFST$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CNTL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CNTH$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CTL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CCTL0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CCTL1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T1CCTL2$0$0({1}SC:U),I,0,0
+S:Fradio_registers$IRCON2$0$0({1}SC:U),I,0,0
+S:Fradio_registers$RFIF$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T4CNT$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T4CTL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T4CCTL0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T4CC0$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T4CCTL1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$T4CC1$0$0({1}SC:U),I,0,0
+S:Fradio_registers$B$0$0({1}SC:U),I,0,0
+S:Fradio_registers$PERCFG$0$0({1}SC:U),I,0,0
+S:Fradio_registers$ADCCFG$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P0SEL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P1SEL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P2SEL$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P1INP$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P2INP$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U1CSR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U1DBUF$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U1BAUD$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U1UCR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$U1GCR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P0DIR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P1DIR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$P2DIR$0$0({1}SC:U),I,0,0
+S:Fradio_registers$DMA0CFG$0$0({2}SI:U),I,0,0
+S:Fradio_registers$DMA1CFG$0$0({2}SI:U),I,0,0
+S:Fradio_registers$FADDR$0$0({2}SI:U),I,0,0
+S:Fradio_registers$ADC$0$0({2}SI:U),I,0,0
+S:Fradio_registers$T1CC0$0$0({2}SI:U),I,0,0
+S:Fradio_registers$T1CC1$0$0({2}SI:U),I,0,0
+S:Fradio_registers$T1CC2$0$0({2}SI:U),I,0,0
+S:Fradio_registers$P0_0$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P0_1$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P0_2$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P0_3$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P0_4$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P0_5$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P0_6$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P0_7$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_TCON_0$0$0({1}SX:U),J,0,0
+S:Fradio_registers$RFTXRXIF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_TCON_2$0$0({1}SX:U),J,0,0
+S:Fradio_registers$URX0IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_TCON_4$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ADCIF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_TCON_6$0$0({1}SX:U),J,0,0
+S:Fradio_registers$URX1IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P1_0$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P1_1$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P1_2$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P1_3$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P1_4$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P1_5$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P1_6$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P1_7$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ENCIF_0$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ENCIF_1$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_SOCON2$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_SOCON3$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_SOCON4$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_SOCON5$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_SOCON6$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_SOCON7$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P2_0$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P2_1$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P2_2$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P2_3$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P2_4$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P2_5$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P2_6$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P2_7$0$0({1}SX:U),J,0,0
+S:Fradio_registers$RFTXRXIE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ADCIE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$URX0IE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$URX1IE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ENCIE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$STIE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_IEN06$0$0({1}SX:U),J,0,0
+S:Fradio_registers$EA$0$0({1}SX:U),J,0,0
+S:Fradio_registers$DMAIE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T1IE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T2IE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T3IE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T4IE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P0IE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_IEN16$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_IEN17$0$0({1}SX:U),J,0,0
+S:Fradio_registers$DMAIF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T1IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T2IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T3IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T4IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P0IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_IRCON6$0$0({1}SX:U),J,0,0
+S:Fradio_registers$STIF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P$0$0({1}SX:U),J,0,0
+S:Fradio_registers$F1$0$0({1}SX:U),J,0,0
+S:Fradio_registers$OV$0$0({1}SX:U),J,0,0
+S:Fradio_registers$RS0$0$0({1}SX:U),J,0,0
+S:Fradio_registers$RS1$0$0({1}SX:U),J,0,0
+S:Fradio_registers$F0$0$0({1}SX:U),J,0,0
+S:Fradio_registers$AC$0$0({1}SX:U),J,0,0
+S:Fradio_registers$CY$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T3OVFIF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T3CH0IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T3CH1IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T4OVFIF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T4CH0IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$T4CH1IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$OVFIM$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_TIMIF7$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ACC_0$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ACC_1$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ACC_2$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ACC_3$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ACC_4$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ACC_5$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ACC_6$0$0({1}SX:U),J,0,0
+S:Fradio_registers$ACC_7$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P2IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$UTX0IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$UTX1IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$P1IF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$WDTIF$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_IRCON25$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_IRCON26$0$0({1}SX:U),J,0,0
+S:Fradio_registers$_IRCON27$0$0({1}SX:U),J,0,0
+S:Fradio_registers$B_0$0$0({1}SX:U),J,0,0
+S:Fradio_registers$B_1$0$0({1}SX:U),J,0,0
+S:Fradio_registers$B_2$0$0({1}SX:U),J,0,0
+S:Fradio_registers$B_3$0$0({1}SX:U),J,0,0
+S:Fradio_registers$B_4$0$0({1}SX:U),J,0,0
+S:Fradio_registers$B_5$0$0({1}SX:U),J,0,0
+S:Fradio_registers$B_6$0$0({1}SX:U),J,0,0
+S:Fradio_registers$B_7$0$0({1}SX:U),J,0,0
+S:Fradio_registers$U1ACTIVE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$U1TX_BYTE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$U1RX_BYTE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$U1ERR$0$0({1}SX:U),J,0,0
+S:Fradio_registers$U1FE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$U1SLAVE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$U1RE$0$0({1}SX:U),J,0,0
+S:Fradio_registers$U1MODE$0$0({1}SX:U),J,0,0
+</ADB>
+</FILE>
+
+</FILES>
+
+</SDCCLIB>

@@ -1,0 +1,381 @@
+;!FILE libraries/src/random/random_from_sernum.asm
+XH
+H 1B areas 151 global symbols
+M random_from_sernum
+O -mmcs51 --model-medium
+S Frandom_from_sernum$USBIIE$0$0 DefDE07
+S Frandom_from_sernum$RSSI$0$0 DefDF3A
+S Frandom_from_sernum$U1SLAVE$0$0 Def00FD
+S Frandom_from_sernum$T3OVFIF$0$0 Def00D8
+S Frandom_from_sernum$DMAIF$0$0 Def00C0
+S Frandom_from_sernum$_IEN06$0$0 Def00AE
+S Frandom_from_sernum$FADDR$0$0 DefFFFFADAC
+S Frandom_from_sernum$U0BAUD$0$0 Def00C2
+S Frandom_from_sernum$USBIIF$0$0 DefDE02
+S Frandom_from_sernum$T4OVFIF$0$0 Def00DB
+S Frandom_from_sernum$_IEN16$0$0 Def00BE
+S Frandom_from_sernum$U1BAUD$0$0 Def00FA
+S _randomSeed Ref0000
+S Frandom_from_sernum$_IEN17$0$0 Def00BF
+S Frandom_from_sernum$T1CC0H$0$0 Def00DB
+S Frandom_from_sernum$ENCDI$0$0 Def00B1
+S Frandom_from_sernum$MARCSTATE$0$0 DefDF3B
+S Frandom_from_sernum$AC$0$0 Def00D6
+S Frandom_from_sernum$ENCIE$0$0 Def00AC
+S Frandom_from_sernum$T1CC1H$0$0 Def00DD
+S Frandom_from_sernum$BSCFG$0$0 DefDF16
+S Frandom_from_sernum$T1CC2H$0$0 Def00DF
+S Frandom_from_sernum$LQI$0$0 DefDF39
+S Frandom_from_sernum$VERSION$0$0 DefDF37
+S Frandom_from_sernum$EA$0$0 Def00AF
+S Frandom_from_sernum$U0DBUF$0$0 Def00C1
+S Frandom_from_sernum$USBOIE$0$0 DefDE09
+S Frandom_from_sernum$VCO_VC_DAC$0$0 DefDF3D
+S Frandom_from_sernum$PARTNUM$0$0 DefDF36
+S Frandom_from_sernum$U1DBUF$0$0 Def00F9
+S Frandom_from_sernum$T1CC0L$0$0 Def00DA
+S Frandom_from_sernum$DPS$0$0 Def0092
+S Frandom_from_sernum$USBOIF$0$0 DefDE04
+S Frandom_from_sernum$T1CC1L$0$0 Def00DC
+S Frandom_from_sernum$MEMCTR$0$0 Def00C7
+S Frandom_from_sernum$T2PR$0$0 Def009D
+S Frandom_from_sernum$T1CC2L$0$0 Def00DE
+S Frandom_from_sernum$ENCDO$0$0 Def00B2
+S Frandom_from_sernum$IP0$0$0 Def00A9
+S Frandom_from_sernum$I2SSTAT$0$0 DefDF45
+S Frandom_from_sernum$I2SWCNT$0$0 DefDF44
+S Frandom_from_sernum$IP1$0$0 Def00B9
+S Frandom_from_sernum$MPAGE$0$0 Def0093
+S Frandom_from_sernum$U1MODE$0$0 Def00FF
+S Frandom_from_sernum$ENCCS$0$0 Def00B3
+S Frandom_from_sernum$IRCON2$0$0 Def00E8
+S Frandom_from_sernum$WORCTRL$0$0 Def00A2
+S Frandom_from_sernum$PKTLEN$0$0 DefDF02
+S Frandom_from_sernum$AGCCTRL0$0$0 DefDF19
+S Frandom_from_sernum$ADCH$0$0 Def00BB
+S Frandom_from_sernum$AGCCTRL1$0$0 DefDF18
+S Frandom_from_sernum$FWT$0$0 Def00AB
+S Frandom_from_sernum$AGCCTRL2$0$0 DefDF17
+S Frandom_from_sernum$DMA0CFG$0$0 DefFFFFD5D4
+S Frandom_from_sernum$T1CNTH$0$0 Def00E3
+S Frandom_from_sernum$DMA1CFG$0$0 DefFFFFD3D2
+S Frandom_from_sernum$ENCIF_0$0$0 Def0098
+S Frandom_from_sernum$ADCL$0$0 Def00BA
+S Frandom_from_sernum$RS0$0$0 Def00D3
+S Frandom_from_sernum$ENCIF_1$0$0 Def0099
+S Frandom_from_sernum$F0$0$0 Def00D5
+S Frandom_from_sernum$RS1$0$0 Def00D4
+S Frandom_from_sernum$T1CNTL$0$0 Def00E2
+S Frandom_from_sernum$P0IFG$0$0 Def0089
+S Frandom_from_sernum$F1$0$0 Def00D1
+S Frandom_from_sernum$WOREVT0$0$0 Def00A3
+S Frandom_from_sernum$P1IFG$0$0 Def008A
+S Frandom_from_sernum$ADCCFG$0$0 Def00F2
+S Frandom_from_sernum$WOREVT1$0$0 Def00A4
+S Frandom_from_sernum$P2IFG$0$0 Def008B
+S Frandom_from_sernum$TIMIF$0$0 Def00D8
+S Frandom_from_sernum$SLEEP$0$0 Def00BE
+S Frandom_from_sernum$ADCCON1$0$0 Def00B4
+S Frandom_from_sernum$PSW$0$0 Def00D0
+S Frandom_from_sernum$ADCCON2$0$0 Def00B5
+S Frandom_from_sernum$ADDR$0$0 DefDF05
+S Frandom_from_sernum$T1CC0$0$0 DefFFFFDBDA
+S Frandom_from_sernum$IRCON$0$0 Def00C0
+S Frandom_from_sernum$ADCCON3$0$0 Def00B6
+S Frandom_from_sernum$CY$0$0 Def00D7
+S Frandom_from_sernum$T1CC1$0$0 DefFFFFDDDC
+S Frandom_from_sernum$PICTL$0$0 Def008C
+S Frandom_from_sernum$URX0IE$0$0 Def00AA
+S Frandom_from_sernum$T1CC2$0$0 DefFFFFDFDE
+S Frandom_from_sernum$T3CC0$0$0 Def00CD
+S Frandom_from_sernum$P1IEN$0$0 Def008D
+S Frandom_from_sernum$I2SCLKF0$0$0 DefDF46
+S Frandom_from_sernum$MDMCFG0$0$0 DefDF10
+S Frandom_from_sernum$FREQ0$0$0 DefDF0B
+S Frandom_from_sernum$WDTIF$0$0 Def00EC
+S Frandom_from_sernum$URX1IE$0$0 Def00AB
+S Frandom_from_sernum$URX0IF$0$0 Def008B
+S Frandom_from_sernum$T4CC0$0$0 Def00ED
+S Frandom_from_sernum$T3CC1$0$0 Def00CF
+S Frandom_from_sernum$WDCTL$0$0 Def00C9
+S Frandom_from_sernum$I2SCLKF1$0$0 DefDF47
+S Frandom_from_sernum$MDMCFG1$0$0 DefDF0F
+S Frandom_from_sernum$FREQ1$0$0 DefDF0A
+S Frandom_from_sernum$URX1IF$0$0 Def008F
+S Frandom_from_sernum$P0DIR$0$0 Def00FD
+S Frandom_from_sernum$T4CC1$0$0 Def00EF
+S Frandom_from_sernum$USBF0$0$0 DefDE20
+S Frandom_from_sernum$USBPOW$0$0 DefDE01
+S Frandom_from_sernum$I2SCLKF2$0$0 DefDF48
+S Frandom_from_sernum$MCSM0$0$0 DefDF14
+S Frandom_from_sernum$MDMCFG2$0$0 DefDF0E
+S Frandom_from_sernum$FREQ2$0$0 DefDF09
+S Frandom_from_sernum$UTX0IF$0$0 Def00E9
+S Frandom_from_sernum$P1DIR$0$0 Def00FE
+S Frandom_from_sernum$P0$0$0 Def0080
+S Frandom_from_sernum$USBF1$0$0 DefDE22
+S Frandom_from_sernum$MCSM1$0$0 DefDF13
+S Frandom_from_sernum$MDMCFG3$0$0 DefDF0D
+S Frandom_from_sernum$_IRCON25$0$0 Def00ED
+S Frandom_from_sernum$UTX1IF$0$0 Def00EA
+S Frandom_from_sernum$OVFIM$0$0 Def00DE
+S Frandom_from_sernum$P2DIR$0$0 Def00FF
+S Frandom_from_sernum$U0GCR$0$0 Def00C5
+S Frandom_from_sernum$P1$0$0 Def0090
+S _randomSeed_PARM_2 Ref0000
+S Frandom_from_sernum$USBF2$0$0 DefDE24
+S Frandom_from_sernum$USBINDEX$0$0 DefDE0E
+S Frandom_from_sernum$MCSM2$0$0 DefDF12
+S Frandom_from_sernum$MDMCFG4$0$0 DefDF0C
+S Frandom_from_sernum$U1ACTIVE$0$0 Def00F8
+S Frandom_from_sernum$_IRCON26$0$0 Def00EE
+S Frandom_from_sernum$_TCON_0$0$0 Def0088
+S Frandom_from_sernum$U1GCR$0$0 Def00FC
+S Frandom_from_sernum$B$0$0 Def00F0
+S Frandom_from_sernum$P2$0$0 Def00A0
+S Frandom_from_sernum$USBF3$0$0 DefDE26
+S Frandom_from_sernum$U1RX_BYTE$0$0 Def00FA
+S Frandom_from_sernum$_IRCON27$0$0 Def00EF
+S Frandom_from_sernum$S0CON$0$0 Def0098
+S Frandom_from_sernum$SP$0$0 Def0081
+S Frandom_from_sernum$USBF4$0$0 DefDE28
+S Frandom_from_sernum$_TCON_2$0$0 Def008A
+S Frandom_from_sernum$P0SEL$0$0 Def00F3
+S Frandom_from_sernum$WORIRQ$0$0 Def00A1
+S Frandom_from_sernum$S1CON$0$0 Def009B
+S Frandom_from_sernum$USBF5$0$0 DefDE2A
+S Frandom_from_sernum$USBADDR$0$0 DefDE00
+S Frandom_from_sernum$U1TX_BYTE$0$0 Def00F9
+S Frandom_from_sernum$OV$0$0 Def00D2
+S Frandom_from_sernum$P1SEL$0$0 Def00F4
+S Frandom_from_sernum$_TCON_4$0$0 Def008C
+S Frandom_from_sernum$P2SEL$0$0 Def00F5
+S Frandom_from_sernum$RFIF$0$0 Def00E9
+S Frandom_from_sernum$ACC$0$0 Def00E0
+S Frandom_from_sernum$P0INP$0$0 Def008F
+S Frandom_from_sernum$PA_TABLE0$0$0 DefDF2E
+S Frandom_from_sernum$FOCCFG$0$0 DefDF15
+S Frandom_from_sernum$_TCON_6$0$0 Def008E
+S Frandom_from_sernum$ADC$0$0 DefFFFFBBBA
+S Frandom_from_sernum$P1INP$0$0 Def00F6
+S Frandom_from_sernum$T1CTL$0$0 Def00E4
+S _serialNumber Ref0000
+S Frandom_from_sernum$P2INP$0$0 Def00F7
+S Frandom_from_sernum$FCTL$0$0 Def00AE
+S Frandom_from_sernum$FADDRH$0$0 Def00AD
+S Frandom_from_sernum$T2CTL$0$0 Def009E
+S Frandom_from_sernum$T3CTL$0$0 Def00CB
+S Frandom_from_sernum$DEVIATN$0$0 DefDF11
+S Frandom_from_sernum$T4CTL$0$0 Def00EB
+S Frandom_from_sernum$T3CNT$0$0 Def00CA
+S Frandom_from_sernum$RNDH$0$0 Def00BD
+S Frandom_from_sernum$IEN0$0$0 Def00A8
+S Frandom_from_sernum$DPH0$0$0 Def0083
+S Frandom_from_sernum$SYNC0$0$0 DefDF01
+S Frandom_from_sernum$T4CNT$0$0 Def00EA
+S Frandom_from_sernum$IEN1$0$0 Def00B8
+S Frandom_from_sernum$FADDRL$0$0 Def00AC
+S Frandom_from_sernum$U0CSR$0$0 Def0086
+S Frandom_from_sernum$DPH1$0$0 Def0085
+S Frandom_from_sernum$I2SCFG0$0$0 DefDF40
+S Frandom_from_sernum$SYNC1$0$0 DefDF00
+S Frandom_from_sernum$P0IE$0$0 Def00BD
+S Frandom_from_sernum$U1CSR$0$0 Def00F8
+S Frandom_from_sernum$IEN2$0$0 Def009A
+S Frandom_from_sernum$RFIM$0$0 Def0091
+S Frandom_from_sernum$I2SDATH$0$0 DefDF43
+S Frandom_from_sernum$I2SCFG1$0$0 DefDF41
+S Frandom_from_sernum$U1ERR$0$0 Def00FB
+S Frandom_from_sernum$_TIMIF7$0$0 Def00DF
+S Frandom_from_sernum$P0IF$0$0 Def00C5
+S Frandom_from_sernum$P0_0$0$0 Def0080
+S Frandom_from_sernum$U0UCR$0$0 Def00C4
+S Frandom_from_sernum$ENDIAN$0$0 Def0095
+S Frandom_from_sernum$TEST0$0$0 DefDF25
+S Frandom_from_sernum$P1IF$0$0 Def00EB
+S Frandom_from_sernum$P$0$0 Def00D0
+S Frandom_from_sernum$_IRCON6$0$0 Def00C6
+S Frandom_from_sernum$P1_0$0$0 Def0090
+S Frandom_from_sernum$P0_1$0$0 Def0081
+S Frandom_from_sernum$U1UCR$0$0 Def00FB
+S Frandom_from_sernum$RNDL$0$0 Def00BC
+S Frandom_from_sernum$PCON$0$0 Def0087
+S Frandom_from_sernum$DPL0$0$0 Def0082
+S Frandom_from_sernum$USBCSIH$0$0 DefDE12
+S Frandom_from_sernum$TEST1$0$0 DefDF24
+S Frandom_from_sernum$U1FE$0$0 Def00FC
+S Frandom_from_sernum$B_0$0$0 Def00F0
+S Frandom_from_sernum$P2IF$0$0 Def00E8
+S Frandom_from_sernum$T3CH0IF$0$0 Def00D9
+S Frandom_from_sernum$P2_0$0$0 Def00A0
+S Frandom_from_sernum$P1_1$0$0 Def0091
+S Frandom_from_sernum$P0_2$0$0 Def0082
+S Frandom_from_sernum$DPL1$0$0 Def0084
+S Frandom_from_sernum$TEST2$0$0 DefDF23
+S Frandom_from_sernum$B_1$0$0 Def00F1
+S Frandom_from_sernum$T4CH0IF$0$0 Def00DC
+S Frandom_from_sernum$T3CH1IF$0$0 Def00DA
+S Frandom_from_sernum$P2_1$0$0 Def00A1
+S Frandom_from_sernum$P1_2$0$0 Def0092
+S Frandom_from_sernum$P0_3$0$0 Def0083
+S Frandom_from_sernum$DMAARM$0$0 Def00D6
+S Frandom_from_sernum$I2SDATL$0$0 DefDF42
+S Frandom_from_sernum$PKTSTATUS$0$0 DefDF3C
+S Frandom_from_sernum$B_2$0$0 Def00F2
+S Frandom_from_sernum$T4CH1IF$0$0 Def00DD
+S Frandom_from_sernum$T1IE$0$0 Def00B9
+S Frandom_from_sernum$P2_2$0$0 Def00A2
+S Frandom_from_sernum$_SOCON2$0$0 Def009A
+S Frandom_from_sernum$P1_3$0$0 Def0093
+S Frandom_from_sernum$P0_4$0$0 Def0084
+S Frandom_from_sernum$PKTCTRL0$0$0 DefDF04
+S Frandom_from_sernum$B_3$0$0 Def00F3
+S Frandom_from_sernum$T1IF$0$0 Def00C1
+S Frandom_from_sernum$T2IE$0$0 Def00BA
+S Frandom_from_sernum$P2_3$0$0 Def00A3
+S Frandom_from_sernum$_SOCON3$0$0 Def009B
+S Frandom_from_sernum$P1_4$0$0 Def0094
+S Frandom_from_sernum$P0_5$0$0 Def0085
+S Frandom_from_sernum$TCON$0$0 Def0088
+S Frandom_from_sernum$USBCSIL$0$0 DefDE11
+S Frandom_from_sernum$PKTCTRL1$0$0 DefDF03
+S Frandom_from_sernum$B_4$0$0 Def00F4
+S Frandom_from_sernum$T2IF$0$0 Def00C2
+S Frandom_from_sernum$T3IE$0$0 Def00BB
+S Frandom_from_sernum$STIE$0$0 Def00AD
+S Frandom_from_sernum$P2_4$0$0 Def00A4
+S Frandom_from_sernum$_SOCON4$0$0 Def009C
+S Frandom_from_sernum$P1_5$0$0 Def0095
+S Frandom_from_sernum$P0_6$0$0 Def0086
+S Frandom_from_sernum$B_5$0$0 Def00F5
+S Frandom_from_sernum$ACC_0$0$0 Def00E0
+S Frandom_from_sernum$STIF$0$0 Def00C7
+S Frandom_from_sernum$T3IF$0$0 Def00C3
+S Frandom_from_sernum$T4IE$0$0 Def00BC
+S Frandom_from_sernum$ADCIE$0$0 Def00A9
+S Frandom_from_sernum$P2_5$0$0 Def00A5
+S Frandom_from_sernum$_SOCON5$0$0 Def009D
+S Frandom_from_sernum$P1_6$0$0 Def0096
+S Frandom_from_sernum$P0_7$0$0 Def0087
+S Frandom_from_sernum$USBCNTH$0$0 DefDE17
+S Frandom_from_sernum$USBCSOH$0$0 DefDE15
+S Frandom_from_sernum$USBFRMH$0$0 DefDE0D
+S Frandom_from_sernum$B_6$0$0 Def00F6
+S Frandom_from_sernum$ACC_1$0$0 Def00E1
+S Frandom_from_sernum$T4IF$0$0 Def00C4
+S Frandom_from_sernum$P2_6$0$0 Def00A6
+S Frandom_from_sernum$_SOCON6$0$0 Def009E
+S Frandom_from_sernum$P1_7$0$0 Def0097
+S Frandom_from_sernum$ADCIF$0$0 Def008D
+S Frandom_from_sernum$PERCFG$0$0 Def00F1
+S Frandom_from_sernum$FWDATA$0$0 Def00AF
+S Frandom_from_sernum$WORTIME0$0$0 Def00A5
+S Frandom_from_sernum$IOCFG0$0$0 DefDF31
+S Frandom_from_sernum$B_7$0$0 Def00F7
+S Frandom_from_sernum$ACC_2$0$0 Def00E2
+S Frandom_from_sernum$P2_7$0$0 Def00A7
+S Frandom_from_sernum$_SOCON7$0$0 Def009F
+S Frandom_from_sernum$WORTIME1$0$0 Def00A6
+S Frandom_from_sernum$USBMAXI$0$0 DefDE10
+S Frandom_from_sernum$IOCFG1$0$0 DefDF30
+S Frandom_from_sernum$FSCAL0$0$0 DefDF1F
+S Frandom_from_sernum$ACC_3$0$0 Def00E3
+S Frandom_from_sernum$FREQEST$0$0 DefDF38
+S Frandom_from_sernum$IOCFG2$0$0 DefDF2F
+S Frandom_from_sernum$FSCAL1$0$0 DefDF1E
+S Frandom_from_sernum$CHANNR$0$0 DefDF06
+S Frandom_from_sernum$ACC_4$0$0 Def00E4
+S Frandom_from_sernum$DMAREQ$0$0 Def00D7
+S Frandom_from_sernum$DMA0CFGH$0$0 Def00D5
+S Frandom_from_sernum$CLKCON$0$0 Def00C6
+S Frandom_from_sernum$USBCNTL$0$0 DefDE16
+S Frandom_from_sernum$USBCSOL$0$0 DefDE14
+S Frandom_from_sernum$USBFRML$0$0 DefDE0C
+S Frandom_from_sernum$USBCIE$0$0 DefDE0B
+S Frandom_from_sernum$FSCAL2$0$0 DefDF1D
+S Frandom_from_sernum$ACC_5$0$0 Def00E5
+S Frandom_from_sernum$T1CCTL0$0$0 Def00E5
+S Frandom_from_sernum$DMA1CFGH$0$0 Def00D3
+S Frandom_from_sernum$USBCIF$0$0 DefDE06
+S Frandom_from_sernum$FSCAL3$0$0 DefDF1C
+S Frandom_from_sernum$ACC_6$0$0 Def00E6
+S Frandom_from_sernum$RFTXRXIE$0$0 Def00A8
+S Frandom_from_sernum$T1CCTL1$0$0 Def00E6
+S Frandom_from_sernum$RFD$0$0 Def00D9
+S Frandom_from_sernum$U1RE$0$0 Def00FE
+S Frandom_from_sernum$ACC_7$0$0 Def00E7
+S Frandom_from_sernum$RFTXRXIF$0$0 Def0089
+S Frandom_from_sernum$T1CCTL2$0$0 Def00E7
+S Frandom_from_sernum$T3CCTL0$0$0 Def00CC
+S Frandom_from_sernum$T2CT$0$0 Def009C
+S Frandom_from_sernum$FSCTRL0$0$0 DefDF08
+S Frandom_from_sernum$T4CCTL0$0$0 Def00EC
+S Frandom_from_sernum$DMA0CFGL$0$0 Def00D4
+S Frandom_from_sernum$DMAIRQ$0$0 Def00D1
+S Frandom_from_sernum$T3CCTL1$0$0 Def00CE
+S Frandom_from_sernum$USBMAXO$0$0 DefDE13
+S Frandom_from_sernum$FREND0$0$0 DefDF1B
+S Frandom_from_sernum$FSCTRL1$0$0 DefDF07
+S Frandom_from_sernum$T4CCTL1$0$0 Def00EE
+S Frandom_from_sernum$RFST$0$0 Def00E1
+S Frandom_from_sernum$DMA1CFGL$0$0 Def00D2
+S .__.ABS. Def0000
+S Frandom_from_sernum$FREND1$0$0 DefDF1A
+S Frandom_from_sernum$DMAIE$0$0 Def00B8
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A OSEG size 0 flags 4 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 0 flags 80 addr 0
+A PSEG size 0 flags 50 addr 0
+A XSEG size 0 flags 40 addr 0
+A XABS size 0 flags 48 addr 0
+A XISEG size 0 flags 40 addr 0
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size 14 flags 20 addr 0
+S XG$randomSeedFromSerialNumber$0$0 Def0013
+S A$random_from_sernum$750 Def000D
+S G$randomSeedFromSerialNumber$0$0 Def0000
+S A$random_from_sernum$751 Def000E
+S A$random_from_sernum$742 Def0000
+S A$random_from_sernum$752 Def0010
+S A$random_from_sernum$743 Def0003
+S A$random_from_sernum$744 Def0004
+S A$random_from_sernum$745 Def0005
+S A$random_from_sernum$755 Def0013
+S A$random_from_sernum$746 Def0006
+S A$random_from_sernum$747 Def0009
+S A$random_from_sernum$748 Def000A
+S A$random_from_sernum$749 Def000B
+S C$random_from_sernum.c$17$1$1 Def0000
+S C$random_from_sernum.c$18$1$1 Def0013
+S C$random_from_sernum.c$9$0$0 Def0000
+S _randomSeedFromSerialNumber Def0000
+A CONST size 0 flags 20 addr 0
+A XINIT size 0 flags 20 addr 0
+A CABS size 0 flags 28 addr 0
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00
+R 00 00 00 04
+T 00 00
+R 00 00 00 17
+T 00 00 90 00 00 E4 93 FF 90 00 01 E4 93 78
+R 00 00 00 17 02 03 00 9C 02 09 00 9C
+T 00 0C 00 00 00 F2 8F 82 12 00 00 22
+R 00 00 00 17 F1 03 02 00 77 02 09 00 0C

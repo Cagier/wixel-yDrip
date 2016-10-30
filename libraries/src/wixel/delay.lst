@@ -1,0 +1,64 @@
+                              1     .module delay
+                              2     .optsdcc -mmcs51 --model-medium
+                              3     .area CSEG (CODE)
+                              4 
+                              5 ; void delayMicroseconds(unsigned char microseconds)
+                              6 ;   microseconds: number of microseconds delay; any value between 0 and 255
+                              7 ; 
+                              8 ;   This function delays for the specified number of microseconds using
+                              9 ;   a simple loop.  If an interrupt occurs during this function, the delay
+                             10 ;   will be longer than desired.
+                             11 ; 
+                             12 ; Prerequisites:  The chip must be running at 24 MHz, and flash prefetching
+                             13 ;   and caching must be enabled (MEMCTR = 0;).  
+                             14 ;
+                             15 ; Tests:
+                             16 ;    This function was tested using the following code:
+                             17 ;    P1_0 = 1;
+                             18 ;    delayMicroseconds(100);
+                             19 ;    P1_0 = 0;
+                             20 ;    delayMicroseconds(10);
+                             21 ;    P1_0 = 1;
+                             22 ;    delayMicroseconds(1);
+                             23 ;    P1_0 = 0;
+                             24 ;    The code above produced a high pulse of 100.20/100.16 microseconds,
+                             25 ;    followed by a low pulse of 10.20/10.16 microseconds,
+                             26 ;    followed by a high pulse of 1.20/1.16 microseconds.
+                             27 ;    (The exact length of the pulses depended on the parity of the address
+                             28 ;    of the lcall instruction used to call delayMicroseconds.)
+                             29 ;
+                             30 ; Implementation Details:
+                             31 ;    By experimenting, David determined that jumping (e.g. lcall, ret, or
+                             32 ;    ajmp) to an odd address takes one more instruction cycle than jumping
+                             33 ;    to an even address.
+                             34 ;
+                             35 ;    To get around this, the delayMicroseconds loop contains two jumps:
+                             36 ;    one of these jumps will be to an odd address, and one will be to an
+                             37 ;    even address, so the effects of the object's parity will always
+                             38 ;    cancel out.
+                             39 ;
+                             40 ;    The ".even" directive doesn't guarantee that the absolute address of
+                             41 ;    a label will be even, it seems to only effect relative positioning
+                             42 ;    within an object file, so we could not use the .even directive.
+                             43 ;
+                             44     .globl _delayMicroseconds
+   0000                      45 loopStart:
+   0000 00                   46     nop
+   0001 00                   47     nop
+   0002 00                   48     nop
+   0003 00                   49     nop
+   0004 02 00 0B             50     ljmp loopJump
+   0007 00                   51     nop    ; unreachable instruction
+   0008 00                   52     nop    ; unreachable instruction
+   0009 00                   53     nop    ; unreachable instruction
+   000A 00                   54     nop    ; unreachable instruction
+   000B                      55 loopJump:  ; Guaranteed to have a different parity from loopStart.
+   000B 00                   56     nop
+   000C 00                   57     nop
+   000D 00                   58     nop
+   000E 00                   59     nop
+   000F                      60 _delayMicroseconds:
+   000F E5 82                61     mov a,dpl
+   0011 60 03                62     jz loopEnd
+   0013 D5 82 EA             63     djnz dpl, loopStart
+   0016 22                   64 loopEnd: ret

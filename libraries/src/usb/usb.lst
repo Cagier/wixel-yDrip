@@ -1,0 +1,2489 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:07 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module usb
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _disableUsbPullup
+                             13 	.globl _enableUsbPullup
+                             14 	.globl _vinPowerPresent
+                             15 	.globl _usbPowerPresent
+                             16 	.globl _usbCallbackControlWriteHandler
+                             17 	.globl _usbCallbackInitEndpoints
+                             18 	.globl _usbCallbackClassDescriptorHandler
+                             19 	.globl _usbCallbackSetupHandler
+                             20 	.globl _controlTransferState
+                             21 	.globl _usbDeviceState
+                             22 	.globl _controlTransferBytesLeft
+                             23 	.globl _usbSetupPacket
+                             24 	.globl _usbInitEndpointOut_PARM_2
+                             25 	.globl _usbInitEndpointIn_PARM_2
+                             26 	.globl _usbControlWrite_PARM_2
+                             27 	.globl _usbControlRead_PARM_2
+                             28 	.globl _usbWriteFifo_PARM_3
+                             29 	.globl _usbWriteFifo_PARM_2
+                             30 	.globl _usbReadFifo_PARM_3
+                             31 	.globl _usbReadFifo_PARM_2
+                             32 	.globl _controlTransferPointer
+                             33 	.globl _usbActivityFlag
+                             34 	.globl _usbSuspendMode
+                             35 	.globl _usbInit
+                             36 	.globl _usbReadFifo
+                             37 	.globl _usbWriteFifo
+                             38 	.globl _usbPoll
+                             39 	.globl _usbStandardDeviceRequestHandler
+                             40 	.globl _usbSuspended
+                             41 	.globl _usbSleep
+                             42 	.globl _usbControlRead
+                             43 	.globl _usbControlWrite
+                             44 	.globl _usbControlAcknowledge
+                             45 	.globl _usbControlStall
+                             46 	.globl _usbInitEndpointIn
+                             47 	.globl _usbInitEndpointOut
+                             48 ;--------------------------------------------------------
+                             49 ; special function registers
+                             50 ;--------------------------------------------------------
+                             51 	.area RSEG    (ABS,DATA)
+   0000                      52 	.org 0x0000
+                    0080     53 Fusb$P0$0$0 == 0x0080
+                    0080     54 _P0	=	0x0080
+                    0081     55 Fusb$SP$0$0 == 0x0081
+                    0081     56 _SP	=	0x0081
+                    0082     57 Fusb$DPL0$0$0 == 0x0082
+                    0082     58 _DPL0	=	0x0082
+                    0083     59 Fusb$DPH0$0$0 == 0x0083
+                    0083     60 _DPH0	=	0x0083
+                    0084     61 Fusb$DPL1$0$0 == 0x0084
+                    0084     62 _DPL1	=	0x0084
+                    0085     63 Fusb$DPH1$0$0 == 0x0085
+                    0085     64 _DPH1	=	0x0085
+                    0086     65 Fusb$U0CSR$0$0 == 0x0086
+                    0086     66 _U0CSR	=	0x0086
+                    0087     67 Fusb$PCON$0$0 == 0x0087
+                    0087     68 _PCON	=	0x0087
+                    0088     69 Fusb$TCON$0$0 == 0x0088
+                    0088     70 _TCON	=	0x0088
+                    0089     71 Fusb$P0IFG$0$0 == 0x0089
+                    0089     72 _P0IFG	=	0x0089
+                    008A     73 Fusb$P1IFG$0$0 == 0x008a
+                    008A     74 _P1IFG	=	0x008a
+                    008B     75 Fusb$P2IFG$0$0 == 0x008b
+                    008B     76 _P2IFG	=	0x008b
+                    008C     77 Fusb$PICTL$0$0 == 0x008c
+                    008C     78 _PICTL	=	0x008c
+                    008D     79 Fusb$P1IEN$0$0 == 0x008d
+                    008D     80 _P1IEN	=	0x008d
+                    008F     81 Fusb$P0INP$0$0 == 0x008f
+                    008F     82 _P0INP	=	0x008f
+                    0090     83 Fusb$P1$0$0 == 0x0090
+                    0090     84 _P1	=	0x0090
+                    0091     85 Fusb$RFIM$0$0 == 0x0091
+                    0091     86 _RFIM	=	0x0091
+                    0092     87 Fusb$DPS$0$0 == 0x0092
+                    0092     88 _DPS	=	0x0092
+                    0093     89 Fusb$MPAGE$0$0 == 0x0093
+                    0093     90 _MPAGE	=	0x0093
+                    0095     91 Fusb$ENDIAN$0$0 == 0x0095
+                    0095     92 _ENDIAN	=	0x0095
+                    0098     93 Fusb$S0CON$0$0 == 0x0098
+                    0098     94 _S0CON	=	0x0098
+                    009A     95 Fusb$IEN2$0$0 == 0x009a
+                    009A     96 _IEN2	=	0x009a
+                    009B     97 Fusb$S1CON$0$0 == 0x009b
+                    009B     98 _S1CON	=	0x009b
+                    009C     99 Fusb$T2CT$0$0 == 0x009c
+                    009C    100 _T2CT	=	0x009c
+                    009D    101 Fusb$T2PR$0$0 == 0x009d
+                    009D    102 _T2PR	=	0x009d
+                    009E    103 Fusb$T2CTL$0$0 == 0x009e
+                    009E    104 _T2CTL	=	0x009e
+                    00A0    105 Fusb$P2$0$0 == 0x00a0
+                    00A0    106 _P2	=	0x00a0
+                    00A1    107 Fusb$WORIRQ$0$0 == 0x00a1
+                    00A1    108 _WORIRQ	=	0x00a1
+                    00A2    109 Fusb$WORCTRL$0$0 == 0x00a2
+                    00A2    110 _WORCTRL	=	0x00a2
+                    00A3    111 Fusb$WOREVT0$0$0 == 0x00a3
+                    00A3    112 _WOREVT0	=	0x00a3
+                    00A4    113 Fusb$WOREVT1$0$0 == 0x00a4
+                    00A4    114 _WOREVT1	=	0x00a4
+                    00A5    115 Fusb$WORTIME0$0$0 == 0x00a5
+                    00A5    116 _WORTIME0	=	0x00a5
+                    00A6    117 Fusb$WORTIME1$0$0 == 0x00a6
+                    00A6    118 _WORTIME1	=	0x00a6
+                    00A8    119 Fusb$IEN0$0$0 == 0x00a8
+                    00A8    120 _IEN0	=	0x00a8
+                    00A9    121 Fusb$IP0$0$0 == 0x00a9
+                    00A9    122 _IP0	=	0x00a9
+                    00AB    123 Fusb$FWT$0$0 == 0x00ab
+                    00AB    124 _FWT	=	0x00ab
+                    00AC    125 Fusb$FADDRL$0$0 == 0x00ac
+                    00AC    126 _FADDRL	=	0x00ac
+                    00AD    127 Fusb$FADDRH$0$0 == 0x00ad
+                    00AD    128 _FADDRH	=	0x00ad
+                    00AE    129 Fusb$FCTL$0$0 == 0x00ae
+                    00AE    130 _FCTL	=	0x00ae
+                    00AF    131 Fusb$FWDATA$0$0 == 0x00af
+                    00AF    132 _FWDATA	=	0x00af
+                    00B1    133 Fusb$ENCDI$0$0 == 0x00b1
+                    00B1    134 _ENCDI	=	0x00b1
+                    00B2    135 Fusb$ENCDO$0$0 == 0x00b2
+                    00B2    136 _ENCDO	=	0x00b2
+                    00B3    137 Fusb$ENCCS$0$0 == 0x00b3
+                    00B3    138 _ENCCS	=	0x00b3
+                    00B4    139 Fusb$ADCCON1$0$0 == 0x00b4
+                    00B4    140 _ADCCON1	=	0x00b4
+                    00B5    141 Fusb$ADCCON2$0$0 == 0x00b5
+                    00B5    142 _ADCCON2	=	0x00b5
+                    00B6    143 Fusb$ADCCON3$0$0 == 0x00b6
+                    00B6    144 _ADCCON3	=	0x00b6
+                    00B8    145 Fusb$IEN1$0$0 == 0x00b8
+                    00B8    146 _IEN1	=	0x00b8
+                    00B9    147 Fusb$IP1$0$0 == 0x00b9
+                    00B9    148 _IP1	=	0x00b9
+                    00BA    149 Fusb$ADCL$0$0 == 0x00ba
+                    00BA    150 _ADCL	=	0x00ba
+                    00BB    151 Fusb$ADCH$0$0 == 0x00bb
+                    00BB    152 _ADCH	=	0x00bb
+                    00BC    153 Fusb$RNDL$0$0 == 0x00bc
+                    00BC    154 _RNDL	=	0x00bc
+                    00BD    155 Fusb$RNDH$0$0 == 0x00bd
+                    00BD    156 _RNDH	=	0x00bd
+                    00BE    157 Fusb$SLEEP$0$0 == 0x00be
+                    00BE    158 _SLEEP	=	0x00be
+                    00C0    159 Fusb$IRCON$0$0 == 0x00c0
+                    00C0    160 _IRCON	=	0x00c0
+                    00C1    161 Fusb$U0DBUF$0$0 == 0x00c1
+                    00C1    162 _U0DBUF	=	0x00c1
+                    00C2    163 Fusb$U0BAUD$0$0 == 0x00c2
+                    00C2    164 _U0BAUD	=	0x00c2
+                    00C4    165 Fusb$U0UCR$0$0 == 0x00c4
+                    00C4    166 _U0UCR	=	0x00c4
+                    00C5    167 Fusb$U0GCR$0$0 == 0x00c5
+                    00C5    168 _U0GCR	=	0x00c5
+                    00C6    169 Fusb$CLKCON$0$0 == 0x00c6
+                    00C6    170 _CLKCON	=	0x00c6
+                    00C7    171 Fusb$MEMCTR$0$0 == 0x00c7
+                    00C7    172 _MEMCTR	=	0x00c7
+                    00C9    173 Fusb$WDCTL$0$0 == 0x00c9
+                    00C9    174 _WDCTL	=	0x00c9
+                    00CA    175 Fusb$T3CNT$0$0 == 0x00ca
+                    00CA    176 _T3CNT	=	0x00ca
+                    00CB    177 Fusb$T3CTL$0$0 == 0x00cb
+                    00CB    178 _T3CTL	=	0x00cb
+                    00CC    179 Fusb$T3CCTL0$0$0 == 0x00cc
+                    00CC    180 _T3CCTL0	=	0x00cc
+                    00CD    181 Fusb$T3CC0$0$0 == 0x00cd
+                    00CD    182 _T3CC0	=	0x00cd
+                    00CE    183 Fusb$T3CCTL1$0$0 == 0x00ce
+                    00CE    184 _T3CCTL1	=	0x00ce
+                    00CF    185 Fusb$T3CC1$0$0 == 0x00cf
+                    00CF    186 _T3CC1	=	0x00cf
+                    00D0    187 Fusb$PSW$0$0 == 0x00d0
+                    00D0    188 _PSW	=	0x00d0
+                    00D1    189 Fusb$DMAIRQ$0$0 == 0x00d1
+                    00D1    190 _DMAIRQ	=	0x00d1
+                    00D2    191 Fusb$DMA1CFGL$0$0 == 0x00d2
+                    00D2    192 _DMA1CFGL	=	0x00d2
+                    00D3    193 Fusb$DMA1CFGH$0$0 == 0x00d3
+                    00D3    194 _DMA1CFGH	=	0x00d3
+                    00D4    195 Fusb$DMA0CFGL$0$0 == 0x00d4
+                    00D4    196 _DMA0CFGL	=	0x00d4
+                    00D5    197 Fusb$DMA0CFGH$0$0 == 0x00d5
+                    00D5    198 _DMA0CFGH	=	0x00d5
+                    00D6    199 Fusb$DMAARM$0$0 == 0x00d6
+                    00D6    200 _DMAARM	=	0x00d6
+                    00D7    201 Fusb$DMAREQ$0$0 == 0x00d7
+                    00D7    202 _DMAREQ	=	0x00d7
+                    00D8    203 Fusb$TIMIF$0$0 == 0x00d8
+                    00D8    204 _TIMIF	=	0x00d8
+                    00D9    205 Fusb$RFD$0$0 == 0x00d9
+                    00D9    206 _RFD	=	0x00d9
+                    00DA    207 Fusb$T1CC0L$0$0 == 0x00da
+                    00DA    208 _T1CC0L	=	0x00da
+                    00DB    209 Fusb$T1CC0H$0$0 == 0x00db
+                    00DB    210 _T1CC0H	=	0x00db
+                    00DC    211 Fusb$T1CC1L$0$0 == 0x00dc
+                    00DC    212 _T1CC1L	=	0x00dc
+                    00DD    213 Fusb$T1CC1H$0$0 == 0x00dd
+                    00DD    214 _T1CC1H	=	0x00dd
+                    00DE    215 Fusb$T1CC2L$0$0 == 0x00de
+                    00DE    216 _T1CC2L	=	0x00de
+                    00DF    217 Fusb$T1CC2H$0$0 == 0x00df
+                    00DF    218 _T1CC2H	=	0x00df
+                    00E0    219 Fusb$ACC$0$0 == 0x00e0
+                    00E0    220 _ACC	=	0x00e0
+                    00E1    221 Fusb$RFST$0$0 == 0x00e1
+                    00E1    222 _RFST	=	0x00e1
+                    00E2    223 Fusb$T1CNTL$0$0 == 0x00e2
+                    00E2    224 _T1CNTL	=	0x00e2
+                    00E3    225 Fusb$T1CNTH$0$0 == 0x00e3
+                    00E3    226 _T1CNTH	=	0x00e3
+                    00E4    227 Fusb$T1CTL$0$0 == 0x00e4
+                    00E4    228 _T1CTL	=	0x00e4
+                    00E5    229 Fusb$T1CCTL0$0$0 == 0x00e5
+                    00E5    230 _T1CCTL0	=	0x00e5
+                    00E6    231 Fusb$T1CCTL1$0$0 == 0x00e6
+                    00E6    232 _T1CCTL1	=	0x00e6
+                    00E7    233 Fusb$T1CCTL2$0$0 == 0x00e7
+                    00E7    234 _T1CCTL2	=	0x00e7
+                    00E8    235 Fusb$IRCON2$0$0 == 0x00e8
+                    00E8    236 _IRCON2	=	0x00e8
+                    00E9    237 Fusb$RFIF$0$0 == 0x00e9
+                    00E9    238 _RFIF	=	0x00e9
+                    00EA    239 Fusb$T4CNT$0$0 == 0x00ea
+                    00EA    240 _T4CNT	=	0x00ea
+                    00EB    241 Fusb$T4CTL$0$0 == 0x00eb
+                    00EB    242 _T4CTL	=	0x00eb
+                    00EC    243 Fusb$T4CCTL0$0$0 == 0x00ec
+                    00EC    244 _T4CCTL0	=	0x00ec
+                    00ED    245 Fusb$T4CC0$0$0 == 0x00ed
+                    00ED    246 _T4CC0	=	0x00ed
+                    00EE    247 Fusb$T4CCTL1$0$0 == 0x00ee
+                    00EE    248 _T4CCTL1	=	0x00ee
+                    00EF    249 Fusb$T4CC1$0$0 == 0x00ef
+                    00EF    250 _T4CC1	=	0x00ef
+                    00F0    251 Fusb$B$0$0 == 0x00f0
+                    00F0    252 _B	=	0x00f0
+                    00F1    253 Fusb$PERCFG$0$0 == 0x00f1
+                    00F1    254 _PERCFG	=	0x00f1
+                    00F2    255 Fusb$ADCCFG$0$0 == 0x00f2
+                    00F2    256 _ADCCFG	=	0x00f2
+                    00F3    257 Fusb$P0SEL$0$0 == 0x00f3
+                    00F3    258 _P0SEL	=	0x00f3
+                    00F4    259 Fusb$P1SEL$0$0 == 0x00f4
+                    00F4    260 _P1SEL	=	0x00f4
+                    00F5    261 Fusb$P2SEL$0$0 == 0x00f5
+                    00F5    262 _P2SEL	=	0x00f5
+                    00F6    263 Fusb$P1INP$0$0 == 0x00f6
+                    00F6    264 _P1INP	=	0x00f6
+                    00F7    265 Fusb$P2INP$0$0 == 0x00f7
+                    00F7    266 _P2INP	=	0x00f7
+                    00F8    267 Fusb$U1CSR$0$0 == 0x00f8
+                    00F8    268 _U1CSR	=	0x00f8
+                    00F9    269 Fusb$U1DBUF$0$0 == 0x00f9
+                    00F9    270 _U1DBUF	=	0x00f9
+                    00FA    271 Fusb$U1BAUD$0$0 == 0x00fa
+                    00FA    272 _U1BAUD	=	0x00fa
+                    00FB    273 Fusb$U1UCR$0$0 == 0x00fb
+                    00FB    274 _U1UCR	=	0x00fb
+                    00FC    275 Fusb$U1GCR$0$0 == 0x00fc
+                    00FC    276 _U1GCR	=	0x00fc
+                    00FD    277 Fusb$P0DIR$0$0 == 0x00fd
+                    00FD    278 _P0DIR	=	0x00fd
+                    00FE    279 Fusb$P1DIR$0$0 == 0x00fe
+                    00FE    280 _P1DIR	=	0x00fe
+                    00FF    281 Fusb$P2DIR$0$0 == 0x00ff
+                    00FF    282 _P2DIR	=	0x00ff
+                    FFFFD5D4    283 Fusb$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    284 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    285 Fusb$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    286 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    287 Fusb$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    288 _FADDR	=	0xffffadac
+                    FFFFBBBA    289 Fusb$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    290 _ADC	=	0xffffbbba
+                    FFFFDBDA    291 Fusb$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    292 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    293 Fusb$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    294 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    295 Fusb$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    296 _T1CC2	=	0xffffdfde
+                            297 ;--------------------------------------------------------
+                            298 ; special function bits
+                            299 ;--------------------------------------------------------
+                            300 	.area RSEG    (ABS,DATA)
+   0000                     301 	.org 0x0000
+                    0080    302 Fusb$P0_0$0$0 == 0x0080
+                    0080    303 _P0_0	=	0x0080
+                    0081    304 Fusb$P0_1$0$0 == 0x0081
+                    0081    305 _P0_1	=	0x0081
+                    0082    306 Fusb$P0_2$0$0 == 0x0082
+                    0082    307 _P0_2	=	0x0082
+                    0083    308 Fusb$P0_3$0$0 == 0x0083
+                    0083    309 _P0_3	=	0x0083
+                    0084    310 Fusb$P0_4$0$0 == 0x0084
+                    0084    311 _P0_4	=	0x0084
+                    0085    312 Fusb$P0_5$0$0 == 0x0085
+                    0085    313 _P0_5	=	0x0085
+                    0086    314 Fusb$P0_6$0$0 == 0x0086
+                    0086    315 _P0_6	=	0x0086
+                    0087    316 Fusb$P0_7$0$0 == 0x0087
+                    0087    317 _P0_7	=	0x0087
+                    0088    318 Fusb$_TCON_0$0$0 == 0x0088
+                    0088    319 __TCON_0	=	0x0088
+                    0089    320 Fusb$RFTXRXIF$0$0 == 0x0089
+                    0089    321 _RFTXRXIF	=	0x0089
+                    008A    322 Fusb$_TCON_2$0$0 == 0x008a
+                    008A    323 __TCON_2	=	0x008a
+                    008B    324 Fusb$URX0IF$0$0 == 0x008b
+                    008B    325 _URX0IF	=	0x008b
+                    008C    326 Fusb$_TCON_4$0$0 == 0x008c
+                    008C    327 __TCON_4	=	0x008c
+                    008D    328 Fusb$ADCIF$0$0 == 0x008d
+                    008D    329 _ADCIF	=	0x008d
+                    008E    330 Fusb$_TCON_6$0$0 == 0x008e
+                    008E    331 __TCON_6	=	0x008e
+                    008F    332 Fusb$URX1IF$0$0 == 0x008f
+                    008F    333 _URX1IF	=	0x008f
+                    0090    334 Fusb$P1_0$0$0 == 0x0090
+                    0090    335 _P1_0	=	0x0090
+                    0091    336 Fusb$P1_1$0$0 == 0x0091
+                    0091    337 _P1_1	=	0x0091
+                    0092    338 Fusb$P1_2$0$0 == 0x0092
+                    0092    339 _P1_2	=	0x0092
+                    0093    340 Fusb$P1_3$0$0 == 0x0093
+                    0093    341 _P1_3	=	0x0093
+                    0094    342 Fusb$P1_4$0$0 == 0x0094
+                    0094    343 _P1_4	=	0x0094
+                    0095    344 Fusb$P1_5$0$0 == 0x0095
+                    0095    345 _P1_5	=	0x0095
+                    0096    346 Fusb$P1_6$0$0 == 0x0096
+                    0096    347 _P1_6	=	0x0096
+                    0097    348 Fusb$P1_7$0$0 == 0x0097
+                    0097    349 _P1_7	=	0x0097
+                    0098    350 Fusb$ENCIF_0$0$0 == 0x0098
+                    0098    351 _ENCIF_0	=	0x0098
+                    0099    352 Fusb$ENCIF_1$0$0 == 0x0099
+                    0099    353 _ENCIF_1	=	0x0099
+                    009A    354 Fusb$_SOCON2$0$0 == 0x009a
+                    009A    355 __SOCON2	=	0x009a
+                    009B    356 Fusb$_SOCON3$0$0 == 0x009b
+                    009B    357 __SOCON3	=	0x009b
+                    009C    358 Fusb$_SOCON4$0$0 == 0x009c
+                    009C    359 __SOCON4	=	0x009c
+                    009D    360 Fusb$_SOCON5$0$0 == 0x009d
+                    009D    361 __SOCON5	=	0x009d
+                    009E    362 Fusb$_SOCON6$0$0 == 0x009e
+                    009E    363 __SOCON6	=	0x009e
+                    009F    364 Fusb$_SOCON7$0$0 == 0x009f
+                    009F    365 __SOCON7	=	0x009f
+                    00A0    366 Fusb$P2_0$0$0 == 0x00a0
+                    00A0    367 _P2_0	=	0x00a0
+                    00A1    368 Fusb$P2_1$0$0 == 0x00a1
+                    00A1    369 _P2_1	=	0x00a1
+                    00A2    370 Fusb$P2_2$0$0 == 0x00a2
+                    00A2    371 _P2_2	=	0x00a2
+                    00A3    372 Fusb$P2_3$0$0 == 0x00a3
+                    00A3    373 _P2_3	=	0x00a3
+                    00A4    374 Fusb$P2_4$0$0 == 0x00a4
+                    00A4    375 _P2_4	=	0x00a4
+                    00A5    376 Fusb$P2_5$0$0 == 0x00a5
+                    00A5    377 _P2_5	=	0x00a5
+                    00A6    378 Fusb$P2_6$0$0 == 0x00a6
+                    00A6    379 _P2_6	=	0x00a6
+                    00A7    380 Fusb$P2_7$0$0 == 0x00a7
+                    00A7    381 _P2_7	=	0x00a7
+                    00A8    382 Fusb$RFTXRXIE$0$0 == 0x00a8
+                    00A8    383 _RFTXRXIE	=	0x00a8
+                    00A9    384 Fusb$ADCIE$0$0 == 0x00a9
+                    00A9    385 _ADCIE	=	0x00a9
+                    00AA    386 Fusb$URX0IE$0$0 == 0x00aa
+                    00AA    387 _URX0IE	=	0x00aa
+                    00AB    388 Fusb$URX1IE$0$0 == 0x00ab
+                    00AB    389 _URX1IE	=	0x00ab
+                    00AC    390 Fusb$ENCIE$0$0 == 0x00ac
+                    00AC    391 _ENCIE	=	0x00ac
+                    00AD    392 Fusb$STIE$0$0 == 0x00ad
+                    00AD    393 _STIE	=	0x00ad
+                    00AE    394 Fusb$_IEN06$0$0 == 0x00ae
+                    00AE    395 __IEN06	=	0x00ae
+                    00AF    396 Fusb$EA$0$0 == 0x00af
+                    00AF    397 _EA	=	0x00af
+                    00B8    398 Fusb$DMAIE$0$0 == 0x00b8
+                    00B8    399 _DMAIE	=	0x00b8
+                    00B9    400 Fusb$T1IE$0$0 == 0x00b9
+                    00B9    401 _T1IE	=	0x00b9
+                    00BA    402 Fusb$T2IE$0$0 == 0x00ba
+                    00BA    403 _T2IE	=	0x00ba
+                    00BB    404 Fusb$T3IE$0$0 == 0x00bb
+                    00BB    405 _T3IE	=	0x00bb
+                    00BC    406 Fusb$T4IE$0$0 == 0x00bc
+                    00BC    407 _T4IE	=	0x00bc
+                    00BD    408 Fusb$P0IE$0$0 == 0x00bd
+                    00BD    409 _P0IE	=	0x00bd
+                    00BE    410 Fusb$_IEN16$0$0 == 0x00be
+                    00BE    411 __IEN16	=	0x00be
+                    00BF    412 Fusb$_IEN17$0$0 == 0x00bf
+                    00BF    413 __IEN17	=	0x00bf
+                    00C0    414 Fusb$DMAIF$0$0 == 0x00c0
+                    00C0    415 _DMAIF	=	0x00c0
+                    00C1    416 Fusb$T1IF$0$0 == 0x00c1
+                    00C1    417 _T1IF	=	0x00c1
+                    00C2    418 Fusb$T2IF$0$0 == 0x00c2
+                    00C2    419 _T2IF	=	0x00c2
+                    00C3    420 Fusb$T3IF$0$0 == 0x00c3
+                    00C3    421 _T3IF	=	0x00c3
+                    00C4    422 Fusb$T4IF$0$0 == 0x00c4
+                    00C4    423 _T4IF	=	0x00c4
+                    00C5    424 Fusb$P0IF$0$0 == 0x00c5
+                    00C5    425 _P0IF	=	0x00c5
+                    00C6    426 Fusb$_IRCON6$0$0 == 0x00c6
+                    00C6    427 __IRCON6	=	0x00c6
+                    00C7    428 Fusb$STIF$0$0 == 0x00c7
+                    00C7    429 _STIF	=	0x00c7
+                    00D0    430 Fusb$P$0$0 == 0x00d0
+                    00D0    431 _P	=	0x00d0
+                    00D1    432 Fusb$F1$0$0 == 0x00d1
+                    00D1    433 _F1	=	0x00d1
+                    00D2    434 Fusb$OV$0$0 == 0x00d2
+                    00D2    435 _OV	=	0x00d2
+                    00D3    436 Fusb$RS0$0$0 == 0x00d3
+                    00D3    437 _RS0	=	0x00d3
+                    00D4    438 Fusb$RS1$0$0 == 0x00d4
+                    00D4    439 _RS1	=	0x00d4
+                    00D5    440 Fusb$F0$0$0 == 0x00d5
+                    00D5    441 _F0	=	0x00d5
+                    00D6    442 Fusb$AC$0$0 == 0x00d6
+                    00D6    443 _AC	=	0x00d6
+                    00D7    444 Fusb$CY$0$0 == 0x00d7
+                    00D7    445 _CY	=	0x00d7
+                    00D8    446 Fusb$T3OVFIF$0$0 == 0x00d8
+                    00D8    447 _T3OVFIF	=	0x00d8
+                    00D9    448 Fusb$T3CH0IF$0$0 == 0x00d9
+                    00D9    449 _T3CH0IF	=	0x00d9
+                    00DA    450 Fusb$T3CH1IF$0$0 == 0x00da
+                    00DA    451 _T3CH1IF	=	0x00da
+                    00DB    452 Fusb$T4OVFIF$0$0 == 0x00db
+                    00DB    453 _T4OVFIF	=	0x00db
+                    00DC    454 Fusb$T4CH0IF$0$0 == 0x00dc
+                    00DC    455 _T4CH0IF	=	0x00dc
+                    00DD    456 Fusb$T4CH1IF$0$0 == 0x00dd
+                    00DD    457 _T4CH1IF	=	0x00dd
+                    00DE    458 Fusb$OVFIM$0$0 == 0x00de
+                    00DE    459 _OVFIM	=	0x00de
+                    00DF    460 Fusb$_TIMIF7$0$0 == 0x00df
+                    00DF    461 __TIMIF7	=	0x00df
+                    00E0    462 Fusb$ACC_0$0$0 == 0x00e0
+                    00E0    463 _ACC_0	=	0x00e0
+                    00E1    464 Fusb$ACC_1$0$0 == 0x00e1
+                    00E1    465 _ACC_1	=	0x00e1
+                    00E2    466 Fusb$ACC_2$0$0 == 0x00e2
+                    00E2    467 _ACC_2	=	0x00e2
+                    00E3    468 Fusb$ACC_3$0$0 == 0x00e3
+                    00E3    469 _ACC_3	=	0x00e3
+                    00E4    470 Fusb$ACC_4$0$0 == 0x00e4
+                    00E4    471 _ACC_4	=	0x00e4
+                    00E5    472 Fusb$ACC_5$0$0 == 0x00e5
+                    00E5    473 _ACC_5	=	0x00e5
+                    00E6    474 Fusb$ACC_6$0$0 == 0x00e6
+                    00E6    475 _ACC_6	=	0x00e6
+                    00E7    476 Fusb$ACC_7$0$0 == 0x00e7
+                    00E7    477 _ACC_7	=	0x00e7
+                    00E8    478 Fusb$P2IF$0$0 == 0x00e8
+                    00E8    479 _P2IF	=	0x00e8
+                    00E9    480 Fusb$UTX0IF$0$0 == 0x00e9
+                    00E9    481 _UTX0IF	=	0x00e9
+                    00EA    482 Fusb$UTX1IF$0$0 == 0x00ea
+                    00EA    483 _UTX1IF	=	0x00ea
+                    00EB    484 Fusb$P1IF$0$0 == 0x00eb
+                    00EB    485 _P1IF	=	0x00eb
+                    00EC    486 Fusb$WDTIF$0$0 == 0x00ec
+                    00EC    487 _WDTIF	=	0x00ec
+                    00ED    488 Fusb$_IRCON25$0$0 == 0x00ed
+                    00ED    489 __IRCON25	=	0x00ed
+                    00EE    490 Fusb$_IRCON26$0$0 == 0x00ee
+                    00EE    491 __IRCON26	=	0x00ee
+                    00EF    492 Fusb$_IRCON27$0$0 == 0x00ef
+                    00EF    493 __IRCON27	=	0x00ef
+                    00F0    494 Fusb$B_0$0$0 == 0x00f0
+                    00F0    495 _B_0	=	0x00f0
+                    00F1    496 Fusb$B_1$0$0 == 0x00f1
+                    00F1    497 _B_1	=	0x00f1
+                    00F2    498 Fusb$B_2$0$0 == 0x00f2
+                    00F2    499 _B_2	=	0x00f2
+                    00F3    500 Fusb$B_3$0$0 == 0x00f3
+                    00F3    501 _B_3	=	0x00f3
+                    00F4    502 Fusb$B_4$0$0 == 0x00f4
+                    00F4    503 _B_4	=	0x00f4
+                    00F5    504 Fusb$B_5$0$0 == 0x00f5
+                    00F5    505 _B_5	=	0x00f5
+                    00F6    506 Fusb$B_6$0$0 == 0x00f6
+                    00F6    507 _B_6	=	0x00f6
+                    00F7    508 Fusb$B_7$0$0 == 0x00f7
+                    00F7    509 _B_7	=	0x00f7
+                    00F8    510 Fusb$U1ACTIVE$0$0 == 0x00f8
+                    00F8    511 _U1ACTIVE	=	0x00f8
+                    00F9    512 Fusb$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    513 _U1TX_BYTE	=	0x00f9
+                    00FA    514 Fusb$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    515 _U1RX_BYTE	=	0x00fa
+                    00FB    516 Fusb$U1ERR$0$0 == 0x00fb
+                    00FB    517 _U1ERR	=	0x00fb
+                    00FC    518 Fusb$U1FE$0$0 == 0x00fc
+                    00FC    519 _U1FE	=	0x00fc
+                    00FD    520 Fusb$U1SLAVE$0$0 == 0x00fd
+                    00FD    521 _U1SLAVE	=	0x00fd
+                    00FE    522 Fusb$U1RE$0$0 == 0x00fe
+                    00FE    523 _U1RE	=	0x00fe
+                    00FF    524 Fusb$U1MODE$0$0 == 0x00ff
+                    00FF    525 _U1MODE	=	0x00ff
+                            526 ;--------------------------------------------------------
+                            527 ; overlayable register banks
+                            528 ;--------------------------------------------------------
+                            529 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     530 	.ds 8
+                            531 ;--------------------------------------------------------
+                            532 ; internal ram data
+                            533 ;--------------------------------------------------------
+                            534 	.area DSEG    (DATA)
+                            535 ;--------------------------------------------------------
+                            536 ; overlayable items in internal ram 
+                            537 ;--------------------------------------------------------
+                            538 	.area OSEG    (OVR,DATA)
+                            539 ;--------------------------------------------------------
+                            540 ; indirectly addressable internal ram data
+                            541 ;--------------------------------------------------------
+                            542 	.area ISEG    (DATA)
+                            543 ;--------------------------------------------------------
+                            544 ; absolute internal ram data
+                            545 ;--------------------------------------------------------
+                            546 	.area IABS    (ABS,DATA)
+                            547 	.area IABS    (ABS,DATA)
+                            548 ;--------------------------------------------------------
+                            549 ; bit data
+                            550 ;--------------------------------------------------------
+                            551 	.area BSEG    (BIT)
+                    0000    552 G$usbSuspendMode$0$0==.
+   0000                     553 _usbSuspendMode::
+   0000                     554 	.ds 1
+                    0001    555 G$usbActivityFlag$0$0==.
+   0001                     556 _usbActivityFlag::
+   0001                     557 	.ds 1
+                    0002    558 Lusb.usbSleep$savedP0IE$1$1==.
+   0002                     559 _usbSleep_savedP0IE_1_1:
+   0002                     560 	.ds 1
+                            561 ;--------------------------------------------------------
+                            562 ; paged external ram data
+                            563 ;--------------------------------------------------------
+                            564 	.area PSEG    (PAG,XDATA)
+                    0000    565 G$controlTransferPointer$0$0==.
+   0000                     566 _controlTransferPointer::
+   0000                     567 	.ds 2
+                    0002    568 Lusb.usbReadFifo$count$1$1==.
+   0002                     569 _usbReadFifo_PARM_2:
+   0002                     570 	.ds 1
+                    0003    571 Lusb.usbReadFifo$buffer$1$1==.
+   0003                     572 _usbReadFifo_PARM_3:
+   0003                     573 	.ds 2
+                    0005    574 Lusb.usbWriteFifo$count$1$1==.
+   0005                     575 _usbWriteFifo_PARM_2:
+   0005                     576 	.ds 1
+                    0006    577 Lusb.usbWriteFifo$buffer$1$1==.
+   0006                     578 _usbWriteFifo_PARM_3:
+   0006                     579 	.ds 2
+                    0008    580 Lusb.usbControlRead$source$1$1==.
+   0008                     581 _usbControlRead_PARM_2:
+   0008                     582 	.ds 2
+                    000A    583 Lusb.usbControlWrite$source$1$1==.
+   000A                     584 _usbControlWrite_PARM_2:
+   000A                     585 	.ds 2
+                    000C    586 Lusb.usbInitEndpointIn$maxPacketSize$1$1==.
+   000C                     587 _usbInitEndpointIn_PARM_2:
+   000C                     588 	.ds 1
+                    000D    589 Lusb.usbInitEndpointOut$maxPacketSize$1$1==.
+   000D                     590 _usbInitEndpointOut_PARM_2:
+   000D                     591 	.ds 1
+                            592 ;--------------------------------------------------------
+                            593 ; external ram data
+                            594 ;--------------------------------------------------------
+                            595 	.area XSEG    (XDATA)
+                    DF00    596 Fusb$SYNC1$0$0 == 0xdf00
+                    DF00    597 _SYNC1	=	0xdf00
+                    DF01    598 Fusb$SYNC0$0$0 == 0xdf01
+                    DF01    599 _SYNC0	=	0xdf01
+                    DF02    600 Fusb$PKTLEN$0$0 == 0xdf02
+                    DF02    601 _PKTLEN	=	0xdf02
+                    DF03    602 Fusb$PKTCTRL1$0$0 == 0xdf03
+                    DF03    603 _PKTCTRL1	=	0xdf03
+                    DF04    604 Fusb$PKTCTRL0$0$0 == 0xdf04
+                    DF04    605 _PKTCTRL0	=	0xdf04
+                    DF05    606 Fusb$ADDR$0$0 == 0xdf05
+                    DF05    607 _ADDR	=	0xdf05
+                    DF06    608 Fusb$CHANNR$0$0 == 0xdf06
+                    DF06    609 _CHANNR	=	0xdf06
+                    DF07    610 Fusb$FSCTRL1$0$0 == 0xdf07
+                    DF07    611 _FSCTRL1	=	0xdf07
+                    DF08    612 Fusb$FSCTRL0$0$0 == 0xdf08
+                    DF08    613 _FSCTRL0	=	0xdf08
+                    DF09    614 Fusb$FREQ2$0$0 == 0xdf09
+                    DF09    615 _FREQ2	=	0xdf09
+                    DF0A    616 Fusb$FREQ1$0$0 == 0xdf0a
+                    DF0A    617 _FREQ1	=	0xdf0a
+                    DF0B    618 Fusb$FREQ0$0$0 == 0xdf0b
+                    DF0B    619 _FREQ0	=	0xdf0b
+                    DF0C    620 Fusb$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    621 _MDMCFG4	=	0xdf0c
+                    DF0D    622 Fusb$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    623 _MDMCFG3	=	0xdf0d
+                    DF0E    624 Fusb$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    625 _MDMCFG2	=	0xdf0e
+                    DF0F    626 Fusb$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    627 _MDMCFG1	=	0xdf0f
+                    DF10    628 Fusb$MDMCFG0$0$0 == 0xdf10
+                    DF10    629 _MDMCFG0	=	0xdf10
+                    DF11    630 Fusb$DEVIATN$0$0 == 0xdf11
+                    DF11    631 _DEVIATN	=	0xdf11
+                    DF12    632 Fusb$MCSM2$0$0 == 0xdf12
+                    DF12    633 _MCSM2	=	0xdf12
+                    DF13    634 Fusb$MCSM1$0$0 == 0xdf13
+                    DF13    635 _MCSM1	=	0xdf13
+                    DF14    636 Fusb$MCSM0$0$0 == 0xdf14
+                    DF14    637 _MCSM0	=	0xdf14
+                    DF15    638 Fusb$FOCCFG$0$0 == 0xdf15
+                    DF15    639 _FOCCFG	=	0xdf15
+                    DF16    640 Fusb$BSCFG$0$0 == 0xdf16
+                    DF16    641 _BSCFG	=	0xdf16
+                    DF17    642 Fusb$AGCCTRL2$0$0 == 0xdf17
+                    DF17    643 _AGCCTRL2	=	0xdf17
+                    DF18    644 Fusb$AGCCTRL1$0$0 == 0xdf18
+                    DF18    645 _AGCCTRL1	=	0xdf18
+                    DF19    646 Fusb$AGCCTRL0$0$0 == 0xdf19
+                    DF19    647 _AGCCTRL0	=	0xdf19
+                    DF1A    648 Fusb$FREND1$0$0 == 0xdf1a
+                    DF1A    649 _FREND1	=	0xdf1a
+                    DF1B    650 Fusb$FREND0$0$0 == 0xdf1b
+                    DF1B    651 _FREND0	=	0xdf1b
+                    DF1C    652 Fusb$FSCAL3$0$0 == 0xdf1c
+                    DF1C    653 _FSCAL3	=	0xdf1c
+                    DF1D    654 Fusb$FSCAL2$0$0 == 0xdf1d
+                    DF1D    655 _FSCAL2	=	0xdf1d
+                    DF1E    656 Fusb$FSCAL1$0$0 == 0xdf1e
+                    DF1E    657 _FSCAL1	=	0xdf1e
+                    DF1F    658 Fusb$FSCAL0$0$0 == 0xdf1f
+                    DF1F    659 _FSCAL0	=	0xdf1f
+                    DF23    660 Fusb$TEST2$0$0 == 0xdf23
+                    DF23    661 _TEST2	=	0xdf23
+                    DF24    662 Fusb$TEST1$0$0 == 0xdf24
+                    DF24    663 _TEST1	=	0xdf24
+                    DF25    664 Fusb$TEST0$0$0 == 0xdf25
+                    DF25    665 _TEST0	=	0xdf25
+                    DF2E    666 Fusb$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    667 _PA_TABLE0	=	0xdf2e
+                    DF2F    668 Fusb$IOCFG2$0$0 == 0xdf2f
+                    DF2F    669 _IOCFG2	=	0xdf2f
+                    DF30    670 Fusb$IOCFG1$0$0 == 0xdf30
+                    DF30    671 _IOCFG1	=	0xdf30
+                    DF31    672 Fusb$IOCFG0$0$0 == 0xdf31
+                    DF31    673 _IOCFG0	=	0xdf31
+                    DF36    674 Fusb$PARTNUM$0$0 == 0xdf36
+                    DF36    675 _PARTNUM	=	0xdf36
+                    DF37    676 Fusb$VERSION$0$0 == 0xdf37
+                    DF37    677 _VERSION	=	0xdf37
+                    DF38    678 Fusb$FREQEST$0$0 == 0xdf38
+                    DF38    679 _FREQEST	=	0xdf38
+                    DF39    680 Fusb$LQI$0$0 == 0xdf39
+                    DF39    681 _LQI	=	0xdf39
+                    DF3A    682 Fusb$RSSI$0$0 == 0xdf3a
+                    DF3A    683 _RSSI	=	0xdf3a
+                    DF3B    684 Fusb$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    685 _MARCSTATE	=	0xdf3b
+                    DF3C    686 Fusb$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    687 _PKTSTATUS	=	0xdf3c
+                    DF3D    688 Fusb$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    689 _VCO_VC_DAC	=	0xdf3d
+                    DF40    690 Fusb$I2SCFG0$0$0 == 0xdf40
+                    DF40    691 _I2SCFG0	=	0xdf40
+                    DF41    692 Fusb$I2SCFG1$0$0 == 0xdf41
+                    DF41    693 _I2SCFG1	=	0xdf41
+                    DF42    694 Fusb$I2SDATL$0$0 == 0xdf42
+                    DF42    695 _I2SDATL	=	0xdf42
+                    DF43    696 Fusb$I2SDATH$0$0 == 0xdf43
+                    DF43    697 _I2SDATH	=	0xdf43
+                    DF44    698 Fusb$I2SWCNT$0$0 == 0xdf44
+                    DF44    699 _I2SWCNT	=	0xdf44
+                    DF45    700 Fusb$I2SSTAT$0$0 == 0xdf45
+                    DF45    701 _I2SSTAT	=	0xdf45
+                    DF46    702 Fusb$I2SCLKF0$0$0 == 0xdf46
+                    DF46    703 _I2SCLKF0	=	0xdf46
+                    DF47    704 Fusb$I2SCLKF1$0$0 == 0xdf47
+                    DF47    705 _I2SCLKF1	=	0xdf47
+                    DF48    706 Fusb$I2SCLKF2$0$0 == 0xdf48
+                    DF48    707 _I2SCLKF2	=	0xdf48
+                    DE00    708 Fusb$USBADDR$0$0 == 0xde00
+                    DE00    709 _USBADDR	=	0xde00
+                    DE01    710 Fusb$USBPOW$0$0 == 0xde01
+                    DE01    711 _USBPOW	=	0xde01
+                    DE02    712 Fusb$USBIIF$0$0 == 0xde02
+                    DE02    713 _USBIIF	=	0xde02
+                    DE04    714 Fusb$USBOIF$0$0 == 0xde04
+                    DE04    715 _USBOIF	=	0xde04
+                    DE06    716 Fusb$USBCIF$0$0 == 0xde06
+                    DE06    717 _USBCIF	=	0xde06
+                    DE07    718 Fusb$USBIIE$0$0 == 0xde07
+                    DE07    719 _USBIIE	=	0xde07
+                    DE09    720 Fusb$USBOIE$0$0 == 0xde09
+                    DE09    721 _USBOIE	=	0xde09
+                    DE0B    722 Fusb$USBCIE$0$0 == 0xde0b
+                    DE0B    723 _USBCIE	=	0xde0b
+                    DE0C    724 Fusb$USBFRML$0$0 == 0xde0c
+                    DE0C    725 _USBFRML	=	0xde0c
+                    DE0D    726 Fusb$USBFRMH$0$0 == 0xde0d
+                    DE0D    727 _USBFRMH	=	0xde0d
+                    DE0E    728 Fusb$USBINDEX$0$0 == 0xde0e
+                    DE0E    729 _USBINDEX	=	0xde0e
+                    DE10    730 Fusb$USBMAXI$0$0 == 0xde10
+                    DE10    731 _USBMAXI	=	0xde10
+                    DE11    732 Fusb$USBCSIL$0$0 == 0xde11
+                    DE11    733 _USBCSIL	=	0xde11
+                    DE12    734 Fusb$USBCSIH$0$0 == 0xde12
+                    DE12    735 _USBCSIH	=	0xde12
+                    DE13    736 Fusb$USBMAXO$0$0 == 0xde13
+                    DE13    737 _USBMAXO	=	0xde13
+                    DE14    738 Fusb$USBCSOL$0$0 == 0xde14
+                    DE14    739 _USBCSOL	=	0xde14
+                    DE15    740 Fusb$USBCSOH$0$0 == 0xde15
+                    DE15    741 _USBCSOH	=	0xde15
+                    DE16    742 Fusb$USBCNTL$0$0 == 0xde16
+                    DE16    743 _USBCNTL	=	0xde16
+                    DE17    744 Fusb$USBCNTH$0$0 == 0xde17
+                    DE17    745 _USBCNTH	=	0xde17
+                    DE20    746 Fusb$USBF0$0$0 == 0xde20
+                    DE20    747 _USBF0	=	0xde20
+                    DE22    748 Fusb$USBF1$0$0 == 0xde22
+                    DE22    749 _USBF1	=	0xde22
+                    DE24    750 Fusb$USBF2$0$0 == 0xde24
+                    DE24    751 _USBF2	=	0xde24
+                    DE26    752 Fusb$USBF3$0$0 == 0xde26
+                    DE26    753 _USBF3	=	0xde26
+                    DE28    754 Fusb$USBF4$0$0 == 0xde28
+                    DE28    755 _USBF4	=	0xde28
+                    DE2A    756 Fusb$USBF5$0$0 == 0xde2a
+                    DE2A    757 _USBF5	=	0xde2a
+                    0000    758 G$usbSetupPacket$0$0==.
+   0000                     759 _usbSetupPacket::
+   0000                     760 	.ds 8
+                    0008    761 G$controlTransferBytesLeft$0$0==.
+   0008                     762 _controlTransferBytesLeft::
+   0008                     763 	.ds 2
+                    000A    764 Lusb.usbStandardDeviceRequestHandler$response$1$1==.
+   000A                     765 _usbStandardDeviceRequestHandler_response_1_1:
+   000A                     766 	.ds 2
+                            767 ;--------------------------------------------------------
+                            768 ; absolute external ram data
+                            769 ;--------------------------------------------------------
+                            770 	.area XABS    (ABS,XDATA)
+                            771 ;--------------------------------------------------------
+                            772 ; external initialized ram data
+                            773 ;--------------------------------------------------------
+                            774 	.area XISEG   (XDATA)
+                    0000    775 G$usbDeviceState$0$0==.
+   0000                     776 _usbDeviceState::
+   0000                     777 	.ds 1
+                    0001    778 G$controlTransferState$0$0==.
+   0001                     779 _controlTransferState::
+   0001                     780 	.ds 1
+                            781 	.area HOME    (CODE)
+                            782 	.area GSINIT0 (CODE)
+                            783 	.area GSINIT1 (CODE)
+                            784 	.area GSINIT2 (CODE)
+                            785 	.area GSINIT3 (CODE)
+                            786 	.area GSINIT4 (CODE)
+                            787 	.area GSINIT5 (CODE)
+                            788 	.area GSINIT  (CODE)
+                            789 	.area GSFINAL (CODE)
+                            790 	.area CSEG    (CODE)
+                            791 ;--------------------------------------------------------
+                            792 ; global & static initialisations
+                            793 ;--------------------------------------------------------
+                            794 	.area HOME    (CODE)
+                            795 	.area GSINIT  (CODE)
+                            796 	.area GSFINAL (CODE)
+                            797 	.area GSINIT  (CODE)
+                    0000    798 	G$usbInitEndpointOut$0$0 ==.
+                    0000    799 	C$usb.c$24$1$1 ==.
+                            800 ;	libraries/src/usb/usb.c:24: volatile BIT usbSuspendMode = 0;
+   0000 C2*00               801 	clr	_usbSuspendMode
+                    0002    802 	G$usbInitEndpointOut$0$0 ==.
+                    0002    803 	C$usb.c$27$1$1 ==.
+                            804 ;	libraries/src/usb/usb.c:27: volatile BIT usbActivityFlag = 0;
+   0002 C2*01               805 	clr	_usbActivityFlag
+                            806 ;--------------------------------------------------------
+                            807 ; Home
+                            808 ;--------------------------------------------------------
+                            809 	.area HOME    (CODE)
+                            810 	.area HOME    (CODE)
+                            811 ;--------------------------------------------------------
+                            812 ; code
+                            813 ;--------------------------------------------------------
+                            814 	.area CSEG    (CODE)
+                            815 ;------------------------------------------------------------
+                            816 ;Allocation info for local variables in function 'usbInit'
+                            817 ;------------------------------------------------------------
+                    0000    818 	G$usbInit$0$0 ==.
+                    0000    819 	C$usb.c$29$0$0 ==.
+                            820 ;	libraries/src/usb/usb.c:29: void usbInit()
+                            821 ;	-----------------------------------------
+                            822 ;	 function usbInit
+                            823 ;	-----------------------------------------
+   0000                     824 _usbInit:
+                    0007    825 	ar7 = 0x07
+                    0006    826 	ar6 = 0x06
+                    0005    827 	ar5 = 0x05
+                    0004    828 	ar4 = 0x04
+                    0003    829 	ar3 = 0x03
+                    0002    830 	ar2 = 0x02
+                    0001    831 	ar1 = 0x01
+                    0000    832 	ar0 = 0x00
+                    0000    833 	C$usb.c$31$0$0 ==.
+                            834 ;	libraries/src/usb/usb.c:31: }
+                    0000    835 	C$usb.c$31$0$0 ==.
+                    0000    836 	XG$usbInit$0$0 ==.
+   0000 22                  837 	ret
+                            838 ;------------------------------------------------------------
+                            839 ;Allocation info for local variables in function 'usbReadFifo'
+                            840 ;------------------------------------------------------------
+                    0001    841 	G$usbReadFifo$0$0 ==.
+                    0001    842 	C$usb.c$34$0$0 ==.
+                            843 ;	libraries/src/usb/usb.c:34: void usbReadFifo(uint8 endpointNumber, uint8 count, uint8 XDATA * buffer)
+                            844 ;	-----------------------------------------
+                            845 ;	 function usbReadFifo
+                            846 ;	-----------------------------------------
+   0001                     847 _usbReadFifo:
+   0001 AF 82               848 	mov	r7,dpl
+                    0003    849 	C$usb.c$36$1$1 ==.
+                            850 ;	libraries/src/usb/usb.c:36: XDATA uint8 * fifo = (XDATA uint8 *)(0xDE20 + (uint8)(endpointNumber<<1));
+   0003 E4                  851 	clr	a
+   0004 CF                  852 	xch	a,r7
+   0005 25 E0               853 	add	a,acc
+   0007 CF                  854 	xch	a,r7
+   0008 33                  855 	rlc	a
+   0009 FE                  856 	mov	r6,a
+   000A 74 20               857 	mov	a,#0x20
+   000C 2F                  858 	add	a,r7
+   000D FF                  859 	mov	r7,a
+   000E 74 DE               860 	mov	a,#0xDE
+   0010 3E                  861 	addc	a,r6
+   0011 FE                  862 	mov	r6,a
+                    0012    863 	C$usb.c$37$1$1 ==.
+                            864 ;	libraries/src/usb/usb.c:37: while(count > 0)
+   0012 78r02               865 	mov	r0,#_usbReadFifo_PARM_2
+   0014 E2                  866 	movx	a,@r0
+   0015 FD                  867 	mov	r5,a
+   0016 78r03               868 	mov	r0,#_usbReadFifo_PARM_3
+   0018 E2                  869 	movx	a,@r0
+   0019 FB                  870 	mov	r3,a
+   001A 08                  871 	inc	r0
+   001B E2                  872 	movx	a,@r0
+   001C FC                  873 	mov	r4,a
+   001D                     874 00101$:
+   001D ED                  875 	mov	a,r5
+   001E 60 13               876 	jz	00103$
+                    0020    877 	C$usb.c$39$2$2 ==.
+                            878 ;	libraries/src/usb/usb.c:39: count--;
+   0020 1D                  879 	dec	r5
+                    0021    880 	C$usb.c$40$2$2 ==.
+                            881 ;	libraries/src/usb/usb.c:40: *(buffer++) = *fifo;
+   0021 8F 82               882 	mov	dpl,r7
+   0023 8E 83               883 	mov	dph,r6
+   0025 E0                  884 	movx	a,@dptr
+   0026 FA                  885 	mov	r2,a
+   0027 8B 82               886 	mov	dpl,r3
+   0029 8C 83               887 	mov	dph,r4
+   002B F0                  888 	movx	@dptr,a
+   002C A3                  889 	inc	dptr
+   002D AB 82               890 	mov	r3,dpl
+   002F AC 83               891 	mov	r4,dph
+   0031 80 EA               892 	sjmp	00101$
+   0033                     893 00103$:
+                    0033    894 	C$usb.c$43$1$1 ==.
+                            895 ;	libraries/src/usb/usb.c:43: usbActivityFlag = 1;
+   0033 D2*01               896 	setb	_usbActivityFlag
+                    0035    897 	C$usb.c$44$1$1 ==.
+                    0035    898 	XG$usbReadFifo$0$0 ==.
+   0035 22                  899 	ret
+                            900 ;------------------------------------------------------------
+                            901 ;Allocation info for local variables in function 'usbWriteFifo'
+                            902 ;------------------------------------------------------------
+                    0036    903 	G$usbWriteFifo$0$0 ==.
+                    0036    904 	C$usb.c$46$1$1 ==.
+                            905 ;	libraries/src/usb/usb.c:46: void usbWriteFifo(uint8 endpointNumber, uint8 count, const uint8 XDATA * buffer)
+                            906 ;	-----------------------------------------
+                            907 ;	 function usbWriteFifo
+                            908 ;	-----------------------------------------
+   0036                     909 _usbWriteFifo:
+   0036 AF 82               910 	mov	r7,dpl
+                    0038    911 	C$usb.c$48$1$1 ==.
+                            912 ;	libraries/src/usb/usb.c:48: XDATA uint8 * fifo = (XDATA uint8 *)(0xDE20 + (uint8)(endpointNumber<<1));
+   0038 E4                  913 	clr	a
+   0039 CF                  914 	xch	a,r7
+   003A 25 E0               915 	add	a,acc
+   003C CF                  916 	xch	a,r7
+   003D 33                  917 	rlc	a
+   003E FE                  918 	mov	r6,a
+   003F 74 20               919 	mov	a,#0x20
+   0041 2F                  920 	add	a,r7
+   0042 FF                  921 	mov	r7,a
+   0043 74 DE               922 	mov	a,#0xDE
+   0045 3E                  923 	addc	a,r6
+   0046 FE                  924 	mov	r6,a
+                    0047    925 	C$usb.c$49$1$1 ==.
+                            926 ;	libraries/src/usb/usb.c:49: while(count > 0)
+   0047 78r05               927 	mov	r0,#_usbWriteFifo_PARM_2
+   0049 E2                  928 	movx	a,@r0
+   004A FD                  929 	mov	r5,a
+   004B 78r06               930 	mov	r0,#_usbWriteFifo_PARM_3
+   004D E2                  931 	movx	a,@r0
+   004E FB                  932 	mov	r3,a
+   004F 08                  933 	inc	r0
+   0050 E2                  934 	movx	a,@r0
+   0051 FC                  935 	mov	r4,a
+   0052                     936 00101$:
+   0052 ED                  937 	mov	a,r5
+   0053 60 14               938 	jz	00104$
+                    0055    939 	C$usb.c$51$2$2 ==.
+                            940 ;	libraries/src/usb/usb.c:51: count--;
+   0055 1D                  941 	dec	r5
+                    0056    942 	C$usb.c$52$2$2 ==.
+                            943 ;	libraries/src/usb/usb.c:52: *fifo = *(buffer++);
+   0056 8B 82               944 	mov	dpl,r3
+   0058 8C 83               945 	mov	dph,r4
+   005A E0                  946 	movx	a,@dptr
+   005B FA                  947 	mov	r2,a
+   005C A3                  948 	inc	dptr
+   005D AB 82               949 	mov	r3,dpl
+   005F AC 83               950 	mov	r4,dph
+   0061 8F 82               951 	mov	dpl,r7
+   0063 8E 83               952 	mov	dph,r6
+   0065 EA                  953 	mov	a,r2
+   0066 F0                  954 	movx	@dptr,a
+   0067 80 E9               955 	sjmp	00101$
+   0069                     956 00104$:
+                    0069    957 	C$usb.c$57$1$1 ==.
+                    0069    958 	XG$usbWriteFifo$0$0 ==.
+   0069 22                  959 	ret
+                            960 ;------------------------------------------------------------
+                            961 ;Allocation info for local variables in function 'basicUsbInit'
+                            962 ;------------------------------------------------------------
+                    006A    963 	Fusb$basicUsbInit$0$0 ==.
+                    006A    964 	C$usb.c$61$1$1 ==.
+                            965 ;	libraries/src/usb/usb.c:61: static void basicUsbInit()
+                            966 ;	-----------------------------------------
+                            967 ;	 function basicUsbInit
+                            968 ;	-----------------------------------------
+   006A                     969 _basicUsbInit:
+                    006A    970 	C$usb.c$63$1$1 ==.
+                            971 ;	libraries/src/usb/usb.c:63: usbSuspendMode = 0;
+   006A C2*00               972 	clr	_usbSuspendMode
+                    006C    973 	C$usb.c$66$1$1 ==.
+                            974 ;	libraries/src/usb/usb.c:66: USBPOW = 1;
+   006C 90 DE 01            975 	mov	dptr,#_USBPOW
+   006F 74 01               976 	mov	a,#0x01
+   0071 F0                  977 	movx	@dptr,a
+                    0072    978 	C$usb.c$70$1$1 ==.
+                            979 ;	libraries/src/usb/usb.c:70: USBCIE = 0b0111;
+   0072 90 DE 0B            980 	mov	dptr,#_USBCIE
+   0075 74 07               981 	mov	a,#0x07
+   0077 F0                  982 	movx	@dptr,a
+                    0078    983 	C$usb.c$71$1$1 ==.
+                    0078    984 	XFusb$basicUsbInit$0$0 ==.
+   0078 22                  985 	ret
+                            986 ;------------------------------------------------------------
+                            987 ;Allocation info for local variables in function 'usbPoll'
+                            988 ;------------------------------------------------------------
+                    0079    989 	G$usbPoll$0$0 ==.
+                    0079    990 	C$usb.c$73$1$1 ==.
+                            991 ;	libraries/src/usb/usb.c:73: void usbPoll()
+                            992 ;	-----------------------------------------
+                            993 ;	 function usbPoll
+                            994 ;	-----------------------------------------
+   0079                     995 _usbPoll:
+                    0079    996 	C$usb.c$79$1$1 ==.
+                            997 ;	libraries/src/usb/usb.c:79: if (!usbPowerPresent())
+   0079 12s00r00            998 	lcall	_usbPowerPresent
+   007C 40 14               999 	jc	00102$
+                    007E   1000 	C$usb.c$84$2$2 ==.
+                           1001 ;	libraries/src/usb/usb.c:84: SLEEP &= ~(1<<7); // Disable the USB module (SLEEP.USB_EN = 0).
+   007E AF BE              1002 	mov	r7,_SLEEP
+   0080 53 07 7F           1003 	anl	ar7,#0x7F
+   0083 8F BE              1004 	mov	_SLEEP,r7
+                    0085   1005 	C$usb.c$86$2$2 ==.
+                           1006 ;	libraries/src/usb/usb.c:86: disableUsbPullup();
+   0085 12s00r00           1007 	lcall	_disableUsbPullup
+                    0088   1008 	C$usb.c$87$2$2 ==.
+                           1009 ;	libraries/src/usb/usb.c:87: usbDeviceState = USB_STATE_DETACHED;
+   0088 90s00r00           1010 	mov	dptr,#_usbDeviceState
+   008B E4                 1011 	clr	a
+   008C F0                 1012 	movx	@dptr,a
+                    008D   1013 	C$usb.c$88$2$2 ==.
+                           1014 ;	libraries/src/usb/usb.c:88: usbSuspendMode = 0;
+   008D C2*00              1015 	clr	_usbSuspendMode
+                    008F   1016 	C$usb.c$89$2$2 ==.
+                           1017 ;	libraries/src/usb/usb.c:89: return;
+   008F 02s02r9E           1018 	ljmp	00152$
+   0092                    1019 00102$:
+                    0092   1020 	C$usb.c$92$1$1 ==.
+                           1021 ;	libraries/src/usb/usb.c:92: if (usbDeviceState == USB_STATE_DETACHED)
+   0092 90s00r00           1022 	mov	dptr,#_usbDeviceState
+   0095 E0                 1023 	movx	a,@dptr
+   0096 FF                 1024 	mov	r7,a
+   0097 70 13              1025 	jnz	00104$
+                    0099   1026 	C$usb.c$94$2$3 ==.
+                           1027 ;	libraries/src/usb/usb.c:94: enableUsbPullup();
+   0099 12s00r00           1028 	lcall	_enableUsbPullup
+                    009C   1029 	C$usb.c$95$2$3 ==.
+                           1030 ;	libraries/src/usb/usb.c:95: SLEEP |= (1<<7);            // Enable the USB module (SLEEP.USB_EN = 1).
+   009C 43 BE 80           1031 	orl	_SLEEP,#0x80
+                    009F   1032 	C$usb.c$96$2$3 ==.
+                           1033 ;	libraries/src/usb/usb.c:96: __asm nop __endasm;         // Datasheet doesn't say so, but David suspects we need some NOPs here before writing to USB registers.
+   009F 00                 1034 	 nop 
+                    00A0   1035 	C$usb.c$97$2$3 ==.
+                           1036 ;	libraries/src/usb/usb.c:97: __asm nop __endasm;
+   00A0 00                 1037 	 nop 
+                    00A1   1038 	C$usb.c$98$2$3 ==.
+                           1039 ;	libraries/src/usb/usb.c:98: __asm nop __endasm;
+   00A1 00                 1040 	 nop 
+                    00A2   1041 	C$usb.c$99$2$3 ==.
+                           1042 ;	libraries/src/usb/usb.c:99: __asm nop __endasm;
+   00A2 00                 1043 	 nop 
+                    00A3   1044 	C$usb.c$100$2$3 ==.
+                           1045 ;	libraries/src/usb/usb.c:100: usbDeviceState = USB_STATE_POWERED;
+   00A3 90s00r00           1046 	mov	dptr,#_usbDeviceState
+   00A6 74 02              1047 	mov	a,#0x02
+   00A8 F0                 1048 	movx	@dptr,a
+                    00A9   1049 	C$usb.c$102$2$3 ==.
+                           1050 ;	libraries/src/usb/usb.c:102: basicUsbInit();
+   00A9 12s00r6A           1051 	lcall	_basicUsbInit
+   00AC                    1052 00104$:
+                    00AC   1053 	C$usb.c$105$1$1 ==.
+                           1054 ;	libraries/src/usb/usb.c:105: usbcif = USBCIF;
+   00AC 90 DE 06           1055 	mov	dptr,#_USBCIF
+   00AF E0                 1056 	movx	a,@dptr
+   00B0 FF                 1057 	mov	r7,a
+                    00B1   1058 	C$usb.c$106$1$1 ==.
+                           1059 ;	libraries/src/usb/usb.c:106: usbiif = USBIIF;
+   00B1 90 DE 02           1060 	mov	dptr,#_USBIIF
+   00B4 E0                 1061 	movx	a,@dptr
+   00B5 FE                 1062 	mov	r6,a
+                    00B6   1063 	C$usb.c$108$1$1 ==.
+                           1064 ;	libraries/src/usb/usb.c:108: if (usbcif & (1<<0)) // Check SUSPENDIF
+   00B6 EF                 1065 	mov	a,r7
+   00B7 30 E0 02           1066 	jnb	acc.0,00106$
+                    00BA   1067 	C$usb.c$113$2$4 ==.
+                           1068 ;	libraries/src/usb/usb.c:113: usbSuspendMode = 1;
+   00BA D2*00              1069 	setb	_usbSuspendMode
+   00BC                    1070 00106$:
+                    00BC   1071 	C$usb.c$116$1$1 ==.
+                           1072 ;	libraries/src/usb/usb.c:116: if (usbcif & (1<<2))  // check RSTIF, the reset flag
+   00BC EF                 1073 	mov	a,r7
+   00BD 30 E2 16           1074 	jnb	acc.2,00108$
+                    00C0   1075 	C$usb.c$119$2$5 ==.
+                           1076 ;	libraries/src/usb/usb.c:119: usbDeviceState = USB_STATE_DEFAULT;
+   00C0 90s00r00           1077 	mov	dptr,#_usbDeviceState
+   00C3 74 04              1078 	mov	a,#0x04
+   00C5 F0                 1079 	movx	@dptr,a
+                    00C6   1080 	C$usb.c$120$2$5 ==.
+                           1081 ;	libraries/src/usb/usb.c:120: controlTransferState = CONTROL_TRANSFER_STATE_NONE;
+   00C6 90s00r01           1082 	mov	dptr,#_controlTransferState
+   00C9 E4                 1083 	clr	a
+   00CA F0                 1084 	movx	@dptr,a
+                    00CB   1085 	C$usb.c$122$2$5 ==.
+                           1086 ;	libraries/src/usb/usb.c:122: basicUsbInit();
+   00CB C0 07              1087 	push	ar7
+   00CD C0 06              1088 	push	ar6
+   00CF 12s00r6A           1089 	lcall	_basicUsbInit
+   00D2 D0 06              1090 	pop	ar6
+   00D4 D0 07              1091 	pop	ar7
+   00D6                    1092 00108$:
+                    00D6   1093 	C$usb.c$125$1$1 ==.
+                           1094 ;	libraries/src/usb/usb.c:125: if (usbcif & (1<<1)) // Check RESUMEIF
+   00D6 EF                 1095 	mov	a,r7
+   00D7 30 E1 02           1096 	jnb	acc.1,00110$
+                    00DA   1097 	C$usb.c$127$2$6 ==.
+                           1098 ;	libraries/src/usb/usb.c:127: usbSuspendMode = 0;
+   00DA C2*00              1099 	clr	_usbSuspendMode
+   00DC                    1100 00110$:
+                    00DC   1101 	C$usb.c$130$1$1 ==.
+                           1102 ;	libraries/src/usb/usb.c:130: if (usbiif & (1<<0)) // Check EP0IF
+   00DC EE                 1103 	mov	a,r6
+   00DD 20 E0 03           1104 	jb	acc.0,00181$
+   00E0 02s02r9E           1105 	ljmp	00152$
+   00E3                    1106 00181$:
+                    00E3   1107 	C$usb.c$134$2$7 ==.
+                           1108 ;	libraries/src/usb/usb.c:134: USBINDEX = 0;
+   00E3 90 DE 0E           1109 	mov	dptr,#_USBINDEX
+   00E6 E4                 1110 	clr	a
+   00E7 F0                 1111 	movx	@dptr,a
+                    00E8   1112 	C$usb.c$135$2$7 ==.
+                           1113 ;	libraries/src/usb/usb.c:135: usbcs0 = USBCS0;
+   00E8 90 DE 11           1114 	mov	dptr,#_USBCSIL
+   00EB E0                 1115 	movx	a,@dptr
+   00EC FF                 1116 	mov	r7,a
+                    00ED   1117 	C$usb.c$137$2$7 ==.
+                           1118 ;	libraries/src/usb/usb.c:137: usbActivityFlag = 1;
+   00ED D2*01              1119 	setb	_usbActivityFlag
+                    00EF   1120 	C$usb.c$139$2$7 ==.
+                           1121 ;	libraries/src/usb/usb.c:139: if (usbcs0 & (1<<4)) // Check SETUP_END
+   00EF EF                 1122 	mov	a,r7
+   00F0 30 E4 0B           1123 	jnb	acc.4,00112$
+                    00F3   1124 	C$usb.c$142$3$8 ==.
+                           1125 ;	libraries/src/usb/usb.c:142: USBCS0 = 0x80; // Clear the SETUP_END bit
+   00F3 90 DE 11           1126 	mov	dptr,#_USBCSIL
+   00F6 74 80              1127 	mov	a,#0x80
+   00F8 F0                 1128 	movx	@dptr,a
+                    00F9   1129 	C$usb.c$143$3$8 ==.
+                           1130 ;	libraries/src/usb/usb.c:143: controlTransferState = CONTROL_TRANSFER_STATE_NONE;
+   00F9 90s00r01           1131 	mov	dptr,#_controlTransferState
+   00FC E4                 1132 	clr	a
+   00FD F0                 1133 	movx	@dptr,a
+   00FE                    1134 00112$:
+                    00FE   1135 	C$usb.c$146$2$7 ==.
+                           1136 ;	libraries/src/usb/usb.c:146: if (usbcs0 & (1<<2))  // Check SENT_STALL
+   00FE EF                 1137 	mov	a,r7
+   00FF 30 E2 09           1138 	jnb	acc.2,00114$
+                    0102   1139 	C$usb.c$149$3$9 ==.
+                           1140 ;	libraries/src/usb/usb.c:149: USBCS0 = 0x00;  // Reset endpoint 0.
+   0102 90 DE 11           1141 	mov	dptr,#_USBCSIL
+                    0105   1142 	C$usb.c$150$3$9 ==.
+                           1143 ;	libraries/src/usb/usb.c:150: controlTransferState = CONTROL_TRANSFER_STATE_NONE;
+   0105 E4                 1144 	clr	a
+   0106 F0                 1145 	movx	@dptr,a
+   0107 90s00r01           1146 	mov	dptr,#_controlTransferState
+   010A F0                 1147 	movx	@dptr,a
+   010B                    1148 00114$:
+                    010B   1149 	C$usb.c$153$2$7 ==.
+                           1150 ;	libraries/src/usb/usb.c:153: if (usbcs0 & (1<<0))  // Check OUTPKT_RDY
+   010B EF                 1151 	mov	a,r7
+   010C 20 E0 03           1152 	jb	acc.0,00184$
+   010F 02s02r34           1153 	ljmp	00143$
+   0112                    1154 00184$:
+                    0112   1155 	C$usb.c$158$3$10 ==.
+                           1156 ;	libraries/src/usb/usb.c:158: if (controlTransferState == CONTROL_TRANSFER_STATE_WRITE)
+   0112 90s00r01           1157 	mov	dptr,#_controlTransferState
+   0115 E0                 1158 	movx	a,@dptr
+   0116 FE                 1159 	mov	r6,a
+   0117 BE 01 02           1160 	cjne	r6,#0x01,00185$
+   011A 80 03              1161 	sjmp	00186$
+   011C                    1162 00185$:
+   011C 02s01rBA           1163 	ljmp	00140$
+   011F                    1164 00186$:
+                    011F   1165 	C$usb.c$161$4$10 ==.
+                           1166 ;	libraries/src/usb/usb.c:161: uint8 bytesReceived = USBCNT0;
+   011F 90 DE 16           1167 	mov	dptr,#_USBCNTL
+   0122 E0                 1168 	movx	a,@dptr
+   0123 FE                 1169 	mov	r6,a
+                    0124   1170 	C$usb.c$162$4$11 ==.
+                           1171 ;	libraries/src/usb/usb.c:162: if (bytesReceived > controlTransferBytesLeft)
+   0124 90s00r08           1172 	mov	dptr,#_controlTransferBytesLeft
+   0127 E0                 1173 	movx	a,@dptr
+   0128 FC                 1174 	mov	r4,a
+   0129 A3                 1175 	inc	dptr
+   012A E0                 1176 	movx	a,@dptr
+   012B FD                 1177 	mov	r5,a
+   012C 8E 02              1178 	mov	ar2,r6
+   012E 7B 00              1179 	mov	r3,#0x00
+   0130 C3                 1180 	clr	c
+   0131 EC                 1181 	mov	a,r4
+   0132 9A                 1182 	subb	a,r2
+   0133 ED                 1183 	mov	a,r5
+   0134 9B                 1184 	subb	a,r3
+   0135 50 02              1185 	jnc	00116$
+                    0137   1186 	C$usb.c$164$5$12 ==.
+                           1187 ;	libraries/src/usb/usb.c:164: bytesReceived = controlTransferBytesLeft;
+   0137 8C 06              1188 	mov	ar6,r4
+   0139                    1189 00116$:
+                    0139   1190 	C$usb.c$166$4$11 ==.
+                           1191 ;	libraries/src/usb/usb.c:166: usbReadFifo(0, bytesReceived, controlTransferPointer);
+   0139 78r02              1192 	mov	r0,#_usbReadFifo_PARM_2
+   013B EE                 1193 	mov	a,r6
+   013C F2                 1194 	movx	@r0,a
+   013D 78r00              1195 	mov	r0,#_controlTransferPointer
+   013F 79r03              1196 	mov	r1,#_usbReadFifo_PARM_3
+   0141 E2                 1197 	movx	a,@r0
+   0142 F3                 1198 	movx	@r1,a
+   0143 08                 1199 	inc	r0
+   0144 E2                 1200 	movx	a,@r0
+   0145 09                 1201 	inc	r1
+   0146 F3                 1202 	movx	@r1,a
+   0147 75 82 00           1203 	mov	dpl,#0x00
+   014A C0 07              1204 	push	ar7
+   014C C0 06              1205 	push	ar6
+   014E 12s00r01           1206 	lcall	_usbReadFifo
+   0151 D0 06              1207 	pop	ar6
+   0153 D0 07              1208 	pop	ar7
+                    0155   1209 	C$usb.c$167$4$11 ==.
+                           1210 ;	libraries/src/usb/usb.c:167: controlTransferPointer += bytesReceived;
+   0155 78r00              1211 	mov	r0,#_controlTransferPointer
+   0157 E2                 1212 	movx	a,@r0
+   0158 2E                 1213 	add	a,r6
+   0159 F2                 1214 	movx	@r0,a
+   015A 08                 1215 	inc	r0
+   015B E2                 1216 	movx	a,@r0
+   015C 34 00              1217 	addc	a,#0x00
+   015E F2                 1218 	movx	@r0,a
+                    015F   1219 	C$usb.c$168$4$11 ==.
+                           1220 ;	libraries/src/usb/usb.c:168: controlTransferBytesLeft -= bytesReceived;
+   015F 90s00r08           1221 	mov	dptr,#_controlTransferBytesLeft
+   0162 E0                 1222 	movx	a,@dptr
+   0163 FC                 1223 	mov	r4,a
+   0164 A3                 1224 	inc	dptr
+   0165 E0                 1225 	movx	a,@dptr
+   0166 FD                 1226 	mov	r5,a
+   0167 7B 00              1227 	mov	r3,#0x00
+   0169 90s00r08           1228 	mov	dptr,#_controlTransferBytesLeft
+   016C EC                 1229 	mov	a,r4
+   016D C3                 1230 	clr	c
+   016E 9E                 1231 	subb	a,r6
+   016F F0                 1232 	movx	@dptr,a
+   0170 ED                 1233 	mov	a,r5
+   0171 9B                 1234 	subb	a,r3
+   0172 A3                 1235 	inc	dptr
+   0173 F0                 1236 	movx	@dptr,a
+                    0174   1237 	C$usb.c$170$4$11 ==.
+                           1238 ;	libraries/src/usb/usb.c:170: if (controlTransferBytesLeft)
+   0174 90s00r08           1239 	mov	dptr,#_controlTransferBytesLeft
+   0177 E0                 1240 	movx	a,@dptr
+   0178 FD                 1241 	mov	r5,a
+   0179 A3                 1242 	inc	dptr
+   017A E0                 1243 	movx	a,@dptr
+   017B FE                 1244 	mov	r6,a
+   017C 4D                 1245 	orl	a,r5
+   017D 60 09              1246 	jz	00123$
+                    017F   1247 	C$usb.c$173$5$13 ==.
+                           1248 ;	libraries/src/usb/usb.c:173: USBCS0 = (1<<6);  // De-asserts the OUTPKT_RDY bit (bit 0).
+   017F 90 DE 11           1249 	mov	dptr,#_USBCSIL
+   0182 74 40              1250 	mov	a,#0x40
+   0184 F0                 1251 	movx	@dptr,a
+   0185 02s02r34           1252 	ljmp	00143$
+   0188                    1253 00123$:
+                    0188   1254 	C$usb.c$179$5$14 ==.
+                           1255 ;	libraries/src/usb/usb.c:179: if (usbSetupPacket.requestType != USB_REQUEST_TYPE_STANDARD) // OPT: remove this check
+   0188 90s00r00           1256 	mov	dptr,#_usbSetupPacket
+   018B E0                 1257 	movx	a,@dptr
+   018C 54 60              1258 	anl	a,#0x60
+   018E 60 07              1259 	jz	00118$
+                    0190   1260 	C$usb.c$181$6$15 ==.
+                           1261 ;	libraries/src/usb/usb.c:181: usbCallbackControlWriteHandler();
+   0190 C0 07              1262 	push	ar7
+   0192 12s00r00           1263 	lcall	_usbCallbackControlWriteHandler
+   0195 D0 07              1264 	pop	ar7
+   0197                    1265 00118$:
+                    0197   1266 	C$usb.c$184$5$14 ==.
+                           1267 ;	libraries/src/usb/usb.c:184: USBINDEX = 0;  // Just in case USBINDEX was changed above.
+   0197 90 DE 0E           1268 	mov	dptr,#_USBINDEX
+   019A E4                 1269 	clr	a
+   019B F0                 1270 	movx	@dptr,a
+                    019C   1271 	C$usb.c$186$5$14 ==.
+                           1272 ;	libraries/src/usb/usb.c:186: if (controlTransferState == CONTROL_TRANSFER_STATE_NONE)
+   019C 90s00r01           1273 	mov	dptr,#_controlTransferState
+   019F E0                 1274 	movx	a,@dptr
+   01A0 FE                 1275 	mov	r6,a
+   01A1 70 09              1276 	jnz	00120$
+                    01A3   1277 	C$usb.c$189$6$16 ==.
+                           1278 ;	libraries/src/usb/usb.c:189: USBCS0 = (1<<6) | (1<<3) | (1<<5); // clear OUTPKT_RDY, set DATA_END, SEND_STALL
+   01A3 90 DE 11           1279 	mov	dptr,#_USBCSIL
+   01A6 74 68              1280 	mov	a,#0x68
+   01A8 F0                 1281 	movx	@dptr,a
+   01A9 02s02r34           1282 	ljmp	00143$
+   01AC                    1283 00120$:
+                    01AC   1284 	C$usb.c$194$6$17 ==.
+                           1285 ;	libraries/src/usb/usb.c:194: USBCS0 = (1<<6) | (1<<3); // clear OUTPKT_RDY, set DATA_END
+   01AC 90 DE 11           1286 	mov	dptr,#_USBCSIL
+   01AF 74 48              1287 	mov	a,#0x48
+   01B1 F0                 1288 	movx	@dptr,a
+                    01B2   1289 	C$usb.c$195$6$17 ==.
+                           1290 ;	libraries/src/usb/usb.c:195: controlTransferState = CONTROL_TRANSFER_STATE_NONE;
+   01B2 90s00r01           1291 	mov	dptr,#_controlTransferState
+   01B5 E4                 1292 	clr	a
+   01B6 F0                 1293 	movx	@dptr,a
+   01B7 02s02r34           1294 	ljmp	00143$
+   01BA                    1295 00140$:
+                    01BA   1296 	C$usb.c$199$3$10 ==.
+                           1297 ;	libraries/src/usb/usb.c:199: else if (USBCNT0 == 8)
+   01BA 90 DE 16           1298 	mov	dptr,#_USBCNTL
+   01BD E0                 1299 	movx	a,@dptr
+   01BE FE                 1300 	mov	r6,a
+   01BF BE 08 6C           1301 	cjne	r6,#0x08,00137$
+                    01C2   1302 	C$usb.c$204$4$18 ==.
+                           1303 ;	libraries/src/usb/usb.c:204: usbReadFifo(0, 8, (uint8 XDATA *)&usbSetupPacket); // Store the data in usbSetupPacket.
+   01C2 78r03              1304 	mov	r0,#_usbReadFifo_PARM_3
+   01C4 74r00              1305 	mov	a,#_usbSetupPacket
+   01C6 F2                 1306 	movx	@r0,a
+   01C7 08                 1307 	inc	r0
+   01C8 74s00              1308 	mov	a,#(_usbSetupPacket >> 8)
+   01CA F2                 1309 	movx	@r0,a
+   01CB 78r02              1310 	mov	r0,#_usbReadFifo_PARM_2
+   01CD 74 08              1311 	mov	a,#0x08
+   01CF F2                 1312 	movx	@r0,a
+   01D0 75 82 00           1313 	mov	dpl,#0x00
+   01D3 C0 07              1314 	push	ar7
+   01D5 12s00r01           1315 	lcall	_usbReadFifo
+   01D8 D0 07              1316 	pop	ar7
+                    01DA   1317 	C$usb.c$207$4$18 ==.
+                           1318 ;	libraries/src/usb/usb.c:207: controlTransferState = CONTROL_TRANSFER_STATE_NONE;
+   01DA 90s00r01           1319 	mov	dptr,#_controlTransferState
+   01DD E4                 1320 	clr	a
+   01DE F0                 1321 	movx	@dptr,a
+                    01DF   1322 	C$usb.c$209$4$18 ==.
+                           1323 ;	libraries/src/usb/usb.c:209: if (usbSetupPacket.requestType == USB_REQUEST_TYPE_STANDARD)
+   01DF 90s00r00           1324 	mov	dptr,#_usbSetupPacket
+   01E2 E0                 1325 	movx	a,@dptr
+   01E3 54 60              1326 	anl	a,#0x60
+   01E5 70 09              1327 	jnz	00126$
+                    01E7   1328 	C$usb.c$214$5$19 ==.
+                           1329 ;	libraries/src/usb/usb.c:214: usbStandardDeviceRequestHandler();
+   01E7 C0 07              1330 	push	ar7
+   01E9 12s02r9F           1331 	lcall	_usbStandardDeviceRequestHandler
+   01EC D0 07              1332 	pop	ar7
+   01EE 80 07              1333 	sjmp	00127$
+   01F0                    1334 00126$:
+                    01F0   1335 	C$usb.c$221$5$20 ==.
+                           1336 ;	libraries/src/usb/usb.c:221: usbCallbackSetupHandler();
+   01F0 C0 07              1337 	push	ar7
+   01F2 12s00r00           1338 	lcall	_usbCallbackSetupHandler
+   01F5 D0 07              1339 	pop	ar7
+   01F7                    1340 00127$:
+                    01F7   1341 	C$usb.c$224$4$18 ==.
+                           1342 ;	libraries/src/usb/usb.c:224: USBINDEX = 0;  // Select EP0 again because the functions above might have changed USBINDEX.
+   01F7 90 DE 0E           1343 	mov	dptr,#_USBINDEX
+   01FA E4                 1344 	clr	a
+   01FB F0                 1345 	movx	@dptr,a
+                    01FC   1346 	C$usb.c$227$4$18 ==.
+                           1347 ;	libraries/src/usb/usb.c:227: if (controlTransferState == CONTROL_TRANSFER_STATE_NONE)
+   01FC 90s00r01           1348 	mov	dptr,#_controlTransferState
+   01FF E0                 1349 	movx	a,@dptr
+   0200 FE                 1350 	mov	r6,a
+   0201 70 08              1351 	jnz	00134$
+                    0203   1352 	C$usb.c$230$5$21 ==.
+                           1353 ;	libraries/src/usb/usb.c:230: USBCS0 = (1<<6) | (1<<5); // Clears the OUTPKT_RDY flag because we've handled it, and sends a STALL.
+   0203 90 DE 11           1354 	mov	dptr,#_USBCSIL
+   0206 74 60              1355 	mov	a,#0x60
+   0208 F0                 1356 	movx	@dptr,a
+   0209 80 29              1357 	sjmp	00143$
+   020B                    1358 00134$:
+                    020B   1359 	C$usb.c$232$4$18 ==.
+                           1360 ;	libraries/src/usb/usb.c:232: else if (controlTransferState == CONTROL_TRANSFER_STATE_WRITE)
+   020B BE 01 26           1361 	cjne	r6,#0x01,00143$
+                    020E   1362 	C$usb.c$234$5$22 ==.
+                           1363 ;	libraries/src/usb/usb.c:234: if (controlTransferBytesLeft)
+   020E 90s00r08           1364 	mov	dptr,#_controlTransferBytesLeft
+   0211 E0                 1365 	movx	a,@dptr
+   0212 FD                 1366 	mov	r5,a
+   0213 A3                 1367 	inc	dptr
+   0214 E0                 1368 	movx	a,@dptr
+   0215 FE                 1369 	mov	r6,a
+   0216 4D                 1370 	orl	a,r5
+   0217 60 08              1371 	jz	00129$
+                    0219   1372 	C$usb.c$237$6$23 ==.
+                           1373 ;	libraries/src/usb/usb.c:237: USBCS0 = (1<<6);  // De-asserts the OUTPKT_RDY bit.
+   0219 90 DE 11           1374 	mov	dptr,#_USBCSIL
+   021C 74 40              1375 	mov	a,#0x40
+   021E F0                 1376 	movx	@dptr,a
+   021F 80 13              1377 	sjmp	00143$
+   0221                    1378 00129$:
+                    0221   1379 	C$usb.c$242$6$24 ==.
+                           1380 ;	libraries/src/usb/usb.c:242: USBCS0 = (1<<6) | (1<<3) | (1<<1);  // De-asserts OUTPKY_RDY, asserts DATA_END, asserts INPKT_RDY.
+   0221 90 DE 11           1381 	mov	dptr,#_USBCSIL
+   0224 74 4A              1382 	mov	a,#0x4A
+   0226 F0                 1383 	movx	@dptr,a
+                    0227   1384 	C$usb.c$243$6$24 ==.
+                           1385 ;	libraries/src/usb/usb.c:243: controlTransferState = CONTROL_TRANSFER_STATE_NONE;
+   0227 90s00r01           1386 	mov	dptr,#_controlTransferState
+   022A E4                 1387 	clr	a
+   022B F0                 1388 	movx	@dptr,a
+   022C 80 06              1389 	sjmp	00143$
+   022E                    1390 00137$:
+                    022E   1391 	C$usb.c$252$4$25 ==.
+                           1392 ;	libraries/src/usb/usb.c:252: USBCS0 = (1<<6);  // De-asserts the OUTPKT_RDY.
+   022E 90 DE 11           1393 	mov	dptr,#_USBCSIL
+   0231 74 40              1394 	mov	a,#0x40
+   0233 F0                 1395 	movx	@dptr,a
+   0234                    1396 00143$:
+                    0234   1397 	C$usb.c$256$2$7 ==.
+                           1398 ;	libraries/src/usb/usb.c:256: if (!(usbcs0 & (1<<1)) && (controlTransferState == CONTROL_TRANSFER_STATE_READ))
+   0234 EF                 1399 	mov	a,r7
+   0235 20 E1 66           1400 	jb	acc.1,00152$
+   0238 90s00r01           1401 	mov	dptr,#_controlTransferState
+   023B E0                 1402 	movx	a,@dptr
+   023C FE                 1403 	mov	r6,a
+   023D BE 02 5E           1404 	cjne	r6,#0x02,00152$
+                    0240   1405 	C$usb.c$261$3$26 ==.
+                           1406 ;	libraries/src/usb/usb.c:261: if (controlTransferBytesLeft < USB_EP0_PACKET_SIZE)
+   0240 90s00r08           1407 	mov	dptr,#_controlTransferBytesLeft
+   0243 E0                 1408 	movx	a,@dptr
+   0244 FD                 1409 	mov	r5,a
+   0245 A3                 1410 	inc	dptr
+   0246 E0                 1411 	movx	a,@dptr
+   0247 FE                 1412 	mov	r6,a
+   0248 C3                 1413 	clr	c
+   0249 ED                 1414 	mov	a,r5
+   024A 94 20              1415 	subb	a,#0x20
+   024C EE                 1416 	mov	a,r6
+   024D 94 00              1417 	subb	a,#0x00
+   024F 50 09              1418 	jnc	00145$
+                    0251   1419 	C$usb.c$264$4$27 ==.
+                           1420 ;	libraries/src/usb/usb.c:264: usbcs0 = (1<<1)|(1<<3);  // INPKT_RDY and DATA_END
+   0251 7F 0A              1421 	mov	r7,#0x0A
+                    0253   1422 	C$usb.c$265$4$27 ==.
+                           1423 ;	libraries/src/usb/usb.c:265: bytesToSend = controlTransferBytesLeft;
+                    0253   1424 	C$usb.c$266$4$27 ==.
+                           1425 ;	libraries/src/usb/usb.c:266: controlTransferState = CONTROL_TRANSFER_STATE_NONE;
+   0253 90s00r01           1426 	mov	dptr,#_controlTransferState
+   0256 E4                 1427 	clr	a
+   0257 F0                 1428 	movx	@dptr,a
+   0258 80 04              1429 	sjmp	00146$
+   025A                    1430 00145$:
+                    025A   1431 	C$usb.c$271$4$28 ==.
+                           1432 ;	libraries/src/usb/usb.c:271: usbcs0 = (1<<1); // INPKT_RDY
+   025A 7F 02              1433 	mov	r7,#0x02
+                    025C   1434 	C$usb.c$272$4$28 ==.
+                           1435 ;	libraries/src/usb/usb.c:272: bytesToSend = USB_EP0_PACKET_SIZE;
+   025C 7D 20              1436 	mov	r5,#0x20
+   025E                    1437 00146$:
+                    025E   1438 	C$usb.c$276$3$26 ==.
+                           1439 ;	libraries/src/usb/usb.c:276: usbWriteFifo(0, bytesToSend, controlTransferPointer);
+   025E 78r05              1440 	mov	r0,#_usbWriteFifo_PARM_2
+   0260 ED                 1441 	mov	a,r5
+   0261 F2                 1442 	movx	@r0,a
+   0262 78r00              1443 	mov	r0,#_controlTransferPointer
+   0264 79r06              1444 	mov	r1,#_usbWriteFifo_PARM_3
+   0266 E2                 1445 	movx	a,@r0
+   0267 F3                 1446 	movx	@r1,a
+   0268 08                 1447 	inc	r0
+   0269 E2                 1448 	movx	a,@r0
+   026A 09                 1449 	inc	r1
+   026B F3                 1450 	movx	@r1,a
+   026C 75 82 00           1451 	mov	dpl,#0x00
+   026F C0 07              1452 	push	ar7
+   0271 C0 05              1453 	push	ar5
+   0273 12s00r36           1454 	lcall	_usbWriteFifo
+   0276 D0 05              1455 	pop	ar5
+   0278 D0 07              1456 	pop	ar7
+                    027A   1457 	C$usb.c$277$3$26 ==.
+                           1458 ;	libraries/src/usb/usb.c:277: USBCS0 = usbcs0;
+   027A 90 DE 11           1459 	mov	dptr,#_USBCSIL
+   027D EF                 1460 	mov	a,r7
+   027E F0                 1461 	movx	@dptr,a
+                    027F   1462 	C$usb.c$280$3$26 ==.
+                           1463 ;	libraries/src/usb/usb.c:280: controlTransferPointer += bytesToSend;
+   027F 78r00              1464 	mov	r0,#_controlTransferPointer
+   0281 E2                 1465 	movx	a,@r0
+   0282 2D                 1466 	add	a,r5
+   0283 F2                 1467 	movx	@r0,a
+   0284 08                 1468 	inc	r0
+   0285 E2                 1469 	movx	a,@r0
+   0286 34 00              1470 	addc	a,#0x00
+   0288 F2                 1471 	movx	@r0,a
+                    0289   1472 	C$usb.c$281$3$26 ==.
+                           1473 ;	libraries/src/usb/usb.c:281: controlTransferBytesLeft -= bytesToSend;
+   0289 90s00r08           1474 	mov	dptr,#_controlTransferBytesLeft
+   028C E0                 1475 	movx	a,@dptr
+   028D FE                 1476 	mov	r6,a
+   028E A3                 1477 	inc	dptr
+   028F E0                 1478 	movx	a,@dptr
+   0290 FF                 1479 	mov	r7,a
+   0291 7C 00              1480 	mov	r4,#0x00
+   0293 90s00r08           1481 	mov	dptr,#_controlTransferBytesLeft
+   0296 EE                 1482 	mov	a,r6
+   0297 C3                 1483 	clr	c
+   0298 9D                 1484 	subb	a,r5
+   0299 F0                 1485 	movx	@dptr,a
+   029A EF                 1486 	mov	a,r7
+   029B 9C                 1487 	subb	a,r4
+   029C A3                 1488 	inc	dptr
+   029D F0                 1489 	movx	@dptr,a
+   029E                    1490 00152$:
+                    029E   1491 	C$usb.c$284$1$1 ==.
+                    029E   1492 	XG$usbPoll$0$0 ==.
+   029E 22                 1493 	ret
+                           1494 ;------------------------------------------------------------
+                           1495 ;Allocation info for local variables in function 'usbStandardDeviceRequestHandler'
+                           1496 ;------------------------------------------------------------
+                           1497 ;response                  Allocated with name '_usbStandardDeviceRequestHandler_response_1_1'
+                           1498 ;------------------------------------------------------------
+                    029F   1499 	Fusb$usbStandardDeviceRequestHandler$0$0 ==.
+                    029F   1500 	C$usb.c$291$1$1 ==.
+                           1501 ;	libraries/src/usb/usb.c:291: static void usbStandardDeviceRequestHandler()
+                           1502 ;	-----------------------------------------
+                           1503 ;	 function usbStandardDeviceRequestHandler
+                           1504 ;	-----------------------------------------
+   029F                    1505 _usbStandardDeviceRequestHandler:
+                    029F   1506 	C$usb.c$295$1$1 ==.
+                           1507 ;	libraries/src/usb/usb.c:295: response[0] = 0;
+   029F 90s00r0A           1508 	mov	dptr,#_usbStandardDeviceRequestHandler_response_1_1
+                    02A2   1509 	C$usb.c$296$1$1 ==.
+                           1510 ;	libraries/src/usb/usb.c:296: response[1] = 0;
+   02A2 E4                 1511 	clr	a
+   02A3 F0                 1512 	movx	@dptr,a
+   02A4 90s00r0B           1513 	mov	dptr,#(_usbStandardDeviceRequestHandler_response_1_1 + 0x0001)
+   02A7 F0                 1514 	movx	@dptr,a
+                    02A8   1515 	C$usb.c$309$1$1 ==.
+                           1516 ;	libraries/src/usb/usb.c:309: switch(usbSetupPacket.bRequest)
+   02A8 90s00r01           1517 	mov	dptr,#(_usbSetupPacket + 0x0001)
+   02AB E0                 1518 	movx	a,@dptr
+   02AC FF                 1519 	mov  r7,a
+   02AD 24 F3              1520 	add	a,#0xff - 0x0C
+   02AF 50 03              1521 	jnc	00179$
+   02B1 02s05r54           1522 	ljmp	00147$
+   02B4                    1523 00179$:
+   02B4 EF                 1524 	mov	a,r7
+   02B5 2F                 1525 	add	a,r7
+   02B6 2F                 1526 	add	a,r7
+   02B7 90s02rBB           1527 	mov	dptr,#00180$
+   02BA 73                 1528 	jmp	@a+dptr
+   02BB                    1529 00180$:
+   02BB 02s04r7E           1530 	ljmp	00129$
+   02BE 02s05r40           1531 	ljmp	00144$
+   02C1 02s05r54           1532 	ljmp	00146$
+   02C4 02s05r40           1533 	ljmp	00143$
+   02C7 02s05r54           1534 	ljmp	00146$
+   02CA 02s03rB9           1535 	ljmp	00115$
+   02CD 02s02rE2           1536 	ljmp	00101$
+   02D0 02s05r54           1537 	ljmp	00146$
+   02D3 02s04r17           1538 	ljmp	00123$
+   02D6 02s03rDA           1539 	ljmp	00116$
+   02D9 02s04r3C           1540 	ljmp	00124$
+   02DC 02s05r54           1541 	ljmp	00146$
+   02DF 02s05r45           1542 	ljmp	00145$
+                    02E2   1543 	C$usb.c$311$2$2 ==.
+                           1544 ;	libraries/src/usb/usb.c:311: case USB_REQUEST_GET_DESCRIPTOR: // USB Spec 9.4.3 Get Descriptor
+   02E2                    1545 00101$:
+                    02E2   1546 	C$usb.c$313$3$3 ==.
+                           1547 ;	libraries/src/usb/usb.c:313: switch(usbSetupPacket.wValue >> 8)
+   02E2 90s00r02           1548 	mov	dptr,#(_usbSetupPacket + 0x0002)
+   02E5 E0                 1549 	movx	a,@dptr
+   02E6 FE                 1550 	mov	r6,a
+   02E7 A3                 1551 	inc	dptr
+   02E8 E0                 1552 	movx	a,@dptr
+   02E9 FF                 1553 	mov	r7,a
+   02EA FC                 1554 	mov	r4,a
+   02EB 7D 00              1555 	mov	r5,#0x00
+   02ED BC 01 05           1556 	cjne	r4,#0x01,00181$
+   02F0 BD 00 02           1557 	cjne	r5,#0x00,00181$
+   02F3 80 13              1558 	sjmp	00102$
+   02F5                    1559 00181$:
+   02F5 BC 02 05           1560 	cjne	r4,#0x02,00182$
+   02F8 BD 00 02           1561 	cjne	r5,#0x00,00182$
+   02FB 80 20              1562 	sjmp	00103$
+   02FD                    1563 00182$:
+   02FD BC 03 05           1564 	cjne	r4,#0x03,00183$
+   0300 BD 00 02           1565 	cjne	r5,#0x00,00183$
+   0303 80 3B              1566 	sjmp	00106$
+   0305                    1567 00183$:
+   0305 02s03r84           1568 	ljmp	00109$
+                    0308   1569 	C$usb.c$315$4$4 ==.
+                           1570 ;	libraries/src/usb/usb.c:315: case USB_DESCRIPTOR_TYPE_DEVICE:
+   0308                    1571 00102$:
+                    0308   1572 	C$usb.c$317$5$5 ==.
+                           1573 ;	libraries/src/usb/usb.c:317: controlTransferPointer = (uint8 XDATA *)&usbDeviceDescriptor;
+   0308 78r00              1574 	mov	r0,#_controlTransferPointer
+   030A 74r00              1575 	mov	a,#_usbDeviceDescriptor
+   030C F2                 1576 	movx	@r0,a
+   030D 08                 1577 	inc	r0
+   030E 74s00              1578 	mov	a,#(_usbDeviceDescriptor >> 8)
+   0310 F2                 1579 	movx	@r0,a
+                    0311   1580 	C$usb.c$318$5$5 ==.
+                           1581 ;	libraries/src/usb/usb.c:318: controlTransferBytesLeft = sizeof(USB_DESCRIPTOR_DEVICE);
+   0311 90s00r08           1582 	mov	dptr,#_controlTransferBytesLeft
+   0314 74 12              1583 	mov	a,#0x12
+   0316 F0                 1584 	movx	@dptr,a
+   0317 A3                 1585 	inc	dptr
+   0318 E4                 1586 	clr	a
+   0319 F0                 1587 	movx	@dptr,a
+                    031A   1588 	C$usb.c$319$5$5 ==.
+                           1589 ;	libraries/src/usb/usb.c:319: break;
+   031A 02s03r91           1590 	ljmp	00112$
+                    031D   1591 	C$usb.c$321$4$4 ==.
+                           1592 ;	libraries/src/usb/usb.c:321: case USB_DESCRIPTOR_TYPE_CONFIGURATION:
+   031D                    1593 00103$:
+                    031D   1594 	C$usb.c$323$5$6 ==.
+                           1595 ;	libraries/src/usb/usb.c:323: if ((usbSetupPacket.wValue & 0xFF) != 0)
+   031D EE                 1596 	mov	a,r6
+   031E 60 03              1597 	jz	00105$
+                    0320   1598 	C$usb.c$326$6$7 ==.
+                           1599 ;	libraries/src/usb/usb.c:326: return;
+   0320 02s05r54           1600 	ljmp	00147$
+   0323                    1601 00105$:
+                    0323   1602 	C$usb.c$331$5$6 ==.
+                           1603 ;	libraries/src/usb/usb.c:331: controlTransferPointer = (uint8 XDATA *)usbConfigurationDescriptor;
+   0323 78r00              1604 	mov	r0,#_controlTransferPointer
+   0325 74r00              1605 	mov	a,#_usbConfigurationDescriptor
+   0327 F2                 1606 	movx	@r0,a
+   0328 08                 1607 	inc	r0
+   0329 74s00              1608 	mov	a,#(_usbConfigurationDescriptor >> 8)
+   032B F2                 1609 	movx	@r0,a
+                    032C   1610 	C$usb.c$332$5$6 ==.
+                           1611 ;	libraries/src/usb/usb.c:332: controlTransferBytesLeft = *(uint16 *)&usbConfigurationDescriptor[2];
+   032C 90s00r02           1612 	mov	dptr,#(_usbConfigurationDescriptor + 0x0002)
+   032F E4                 1613 	clr	a
+   0330 93                 1614 	movc	a,@a+dptr
+   0331 FC                 1615 	mov	r4,a
+   0332 A3                 1616 	inc	dptr
+   0333 E4                 1617 	clr	a
+   0334 93                 1618 	movc	a,@a+dptr
+   0335 FD                 1619 	mov	r5,a
+   0336 90s00r08           1620 	mov	dptr,#_controlTransferBytesLeft
+   0339 EC                 1621 	mov	a,r4
+   033A F0                 1622 	movx	@dptr,a
+   033B A3                 1623 	inc	dptr
+   033C ED                 1624 	mov	a,r5
+   033D F0                 1625 	movx	@dptr,a
+                    033E   1626 	C$usb.c$333$5$6 ==.
+                           1627 ;	libraries/src/usb/usb.c:333: break;
+                    033E   1628 	C$usb.c$335$4$4 ==.
+                           1629 ;	libraries/src/usb/usb.c:335: case USB_DESCRIPTOR_TYPE_STRING:
+   033E 80 51              1630 	sjmp	00112$
+   0340                    1631 00106$:
+                    0340   1632 	C$usb.c$337$5$8 ==.
+                           1633 ;	libraries/src/usb/usb.c:337: if ((usbSetupPacket.wValue & 0xFF) >= usbStringDescriptorCount)
+   0340 8E 04              1634 	mov	ar4,r6
+   0342 7D 00              1635 	mov	r5,#0x00
+   0344 90s00r00           1636 	mov	dptr,#_usbStringDescriptorCount
+   0347 E4                 1637 	clr	a
+   0348 93                 1638 	movc	a,@a+dptr
+   0349 FB                 1639 	mov	r3,a
+   034A 7A 00              1640 	mov	r2,#0x00
+   034C C3                 1641 	clr	c
+   034D EC                 1642 	mov	a,r4
+   034E 9B                 1643 	subb	a,r3
+   034F ED                 1644 	mov	a,r5
+   0350 9A                 1645 	subb	a,r2
+   0351 40 03              1646 	jc	00108$
+                    0353   1647 	C$usb.c$340$6$9 ==.
+                           1648 ;	libraries/src/usb/usb.c:340: return;
+   0353 02s05r54           1649 	ljmp	00147$
+   0356                    1650 00108$:
+                    0356   1651 	C$usb.c$343$5$8 ==.
+                           1652 ;	libraries/src/usb/usb.c:343: controlTransferPointer = (uint8 XDATA *)usbStringDescriptors[usbSetupPacket.wValue & 0xFF];
+   0356 E4                 1653 	clr	a
+   0357 CE                 1654 	xch	a,r6
+   0358 25 E0              1655 	add	a,acc
+   035A CE                 1656 	xch	a,r6
+   035B 33                 1657 	rlc	a
+   035C FF                 1658 	mov	r7,a
+   035D EE                 1659 	mov	a,r6
+   035E 24r00              1660 	add	a,#_usbStringDescriptors
+   0360 F5 82              1661 	mov	dpl,a
+   0362 EF                 1662 	mov	a,r7
+   0363 34s00              1663 	addc	a,#(_usbStringDescriptors >> 8)
+   0365 F5 83              1664 	mov	dph,a
+   0367 E4                 1665 	clr	a
+   0368 93                 1666 	movc	a,@a+dptr
+   0369 FE                 1667 	mov	r6,a
+   036A A3                 1668 	inc	dptr
+   036B E4                 1669 	clr	a
+   036C 93                 1670 	movc	a,@a+dptr
+   036D FF                 1671 	mov	r7,a
+   036E 78r00              1672 	mov	r0,#_controlTransferPointer
+   0370 EE                 1673 	mov	a,r6
+   0371 F2                 1674 	movx	@r0,a
+   0372 08                 1675 	inc	r0
+   0373 EF                 1676 	mov	a,r7
+   0374 F2                 1677 	movx	@r0,a
+                    0375   1678 	C$usb.c$344$5$8 ==.
+                           1679 ;	libraries/src/usb/usb.c:344: controlTransferBytesLeft = controlTransferPointer[0];
+   0375 8E 82              1680 	mov	dpl,r6
+   0377 8F 83              1681 	mov	dph,r7
+   0379 E0                 1682 	movx	a,@dptr
+   037A FE                 1683 	mov	r6,a
+   037B 90s00r08           1684 	mov	dptr,#_controlTransferBytesLeft
+   037E F0                 1685 	movx	@dptr,a
+   037F A3                 1686 	inc	dptr
+   0380 E4                 1687 	clr	a
+   0381 F0                 1688 	movx	@dptr,a
+                    0382   1689 	C$usb.c$345$5$8 ==.
+                           1690 ;	libraries/src/usb/usb.c:345: break;
+                    0382   1691 	C$usb.c$347$4$4 ==.
+                           1692 ;	libraries/src/usb/usb.c:347: default:
+   0382 80 0D              1693 	sjmp	00112$
+   0384                    1694 00109$:
+                    0384   1695 	C$usb.c$350$5$10 ==.
+                           1696 ;	libraries/src/usb/usb.c:350: usbCallbackClassDescriptorHandler();
+   0384 12s00r00           1697 	lcall	_usbCallbackClassDescriptorHandler
+                    0387   1698 	C$usb.c$352$5$10 ==.
+                           1699 ;	libraries/src/usb/usb.c:352: if (controlTransferState == CONTROL_TRANSFER_STATE_NONE)
+   0387 90s00r01           1700 	mov	dptr,#_controlTransferState
+   038A E0                 1701 	movx	a,@dptr
+   038B FF                 1702 	mov	r7,a
+   038C 70 03              1703 	jnz	00112$
+                    038E   1704 	C$usb.c$355$6$11 ==.
+                           1705 ;	libraries/src/usb/usb.c:355: return;
+   038E 02s05r54           1706 	ljmp	00147$
+                    0391   1707 	C$usb.c$359$3$3 ==.
+                           1708 ;	libraries/src/usb/usb.c:359: }
+   0391                    1709 00112$:
+                    0391   1710 	C$usb.c$364$3$3 ==.
+                           1711 ;	libraries/src/usb/usb.c:364: if(controlTransferBytesLeft > usbSetupPacket.wLength)
+   0391 90s00r06           1712 	mov	dptr,#(_usbSetupPacket + 0x0006)
+   0394 E0                 1713 	movx	a,@dptr
+   0395 FE                 1714 	mov	r6,a
+   0396 A3                 1715 	inc	dptr
+   0397 E0                 1716 	movx	a,@dptr
+   0398 FF                 1717 	mov	r7,a
+   0399 90s00r08           1718 	mov	dptr,#_controlTransferBytesLeft
+   039C E0                 1719 	movx	a,@dptr
+   039D FC                 1720 	mov	r4,a
+   039E A3                 1721 	inc	dptr
+   039F E0                 1722 	movx	a,@dptr
+   03A0 FD                 1723 	mov	r5,a
+   03A1 C3                 1724 	clr	c
+   03A2 EE                 1725 	mov	a,r6
+   03A3 9C                 1726 	subb	a,r4
+   03A4 EF                 1727 	mov	a,r7
+   03A5 9D                 1728 	subb	a,r5
+   03A6 50 08              1729 	jnc	00114$
+                    03A8   1730 	C$usb.c$366$4$12 ==.
+                           1731 ;	libraries/src/usb/usb.c:366: controlTransferBytesLeft = usbSetupPacket.wLength;
+   03A8 90s00r08           1732 	mov	dptr,#_controlTransferBytesLeft
+   03AB EE                 1733 	mov	a,r6
+   03AC F0                 1734 	movx	@dptr,a
+   03AD A3                 1735 	inc	dptr
+   03AE EF                 1736 	mov	a,r7
+   03AF F0                 1737 	movx	@dptr,a
+   03B0                    1738 00114$:
+                    03B0   1739 	C$usb.c$369$3$3 ==.
+                           1740 ;	libraries/src/usb/usb.c:369: controlTransferState = CONTROL_TRANSFER_STATE_READ;
+   03B0 90s00r01           1741 	mov	dptr,#_controlTransferState
+   03B3 74 02              1742 	mov	a,#0x02
+   03B5 F0                 1743 	movx	@dptr,a
+                    03B6   1744 	C$usb.c$370$3$3 ==.
+                           1745 ;	libraries/src/usb/usb.c:370: return;
+   03B6 02s05r54           1746 	ljmp	00147$
+                    03B9   1747 	C$usb.c$372$2$2 ==.
+                           1748 ;	libraries/src/usb/usb.c:372: case USB_REQUEST_SET_ADDRESS: // USB Spec, 9.4.6 Set Address
+   03B9                    1749 00115$:
+                    03B9   1750 	C$usb.c$379$3$13 ==.
+                           1751 ;	libraries/src/usb/usb.c:379: USBADDR = (uint8)usbSetupPacket.wValue;
+   03B9 90s00r02           1752 	mov	dptr,#(_usbSetupPacket + 0x0002)
+   03BC E0                 1753 	movx	a,@dptr
+   03BD FE                 1754 	mov	r6,a
+   03BE A3                 1755 	inc	dptr
+   03BF E0                 1756 	movx	a,@dptr
+   03C0 FF                 1757 	mov	r7,a
+   03C1 90 DE 00           1758 	mov	dptr,#_USBADDR
+   03C4 EE                 1759 	mov	a,r6
+   03C5 F0                 1760 	movx	@dptr,a
+                    03C6   1761 	C$usb.c$380$3$13 ==.
+                           1762 ;	libraries/src/usb/usb.c:380: usbDeviceState = ((uint8)usbSetupPacket.wValue) ? USB_STATE_ADDRESS : USB_STATE_DEFAULT;
+   03C6 EE                 1763 	mov	a,r6
+   03C7 60 04              1764 	jz	00149$
+   03C9 7F 08              1765 	mov	r7,#0x08
+   03CB 80 02              1766 	sjmp	00150$
+   03CD                    1767 00149$:
+   03CD 7F 04              1768 	mov	r7,#0x04
+   03CF                    1769 00150$:
+   03CF 90s00r00           1770 	mov	dptr,#_usbDeviceState
+   03D2 EF                 1771 	mov	a,r7
+   03D3 F0                 1772 	movx	@dptr,a
+                    03D4   1773 	C$usb.c$383$3$13 ==.
+                           1774 ;	libraries/src/usb/usb.c:383: usbControlAcknowledge();
+   03D4 12s05rEE           1775 	lcall	_usbControlAcknowledge
+                    03D7   1776 	C$usb.c$384$3$13 ==.
+                           1777 ;	libraries/src/usb/usb.c:384: return;
+   03D7 02s05r54           1778 	ljmp	00147$
+                    03DA   1779 	C$usb.c$386$2$2 ==.
+                           1780 ;	libraries/src/usb/usb.c:386: case USB_REQUEST_SET_CONFIGURATION: // USB Spec, 9.4.7 Set Configuration
+   03DA                    1781 00116$:
+                    03DA   1782 	C$usb.c$389$3$14 ==.
+                           1783 ;	libraries/src/usb/usb.c:389: switch(usbSetupPacket.wValue)
+   03DA 90s00r02           1784 	mov	dptr,#(_usbSetupPacket + 0x0002)
+   03DD E0                 1785 	movx	a,@dptr
+   03DE FE                 1786 	mov	r6,a
+   03DF A3                 1787 	inc	dptr
+   03E0 E0                 1788 	movx	a,@dptr
+   03E1 FF                 1789 	mov	r7,a
+   03E2 BE 00 05           1790 	cjne	r6,#0x00,00189$
+   03E5 BF 00 02           1791 	cjne	r7,#0x00,00189$
+   03E8 80 08              1792 	sjmp	00117$
+   03EA                    1793 00189$:
+                    03EA   1794 	C$usb.c$391$4$15 ==.
+                           1795 ;	libraries/src/usb/usb.c:391: case 0:
+   03EA BE 01 21           1796 	cjne	r6,#0x01,00121$
+   03ED BF 00 1E           1797 	cjne	r7,#0x00,00121$
+   03F0 80 11              1798 	sjmp	00120$
+   03F2                    1799 00117$:
+                    03F2   1800 	C$usb.c$397$5$16 ==.
+                           1801 ;	libraries/src/usb/usb.c:397: if (usbDeviceState > USB_STATE_ADDRESS)
+   03F2 90s00r00           1802 	mov	dptr,#_usbDeviceState
+   03F5 E0                 1803 	movx	a,@dptr
+   03F6 FF                 1804 	mov  r7,a
+   03F7 24 F7              1805 	add	a,#0xff - 0x08
+   03F9 50 16              1806 	jnc	00122$
+                    03FB   1807 	C$usb.c$399$6$17 ==.
+                           1808 ;	libraries/src/usb/usb.c:399: usbDeviceState = USB_STATE_ADDRESS;
+   03FB 90s00r00           1809 	mov	dptr,#_usbDeviceState
+   03FE 74 08              1810 	mov	a,#0x08
+   0400 F0                 1811 	movx	@dptr,a
+                    0401   1812 	C$usb.c$401$5$16 ==.
+                           1813 ;	libraries/src/usb/usb.c:401: break;
+                    0401   1814 	C$usb.c$403$4$15 ==.
+                           1815 ;	libraries/src/usb/usb.c:403: case 1:
+   0401 80 0E              1816 	sjmp	00122$
+   0403                    1817 00120$:
+                    0403   1818 	C$usb.c$408$5$18 ==.
+                           1819 ;	libraries/src/usb/usb.c:408: usbDeviceState = USB_STATE_CONFIGURED;
+   0403 90s00r00           1820 	mov	dptr,#_usbDeviceState
+   0406 74 10              1821 	mov	a,#0x10
+   0408 F0                 1822 	movx	@dptr,a
+                    0409   1823 	C$usb.c$409$5$18 ==.
+                           1824 ;	libraries/src/usb/usb.c:409: usbCallbackInitEndpoints();
+   0409 12s00r00           1825 	lcall	_usbCallbackInitEndpoints
+                    040C   1826 	C$usb.c$410$5$18 ==.
+                           1827 ;	libraries/src/usb/usb.c:410: break;
+                    040C   1828 	C$usb.c$412$4$15 ==.
+                           1829 ;	libraries/src/usb/usb.c:412: default:
+   040C 80 03              1830 	sjmp	00122$
+   040E                    1831 00121$:
+                    040E   1832 	C$usb.c$415$5$19 ==.
+                           1833 ;	libraries/src/usb/usb.c:415: return;
+   040E 02s05r54           1834 	ljmp	00147$
+                    0411   1835 	C$usb.c$417$3$14 ==.
+                           1836 ;	libraries/src/usb/usb.c:417: }
+   0411                    1837 00122$:
+                    0411   1838 	C$usb.c$420$3$14 ==.
+                           1839 ;	libraries/src/usb/usb.c:420: usbControlAcknowledge();
+   0411 12s05rEE           1840 	lcall	_usbControlAcknowledge
+                    0414   1841 	C$usb.c$421$3$14 ==.
+                           1842 ;	libraries/src/usb/usb.c:421: return;
+   0414 02s05r54           1843 	ljmp	00147$
+                    0417   1844 	C$usb.c$423$2$2 ==.
+                           1845 ;	libraries/src/usb/usb.c:423: case USB_REQUEST_GET_CONFIGURATION: // USB Spec 9.4.2 Get Configuration
+   0417                    1846 00123$:
+                    0417   1847 	C$usb.c$426$3$20 ==.
+                           1848 ;	libraries/src/usb/usb.c:426: response[0] = (usbDeviceState == USB_STATE_CONFIGURED) ? 1 : 0;
+   0417 90s00r00           1849 	mov	dptr,#_usbDeviceState
+   041A E0                 1850 	movx	a,@dptr
+   041B FF                 1851 	mov	r7,a
+   041C BF 10 04           1852 	cjne	r7,#0x10,00151$
+   041F 7F 01              1853 	mov	r7,#0x01
+   0421 80 02              1854 	sjmp	00152$
+   0423                    1855 00151$:
+   0423 7F 00              1856 	mov	r7,#0x00
+   0425                    1857 00152$:
+   0425 90s00r0A           1858 	mov	dptr,#_usbStandardDeviceRequestHandler_response_1_1
+   0428 EF                 1859 	mov	a,r7
+   0429 F0                 1860 	movx	@dptr,a
+                    042A   1861 	C$usb.c$427$3$20 ==.
+                           1862 ;	libraries/src/usb/usb.c:427: usbControlRead(1, response);
+   042A 78r08              1863 	mov	r0,#_usbControlRead_PARM_2
+   042C 74r0A              1864 	mov	a,#_usbStandardDeviceRequestHandler_response_1_1
+   042E F2                 1865 	movx	@r0,a
+   042F 08                 1866 	inc	r0
+   0430 74s00              1867 	mov	a,#(_usbStandardDeviceRequestHandler_response_1_1 >> 8)
+   0432 F2                 1868 	movx	@r0,a
+   0433 90 00 01           1869 	mov	dptr,#0x0001
+   0436 12s05rAC           1870 	lcall	_usbControlRead
+                    0439   1871 	C$usb.c$428$3$20 ==.
+                           1872 ;	libraries/src/usb/usb.c:428: return;
+   0439 02s05r54           1873 	ljmp	00147$
+                    043C   1874 	C$usb.c$430$2$2 ==.
+                           1875 ;	libraries/src/usb/usb.c:430: case USB_REQUEST_GET_INTERFACE: // USB Spec 9.4.4 Get Interface
+   043C                    1876 00124$:
+                    043C   1877 	C$usb.c$437$3$21 ==.
+                           1878 ;	libraries/src/usb/usb.c:437: if (usbDeviceState < USB_STATE_CONFIGURED)
+   043C 90s00r00           1879 	mov	dptr,#_usbDeviceState
+   043F E0                 1880 	movx	a,@dptr
+   0440 FF                 1881 	mov	r7,a
+   0441 BF 10 00           1882 	cjne	r7,#0x10,00194$
+   0444                    1883 00194$:
+   0444 50 03              1884 	jnc	00126$
+                    0446   1885 	C$usb.c$440$4$22 ==.
+                           1886 ;	libraries/src/usb/usb.c:440: return;
+   0446 02s05r54           1887 	ljmp	00147$
+   0449                    1888 00126$:
+                    0449   1889 	C$usb.c$443$3$21 ==.
+                           1890 ;	libraries/src/usb/usb.c:443: if (usbSetupPacket.wIndex >= ((USB_DESCRIPTOR_CONFIGURATION *)&usbConfigurationDescriptor)->bNumInterfaces)
+   0449 90s00r04           1891 	mov	dptr,#(_usbSetupPacket + 0x0004)
+   044C E0                 1892 	movx	a,@dptr
+   044D FE                 1893 	mov	r6,a
+   044E A3                 1894 	inc	dptr
+   044F E0                 1895 	movx	a,@dptr
+   0450 FF                 1896 	mov	r7,a
+   0451 7Cr00              1897 	mov	r4,#_usbConfigurationDescriptor
+   0453 7Ds00              1898 	mov	r5,#(_usbConfigurationDescriptor >> 8)
+   0455 8C 82              1899 	mov	dpl,r4
+   0457 8D 83              1900 	mov	dph,r5
+   0459 A3                 1901 	inc	dptr
+   045A A3                 1902 	inc	dptr
+   045B A3                 1903 	inc	dptr
+   045C A3                 1904 	inc	dptr
+   045D E4                 1905 	clr	a
+   045E 93                 1906 	movc	a,@a+dptr
+   045F FD                 1907 	mov	r5,a
+   0460 7C 00              1908 	mov	r4,#0x00
+   0462 C3                 1909 	clr	c
+   0463 EE                 1910 	mov	a,r6
+   0464 9D                 1911 	subb	a,r5
+   0465 EF                 1912 	mov	a,r7
+   0466 9C                 1913 	subb	a,r4
+   0467 40 03              1914 	jc	00128$
+                    0469   1915 	C$usb.c$446$4$23 ==.
+                           1916 ;	libraries/src/usb/usb.c:446: return;
+   0469 02s05r54           1917 	ljmp	00147$
+   046C                    1918 00128$:
+                    046C   1919 	C$usb.c$451$3$21 ==.
+                           1920 ;	libraries/src/usb/usb.c:451: usbControlRead(1, response);
+   046C 78r08              1921 	mov	r0,#_usbControlRead_PARM_2
+   046E 74r0A              1922 	mov	a,#_usbStandardDeviceRequestHandler_response_1_1
+   0470 F2                 1923 	movx	@r0,a
+   0471 08                 1924 	inc	r0
+   0472 74s00              1925 	mov	a,#(_usbStandardDeviceRequestHandler_response_1_1 >> 8)
+   0474 F2                 1926 	movx	@r0,a
+   0475 90 00 01           1927 	mov	dptr,#0x0001
+   0478 12s05rAC           1928 	lcall	_usbControlRead
+                    047B   1929 	C$usb.c$452$3$21 ==.
+                           1930 ;	libraries/src/usb/usb.c:452: return;
+   047B 02s05r54           1931 	ljmp	00147$
+                    047E   1932 	C$usb.c$454$2$2 ==.
+                           1933 ;	libraries/src/usb/usb.c:454: case USB_REQUEST_GET_STATUS: // USB Spec 9.4.5 Get Status
+   047E                    1934 00129$:
+                    047E   1935 	C$usb.c$456$3$24 ==.
+                           1936 ;	libraries/src/usb/usb.c:456: switch(usbSetupPacket.recipient)
+   047E 90s00r00           1937 	mov	dptr,#_usbSetupPacket
+   0481 E0                 1938 	movx	a,@dptr
+   0482 54 1F              1939 	anl	a,#0x1F
+   0484 FE                 1940 	mov	r6,a
+   0485 7F 00              1941 	mov	r7,#0x00
+   0487 BE 00 05           1942 	cjne	r6,#0x00,00197$
+   048A BF 00 02           1943 	cjne	r7,#0x00,00197$
+   048D 80 14              1944 	sjmp	00130$
+   048F                    1945 00197$:
+   048F BE 01 05           1946 	cjne	r6,#0x01,00198$
+   0492 BF 00 02           1947 	cjne	r7,#0x00,00198$
+   0495 80 2E              1948 	sjmp	00131$
+   0497                    1949 00198$:
+   0497 BE 02 06           1950 	cjne	r6,#0x02,00199$
+   049A BF 00 03           1951 	cjne	r7,#0x00,00199$
+   049D 02s05r10           1952 	ljmp	00137$
+   04A0                    1953 00199$:
+   04A0 02s05r3E           1954 	ljmp	00142$
+                    04A3   1955 	C$usb.c$458$4$25 ==.
+                           1956 ;	libraries/src/usb/usb.c:458: case USB_RECIPIENT_DEVICE:
+   04A3                    1957 00130$:
+                    04A3   1958 	C$usb.c$461$5$26 ==.
+                           1959 ;	libraries/src/usb/usb.c:461: response[0] = vinPowerPresent() ? 1 : 0;
+   04A3 12s00r00           1960 	lcall	_vinPowerPresent
+   04A6 50 04              1961 	jnc	00153$
+   04A8 7F 01              1962 	mov	r7,#0x01
+   04AA 80 02              1963 	sjmp	00154$
+   04AC                    1964 00153$:
+   04AC 7F 00              1965 	mov	r7,#0x00
+   04AE                    1966 00154$:
+   04AE 90s00r0A           1967 	mov	dptr,#_usbStandardDeviceRequestHandler_response_1_1
+   04B1 EF                 1968 	mov	a,r7
+   04B2 F0                 1969 	movx	@dptr,a
+                    04B3   1970 	C$usb.c$463$5$26 ==.
+                           1971 ;	libraries/src/usb/usb.c:463: usbControlRead(2, response);
+   04B3 78r08              1972 	mov	r0,#_usbControlRead_PARM_2
+   04B5 74r0A              1973 	mov	a,#_usbStandardDeviceRequestHandler_response_1_1
+   04B7 F2                 1974 	movx	@r0,a
+   04B8 08                 1975 	inc	r0
+   04B9 74s00              1976 	mov	a,#(_usbStandardDeviceRequestHandler_response_1_1 >> 8)
+   04BB F2                 1977 	movx	@r0,a
+   04BC 90 00 02           1978 	mov	dptr,#0x0002
+   04BF 12s05rAC           1979 	lcall	_usbControlRead
+                    04C2   1980 	C$usb.c$464$5$26 ==.
+                           1981 ;	libraries/src/usb/usb.c:464: return;
+   04C2 02s05r54           1982 	ljmp	00147$
+                    04C5   1983 	C$usb.c$466$4$25 ==.
+                           1984 ;	libraries/src/usb/usb.c:466: case USB_RECIPIENT_INTERFACE:
+   04C5                    1985 00131$:
+                    04C5   1986 	C$usb.c$468$5$27 ==.
+                           1987 ;	libraries/src/usb/usb.c:468: if (usbDeviceState < USB_STATE_CONFIGURED && usbSetupPacket.wIndex != 0)
+   04C5 90s00r00           1988 	mov	dptr,#_usbDeviceState
+   04C8 E0                 1989 	movx	a,@dptr
+   04C9 FF                 1990 	mov	r7,a
+   04CA BF 10 00           1991 	cjne	r7,#0x10,00201$
+   04CD                    1992 00201$:
+   04CD 50 0E              1993 	jnc	00133$
+   04CF 90s00r04           1994 	mov	dptr,#(_usbSetupPacket + 0x0004)
+   04D2 E0                 1995 	movx	a,@dptr
+   04D3 FE                 1996 	mov	r6,a
+   04D4 A3                 1997 	inc	dptr
+   04D5 E0                 1998 	movx	a,@dptr
+   04D6 FF                 1999 	mov	r7,a
+   04D7 4E                 2000 	orl	a,r6
+   04D8 60 03              2001 	jz	00133$
+                    04DA   2002 	C$usb.c$472$6$28 ==.
+                           2003 ;	libraries/src/usb/usb.c:472: return;
+   04DA 02s05r54           2004 	ljmp	00147$
+   04DD                    2005 00133$:
+                    04DD   2006 	C$usb.c$475$5$27 ==.
+                           2007 ;	libraries/src/usb/usb.c:475: if (usbSetupPacket.wIndex >= ((USB_DESCRIPTOR_CONFIGURATION *)&usbConfigurationDescriptor)->bNumInterfaces)
+   04DD 90s00r04           2008 	mov	dptr,#(_usbSetupPacket + 0x0004)
+   04E0 E0                 2009 	movx	a,@dptr
+   04E1 FE                 2010 	mov	r6,a
+   04E2 A3                 2011 	inc	dptr
+   04E3 E0                 2012 	movx	a,@dptr
+   04E4 FF                 2013 	mov	r7,a
+   04E5 7Cr00              2014 	mov	r4,#_usbConfigurationDescriptor
+   04E7 7Ds00              2015 	mov	r5,#(_usbConfigurationDescriptor >> 8)
+   04E9 8C 82              2016 	mov	dpl,r4
+   04EB 8D 83              2017 	mov	dph,r5
+   04ED A3                 2018 	inc	dptr
+   04EE A3                 2019 	inc	dptr
+   04EF A3                 2020 	inc	dptr
+   04F0 A3                 2021 	inc	dptr
+   04F1 E4                 2022 	clr	a
+   04F2 93                 2023 	movc	a,@a+dptr
+   04F3 FD                 2024 	mov	r5,a
+   04F4 7C 00              2025 	mov	r4,#0x00
+   04F6 C3                 2026 	clr	c
+   04F7 EE                 2027 	mov	a,r6
+   04F8 9D                 2028 	subb	a,r5
+   04F9 EF                 2029 	mov	a,r7
+   04FA 9C                 2030 	subb	a,r4
+   04FB 40 02              2031 	jc	00136$
+                    04FD   2032 	C$usb.c$478$6$29 ==.
+                           2033 ;	libraries/src/usb/usb.c:478: return;
+   04FD 80 55              2034 	sjmp	00147$
+   04FF                    2035 00136$:
+                    04FF   2036 	C$usb.c$483$5$27 ==.
+                           2037 ;	libraries/src/usb/usb.c:483: usbControlRead(2, response);
+   04FF 78r08              2038 	mov	r0,#_usbControlRead_PARM_2
+   0501 74r0A              2039 	mov	a,#_usbStandardDeviceRequestHandler_response_1_1
+   0503 F2                 2040 	movx	@r0,a
+   0504 08                 2041 	inc	r0
+   0505 74s00              2042 	mov	a,#(_usbStandardDeviceRequestHandler_response_1_1 >> 8)
+   0507 F2                 2043 	movx	@r0,a
+   0508 90 00 02           2044 	mov	dptr,#0x0002
+   050B 12s05rAC           2045 	lcall	_usbControlRead
+                    050E   2046 	C$usb.c$484$5$27 ==.
+                           2047 ;	libraries/src/usb/usb.c:484: return;
+                    050E   2048 	C$usb.c$486$4$25 ==.
+                           2049 ;	libraries/src/usb/usb.c:486: case USB_RECIPIENT_ENDPOINT:
+   050E 80 44              2050 	sjmp	00147$
+   0510                    2051 00137$:
+                    0510   2052 	C$usb.c$488$5$30 ==.
+                           2053 ;	libraries/src/usb/usb.c:488: if ((usbSetupPacket.wValue & 15) == 0)
+   0510 90s00r02           2054 	mov	dptr,#(_usbSetupPacket + 0x0002)
+   0513 E0                 2055 	movx	a,@dptr
+   0514 FE                 2056 	mov	r6,a
+   0515 A3                 2057 	inc	dptr
+   0516 E0                 2058 	movx	a,@dptr
+   0517 FF                 2059 	mov	r7,a
+   0518 EE                 2060 	mov	a,r6
+   0519 54 0F              2061 	anl	a,#0x0F
+   051B 60 02              2062 	jz	00206$
+   051D 80 02              2063 	sjmp	00139$
+   051F                    2064 00206$:
+                    051F   2065 	C$usb.c$492$6$31 ==.
+                           2066 ;	libraries/src/usb/usb.c:492: return;
+   051F 80 33              2067 	sjmp	00147$
+   0521                    2068 00139$:
+                    0521   2069 	C$usb.c$495$5$30 ==.
+                           2070 ;	libraries/src/usb/usb.c:495: if (usbDeviceState < USB_STATE_CONFIGURED)
+   0521 90s00r00           2071 	mov	dptr,#_usbDeviceState
+   0524 E0                 2072 	movx	a,@dptr
+   0525 FF                 2073 	mov	r7,a
+   0526 BF 10 00           2074 	cjne	r7,#0x10,00207$
+   0529                    2075 00207$:
+   0529 50 02              2076 	jnc	00141$
+                    052B   2077 	C$usb.c$499$6$32 ==.
+                           2078 ;	libraries/src/usb/usb.c:499: return;
+   052B 80 27              2079 	sjmp	00147$
+   052D                    2080 00141$:
+                    052D   2081 	C$usb.c$507$5$30 ==.
+                           2082 ;	libraries/src/usb/usb.c:507: usbControlRead(2, response);
+   052D 78r08              2083 	mov	r0,#_usbControlRead_PARM_2
+   052F 74r0A              2084 	mov	a,#_usbStandardDeviceRequestHandler_response_1_1
+   0531 F2                 2085 	movx	@r0,a
+   0532 08                 2086 	inc	r0
+   0533 74s00              2087 	mov	a,#(_usbStandardDeviceRequestHandler_response_1_1 >> 8)
+   0535 F2                 2088 	movx	@r0,a
+   0536 90 00 02           2089 	mov	dptr,#0x0002
+   0539 12s05rAC           2090 	lcall	_usbControlRead
+                    053C   2091 	C$usb.c$508$5$30 ==.
+                           2092 ;	libraries/src/usb/usb.c:508: return;
+                    053C   2093 	C$usb.c$510$3$24 ==.
+                           2094 ;	libraries/src/usb/usb.c:510: }
+   053C 80 16              2095 	sjmp	00147$
+   053E                    2096 00142$:
+                    053E   2097 	C$usb.c$511$3$24 ==.
+                           2098 ;	libraries/src/usb/usb.c:511: return;
+                    053E   2099 	C$usb.c$519$2$2 ==.
+                           2100 ;	libraries/src/usb/usb.c:519: case USB_REQUEST_SET_FEATURE:
+   053E 80 14              2101 	sjmp	00147$
+   0540                    2102 00143$:
+                    0540   2103 	C$usb.c$520$2$2 ==.
+                           2104 ;	libraries/src/usb/usb.c:520: case USB_REQUEST_CLEAR_FEATURE:
+   0540                    2105 00144$:
+                    0540   2106 	C$usb.c$523$3$33 ==.
+                           2107 ;	libraries/src/usb/usb.c:523: usbControlAcknowledge();
+   0540 12s05rEE           2108 	lcall	_usbControlAcknowledge
+                    0543   2109 	C$usb.c$524$3$33 ==.
+                           2110 ;	libraries/src/usb/usb.c:524: return;
+                    0543   2111 	C$usb.c$526$2$2 ==.
+                           2112 ;	libraries/src/usb/usb.c:526: case USB_REQUEST_SYNCH_FRAME:
+   0543 80 0F              2113 	sjmp	00147$
+   0545                    2114 00145$:
+                    0545   2115 	C$usb.c$529$3$34 ==.
+                           2116 ;	libraries/src/usb/usb.c:529: usbControlRead(2, response);
+   0545 78r08              2117 	mov	r0,#_usbControlRead_PARM_2
+   0547 74r0A              2118 	mov	a,#_usbStandardDeviceRequestHandler_response_1_1
+   0549 F2                 2119 	movx	@r0,a
+   054A 08                 2120 	inc	r0
+   054B 74s00              2121 	mov	a,#(_usbStandardDeviceRequestHandler_response_1_1 >> 8)
+   054D F2                 2122 	movx	@r0,a
+   054E 90 00 02           2123 	mov	dptr,#0x0002
+   0551 12s05rAC           2124 	lcall	_usbControlRead
+                    0554   2125 	C$usb.c$530$3$34 ==.
+                           2126 ;	libraries/src/usb/usb.c:530: return;
+                    0554   2127 	C$usb.c$532$1$1 ==.
+                           2128 ;	libraries/src/usb/usb.c:532: }
+   0554                    2129 00146$:
+   0554                    2130 00147$:
+                    0554   2131 	C$usb.c$533$1$1 ==.
+                    0554   2132 	XFusb$usbStandardDeviceRequestHandler$0$0 ==.
+   0554 22                 2133 	ret
+                           2134 ;------------------------------------------------------------
+                           2135 ;Allocation info for local variables in function 'usbSuspended'
+                           2136 ;------------------------------------------------------------
+                    0555   2137 	G$usbSuspended$0$0 ==.
+                    0555   2138 	C$usb.c$535$1$1 ==.
+                           2139 ;	libraries/src/usb/usb.c:535: BIT usbSuspended()
+                           2140 ;	-----------------------------------------
+                           2141 ;	 function usbSuspended
+                           2142 ;	-----------------------------------------
+   0555                    2143 _usbSuspended:
+                    0555   2144 	C$usb.c$537$1$1 ==.
+                           2145 ;	libraries/src/usb/usb.c:537: return usbSuspendMode;
+   0555 A2*00              2146 	mov	c,_usbSuspendMode
+                    0557   2147 	C$usb.c$538$1$1 ==.
+                    0557   2148 	XG$usbSuspended$0$0 ==.
+   0557 22                 2149 	ret
+                           2150 ;------------------------------------------------------------
+                           2151 ;Allocation info for local variables in function 'usbSleep'
+                           2152 ;------------------------------------------------------------
+                    0558   2153 	G$usbSleep$0$0 ==.
+                    0558   2154 	C$usb.c$554$1$1 ==.
+                           2155 ;	libraries/src/usb/usb.c:554: void usbSleep()
+                           2156 ;	-----------------------------------------
+                           2157 ;	 function usbSleep
+                           2158 ;	-----------------------------------------
+   0558                    2159 _usbSleep:
+                    0558   2160 	C$usb.c$556$1$1 ==.
+                           2161 ;	libraries/src/usb/usb.c:556: uint8 savedPICTL = PICTL;
+   0558 AF 8C              2162 	mov	r7,_PICTL
+                    055A   2163 	C$usb.c$557$1$1 ==.
+                           2164 ;	libraries/src/usb/usb.c:557: BIT savedP0IE = P0IE;
+   055A A2 BD              2165 	mov	c,_P0IE
+   055C 92*02              2166 	mov	_usbSleep_savedP0IE_1_1,c
+                    055E   2167 	C$usb.c$561$1$1 ==.
+                           2168 ;	libraries/src/usb/usb.c:561: P0IE = 0;         // Disable the P0 interrupt while we are reconfiguring it (maybe not necessary).
+   055E C2 BD              2169 	clr	_P0IE
+                    0560   2170 	C$usb.c$562$1$1 ==.
+                           2171 ;	libraries/src/usb/usb.c:562: PICTL |= (1<<4);  // PICTL.P0IENH = 1  Enable the Port 0 interrupts for inputs 4-7 (USB_RESUME is #7).
+   0560 43 8C 10           2172 	orl	_PICTL,#0x10
+                    0563   2173 	C$usb.c$563$1$1 ==.
+                           2174 ;	libraries/src/usb/usb.c:563: PICTL &= ~(1<<0); // PICTL.P0ICON = 0  Detect rising edges (this is required for waking up).
+   0563 AE 8C              2175 	mov	r6,_PICTL
+   0565 53 06 FE           2176 	anl	ar6,#0xFE
+   0568 8E 8C              2177 	mov	_PICTL,r6
+                    056A   2178 	C$usb.c$565$1$1 ==.
+                           2179 ;	libraries/src/usb/usb.c:565: do
+   056A                    2180 00106$:
+                    056A   2181 	C$usb.c$568$2$2 ==.
+                           2182 ;	libraries/src/usb/usb.c:568: P0IFG = 0;   // Clear Port 0 module interrupt flags.
+   056A 75 89 00           2183 	mov	_P0IFG,#0x00
+                    056D   2184 	C$usb.c$569$2$2 ==.
+                           2185 ;	libraries/src/usb/usb.c:569: P0IF = 0;    // Clear Port 0 CPU interrupt flag (IRCON.P0IF = 0).
+   056D C2 C5              2186 	clr	_P0IF
+                    056F   2187 	C$usb.c$571$2$2 ==.
+                           2188 ;	libraries/src/usb/usb.c:571: P0IE = 1;    // Enable the Port 0 interrupt (IEN1.P0IE = 1) so we can wake up.
+   056F D2 BD              2189 	setb	_P0IE
+                    0571   2190 	C$usb.c$574$2$2 ==.
+                           2191 ;	libraries/src/usb/usb.c:574: SLEEP = (SLEEP & ~3) | 1;    // SLEEP.MODE = 1 : Selects Power Mode 1 (PM1).
+   0571 AE BE              2192 	mov	r6,_SLEEP
+   0573 74 FC              2193 	mov	a,#0xFC
+   0575 5E                 2194 	anl	a,r6
+   0576 44 01              2195 	orl	a,#0x01
+   0578 FE                 2196 	mov	r6,a
+   0579 8E BE              2197 	mov	_SLEEP,r6
+                    057B   2198 	C$usb.c$575$2$2 ==.
+                           2199 ;	libraries/src/usb/usb.c:575: __asm nop __endasm; __asm nop __endasm; __asm nop __endasm;
+   057B 00                 2200 	 nop 
+   057C 00                 2201 	 nop 
+   057D 00                 2202 	 nop 
+                    057E   2203 	C$usb.c$576$2$2 ==.
+                           2204 ;	libraries/src/usb/usb.c:576: if (SLEEP & 3)
+   057E E5 BE              2205 	mov	a,_SLEEP
+   0580 54 03              2206 	anl	a,#0x03
+   0582 60 07              2207 	jz	00102$
+                    0584   2208 	C$usb.c$578$3$3 ==.
+                           2209 ;	libraries/src/usb/usb.c:578: P1_0 = 1;
+   0584 D2 90              2210 	setb	_P1_0
+                    0586   2211 	C$usb.c$579$3$3 ==.
+                           2212 ;	libraries/src/usb/usb.c:579: PCON |= 1;    // PCON.IDLE = 1 : Actually go to sleep.
+   0586 43 87 01           2213 	orl	_PCON,#0x01
+                    0589   2214 	C$usb.c$580$3$3 ==.
+                           2215 ;	libraries/src/usb/usb.c:580: P1_0 = 0;
+   0589 C2 90              2216 	clr	_P1_0
+   058B                    2217 00102$:
+                    058B   2218 	C$usb.c$586$2$2 ==.
+                           2219 ;	libraries/src/usb/usb.c:586: P0IE = 0; // (IEN1.P0IE = 1)
+   058B C2 BD              2220 	clr	_P0IE
+                    058D   2221 	C$usb.c$592$2$2 ==.
+                           2222 ;	libraries/src/usb/usb.c:592: if (P0IFG & 0x80)
+   058D E5 89              2223 	mov	a,_P0IFG
+   058F 30 E7 02           2224 	jnb	acc.7,00107$
+                    0592   2225 	C$usb.c$594$3$4 ==.
+                           2226 ;	libraries/src/usb/usb.c:594: usbSuspendMode = 0;
+   0592 C2*00              2227 	clr	_usbSuspendMode
+   0594                    2228 00107$:
+                    0594   2229 	C$usb.c$597$1$1 ==.
+                           2230 ;	libraries/src/usb/usb.c:597: while(usbSuspendMode && !vinPowerPresent());
+   0594 30*00 09           2231 	jnb	_usbSuspendMode,00109$
+   0597 C0 07              2232 	push	ar7
+   0599 12s00r00           2233 	lcall	_vinPowerPresent
+   059C D0 07              2234 	pop	ar7
+   059E 50 CA              2235 	jnc	00106$
+                    05A0   2236 	C$usb.c$601$1$1 ==.
+                           2237 ;	libraries/src/usb/usb.c:601: while(!(SLEEP & (1<<6))){};
+   05A0                    2238 00109$:
+   05A0 E5 BE              2239 	mov	a,_SLEEP
+   05A2 30 E6 FB           2240 	jnb	acc.6,00109$
+                    05A5   2241 	C$usb.c$604$1$1 ==.
+                           2242 ;	libraries/src/usb/usb.c:604: PICTL = savedPICTL;
+   05A5 8F 8C              2243 	mov	_PICTL,r7
+                    05A7   2244 	C$usb.c$605$1$1 ==.
+                           2245 ;	libraries/src/usb/usb.c:605: P0IE = savedP0IE;
+   05A7 A2*02              2246 	mov	c,_usbSleep_savedP0IE_1_1
+   05A9 92 BD              2247 	mov	_P0IE,c
+                    05AB   2248 	C$usb.c$606$1$1 ==.
+                    05AB   2249 	XG$usbSleep$0$0 ==.
+   05AB 22                 2250 	ret
+                           2251 ;------------------------------------------------------------
+                           2252 ;Allocation info for local variables in function 'usbControlRead'
+                           2253 ;------------------------------------------------------------
+                    05AC   2254 	G$usbControlRead$0$0 ==.
+                    05AC   2255 	C$usb.c$608$1$1 ==.
+                           2256 ;	libraries/src/usb/usb.c:608: void usbControlRead(uint16 bytesCount, uint8 XDATA * source)
+                           2257 ;	-----------------------------------------
+                           2258 ;	 function usbControlRead
+                           2259 ;	-----------------------------------------
+   05AC                    2260 _usbControlRead:
+   05AC AE 82              2261 	mov	r6,dpl
+   05AE AF 83              2262 	mov	r7,dph
+                    05B0   2263 	C$usb.c$610$1$1 ==.
+                           2264 ;	libraries/src/usb/usb.c:610: controlTransferState = CONTROL_TRANSFER_STATE_READ;
+   05B0 90s00r01           2265 	mov	dptr,#_controlTransferState
+   05B3 74 02              2266 	mov	a,#0x02
+   05B5 F0                 2267 	movx	@dptr,a
+                    05B6   2268 	C$usb.c$611$1$1 ==.
+                           2269 ;	libraries/src/usb/usb.c:611: controlTransferBytesLeft = bytesCount;
+   05B6 90s00r08           2270 	mov	dptr,#_controlTransferBytesLeft
+   05B9 EE                 2271 	mov	a,r6
+   05BA F0                 2272 	movx	@dptr,a
+   05BB A3                 2273 	inc	dptr
+   05BC EF                 2274 	mov	a,r7
+   05BD F0                 2275 	movx	@dptr,a
+                    05BE   2276 	C$usb.c$612$1$1 ==.
+                           2277 ;	libraries/src/usb/usb.c:612: controlTransferPointer = source;
+   05BE 78r08              2278 	mov	r0,#_usbControlRead_PARM_2
+   05C0 E2                 2279 	movx	a,@r0
+   05C1 FE                 2280 	mov	r6,a
+   05C2 08                 2281 	inc	r0
+   05C3 E2                 2282 	movx	a,@r0
+   05C4 FF                 2283 	mov	r7,a
+   05C5 78r00              2284 	mov	r0,#_controlTransferPointer
+   05C7 EE                 2285 	mov	a,r6
+   05C8 F2                 2286 	movx	@r0,a
+   05C9 08                 2287 	inc	r0
+   05CA EF                 2288 	mov	a,r7
+   05CB F2                 2289 	movx	@r0,a
+                    05CC   2290 	C$usb.c$613$1$1 ==.
+                    05CC   2291 	XG$usbControlRead$0$0 ==.
+   05CC 22                 2292 	ret
+                           2293 ;------------------------------------------------------------
+                           2294 ;Allocation info for local variables in function 'usbControlWrite'
+                           2295 ;------------------------------------------------------------
+                    05CD   2296 	G$usbControlWrite$0$0 ==.
+                    05CD   2297 	C$usb.c$615$1$1 ==.
+                           2298 ;	libraries/src/usb/usb.c:615: void usbControlWrite(uint16 bytesCount, uint8 XDATA * source)
+                           2299 ;	-----------------------------------------
+                           2300 ;	 function usbControlWrite
+                           2301 ;	-----------------------------------------
+   05CD                    2302 _usbControlWrite:
+   05CD AE 82              2303 	mov	r6,dpl
+   05CF AF 83              2304 	mov	r7,dph
+                    05D1   2305 	C$usb.c$617$1$1 ==.
+                           2306 ;	libraries/src/usb/usb.c:617: controlTransferState = CONTROL_TRANSFER_STATE_WRITE;
+   05D1 90s00r01           2307 	mov	dptr,#_controlTransferState
+   05D4 74 01              2308 	mov	a,#0x01
+   05D6 F0                 2309 	movx	@dptr,a
+                    05D7   2310 	C$usb.c$618$1$1 ==.
+                           2311 ;	libraries/src/usb/usb.c:618: controlTransferBytesLeft = bytesCount;
+   05D7 90s00r08           2312 	mov	dptr,#_controlTransferBytesLeft
+   05DA EE                 2313 	mov	a,r6
+   05DB F0                 2314 	movx	@dptr,a
+   05DC A3                 2315 	inc	dptr
+   05DD EF                 2316 	mov	a,r7
+   05DE F0                 2317 	movx	@dptr,a
+                    05DF   2318 	C$usb.c$619$1$1 ==.
+                           2319 ;	libraries/src/usb/usb.c:619: controlTransferPointer = source;
+   05DF 78r0A              2320 	mov	r0,#_usbControlWrite_PARM_2
+   05E1 E2                 2321 	movx	a,@r0
+   05E2 FE                 2322 	mov	r6,a
+   05E3 08                 2323 	inc	r0
+   05E4 E2                 2324 	movx	a,@r0
+   05E5 FF                 2325 	mov	r7,a
+   05E6 78r00              2326 	mov	r0,#_controlTransferPointer
+   05E8 EE                 2327 	mov	a,r6
+   05E9 F2                 2328 	movx	@r0,a
+   05EA 08                 2329 	inc	r0
+   05EB EF                 2330 	mov	a,r7
+   05EC F2                 2331 	movx	@r0,a
+                    05ED   2332 	C$usb.c$620$1$1 ==.
+                    05ED   2333 	XG$usbControlWrite$0$0 ==.
+   05ED 22                 2334 	ret
+                           2335 ;------------------------------------------------------------
+                           2336 ;Allocation info for local variables in function 'usbControlAcknowledge'
+                           2337 ;------------------------------------------------------------
+                    05EE   2338 	G$usbControlAcknowledge$0$0 ==.
+                    05EE   2339 	C$usb.c$622$1$1 ==.
+                           2340 ;	libraries/src/usb/usb.c:622: void usbControlAcknowledge()
+                           2341 ;	-----------------------------------------
+                           2342 ;	 function usbControlAcknowledge
+                           2343 ;	-----------------------------------------
+   05EE                    2344 _usbControlAcknowledge:
+                    05EE   2345 	C$usb.c$624$1$1 ==.
+                           2346 ;	libraries/src/usb/usb.c:624: controlTransferState = CONTROL_TRANSFER_STATE_WRITE;
+   05EE 90s00r01           2347 	mov	dptr,#_controlTransferState
+   05F1 74 01              2348 	mov	a,#0x01
+   05F3 F0                 2349 	movx	@dptr,a
+                    05F4   2350 	C$usb.c$625$1$1 ==.
+                           2351 ;	libraries/src/usb/usb.c:625: controlTransferBytesLeft = 0;
+   05F4 90s00r08           2352 	mov	dptr,#_controlTransferBytesLeft
+   05F7 E4                 2353 	clr	a
+   05F8 F0                 2354 	movx	@dptr,a
+   05F9 A3                 2355 	inc	dptr
+   05FA F0                 2356 	movx	@dptr,a
+                    05FB   2357 	C$usb.c$626$1$1 ==.
+                    05FB   2358 	XG$usbControlAcknowledge$0$0 ==.
+   05FB 22                 2359 	ret
+                           2360 ;------------------------------------------------------------
+                           2361 ;Allocation info for local variables in function 'usbControlStall'
+                           2362 ;------------------------------------------------------------
+                    05FC   2363 	G$usbControlStall$0$0 ==.
+                    05FC   2364 	C$usb.c$628$1$1 ==.
+                           2365 ;	libraries/src/usb/usb.c:628: void usbControlStall()
+                           2366 ;	-----------------------------------------
+                           2367 ;	 function usbControlStall
+                           2368 ;	-----------------------------------------
+   05FC                    2369 _usbControlStall:
+                    05FC   2370 	C$usb.c$630$1$1 ==.
+                           2371 ;	libraries/src/usb/usb.c:630: controlTransferState = CONTROL_TRANSFER_STATE_NONE;
+   05FC 90s00r01           2372 	mov	dptr,#_controlTransferState
+   05FF E4                 2373 	clr	a
+   0600 F0                 2374 	movx	@dptr,a
+                    0601   2375 	C$usb.c$631$1$1 ==.
+                    0601   2376 	XG$usbControlStall$0$0 ==.
+   0601 22                 2377 	ret
+                           2378 ;------------------------------------------------------------
+                           2379 ;Allocation info for local variables in function 'usbInitEndpointIn'
+                           2380 ;------------------------------------------------------------
+                    0602   2381 	G$usbInitEndpointIn$0$0 ==.
+                    0602   2382 	C$usb.c$633$1$1 ==.
+                           2383 ;	libraries/src/usb/usb.c:633: void usbInitEndpointIn(uint8 endpointNumber, uint8 maxPacketSize)
+                           2384 ;	-----------------------------------------
+                           2385 ;	 function usbInitEndpointIn
+                           2386 ;	-----------------------------------------
+   0602                    2387 _usbInitEndpointIn:
+   0602 E5 82              2388 	mov	a,dpl
+   0604 90 DE 0E           2389 	mov	dptr,#_USBINDEX
+   0607 F0                 2390 	movx	@dptr,a
+                    0608   2391 	C$usb.c$636$1$1 ==.
+                           2392 ;	libraries/src/usb/usb.c:636: USBMAXI = (maxPacketSize + 7) >> 3;
+   0608 78r0C              2393 	mov	r0,#_usbInitEndpointIn_PARM_2
+   060A E2                 2394 	movx	a,@r0
+   060B FE                 2395 	mov	r6,a
+   060C 7F 00              2396 	mov	r7,#0x00
+   060E 74 07              2397 	mov	a,#0x07
+   0610 2E                 2398 	add	a,r6
+   0611 FE                 2399 	mov	r6,a
+   0612 E4                 2400 	clr	a
+   0613 3F                 2401 	addc	a,r7
+   0614 FF                 2402 	mov	r7,a
+   0615 C4                 2403 	swap	a
+   0616 23                 2404 	rl	a
+   0617 CE                 2405 	xch	a,r6
+   0618 C4                 2406 	swap	a
+   0619 23                 2407 	rl	a
+   061A 54 1F              2408 	anl	a,#0x1F
+   061C 6E                 2409 	xrl	a,r6
+   061D CE                 2410 	xch	a,r6
+   061E 54 1F              2411 	anl	a,#0x1F
+   0620 CE                 2412 	xch	a,r6
+   0621 6E                 2413 	xrl	a,r6
+   0622 CE                 2414 	xch	a,r6
+   0623 30 E4 02           2415 	jnb	acc.4,00103$
+   0626 44 E0              2416 	orl	a,#0xE0
+   0628                    2417 00103$:
+   0628 90 DE 10           2418 	mov	dptr,#_USBMAXI
+   062B EE                 2419 	mov	a,r6
+   062C F0                 2420 	movx	@dptr,a
+                    062D   2421 	C$usb.c$637$1$1 ==.
+                           2422 ;	libraries/src/usb/usb.c:637: USBCSIH = 1;                    // Enable Double buffering
+   062D 90 DE 12           2423 	mov	dptr,#_USBCSIH
+   0630 74 01              2424 	mov	a,#0x01
+   0632 F0                 2425 	movx	@dptr,a
+                    0633   2426 	C$usb.c$638$1$1 ==.
+                    0633   2427 	XG$usbInitEndpointIn$0$0 ==.
+   0633 22                 2428 	ret
+                           2429 ;------------------------------------------------------------
+                           2430 ;Allocation info for local variables in function 'usbInitEndpointOut'
+                           2431 ;------------------------------------------------------------
+                    0634   2432 	G$usbInitEndpointOut$0$0 ==.
+                    0634   2433 	C$usb.c$640$1$1 ==.
+                           2434 ;	libraries/src/usb/usb.c:640: void usbInitEndpointOut(uint8 endpointNumber, uint8 maxPacketSize)
+                           2435 ;	-----------------------------------------
+                           2436 ;	 function usbInitEndpointOut
+                           2437 ;	-----------------------------------------
+   0634                    2438 _usbInitEndpointOut:
+   0634 E5 82              2439 	mov	a,dpl
+   0636 90 DE 0E           2440 	mov	dptr,#_USBINDEX
+   0639 F0                 2441 	movx	@dptr,a
+                    063A   2442 	C$usb.c$643$1$1 ==.
+                           2443 ;	libraries/src/usb/usb.c:643: USBMAXO = (maxPacketSize + 7) >> 3;
+   063A 78r0D              2444 	mov	r0,#_usbInitEndpointOut_PARM_2
+   063C E2                 2445 	movx	a,@r0
+   063D FE                 2446 	mov	r6,a
+   063E 7F 00              2447 	mov	r7,#0x00
+   0640 74 07              2448 	mov	a,#0x07
+   0642 2E                 2449 	add	a,r6
+   0643 FE                 2450 	mov	r6,a
+   0644 E4                 2451 	clr	a
+   0645 3F                 2452 	addc	a,r7
+   0646 FF                 2453 	mov	r7,a
+   0647 C4                 2454 	swap	a
+   0648 23                 2455 	rl	a
+   0649 CE                 2456 	xch	a,r6
+   064A C4                 2457 	swap	a
+   064B 23                 2458 	rl	a
+   064C 54 1F              2459 	anl	a,#0x1F
+   064E 6E                 2460 	xrl	a,r6
+   064F CE                 2461 	xch	a,r6
+   0650 54 1F              2462 	anl	a,#0x1F
+   0652 CE                 2463 	xch	a,r6
+   0653 6E                 2464 	xrl	a,r6
+   0654 CE                 2465 	xch	a,r6
+   0655 30 E4 02           2466 	jnb	acc.4,00103$
+   0658 44 E0              2467 	orl	a,#0xE0
+   065A                    2468 00103$:
+   065A 90 DE 13           2469 	mov	dptr,#_USBMAXO
+   065D EE                 2470 	mov	a,r6
+   065E F0                 2471 	movx	@dptr,a
+                    065F   2472 	C$usb.c$644$1$1 ==.
+                           2473 ;	libraries/src/usb/usb.c:644: USBCSOH = 1;                    // Enable Double buffering
+   065F 90 DE 15           2474 	mov	dptr,#_USBCSOH
+   0662 74 01              2475 	mov	a,#0x01
+   0664 F0                 2476 	movx	@dptr,a
+                    0665   2477 	C$usb.c$645$1$1 ==.
+                    0665   2478 	XG$usbInitEndpointOut$0$0 ==.
+   0665 22                 2479 	ret
+                           2480 	.area CSEG    (CODE)
+                           2481 	.area CONST   (CODE)
+                           2482 	.area XINIT   (CODE)
+                    0000   2483 Fusb$__xinit_usbDeviceState$0$0 == .
+   0000                    2484 __xinit__usbDeviceState:
+   0000 00                 2485 	.db #0x00	; 0
+                    0001   2486 Fusb$__xinit_controlTransferState$0$0 == .
+   0001                    2487 __xinit__controlTransferState:
+   0001 00                 2488 	.db #0x00	; 0
+                           2489 	.area CABS    (ABS,CODE)

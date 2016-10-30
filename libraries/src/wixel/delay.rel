@@ -1,0 +1,20 @@
+XH
+H 2 areas 2 global symbols
+M delay
+O -mmcs51 --model-medium
+S .__.ABS. Def0000
+A _CODE size 0 flags 0 addr 0
+A CSEG size 17 flags 20 addr 0
+S _delayMicroseconds Def000F
+T 00 00
+R 00 00 00 01
+T 00 00 00 00 00 00 02 00 0B 00 00 00 00
+R 00 00 00 01 00 07 00 01
+T 00 0B
+R 00 00 00 01
+T 00 0B 00 00 00 00
+R 00 00 00 01
+T 00 0F
+R 00 00 00 01
+T 00 0F E5 82 60 03 D5 82 EA 22
+R 00 00 00 01

@@ -1,0 +1,1492 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:10 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module gpio
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _setDigitalOutput
+                             13 	.globl _setDigitalInput
+                             14 	.globl _isPinHigh
+                             15 	.globl _setPort0PullType
+                             16 	.globl _setPort1PullType
+                             17 	.globl _setPort2PullType
+                             18 ;--------------------------------------------------------
+                             19 ; special function registers
+                             20 ;--------------------------------------------------------
+                             21 	.area RSEG    (ABS,DATA)
+   0000                      22 	.org 0x0000
+                    0080     23 Fgpio$P0$0$0 == 0x0080
+                    0080     24 _P0	=	0x0080
+                    0081     25 Fgpio$SP$0$0 == 0x0081
+                    0081     26 _SP	=	0x0081
+                    0082     27 Fgpio$DPL0$0$0 == 0x0082
+                    0082     28 _DPL0	=	0x0082
+                    0083     29 Fgpio$DPH0$0$0 == 0x0083
+                    0083     30 _DPH0	=	0x0083
+                    0084     31 Fgpio$DPL1$0$0 == 0x0084
+                    0084     32 _DPL1	=	0x0084
+                    0085     33 Fgpio$DPH1$0$0 == 0x0085
+                    0085     34 _DPH1	=	0x0085
+                    0086     35 Fgpio$U0CSR$0$0 == 0x0086
+                    0086     36 _U0CSR	=	0x0086
+                    0087     37 Fgpio$PCON$0$0 == 0x0087
+                    0087     38 _PCON	=	0x0087
+                    0088     39 Fgpio$TCON$0$0 == 0x0088
+                    0088     40 _TCON	=	0x0088
+                    0089     41 Fgpio$P0IFG$0$0 == 0x0089
+                    0089     42 _P0IFG	=	0x0089
+                    008A     43 Fgpio$P1IFG$0$0 == 0x008a
+                    008A     44 _P1IFG	=	0x008a
+                    008B     45 Fgpio$P2IFG$0$0 == 0x008b
+                    008B     46 _P2IFG	=	0x008b
+                    008C     47 Fgpio$PICTL$0$0 == 0x008c
+                    008C     48 _PICTL	=	0x008c
+                    008D     49 Fgpio$P1IEN$0$0 == 0x008d
+                    008D     50 _P1IEN	=	0x008d
+                    008F     51 Fgpio$P0INP$0$0 == 0x008f
+                    008F     52 _P0INP	=	0x008f
+                    0090     53 Fgpio$P1$0$0 == 0x0090
+                    0090     54 _P1	=	0x0090
+                    0091     55 Fgpio$RFIM$0$0 == 0x0091
+                    0091     56 _RFIM	=	0x0091
+                    0092     57 Fgpio$DPS$0$0 == 0x0092
+                    0092     58 _DPS	=	0x0092
+                    0093     59 Fgpio$MPAGE$0$0 == 0x0093
+                    0093     60 _MPAGE	=	0x0093
+                    0095     61 Fgpio$ENDIAN$0$0 == 0x0095
+                    0095     62 _ENDIAN	=	0x0095
+                    0098     63 Fgpio$S0CON$0$0 == 0x0098
+                    0098     64 _S0CON	=	0x0098
+                    009A     65 Fgpio$IEN2$0$0 == 0x009a
+                    009A     66 _IEN2	=	0x009a
+                    009B     67 Fgpio$S1CON$0$0 == 0x009b
+                    009B     68 _S1CON	=	0x009b
+                    009C     69 Fgpio$T2CT$0$0 == 0x009c
+                    009C     70 _T2CT	=	0x009c
+                    009D     71 Fgpio$T2PR$0$0 == 0x009d
+                    009D     72 _T2PR	=	0x009d
+                    009E     73 Fgpio$T2CTL$0$0 == 0x009e
+                    009E     74 _T2CTL	=	0x009e
+                    00A0     75 Fgpio$P2$0$0 == 0x00a0
+                    00A0     76 _P2	=	0x00a0
+                    00A1     77 Fgpio$WORIRQ$0$0 == 0x00a1
+                    00A1     78 _WORIRQ	=	0x00a1
+                    00A2     79 Fgpio$WORCTRL$0$0 == 0x00a2
+                    00A2     80 _WORCTRL	=	0x00a2
+                    00A3     81 Fgpio$WOREVT0$0$0 == 0x00a3
+                    00A3     82 _WOREVT0	=	0x00a3
+                    00A4     83 Fgpio$WOREVT1$0$0 == 0x00a4
+                    00A4     84 _WOREVT1	=	0x00a4
+                    00A5     85 Fgpio$WORTIME0$0$0 == 0x00a5
+                    00A5     86 _WORTIME0	=	0x00a5
+                    00A6     87 Fgpio$WORTIME1$0$0 == 0x00a6
+                    00A6     88 _WORTIME1	=	0x00a6
+                    00A8     89 Fgpio$IEN0$0$0 == 0x00a8
+                    00A8     90 _IEN0	=	0x00a8
+                    00A9     91 Fgpio$IP0$0$0 == 0x00a9
+                    00A9     92 _IP0	=	0x00a9
+                    00AB     93 Fgpio$FWT$0$0 == 0x00ab
+                    00AB     94 _FWT	=	0x00ab
+                    00AC     95 Fgpio$FADDRL$0$0 == 0x00ac
+                    00AC     96 _FADDRL	=	0x00ac
+                    00AD     97 Fgpio$FADDRH$0$0 == 0x00ad
+                    00AD     98 _FADDRH	=	0x00ad
+                    00AE     99 Fgpio$FCTL$0$0 == 0x00ae
+                    00AE    100 _FCTL	=	0x00ae
+                    00AF    101 Fgpio$FWDATA$0$0 == 0x00af
+                    00AF    102 _FWDATA	=	0x00af
+                    00B1    103 Fgpio$ENCDI$0$0 == 0x00b1
+                    00B1    104 _ENCDI	=	0x00b1
+                    00B2    105 Fgpio$ENCDO$0$0 == 0x00b2
+                    00B2    106 _ENCDO	=	0x00b2
+                    00B3    107 Fgpio$ENCCS$0$0 == 0x00b3
+                    00B3    108 _ENCCS	=	0x00b3
+                    00B4    109 Fgpio$ADCCON1$0$0 == 0x00b4
+                    00B4    110 _ADCCON1	=	0x00b4
+                    00B5    111 Fgpio$ADCCON2$0$0 == 0x00b5
+                    00B5    112 _ADCCON2	=	0x00b5
+                    00B6    113 Fgpio$ADCCON3$0$0 == 0x00b6
+                    00B6    114 _ADCCON3	=	0x00b6
+                    00B8    115 Fgpio$IEN1$0$0 == 0x00b8
+                    00B8    116 _IEN1	=	0x00b8
+                    00B9    117 Fgpio$IP1$0$0 == 0x00b9
+                    00B9    118 _IP1	=	0x00b9
+                    00BA    119 Fgpio$ADCL$0$0 == 0x00ba
+                    00BA    120 _ADCL	=	0x00ba
+                    00BB    121 Fgpio$ADCH$0$0 == 0x00bb
+                    00BB    122 _ADCH	=	0x00bb
+                    00BC    123 Fgpio$RNDL$0$0 == 0x00bc
+                    00BC    124 _RNDL	=	0x00bc
+                    00BD    125 Fgpio$RNDH$0$0 == 0x00bd
+                    00BD    126 _RNDH	=	0x00bd
+                    00BE    127 Fgpio$SLEEP$0$0 == 0x00be
+                    00BE    128 _SLEEP	=	0x00be
+                    00C0    129 Fgpio$IRCON$0$0 == 0x00c0
+                    00C0    130 _IRCON	=	0x00c0
+                    00C1    131 Fgpio$U0DBUF$0$0 == 0x00c1
+                    00C1    132 _U0DBUF	=	0x00c1
+                    00C2    133 Fgpio$U0BAUD$0$0 == 0x00c2
+                    00C2    134 _U0BAUD	=	0x00c2
+                    00C4    135 Fgpio$U0UCR$0$0 == 0x00c4
+                    00C4    136 _U0UCR	=	0x00c4
+                    00C5    137 Fgpio$U0GCR$0$0 == 0x00c5
+                    00C5    138 _U0GCR	=	0x00c5
+                    00C6    139 Fgpio$CLKCON$0$0 == 0x00c6
+                    00C6    140 _CLKCON	=	0x00c6
+                    00C7    141 Fgpio$MEMCTR$0$0 == 0x00c7
+                    00C7    142 _MEMCTR	=	0x00c7
+                    00C9    143 Fgpio$WDCTL$0$0 == 0x00c9
+                    00C9    144 _WDCTL	=	0x00c9
+                    00CA    145 Fgpio$T3CNT$0$0 == 0x00ca
+                    00CA    146 _T3CNT	=	0x00ca
+                    00CB    147 Fgpio$T3CTL$0$0 == 0x00cb
+                    00CB    148 _T3CTL	=	0x00cb
+                    00CC    149 Fgpio$T3CCTL0$0$0 == 0x00cc
+                    00CC    150 _T3CCTL0	=	0x00cc
+                    00CD    151 Fgpio$T3CC0$0$0 == 0x00cd
+                    00CD    152 _T3CC0	=	0x00cd
+                    00CE    153 Fgpio$T3CCTL1$0$0 == 0x00ce
+                    00CE    154 _T3CCTL1	=	0x00ce
+                    00CF    155 Fgpio$T3CC1$0$0 == 0x00cf
+                    00CF    156 _T3CC1	=	0x00cf
+                    00D0    157 Fgpio$PSW$0$0 == 0x00d0
+                    00D0    158 _PSW	=	0x00d0
+                    00D1    159 Fgpio$DMAIRQ$0$0 == 0x00d1
+                    00D1    160 _DMAIRQ	=	0x00d1
+                    00D2    161 Fgpio$DMA1CFGL$0$0 == 0x00d2
+                    00D2    162 _DMA1CFGL	=	0x00d2
+                    00D3    163 Fgpio$DMA1CFGH$0$0 == 0x00d3
+                    00D3    164 _DMA1CFGH	=	0x00d3
+                    00D4    165 Fgpio$DMA0CFGL$0$0 == 0x00d4
+                    00D4    166 _DMA0CFGL	=	0x00d4
+                    00D5    167 Fgpio$DMA0CFGH$0$0 == 0x00d5
+                    00D5    168 _DMA0CFGH	=	0x00d5
+                    00D6    169 Fgpio$DMAARM$0$0 == 0x00d6
+                    00D6    170 _DMAARM	=	0x00d6
+                    00D7    171 Fgpio$DMAREQ$0$0 == 0x00d7
+                    00D7    172 _DMAREQ	=	0x00d7
+                    00D8    173 Fgpio$TIMIF$0$0 == 0x00d8
+                    00D8    174 _TIMIF	=	0x00d8
+                    00D9    175 Fgpio$RFD$0$0 == 0x00d9
+                    00D9    176 _RFD	=	0x00d9
+                    00DA    177 Fgpio$T1CC0L$0$0 == 0x00da
+                    00DA    178 _T1CC0L	=	0x00da
+                    00DB    179 Fgpio$T1CC0H$0$0 == 0x00db
+                    00DB    180 _T1CC0H	=	0x00db
+                    00DC    181 Fgpio$T1CC1L$0$0 == 0x00dc
+                    00DC    182 _T1CC1L	=	0x00dc
+                    00DD    183 Fgpio$T1CC1H$0$0 == 0x00dd
+                    00DD    184 _T1CC1H	=	0x00dd
+                    00DE    185 Fgpio$T1CC2L$0$0 == 0x00de
+                    00DE    186 _T1CC2L	=	0x00de
+                    00DF    187 Fgpio$T1CC2H$0$0 == 0x00df
+                    00DF    188 _T1CC2H	=	0x00df
+                    00E0    189 Fgpio$ACC$0$0 == 0x00e0
+                    00E0    190 _ACC	=	0x00e0
+                    00E1    191 Fgpio$RFST$0$0 == 0x00e1
+                    00E1    192 _RFST	=	0x00e1
+                    00E2    193 Fgpio$T1CNTL$0$0 == 0x00e2
+                    00E2    194 _T1CNTL	=	0x00e2
+                    00E3    195 Fgpio$T1CNTH$0$0 == 0x00e3
+                    00E3    196 _T1CNTH	=	0x00e3
+                    00E4    197 Fgpio$T1CTL$0$0 == 0x00e4
+                    00E4    198 _T1CTL	=	0x00e4
+                    00E5    199 Fgpio$T1CCTL0$0$0 == 0x00e5
+                    00E5    200 _T1CCTL0	=	0x00e5
+                    00E6    201 Fgpio$T1CCTL1$0$0 == 0x00e6
+                    00E6    202 _T1CCTL1	=	0x00e6
+                    00E7    203 Fgpio$T1CCTL2$0$0 == 0x00e7
+                    00E7    204 _T1CCTL2	=	0x00e7
+                    00E8    205 Fgpio$IRCON2$0$0 == 0x00e8
+                    00E8    206 _IRCON2	=	0x00e8
+                    00E9    207 Fgpio$RFIF$0$0 == 0x00e9
+                    00E9    208 _RFIF	=	0x00e9
+                    00EA    209 Fgpio$T4CNT$0$0 == 0x00ea
+                    00EA    210 _T4CNT	=	0x00ea
+                    00EB    211 Fgpio$T4CTL$0$0 == 0x00eb
+                    00EB    212 _T4CTL	=	0x00eb
+                    00EC    213 Fgpio$T4CCTL0$0$0 == 0x00ec
+                    00EC    214 _T4CCTL0	=	0x00ec
+                    00ED    215 Fgpio$T4CC0$0$0 == 0x00ed
+                    00ED    216 _T4CC0	=	0x00ed
+                    00EE    217 Fgpio$T4CCTL1$0$0 == 0x00ee
+                    00EE    218 _T4CCTL1	=	0x00ee
+                    00EF    219 Fgpio$T4CC1$0$0 == 0x00ef
+                    00EF    220 _T4CC1	=	0x00ef
+                    00F0    221 Fgpio$B$0$0 == 0x00f0
+                    00F0    222 _B	=	0x00f0
+                    00F1    223 Fgpio$PERCFG$0$0 == 0x00f1
+                    00F1    224 _PERCFG	=	0x00f1
+                    00F2    225 Fgpio$ADCCFG$0$0 == 0x00f2
+                    00F2    226 _ADCCFG	=	0x00f2
+                    00F3    227 Fgpio$P0SEL$0$0 == 0x00f3
+                    00F3    228 _P0SEL	=	0x00f3
+                    00F4    229 Fgpio$P1SEL$0$0 == 0x00f4
+                    00F4    230 _P1SEL	=	0x00f4
+                    00F5    231 Fgpio$P2SEL$0$0 == 0x00f5
+                    00F5    232 _P2SEL	=	0x00f5
+                    00F6    233 Fgpio$P1INP$0$0 == 0x00f6
+                    00F6    234 _P1INP	=	0x00f6
+                    00F7    235 Fgpio$P2INP$0$0 == 0x00f7
+                    00F7    236 _P2INP	=	0x00f7
+                    00F8    237 Fgpio$U1CSR$0$0 == 0x00f8
+                    00F8    238 _U1CSR	=	0x00f8
+                    00F9    239 Fgpio$U1DBUF$0$0 == 0x00f9
+                    00F9    240 _U1DBUF	=	0x00f9
+                    00FA    241 Fgpio$U1BAUD$0$0 == 0x00fa
+                    00FA    242 _U1BAUD	=	0x00fa
+                    00FB    243 Fgpio$U1UCR$0$0 == 0x00fb
+                    00FB    244 _U1UCR	=	0x00fb
+                    00FC    245 Fgpio$U1GCR$0$0 == 0x00fc
+                    00FC    246 _U1GCR	=	0x00fc
+                    00FD    247 Fgpio$P0DIR$0$0 == 0x00fd
+                    00FD    248 _P0DIR	=	0x00fd
+                    00FE    249 Fgpio$P1DIR$0$0 == 0x00fe
+                    00FE    250 _P1DIR	=	0x00fe
+                    00FF    251 Fgpio$P2DIR$0$0 == 0x00ff
+                    00FF    252 _P2DIR	=	0x00ff
+                    FFFFD5D4    253 Fgpio$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    254 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    255 Fgpio$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    256 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    257 Fgpio$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    258 _FADDR	=	0xffffadac
+                    FFFFBBBA    259 Fgpio$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    260 _ADC	=	0xffffbbba
+                    FFFFDBDA    261 Fgpio$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    262 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    263 Fgpio$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    264 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    265 Fgpio$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    266 _T1CC2	=	0xffffdfde
+                            267 ;--------------------------------------------------------
+                            268 ; special function bits
+                            269 ;--------------------------------------------------------
+                            270 	.area RSEG    (ABS,DATA)
+   0000                     271 	.org 0x0000
+                    0080    272 Fgpio$P0_0$0$0 == 0x0080
+                    0080    273 _P0_0	=	0x0080
+                    0081    274 Fgpio$P0_1$0$0 == 0x0081
+                    0081    275 _P0_1	=	0x0081
+                    0082    276 Fgpio$P0_2$0$0 == 0x0082
+                    0082    277 _P0_2	=	0x0082
+                    0083    278 Fgpio$P0_3$0$0 == 0x0083
+                    0083    279 _P0_3	=	0x0083
+                    0084    280 Fgpio$P0_4$0$0 == 0x0084
+                    0084    281 _P0_4	=	0x0084
+                    0085    282 Fgpio$P0_5$0$0 == 0x0085
+                    0085    283 _P0_5	=	0x0085
+                    0086    284 Fgpio$P0_6$0$0 == 0x0086
+                    0086    285 _P0_6	=	0x0086
+                    0087    286 Fgpio$P0_7$0$0 == 0x0087
+                    0087    287 _P0_7	=	0x0087
+                    0088    288 Fgpio$_TCON_0$0$0 == 0x0088
+                    0088    289 __TCON_0	=	0x0088
+                    0089    290 Fgpio$RFTXRXIF$0$0 == 0x0089
+                    0089    291 _RFTXRXIF	=	0x0089
+                    008A    292 Fgpio$_TCON_2$0$0 == 0x008a
+                    008A    293 __TCON_2	=	0x008a
+                    008B    294 Fgpio$URX0IF$0$0 == 0x008b
+                    008B    295 _URX0IF	=	0x008b
+                    008C    296 Fgpio$_TCON_4$0$0 == 0x008c
+                    008C    297 __TCON_4	=	0x008c
+                    008D    298 Fgpio$ADCIF$0$0 == 0x008d
+                    008D    299 _ADCIF	=	0x008d
+                    008E    300 Fgpio$_TCON_6$0$0 == 0x008e
+                    008E    301 __TCON_6	=	0x008e
+                    008F    302 Fgpio$URX1IF$0$0 == 0x008f
+                    008F    303 _URX1IF	=	0x008f
+                    0090    304 Fgpio$P1_0$0$0 == 0x0090
+                    0090    305 _P1_0	=	0x0090
+                    0091    306 Fgpio$P1_1$0$0 == 0x0091
+                    0091    307 _P1_1	=	0x0091
+                    0092    308 Fgpio$P1_2$0$0 == 0x0092
+                    0092    309 _P1_2	=	0x0092
+                    0093    310 Fgpio$P1_3$0$0 == 0x0093
+                    0093    311 _P1_3	=	0x0093
+                    0094    312 Fgpio$P1_4$0$0 == 0x0094
+                    0094    313 _P1_4	=	0x0094
+                    0095    314 Fgpio$P1_5$0$0 == 0x0095
+                    0095    315 _P1_5	=	0x0095
+                    0096    316 Fgpio$P1_6$0$0 == 0x0096
+                    0096    317 _P1_6	=	0x0096
+                    0097    318 Fgpio$P1_7$0$0 == 0x0097
+                    0097    319 _P1_7	=	0x0097
+                    0098    320 Fgpio$ENCIF_0$0$0 == 0x0098
+                    0098    321 _ENCIF_0	=	0x0098
+                    0099    322 Fgpio$ENCIF_1$0$0 == 0x0099
+                    0099    323 _ENCIF_1	=	0x0099
+                    009A    324 Fgpio$_SOCON2$0$0 == 0x009a
+                    009A    325 __SOCON2	=	0x009a
+                    009B    326 Fgpio$_SOCON3$0$0 == 0x009b
+                    009B    327 __SOCON3	=	0x009b
+                    009C    328 Fgpio$_SOCON4$0$0 == 0x009c
+                    009C    329 __SOCON4	=	0x009c
+                    009D    330 Fgpio$_SOCON5$0$0 == 0x009d
+                    009D    331 __SOCON5	=	0x009d
+                    009E    332 Fgpio$_SOCON6$0$0 == 0x009e
+                    009E    333 __SOCON6	=	0x009e
+                    009F    334 Fgpio$_SOCON7$0$0 == 0x009f
+                    009F    335 __SOCON7	=	0x009f
+                    00A0    336 Fgpio$P2_0$0$0 == 0x00a0
+                    00A0    337 _P2_0	=	0x00a0
+                    00A1    338 Fgpio$P2_1$0$0 == 0x00a1
+                    00A1    339 _P2_1	=	0x00a1
+                    00A2    340 Fgpio$P2_2$0$0 == 0x00a2
+                    00A2    341 _P2_2	=	0x00a2
+                    00A3    342 Fgpio$P2_3$0$0 == 0x00a3
+                    00A3    343 _P2_3	=	0x00a3
+                    00A4    344 Fgpio$P2_4$0$0 == 0x00a4
+                    00A4    345 _P2_4	=	0x00a4
+                    00A5    346 Fgpio$P2_5$0$0 == 0x00a5
+                    00A5    347 _P2_5	=	0x00a5
+                    00A6    348 Fgpio$P2_6$0$0 == 0x00a6
+                    00A6    349 _P2_6	=	0x00a6
+                    00A7    350 Fgpio$P2_7$0$0 == 0x00a7
+                    00A7    351 _P2_7	=	0x00a7
+                    00A8    352 Fgpio$RFTXRXIE$0$0 == 0x00a8
+                    00A8    353 _RFTXRXIE	=	0x00a8
+                    00A9    354 Fgpio$ADCIE$0$0 == 0x00a9
+                    00A9    355 _ADCIE	=	0x00a9
+                    00AA    356 Fgpio$URX0IE$0$0 == 0x00aa
+                    00AA    357 _URX0IE	=	0x00aa
+                    00AB    358 Fgpio$URX1IE$0$0 == 0x00ab
+                    00AB    359 _URX1IE	=	0x00ab
+                    00AC    360 Fgpio$ENCIE$0$0 == 0x00ac
+                    00AC    361 _ENCIE	=	0x00ac
+                    00AD    362 Fgpio$STIE$0$0 == 0x00ad
+                    00AD    363 _STIE	=	0x00ad
+                    00AE    364 Fgpio$_IEN06$0$0 == 0x00ae
+                    00AE    365 __IEN06	=	0x00ae
+                    00AF    366 Fgpio$EA$0$0 == 0x00af
+                    00AF    367 _EA	=	0x00af
+                    00B8    368 Fgpio$DMAIE$0$0 == 0x00b8
+                    00B8    369 _DMAIE	=	0x00b8
+                    00B9    370 Fgpio$T1IE$0$0 == 0x00b9
+                    00B9    371 _T1IE	=	0x00b9
+                    00BA    372 Fgpio$T2IE$0$0 == 0x00ba
+                    00BA    373 _T2IE	=	0x00ba
+                    00BB    374 Fgpio$T3IE$0$0 == 0x00bb
+                    00BB    375 _T3IE	=	0x00bb
+                    00BC    376 Fgpio$T4IE$0$0 == 0x00bc
+                    00BC    377 _T4IE	=	0x00bc
+                    00BD    378 Fgpio$P0IE$0$0 == 0x00bd
+                    00BD    379 _P0IE	=	0x00bd
+                    00BE    380 Fgpio$_IEN16$0$0 == 0x00be
+                    00BE    381 __IEN16	=	0x00be
+                    00BF    382 Fgpio$_IEN17$0$0 == 0x00bf
+                    00BF    383 __IEN17	=	0x00bf
+                    00C0    384 Fgpio$DMAIF$0$0 == 0x00c0
+                    00C0    385 _DMAIF	=	0x00c0
+                    00C1    386 Fgpio$T1IF$0$0 == 0x00c1
+                    00C1    387 _T1IF	=	0x00c1
+                    00C2    388 Fgpio$T2IF$0$0 == 0x00c2
+                    00C2    389 _T2IF	=	0x00c2
+                    00C3    390 Fgpio$T3IF$0$0 == 0x00c3
+                    00C3    391 _T3IF	=	0x00c3
+                    00C4    392 Fgpio$T4IF$0$0 == 0x00c4
+                    00C4    393 _T4IF	=	0x00c4
+                    00C5    394 Fgpio$P0IF$0$0 == 0x00c5
+                    00C5    395 _P0IF	=	0x00c5
+                    00C6    396 Fgpio$_IRCON6$0$0 == 0x00c6
+                    00C6    397 __IRCON6	=	0x00c6
+                    00C7    398 Fgpio$STIF$0$0 == 0x00c7
+                    00C7    399 _STIF	=	0x00c7
+                    00D0    400 Fgpio$P$0$0 == 0x00d0
+                    00D0    401 _P	=	0x00d0
+                    00D1    402 Fgpio$F1$0$0 == 0x00d1
+                    00D1    403 _F1	=	0x00d1
+                    00D2    404 Fgpio$OV$0$0 == 0x00d2
+                    00D2    405 _OV	=	0x00d2
+                    00D3    406 Fgpio$RS0$0$0 == 0x00d3
+                    00D3    407 _RS0	=	0x00d3
+                    00D4    408 Fgpio$RS1$0$0 == 0x00d4
+                    00D4    409 _RS1	=	0x00d4
+                    00D5    410 Fgpio$F0$0$0 == 0x00d5
+                    00D5    411 _F0	=	0x00d5
+                    00D6    412 Fgpio$AC$0$0 == 0x00d6
+                    00D6    413 _AC	=	0x00d6
+                    00D7    414 Fgpio$CY$0$0 == 0x00d7
+                    00D7    415 _CY	=	0x00d7
+                    00D8    416 Fgpio$T3OVFIF$0$0 == 0x00d8
+                    00D8    417 _T3OVFIF	=	0x00d8
+                    00D9    418 Fgpio$T3CH0IF$0$0 == 0x00d9
+                    00D9    419 _T3CH0IF	=	0x00d9
+                    00DA    420 Fgpio$T3CH1IF$0$0 == 0x00da
+                    00DA    421 _T3CH1IF	=	0x00da
+                    00DB    422 Fgpio$T4OVFIF$0$0 == 0x00db
+                    00DB    423 _T4OVFIF	=	0x00db
+                    00DC    424 Fgpio$T4CH0IF$0$0 == 0x00dc
+                    00DC    425 _T4CH0IF	=	0x00dc
+                    00DD    426 Fgpio$T4CH1IF$0$0 == 0x00dd
+                    00DD    427 _T4CH1IF	=	0x00dd
+                    00DE    428 Fgpio$OVFIM$0$0 == 0x00de
+                    00DE    429 _OVFIM	=	0x00de
+                    00DF    430 Fgpio$_TIMIF7$0$0 == 0x00df
+                    00DF    431 __TIMIF7	=	0x00df
+                    00E0    432 Fgpio$ACC_0$0$0 == 0x00e0
+                    00E0    433 _ACC_0	=	0x00e0
+                    00E1    434 Fgpio$ACC_1$0$0 == 0x00e1
+                    00E1    435 _ACC_1	=	0x00e1
+                    00E2    436 Fgpio$ACC_2$0$0 == 0x00e2
+                    00E2    437 _ACC_2	=	0x00e2
+                    00E3    438 Fgpio$ACC_3$0$0 == 0x00e3
+                    00E3    439 _ACC_3	=	0x00e3
+                    00E4    440 Fgpio$ACC_4$0$0 == 0x00e4
+                    00E4    441 _ACC_4	=	0x00e4
+                    00E5    442 Fgpio$ACC_5$0$0 == 0x00e5
+                    00E5    443 _ACC_5	=	0x00e5
+                    00E6    444 Fgpio$ACC_6$0$0 == 0x00e6
+                    00E6    445 _ACC_6	=	0x00e6
+                    00E7    446 Fgpio$ACC_7$0$0 == 0x00e7
+                    00E7    447 _ACC_7	=	0x00e7
+                    00E8    448 Fgpio$P2IF$0$0 == 0x00e8
+                    00E8    449 _P2IF	=	0x00e8
+                    00E9    450 Fgpio$UTX0IF$0$0 == 0x00e9
+                    00E9    451 _UTX0IF	=	0x00e9
+                    00EA    452 Fgpio$UTX1IF$0$0 == 0x00ea
+                    00EA    453 _UTX1IF	=	0x00ea
+                    00EB    454 Fgpio$P1IF$0$0 == 0x00eb
+                    00EB    455 _P1IF	=	0x00eb
+                    00EC    456 Fgpio$WDTIF$0$0 == 0x00ec
+                    00EC    457 _WDTIF	=	0x00ec
+                    00ED    458 Fgpio$_IRCON25$0$0 == 0x00ed
+                    00ED    459 __IRCON25	=	0x00ed
+                    00EE    460 Fgpio$_IRCON26$0$0 == 0x00ee
+                    00EE    461 __IRCON26	=	0x00ee
+                    00EF    462 Fgpio$_IRCON27$0$0 == 0x00ef
+                    00EF    463 __IRCON27	=	0x00ef
+                    00F0    464 Fgpio$B_0$0$0 == 0x00f0
+                    00F0    465 _B_0	=	0x00f0
+                    00F1    466 Fgpio$B_1$0$0 == 0x00f1
+                    00F1    467 _B_1	=	0x00f1
+                    00F2    468 Fgpio$B_2$0$0 == 0x00f2
+                    00F2    469 _B_2	=	0x00f2
+                    00F3    470 Fgpio$B_3$0$0 == 0x00f3
+                    00F3    471 _B_3	=	0x00f3
+                    00F4    472 Fgpio$B_4$0$0 == 0x00f4
+                    00F4    473 _B_4	=	0x00f4
+                    00F5    474 Fgpio$B_5$0$0 == 0x00f5
+                    00F5    475 _B_5	=	0x00f5
+                    00F6    476 Fgpio$B_6$0$0 == 0x00f6
+                    00F6    477 _B_6	=	0x00f6
+                    00F7    478 Fgpio$B_7$0$0 == 0x00f7
+                    00F7    479 _B_7	=	0x00f7
+                    00F8    480 Fgpio$U1ACTIVE$0$0 == 0x00f8
+                    00F8    481 _U1ACTIVE	=	0x00f8
+                    00F9    482 Fgpio$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    483 _U1TX_BYTE	=	0x00f9
+                    00FA    484 Fgpio$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    485 _U1RX_BYTE	=	0x00fa
+                    00FB    486 Fgpio$U1ERR$0$0 == 0x00fb
+                    00FB    487 _U1ERR	=	0x00fb
+                    00FC    488 Fgpio$U1FE$0$0 == 0x00fc
+                    00FC    489 _U1FE	=	0x00fc
+                    00FD    490 Fgpio$U1SLAVE$0$0 == 0x00fd
+                    00FD    491 _U1SLAVE	=	0x00fd
+                    00FE    492 Fgpio$U1RE$0$0 == 0x00fe
+                    00FE    493 _U1RE	=	0x00fe
+                    00FF    494 Fgpio$U1MODE$0$0 == 0x00ff
+                    00FF    495 _U1MODE	=	0x00ff
+                            496 ;--------------------------------------------------------
+                            497 ; overlayable register banks
+                            498 ;--------------------------------------------------------
+                            499 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     500 	.ds 8
+                            501 ;--------------------------------------------------------
+                            502 ; overlayable bit register bank
+                            503 ;--------------------------------------------------------
+                            504 	.area BIT_BANK	(REL,OVR,DATA)
+   0000                     505 bits:
+   0000                     506 	.ds 1
+                    8000    507 	b0 = bits[0]
+                    8100    508 	b1 = bits[1]
+                    8200    509 	b2 = bits[2]
+                    8300    510 	b3 = bits[3]
+                    8400    511 	b4 = bits[4]
+                    8500    512 	b5 = bits[5]
+                    8600    513 	b6 = bits[6]
+                    8700    514 	b7 = bits[7]
+                            515 ;--------------------------------------------------------
+                            516 ; internal ram data
+                            517 ;--------------------------------------------------------
+                            518 	.area DSEG    (DATA)
+                            519 ;--------------------------------------------------------
+                            520 ; overlayable items in internal ram 
+                            521 ;--------------------------------------------------------
+                            522 	.area OSEG    (OVR,DATA)
+                            523 ;--------------------------------------------------------
+                            524 ; indirectly addressable internal ram data
+                            525 ;--------------------------------------------------------
+                            526 	.area ISEG    (DATA)
+                            527 ;--------------------------------------------------------
+                            528 ; absolute internal ram data
+                            529 ;--------------------------------------------------------
+                            530 	.area IABS    (ABS,DATA)
+                            531 	.area IABS    (ABS,DATA)
+                            532 ;--------------------------------------------------------
+                            533 ; bit data
+                            534 ;--------------------------------------------------------
+                            535 	.area BSEG    (BIT)
+                            536 ;--------------------------------------------------------
+                            537 ; paged external ram data
+                            538 ;--------------------------------------------------------
+                            539 	.area PSEG    (PAG,XDATA)
+                            540 ;--------------------------------------------------------
+                            541 ; external ram data
+                            542 ;--------------------------------------------------------
+                            543 	.area XSEG    (XDATA)
+                    DF00    544 Fgpio$SYNC1$0$0 == 0xdf00
+                    DF00    545 _SYNC1	=	0xdf00
+                    DF01    546 Fgpio$SYNC0$0$0 == 0xdf01
+                    DF01    547 _SYNC0	=	0xdf01
+                    DF02    548 Fgpio$PKTLEN$0$0 == 0xdf02
+                    DF02    549 _PKTLEN	=	0xdf02
+                    DF03    550 Fgpio$PKTCTRL1$0$0 == 0xdf03
+                    DF03    551 _PKTCTRL1	=	0xdf03
+                    DF04    552 Fgpio$PKTCTRL0$0$0 == 0xdf04
+                    DF04    553 _PKTCTRL0	=	0xdf04
+                    DF05    554 Fgpio$ADDR$0$0 == 0xdf05
+                    DF05    555 _ADDR	=	0xdf05
+                    DF06    556 Fgpio$CHANNR$0$0 == 0xdf06
+                    DF06    557 _CHANNR	=	0xdf06
+                    DF07    558 Fgpio$FSCTRL1$0$0 == 0xdf07
+                    DF07    559 _FSCTRL1	=	0xdf07
+                    DF08    560 Fgpio$FSCTRL0$0$0 == 0xdf08
+                    DF08    561 _FSCTRL0	=	0xdf08
+                    DF09    562 Fgpio$FREQ2$0$0 == 0xdf09
+                    DF09    563 _FREQ2	=	0xdf09
+                    DF0A    564 Fgpio$FREQ1$0$0 == 0xdf0a
+                    DF0A    565 _FREQ1	=	0xdf0a
+                    DF0B    566 Fgpio$FREQ0$0$0 == 0xdf0b
+                    DF0B    567 _FREQ0	=	0xdf0b
+                    DF0C    568 Fgpio$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    569 _MDMCFG4	=	0xdf0c
+                    DF0D    570 Fgpio$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    571 _MDMCFG3	=	0xdf0d
+                    DF0E    572 Fgpio$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    573 _MDMCFG2	=	0xdf0e
+                    DF0F    574 Fgpio$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    575 _MDMCFG1	=	0xdf0f
+                    DF10    576 Fgpio$MDMCFG0$0$0 == 0xdf10
+                    DF10    577 _MDMCFG0	=	0xdf10
+                    DF11    578 Fgpio$DEVIATN$0$0 == 0xdf11
+                    DF11    579 _DEVIATN	=	0xdf11
+                    DF12    580 Fgpio$MCSM2$0$0 == 0xdf12
+                    DF12    581 _MCSM2	=	0xdf12
+                    DF13    582 Fgpio$MCSM1$0$0 == 0xdf13
+                    DF13    583 _MCSM1	=	0xdf13
+                    DF14    584 Fgpio$MCSM0$0$0 == 0xdf14
+                    DF14    585 _MCSM0	=	0xdf14
+                    DF15    586 Fgpio$FOCCFG$0$0 == 0xdf15
+                    DF15    587 _FOCCFG	=	0xdf15
+                    DF16    588 Fgpio$BSCFG$0$0 == 0xdf16
+                    DF16    589 _BSCFG	=	0xdf16
+                    DF17    590 Fgpio$AGCCTRL2$0$0 == 0xdf17
+                    DF17    591 _AGCCTRL2	=	0xdf17
+                    DF18    592 Fgpio$AGCCTRL1$0$0 == 0xdf18
+                    DF18    593 _AGCCTRL1	=	0xdf18
+                    DF19    594 Fgpio$AGCCTRL0$0$0 == 0xdf19
+                    DF19    595 _AGCCTRL0	=	0xdf19
+                    DF1A    596 Fgpio$FREND1$0$0 == 0xdf1a
+                    DF1A    597 _FREND1	=	0xdf1a
+                    DF1B    598 Fgpio$FREND0$0$0 == 0xdf1b
+                    DF1B    599 _FREND0	=	0xdf1b
+                    DF1C    600 Fgpio$FSCAL3$0$0 == 0xdf1c
+                    DF1C    601 _FSCAL3	=	0xdf1c
+                    DF1D    602 Fgpio$FSCAL2$0$0 == 0xdf1d
+                    DF1D    603 _FSCAL2	=	0xdf1d
+                    DF1E    604 Fgpio$FSCAL1$0$0 == 0xdf1e
+                    DF1E    605 _FSCAL1	=	0xdf1e
+                    DF1F    606 Fgpio$FSCAL0$0$0 == 0xdf1f
+                    DF1F    607 _FSCAL0	=	0xdf1f
+                    DF23    608 Fgpio$TEST2$0$0 == 0xdf23
+                    DF23    609 _TEST2	=	0xdf23
+                    DF24    610 Fgpio$TEST1$0$0 == 0xdf24
+                    DF24    611 _TEST1	=	0xdf24
+                    DF25    612 Fgpio$TEST0$0$0 == 0xdf25
+                    DF25    613 _TEST0	=	0xdf25
+                    DF2E    614 Fgpio$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    615 _PA_TABLE0	=	0xdf2e
+                    DF2F    616 Fgpio$IOCFG2$0$0 == 0xdf2f
+                    DF2F    617 _IOCFG2	=	0xdf2f
+                    DF30    618 Fgpio$IOCFG1$0$0 == 0xdf30
+                    DF30    619 _IOCFG1	=	0xdf30
+                    DF31    620 Fgpio$IOCFG0$0$0 == 0xdf31
+                    DF31    621 _IOCFG0	=	0xdf31
+                    DF36    622 Fgpio$PARTNUM$0$0 == 0xdf36
+                    DF36    623 _PARTNUM	=	0xdf36
+                    DF37    624 Fgpio$VERSION$0$0 == 0xdf37
+                    DF37    625 _VERSION	=	0xdf37
+                    DF38    626 Fgpio$FREQEST$0$0 == 0xdf38
+                    DF38    627 _FREQEST	=	0xdf38
+                    DF39    628 Fgpio$LQI$0$0 == 0xdf39
+                    DF39    629 _LQI	=	0xdf39
+                    DF3A    630 Fgpio$RSSI$0$0 == 0xdf3a
+                    DF3A    631 _RSSI	=	0xdf3a
+                    DF3B    632 Fgpio$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    633 _MARCSTATE	=	0xdf3b
+                    DF3C    634 Fgpio$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    635 _PKTSTATUS	=	0xdf3c
+                    DF3D    636 Fgpio$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    637 _VCO_VC_DAC	=	0xdf3d
+                    DF40    638 Fgpio$I2SCFG0$0$0 == 0xdf40
+                    DF40    639 _I2SCFG0	=	0xdf40
+                    DF41    640 Fgpio$I2SCFG1$0$0 == 0xdf41
+                    DF41    641 _I2SCFG1	=	0xdf41
+                    DF42    642 Fgpio$I2SDATL$0$0 == 0xdf42
+                    DF42    643 _I2SDATL	=	0xdf42
+                    DF43    644 Fgpio$I2SDATH$0$0 == 0xdf43
+                    DF43    645 _I2SDATH	=	0xdf43
+                    DF44    646 Fgpio$I2SWCNT$0$0 == 0xdf44
+                    DF44    647 _I2SWCNT	=	0xdf44
+                    DF45    648 Fgpio$I2SSTAT$0$0 == 0xdf45
+                    DF45    649 _I2SSTAT	=	0xdf45
+                    DF46    650 Fgpio$I2SCLKF0$0$0 == 0xdf46
+                    DF46    651 _I2SCLKF0	=	0xdf46
+                    DF47    652 Fgpio$I2SCLKF1$0$0 == 0xdf47
+                    DF47    653 _I2SCLKF1	=	0xdf47
+                    DF48    654 Fgpio$I2SCLKF2$0$0 == 0xdf48
+                    DF48    655 _I2SCLKF2	=	0xdf48
+                    DE00    656 Fgpio$USBADDR$0$0 == 0xde00
+                    DE00    657 _USBADDR	=	0xde00
+                    DE01    658 Fgpio$USBPOW$0$0 == 0xde01
+                    DE01    659 _USBPOW	=	0xde01
+                    DE02    660 Fgpio$USBIIF$0$0 == 0xde02
+                    DE02    661 _USBIIF	=	0xde02
+                    DE04    662 Fgpio$USBOIF$0$0 == 0xde04
+                    DE04    663 _USBOIF	=	0xde04
+                    DE06    664 Fgpio$USBCIF$0$0 == 0xde06
+                    DE06    665 _USBCIF	=	0xde06
+                    DE07    666 Fgpio$USBIIE$0$0 == 0xde07
+                    DE07    667 _USBIIE	=	0xde07
+                    DE09    668 Fgpio$USBOIE$0$0 == 0xde09
+                    DE09    669 _USBOIE	=	0xde09
+                    DE0B    670 Fgpio$USBCIE$0$0 == 0xde0b
+                    DE0B    671 _USBCIE	=	0xde0b
+                    DE0C    672 Fgpio$USBFRML$0$0 == 0xde0c
+                    DE0C    673 _USBFRML	=	0xde0c
+                    DE0D    674 Fgpio$USBFRMH$0$0 == 0xde0d
+                    DE0D    675 _USBFRMH	=	0xde0d
+                    DE0E    676 Fgpio$USBINDEX$0$0 == 0xde0e
+                    DE0E    677 _USBINDEX	=	0xde0e
+                    DE10    678 Fgpio$USBMAXI$0$0 == 0xde10
+                    DE10    679 _USBMAXI	=	0xde10
+                    DE11    680 Fgpio$USBCSIL$0$0 == 0xde11
+                    DE11    681 _USBCSIL	=	0xde11
+                    DE12    682 Fgpio$USBCSIH$0$0 == 0xde12
+                    DE12    683 _USBCSIH	=	0xde12
+                    DE13    684 Fgpio$USBMAXO$0$0 == 0xde13
+                    DE13    685 _USBMAXO	=	0xde13
+                    DE14    686 Fgpio$USBCSOL$0$0 == 0xde14
+                    DE14    687 _USBCSOL	=	0xde14
+                    DE15    688 Fgpio$USBCSOH$0$0 == 0xde15
+                    DE15    689 _USBCSOH	=	0xde15
+                    DE16    690 Fgpio$USBCNTL$0$0 == 0xde16
+                    DE16    691 _USBCNTL	=	0xde16
+                    DE17    692 Fgpio$USBCNTH$0$0 == 0xde17
+                    DE17    693 _USBCNTH	=	0xde17
+                    DE20    694 Fgpio$USBF0$0$0 == 0xde20
+                    DE20    695 _USBF0	=	0xde20
+                    DE22    696 Fgpio$USBF1$0$0 == 0xde22
+                    DE22    697 _USBF1	=	0xde22
+                    DE24    698 Fgpio$USBF2$0$0 == 0xde24
+                    DE24    699 _USBF2	=	0xde24
+                    DE26    700 Fgpio$USBF3$0$0 == 0xde26
+                    DE26    701 _USBF3	=	0xde26
+                    DE28    702 Fgpio$USBF4$0$0 == 0xde28
+                    DE28    703 _USBF4	=	0xde28
+                    DE2A    704 Fgpio$USBF5$0$0 == 0xde2a
+                    DE2A    705 _USBF5	=	0xde2a
+                            706 ;--------------------------------------------------------
+                            707 ; absolute external ram data
+                            708 ;--------------------------------------------------------
+                            709 	.area XABS    (ABS,XDATA)
+                            710 ;--------------------------------------------------------
+                            711 ; external initialized ram data
+                            712 ;--------------------------------------------------------
+                            713 	.area XISEG   (XDATA)
+                            714 	.area HOME    (CODE)
+                            715 	.area GSINIT0 (CODE)
+                            716 	.area GSINIT1 (CODE)
+                            717 	.area GSINIT2 (CODE)
+                            718 	.area GSINIT3 (CODE)
+                            719 	.area GSINIT4 (CODE)
+                            720 	.area GSINIT5 (CODE)
+                            721 	.area GSINIT  (CODE)
+                            722 	.area GSFINAL (CODE)
+                            723 	.area CSEG    (CODE)
+                            724 ;--------------------------------------------------------
+                            725 ; global & static initialisations
+                            726 ;--------------------------------------------------------
+                            727 	.area HOME    (CODE)
+                            728 	.area GSINIT  (CODE)
+                            729 	.area GSFINAL (CODE)
+                            730 	.area GSINIT  (CODE)
+                            731 ;--------------------------------------------------------
+                            732 ; Home
+                            733 ;--------------------------------------------------------
+                            734 	.area HOME    (CODE)
+                            735 	.area HOME    (CODE)
+                            736 ;--------------------------------------------------------
+                            737 ; code
+                            738 ;--------------------------------------------------------
+                            739 	.area CSEG    (CODE)
+                            740 ;------------------------------------------------------------
+                            741 ;Allocation info for local variables in function 'setDigitalOutput'
+                            742 ;------------------------------------------------------------
+                            743 ;value                     Allocated to registers b0 
+                            744 ;pinNumber                 Allocated to registers r7 
+                            745 ;------------------------------------------------------------
+                    0000    746 	G$setDigitalOutput$0$0 ==.
+                    0000    747 	C$gpio.c$36$0$0 ==.
+                            748 ;	libraries/src/gpio/gpio.c:36: void setDigitalOutput(uint8 pinNumber, BIT value) __reentrant
+                            749 ;	-----------------------------------------
+                            750 ;	 function setDigitalOutput
+                            751 ;	-----------------------------------------
+   0000                     752 _setDigitalOutput:
+                    0007    753 	ar7 = 0x07
+                    0006    754 	ar6 = 0x06
+                    0005    755 	ar5 = 0x05
+                    0004    756 	ar4 = 0x04
+                    0003    757 	ar3 = 0x03
+                    0002    758 	ar2 = 0x02
+                    0001    759 	ar1 = 0x01
+                    0000    760 	ar0 = 0x00
+                    0000    761 	C$gpio.c$38$1$1 ==.
+                            762 ;	libraries/src/gpio/gpio.c:38: PIN_SWITCH(SET_DIGITAL_OUTPUT);
+   0000 E5 82               763 	mov	a,dpl
+   0002 FF                  764 	mov	r7,a
+   0003 24 E7               765 	add	a,#0xff - 0x18
+   0005 50 03               766 	jnc	00124$
+   0007 02s00rF8            767 	ljmp	00121$
+   000A                     768 00124$:
+   000A EF                  769 	mov	a,r7
+   000B 24 09               770 	add	a,#(00125$-3-.)
+   000D 83                  771 	movc	a,@a+pc
+   000E C0 E0               772 	push	acc
+   0010 EF                  773 	mov	a,r7
+   0011 24 1C               774 	add	a,#(00126$-3-.)
+   0013 83                  775 	movc	a,@a+pc
+   0014 C0 E0               776 	push	acc
+   0016 22                  777 	ret
+   0017                     778 00125$:
+   0017r49                  779 	.db	00101$
+   0018r53                  780 	.db	00102$
+   0019r5D                  781 	.db	00103$
+   001Ar67                  782 	.db	00104$
+   001Br71                  783 	.db	00105$
+   001Cr7B                  784 	.db	00106$
+   001DrF8                  785 	.db	00120$
+   001ErF8                  786 	.db	00120$
+   001FrF8                  787 	.db	00120$
+   0020rF8                  788 	.db	00120$
+   0021r85                  789 	.db	00107$
+   0022r8E                  790 	.db	00108$
+   0023r97                  791 	.db	00109$
+   0024rA0                  792 	.db	00110$
+   0025rA9                  793 	.db	00111$
+   0026rB2                  794 	.db	00112$
+   0027rBB                  795 	.db	00113$
+   0028rC4                  796 	.db	00114$
+   0029rF8                  797 	.db	00120$
+   002ArF8                  798 	.db	00120$
+   002BrCD                  799 	.db	00115$
+   002CrD6                  800 	.db	00116$
+   002DrDF                  801 	.db	00117$
+   002ErE8                  802 	.db	00118$
+   002FrF1                  803 	.db	00119$
+   0030                     804 00126$:
+   0030s00                  805 	.db	00101$>>8
+   0031s00                  806 	.db	00102$>>8
+   0032s00                  807 	.db	00103$>>8
+   0033s00                  808 	.db	00104$>>8
+   0034s00                  809 	.db	00105$>>8
+   0035s00                  810 	.db	00106$>>8
+   0036s00                  811 	.db	00120$>>8
+   0037s00                  812 	.db	00120$>>8
+   0038s00                  813 	.db	00120$>>8
+   0039s00                  814 	.db	00120$>>8
+   003As00                  815 	.db	00107$>>8
+   003Bs00                  816 	.db	00108$>>8
+   003Cs00                  817 	.db	00109$>>8
+   003Ds00                  818 	.db	00110$>>8
+   003Es00                  819 	.db	00111$>>8
+   003Fs00                  820 	.db	00112$>>8
+   0040s00                  821 	.db	00113$>>8
+   0041s00                  822 	.db	00114$>>8
+   0042s00                  823 	.db	00120$>>8
+   0043s00                  824 	.db	00120$>>8
+   0044s00                  825 	.db	00115$>>8
+   0045s00                  826 	.db	00116$>>8
+   0046s00                  827 	.db	00117$>>8
+   0047s00                  828 	.db	00118$>>8
+   0048s00                  829 	.db	00119$>>8
+   0049                     830 00101$:
+   0049 A2*00               831 	mov	c,b0
+   004B 92 80               832 	mov	_P0_0,c
+   004D 43 FD 01            833 	orl	_P0DIR,#0x01
+   0050 02s00rF8            834 	ljmp	00121$
+   0053                     835 00102$:
+   0053 A2*00               836 	mov	c,b0
+   0055 92 81               837 	mov	_P0_1,c
+   0057 43 FD 02            838 	orl	_P0DIR,#0x02
+   005A 02s00rF8            839 	ljmp	00121$
+   005D                     840 00103$:
+   005D A2*00               841 	mov	c,b0
+   005F 92 82               842 	mov	_P0_2,c
+   0061 43 FD 04            843 	orl	_P0DIR,#0x04
+   0064 02s00rF8            844 	ljmp	00121$
+   0067                     845 00104$:
+   0067 A2*00               846 	mov	c,b0
+   0069 92 83               847 	mov	_P0_3,c
+   006B 43 FD 08            848 	orl	_P0DIR,#0x08
+   006E 02s00rF8            849 	ljmp	00121$
+   0071                     850 00105$:
+   0071 A2*00               851 	mov	c,b0
+   0073 92 84               852 	mov	_P0_4,c
+   0075 43 FD 10            853 	orl	_P0DIR,#0x10
+   0078 02s00rF8            854 	ljmp	00121$
+   007B                     855 00106$:
+   007B A2*00               856 	mov	c,b0
+   007D 92 85               857 	mov	_P0_5,c
+   007F 43 FD 20            858 	orl	_P0DIR,#0x20
+   0082 02s00rF8            859 	ljmp	00121$
+   0085                     860 00107$:
+   0085 A2*00               861 	mov	c,b0
+   0087 92 90               862 	mov	_P1_0,c
+   0089 43 FE 01            863 	orl	_P1DIR,#0x01
+   008C 80 6A               864 	sjmp	00121$
+   008E                     865 00108$:
+   008E A2*00               866 	mov	c,b0
+   0090 92 91               867 	mov	_P1_1,c
+   0092 43 FE 02            868 	orl	_P1DIR,#0x02
+   0095 80 61               869 	sjmp	00121$
+   0097                     870 00109$:
+   0097 A2*00               871 	mov	c,b0
+   0099 92 92               872 	mov	_P1_2,c
+   009B 43 FE 04            873 	orl	_P1DIR,#0x04
+   009E 80 58               874 	sjmp	00121$
+   00A0                     875 00110$:
+   00A0 A2*00               876 	mov	c,b0
+   00A2 92 93               877 	mov	_P1_3,c
+   00A4 43 FE 08            878 	orl	_P1DIR,#0x08
+   00A7 80 4F               879 	sjmp	00121$
+   00A9                     880 00111$:
+   00A9 A2*00               881 	mov	c,b0
+   00AB 92 94               882 	mov	_P1_4,c
+   00AD 43 FE 10            883 	orl	_P1DIR,#0x10
+   00B0 80 46               884 	sjmp	00121$
+   00B2                     885 00112$:
+   00B2 A2*00               886 	mov	c,b0
+   00B4 92 95               887 	mov	_P1_5,c
+   00B6 43 FE 20            888 	orl	_P1DIR,#0x20
+   00B9 80 3D               889 	sjmp	00121$
+   00BB                     890 00113$:
+   00BB A2*00               891 	mov	c,b0
+   00BD 92 96               892 	mov	_P1_6,c
+   00BF 43 FE 40            893 	orl	_P1DIR,#0x40
+   00C2 80 34               894 	sjmp	00121$
+   00C4                     895 00114$:
+   00C4 A2*00               896 	mov	c,b0
+   00C6 92 97               897 	mov	_P1_7,c
+   00C8 43 FE 80            898 	orl	_P1DIR,#0x80
+   00CB 80 2B               899 	sjmp	00121$
+   00CD                     900 00115$:
+   00CD A2*00               901 	mov	c,b0
+   00CF 92 A0               902 	mov	_P2_0,c
+   00D1 43 FF 01            903 	orl	_P2DIR,#0x01
+   00D4 80 22               904 	sjmp	00121$
+   00D6                     905 00116$:
+   00D6 A2*00               906 	mov	c,b0
+   00D8 92 A1               907 	mov	_P2_1,c
+   00DA 43 FF 02            908 	orl	_P2DIR,#0x02
+   00DD 80 19               909 	sjmp	00121$
+   00DF                     910 00117$:
+   00DF A2*00               911 	mov	c,b0
+   00E1 92 A2               912 	mov	_P2_2,c
+   00E3 43 FF 04            913 	orl	_P2DIR,#0x04
+   00E6 80 10               914 	sjmp	00121$
+   00E8                     915 00118$:
+   00E8 A2*00               916 	mov	c,b0
+   00EA 92 A3               917 	mov	_P2_3,c
+   00EC 43 FF 08            918 	orl	_P2DIR,#0x08
+   00EF 80 07               919 	sjmp	00121$
+   00F1                     920 00119$:
+   00F1 A2*00               921 	mov	c,b0
+   00F3 92 A4               922 	mov	_P2_4,c
+   00F5 43 FF 10            923 	orl	_P2DIR,#0x10
+   00F8                     924 00120$:
+   00F8                     925 00121$:
+                    00F8    926 	C$gpio.c$39$1$1 ==.
+                    00F8    927 	XG$setDigitalOutput$0$0 ==.
+   00F8 22                  928 	ret
+                            929 ;------------------------------------------------------------
+                            930 ;Allocation info for local variables in function 'setDigitalInput'
+                            931 ;------------------------------------------------------------
+                            932 ;pulled                    Allocated to registers b0 
+                            933 ;pinNumber                 Allocated to registers r7 
+                            934 ;------------------------------------------------------------
+                    00F9    935 	G$setDigitalInput$0$0 ==.
+                    00F9    936 	C$gpio.c$41$1$1 ==.
+                            937 ;	libraries/src/gpio/gpio.c:41: void setDigitalInput(uint8 pinNumber, BIT pulled) __reentrant
+                            938 ;	-----------------------------------------
+                            939 ;	 function setDigitalInput
+                            940 ;	-----------------------------------------
+   00F9                     941 _setDigitalInput:
+                    00F9    942 	C$gpio.c$43$1$1 ==.
+                            943 ;	libraries/src/gpio/gpio.c:43: PIN_SWITCH(SET_DIGITAL_INPUT);
+   00F9 E5 82               944 	mov	a,dpl
+   00FB FF                  945 	mov	r7,a
+   00FC 24 E7               946 	add	a,#0xff - 0x18
+   00FE 50 03               947 	jnc	00200$
+   0100 02s03r16            948 	ljmp	00178$
+   0103                     949 00200$:
+   0103 EF                  950 	mov	a,r7
+   0104 24 09               951 	add	a,#(00201$-3-.)
+   0106 83                  952 	movc	a,@a+pc
+   0107 C0 E0               953 	push	acc
+   0109 EF                  954 	mov	a,r7
+   010A 24 1C               955 	add	a,#(00202$-3-.)
+   010C 83                  956 	movc	a,@a+pc
+   010D C0 E0               957 	push	acc
+   010F 22                  958 	ret
+   0110                     959 00201$:
+   0110r42                  960 	.db	00101$
+   0111r5B                  961 	.db	00105$
+   0112r74                  962 	.db	00109$
+   0113r8D                  963 	.db	00113$
+   0114rA6                  964 	.db	00117$
+   0115rBF                  965 	.db	00121$
+   0116r16                  966 	.db	00177$
+   0117r16                  967 	.db	00177$
+   0118r16                  968 	.db	00177$
+   0119r16                  969 	.db	00177$
+   011ArD8                  970 	.db	00125$
+   011BrF1                  971 	.db	00129$
+   011Cr0A                  972 	.db	00133$
+   011Dr23                  973 	.db	00137$
+   011Er3C                  974 	.db	00141$
+   011Fr55                  975 	.db	00145$
+   0120r6E                  976 	.db	00149$
+   0121r87                  977 	.db	00153$
+   0122r16                  978 	.db	00177$
+   0123r16                  979 	.db	00177$
+   0124rA0                  980 	.db	00157$
+   0125rB8                  981 	.db	00161$
+   0126rD0                  982 	.db	00165$
+   0127rE8                  983 	.db	00169$
+   0128r00                  984 	.db	00173$
+   0129                     985 00202$:
+   0129s01                  986 	.db	00101$>>8
+   012As01                  987 	.db	00105$>>8
+   012Bs01                  988 	.db	00109$>>8
+   012Cs01                  989 	.db	00113$>>8
+   012Ds01                  990 	.db	00117$>>8
+   012Es01                  991 	.db	00121$>>8
+   012Fs03                  992 	.db	00177$>>8
+   0130s03                  993 	.db	00177$>>8
+   0131s03                  994 	.db	00177$>>8
+   0132s03                  995 	.db	00177$>>8
+   0133s01                  996 	.db	00125$>>8
+   0134s01                  997 	.db	00129$>>8
+   0135s02                  998 	.db	00133$>>8
+   0136s02                  999 	.db	00137$>>8
+   0137s02                 1000 	.db	00141$>>8
+   0138s02                 1001 	.db	00145$>>8
+   0139s02                 1002 	.db	00149$>>8
+   013As02                 1003 	.db	00153$>>8
+   013Bs03                 1004 	.db	00177$>>8
+   013Cs03                 1005 	.db	00177$>>8
+   013Ds02                 1006 	.db	00157$>>8
+   013Es02                 1007 	.db	00161$>>8
+   013Fs02                 1008 	.db	00165$>>8
+   0140s02                 1009 	.db	00169$>>8
+   0141s03                 1010 	.db	00173$>>8
+   0142                    1011 00101$:
+   0142 30*00 09           1012 	jnb	b0,00103$
+   0145 AF 8F              1013 	mov	r7,_P0INP
+   0147 53 07 FE           1014 	anl	ar7,#0xFE
+   014A 8F 8F              1015 	mov	_P0INP,r7
+   014C 80 03              1016 	sjmp	00104$
+   014E                    1017 00103$:
+   014E 43 8F 01           1018 	orl	_P0INP,#0x01
+   0151                    1019 00104$:
+   0151 AF FD              1020 	mov	r7,_P0DIR
+   0153 53 07 FE           1021 	anl	ar7,#0xFE
+   0156 8F FD              1022 	mov	_P0DIR,r7
+   0158 02s03r16           1023 	ljmp	00178$
+   015B                    1024 00105$:
+   015B 30*00 09           1025 	jnb	b0,00107$
+   015E AF 8F              1026 	mov	r7,_P0INP
+   0160 53 07 FD           1027 	anl	ar7,#0xFD
+   0163 8F 8F              1028 	mov	_P0INP,r7
+   0165 80 03              1029 	sjmp	00108$
+   0167                    1030 00107$:
+   0167 43 8F 02           1031 	orl	_P0INP,#0x02
+   016A                    1032 00108$:
+   016A AF FD              1033 	mov	r7,_P0DIR
+   016C 53 07 FD           1034 	anl	ar7,#0xFD
+   016F 8F FD              1035 	mov	_P0DIR,r7
+   0171 02s03r16           1036 	ljmp	00178$
+   0174                    1037 00109$:
+   0174 30*00 09           1038 	jnb	b0,00111$
+   0177 AF 8F              1039 	mov	r7,_P0INP
+   0179 53 07 FB           1040 	anl	ar7,#0xFB
+   017C 8F 8F              1041 	mov	_P0INP,r7
+   017E 80 03              1042 	sjmp	00112$
+   0180                    1043 00111$:
+   0180 43 8F 04           1044 	orl	_P0INP,#0x04
+   0183                    1045 00112$:
+   0183 AF FD              1046 	mov	r7,_P0DIR
+   0185 53 07 FB           1047 	anl	ar7,#0xFB
+   0188 8F FD              1048 	mov	_P0DIR,r7
+   018A 02s03r16           1049 	ljmp	00178$
+   018D                    1050 00113$:
+   018D 30*00 09           1051 	jnb	b0,00115$
+   0190 AF 8F              1052 	mov	r7,_P0INP
+   0192 53 07 F7           1053 	anl	ar7,#0xF7
+   0195 8F 8F              1054 	mov	_P0INP,r7
+   0197 80 03              1055 	sjmp	00116$
+   0199                    1056 00115$:
+   0199 43 8F 08           1057 	orl	_P0INP,#0x08
+   019C                    1058 00116$:
+   019C AF FD              1059 	mov	r7,_P0DIR
+   019E 53 07 F7           1060 	anl	ar7,#0xF7
+   01A1 8F FD              1061 	mov	_P0DIR,r7
+   01A3 02s03r16           1062 	ljmp	00178$
+   01A6                    1063 00117$:
+   01A6 30*00 09           1064 	jnb	b0,00119$
+   01A9 AF 8F              1065 	mov	r7,_P0INP
+   01AB 53 07 EF           1066 	anl	ar7,#0xEF
+   01AE 8F 8F              1067 	mov	_P0INP,r7
+   01B0 80 03              1068 	sjmp	00120$
+   01B2                    1069 00119$:
+   01B2 43 8F 10           1070 	orl	_P0INP,#0x10
+   01B5                    1071 00120$:
+   01B5 AF FD              1072 	mov	r7,_P0DIR
+   01B7 53 07 EF           1073 	anl	ar7,#0xEF
+   01BA 8F FD              1074 	mov	_P0DIR,r7
+   01BC 02s03r16           1075 	ljmp	00178$
+   01BF                    1076 00121$:
+   01BF 30*00 09           1077 	jnb	b0,00123$
+   01C2 AF 8F              1078 	mov	r7,_P0INP
+   01C4 53 07 DF           1079 	anl	ar7,#0xDF
+   01C7 8F 8F              1080 	mov	_P0INP,r7
+   01C9 80 03              1081 	sjmp	00124$
+   01CB                    1082 00123$:
+   01CB 43 8F 20           1083 	orl	_P0INP,#0x20
+   01CE                    1084 00124$:
+   01CE AF FD              1085 	mov	r7,_P0DIR
+   01D0 53 07 DF           1086 	anl	ar7,#0xDF
+   01D3 8F FD              1087 	mov	_P0DIR,r7
+   01D5 02s03r16           1088 	ljmp	00178$
+   01D8                    1089 00125$:
+   01D8 30*00 09           1090 	jnb	b0,00127$
+   01DB AF F6              1091 	mov	r7,_P1INP
+   01DD 53 07 FE           1092 	anl	ar7,#0xFE
+   01E0 8F F6              1093 	mov	_P1INP,r7
+   01E2 80 03              1094 	sjmp	00128$
+   01E4                    1095 00127$:
+   01E4 43 F6 01           1096 	orl	_P1INP,#0x01
+   01E7                    1097 00128$:
+   01E7 AF FE              1098 	mov	r7,_P1DIR
+   01E9 53 07 FE           1099 	anl	ar7,#0xFE
+   01EC 8F FE              1100 	mov	_P1DIR,r7
+   01EE 02s03r16           1101 	ljmp	00178$
+   01F1                    1102 00129$:
+   01F1 30*00 09           1103 	jnb	b0,00131$
+   01F4 AF F6              1104 	mov	r7,_P1INP
+   01F6 53 07 FD           1105 	anl	ar7,#0xFD
+   01F9 8F F6              1106 	mov	_P1INP,r7
+   01FB 80 03              1107 	sjmp	00132$
+   01FD                    1108 00131$:
+   01FD 43 F6 02           1109 	orl	_P1INP,#0x02
+   0200                    1110 00132$:
+   0200 AF FE              1111 	mov	r7,_P1DIR
+   0202 53 07 FD           1112 	anl	ar7,#0xFD
+   0205 8F FE              1113 	mov	_P1DIR,r7
+   0207 02s03r16           1114 	ljmp	00178$
+   020A                    1115 00133$:
+   020A 30*00 09           1116 	jnb	b0,00135$
+   020D AF F6              1117 	mov	r7,_P1INP
+   020F 53 07 FB           1118 	anl	ar7,#0xFB
+   0212 8F F6              1119 	mov	_P1INP,r7
+   0214 80 03              1120 	sjmp	00136$
+   0216                    1121 00135$:
+   0216 43 F6 04           1122 	orl	_P1INP,#0x04
+   0219                    1123 00136$:
+   0219 AF FE              1124 	mov	r7,_P1DIR
+   021B 53 07 FB           1125 	anl	ar7,#0xFB
+   021E 8F FE              1126 	mov	_P1DIR,r7
+   0220 02s03r16           1127 	ljmp	00178$
+   0223                    1128 00137$:
+   0223 30*00 09           1129 	jnb	b0,00139$
+   0226 AF F6              1130 	mov	r7,_P1INP
+   0228 53 07 F7           1131 	anl	ar7,#0xF7
+   022B 8F F6              1132 	mov	_P1INP,r7
+   022D 80 03              1133 	sjmp	00140$
+   022F                    1134 00139$:
+   022F 43 F6 08           1135 	orl	_P1INP,#0x08
+   0232                    1136 00140$:
+   0232 AF FE              1137 	mov	r7,_P1DIR
+   0234 53 07 F7           1138 	anl	ar7,#0xF7
+   0237 8F FE              1139 	mov	_P1DIR,r7
+   0239 02s03r16           1140 	ljmp	00178$
+   023C                    1141 00141$:
+   023C 30*00 09           1142 	jnb	b0,00143$
+   023F AF F6              1143 	mov	r7,_P1INP
+   0241 53 07 EF           1144 	anl	ar7,#0xEF
+   0244 8F F6              1145 	mov	_P1INP,r7
+   0246 80 03              1146 	sjmp	00144$
+   0248                    1147 00143$:
+   0248 43 F6 10           1148 	orl	_P1INP,#0x10
+   024B                    1149 00144$:
+   024B AF FE              1150 	mov	r7,_P1DIR
+   024D 53 07 EF           1151 	anl	ar7,#0xEF
+   0250 8F FE              1152 	mov	_P1DIR,r7
+   0252 02s03r16           1153 	ljmp	00178$
+   0255                    1154 00145$:
+   0255 30*00 09           1155 	jnb	b0,00147$
+   0258 AF F6              1156 	mov	r7,_P1INP
+   025A 53 07 DF           1157 	anl	ar7,#0xDF
+   025D 8F F6              1158 	mov	_P1INP,r7
+   025F 80 03              1159 	sjmp	00148$
+   0261                    1160 00147$:
+   0261 43 F6 20           1161 	orl	_P1INP,#0x20
+   0264                    1162 00148$:
+   0264 AF FE              1163 	mov	r7,_P1DIR
+   0266 53 07 DF           1164 	anl	ar7,#0xDF
+   0269 8F FE              1165 	mov	_P1DIR,r7
+   026B 02s03r16           1166 	ljmp	00178$
+   026E                    1167 00149$:
+   026E 30*00 09           1168 	jnb	b0,00151$
+   0271 AF F6              1169 	mov	r7,_P1INP
+   0273 53 07 BF           1170 	anl	ar7,#0xBF
+   0276 8F F6              1171 	mov	_P1INP,r7
+   0278 80 03              1172 	sjmp	00152$
+   027A                    1173 00151$:
+   027A 43 F6 40           1174 	orl	_P1INP,#0x40
+   027D                    1175 00152$:
+   027D AF FE              1176 	mov	r7,_P1DIR
+   027F 53 07 BF           1177 	anl	ar7,#0xBF
+   0282 8F FE              1178 	mov	_P1DIR,r7
+   0284 02s03r16           1179 	ljmp	00178$
+   0287                    1180 00153$:
+   0287 30*00 09           1181 	jnb	b0,00155$
+   028A AF F6              1182 	mov	r7,_P1INP
+   028C 53 07 7F           1183 	anl	ar7,#0x7F
+   028F 8F F6              1184 	mov	_P1INP,r7
+   0291 80 03              1185 	sjmp	00156$
+   0293                    1186 00155$:
+   0293 43 F6 80           1187 	orl	_P1INP,#0x80
+   0296                    1188 00156$:
+   0296 AF FE              1189 	mov	r7,_P1DIR
+   0298 53 07 7F           1190 	anl	ar7,#0x7F
+   029B 8F FE              1191 	mov	_P1DIR,r7
+   029D 02s03r16           1192 	ljmp	00178$
+   02A0                    1193 00157$:
+   02A0 30*00 09           1194 	jnb	b0,00159$
+   02A3 AF F7              1195 	mov	r7,_P2INP
+   02A5 53 07 FE           1196 	anl	ar7,#0xFE
+   02A8 8F F7              1197 	mov	_P2INP,r7
+   02AA 80 03              1198 	sjmp	00160$
+   02AC                    1199 00159$:
+   02AC 43 F7 01           1200 	orl	_P2INP,#0x01
+   02AF                    1201 00160$:
+   02AF AF FF              1202 	mov	r7,_P2DIR
+   02B1 53 07 FE           1203 	anl	ar7,#0xFE
+   02B4 8F FF              1204 	mov	_P2DIR,r7
+   02B6 80 5E              1205 	sjmp	00178$
+   02B8                    1206 00161$:
+   02B8 30*00 09           1207 	jnb	b0,00163$
+   02BB AF F7              1208 	mov	r7,_P2INP
+   02BD 53 07 FD           1209 	anl	ar7,#0xFD
+   02C0 8F F7              1210 	mov	_P2INP,r7
+   02C2 80 03              1211 	sjmp	00164$
+   02C4                    1212 00163$:
+   02C4 43 F7 02           1213 	orl	_P2INP,#0x02
+   02C7                    1214 00164$:
+   02C7 AF FF              1215 	mov	r7,_P2DIR
+   02C9 53 07 FD           1216 	anl	ar7,#0xFD
+   02CC 8F FF              1217 	mov	_P2DIR,r7
+   02CE 80 46              1218 	sjmp	00178$
+   02D0                    1219 00165$:
+   02D0 30*00 09           1220 	jnb	b0,00167$
+   02D3 AF F7              1221 	mov	r7,_P2INP
+   02D5 53 07 FB           1222 	anl	ar7,#0xFB
+   02D8 8F F7              1223 	mov	_P2INP,r7
+   02DA 80 03              1224 	sjmp	00168$
+   02DC                    1225 00167$:
+   02DC 43 F7 04           1226 	orl	_P2INP,#0x04
+   02DF                    1227 00168$:
+   02DF AF FF              1228 	mov	r7,_P2DIR
+   02E1 53 07 FB           1229 	anl	ar7,#0xFB
+   02E4 8F FF              1230 	mov	_P2DIR,r7
+   02E6 80 2E              1231 	sjmp	00178$
+   02E8                    1232 00169$:
+   02E8 30*00 09           1233 	jnb	b0,00171$
+   02EB AF F7              1234 	mov	r7,_P2INP
+   02ED 53 07 F7           1235 	anl	ar7,#0xF7
+   02F0 8F F7              1236 	mov	_P2INP,r7
+   02F2 80 03              1237 	sjmp	00172$
+   02F4                    1238 00171$:
+   02F4 43 F7 08           1239 	orl	_P2INP,#0x08
+   02F7                    1240 00172$:
+   02F7 AF FF              1241 	mov	r7,_P2DIR
+   02F9 53 07 F7           1242 	anl	ar7,#0xF7
+   02FC 8F FF              1243 	mov	_P2DIR,r7
+   02FE 80 16              1244 	sjmp	00178$
+   0300                    1245 00173$:
+   0300 30*00 09           1246 	jnb	b0,00175$
+   0303 AF F7              1247 	mov	r7,_P2INP
+   0305 53 07 EF           1248 	anl	ar7,#0xEF
+   0308 8F F7              1249 	mov	_P2INP,r7
+   030A 80 03              1250 	sjmp	00176$
+   030C                    1251 00175$:
+   030C 43 F7 10           1252 	orl	_P2INP,#0x10
+   030F                    1253 00176$:
+   030F AF FF              1254 	mov	r7,_P2DIR
+   0311 53 07 EF           1255 	anl	ar7,#0xEF
+   0314 8F FF              1256 	mov	_P2DIR,r7
+   0316                    1257 00177$:
+   0316                    1258 00178$:
+                    0316   1259 	C$gpio.c$44$1$1 ==.
+                    0316   1260 	XG$setDigitalInput$0$0 ==.
+   0316 22                 1261 	ret
+                           1262 ;------------------------------------------------------------
+                           1263 ;Allocation info for local variables in function 'isPinHigh'
+                           1264 ;------------------------------------------------------------
+                           1265 ;pinNumber                 Allocated to registers r7 
+                           1266 ;------------------------------------------------------------
+                    0317   1267 	G$isPinHigh$0$0 ==.
+                    0317   1268 	C$gpio.c$46$1$1 ==.
+                           1269 ;	libraries/src/gpio/gpio.c:46: BIT isPinHigh(uint8 pinNumber) __reentrant
+                           1270 ;	-----------------------------------------
+                           1271 ;	 function isPinHigh
+                           1272 ;	-----------------------------------------
+   0317                    1273 _isPinHigh:
+                    0317   1274 	C$gpio.c$48$1$1 ==.
+                           1275 ;	libraries/src/gpio/gpio.c:48: PIN_SWITCH(IS_DIGITAL_INPUT_HIGH);
+   0317 E5 82              1276 	mov	a,dpl
+   0319 FF                 1277 	mov	r7,a
+   031A 24 E7              1278 	add	a,#0xff - 0x18
+   031C 50 03              1279 	jnc	00124$
+   031E 02s03rAC           1280 	ljmp	00120$
+   0321                    1281 00124$:
+   0321 EF                 1282 	mov	a,r7
+   0322 24 09              1283 	add	a,#(00125$-3-.)
+   0324 83                 1284 	movc	a,@a+pc
+   0325 C0 E0              1285 	push	acc
+   0327 EF                 1286 	mov	a,r7
+   0328 24 1C              1287 	add	a,#(00126$-3-.)
+   032A 83                 1288 	movc	a,@a+pc
+   032B C0 E0              1289 	push	acc
+   032D 22                 1290 	ret
+   032E                    1291 00125$:
+   032Er60                 1292 	.db	00101$
+   032Fr64                 1293 	.db	00102$
+   0330r68                 1294 	.db	00103$
+   0331r6C                 1295 	.db	00104$
+   0332r70                 1296 	.db	00105$
+   0333r74                 1297 	.db	00106$
+   0334rAC                 1298 	.db	00120$
+   0335rAC                 1299 	.db	00120$
+   0336rAC                 1300 	.db	00120$
+   0337rAC                 1301 	.db	00120$
+   0338r78                 1302 	.db	00107$
+   0339r7C                 1303 	.db	00108$
+   033Ar80                 1304 	.db	00109$
+   033Br84                 1305 	.db	00110$
+   033Cr88                 1306 	.db	00111$
+   033Dr8C                 1307 	.db	00112$
+   033Er90                 1308 	.db	00113$
+   033Fr94                 1309 	.db	00114$
+   0340rAC                 1310 	.db	00120$
+   0341rAC                 1311 	.db	00120$
+   0342r98                 1312 	.db	00115$
+   0343r9C                 1313 	.db	00116$
+   0344rA0                 1314 	.db	00117$
+   0345rA4                 1315 	.db	00118$
+   0346rA8                 1316 	.db	00119$
+   0347                    1317 00126$:
+   0347s03                 1318 	.db	00101$>>8
+   0348s03                 1319 	.db	00102$>>8
+   0349s03                 1320 	.db	00103$>>8
+   034As03                 1321 	.db	00104$>>8
+   034Bs03                 1322 	.db	00105$>>8
+   034Cs03                 1323 	.db	00106$>>8
+   034Ds03                 1324 	.db	00120$>>8
+   034Es03                 1325 	.db	00120$>>8
+   034Fs03                 1326 	.db	00120$>>8
+   0350s03                 1327 	.db	00120$>>8
+   0351s03                 1328 	.db	00107$>>8
+   0352s03                 1329 	.db	00108$>>8
+   0353s03                 1330 	.db	00109$>>8
+   0354s03                 1331 	.db	00110$>>8
+   0355s03                 1332 	.db	00111$>>8
+   0356s03                 1333 	.db	00112$>>8
+   0357s03                 1334 	.db	00113$>>8
+   0358s03                 1335 	.db	00114$>>8
+   0359s03                 1336 	.db	00120$>>8
+   035As03                 1337 	.db	00120$>>8
+   035Bs03                 1338 	.db	00115$>>8
+   035Cs03                 1339 	.db	00116$>>8
+   035Ds03                 1340 	.db	00117$>>8
+   035Es03                 1341 	.db	00118$>>8
+   035Fs03                 1342 	.db	00119$>>8
+   0360                    1343 00101$:
+   0360 A2 80              1344 	mov	c,_P0_0
+   0362 80 49              1345 	sjmp	00121$
+   0364                    1346 00102$:
+   0364 A2 81              1347 	mov	c,_P0_1
+   0366 80 45              1348 	sjmp	00121$
+   0368                    1349 00103$:
+   0368 A2 82              1350 	mov	c,_P0_2
+   036A 80 41              1351 	sjmp	00121$
+   036C                    1352 00104$:
+   036C A2 83              1353 	mov	c,_P0_3
+   036E 80 3D              1354 	sjmp	00121$
+   0370                    1355 00105$:
+   0370 A2 84              1356 	mov	c,_P0_4
+   0372 80 39              1357 	sjmp	00121$
+   0374                    1358 00106$:
+   0374 A2 85              1359 	mov	c,_P0_5
+   0376 80 35              1360 	sjmp	00121$
+   0378                    1361 00107$:
+   0378 A2 90              1362 	mov	c,_P1_0
+   037A 80 31              1363 	sjmp	00121$
+   037C                    1364 00108$:
+   037C A2 91              1365 	mov	c,_P1_1
+   037E 80 2D              1366 	sjmp	00121$
+   0380                    1367 00109$:
+   0380 A2 92              1368 	mov	c,_P1_2
+   0382 80 29              1369 	sjmp	00121$
+   0384                    1370 00110$:
+   0384 A2 93              1371 	mov	c,_P1_3
+   0386 80 25              1372 	sjmp	00121$
+   0388                    1373 00111$:
+   0388 A2 94              1374 	mov	c,_P1_4
+   038A 80 21              1375 	sjmp	00121$
+   038C                    1376 00112$:
+   038C A2 95              1377 	mov	c,_P1_5
+   038E 80 1D              1378 	sjmp	00121$
+   0390                    1379 00113$:
+   0390 A2 96              1380 	mov	c,_P1_6
+   0392 80 19              1381 	sjmp	00121$
+   0394                    1382 00114$:
+   0394 A2 97              1383 	mov	c,_P1_7
+   0396 80 15              1384 	sjmp	00121$
+   0398                    1385 00115$:
+   0398 A2 A0              1386 	mov	c,_P2_0
+   039A 80 11              1387 	sjmp	00121$
+   039C                    1388 00116$:
+   039C A2 A1              1389 	mov	c,_P2_1
+   039E 80 0D              1390 	sjmp	00121$
+   03A0                    1391 00117$:
+   03A0 A2 A2              1392 	mov	c,_P2_2
+   03A2 80 09              1393 	sjmp	00121$
+   03A4                    1394 00118$:
+   03A4 A2 A3              1395 	mov	c,_P2_3
+   03A6 80 05              1396 	sjmp	00121$
+   03A8                    1397 00119$:
+   03A8 A2 A4              1398 	mov	c,_P2_4
+   03AA 80 01              1399 	sjmp	00121$
+   03AC                    1400 00120$:
+                    03AC   1401 	C$gpio.c$49$1$1 ==.
+                           1402 ;	libraries/src/gpio/gpio.c:49: return 0;
+   03AC C3                 1403 	clr	c
+   03AD                    1404 00121$:
+                    03AD   1405 	C$gpio.c$50$1$1 ==.
+                    03AD   1406 	XG$isPinHigh$0$0 ==.
+   03AD 22                 1407 	ret
+                           1408 ;------------------------------------------------------------
+                           1409 ;Allocation info for local variables in function 'setPort0PullType'
+                           1410 ;------------------------------------------------------------
+                           1411 ;pullType                  Allocated to registers b0 
+                           1412 ;------------------------------------------------------------
+                    03AE   1413 	G$setPort0PullType$0$0 ==.
+                    03AE   1414 	C$gpio.c$52$1$1 ==.
+                           1415 ;	libraries/src/gpio/gpio.c:52: void setPort0PullType(BIT pullType) __reentrant
+                           1416 ;	-----------------------------------------
+                           1417 ;	 function setPort0PullType
+                           1418 ;	-----------------------------------------
+   03AE                    1419 _setPort0PullType:
+                    03AE   1420 	C$gpio.c$54$1$1 ==.
+                           1421 ;	libraries/src/gpio/gpio.c:54: if (pullType){ P2INP &= ~(1<<5); }
+   03AE 30*00 09           1422 	jnb	b0,00102$
+   03B1 AF F7              1423 	mov	r7,_P2INP
+   03B3 53 07 DF           1424 	anl	ar7,#0xDF
+   03B6 8F F7              1425 	mov	_P2INP,r7
+   03B8 80 03              1426 	sjmp	00104$
+   03BA                    1427 00102$:
+                    03BA   1428 	C$gpio.c$55$2$3 ==.
+                           1429 ;	libraries/src/gpio/gpio.c:55: else { P2INP |= (1<<5); }
+   03BA 43 F7 20           1430 	orl	_P2INP,#0x20
+   03BD                    1431 00104$:
+                    03BD   1432 	C$gpio.c$56$1$1 ==.
+                    03BD   1433 	XG$setPort0PullType$0$0 ==.
+   03BD 22                 1434 	ret
+                           1435 ;------------------------------------------------------------
+                           1436 ;Allocation info for local variables in function 'setPort1PullType'
+                           1437 ;------------------------------------------------------------
+                           1438 ;pullType                  Allocated to registers b0 
+                           1439 ;------------------------------------------------------------
+                    03BE   1440 	G$setPort1PullType$0$0 ==.
+                    03BE   1441 	C$gpio.c$58$1$1 ==.
+                           1442 ;	libraries/src/gpio/gpio.c:58: void setPort1PullType(BIT pullType) __reentrant
+                           1443 ;	-----------------------------------------
+                           1444 ;	 function setPort1PullType
+                           1445 ;	-----------------------------------------
+   03BE                    1446 _setPort1PullType:
+                    03BE   1447 	C$gpio.c$60$1$1 ==.
+                           1448 ;	libraries/src/gpio/gpio.c:60: if (pullType){ P2INP &= ~(1<<6); }
+   03BE 30*00 09           1449 	jnb	b0,00102$
+   03C1 AF F7              1450 	mov	r7,_P2INP
+   03C3 53 07 BF           1451 	anl	ar7,#0xBF
+   03C6 8F F7              1452 	mov	_P2INP,r7
+   03C8 80 03              1453 	sjmp	00104$
+   03CA                    1454 00102$:
+                    03CA   1455 	C$gpio.c$61$2$3 ==.
+                           1456 ;	libraries/src/gpio/gpio.c:61: else { P2INP |= (1<<6); }
+   03CA 43 F7 40           1457 	orl	_P2INP,#0x40
+   03CD                    1458 00104$:
+                    03CD   1459 	C$gpio.c$62$1$1 ==.
+                    03CD   1460 	XG$setPort1PullType$0$0 ==.
+   03CD 22                 1461 	ret
+                           1462 ;------------------------------------------------------------
+                           1463 ;Allocation info for local variables in function 'setPort2PullType'
+                           1464 ;------------------------------------------------------------
+                           1465 ;pullType                  Allocated to registers b0 
+                           1466 ;------------------------------------------------------------
+                    03CE   1467 	G$setPort2PullType$0$0 ==.
+                    03CE   1468 	C$gpio.c$64$1$1 ==.
+                           1469 ;	libraries/src/gpio/gpio.c:64: void setPort2PullType(BIT pullType) __reentrant
+                           1470 ;	-----------------------------------------
+                           1471 ;	 function setPort2PullType
+                           1472 ;	-----------------------------------------
+   03CE                    1473 _setPort2PullType:
+                    03CE   1474 	C$gpio.c$66$1$1 ==.
+                           1475 ;	libraries/src/gpio/gpio.c:66: if (pullType){ P2INP &= ~(1<<7); }
+   03CE 30*00 09           1476 	jnb	b0,00102$
+   03D1 AF F7              1477 	mov	r7,_P2INP
+   03D3 53 07 7F           1478 	anl	ar7,#0x7F
+   03D6 8F F7              1479 	mov	_P2INP,r7
+   03D8 80 03              1480 	sjmp	00104$
+   03DA                    1481 00102$:
+                    03DA   1482 	C$gpio.c$67$2$3 ==.
+                           1483 ;	libraries/src/gpio/gpio.c:67: else { P2INP |= (1<<7); }
+   03DA 43 F7 80           1484 	orl	_P2INP,#0x80
+   03DD                    1485 00104$:
+                    03DD   1486 	C$gpio.c$68$1$1 ==.
+                    03DD   1487 	XG$setPort2PullType$0$0 ==.
+   03DD 22                 1488 	ret
+                           1489 	.area CSEG    (CODE)
+                           1490 	.area CONST   (CODE)
+                           1491 	.area XINIT   (CODE)
+                           1492 	.area CABS    (ABS,CODE)

@@ -1,0 +1,278 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:12 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module millivolts
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _adcRead
+                             13 	.globl _adcReadVddMillivolts
+                             14 	.globl _adcSetMillivoltCalibration
+                             15 	.globl _adcConvertToMillivolts
+                             16 ;--------------------------------------------------------
+                             17 ; special function registers
+                             18 ;--------------------------------------------------------
+                             19 	.area RSEG    (ABS,DATA)
+   0000                      20 	.org 0x0000
+                             21 ;--------------------------------------------------------
+                             22 ; special function bits
+                             23 ;--------------------------------------------------------
+                             24 	.area RSEG    (ABS,DATA)
+   0000                      25 	.org 0x0000
+                             26 ;--------------------------------------------------------
+                             27 ; overlayable register banks
+                             28 ;--------------------------------------------------------
+                             29 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                      30 	.ds 8
+                             31 ;--------------------------------------------------------
+                             32 ; internal ram data
+                             33 ;--------------------------------------------------------
+                             34 	.area DSEG    (DATA)
+                             35 ;--------------------------------------------------------
+                             36 ; overlayable items in internal ram 
+                             37 ;--------------------------------------------------------
+                             38 	.area OSEG    (OVR,DATA)
+                             39 ;--------------------------------------------------------
+                             40 ; indirectly addressable internal ram data
+                             41 ;--------------------------------------------------------
+                             42 	.area ISEG    (DATA)
+                             43 ;--------------------------------------------------------
+                             44 ; absolute internal ram data
+                             45 ;--------------------------------------------------------
+                             46 	.area IABS    (ABS,DATA)
+                             47 	.area IABS    (ABS,DATA)
+                             48 ;--------------------------------------------------------
+                             49 ; bit data
+                             50 ;--------------------------------------------------------
+                             51 	.area BSEG    (BIT)
+                             52 ;--------------------------------------------------------
+                             53 ; paged external ram data
+                             54 ;--------------------------------------------------------
+                             55 	.area PSEG    (PAG,XDATA)
+                    0000     56 Fmillivolts$millivoltCalibration$0$0==.
+   0000                      57 _millivoltCalibration:
+   0000                      58 	.ds 2
+                             59 ;--------------------------------------------------------
+                             60 ; external ram data
+                             61 ;--------------------------------------------------------
+                             62 	.area XSEG    (XDATA)
+                             63 ;--------------------------------------------------------
+                             64 ; absolute external ram data
+                             65 ;--------------------------------------------------------
+                             66 	.area XABS    (ABS,XDATA)
+                             67 ;--------------------------------------------------------
+                             68 ; external initialized ram data
+                             69 ;--------------------------------------------------------
+                             70 	.area XISEG   (XDATA)
+                             71 	.area HOME    (CODE)
+                             72 	.area GSINIT0 (CODE)
+                             73 	.area GSINIT1 (CODE)
+                             74 	.area GSINIT2 (CODE)
+                             75 	.area GSINIT3 (CODE)
+                             76 	.area GSINIT4 (CODE)
+                             77 	.area GSINIT5 (CODE)
+                             78 	.area GSINIT  (CODE)
+                             79 	.area GSFINAL (CODE)
+                             80 	.area CSEG    (CODE)
+                             81 ;--------------------------------------------------------
+                             82 ; global & static initialisations
+                             83 ;--------------------------------------------------------
+                             84 	.area HOME    (CODE)
+                             85 	.area GSINIT  (CODE)
+                             86 	.area GSFINAL (CODE)
+                             87 	.area GSINIT  (CODE)
+                    0000     88 	G$adcConvertToMillivolts$0$0 ==.
+                    0000     89 	C$millivolts.c$4$1$1 ==.
+                             90 ;	libraries/src/adc/millivolts.c:4: static uint16 millivoltCalibration = 3300;
+   0000 78r00                91 	mov	r0,#_millivoltCalibration
+   0002 74 E4                92 	mov	a,#0xE4
+   0004 F2                   93 	movx	@r0,a
+   0005 08                   94 	inc	r0
+   0006 74 0C                95 	mov	a,#0x0C
+   0008 F2                   96 	movx	@r0,a
+                             97 ;--------------------------------------------------------
+                             98 ; Home
+                             99 ;--------------------------------------------------------
+                            100 	.area HOME    (CODE)
+                            101 	.area HOME    (CODE)
+                            102 ;--------------------------------------------------------
+                            103 ; code
+                            104 ;--------------------------------------------------------
+                            105 	.area CSEG    (CODE)
+                            106 ;------------------------------------------------------------
+                            107 ;Allocation info for local variables in function 'adcReadVddMillivolts'
+                            108 ;------------------------------------------------------------
+                    0000    109 	G$adcReadVddMillivolts$0$0 ==.
+                    0000    110 	C$millivolts.c$6$0$0 ==.
+                            111 ;	libraries/src/adc/millivolts.c:6: uint16 adcReadVddMillivolts()
+                            112 ;	-----------------------------------------
+                            113 ;	 function adcReadVddMillivolts
+                            114 ;	-----------------------------------------
+   0000                     115 _adcReadVddMillivolts:
+                    0007    116 	ar7 = 0x07
+                    0006    117 	ar6 = 0x06
+                    0005    118 	ar5 = 0x05
+                    0004    119 	ar4 = 0x04
+                    0003    120 	ar3 = 0x03
+                    0002    121 	ar2 = 0x02
+                    0001    122 	ar1 = 0x01
+                    0000    123 	ar0 = 0x00
+                    0000    124 	C$millivolts.c$9$1$1 ==.
+                            125 ;	libraries/src/adc/millivolts.c:9: return ((uint32)adcRead(15|ADC_REFERENCE_INTERNAL)*3750 + 1023) / 2047;
+   0000 75 82 8F            126 	mov	dpl,#0x8F
+   0003 12s00r00            127 	lcall	_adcRead
+   0006 AE 82               128 	mov	r6,dpl
+   0008 AF 83               129 	mov	r7,dph
+   000A 78r00               130 	mov	r0,#__mullong_PARM_2
+   000C EE                  131 	mov	a,r6
+   000D F2                  132 	movx	@r0,a
+   000E 08                  133 	inc	r0
+   000F EF                  134 	mov	a,r7
+   0010 F2                  135 	movx	@r0,a
+   0011 08                  136 	inc	r0
+   0012 E4                  137 	clr	a
+   0013 F2                  138 	movx	@r0,a
+   0014 08                  139 	inc	r0
+   0015 F2                  140 	movx	@r0,a
+   0016 90 0E A6            141 	mov	dptr,#0x0EA6
+   0019 E4                  142 	clr	a
+   001A F5 F0               143 	mov	b,a
+   001C 12s00r00            144 	lcall	__mullong
+   001F AC 82               145 	mov	r4,dpl
+   0021 AD 83               146 	mov	r5,dph
+   0023 AE F0               147 	mov	r6,b
+   0025 FF                  148 	mov	r7,a
+   0026 74 FF               149 	mov	a,#0xFF
+   0028 2C                  150 	add	a,r4
+   0029 FC                  151 	mov	r4,a
+   002A 74 03               152 	mov	a,#0x03
+   002C 3D                  153 	addc	a,r5
+   002D FD                  154 	mov	r5,a
+   002E E4                  155 	clr	a
+   002F 3E                  156 	addc	a,r6
+   0030 FE                  157 	mov	r6,a
+   0031 E4                  158 	clr	a
+   0032 3F                  159 	addc	a,r7
+   0033 FF                  160 	mov	r7,a
+   0034 78r00               161 	mov	r0,#__divulong_PARM_2
+   0036 74 FF               162 	mov	a,#0xFF
+   0038 F2                  163 	movx	@r0,a
+   0039 08                  164 	inc	r0
+   003A 74 07               165 	mov	a,#0x07
+   003C F2                  166 	movx	@r0,a
+   003D 08                  167 	inc	r0
+   003E E4                  168 	clr	a
+   003F F2                  169 	movx	@r0,a
+   0040 08                  170 	inc	r0
+   0041 F2                  171 	movx	@r0,a
+   0042 8C 82               172 	mov	dpl,r4
+   0044 8D 83               173 	mov	dph,r5
+   0046 8E F0               174 	mov	b,r6
+   0048 EF                  175 	mov	a,r7
+   0049 12s00r00            176 	lcall	__divulong
+                    004C    177 	C$millivolts.c$10$1$1 ==.
+                    004C    178 	XG$adcReadVddMillivolts$0$0 ==.
+   004C 22                  179 	ret
+                            180 ;------------------------------------------------------------
+                            181 ;Allocation info for local variables in function 'adcSetMillivoltCalibration'
+                            182 ;------------------------------------------------------------
+                    004D    183 	G$adcSetMillivoltCalibration$0$0 ==.
+                    004D    184 	C$millivolts.c$12$1$1 ==.
+                            185 ;	libraries/src/adc/millivolts.c:12: void adcSetMillivoltCalibration(uint16 vddMillivolts)
+                            186 ;	-----------------------------------------
+                            187 ;	 function adcSetMillivoltCalibration
+                            188 ;	-----------------------------------------
+   004D                     189 _adcSetMillivoltCalibration:
+   004D AE 82               190 	mov	r6,dpl
+   004F AF 83               191 	mov	r7,dph
+                    0051    192 	C$millivolts.c$14$1$1 ==.
+                            193 ;	libraries/src/adc/millivolts.c:14: millivoltCalibration = vddMillivolts;
+   0051 78r00               194 	mov	r0,#_millivoltCalibration
+   0053 EE                  195 	mov	a,r6
+   0054 F2                  196 	movx	@r0,a
+   0055 08                  197 	inc	r0
+   0056 EF                  198 	mov	a,r7
+   0057 F2                  199 	movx	@r0,a
+                    0058    200 	C$millivolts.c$15$1$1 ==.
+                    0058    201 	XG$adcSetMillivoltCalibration$0$0 ==.
+   0058 22                  202 	ret
+                            203 ;------------------------------------------------------------
+                            204 ;Allocation info for local variables in function 'adcConvertToMillivolts'
+                            205 ;------------------------------------------------------------
+                    0059    206 	G$adcConvertToMillivolts$0$0 ==.
+                    0059    207 	C$millivolts.c$17$1$1 ==.
+                            208 ;	libraries/src/adc/millivolts.c:17: int16 adcConvertToMillivolts(int16 adcResult)
+                            209 ;	-----------------------------------------
+                            210 ;	 function adcConvertToMillivolts
+                            211 ;	-----------------------------------------
+   0059                     212 _adcConvertToMillivolts:
+   0059 AE 82               213 	mov	r6,dpl
+                    005B    214 	C$millivolts.c$19$1$1 ==.
+                            215 ;	libraries/src/adc/millivolts.c:19: return ((int32)adcResult * millivoltCalibration + 1023) / 2047;
+   005B E5 83               216 	mov	a,dph
+   005D FF                  217 	mov	r7,a
+   005E 33                  218 	rlc	a
+   005F 95 E0               219 	subb	a,acc
+   0061 FD                  220 	mov	r5,a
+   0062 FC                  221 	mov	r4,a
+   0063 78r00               222 	mov	r0,#_millivoltCalibration
+   0065 79r00               223 	mov	r1,#__mullong_PARM_2
+   0067 E2                  224 	movx	a,@r0
+   0068 F3                  225 	movx	@r1,a
+   0069 08                  226 	inc	r0
+   006A E2                  227 	movx	a,@r0
+   006B 09                  228 	inc	r1
+   006C F3                  229 	movx	@r1,a
+   006D 09                  230 	inc	r1
+   006E E4                  231 	clr	a
+   006F F3                  232 	movx	@r1,a
+   0070 09                  233 	inc	r1
+   0071 F3                  234 	movx	@r1,a
+   0072 8E 82               235 	mov	dpl,r6
+   0074 8F 83               236 	mov	dph,r7
+   0076 8D F0               237 	mov	b,r5
+   0078 EC                  238 	mov	a,r4
+   0079 12s00r00            239 	lcall	__mullong
+   007C AC 82               240 	mov	r4,dpl
+   007E AD 83               241 	mov	r5,dph
+   0080 AE F0               242 	mov	r6,b
+   0082 FF                  243 	mov	r7,a
+   0083 74 FF               244 	mov	a,#0xFF
+   0085 2C                  245 	add	a,r4
+   0086 FC                  246 	mov	r4,a
+   0087 74 03               247 	mov	a,#0x03
+   0089 3D                  248 	addc	a,r5
+   008A FD                  249 	mov	r5,a
+   008B E4                  250 	clr	a
+   008C 3E                  251 	addc	a,r6
+   008D FE                  252 	mov	r6,a
+   008E E4                  253 	clr	a
+   008F 3F                  254 	addc	a,r7
+   0090 FF                  255 	mov	r7,a
+   0091 78r00               256 	mov	r0,#__divslong_PARM_2
+   0093 74 FF               257 	mov	a,#0xFF
+   0095 F2                  258 	movx	@r0,a
+   0096 08                  259 	inc	r0
+   0097 74 07               260 	mov	a,#0x07
+   0099 F2                  261 	movx	@r0,a
+   009A 08                  262 	inc	r0
+   009B E4                  263 	clr	a
+   009C F2                  264 	movx	@r0,a
+   009D 08                  265 	inc	r0
+   009E F2                  266 	movx	@r0,a
+   009F 8C 82               267 	mov	dpl,r4
+   00A1 8D 83               268 	mov	dph,r5
+   00A3 8E F0               269 	mov	b,r6
+   00A5 EF                  270 	mov	a,r7
+   00A6 12s00r00            271 	lcall	__divslong
+                    00A9    272 	C$millivolts.c$20$1$1 ==.
+                    00A9    273 	XG$adcConvertToMillivolts$0$0 ==.
+   00A9 22                  274 	ret
+                            275 	.area CSEG    (CODE)
+                            276 	.area CONST   (CODE)
+                            277 	.area XINIT   (CODE)
+                            278 	.area CABS    (ABS,CODE)

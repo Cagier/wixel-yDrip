@@ -1,0 +1,35 @@
+-muwx
+-i apps/ydrip/ydrip.ihx
+-M
+-Y
+-I 0x0100
+-X 0x0f00
+-C 0x7400
+-y
+-b HOME = 0x0400
+-b XSEG = 0xf000
+-b PSEG = 0xf000
+-b ISEG = 0x0000
+-b BSEG = 0x0000
+-k C:\Program Files\SDCC\bin\..\lib\medium
+-l libraries/lib/usb_cdc_acm.lib
+-l libraries/lib/usb.lib
+-l libraries/lib/radio_mac.lib
+-l libraries/lib/radio_queue.lib
+-l libraries/lib/radio_registers.lib
+-l libraries/lib/wixel.lib
+-l libraries/lib/dma.lib
+-l libraries/lib/uart.lib
+-l libraries/lib/gpio.lib
+-l libraries/lib/random.lib
+-l libraries/lib/adc.lib
+-l libraries/lib/aes.lib
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+libraries/xpage/xpage.rel
+apps/ydrip/ydrip.rel
+
+-e

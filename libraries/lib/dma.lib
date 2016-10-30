@@ -1,0 +1,1044 @@
+<SDCCLIB>
+
+<INDEX>
+      5409
+<MODULE>
+dma 11
+Fdma$CY$0$0
+Fdma$T1CC1$0$0
+Fdma$PICTL$0$0
+Fdma$URX0IE$0$0
+Fdma$T1CC2$0$0
+Fdma$T3CC0$0$0
+Fdma$P1IEN$0$0
+Fdma$I2SCLKF0$0$0
+Fdma$MDMCFG0$0$0
+Fdma$FREQ0$0$0
+Fdma$WDTIF$0$0
+Fdma$URX1IE$0$0
+Fdma$URX0IF$0$0
+Fdma$T4CC0$0$0
+Fdma$T3CC1$0$0
+Fdma$WDCTL$0$0
+Fdma$I2SCLKF1$0$0
+Fdma$MDMCFG1$0$0
+Fdma$FREQ1$0$0
+Fdma$URX1IF$0$0
+Fdma$P0DIR$0$0
+Fdma$T4CC1$0$0
+Fdma$USBF0$0$0
+Fdma$USBPOW$0$0
+Fdma$I2SCLKF2$0$0
+Fdma$MCSM0$0$0
+Fdma$MDMCFG2$0$0
+Fdma$FREQ2$0$0
+Fdma$UTX0IF$0$0
+Fdma$P1DIR$0$0
+Fdma$P0$0$0
+Fdma$USBF1$0$0
+Fdma$MCSM1$0$0
+Fdma$MDMCFG3$0$0
+Fdma$_IRCON25$0$0
+Fdma$UTX1IF$0$0
+Fdma$OVFIM$0$0
+Fdma$P2DIR$0$0
+Fdma$U0GCR$0$0
+Fdma$P1$0$0
+Fdma$USBF2$0$0
+Fdma$USBINDEX$0$0
+Fdma$MCSM2$0$0
+Fdma$MDMCFG4$0$0
+Fdma$U1ACTIVE$0$0
+Fdma$_IRCON26$0$0
+Fdma$_TCON_0$0$0
+Fdma$U1GCR$0$0
+Fdma$B$0$0
+Fdma$P2$0$0
+Fdma$USBF3$0$0
+Fdma$U1RX_BYTE$0$0
+Fdma$_IRCON27$0$0
+Fdma$S0CON$0$0
+Fdma$SP$0$0
+Fdma$USBF4$0$0
+Fdma$_TCON_2$0$0
+Fdma$P0SEL$0$0
+Fdma$WORIRQ$0$0
+Fdma$S1CON$0$0
+Fdma$USBF5$0$0
+Fdma$USBADDR$0$0
+Fdma$U1TX_BYTE$0$0
+Fdma$OV$0$0
+Fdma$P1SEL$0$0
+Fdma$_TCON_4$0$0
+Fdma$P2SEL$0$0
+Fdma$RFIF$0$0
+Fdma$ACC$0$0
+Fdma$P0INP$0$0
+Fdma$PA_TABLE0$0$0
+Fdma$FOCCFG$0$0
+Fdma$_TCON_6$0$0
+Fdma$ADC$0$0
+Fdma$P1INP$0$0
+Fdma$T1CTL$0$0
+Fdma$P2INP$0$0
+Fdma$FCTL$0$0
+Fdma$FADDRH$0$0
+Fdma$T2CTL$0$0
+Fdma$T3CTL$0$0
+Fdma$DEVIATN$0$0
+Fdma$T4CTL$0$0
+Fdma$T3CNT$0$0
+Fdma$RNDH$0$0
+Fdma$IEN0$0$0
+Fdma$DPH0$0$0
+Fdma$SYNC0$0$0
+Fdma$T4CNT$0$0
+Fdma$IEN1$0$0
+Fdma$FADDRL$0$0
+Fdma$U0CSR$0$0
+Fdma$DPH1$0$0
+Fdma$I2SCFG0$0$0
+Fdma$SYNC1$0$0
+Fdma$P0IE$0$0
+Fdma$U1CSR$0$0
+Fdma$IEN2$0$0
+Fdma$RFIM$0$0
+Fdma$I2SDATH$0$0
+Fdma$I2SCFG1$0$0
+Fdma$U1ERR$0$0
+Fdma$_TIMIF7$0$0
+Fdma$P0IF$0$0
+Fdma$P0_0$0$0
+Fdma$U0UCR$0$0
+Fdma$ENDIAN$0$0
+Fdma$TEST0$0$0
+Fdma$P1IF$0$0
+Fdma$P$0$0
+Fdma$_IRCON6$0$0
+Fdma$P1_0$0$0
+Fdma$P0_1$0$0
+Fdma$U1UCR$0$0
+Fdma$RNDL$0$0
+Fdma$PCON$0$0
+Fdma$DPL0$0$0
+Fdma$USBCSIH$0$0
+Fdma$TEST1$0$0
+Fdma$U1FE$0$0
+Fdma$B_0$0$0
+Fdma$P2IF$0$0
+Fdma$T3CH0IF$0$0
+Fdma$P2_0$0$0
+Fdma$P1_1$0$0
+Fdma$P0_2$0$0
+Fdma$DPL1$0$0
+Fdma$TEST2$0$0
+Fdma$B_1$0$0
+Fdma$T4CH0IF$0$0
+Fdma$T3CH1IF$0$0
+Fdma$P2_1$0$0
+Fdma$P1_2$0$0
+Fdma$P0_3$0$0
+Fdma$DMAARM$0$0
+Fdma$I2SDATL$0$0
+Fdma$PKTSTATUS$0$0
+Fdma$B_2$0$0
+Fdma$T4CH1IF$0$0
+Fdma$T1IE$0$0
+Fdma$P2_2$0$0
+Fdma$_SOCON2$0$0
+Fdma$P1_3$0$0
+Fdma$P0_4$0$0
+Fdma$PKTCTRL0$0$0
+Fdma$B_3$0$0
+Fdma$T1IF$0$0
+Fdma$T2IE$0$0
+Fdma$P2_3$0$0
+Fdma$_SOCON3$0$0
+Fdma$P1_4$0$0
+Fdma$P0_5$0$0
+Fdma$TCON$0$0
+Fdma$USBCSIL$0$0
+Fdma$PKTCTRL1$0$0
+Fdma$B_4$0$0
+Fdma$T2IF$0$0
+Fdma$T3IE$0$0
+Fdma$STIE$0$0
+Fdma$P2_4$0$0
+Fdma$_SOCON4$0$0
+Fdma$P1_5$0$0
+Fdma$P0_6$0$0
+Fdma$B_5$0$0
+Fdma$ACC_0$0$0
+Fdma$STIF$0$0
+Fdma$T3IF$0$0
+Fdma$T4IE$0$0
+Fdma$ADCIE$0$0
+Fdma$P2_5$0$0
+Fdma$_SOCON5$0$0
+Fdma$P1_6$0$0
+Fdma$P0_7$0$0
+Fdma$USBCNTH$0$0
+Fdma$USBCSOH$0$0
+Fdma$USBFRMH$0$0
+Fdma$B_6$0$0
+Fdma$ACC_1$0$0
+Fdma$T4IF$0$0
+Fdma$P2_6$0$0
+Fdma$_SOCON6$0$0
+Fdma$P1_7$0$0
+Fdma$ADCIF$0$0
+Fdma$PERCFG$0$0
+Fdma$FWDATA$0$0
+Fdma$WORTIME0$0$0
+Fdma$IOCFG0$0$0
+Fdma$B_7$0$0
+Fdma$ACC_2$0$0
+Fdma$P2_7$0$0
+Fdma$_SOCON7$0$0
+Fdma$WORTIME1$0$0
+Fdma$USBMAXI$0$0
+Fdma$IOCFG1$0$0
+Fdma$FSCAL0$0$0
+Fdma$ACC_3$0$0
+Fdma$FREQEST$0$0
+Fdma$IOCFG2$0$0
+Fdma$FSCAL1$0$0
+Fdma$CHANNR$0$0
+Fdma$ACC_4$0$0
+Fdma$DMAREQ$0$0
+Fdma$DMA0CFGH$0$0
+Fdma$CLKCON$0$0
+Fdma$USBCNTL$0$0
+Fdma$USBCSOL$0$0
+Fdma$USBFRML$0$0
+Fdma$USBCIE$0$0
+Fdma$FSCAL2$0$0
+Fdma$ACC_5$0$0
+Fdma$T1CCTL0$0$0
+Fdma$DMA1CFGH$0$0
+Fdma$USBCIF$0$0
+Fdma$FSCAL3$0$0
+Fdma$ACC_6$0$0
+Fdma$RFTXRXIE$0$0
+Fdma$T1CCTL1$0$0
+Fdma$RFD$0$0
+Fdma$U1RE$0$0
+Fdma$ACC_7$0$0
+Fdma$RFTXRXIF$0$0
+Fdma$T1CCTL2$0$0
+Fdma$T3CCTL0$0$0
+Fdma$T2CT$0$0
+Fdma$FSCTRL0$0$0
+Fdma$T4CCTL0$0$0
+Fdma$DMA0CFGL$0$0
+Fdma$DMAIRQ$0$0
+Fdma$T3CCTL1$0$0
+Fdma$USBMAXO$0$0
+Fdma$FREND0$0$0
+Fdma$FSCTRL1$0$0
+Fdma$T4CCTL1$0$0
+Fdma$RFST$0$0
+Fdma$DMA1CFGL$0$0
+Fdma$FREND1$0$0
+Fdma$DMAIE$0$0
+Fdma$USBIIE$0$0
+Fdma$RSSI$0$0
+Fdma$U1SLAVE$0$0
+Fdma$T3OVFIF$0$0
+Fdma$DMAIF$0$0
+Fdma$_IEN06$0$0
+Fdma$FADDR$0$0
+Fdma$U0BAUD$0$0
+Fdma$USBIIF$0$0
+Fdma$T4OVFIF$0$0
+Fdma$_IEN16$0$0
+Fdma$U1BAUD$0$0
+Fdma$_IEN17$0$0
+Fdma$T1CC0H$0$0
+Fdma$ENCDI$0$0
+Fdma$MARCSTATE$0$0
+Fdma$AC$0$0
+Fdma$ENCIE$0$0
+Fdma$T1CC1H$0$0
+Fdma$BSCFG$0$0
+Fdma$T1CC2H$0$0
+Fdma$LQI$0$0
+Fdma$VERSION$0$0
+Fdma$EA$0$0
+Fdma$U0DBUF$0$0
+Fdma$USBOIE$0$0
+Fdma$VCO_VC_DAC$0$0
+Fdma$PARTNUM$0$0
+Fdma$U1DBUF$0$0
+Fdma$T1CC0L$0$0
+Fdma$DPS$0$0
+Fdma$USBOIF$0$0
+Fdma$T1CC1L$0$0
+Fdma$MEMCTR$0$0
+Fdma$T2PR$0$0
+Fdma$T1CC2L$0$0
+Fdma$ENCDO$0$0
+Fdma$IP0$0$0
+Fdma$I2SSTAT$0$0
+Fdma$I2SWCNT$0$0
+Fdma$IP1$0$0
+Fdma$MPAGE$0$0
+Fdma$U1MODE$0$0
+Fdma$ENCCS$0$0
+Fdma$IRCON2$0$0
+Fdma$WORCTRL$0$0
+Fdma$PKTLEN$0$0
+Fdma$AGCCTRL0$0$0
+Fdma$ADCH$0$0
+Fdma$AGCCTRL1$0$0
+Fdma$FWT$0$0
+Fdma$AGCCTRL2$0$0
+Fdma$DMA0CFG$0$0
+Fdma$T1CNTH$0$0
+Fdma$DMA1CFG$0$0
+Fdma$ENCIF_0$0$0
+Fdma$ADCL$0$0
+Fdma$RS0$0$0
+Fdma$ENCIF_1$0$0
+Fdma$F0$0$0
+Fdma$RS1$0$0
+Fdma$T1CNTL$0$0
+Fdma$P0IFG$0$0
+Fdma$F1$0$0
+Fdma$WOREVT0$0$0
+Fdma$P1IFG$0$0
+Fdma$ADCCFG$0$0
+Fdma$WOREVT1$0$0
+Fdma$P2IFG$0$0
+Fdma$TIMIF$0$0
+Fdma$SLEEP$0$0
+Fdma$ADCCON1$0$0
+Fdma$PSW$0$0
+Fdma$ADCCON2$0$0
+.__.ABS.
+Fdma$ADDR$0$0
+Fdma$T1CC0$0$0
+Fdma$IRCON$0$0
+Fdma$ADCCON3$0$0
+_dmaConfig
+G$dmaConfig$0$0
+_dmaInit
+C$dma.c$7$0$0
+XG$dmaInit$0$0
+C$dma.c$9$1$1
+G$dmaInit$0$0
+C$dma.c$10$1$1
+A$dma$745
+A$dma$746
+A$dma$749
+</MODULE>
+
+</INDEX>
+
+<FILES>
+
+<FILE>
+dma
+<REL>
+;!FILE libraries/src/dma/dma.asm
+XH
+H 1B areas 147 global symbols
+M dma
+O -mmcs51 --model-medium
+S Fdma$CY$0$0 Def00D7
+S Fdma$T1CC1$0$0 DefFFFFDDDC
+S Fdma$PICTL$0$0 Def008C
+S Fdma$URX0IE$0$0 Def00AA
+S Fdma$T1CC2$0$0 DefFFFFDFDE
+S Fdma$T3CC0$0$0 Def00CD
+S Fdma$P1IEN$0$0 Def008D
+S Fdma$I2SCLKF0$0$0 DefDF46
+S Fdma$MDMCFG0$0$0 DefDF10
+S Fdma$FREQ0$0$0 DefDF0B
+S Fdma$WDTIF$0$0 Def00EC
+S Fdma$URX1IE$0$0 Def00AB
+S Fdma$URX0IF$0$0 Def008B
+S Fdma$T4CC0$0$0 Def00ED
+S Fdma$T3CC1$0$0 Def00CF
+S Fdma$WDCTL$0$0 Def00C9
+S Fdma$I2SCLKF1$0$0 DefDF47
+S Fdma$MDMCFG1$0$0 DefDF0F
+S Fdma$FREQ1$0$0 DefDF0A
+S Fdma$URX1IF$0$0 Def008F
+S Fdma$P0DIR$0$0 Def00FD
+S Fdma$T4CC1$0$0 Def00EF
+S Fdma$USBF0$0$0 DefDE20
+S Fdma$USBPOW$0$0 DefDE01
+S Fdma$I2SCLKF2$0$0 DefDF48
+S Fdma$MCSM0$0$0 DefDF14
+S Fdma$MDMCFG2$0$0 DefDF0E
+S Fdma$FREQ2$0$0 DefDF09
+S Fdma$UTX0IF$0$0 Def00E9
+S Fdma$P1DIR$0$0 Def00FE
+S Fdma$P0$0$0 Def0080
+S Fdma$USBF1$0$0 DefDE22
+S Fdma$MCSM1$0$0 DefDF13
+S Fdma$MDMCFG3$0$0 DefDF0D
+S Fdma$_IRCON25$0$0 Def00ED
+S Fdma$UTX1IF$0$0 Def00EA
+S Fdma$OVFIM$0$0 Def00DE
+S Fdma$P2DIR$0$0 Def00FF
+S Fdma$U0GCR$0$0 Def00C5
+S Fdma$P1$0$0 Def0090
+S Fdma$USBF2$0$0 DefDE24
+S Fdma$USBINDEX$0$0 DefDE0E
+S Fdma$MCSM2$0$0 DefDF12
+S Fdma$MDMCFG4$0$0 DefDF0C
+S Fdma$U1ACTIVE$0$0 Def00F8
+S Fdma$_IRCON26$0$0 Def00EE
+S Fdma$_TCON_0$0$0 Def0088
+S Fdma$U1GCR$0$0 Def00FC
+S Fdma$B$0$0 Def00F0
+S Fdma$P2$0$0 Def00A0
+S Fdma$USBF3$0$0 DefDE26
+S Fdma$U1RX_BYTE$0$0 Def00FA
+S Fdma$_IRCON27$0$0 Def00EF
+S Fdma$S0CON$0$0 Def0098
+S Fdma$SP$0$0 Def0081
+S Fdma$USBF4$0$0 DefDE28
+S Fdma$_TCON_2$0$0 Def008A
+S Fdma$P0SEL$0$0 Def00F3
+S Fdma$WORIRQ$0$0 Def00A1
+S Fdma$S1CON$0$0 Def009B
+S Fdma$USBF5$0$0 DefDE2A
+S Fdma$USBADDR$0$0 DefDE00
+S Fdma$U1TX_BYTE$0$0 Def00F9
+S Fdma$OV$0$0 Def00D2
+S Fdma$P1SEL$0$0 Def00F4
+S Fdma$_TCON_4$0$0 Def008C
+S Fdma$P2SEL$0$0 Def00F5
+S Fdma$RFIF$0$0 Def00E9
+S Fdma$ACC$0$0 Def00E0
+S Fdma$P0INP$0$0 Def008F
+S Fdma$PA_TABLE0$0$0 DefDF2E
+S Fdma$FOCCFG$0$0 DefDF15
+S Fdma$_TCON_6$0$0 Def008E
+S Fdma$ADC$0$0 DefFFFFBBBA
+S Fdma$P1INP$0$0 Def00F6
+S Fdma$T1CTL$0$0 Def00E4
+S Fdma$P2INP$0$0 Def00F7
+S Fdma$FCTL$0$0 Def00AE
+S Fdma$FADDRH$0$0 Def00AD
+S Fdma$T2CTL$0$0 Def009E
+S Fdma$T3CTL$0$0 Def00CB
+S Fdma$DEVIATN$0$0 DefDF11
+S Fdma$T4CTL$0$0 Def00EB
+S Fdma$T3CNT$0$0 Def00CA
+S Fdma$RNDH$0$0 Def00BD
+S Fdma$IEN0$0$0 Def00A8
+S Fdma$DPH0$0$0 Def0083
+S Fdma$SYNC0$0$0 DefDF01
+S Fdma$T4CNT$0$0 Def00EA
+S Fdma$IEN1$0$0 Def00B8
+S Fdma$FADDRL$0$0 Def00AC
+S Fdma$U0CSR$0$0 Def0086
+S Fdma$DPH1$0$0 Def0085
+S Fdma$I2SCFG0$0$0 DefDF40
+S Fdma$SYNC1$0$0 DefDF00
+S Fdma$P0IE$0$0 Def00BD
+S Fdma$U1CSR$0$0 Def00F8
+S Fdma$IEN2$0$0 Def009A
+S Fdma$RFIM$0$0 Def0091
+S Fdma$I2SDATH$0$0 DefDF43
+S Fdma$I2SCFG1$0$0 DefDF41
+S Fdma$U1ERR$0$0 Def00FB
+S Fdma$_TIMIF7$0$0 Def00DF
+S Fdma$P0IF$0$0 Def00C5
+S Fdma$P0_0$0$0 Def0080
+S Fdma$U0UCR$0$0 Def00C4
+S Fdma$ENDIAN$0$0 Def0095
+S Fdma$TEST0$0$0 DefDF25
+S Fdma$P1IF$0$0 Def00EB
+S Fdma$P$0$0 Def00D0
+S Fdma$_IRCON6$0$0 Def00C6
+S Fdma$P1_0$0$0 Def0090
+S Fdma$P0_1$0$0 Def0081
+S Fdma$U1UCR$0$0 Def00FB
+S Fdma$RNDL$0$0 Def00BC
+S Fdma$PCON$0$0 Def0087
+S Fdma$DPL0$0$0 Def0082
+S Fdma$USBCSIH$0$0 DefDE12
+S Fdma$TEST1$0$0 DefDF24
+S Fdma$U1FE$0$0 Def00FC
+S Fdma$B_0$0$0 Def00F0
+S Fdma$P2IF$0$0 Def00E8
+S Fdma$T3CH0IF$0$0 Def00D9
+S Fdma$P2_0$0$0 Def00A0
+S Fdma$P1_1$0$0 Def0091
+S Fdma$P0_2$0$0 Def0082
+S Fdma$DPL1$0$0 Def0084
+S Fdma$TEST2$0$0 DefDF23
+S Fdma$B_1$0$0 Def00F1
+S Fdma$T4CH0IF$0$0 Def00DC
+S Fdma$T3CH1IF$0$0 Def00DA
+S Fdma$P2_1$0$0 Def00A1
+S Fdma$P1_2$0$0 Def0092
+S Fdma$P0_3$0$0 Def0083
+S Fdma$DMAARM$0$0 Def00D6
+S Fdma$I2SDATL$0$0 DefDF42
+S Fdma$PKTSTATUS$0$0 DefDF3C
+S Fdma$B_2$0$0 Def00F2
+S Fdma$T4CH1IF$0$0 Def00DD
+S Fdma$T1IE$0$0 Def00B9
+S Fdma$P2_2$0$0 Def00A2
+S Fdma$_SOCON2$0$0 Def009A
+S Fdma$P1_3$0$0 Def0093
+S Fdma$P0_4$0$0 Def0084
+S Fdma$PKTCTRL0$0$0 DefDF04
+S Fdma$B_3$0$0 Def00F3
+S Fdma$T1IF$0$0 Def00C1
+S Fdma$T2IE$0$0 Def00BA
+S Fdma$P2_3$0$0 Def00A3
+S Fdma$_SOCON3$0$0 Def009B
+S Fdma$P1_4$0$0 Def0094
+S Fdma$P0_5$0$0 Def0085
+S Fdma$TCON$0$0 Def0088
+S Fdma$USBCSIL$0$0 DefDE11
+S Fdma$PKTCTRL1$0$0 DefDF03
+S Fdma$B_4$0$0 Def00F4
+S Fdma$T2IF$0$0 Def00C2
+S Fdma$T3IE$0$0 Def00BB
+S Fdma$STIE$0$0 Def00AD
+S Fdma$P2_4$0$0 Def00A4
+S Fdma$_SOCON4$0$0 Def009C
+S Fdma$P1_5$0$0 Def0095
+S Fdma$P0_6$0$0 Def0086
+S Fdma$B_5$0$0 Def00F5
+S Fdma$ACC_0$0$0 Def00E0
+S Fdma$STIF$0$0 Def00C7
+S Fdma$T3IF$0$0 Def00C3
+S Fdma$T4IE$0$0 Def00BC
+S Fdma$ADCIE$0$0 Def00A9
+S Fdma$P2_5$0$0 Def00A5
+S Fdma$_SOCON5$0$0 Def009D
+S Fdma$P1_6$0$0 Def0096
+S Fdma$P0_7$0$0 Def0087
+S Fdma$USBCNTH$0$0 DefDE17
+S Fdma$USBCSOH$0$0 DefDE15
+S Fdma$USBFRMH$0$0 DefDE0D
+S Fdma$B_6$0$0 Def00F6
+S Fdma$ACC_1$0$0 Def00E1
+S Fdma$T4IF$0$0 Def00C4
+S Fdma$P2_6$0$0 Def00A6
+S Fdma$_SOCON6$0$0 Def009E
+S Fdma$P1_7$0$0 Def0097
+S Fdma$ADCIF$0$0 Def008D
+S Fdma$PERCFG$0$0 Def00F1
+S Fdma$FWDATA$0$0 Def00AF
+S Fdma$WORTIME0$0$0 Def00A5
+S Fdma$IOCFG0$0$0 DefDF31
+S Fdma$B_7$0$0 Def00F7
+S Fdma$ACC_2$0$0 Def00E2
+S Fdma$P2_7$0$0 Def00A7
+S Fdma$_SOCON7$0$0 Def009F
+S Fdma$WORTIME1$0$0 Def00A6
+S Fdma$USBMAXI$0$0 DefDE10
+S Fdma$IOCFG1$0$0 DefDF30
+S Fdma$FSCAL0$0$0 DefDF1F
+S Fdma$ACC_3$0$0 Def00E3
+S Fdma$FREQEST$0$0 DefDF38
+S Fdma$IOCFG2$0$0 DefDF2F
+S Fdma$FSCAL1$0$0 DefDF1E
+S Fdma$CHANNR$0$0 DefDF06
+S Fdma$ACC_4$0$0 Def00E4
+S Fdma$DMAREQ$0$0 Def00D7
+S Fdma$DMA0CFGH$0$0 Def00D5
+S Fdma$CLKCON$0$0 Def00C6
+S Fdma$USBCNTL$0$0 DefDE16
+S Fdma$USBCSOL$0$0 DefDE14
+S Fdma$USBFRML$0$0 DefDE0C
+S Fdma$USBCIE$0$0 DefDE0B
+S Fdma$FSCAL2$0$0 DefDF1D
+S Fdma$ACC_5$0$0 Def00E5
+S Fdma$T1CCTL0$0$0 Def00E5
+S Fdma$DMA1CFGH$0$0 Def00D3
+S Fdma$USBCIF$0$0 DefDE06
+S Fdma$FSCAL3$0$0 DefDF1C
+S Fdma$ACC_6$0$0 Def00E6
+S Fdma$RFTXRXIE$0$0 Def00A8
+S Fdma$T1CCTL1$0$0 Def00E6
+S Fdma$RFD$0$0 Def00D9
+S Fdma$U1RE$0$0 Def00FE
+S Fdma$ACC_7$0$0 Def00E7
+S Fdma$RFTXRXIF$0$0 Def0089
+S Fdma$T1CCTL2$0$0 Def00E7
+S Fdma$T3CCTL0$0$0 Def00CC
+S Fdma$T2CT$0$0 Def009C
+S Fdma$FSCTRL0$0$0 DefDF08
+S Fdma$T4CCTL0$0$0 Def00EC
+S Fdma$DMA0CFGL$0$0 Def00D4
+S Fdma$DMAIRQ$0$0 Def00D1
+S Fdma$T3CCTL1$0$0 Def00CE
+S Fdma$USBMAXO$0$0 DefDE13
+S Fdma$FREND0$0$0 DefDF1B
+S Fdma$FSCTRL1$0$0 DefDF07
+S Fdma$T4CCTL1$0$0 Def00EE
+S Fdma$RFST$0$0 Def00E1
+S Fdma$DMA1CFGL$0$0 Def00D2
+S Fdma$FREND1$0$0 DefDF1A
+S Fdma$DMAIE$0$0 Def00B8
+S Fdma$USBIIE$0$0 DefDE07
+S Fdma$RSSI$0$0 DefDF3A
+S Fdma$U1SLAVE$0$0 Def00FD
+S Fdma$T3OVFIF$0$0 Def00D8
+S Fdma$DMAIF$0$0 Def00C0
+S Fdma$_IEN06$0$0 Def00AE
+S Fdma$FADDR$0$0 DefFFFFADAC
+S Fdma$U0BAUD$0$0 Def00C2
+S Fdma$USBIIF$0$0 DefDE02
+S Fdma$T4OVFIF$0$0 Def00DB
+S Fdma$_IEN16$0$0 Def00BE
+S Fdma$U1BAUD$0$0 Def00FA
+S Fdma$_IEN17$0$0 Def00BF
+S Fdma$T1CC0H$0$0 Def00DB
+S Fdma$ENCDI$0$0 Def00B1
+S Fdma$MARCSTATE$0$0 DefDF3B
+S Fdma$AC$0$0 Def00D6
+S Fdma$ENCIE$0$0 Def00AC
+S Fdma$T1CC1H$0$0 Def00DD
+S Fdma$BSCFG$0$0 DefDF16
+S Fdma$T1CC2H$0$0 Def00DF
+S Fdma$LQI$0$0 DefDF39
+S Fdma$VERSION$0$0 DefDF37
+S Fdma$EA$0$0 Def00AF
+S Fdma$U0DBUF$0$0 Def00C1
+S Fdma$USBOIE$0$0 DefDE09
+S Fdma$VCO_VC_DAC$0$0 DefDF3D
+S Fdma$PARTNUM$0$0 DefDF36
+S Fdma$U1DBUF$0$0 Def00F9
+S Fdma$T1CC0L$0$0 Def00DA
+S Fdma$DPS$0$0 Def0092
+S Fdma$USBOIF$0$0 DefDE04
+S Fdma$T1CC1L$0$0 Def00DC
+S Fdma$MEMCTR$0$0 Def00C7
+S Fdma$T2PR$0$0 Def009D
+S Fdma$T1CC2L$0$0 Def00DE
+S Fdma$ENCDO$0$0 Def00B2
+S Fdma$IP0$0$0 Def00A9
+S Fdma$I2SSTAT$0$0 DefDF45
+S Fdma$I2SWCNT$0$0 DefDF44
+S Fdma$IP1$0$0 Def00B9
+S Fdma$MPAGE$0$0 Def0093
+S Fdma$U1MODE$0$0 Def00FF
+S Fdma$ENCCS$0$0 Def00B3
+S Fdma$IRCON2$0$0 Def00E8
+S Fdma$WORCTRL$0$0 Def00A2
+S Fdma$PKTLEN$0$0 DefDF02
+S Fdma$AGCCTRL0$0$0 DefDF19
+S Fdma$ADCH$0$0 Def00BB
+S Fdma$AGCCTRL1$0$0 DefDF18
+S Fdma$FWT$0$0 Def00AB
+S Fdma$AGCCTRL2$0$0 DefDF17
+S Fdma$DMA0CFG$0$0 DefFFFFD5D4
+S Fdma$T1CNTH$0$0 Def00E3
+S Fdma$DMA1CFG$0$0 DefFFFFD3D2
+S Fdma$ENCIF_0$0$0 Def0098
+S Fdma$ADCL$0$0 Def00BA
+S Fdma$RS0$0$0 Def00D3
+S Fdma$ENCIF_1$0$0 Def0099
+S Fdma$F0$0$0 Def00D5
+S Fdma$RS1$0$0 Def00D4
+S Fdma$T1CNTL$0$0 Def00E2
+S Fdma$P0IFG$0$0 Def0089
+S Fdma$F1$0$0 Def00D1
+S Fdma$WOREVT0$0$0 Def00A3
+S Fdma$P1IFG$0$0 Def008A
+S Fdma$ADCCFG$0$0 Def00F2
+S Fdma$WOREVT1$0$0 Def00A4
+S Fdma$P2IFG$0$0 Def008B
+S Fdma$TIMIF$0$0 Def00D8
+S Fdma$SLEEP$0$0 Def00BE
+S Fdma$ADCCON1$0$0 Def00B4
+S Fdma$PSW$0$0 Def00D0
+S Fdma$ADCCON2$0$0 Def00B5
+S .__.ABS. Def0000
+S Fdma$ADDR$0$0 DefDF05
+S Fdma$T1CC0$0$0 DefFFFFDBDA
+S Fdma$IRCON$0$0 Def00C0
+S Fdma$ADCCON3$0$0 Def00B6
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A OSEG size 0 flags 4 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 0 flags 80 addr 0
+A PSEG size 0 flags 50 addr 0
+A XSEG size 20 flags 40 addr 0
+S _dmaConfig Def0000
+S G$dmaConfig$0$0 Def0000
+A XABS size 0 flags 48 addr 0
+A XISEG size 0 flags 40 addr 0
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size 7 flags 20 addr 0
+S _dmaInit Def0000
+S C$dma.c$7$0$0 Def0000
+S XG$dmaInit$0$0 Def0006
+S C$dma.c$9$1$1 Def0000
+S G$dmaInit$0$0 Def0000
+S C$dma.c$10$1$1 Def0006
+S A$dma$745 Def0000
+S A$dma$746 Def0003
+S A$dma$749 Def0006
+A CONST size 0 flags 20 addr 0
+A XINIT size 0 flags 20 addr 0
+A CABS size 0 flags 28 addr 0
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00
+R 00 00 00 04
+T 00 00
+R 00 00 00 0B
+T 00 00
+R 00 00 00 0B
+T 00 00
+R 00 00 00 17
+T 00 00 75 D2 00 00 00 75 D3 00 00 00 22
+R 00 00 00 17 F1 01 04 00 0B F1 81 09 00 0B
+</REL>
+<ADB>
+M:dma
+F:G$dmaInit$0$0({2}DF,SV:S),Z,0,0,0,0,0
+T:Fdma$__00010000[({0}S:S$SRCADDRH$0$0({1}SC:U),Z,0,0)({1}S:S$SRCADDRL$0$0({1}SC:U),Z,0,0)({2}S:S$DESTADDRH$0$0({1}SC:U),Z,0,0)({3}S:S$DESTADDRL$0$0({1}SC:U),Z,0,0)({4}S:S$VLEN_LENH$0$0({1}SC:U),Z,0,0)({5}S:S$LENL$0$0({1}SC:U),Z,0,0)({6}S:S$DC6$0$0({1}S
+C:U),Z,0,0)({7}S:S$DC7$0$0({1}SC:U),Z,0,0)]
+T:Fdma$DMA14_CONFIG[({0}S:S$radio$0$0({8}ST__00010000:S),Z,0,0)({8}S:S$_2$0$0({8}ST__00010000:S),Z,0,0)({16}S:S$_3$0$0({8}ST__00010000:S),Z,0,0)({24}S:S$_4$0$0({8}ST__00010000:S),Z,0,0)]
+S:Fdma$SYNC1$0$0({1}SC:U),F,0,0
+S:Fdma$SYNC0$0$0({1}SC:U),F,0,0
+S:Fdma$PKTLEN$0$0({1}SC:U),F,0,0
+S:Fdma$PKTCTRL1$0$0({1}SC:U),F,0,0
+S:Fdma$PKTCTRL0$0$0({1}SC:U),F,0,0
+S:Fdma$ADDR$0$0({1}SC:U),F,0,0
+S:Fdma$CHANNR$0$0({1}SC:U),F,0,0
+S:Fdma$FSCTRL1$0$0({1}SC:U),F,0,0
+S:Fdma$FSCTRL0$0$0({1}SC:U),F,0,0
+S:Fdma$FREQ2$0$0({1}SC:U),F,0,0
+S:Fdma$FREQ1$0$0({1}SC:U),F,0,0
+S:Fdma$FREQ0$0$0({1}SC:U),F,0,0
+S:Fdma$MDMCFG4$0$0({1}SC:U),F,0,0
+S:Fdma$MDMCFG3$0$0({1}SC:U),F,0,0
+S:Fdma$MDMCFG2$0$0({1}SC:U),F,0,0
+S:Fdma$MDMCFG1$0$0({1}SC:U),F,0,0
+S:Fdma$MDMCFG0$0$0({1}SC:U),F,0,0
+S:Fdma$DEVIATN$0$0({1}SC:U),F,0,0
+S:Fdma$MCSM2$0$0({1}SC:U),F,0,0
+S:Fdma$MCSM1$0$0({1}SC:U),F,0,0
+S:Fdma$MCSM0$0$0({1}SC:U),F,0,0
+S:Fdma$FOCCFG$0$0({1}SC:U),F,0,0
+S:Fdma$BSCFG$0$0({1}SC:U),F,0,0
+S:Fdma$AGCCTRL2$0$0({1}SC:U),F,0,0
+S:Fdma$AGCCTRL1$0$0({1}SC:U),F,0,0
+S:Fdma$AGCCTRL0$0$0({1}SC:U),F,0,0
+S:Fdma$FREND1$0$0({1}SC:U),F,0,0
+S:Fdma$FREND0$0$0({1}SC:U),F,0,0
+S:Fdma$FSCAL3$0$0({1}SC:U),F,0,0
+S:Fdma$FSCAL2$0$0({1}SC:U),F,0,0
+S:Fdma$FSCAL1$0$0({1}SC:U),F,0,0
+S:Fdma$FSCAL0$0$0({1}SC:U),F,0,0
+S:Fdma$TEST2$0$0({1}SC:U),F,0,0
+S:Fdma$TEST1$0$0({1}SC:U),F,0,0
+S:Fdma$TEST0$0$0({1}SC:U),F,0,0
+S:Fdma$PA_TABLE0$0$0({1}SC:U),F,0,0
+S:Fdma$IOCFG2$0$0({1}SC:U),F,0,0
+S:Fdma$IOCFG1$0$0({1}SC:U),F,0,0
+S:Fdma$IOCFG0$0$0({1}SC:U),F,0,0
+S:Fdma$PARTNUM$0$0({1}SC:U),F,0,0
+S:Fdma$VERSION$0$0({1}SC:U),F,0,0
+S:Fdma$FREQEST$0$0({1}SC:U),F,0,0
+S:Fdma$LQI$0$0({1}SC:U),F,0,0
+S:Fdma$RSSI$0$0({1}SC:U),F,0,0
+S:Fdma$MARCSTATE$0$0({1}SC:U),F,0,0
+S:Fdma$PKTSTATUS$0$0({1}SC:U),F,0,0
+S:Fdma$VCO_VC_DAC$0$0({1}SC:U),F,0,0
+S:Fdma$I2SCFG0$0$0({1}SC:U),F,0,0
+S:Fdma$I2SCFG1$0$0({1}SC:U),F,0,0
+S:Fdma$I2SDATL$0$0({1}SC:U),F,0,0
+S:Fdma$I2SDATH$0$0({1}SC:U),F,0,0
+S:Fdma$I2SWCNT$0$0({1}SC:U),F,0,0
+S:Fdma$I2SSTAT$0$0({1}SC:U),F,0,0
+S:Fdma$I2SCLKF0$0$0({1}SC:U),F,0,0
+S:Fdma$I2SCLKF1$0$0({1}SC:U),F,0,0
+S:Fdma$I2SCLKF2$0$0({1}SC:U),F,0,0
+S:Fdma$USBADDR$0$0({1}SC:U),F,0,0
+S:Fdma$USBPOW$0$0({1}SC:U),F,0,0
+S:Fdma$USBIIF$0$0({1}SC:U),F,0,0
+S:Fdma$USBOIF$0$0({1}SC:U),F,0,0
+S:Fdma$USBCIF$0$0({1}SC:U),F,0,0
+S:Fdma$USBIIE$0$0({1}SC:U),F,0,0
+S:Fdma$USBOIE$0$0({1}SC:U),F,0,0
+S:Fdma$USBCIE$0$0({1}SC:U),F,0,0
+S:Fdma$USBFRML$0$0({1}SC:U),F,0,0
+S:Fdma$USBFRMH$0$0({1}SC:U),F,0,0
+S:Fdma$USBINDEX$0$0({1}SC:U),F,0,0
+S:Fdma$USBMAXI$0$0({1}SC:U),F,0,0
+S:Fdma$USBCSIL$0$0({1}SC:U),F,0,0
+S:Fdma$USBCSIH$0$0({1}SC:U),F,0,0
+S:Fdma$USBMAXO$0$0({1}SC:U),F,0,0
+S:Fdma$USBCSOL$0$0({1}SC:U),F,0,0
+S:Fdma$USBCSOH$0$0({1}SC:U),F,0,0
+S:Fdma$USBCNTL$0$0({1}SC:U),F,0,0
+S:Fdma$USBCNTH$0$0({1}SC:U),F,0,0
+S:Fdma$USBF0$0$0({1}SC:U),F,0,0
+S:Fdma$USBF1$0$0({1}SC:U),F,0,0
+S:Fdma$USBF2$0$0({1}SC:U),F,0,0
+S:Fdma$USBF3$0$0({1}SC:U),F,0,0
+S:Fdma$USBF4$0$0({1}SC:U),F,0,0
+S:Fdma$USBF5$0$0({1}SC:U),F,0,0
+S:G$dmaConfig$0$0({32}STDMA14_CONFIG:S),F,0,0
+S:Fdma$P0$0$0({1}SC:U),I,0,0
+S:Fdma$SP$0$0({1}SC:U),I,0,0
+S:Fdma$DPL0$0$0({1}SC:U),I,0,0
+S:Fdma$DPH0$0$0({1}SC:U),I,0,0
+S:Fdma$DPL1$0$0({1}SC:U),I,0,0
+S:Fdma$DPH1$0$0({1}SC:U),I,0,0
+S:Fdma$U0CSR$0$0({1}SC:U),I,0,0
+S:Fdma$PCON$0$0({1}SC:U),I,0,0
+S:Fdma$TCON$0$0({1}SC:U),I,0,0
+S:Fdma$P0IFG$0$0({1}SC:U),I,0,0
+S:Fdma$P1IFG$0$0({1}SC:U),I,0,0
+S:Fdma$P2IFG$0$0({1}SC:U),I,0,0
+S:Fdma$PICTL$0$0({1}SC:U),I,0,0
+S:Fdma$P1IEN$0$0({1}SC:U),I,0,0
+S:Fdma$P0INP$0$0({1}SC:U),I,0,0
+S:Fdma$P1$0$0({1}SC:U),I,0,0
+S:Fdma$RFIM$0$0({1}SC:U),I,0,0
+S:Fdma$DPS$0$0({1}SC:U),I,0,0
+S:Fdma$MPAGE$0$0({1}SC:U),I,0,0
+S:Fdma$ENDIAN$0$0({1}SC:U),I,0,0
+S:Fdma$S0CON$0$0({1}SC:U),I,0,0
+S:Fdma$IEN2$0$0({1}SC:U),I,0,0
+S:Fdma$S1CON$0$0({1}SC:U),I,0,0
+S:Fdma$T2CT$0$0({1}SC:U),I,0,0
+S:Fdma$T2PR$0$0({1}SC:U),I,0,0
+S:Fdma$T2CTL$0$0({1}SC:U),I,0,0
+S:Fdma$P2$0$0({1}SC:U),I,0,0
+S:Fdma$WORIRQ$0$0({1}SC:U),I,0,0
+S:Fdma$WORCTRL$0$0({1}SC:U),I,0,0
+S:Fdma$WOREVT0$0$0({1}SC:U),I,0,0
+S:Fdma$WOREVT1$0$0({1}SC:U),I,0,0
+S:Fdma$WORTIME0$0$0({1}SC:U),I,0,0
+S:Fdma$WORTIME1$0$0({1}SC:U),I,0,0
+S:Fdma$IEN0$0$0({1}SC:U),I,0,0
+S:Fdma$IP0$0$0({1}SC:U),I,0,0
+S:Fdma$FWT$0$0({1}SC:U),I,0,0
+S:Fdma$FADDRL$0$0({1}SC:U),I,0,0
+S:Fdma$FADDRH$0$0({1}SC:U),I,0,0
+S:Fdma$FCTL$0$0({1}SC:U),I,0,0
+S:Fdma$FWDATA$0$0({1}SC:U),I,0,0
+S:Fdma$ENCDI$0$0({1}SC:U),I,0,0
+S:Fdma$ENCDO$0$0({1}SC:U),I,0,0
+S:Fdma$ENCCS$0$0({1}SC:U),I,0,0
+S:Fdma$ADCCON1$0$0({1}SC:U),I,0,0
+S:Fdma$ADCCON2$0$0({1}SC:U),I,0,0
+S:Fdma$ADCCON3$0$0({1}SC:U),I,0,0
+S:Fdma$IEN1$0$0({1}SC:U),I,0,0
+S:Fdma$IP1$0$0({1}SC:U),I,0,0
+S:Fdma$ADCL$0$0({1}SC:U),I,0,0
+S:Fdma$ADCH$0$0({1}SC:U),I,0,0
+S:Fdma$RNDL$0$0({1}SC:U),I,0,0
+S:Fdma$RNDH$0$0({1}SC:U),I,0,0
+S:Fdma$SLEEP$0$0({1}SC:U),I,0,0
+S:Fdma$IRCON$0$0({1}SC:U),I,0,0
+S:Fdma$U0DBUF$0$0({1}SC:U),I,0,0
+S:Fdma$U0BAUD$0$0({1}SC:U),I,0,0
+S:Fdma$U0UCR$0$0({1}SC:U),I,0,0
+S:Fdma$U0GCR$0$0({1}SC:U),I,0,0
+S:Fdma$CLKCON$0$0({1}SC:U),I,0,0
+S:Fdma$MEMCTR$0$0({1}SC:U),I,0,0
+S:Fdma$WDCTL$0$0({1}SC:U),I,0,0
+S:Fdma$T3CNT$0$0({1}SC:U),I,0,0
+S:Fdma$T3CTL$0$0({1}SC:U),I,0,0
+S:Fdma$T3CCTL0$0$0({1}SC:U),I,0,0
+S:Fdma$T3CC0$0$0({1}SC:U),I,0,0
+S:Fdma$T3CCTL1$0$0({1}SC:U),I,0,0
+S:Fdma$T3CC1$0$0({1}SC:U),I,0,0
+S:Fdma$PSW$0$0({1}SC:U),I,0,0
+S:Fdma$DMAIRQ$0$0({1}SC:U),I,0,0
+S:Fdma$DMA1CFGL$0$0({1}SC:U),I,0,0
+S:Fdma$DMA1CFGH$0$0({1}SC:U),I,0,0
+S:Fdma$DMA0CFGL$0$0({1}SC:U),I,0,0
+S:Fdma$DMA0CFGH$0$0({1}SC:U),I,0,0
+S:Fdma$DMAARM$0$0({1}SC:U),I,0,0
+S:Fdma$DMAREQ$0$0({1}SC:U),I,0,0
+S:Fdma$TIMIF$0$0({1}SC:U),I,0,0
+S:Fdma$RFD$0$0({1}SC:U),I,0,0
+S:Fdma$T1CC0L$0$0({1}SC:U),I,0,0
+S:Fdma$T1CC0H$0$0({1}SC:U),I,0,0
+S:Fdma$T1CC1L$0$0({1}SC:U),I,0,0
+S:Fdma$T1CC1H$0$0({1}SC:U),I,0,0
+S:Fdma$T1CC2L$0$0({1}SC:U),I,0,0
+S:Fdma$T1CC2H$0$0({1}SC:U),I,0,0
+S:Fdma$ACC$0$0({1}SC:U),I,0,0
+S:Fdma$RFST$0$0({1}SC:U),I,0,0
+S:Fdma$T1CNTL$0$0({1}SC:U),I,0,0
+S:Fdma$T1CNTH$0$0({1}SC:U),I,0,0
+S:Fdma$T1CTL$0$0({1}SC:U),I,0,0
+S:Fdma$T1CCTL0$0$0({1}SC:U),I,0,0
+S:Fdma$T1CCTL1$0$0({1}SC:U),I,0,0
+S:Fdma$T1CCTL2$0$0({1}SC:U),I,0,0
+S:Fdma$IRCON2$0$0({1}SC:U),I,0,0
+S:Fdma$RFIF$0$0({1}SC:U),I,0,0
+S:Fdma$T4CNT$0$0({1}SC:U),I,0,0
+S:Fdma$T4CTL$0$0({1}SC:U),I,0,0
+S:Fdma$T4CCTL0$0$0({1}SC:U),I,0,0
+S:Fdma$T4CC0$0$0({1}SC:U),I,0,0
+S:Fdma$T4CCTL1$0$0({1}SC:U),I,0,0
+S:Fdma$T4CC1$0$0({1}SC:U),I,0,0
+S:Fdma$B$0$0({1}SC:U),I,0,0
+S:Fdma$PERCFG$0$0({1}SC:U),I,0,0
+S:Fdma$ADCCFG$0$0({1}SC:U),I,0,0
+S:Fdma$P0SEL$0$0({1}SC:U),I,0,0
+S:Fdma$P1SEL$0$0({1}SC:U),I,0,0
+S:Fdma$P2SEL$0$0({1}SC:U),I,0,0
+S:Fdma$P1INP$0$0({1}SC:U),I,0,0
+S:Fdma$P2INP$0$0({1}SC:U),I,0,0
+S:Fdma$U1CSR$0$0({1}SC:U),I,0,0
+S:Fdma$U1DBUF$0$0({1}SC:U),I,0,0
+S:Fdma$U1BAUD$0$0({1}SC:U),I,0,0
+S:Fdma$U1UCR$0$0({1}SC:U),I,0,0
+S:Fdma$U1GCR$0$0({1}SC:U),I,0,0
+S:Fdma$P0DIR$0$0({1}SC:U),I,0,0
+S:Fdma$P1DIR$0$0({1}SC:U),I,0,0
+S:Fdma$P2DIR$0$0({1}SC:U),I,0,0
+S:Fdma$DMA0CFG$0$0({2}SI:U),I,0,0
+S:Fdma$DMA1CFG$0$0({2}SI:U),I,0,0
+S:Fdma$FADDR$0$0({2}SI:U),I,0,0
+S:Fdma$ADC$0$0({2}SI:U),I,0,0
+S:Fdma$T1CC0$0$0({2}SI:U),I,0,0
+S:Fdma$T1CC1$0$0({2}SI:U),I,0,0
+S:Fdma$T1CC2$0$0({2}SI:U),I,0,0
+S:Fdma$P0_0$0$0({1}SX:U),J,0,0
+S:Fdma$P0_1$0$0({1}SX:U),J,0,0
+S:Fdma$P0_2$0$0({1}SX:U),J,0,0
+S:Fdma$P0_3$0$0({1}SX:U),J,0,0
+S:Fdma$P0_4$0$0({1}SX:U),J,0,0
+S:Fdma$P0_5$0$0({1}SX:U),J,0,0
+S:Fdma$P0_6$0$0({1}SX:U),J,0,0
+S:Fdma$P0_7$0$0({1}SX:U),J,0,0
+S:Fdma$_TCON_0$0$0({1}SX:U),J,0,0
+S:Fdma$RFTXRXIF$0$0({1}SX:U),J,0,0
+S:Fdma$_TCON_2$0$0({1}SX:U),J,0,0
+S:Fdma$URX0IF$0$0({1}SX:U),J,0,0
+S:Fdma$_TCON_4$0$0({1}SX:U),J,0,0
+S:Fdma$ADCIF$0$0({1}SX:U),J,0,0
+S:Fdma$_TCON_6$0$0({1}SX:U),J,0,0
+S:Fdma$URX1IF$0$0({1}SX:U),J,0,0
+S:Fdma$P1_0$0$0({1}SX:U),J,0,0
+S:Fdma$P1_1$0$0({1}SX:U),J,0,0
+S:Fdma$P1_2$0$0({1}SX:U),J,0,0
+S:Fdma$P1_3$0$0({1}SX:U),J,0,0
+S:Fdma$P1_4$0$0({1}SX:U),J,0,0
+S:Fdma$P1_5$0$0({1}SX:U),J,0,0
+S:Fdma$P1_6$0$0({1}SX:U),J,0,0
+S:Fdma$P1_7$0$0({1}SX:U),J,0,0
+S:Fdma$ENCIF_0$0$0({1}SX:U),J,0,0
+S:Fdma$ENCIF_1$0$0({1}SX:U),J,0,0
+S:Fdma$_SOCON2$0$0({1}SX:U),J,0,0
+S:Fdma$_SOCON3$0$0({1}SX:U),J,0,0
+S:Fdma$_SOCON4$0$0({1}SX:U),J,0,0
+S:Fdma$_SOCON5$0$0({1}SX:U),J,0,0
+S:Fdma$_SOCON6$0$0({1}SX:U),J,0,0
+S:Fdma$_SOCON7$0$0({1}SX:U),J,0,0
+S:Fdma$P2_0$0$0({1}SX:U),J,0,0
+S:Fdma$P2_1$0$0({1}SX:U),J,0,0
+S:Fdma$P2_2$0$0({1}SX:U),J,0,0
+S:Fdma$P2_3$0$0({1}SX:U),J,0,0
+S:Fdma$P2_4$0$0({1}SX:U),J,0,0
+S:Fdma$P2_5$0$0({1}SX:U),J,0,0
+S:Fdma$P2_6$0$0({1}SX:U),J,0,0
+S:Fdma$P2_7$0$0({1}SX:U),J,0,0
+S:Fdma$RFTXRXIE$0$0({1}SX:U),J,0,0
+S:Fdma$ADCIE$0$0({1}SX:U),J,0,0
+S:Fdma$URX0IE$0$0({1}SX:U),J,0,0
+S:Fdma$URX1IE$0$0({1}SX:U),J,0,0
+S:Fdma$ENCIE$0$0({1}SX:U),J,0,0
+S:Fdma$STIE$0$0({1}SX:U),J,0,0
+S:Fdma$_IEN06$0$0({1}SX:U),J,0,0
+S:Fdma$EA$0$0({1}SX:U),J,0,0
+S:Fdma$DMAIE$0$0({1}SX:U),J,0,0
+S:Fdma$T1IE$0$0({1}SX:U),J,0,0
+S:Fdma$T2IE$0$0({1}SX:U),J,0,0
+S:Fdma$T3IE$0$0({1}SX:U),J,0,0
+S:Fdma$T4IE$0$0({1}SX:U),J,0,0
+S:Fdma$P0IE$0$0({1}SX:U),J,0,0
+S:Fdma$_IEN16$0$0({1}SX:U),J,0,0
+S:Fdma$_IEN17$0$0({1}SX:U),J,0,0
+S:Fdma$DMAIF$0$0({1}SX:U),J,0,0
+S:Fdma$T1IF$0$0({1}SX:U),J,0,0
+S:Fdma$T2IF$0$0({1}SX:U),J,0,0
+S:Fdma$T3IF$0$0({1}SX:U),J,0,0
+S:Fdma$T4IF$0$0({1}SX:U),J,0,0
+S:Fdma$P0IF$0$0({1}SX:U),J,0,0
+S:Fdma$_IRCON6$0$0({1}SX:U),J,0,0
+S:Fdma$STIF$0$0({1}SX:U),J,0,0
+S:Fdma$P$0$0({1}SX:U),J,0,0
+S:Fdma$F1$0$0({1}SX:U),J,0,0
+S:Fdma$OV$0$0({1}SX:U),J,0,0
+S:Fdma$RS0$0$0({1}SX:U),J,0,0
+S:Fdma$RS1$0$0({1}SX:U),J,0,0
+S:Fdma$F0$0$0({1}SX:U),J,0,0
+S:Fdma$AC$0$0({1}SX:U),J,0,0
+S:Fdma$CY$0$0({1}SX:U),J,0,0
+S:Fdma$T3OVFIF$0$0({1}SX:U),J,0,0
+S:Fdma$T3CH0IF$0$0({1}SX:U),J,0,0
+S:Fdma$T3CH1IF$0$0({1}SX:U),J,0,0
+S:Fdma$T4OVFIF$0$0({1}SX:U),J,0,0
+S:Fdma$T4CH0IF$0$0({1}SX:U),J,0,0
+S:Fdma$T4CH1IF$0$0({1}SX:U),J,0,0
+S:Fdma$OVFIM$0$0({1}SX:U),J,0,0
+S:Fdma$_TIMIF7$0$0({1}SX:U),J,0,0
+S:Fdma$ACC_0$0$0({1}SX:U),J,0,0
+S:Fdma$ACC_1$0$0({1}SX:U),J,0,0
+S:Fdma$ACC_2$0$0({1}SX:U),J,0,0
+S:Fdma$ACC_3$0$0({1}SX:U),J,0,0
+S:Fdma$ACC_4$0$0({1}SX:U),J,0,0
+S:Fdma$ACC_5$0$0({1}SX:U),J,0,0
+S:Fdma$ACC_6$0$0({1}SX:U),J,0,0
+S:Fdma$ACC_7$0$0({1}SX:U),J,0,0
+S:Fdma$P2IF$0$0({1}SX:U),J,0,0
+S:Fdma$UTX0IF$0$0({1}SX:U),J,0,0
+S:Fdma$UTX1IF$0$0({1}SX:U),J,0,0
+S:Fdma$P1IF$0$0({1}SX:U),J,0,0
+S:Fdma$WDTIF$0$0({1}SX:U),J,0,0
+S:Fdma$_IRCON25$0$0({1}SX:U),J,0,0
+S:Fdma$_IRCON26$0$0({1}SX:U),J,0,0
+S:Fdma$_IRCON27$0$0({1}SX:U),J,0,0
+S:Fdma$B_0$0$0({1}SX:U),J,0,0
+S:Fdma$B_1$0$0({1}SX:U),J,0,0
+S:Fdma$B_2$0$0({1}SX:U),J,0,0
+S:Fdma$B_3$0$0({1}SX:U),J,0,0
+S:Fdma$B_4$0$0({1}SX:U),J,0,0
+S:Fdma$B_5$0$0({1}SX:U),J,0,0
+S:Fdma$B_6$0$0({1}SX:U),J,0,0
+S:Fdma$B_7$0$0({1}SX:U),J,0,0
+S:Fdma$U1ACTIVE$0$0({1}SX:U),J,0,0
+S:Fdma$U1TX_BYTE$0$0({1}SX:U),J,0,0
+S:Fdma$U1RX_BYTE$0$0({1}SX:U),J,0,0
+S:Fdma$U1ERR$0$0({1}SX:U),J,0,0
+S:Fdma$U1FE$0$0({1}SX:U),J,0,0
+S:Fdma$U1SLAVE$0$0({1}SX:U),J,0,0
+S:Fdma$U1RE$0$0({1}SX:U),J,0,0
+S:Fdma$U1MODE$0$0({1}SX:U),J,0,0
+</ADB>
+</FILE>
+
+</FILES>
+
+</SDCCLIB>

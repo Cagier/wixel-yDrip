@@ -1,0 +1,1273 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:08 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module radio_queue
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _param_radio_channel
+                             13 	.globl _randomNumber
+                             14 	.globl _randomSeedFromSerialNumber
+                             15 	.globl _radioCrcPassed
+                             16 	.globl _radioMacRx
+                             17 	.globl _radioMacTx
+                             18 	.globl _radioMacStrobe
+                             19 	.globl _radioMacInit
+                             20 	.globl _radioQueueAllowCrcErrors
+                             21 	.globl _radioQueueInit
+                             22 	.globl _radioQueueTxAvailable
+                             23 	.globl _radioQueueTxQueued
+                             24 	.globl _radioQueueTxCurrentPacket
+                             25 	.globl _radioQueueTxSendPacket
+                             26 	.globl _radioQueueRxCurrentPacket
+                             27 	.globl _radioQueueRxDoneWithPacket
+                             28 	.globl _radioMacEventHandler
+                             29 ;--------------------------------------------------------
+                             30 ; special function registers
+                             31 ;--------------------------------------------------------
+                             32 	.area RSEG    (ABS,DATA)
+   0000                      33 	.org 0x0000
+                    0080     34 Fradio_queue$P0$0$0 == 0x0080
+                    0080     35 _P0	=	0x0080
+                    0081     36 Fradio_queue$SP$0$0 == 0x0081
+                    0081     37 _SP	=	0x0081
+                    0082     38 Fradio_queue$DPL0$0$0 == 0x0082
+                    0082     39 _DPL0	=	0x0082
+                    0083     40 Fradio_queue$DPH0$0$0 == 0x0083
+                    0083     41 _DPH0	=	0x0083
+                    0084     42 Fradio_queue$DPL1$0$0 == 0x0084
+                    0084     43 _DPL1	=	0x0084
+                    0085     44 Fradio_queue$DPH1$0$0 == 0x0085
+                    0085     45 _DPH1	=	0x0085
+                    0086     46 Fradio_queue$U0CSR$0$0 == 0x0086
+                    0086     47 _U0CSR	=	0x0086
+                    0087     48 Fradio_queue$PCON$0$0 == 0x0087
+                    0087     49 _PCON	=	0x0087
+                    0088     50 Fradio_queue$TCON$0$0 == 0x0088
+                    0088     51 _TCON	=	0x0088
+                    0089     52 Fradio_queue$P0IFG$0$0 == 0x0089
+                    0089     53 _P0IFG	=	0x0089
+                    008A     54 Fradio_queue$P1IFG$0$0 == 0x008a
+                    008A     55 _P1IFG	=	0x008a
+                    008B     56 Fradio_queue$P2IFG$0$0 == 0x008b
+                    008B     57 _P2IFG	=	0x008b
+                    008C     58 Fradio_queue$PICTL$0$0 == 0x008c
+                    008C     59 _PICTL	=	0x008c
+                    008D     60 Fradio_queue$P1IEN$0$0 == 0x008d
+                    008D     61 _P1IEN	=	0x008d
+                    008F     62 Fradio_queue$P0INP$0$0 == 0x008f
+                    008F     63 _P0INP	=	0x008f
+                    0090     64 Fradio_queue$P1$0$0 == 0x0090
+                    0090     65 _P1	=	0x0090
+                    0091     66 Fradio_queue$RFIM$0$0 == 0x0091
+                    0091     67 _RFIM	=	0x0091
+                    0092     68 Fradio_queue$DPS$0$0 == 0x0092
+                    0092     69 _DPS	=	0x0092
+                    0093     70 Fradio_queue$MPAGE$0$0 == 0x0093
+                    0093     71 _MPAGE	=	0x0093
+                    0095     72 Fradio_queue$ENDIAN$0$0 == 0x0095
+                    0095     73 _ENDIAN	=	0x0095
+                    0098     74 Fradio_queue$S0CON$0$0 == 0x0098
+                    0098     75 _S0CON	=	0x0098
+                    009A     76 Fradio_queue$IEN2$0$0 == 0x009a
+                    009A     77 _IEN2	=	0x009a
+                    009B     78 Fradio_queue$S1CON$0$0 == 0x009b
+                    009B     79 _S1CON	=	0x009b
+                    009C     80 Fradio_queue$T2CT$0$0 == 0x009c
+                    009C     81 _T2CT	=	0x009c
+                    009D     82 Fradio_queue$T2PR$0$0 == 0x009d
+                    009D     83 _T2PR	=	0x009d
+                    009E     84 Fradio_queue$T2CTL$0$0 == 0x009e
+                    009E     85 _T2CTL	=	0x009e
+                    00A0     86 Fradio_queue$P2$0$0 == 0x00a0
+                    00A0     87 _P2	=	0x00a0
+                    00A1     88 Fradio_queue$WORIRQ$0$0 == 0x00a1
+                    00A1     89 _WORIRQ	=	0x00a1
+                    00A2     90 Fradio_queue$WORCTRL$0$0 == 0x00a2
+                    00A2     91 _WORCTRL	=	0x00a2
+                    00A3     92 Fradio_queue$WOREVT0$0$0 == 0x00a3
+                    00A3     93 _WOREVT0	=	0x00a3
+                    00A4     94 Fradio_queue$WOREVT1$0$0 == 0x00a4
+                    00A4     95 _WOREVT1	=	0x00a4
+                    00A5     96 Fradio_queue$WORTIME0$0$0 == 0x00a5
+                    00A5     97 _WORTIME0	=	0x00a5
+                    00A6     98 Fradio_queue$WORTIME1$0$0 == 0x00a6
+                    00A6     99 _WORTIME1	=	0x00a6
+                    00A8    100 Fradio_queue$IEN0$0$0 == 0x00a8
+                    00A8    101 _IEN0	=	0x00a8
+                    00A9    102 Fradio_queue$IP0$0$0 == 0x00a9
+                    00A9    103 _IP0	=	0x00a9
+                    00AB    104 Fradio_queue$FWT$0$0 == 0x00ab
+                    00AB    105 _FWT	=	0x00ab
+                    00AC    106 Fradio_queue$FADDRL$0$0 == 0x00ac
+                    00AC    107 _FADDRL	=	0x00ac
+                    00AD    108 Fradio_queue$FADDRH$0$0 == 0x00ad
+                    00AD    109 _FADDRH	=	0x00ad
+                    00AE    110 Fradio_queue$FCTL$0$0 == 0x00ae
+                    00AE    111 _FCTL	=	0x00ae
+                    00AF    112 Fradio_queue$FWDATA$0$0 == 0x00af
+                    00AF    113 _FWDATA	=	0x00af
+                    00B1    114 Fradio_queue$ENCDI$0$0 == 0x00b1
+                    00B1    115 _ENCDI	=	0x00b1
+                    00B2    116 Fradio_queue$ENCDO$0$0 == 0x00b2
+                    00B2    117 _ENCDO	=	0x00b2
+                    00B3    118 Fradio_queue$ENCCS$0$0 == 0x00b3
+                    00B3    119 _ENCCS	=	0x00b3
+                    00B4    120 Fradio_queue$ADCCON1$0$0 == 0x00b4
+                    00B4    121 _ADCCON1	=	0x00b4
+                    00B5    122 Fradio_queue$ADCCON2$0$0 == 0x00b5
+                    00B5    123 _ADCCON2	=	0x00b5
+                    00B6    124 Fradio_queue$ADCCON3$0$0 == 0x00b6
+                    00B6    125 _ADCCON3	=	0x00b6
+                    00B8    126 Fradio_queue$IEN1$0$0 == 0x00b8
+                    00B8    127 _IEN1	=	0x00b8
+                    00B9    128 Fradio_queue$IP1$0$0 == 0x00b9
+                    00B9    129 _IP1	=	0x00b9
+                    00BA    130 Fradio_queue$ADCL$0$0 == 0x00ba
+                    00BA    131 _ADCL	=	0x00ba
+                    00BB    132 Fradio_queue$ADCH$0$0 == 0x00bb
+                    00BB    133 _ADCH	=	0x00bb
+                    00BC    134 Fradio_queue$RNDL$0$0 == 0x00bc
+                    00BC    135 _RNDL	=	0x00bc
+                    00BD    136 Fradio_queue$RNDH$0$0 == 0x00bd
+                    00BD    137 _RNDH	=	0x00bd
+                    00BE    138 Fradio_queue$SLEEP$0$0 == 0x00be
+                    00BE    139 _SLEEP	=	0x00be
+                    00C0    140 Fradio_queue$IRCON$0$0 == 0x00c0
+                    00C0    141 _IRCON	=	0x00c0
+                    00C1    142 Fradio_queue$U0DBUF$0$0 == 0x00c1
+                    00C1    143 _U0DBUF	=	0x00c1
+                    00C2    144 Fradio_queue$U0BAUD$0$0 == 0x00c2
+                    00C2    145 _U0BAUD	=	0x00c2
+                    00C4    146 Fradio_queue$U0UCR$0$0 == 0x00c4
+                    00C4    147 _U0UCR	=	0x00c4
+                    00C5    148 Fradio_queue$U0GCR$0$0 == 0x00c5
+                    00C5    149 _U0GCR	=	0x00c5
+                    00C6    150 Fradio_queue$CLKCON$0$0 == 0x00c6
+                    00C6    151 _CLKCON	=	0x00c6
+                    00C7    152 Fradio_queue$MEMCTR$0$0 == 0x00c7
+                    00C7    153 _MEMCTR	=	0x00c7
+                    00C9    154 Fradio_queue$WDCTL$0$0 == 0x00c9
+                    00C9    155 _WDCTL	=	0x00c9
+                    00CA    156 Fradio_queue$T3CNT$0$0 == 0x00ca
+                    00CA    157 _T3CNT	=	0x00ca
+                    00CB    158 Fradio_queue$T3CTL$0$0 == 0x00cb
+                    00CB    159 _T3CTL	=	0x00cb
+                    00CC    160 Fradio_queue$T3CCTL0$0$0 == 0x00cc
+                    00CC    161 _T3CCTL0	=	0x00cc
+                    00CD    162 Fradio_queue$T3CC0$0$0 == 0x00cd
+                    00CD    163 _T3CC0	=	0x00cd
+                    00CE    164 Fradio_queue$T3CCTL1$0$0 == 0x00ce
+                    00CE    165 _T3CCTL1	=	0x00ce
+                    00CF    166 Fradio_queue$T3CC1$0$0 == 0x00cf
+                    00CF    167 _T3CC1	=	0x00cf
+                    00D0    168 Fradio_queue$PSW$0$0 == 0x00d0
+                    00D0    169 _PSW	=	0x00d0
+                    00D1    170 Fradio_queue$DMAIRQ$0$0 == 0x00d1
+                    00D1    171 _DMAIRQ	=	0x00d1
+                    00D2    172 Fradio_queue$DMA1CFGL$0$0 == 0x00d2
+                    00D2    173 _DMA1CFGL	=	0x00d2
+                    00D3    174 Fradio_queue$DMA1CFGH$0$0 == 0x00d3
+                    00D3    175 _DMA1CFGH	=	0x00d3
+                    00D4    176 Fradio_queue$DMA0CFGL$0$0 == 0x00d4
+                    00D4    177 _DMA0CFGL	=	0x00d4
+                    00D5    178 Fradio_queue$DMA0CFGH$0$0 == 0x00d5
+                    00D5    179 _DMA0CFGH	=	0x00d5
+                    00D6    180 Fradio_queue$DMAARM$0$0 == 0x00d6
+                    00D6    181 _DMAARM	=	0x00d6
+                    00D7    182 Fradio_queue$DMAREQ$0$0 == 0x00d7
+                    00D7    183 _DMAREQ	=	0x00d7
+                    00D8    184 Fradio_queue$TIMIF$0$0 == 0x00d8
+                    00D8    185 _TIMIF	=	0x00d8
+                    00D9    186 Fradio_queue$RFD$0$0 == 0x00d9
+                    00D9    187 _RFD	=	0x00d9
+                    00DA    188 Fradio_queue$T1CC0L$0$0 == 0x00da
+                    00DA    189 _T1CC0L	=	0x00da
+                    00DB    190 Fradio_queue$T1CC0H$0$0 == 0x00db
+                    00DB    191 _T1CC0H	=	0x00db
+                    00DC    192 Fradio_queue$T1CC1L$0$0 == 0x00dc
+                    00DC    193 _T1CC1L	=	0x00dc
+                    00DD    194 Fradio_queue$T1CC1H$0$0 == 0x00dd
+                    00DD    195 _T1CC1H	=	0x00dd
+                    00DE    196 Fradio_queue$T1CC2L$0$0 == 0x00de
+                    00DE    197 _T1CC2L	=	0x00de
+                    00DF    198 Fradio_queue$T1CC2H$0$0 == 0x00df
+                    00DF    199 _T1CC2H	=	0x00df
+                    00E0    200 Fradio_queue$ACC$0$0 == 0x00e0
+                    00E0    201 _ACC	=	0x00e0
+                    00E1    202 Fradio_queue$RFST$0$0 == 0x00e1
+                    00E1    203 _RFST	=	0x00e1
+                    00E2    204 Fradio_queue$T1CNTL$0$0 == 0x00e2
+                    00E2    205 _T1CNTL	=	0x00e2
+                    00E3    206 Fradio_queue$T1CNTH$0$0 == 0x00e3
+                    00E3    207 _T1CNTH	=	0x00e3
+                    00E4    208 Fradio_queue$T1CTL$0$0 == 0x00e4
+                    00E4    209 _T1CTL	=	0x00e4
+                    00E5    210 Fradio_queue$T1CCTL0$0$0 == 0x00e5
+                    00E5    211 _T1CCTL0	=	0x00e5
+                    00E6    212 Fradio_queue$T1CCTL1$0$0 == 0x00e6
+                    00E6    213 _T1CCTL1	=	0x00e6
+                    00E7    214 Fradio_queue$T1CCTL2$0$0 == 0x00e7
+                    00E7    215 _T1CCTL2	=	0x00e7
+                    00E8    216 Fradio_queue$IRCON2$0$0 == 0x00e8
+                    00E8    217 _IRCON2	=	0x00e8
+                    00E9    218 Fradio_queue$RFIF$0$0 == 0x00e9
+                    00E9    219 _RFIF	=	0x00e9
+                    00EA    220 Fradio_queue$T4CNT$0$0 == 0x00ea
+                    00EA    221 _T4CNT	=	0x00ea
+                    00EB    222 Fradio_queue$T4CTL$0$0 == 0x00eb
+                    00EB    223 _T4CTL	=	0x00eb
+                    00EC    224 Fradio_queue$T4CCTL0$0$0 == 0x00ec
+                    00EC    225 _T4CCTL0	=	0x00ec
+                    00ED    226 Fradio_queue$T4CC0$0$0 == 0x00ed
+                    00ED    227 _T4CC0	=	0x00ed
+                    00EE    228 Fradio_queue$T4CCTL1$0$0 == 0x00ee
+                    00EE    229 _T4CCTL1	=	0x00ee
+                    00EF    230 Fradio_queue$T4CC1$0$0 == 0x00ef
+                    00EF    231 _T4CC1	=	0x00ef
+                    00F0    232 Fradio_queue$B$0$0 == 0x00f0
+                    00F0    233 _B	=	0x00f0
+                    00F1    234 Fradio_queue$PERCFG$0$0 == 0x00f1
+                    00F1    235 _PERCFG	=	0x00f1
+                    00F2    236 Fradio_queue$ADCCFG$0$0 == 0x00f2
+                    00F2    237 _ADCCFG	=	0x00f2
+                    00F3    238 Fradio_queue$P0SEL$0$0 == 0x00f3
+                    00F3    239 _P0SEL	=	0x00f3
+                    00F4    240 Fradio_queue$P1SEL$0$0 == 0x00f4
+                    00F4    241 _P1SEL	=	0x00f4
+                    00F5    242 Fradio_queue$P2SEL$0$0 == 0x00f5
+                    00F5    243 _P2SEL	=	0x00f5
+                    00F6    244 Fradio_queue$P1INP$0$0 == 0x00f6
+                    00F6    245 _P1INP	=	0x00f6
+                    00F7    246 Fradio_queue$P2INP$0$0 == 0x00f7
+                    00F7    247 _P2INP	=	0x00f7
+                    00F8    248 Fradio_queue$U1CSR$0$0 == 0x00f8
+                    00F8    249 _U1CSR	=	0x00f8
+                    00F9    250 Fradio_queue$U1DBUF$0$0 == 0x00f9
+                    00F9    251 _U1DBUF	=	0x00f9
+                    00FA    252 Fradio_queue$U1BAUD$0$0 == 0x00fa
+                    00FA    253 _U1BAUD	=	0x00fa
+                    00FB    254 Fradio_queue$U1UCR$0$0 == 0x00fb
+                    00FB    255 _U1UCR	=	0x00fb
+                    00FC    256 Fradio_queue$U1GCR$0$0 == 0x00fc
+                    00FC    257 _U1GCR	=	0x00fc
+                    00FD    258 Fradio_queue$P0DIR$0$0 == 0x00fd
+                    00FD    259 _P0DIR	=	0x00fd
+                    00FE    260 Fradio_queue$P1DIR$0$0 == 0x00fe
+                    00FE    261 _P1DIR	=	0x00fe
+                    00FF    262 Fradio_queue$P2DIR$0$0 == 0x00ff
+                    00FF    263 _P2DIR	=	0x00ff
+                    FFFFD5D4    264 Fradio_queue$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    265 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    266 Fradio_queue$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    267 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    268 Fradio_queue$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    269 _FADDR	=	0xffffadac
+                    FFFFBBBA    270 Fradio_queue$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    271 _ADC	=	0xffffbbba
+                    FFFFDBDA    272 Fradio_queue$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    273 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    274 Fradio_queue$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    275 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    276 Fradio_queue$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    277 _T1CC2	=	0xffffdfde
+                            278 ;--------------------------------------------------------
+                            279 ; special function bits
+                            280 ;--------------------------------------------------------
+                            281 	.area RSEG    (ABS,DATA)
+   0000                     282 	.org 0x0000
+                    0080    283 Fradio_queue$P0_0$0$0 == 0x0080
+                    0080    284 _P0_0	=	0x0080
+                    0081    285 Fradio_queue$P0_1$0$0 == 0x0081
+                    0081    286 _P0_1	=	0x0081
+                    0082    287 Fradio_queue$P0_2$0$0 == 0x0082
+                    0082    288 _P0_2	=	0x0082
+                    0083    289 Fradio_queue$P0_3$0$0 == 0x0083
+                    0083    290 _P0_3	=	0x0083
+                    0084    291 Fradio_queue$P0_4$0$0 == 0x0084
+                    0084    292 _P0_4	=	0x0084
+                    0085    293 Fradio_queue$P0_5$0$0 == 0x0085
+                    0085    294 _P0_5	=	0x0085
+                    0086    295 Fradio_queue$P0_6$0$0 == 0x0086
+                    0086    296 _P0_6	=	0x0086
+                    0087    297 Fradio_queue$P0_7$0$0 == 0x0087
+                    0087    298 _P0_7	=	0x0087
+                    0088    299 Fradio_queue$_TCON_0$0$0 == 0x0088
+                    0088    300 __TCON_0	=	0x0088
+                    0089    301 Fradio_queue$RFTXRXIF$0$0 == 0x0089
+                    0089    302 _RFTXRXIF	=	0x0089
+                    008A    303 Fradio_queue$_TCON_2$0$0 == 0x008a
+                    008A    304 __TCON_2	=	0x008a
+                    008B    305 Fradio_queue$URX0IF$0$0 == 0x008b
+                    008B    306 _URX0IF	=	0x008b
+                    008C    307 Fradio_queue$_TCON_4$0$0 == 0x008c
+                    008C    308 __TCON_4	=	0x008c
+                    008D    309 Fradio_queue$ADCIF$0$0 == 0x008d
+                    008D    310 _ADCIF	=	0x008d
+                    008E    311 Fradio_queue$_TCON_6$0$0 == 0x008e
+                    008E    312 __TCON_6	=	0x008e
+                    008F    313 Fradio_queue$URX1IF$0$0 == 0x008f
+                    008F    314 _URX1IF	=	0x008f
+                    0090    315 Fradio_queue$P1_0$0$0 == 0x0090
+                    0090    316 _P1_0	=	0x0090
+                    0091    317 Fradio_queue$P1_1$0$0 == 0x0091
+                    0091    318 _P1_1	=	0x0091
+                    0092    319 Fradio_queue$P1_2$0$0 == 0x0092
+                    0092    320 _P1_2	=	0x0092
+                    0093    321 Fradio_queue$P1_3$0$0 == 0x0093
+                    0093    322 _P1_3	=	0x0093
+                    0094    323 Fradio_queue$P1_4$0$0 == 0x0094
+                    0094    324 _P1_4	=	0x0094
+                    0095    325 Fradio_queue$P1_5$0$0 == 0x0095
+                    0095    326 _P1_5	=	0x0095
+                    0096    327 Fradio_queue$P1_6$0$0 == 0x0096
+                    0096    328 _P1_6	=	0x0096
+                    0097    329 Fradio_queue$P1_7$0$0 == 0x0097
+                    0097    330 _P1_7	=	0x0097
+                    0098    331 Fradio_queue$ENCIF_0$0$0 == 0x0098
+                    0098    332 _ENCIF_0	=	0x0098
+                    0099    333 Fradio_queue$ENCIF_1$0$0 == 0x0099
+                    0099    334 _ENCIF_1	=	0x0099
+                    009A    335 Fradio_queue$_SOCON2$0$0 == 0x009a
+                    009A    336 __SOCON2	=	0x009a
+                    009B    337 Fradio_queue$_SOCON3$0$0 == 0x009b
+                    009B    338 __SOCON3	=	0x009b
+                    009C    339 Fradio_queue$_SOCON4$0$0 == 0x009c
+                    009C    340 __SOCON4	=	0x009c
+                    009D    341 Fradio_queue$_SOCON5$0$0 == 0x009d
+                    009D    342 __SOCON5	=	0x009d
+                    009E    343 Fradio_queue$_SOCON6$0$0 == 0x009e
+                    009E    344 __SOCON6	=	0x009e
+                    009F    345 Fradio_queue$_SOCON7$0$0 == 0x009f
+                    009F    346 __SOCON7	=	0x009f
+                    00A0    347 Fradio_queue$P2_0$0$0 == 0x00a0
+                    00A0    348 _P2_0	=	0x00a0
+                    00A1    349 Fradio_queue$P2_1$0$0 == 0x00a1
+                    00A1    350 _P2_1	=	0x00a1
+                    00A2    351 Fradio_queue$P2_2$0$0 == 0x00a2
+                    00A2    352 _P2_2	=	0x00a2
+                    00A3    353 Fradio_queue$P2_3$0$0 == 0x00a3
+                    00A3    354 _P2_3	=	0x00a3
+                    00A4    355 Fradio_queue$P2_4$0$0 == 0x00a4
+                    00A4    356 _P2_4	=	0x00a4
+                    00A5    357 Fradio_queue$P2_5$0$0 == 0x00a5
+                    00A5    358 _P2_5	=	0x00a5
+                    00A6    359 Fradio_queue$P2_6$0$0 == 0x00a6
+                    00A6    360 _P2_6	=	0x00a6
+                    00A7    361 Fradio_queue$P2_7$0$0 == 0x00a7
+                    00A7    362 _P2_7	=	0x00a7
+                    00A8    363 Fradio_queue$RFTXRXIE$0$0 == 0x00a8
+                    00A8    364 _RFTXRXIE	=	0x00a8
+                    00A9    365 Fradio_queue$ADCIE$0$0 == 0x00a9
+                    00A9    366 _ADCIE	=	0x00a9
+                    00AA    367 Fradio_queue$URX0IE$0$0 == 0x00aa
+                    00AA    368 _URX0IE	=	0x00aa
+                    00AB    369 Fradio_queue$URX1IE$0$0 == 0x00ab
+                    00AB    370 _URX1IE	=	0x00ab
+                    00AC    371 Fradio_queue$ENCIE$0$0 == 0x00ac
+                    00AC    372 _ENCIE	=	0x00ac
+                    00AD    373 Fradio_queue$STIE$0$0 == 0x00ad
+                    00AD    374 _STIE	=	0x00ad
+                    00AE    375 Fradio_queue$_IEN06$0$0 == 0x00ae
+                    00AE    376 __IEN06	=	0x00ae
+                    00AF    377 Fradio_queue$EA$0$0 == 0x00af
+                    00AF    378 _EA	=	0x00af
+                    00B8    379 Fradio_queue$DMAIE$0$0 == 0x00b8
+                    00B8    380 _DMAIE	=	0x00b8
+                    00B9    381 Fradio_queue$T1IE$0$0 == 0x00b9
+                    00B9    382 _T1IE	=	0x00b9
+                    00BA    383 Fradio_queue$T2IE$0$0 == 0x00ba
+                    00BA    384 _T2IE	=	0x00ba
+                    00BB    385 Fradio_queue$T3IE$0$0 == 0x00bb
+                    00BB    386 _T3IE	=	0x00bb
+                    00BC    387 Fradio_queue$T4IE$0$0 == 0x00bc
+                    00BC    388 _T4IE	=	0x00bc
+                    00BD    389 Fradio_queue$P0IE$0$0 == 0x00bd
+                    00BD    390 _P0IE	=	0x00bd
+                    00BE    391 Fradio_queue$_IEN16$0$0 == 0x00be
+                    00BE    392 __IEN16	=	0x00be
+                    00BF    393 Fradio_queue$_IEN17$0$0 == 0x00bf
+                    00BF    394 __IEN17	=	0x00bf
+                    00C0    395 Fradio_queue$DMAIF$0$0 == 0x00c0
+                    00C0    396 _DMAIF	=	0x00c0
+                    00C1    397 Fradio_queue$T1IF$0$0 == 0x00c1
+                    00C1    398 _T1IF	=	0x00c1
+                    00C2    399 Fradio_queue$T2IF$0$0 == 0x00c2
+                    00C2    400 _T2IF	=	0x00c2
+                    00C3    401 Fradio_queue$T3IF$0$0 == 0x00c3
+                    00C3    402 _T3IF	=	0x00c3
+                    00C4    403 Fradio_queue$T4IF$0$0 == 0x00c4
+                    00C4    404 _T4IF	=	0x00c4
+                    00C5    405 Fradio_queue$P0IF$0$0 == 0x00c5
+                    00C5    406 _P0IF	=	0x00c5
+                    00C6    407 Fradio_queue$_IRCON6$0$0 == 0x00c6
+                    00C6    408 __IRCON6	=	0x00c6
+                    00C7    409 Fradio_queue$STIF$0$0 == 0x00c7
+                    00C7    410 _STIF	=	0x00c7
+                    00D0    411 Fradio_queue$P$0$0 == 0x00d0
+                    00D0    412 _P	=	0x00d0
+                    00D1    413 Fradio_queue$F1$0$0 == 0x00d1
+                    00D1    414 _F1	=	0x00d1
+                    00D2    415 Fradio_queue$OV$0$0 == 0x00d2
+                    00D2    416 _OV	=	0x00d2
+                    00D3    417 Fradio_queue$RS0$0$0 == 0x00d3
+                    00D3    418 _RS0	=	0x00d3
+                    00D4    419 Fradio_queue$RS1$0$0 == 0x00d4
+                    00D4    420 _RS1	=	0x00d4
+                    00D5    421 Fradio_queue$F0$0$0 == 0x00d5
+                    00D5    422 _F0	=	0x00d5
+                    00D6    423 Fradio_queue$AC$0$0 == 0x00d6
+                    00D6    424 _AC	=	0x00d6
+                    00D7    425 Fradio_queue$CY$0$0 == 0x00d7
+                    00D7    426 _CY	=	0x00d7
+                    00D8    427 Fradio_queue$T3OVFIF$0$0 == 0x00d8
+                    00D8    428 _T3OVFIF	=	0x00d8
+                    00D9    429 Fradio_queue$T3CH0IF$0$0 == 0x00d9
+                    00D9    430 _T3CH0IF	=	0x00d9
+                    00DA    431 Fradio_queue$T3CH1IF$0$0 == 0x00da
+                    00DA    432 _T3CH1IF	=	0x00da
+                    00DB    433 Fradio_queue$T4OVFIF$0$0 == 0x00db
+                    00DB    434 _T4OVFIF	=	0x00db
+                    00DC    435 Fradio_queue$T4CH0IF$0$0 == 0x00dc
+                    00DC    436 _T4CH0IF	=	0x00dc
+                    00DD    437 Fradio_queue$T4CH1IF$0$0 == 0x00dd
+                    00DD    438 _T4CH1IF	=	0x00dd
+                    00DE    439 Fradio_queue$OVFIM$0$0 == 0x00de
+                    00DE    440 _OVFIM	=	0x00de
+                    00DF    441 Fradio_queue$_TIMIF7$0$0 == 0x00df
+                    00DF    442 __TIMIF7	=	0x00df
+                    00E0    443 Fradio_queue$ACC_0$0$0 == 0x00e0
+                    00E0    444 _ACC_0	=	0x00e0
+                    00E1    445 Fradio_queue$ACC_1$0$0 == 0x00e1
+                    00E1    446 _ACC_1	=	0x00e1
+                    00E2    447 Fradio_queue$ACC_2$0$0 == 0x00e2
+                    00E2    448 _ACC_2	=	0x00e2
+                    00E3    449 Fradio_queue$ACC_3$0$0 == 0x00e3
+                    00E3    450 _ACC_3	=	0x00e3
+                    00E4    451 Fradio_queue$ACC_4$0$0 == 0x00e4
+                    00E4    452 _ACC_4	=	0x00e4
+                    00E5    453 Fradio_queue$ACC_5$0$0 == 0x00e5
+                    00E5    454 _ACC_5	=	0x00e5
+                    00E6    455 Fradio_queue$ACC_6$0$0 == 0x00e6
+                    00E6    456 _ACC_6	=	0x00e6
+                    00E7    457 Fradio_queue$ACC_7$0$0 == 0x00e7
+                    00E7    458 _ACC_7	=	0x00e7
+                    00E8    459 Fradio_queue$P2IF$0$0 == 0x00e8
+                    00E8    460 _P2IF	=	0x00e8
+                    00E9    461 Fradio_queue$UTX0IF$0$0 == 0x00e9
+                    00E9    462 _UTX0IF	=	0x00e9
+                    00EA    463 Fradio_queue$UTX1IF$0$0 == 0x00ea
+                    00EA    464 _UTX1IF	=	0x00ea
+                    00EB    465 Fradio_queue$P1IF$0$0 == 0x00eb
+                    00EB    466 _P1IF	=	0x00eb
+                    00EC    467 Fradio_queue$WDTIF$0$0 == 0x00ec
+                    00EC    468 _WDTIF	=	0x00ec
+                    00ED    469 Fradio_queue$_IRCON25$0$0 == 0x00ed
+                    00ED    470 __IRCON25	=	0x00ed
+                    00EE    471 Fradio_queue$_IRCON26$0$0 == 0x00ee
+                    00EE    472 __IRCON26	=	0x00ee
+                    00EF    473 Fradio_queue$_IRCON27$0$0 == 0x00ef
+                    00EF    474 __IRCON27	=	0x00ef
+                    00F0    475 Fradio_queue$B_0$0$0 == 0x00f0
+                    00F0    476 _B_0	=	0x00f0
+                    00F1    477 Fradio_queue$B_1$0$0 == 0x00f1
+                    00F1    478 _B_1	=	0x00f1
+                    00F2    479 Fradio_queue$B_2$0$0 == 0x00f2
+                    00F2    480 _B_2	=	0x00f2
+                    00F3    481 Fradio_queue$B_3$0$0 == 0x00f3
+                    00F3    482 _B_3	=	0x00f3
+                    00F4    483 Fradio_queue$B_4$0$0 == 0x00f4
+                    00F4    484 _B_4	=	0x00f4
+                    00F5    485 Fradio_queue$B_5$0$0 == 0x00f5
+                    00F5    486 _B_5	=	0x00f5
+                    00F6    487 Fradio_queue$B_6$0$0 == 0x00f6
+                    00F6    488 _B_6	=	0x00f6
+                    00F7    489 Fradio_queue$B_7$0$0 == 0x00f7
+                    00F7    490 _B_7	=	0x00f7
+                    00F8    491 Fradio_queue$U1ACTIVE$0$0 == 0x00f8
+                    00F8    492 _U1ACTIVE	=	0x00f8
+                    00F9    493 Fradio_queue$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    494 _U1TX_BYTE	=	0x00f9
+                    00FA    495 Fradio_queue$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    496 _U1RX_BYTE	=	0x00fa
+                    00FB    497 Fradio_queue$U1ERR$0$0 == 0x00fb
+                    00FB    498 _U1ERR	=	0x00fb
+                    00FC    499 Fradio_queue$U1FE$0$0 == 0x00fc
+                    00FC    500 _U1FE	=	0x00fc
+                    00FD    501 Fradio_queue$U1SLAVE$0$0 == 0x00fd
+                    00FD    502 _U1SLAVE	=	0x00fd
+                    00FE    503 Fradio_queue$U1RE$0$0 == 0x00fe
+                    00FE    504 _U1RE	=	0x00fe
+                    00FF    505 Fradio_queue$U1MODE$0$0 == 0x00ff
+                    00FF    506 _U1MODE	=	0x00ff
+                            507 ;--------------------------------------------------------
+                            508 ; overlayable register banks
+                            509 ;--------------------------------------------------------
+                            510 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     511 	.ds 8
+                            512 ;--------------------------------------------------------
+                            513 ; internal ram data
+                            514 ;--------------------------------------------------------
+                            515 	.area DSEG    (DATA)
+                    0000    516 Fradio_queue$radioQueueRxMainLoopIndex$0$0==.
+   0000                     517 _radioQueueRxMainLoopIndex:
+   0000                     518 	.ds 1
+                    0001    519 Fradio_queue$radioQueueRxInterruptIndex$0$0==.
+   0001                     520 _radioQueueRxInterruptIndex:
+   0001                     521 	.ds 1
+                    0002    522 Fradio_queue$radioQueueTxMainLoopIndex$0$0==.
+   0002                     523 _radioQueueTxMainLoopIndex:
+   0002                     524 	.ds 1
+                    0003    525 Fradio_queue$radioQueueTxInterruptIndex$0$0==.
+   0003                     526 _radioQueueTxInterruptIndex:
+   0003                     527 	.ds 1
+                            528 ;--------------------------------------------------------
+                            529 ; overlayable items in internal ram 
+                            530 ;--------------------------------------------------------
+                            531 	.area OSEG    (OVR,DATA)
+                            532 ;--------------------------------------------------------
+                            533 ; indirectly addressable internal ram data
+                            534 ;--------------------------------------------------------
+                            535 	.area ISEG    (DATA)
+                            536 ;--------------------------------------------------------
+                            537 ; absolute internal ram data
+                            538 ;--------------------------------------------------------
+                            539 	.area IABS    (ABS,DATA)
+                            540 	.area IABS    (ABS,DATA)
+                            541 ;--------------------------------------------------------
+                            542 ; bit data
+                            543 ;--------------------------------------------------------
+                            544 	.area BSEG    (BIT)
+                    0000    545 Fradio_queue$channel_select$0$0==.
+   0000                     546 _channel_select:
+   0000                     547 	.ds 1
+                    0001    548 G$radioQueueAllowCrcErrors$0$0==.
+   0001                     549 _radioQueueAllowCrcErrors::
+   0001                     550 	.ds 1
+                            551 ;--------------------------------------------------------
+                            552 ; paged external ram data
+                            553 ;--------------------------------------------------------
+                            554 	.area PSEG    (PAG,XDATA)
+                    0000    555 Fradio_queue$channel_number$0$0==.
+   0000                     556 _channel_number:
+   0000                     557 	.ds 4
+                            558 ;--------------------------------------------------------
+                            559 ; external ram data
+                            560 ;--------------------------------------------------------
+                            561 	.area XSEG    (XDATA)
+                    DF00    562 Fradio_queue$SYNC1$0$0 == 0xdf00
+                    DF00    563 _SYNC1	=	0xdf00
+                    DF01    564 Fradio_queue$SYNC0$0$0 == 0xdf01
+                    DF01    565 _SYNC0	=	0xdf01
+                    DF02    566 Fradio_queue$PKTLEN$0$0 == 0xdf02
+                    DF02    567 _PKTLEN	=	0xdf02
+                    DF03    568 Fradio_queue$PKTCTRL1$0$0 == 0xdf03
+                    DF03    569 _PKTCTRL1	=	0xdf03
+                    DF04    570 Fradio_queue$PKTCTRL0$0$0 == 0xdf04
+                    DF04    571 _PKTCTRL0	=	0xdf04
+                    DF05    572 Fradio_queue$ADDR$0$0 == 0xdf05
+                    DF05    573 _ADDR	=	0xdf05
+                    DF06    574 Fradio_queue$CHANNR$0$0 == 0xdf06
+                    DF06    575 _CHANNR	=	0xdf06
+                    DF07    576 Fradio_queue$FSCTRL1$0$0 == 0xdf07
+                    DF07    577 _FSCTRL1	=	0xdf07
+                    DF08    578 Fradio_queue$FSCTRL0$0$0 == 0xdf08
+                    DF08    579 _FSCTRL0	=	0xdf08
+                    DF09    580 Fradio_queue$FREQ2$0$0 == 0xdf09
+                    DF09    581 _FREQ2	=	0xdf09
+                    DF0A    582 Fradio_queue$FREQ1$0$0 == 0xdf0a
+                    DF0A    583 _FREQ1	=	0xdf0a
+                    DF0B    584 Fradio_queue$FREQ0$0$0 == 0xdf0b
+                    DF0B    585 _FREQ0	=	0xdf0b
+                    DF0C    586 Fradio_queue$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    587 _MDMCFG4	=	0xdf0c
+                    DF0D    588 Fradio_queue$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    589 _MDMCFG3	=	0xdf0d
+                    DF0E    590 Fradio_queue$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    591 _MDMCFG2	=	0xdf0e
+                    DF0F    592 Fradio_queue$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    593 _MDMCFG1	=	0xdf0f
+                    DF10    594 Fradio_queue$MDMCFG0$0$0 == 0xdf10
+                    DF10    595 _MDMCFG0	=	0xdf10
+                    DF11    596 Fradio_queue$DEVIATN$0$0 == 0xdf11
+                    DF11    597 _DEVIATN	=	0xdf11
+                    DF12    598 Fradio_queue$MCSM2$0$0 == 0xdf12
+                    DF12    599 _MCSM2	=	0xdf12
+                    DF13    600 Fradio_queue$MCSM1$0$0 == 0xdf13
+                    DF13    601 _MCSM1	=	0xdf13
+                    DF14    602 Fradio_queue$MCSM0$0$0 == 0xdf14
+                    DF14    603 _MCSM0	=	0xdf14
+                    DF15    604 Fradio_queue$FOCCFG$0$0 == 0xdf15
+                    DF15    605 _FOCCFG	=	0xdf15
+                    DF16    606 Fradio_queue$BSCFG$0$0 == 0xdf16
+                    DF16    607 _BSCFG	=	0xdf16
+                    DF17    608 Fradio_queue$AGCCTRL2$0$0 == 0xdf17
+                    DF17    609 _AGCCTRL2	=	0xdf17
+                    DF18    610 Fradio_queue$AGCCTRL1$0$0 == 0xdf18
+                    DF18    611 _AGCCTRL1	=	0xdf18
+                    DF19    612 Fradio_queue$AGCCTRL0$0$0 == 0xdf19
+                    DF19    613 _AGCCTRL0	=	0xdf19
+                    DF1A    614 Fradio_queue$FREND1$0$0 == 0xdf1a
+                    DF1A    615 _FREND1	=	0xdf1a
+                    DF1B    616 Fradio_queue$FREND0$0$0 == 0xdf1b
+                    DF1B    617 _FREND0	=	0xdf1b
+                    DF1C    618 Fradio_queue$FSCAL3$0$0 == 0xdf1c
+                    DF1C    619 _FSCAL3	=	0xdf1c
+                    DF1D    620 Fradio_queue$FSCAL2$0$0 == 0xdf1d
+                    DF1D    621 _FSCAL2	=	0xdf1d
+                    DF1E    622 Fradio_queue$FSCAL1$0$0 == 0xdf1e
+                    DF1E    623 _FSCAL1	=	0xdf1e
+                    DF1F    624 Fradio_queue$FSCAL0$0$0 == 0xdf1f
+                    DF1F    625 _FSCAL0	=	0xdf1f
+                    DF23    626 Fradio_queue$TEST2$0$0 == 0xdf23
+                    DF23    627 _TEST2	=	0xdf23
+                    DF24    628 Fradio_queue$TEST1$0$0 == 0xdf24
+                    DF24    629 _TEST1	=	0xdf24
+                    DF25    630 Fradio_queue$TEST0$0$0 == 0xdf25
+                    DF25    631 _TEST0	=	0xdf25
+                    DF2E    632 Fradio_queue$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    633 _PA_TABLE0	=	0xdf2e
+                    DF2F    634 Fradio_queue$IOCFG2$0$0 == 0xdf2f
+                    DF2F    635 _IOCFG2	=	0xdf2f
+                    DF30    636 Fradio_queue$IOCFG1$0$0 == 0xdf30
+                    DF30    637 _IOCFG1	=	0xdf30
+                    DF31    638 Fradio_queue$IOCFG0$0$0 == 0xdf31
+                    DF31    639 _IOCFG0	=	0xdf31
+                    DF36    640 Fradio_queue$PARTNUM$0$0 == 0xdf36
+                    DF36    641 _PARTNUM	=	0xdf36
+                    DF37    642 Fradio_queue$VERSION$0$0 == 0xdf37
+                    DF37    643 _VERSION	=	0xdf37
+                    DF38    644 Fradio_queue$FREQEST$0$0 == 0xdf38
+                    DF38    645 _FREQEST	=	0xdf38
+                    DF39    646 Fradio_queue$LQI$0$0 == 0xdf39
+                    DF39    647 _LQI	=	0xdf39
+                    DF3A    648 Fradio_queue$RSSI$0$0 == 0xdf3a
+                    DF3A    649 _RSSI	=	0xdf3a
+                    DF3B    650 Fradio_queue$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    651 _MARCSTATE	=	0xdf3b
+                    DF3C    652 Fradio_queue$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    653 _PKTSTATUS	=	0xdf3c
+                    DF3D    654 Fradio_queue$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    655 _VCO_VC_DAC	=	0xdf3d
+                    DF40    656 Fradio_queue$I2SCFG0$0$0 == 0xdf40
+                    DF40    657 _I2SCFG0	=	0xdf40
+                    DF41    658 Fradio_queue$I2SCFG1$0$0 == 0xdf41
+                    DF41    659 _I2SCFG1	=	0xdf41
+                    DF42    660 Fradio_queue$I2SDATL$0$0 == 0xdf42
+                    DF42    661 _I2SDATL	=	0xdf42
+                    DF43    662 Fradio_queue$I2SDATH$0$0 == 0xdf43
+                    DF43    663 _I2SDATH	=	0xdf43
+                    DF44    664 Fradio_queue$I2SWCNT$0$0 == 0xdf44
+                    DF44    665 _I2SWCNT	=	0xdf44
+                    DF45    666 Fradio_queue$I2SSTAT$0$0 == 0xdf45
+                    DF45    667 _I2SSTAT	=	0xdf45
+                    DF46    668 Fradio_queue$I2SCLKF0$0$0 == 0xdf46
+                    DF46    669 _I2SCLKF0	=	0xdf46
+                    DF47    670 Fradio_queue$I2SCLKF1$0$0 == 0xdf47
+                    DF47    671 _I2SCLKF1	=	0xdf47
+                    DF48    672 Fradio_queue$I2SCLKF2$0$0 == 0xdf48
+                    DF48    673 _I2SCLKF2	=	0xdf48
+                    DE00    674 Fradio_queue$USBADDR$0$0 == 0xde00
+                    DE00    675 _USBADDR	=	0xde00
+                    DE01    676 Fradio_queue$USBPOW$0$0 == 0xde01
+                    DE01    677 _USBPOW	=	0xde01
+                    DE02    678 Fradio_queue$USBIIF$0$0 == 0xde02
+                    DE02    679 _USBIIF	=	0xde02
+                    DE04    680 Fradio_queue$USBOIF$0$0 == 0xde04
+                    DE04    681 _USBOIF	=	0xde04
+                    DE06    682 Fradio_queue$USBCIF$0$0 == 0xde06
+                    DE06    683 _USBCIF	=	0xde06
+                    DE07    684 Fradio_queue$USBIIE$0$0 == 0xde07
+                    DE07    685 _USBIIE	=	0xde07
+                    DE09    686 Fradio_queue$USBOIE$0$0 == 0xde09
+                    DE09    687 _USBOIE	=	0xde09
+                    DE0B    688 Fradio_queue$USBCIE$0$0 == 0xde0b
+                    DE0B    689 _USBCIE	=	0xde0b
+                    DE0C    690 Fradio_queue$USBFRML$0$0 == 0xde0c
+                    DE0C    691 _USBFRML	=	0xde0c
+                    DE0D    692 Fradio_queue$USBFRMH$0$0 == 0xde0d
+                    DE0D    693 _USBFRMH	=	0xde0d
+                    DE0E    694 Fradio_queue$USBINDEX$0$0 == 0xde0e
+                    DE0E    695 _USBINDEX	=	0xde0e
+                    DE10    696 Fradio_queue$USBMAXI$0$0 == 0xde10
+                    DE10    697 _USBMAXI	=	0xde10
+                    DE11    698 Fradio_queue$USBCSIL$0$0 == 0xde11
+                    DE11    699 _USBCSIL	=	0xde11
+                    DE12    700 Fradio_queue$USBCSIH$0$0 == 0xde12
+                    DE12    701 _USBCSIH	=	0xde12
+                    DE13    702 Fradio_queue$USBMAXO$0$0 == 0xde13
+                    DE13    703 _USBMAXO	=	0xde13
+                    DE14    704 Fradio_queue$USBCSOL$0$0 == 0xde14
+                    DE14    705 _USBCSOL	=	0xde14
+                    DE15    706 Fradio_queue$USBCSOH$0$0 == 0xde15
+                    DE15    707 _USBCSOH	=	0xde15
+                    DE16    708 Fradio_queue$USBCNTL$0$0 == 0xde16
+                    DE16    709 _USBCNTL	=	0xde16
+                    DE17    710 Fradio_queue$USBCNTH$0$0 == 0xde17
+                    DE17    711 _USBCNTH	=	0xde17
+                    DE20    712 Fradio_queue$USBF0$0$0 == 0xde20
+                    DE20    713 _USBF0	=	0xde20
+                    DE22    714 Fradio_queue$USBF1$0$0 == 0xde22
+                    DE22    715 _USBF1	=	0xde22
+                    DE24    716 Fradio_queue$USBF2$0$0 == 0xde24
+                    DE24    717 _USBF2	=	0xde24
+                    DE26    718 Fradio_queue$USBF3$0$0 == 0xde26
+                    DE26    719 _USBF3	=	0xde26
+                    DE28    720 Fradio_queue$USBF4$0$0 == 0xde28
+                    DE28    721 _USBF4	=	0xde28
+                    DE2A    722 Fradio_queue$USBF5$0$0 == 0xde2a
+                    DE2A    723 _USBF5	=	0xde2a
+                    0000    724 Fradio_queue$radioQueueRxPacket$0$0==.
+   0000                     725 _radioQueueRxPacket:
+   0000                     726 	.ds 66
+                    0042    727 Fradio_queue$radioQueueTxPacket$0$0==.
+   0042                     728 _radioQueueTxPacket:
+   0042                     729 	.ds 320
+                            730 ;--------------------------------------------------------
+                            731 ; absolute external ram data
+                            732 ;--------------------------------------------------------
+                            733 	.area XABS    (ABS,XDATA)
+                            734 ;--------------------------------------------------------
+                            735 ; external initialized ram data
+                            736 ;--------------------------------------------------------
+                            737 	.area XISEG   (XDATA)
+                            738 	.area HOME    (CODE)
+                            739 	.area GSINIT0 (CODE)
+                            740 	.area GSINIT1 (CODE)
+                            741 	.area GSINIT2 (CODE)
+                            742 	.area GSINIT3 (CODE)
+                            743 	.area GSINIT4 (CODE)
+                            744 	.area GSINIT5 (CODE)
+                            745 	.area GSINIT  (CODE)
+                            746 	.area GSFINAL (CODE)
+                            747 	.area CSEG    (CODE)
+                            748 ;--------------------------------------------------------
+                            749 ; global & static initialisations
+                            750 ;--------------------------------------------------------
+                            751 	.area HOME    (CODE)
+                            752 	.area GSINIT  (CODE)
+                            753 	.area GSFINAL (CODE)
+                            754 	.area GSINIT  (CODE)
+                    0000    755 	G$radioMacEventHandler$0$0 ==.
+                    0000    756 	C$radio_queue.c$58$2$1 ==.
+                            757 ;	libraries/src/radio_queue/radio_queue.c:58: static volatile uint8 DATA radioQueueRxMainLoopIndex = 0;   // The index of the next rxBuffer to read from the main loop.
+   0000 75*00 00            758 	mov	_radioQueueRxMainLoopIndex,#0x00
+                    0003    759 	G$radioMacEventHandler$0$0 ==.
+                    0003    760 	C$radio_queue.c$59$2$1 ==.
+                            761 ;	libraries/src/radio_queue/radio_queue.c:59: static volatile uint8 DATA radioQueueRxInterruptIndex = 0;  // The index of the next rxBuffer to write to when a packet comes from the radio.
+   0003 75*01 00            762 	mov	_radioQueueRxInterruptIndex,#0x00
+                    0006    763 	G$radioMacEventHandler$0$0 ==.
+                    0006    764 	C$radio_queue.c$64$2$1 ==.
+                            765 ;	libraries/src/radio_queue/radio_queue.c:64: static volatile uint8 DATA radioQueueTxMainLoopIndex = 0;   // The index of the next txPacket to write to in the main loop.
+   0006 75*02 00            766 	mov	_radioQueueTxMainLoopIndex,#0x00
+                    0009    767 	G$radioMacEventHandler$0$0 ==.
+                    0009    768 	C$radio_queue.c$65$2$1 ==.
+                            769 ;	libraries/src/radio_queue/radio_queue.c:65: static volatile uint8 DATA radioQueueTxInterruptIndex = 0;  // The index of the current txPacket we are trying to send on the radio.
+   0009 75*03 00            770 	mov	_radioQueueTxInterruptIndex,#0x00
+                    000C    771 	G$radioMacEventHandler$0$0 ==.
+                    000C    772 	C$radio_queue.c$29$2$1 ==.
+                            773 ;	libraries/src/radio_queue/radio_queue.c:29: static volatile BIT channel_select = 0;
+   000C C2*00               774 	clr	_channel_select
+                    000E    775 	G$radioMacEventHandler$0$0 ==.
+                    000E    776 	C$radio_queue.c$67$2$1 ==.
+                            777 ;	libraries/src/radio_queue/radio_queue.c:67: BIT radioQueueAllowCrcErrors = 0;
+   000E C2*01               778 	clr	_radioQueueAllowCrcErrors
+                    0010    779 	G$radioMacEventHandler$0$0 ==.
+                    0010    780 	C$radio_queue.c$28$2$1 ==.
+                            781 ;	libraries/src/radio_queue/radio_queue.c:28: static int32 channel_number = 0;
+   0010 78r00               782 	mov	r0,#_channel_number
+   0012 E4                  783 	clr	a
+   0013 F2                  784 	movx	@r0,a
+   0014 08                  785 	inc	r0
+   0015 F2                  786 	movx	@r0,a
+   0016 08                  787 	inc	r0
+   0017 F2                  788 	movx	@r0,a
+   0018 08                  789 	inc	r0
+   0019 F2                  790 	movx	@r0,a
+                            791 ;--------------------------------------------------------
+                            792 ; Home
+                            793 ;--------------------------------------------------------
+                            794 	.area HOME    (CODE)
+                            795 	.area HOME    (CODE)
+                            796 ;--------------------------------------------------------
+                            797 ; code
+                            798 ;--------------------------------------------------------
+                            799 	.area CSEG    (CODE)
+                            800 ;------------------------------------------------------------
+                            801 ;Allocation info for local variables in function 'radioQueueInit'
+                            802 ;------------------------------------------------------------
+                    0000    803 	G$radioQueueInit$0$0 ==.
+                    0000    804 	C$radio_queue.c$71$0$0 ==.
+                            805 ;	libraries/src/radio_queue/radio_queue.c:71: void radioQueueInit()
+                            806 ;	-----------------------------------------
+                            807 ;	 function radioQueueInit
+                            808 ;	-----------------------------------------
+   0000                     809 _radioQueueInit:
+                    0007    810 	ar7 = 0x07
+                    0006    811 	ar6 = 0x06
+                    0005    812 	ar5 = 0x05
+                    0004    813 	ar4 = 0x04
+                    0003    814 	ar3 = 0x03
+                    0002    815 	ar2 = 0x02
+                    0001    816 	ar1 = 0x01
+                    0000    817 	ar0 = 0x00
+                    0000    818 	C$radio_queue.c$73$1$1 ==.
+                            819 ;	libraries/src/radio_queue/radio_queue.c:73: randomSeedFromSerialNumber();
+   0000 12s00r00            820 	lcall	_randomSeedFromSerialNumber
+                    0003    821 	C$radio_queue.c$75$1$1 ==.
+                            822 ;	libraries/src/radio_queue/radio_queue.c:75: PKTLEN = RADIO_MAX_PACKET_SIZE;
+   0003 90 DF 02            823 	mov	dptr,#_PKTLEN
+   0006 74 13               824 	mov	a,#0x13
+   0008 F0                  825 	movx	@dptr,a
+                    0009    826 	C$radio_queue.c$76$1$1 ==.
+                            827 ;	libraries/src/radio_queue/radio_queue.c:76: if (channel_select)
+   0009 30*00 09            828 	jnb	_channel_select,00102$
+                    000C    829 	C$radio_queue.c$77$2$2 ==.
+                            830 ;	libraries/src/radio_queue/radio_queue.c:77: {CHANNR = channel_number;}
+   000C 78r00               831 	mov	r0,#_channel_number
+   000E 90 DF 06            832 	mov	dptr,#_CHANNR
+   0011 E2                  833 	movx	a,@r0
+   0012 F0                  834 	movx	@dptr,a
+   0013 80 17               835 	sjmp	00103$
+   0015                     836 00102$:
+                    0015    837 	C$radio_queue.c$79$2$3 ==.
+                            838 ;	libraries/src/radio_queue/radio_queue.c:79: {CHANNR = param_radio_channel;}
+   0015 90s00r00            839 	mov	dptr,#_param_radio_channel
+   0018 E4                  840 	clr	a
+   0019 93                  841 	movc	a,@a+dptr
+   001A FC                  842 	mov	r4,a
+   001B 74 01               843 	mov	a,#0x01
+   001D 93                  844 	movc	a,@a+dptr
+   001E FD                  845 	mov	r5,a
+   001F 74 02               846 	mov	a,#0x02
+   0021 93                  847 	movc	a,@a+dptr
+   0022 FE                  848 	mov	r6,a
+   0023 74 03               849 	mov	a,#0x03
+   0025 93                  850 	movc	a,@a+dptr
+   0026 FF                  851 	mov	r7,a
+   0027 90 DF 06            852 	mov	dptr,#_CHANNR
+   002A EC                  853 	mov	a,r4
+   002B F0                  854 	movx	@dptr,a
+   002C                     855 00103$:
+                    002C    856 	C$radio_queue.c$81$1$1 ==.
+                            857 ;	libraries/src/radio_queue/radio_queue.c:81: radioMacInit();
+   002C 12s00r00            858 	lcall	_radioMacInit
+                    002F    859 	C$radio_queue.c$82$1$1 ==.
+                            860 ;	libraries/src/radio_queue/radio_queue.c:82: radioMacStrobe();
+   002F 12s00r00            861 	lcall	_radioMacStrobe
+                    0032    862 	C$radio_queue.c$83$1$1 ==.
+                    0032    863 	XG$radioQueueInit$0$0 ==.
+   0032 22                  864 	ret
+                            865 ;------------------------------------------------------------
+                            866 ;Allocation info for local variables in function 'randomTxDelay'
+                            867 ;------------------------------------------------------------
+                    0033    868 	Fradio_queue$randomTxDelay$0$0 ==.
+                    0033    869 	C$radio_queue.c$87$1$1 ==.
+                            870 ;	libraries/src/radio_queue/radio_queue.c:87: static uint8 randomTxDelay()
+                            871 ;	-----------------------------------------
+                            872 ;	 function randomTxDelay
+                            873 ;	-----------------------------------------
+   0033                     874 _randomTxDelay:
+                    0033    875 	C$radio_queue.c$89$1$1 ==.
+                            876 ;	libraries/src/radio_queue/radio_queue.c:89: return 1 + (randomNumber() & 3);
+   0033 12s00r00            877 	lcall	_randomNumber
+   0036 E5 82               878 	mov	a,dpl
+   0038 54 03               879 	anl	a,#0x03
+   003A 04                  880 	inc	a
+   003B F5 82               881 	mov	dpl,a
+                    003D    882 	C$radio_queue.c$90$1$1 ==.
+                    003D    883 	XFradio_queue$randomTxDelay$0$0 ==.
+   003D 22                  884 	ret
+                            885 ;------------------------------------------------------------
+                            886 ;Allocation info for local variables in function 'radioQueueTxAvailable'
+                            887 ;------------------------------------------------------------
+                    003E    888 	G$radioQueueTxAvailable$0$0 ==.
+                    003E    889 	C$radio_queue.c$94$1$1 ==.
+                            890 ;	libraries/src/radio_queue/radio_queue.c:94: uint8 radioQueueTxAvailable(void)
+                            891 ;	-----------------------------------------
+                            892 ;	 function radioQueueTxAvailable
+                            893 ;	-----------------------------------------
+   003E                     894 _radioQueueTxAvailable:
+                    003E    895 	C$radio_queue.c$97$1$1 ==.
+                            896 ;	libraries/src/radio_queue/radio_queue.c:97: return (radioQueueTxInterruptIndex - radioQueueTxMainLoopIndex - 1) & (TX_PACKET_COUNT - 1);
+   003E E5*03               897 	mov	a,_radioQueueTxInterruptIndex
+   0040 C3                  898 	clr	c
+   0041 95*02               899 	subb	a,_radioQueueTxMainLoopIndex
+   0043 14                  900 	dec	a
+   0044 54 0F               901 	anl	a,#0x0F
+   0046 F5 82               902 	mov	dpl,a
+                    0048    903 	C$radio_queue.c$98$1$1 ==.
+                    0048    904 	XG$radioQueueTxAvailable$0$0 ==.
+   0048 22                  905 	ret
+                            906 ;------------------------------------------------------------
+                            907 ;Allocation info for local variables in function 'radioQueueTxQueued'
+                            908 ;------------------------------------------------------------
+                    0049    909 	G$radioQueueTxQueued$0$0 ==.
+                    0049    910 	C$radio_queue.c$100$1$1 ==.
+                            911 ;	libraries/src/radio_queue/radio_queue.c:100: uint8 radioQueueTxQueued(void)
+                            912 ;	-----------------------------------------
+                            913 ;	 function radioQueueTxQueued
+                            914 ;	-----------------------------------------
+   0049                     915 _radioQueueTxQueued:
+                    0049    916 	C$radio_queue.c$102$1$1 ==.
+                            917 ;	libraries/src/radio_queue/radio_queue.c:102: return (radioQueueTxMainLoopIndex - radioQueueTxInterruptIndex) & (TX_PACKET_COUNT - 1);
+   0049 E5*02               918 	mov	a,_radioQueueTxMainLoopIndex
+   004B C3                  919 	clr	c
+   004C 95*03               920 	subb	a,_radioQueueTxInterruptIndex
+   004E 54 0F               921 	anl	a,#0x0F
+   0050 F5 82               922 	mov	dpl,a
+                    0052    923 	C$radio_queue.c$103$1$1 ==.
+                    0052    924 	XG$radioQueueTxQueued$0$0 ==.
+   0052 22                  925 	ret
+                            926 ;------------------------------------------------------------
+                            927 ;Allocation info for local variables in function 'radioQueueTxCurrentPacket'
+                            928 ;------------------------------------------------------------
+                    0053    929 	G$radioQueueTxCurrentPacket$0$0 ==.
+                    0053    930 	C$radio_queue.c$105$1$1 ==.
+                            931 ;	libraries/src/radio_queue/radio_queue.c:105: uint8 XDATA * radioQueueTxCurrentPacket()
+                            932 ;	-----------------------------------------
+                            933 ;	 function radioQueueTxCurrentPacket
+                            934 ;	-----------------------------------------
+   0053                     935 _radioQueueTxCurrentPacket:
+                    0053    936 	C$radio_queue.c$107$1$1 ==.
+                            937 ;	libraries/src/radio_queue/radio_queue.c:107: if (!radioQueueTxAvailable())
+   0053 12s00r3E            938 	lcall	_radioQueueTxAvailable
+   0056 E5 82               939 	mov	a,dpl
+   0058 70 05               940 	jnz	00102$
+                    005A    941 	C$radio_queue.c$109$2$2 ==.
+                            942 ;	libraries/src/radio_queue/radio_queue.c:109: return 0;
+   005A 90 00 00            943 	mov	dptr,#0x0000
+   005D 80 11               944 	sjmp	00103$
+   005F                     945 00102$:
+                    005F    946 	C$radio_queue.c$112$1$1 ==.
+                            947 ;	libraries/src/radio_queue/radio_queue.c:112: return radioQueueTxPacket[radioQueueTxMainLoopIndex];
+   005F E5*02               948 	mov	a,_radioQueueTxMainLoopIndex
+   0061 75 F0 14            949 	mov	b,#0x14
+   0064 A4                  950 	mul	ab
+   0065 24r42               951 	add	a,#_radioQueueTxPacket
+   0067 FE                  952 	mov	r6,a
+   0068 74s00               953 	mov	a,#(_radioQueueTxPacket >> 8)
+   006A 35 F0               954 	addc	a,b
+                    006C    955 	C$radio_queue.c$113$1$1 ==.
+                    006C    956 	XG$radioQueueTxCurrentPacket$0$0 ==.
+   006C 8E 82               957 	mov	dpl,r6
+   006E F5 83               958 	mov	dph,a
+   0070                     959 00103$:
+   0070 22                  960 	ret
+                            961 ;------------------------------------------------------------
+                            962 ;Allocation info for local variables in function 'radioQueueTxSendPacket'
+                            963 ;------------------------------------------------------------
+                    0071    964 	G$radioQueueTxSendPacket$0$0 ==.
+                    0071    965 	C$radio_queue.c$115$1$1 ==.
+                            966 ;	libraries/src/radio_queue/radio_queue.c:115: void radioQueueTxSendPacket(void)
+                            967 ;	-----------------------------------------
+                            968 ;	 function radioQueueTxSendPacket
+                            969 ;	-----------------------------------------
+   0071                     970 _radioQueueTxSendPacket:
+                    0071    971 	C$radio_queue.c$118$1$1 ==.
+                            972 ;	libraries/src/radio_queue/radio_queue.c:118: if (radioQueueTxMainLoopIndex == TX_PACKET_COUNT - 1)
+   0071 74 0F               973 	mov	a,#0x0F
+   0073 B5*02 05            974 	cjne	a,_radioQueueTxMainLoopIndex,00102$
+                    0076    975 	C$radio_queue.c$120$2$2 ==.
+                            976 ;	libraries/src/radio_queue/radio_queue.c:120: radioQueueTxMainLoopIndex = 0;
+   0076 75*02 00            977 	mov	_radioQueueTxMainLoopIndex,#0x00
+   0079 80 02               978 	sjmp	00103$
+   007B                     979 00102$:
+                    007B    980 	C$radio_queue.c$124$2$3 ==.
+                            981 ;	libraries/src/radio_queue/radio_queue.c:124: radioQueueTxMainLoopIndex++;
+   007B 05*02               982 	inc	_radioQueueTxMainLoopIndex
+   007D                     983 00103$:
+                    007D    984 	C$radio_queue.c$129$1$1 ==.
+                            985 ;	libraries/src/radio_queue/radio_queue.c:129: radioMacStrobe();
+   007D 12s00r00            986 	lcall	_radioMacStrobe
+                    0080    987 	C$radio_queue.c$130$1$1 ==.
+                    0080    988 	XG$radioQueueTxSendPacket$0$0 ==.
+   0080 22                  989 	ret
+                            990 ;------------------------------------------------------------
+                            991 ;Allocation info for local variables in function 'radioQueueRxCurrentPacket'
+                            992 ;------------------------------------------------------------
+                    0081    993 	G$radioQueueRxCurrentPacket$0$0 ==.
+                    0081    994 	C$radio_queue.c$134$1$1 ==.
+                            995 ;	libraries/src/radio_queue/radio_queue.c:134: uint8 XDATA * radioQueueRxCurrentPacket(void)
+                            996 ;	-----------------------------------------
+                            997 ;	 function radioQueueRxCurrentPacket
+                            998 ;	-----------------------------------------
+   0081                     999 _radioQueueRxCurrentPacket:
+                    0081   1000 	C$radio_queue.c$136$1$1 ==.
+                           1001 ;	libraries/src/radio_queue/radio_queue.c:136: if (radioQueueRxMainLoopIndex == radioQueueRxInterruptIndex)
+   0081 E5*01              1002 	mov	a,_radioQueueRxInterruptIndex
+   0083 B5*00 05           1003 	cjne	a,_radioQueueRxMainLoopIndex,00102$
+                    0086   1004 	C$radio_queue.c$138$2$2 ==.
+                           1005 ;	libraries/src/radio_queue/radio_queue.c:138: return 0;
+   0086 90 00 00           1006 	mov	dptr,#0x0000
+   0089 80 10              1007 	sjmp	00103$
+   008B                    1008 00102$:
+                    008B   1009 	C$radio_queue.c$140$1$1 ==.
+                           1010 ;	libraries/src/radio_queue/radio_queue.c:140: return radioQueueRxPacket[radioQueueRxMainLoopIndex];
+   008B E5*00              1011 	mov	a,_radioQueueRxMainLoopIndex
+   008D 75 F0 16           1012 	mov	b,#0x16
+   0090 A4                 1013 	mul	ab
+   0091 24r00              1014 	add	a,#_radioQueueRxPacket
+   0093 FE                 1015 	mov	r6,a
+   0094 E4                 1016 	clr	a
+   0095 34s00              1017 	addc	a,#(_radioQueueRxPacket >> 8)
+                    0097   1018 	C$radio_queue.c$141$1$1 ==.
+                    0097   1019 	XG$radioQueueRxCurrentPacket$0$0 ==.
+   0097 8E 82              1020 	mov	dpl,r6
+   0099 F5 83              1021 	mov	dph,a
+   009B                    1022 00103$:
+   009B 22                 1023 	ret
+                           1024 ;------------------------------------------------------------
+                           1025 ;Allocation info for local variables in function 'radioQueueRxDoneWithPacket'
+                           1026 ;------------------------------------------------------------
+                    009C   1027 	G$radioQueueRxDoneWithPacket$0$0 ==.
+                    009C   1028 	C$radio_queue.c$143$1$1 ==.
+                           1029 ;	libraries/src/radio_queue/radio_queue.c:143: void radioQueueRxDoneWithPacket(void)
+                           1030 ;	-----------------------------------------
+                           1031 ;	 function radioQueueRxDoneWithPacket
+                           1032 ;	-----------------------------------------
+   009C                    1033 _radioQueueRxDoneWithPacket:
+                    009C   1034 	C$radio_queue.c$145$1$1 ==.
+                           1035 ;	libraries/src/radio_queue/radio_queue.c:145: if (radioQueueRxMainLoopIndex == RX_PACKET_COUNT - 1)
+   009C 74 02              1036 	mov	a,#0x02
+   009E B5*00 05           1037 	cjne	a,_radioQueueRxMainLoopIndex,00102$
+                    00A1   1038 	C$radio_queue.c$147$2$2 ==.
+                           1039 ;	libraries/src/radio_queue/radio_queue.c:147: radioQueueRxMainLoopIndex = 0;
+   00A1 75*00 00           1040 	mov	_radioQueueRxMainLoopIndex,#0x00
+   00A4 80 02              1041 	sjmp	00104$
+   00A6                    1042 00102$:
+                    00A6   1043 	C$radio_queue.c$151$2$3 ==.
+                           1044 ;	libraries/src/radio_queue/radio_queue.c:151: radioQueueRxMainLoopIndex++;
+   00A6 05*00              1045 	inc	_radioQueueRxMainLoopIndex
+   00A8                    1046 00104$:
+                    00A8   1047 	C$radio_queue.c$153$1$1 ==.
+                    00A8   1048 	XG$radioQueueRxDoneWithPacket$0$0 ==.
+   00A8 22                 1049 	ret
+                           1050 ;------------------------------------------------------------
+                           1051 ;Allocation info for local variables in function 'takeInitiative'
+                           1052 ;------------------------------------------------------------
+                    00A9   1053 	Fradio_queue$takeInitiative$0$0 ==.
+                    00A9   1054 	C$radio_queue.c$157$1$1 ==.
+                           1055 ;	libraries/src/radio_queue/radio_queue.c:157: static void takeInitiative()
+                           1056 ;	-----------------------------------------
+                           1057 ;	 function takeInitiative
+                           1058 ;	-----------------------------------------
+   00A9                    1059 _takeInitiative:
+                    00A9   1060 	C$radio_queue.c$159$1$1 ==.
+                           1061 ;	libraries/src/radio_queue/radio_queue.c:159: if (radioQueueTxInterruptIndex != radioQueueTxMainLoopIndex)
+   00A9 E5*02              1062 	mov	a,_radioQueueTxMainLoopIndex
+   00AB B5*03 02           1063 	cjne	a,_radioQueueTxInterruptIndex,00107$
+   00AE 80 15              1064 	sjmp	00102$
+   00B0                    1065 00107$:
+                    00B0   1066 	C$radio_queue.c$162$2$2 ==.
+                           1067 ;	libraries/src/radio_queue/radio_queue.c:162: radioMacTx(radioQueueTxPacket[radioQueueTxInterruptIndex]);
+   00B0 E5*03              1068 	mov	a,_radioQueueTxInterruptIndex
+   00B2 75 F0 14           1069 	mov	b,#0x14
+   00B5 A4                 1070 	mul	ab
+   00B6 24r42              1071 	add	a,#_radioQueueTxPacket
+   00B8 F5 82              1072 	mov	dpl,a
+   00BA 74s00              1073 	mov	a,#(_radioQueueTxPacket >> 8)
+   00BC 35 F0              1074 	addc	a,b
+   00BE F5 83              1075 	mov	dph,a
+   00C0 12s00r00           1076 	lcall	_radioMacTx
+   00C3 80 16              1077 	sjmp	00104$
+   00C5                    1078 00102$:
+                    00C5   1079 	C$radio_queue.c$166$2$3 ==.
+                           1080 ;	libraries/src/radio_queue/radio_queue.c:166: radioMacRx(radioQueueRxPacket[radioQueueRxInterruptIndex], 0);
+   00C5 E5*01              1081 	mov	a,_radioQueueRxInterruptIndex
+   00C7 75 F0 16           1082 	mov	b,#0x16
+   00CA A4                 1083 	mul	ab
+   00CB 24r00              1084 	add	a,#_radioQueueRxPacket
+   00CD F5 82              1085 	mov	dpl,a
+   00CF E4                 1086 	clr	a
+   00D0 34s00              1087 	addc	a,#(_radioQueueRxPacket >> 8)
+   00D2 F5 83              1088 	mov	dph,a
+   00D4 78r00              1089 	mov	r0,#_radioMacRx_PARM_2
+   00D6 E4                 1090 	clr	a
+   00D7 F2                 1091 	movx	@r0,a
+   00D8 12s00r00           1092 	lcall	_radioMacRx
+   00DB                    1093 00104$:
+                    00DB   1094 	C$radio_queue.c$168$1$1 ==.
+                    00DB   1095 	XFradio_queue$takeInitiative$0$0 ==.
+   00DB 22                 1096 	ret
+                           1097 ;------------------------------------------------------------
+                           1098 ;Allocation info for local variables in function 'radioMacEventHandler'
+                           1099 ;------------------------------------------------------------
+                    00DC   1100 	G$radioMacEventHandler$0$0 ==.
+                    00DC   1101 	C$radio_queue.c$170$1$1 ==.
+                           1102 ;	libraries/src/radio_queue/radio_queue.c:170: void radioMacEventHandler(uint8 event) // called by the MAC in an ISR
+                           1103 ;	-----------------------------------------
+                           1104 ;	 function radioMacEventHandler
+                           1105 ;	-----------------------------------------
+   00DC                    1106 _radioMacEventHandler:
+   00DC AF 82              1107 	mov	r7,dpl
+                    00DE   1108 	C$radio_queue.c$172$1$1 ==.
+                           1109 ;	libraries/src/radio_queue/radio_queue.c:172: if (event == RADIO_MAC_EVENT_STROBE)
+   00DE BF 21 06           1110 	cjne	r7,#0x21,00126$
+                    00E1   1111 	C$radio_queue.c$174$2$2 ==.
+                           1112 ;	libraries/src/radio_queue/radio_queue.c:174: takeInitiative();
+   00E1 12s00rA9           1113 	lcall	_takeInitiative
+                    00E4   1114 	C$radio_queue.c$175$2$2 ==.
+                           1115 ;	libraries/src/radio_queue/radio_queue.c:175: return;
+   00E4 02s01r92           1116 	ljmp	00128$
+   00E7                    1117 00126$:
+                    00E7   1118 	C$radio_queue.c$177$1$1 ==.
+                           1119 ;	libraries/src/radio_queue/radio_queue.c:177: else if (event == RADIO_MAC_EVENT_TX)
+   00E7 BF 1E 33           1120 	cjne	r7,#0x1E,00123$
+                    00EA   1121 	C$radio_queue.c$180$2$3 ==.
+                           1122 ;	libraries/src/radio_queue/radio_queue.c:180: if (radioQueueTxInterruptIndex == TX_PACKET_COUNT - 1)
+   00EA 74 0F              1123 	mov	a,#0x0F
+   00EC B5*03 05           1124 	cjne	a,_radioQueueTxInterruptIndex,00102$
+                    00EF   1125 	C$radio_queue.c$182$3$4 ==.
+                           1126 ;	libraries/src/radio_queue/radio_queue.c:182: radioQueueTxInterruptIndex = 0;
+   00EF 75*03 00           1127 	mov	_radioQueueTxInterruptIndex,#0x00
+   00F2 80 02              1128 	sjmp	00103$
+   00F4                    1129 00102$:
+                    00F4   1130 	C$radio_queue.c$186$3$5 ==.
+                           1131 ;	libraries/src/radio_queue/radio_queue.c:186: radioQueueTxInterruptIndex++;
+   00F4 05*03              1132 	inc	_radioQueueTxInterruptIndex
+   00F6                    1133 00103$:
+                    00F6   1134 	C$radio_queue.c$190$2$3 ==.
+                           1135 ;	libraries/src/radio_queue/radio_queue.c:190: radioMacRx(radioQueueRxPacket[radioQueueRxInterruptIndex], randomTxDelay());
+   00F6 E5*01              1136 	mov	a,_radioQueueRxInterruptIndex
+   00F8 75 F0 16           1137 	mov	b,#0x16
+   00FB A4                 1138 	mul	ab
+   00FC 24r00              1139 	add	a,#_radioQueueRxPacket
+   00FE FD                 1140 	mov	r5,a
+   00FF E4                 1141 	clr	a
+   0100 34s00              1142 	addc	a,#(_radioQueueRxPacket >> 8)
+   0102 FE                 1143 	mov	r6,a
+   0103 C0 06              1144 	push	ar6
+   0105 C0 05              1145 	push	ar5
+   0107 12s00r33           1146 	lcall	_randomTxDelay
+   010A AC 82              1147 	mov	r4,dpl
+   010C D0 05              1148 	pop	ar5
+   010E D0 06              1149 	pop	ar6
+   0110 78r00              1150 	mov	r0,#_radioMacRx_PARM_2
+   0112 EC                 1151 	mov	a,r4
+   0113 F2                 1152 	movx	@r0,a
+   0114 8D 82              1153 	mov	dpl,r5
+   0116 8E 83              1154 	mov	dph,r6
+   0118 12s00r00           1155 	lcall	_radioMacRx
+                    011B   1156 	C$radio_queue.c$191$2$3 ==.
+                           1157 ;	libraries/src/radio_queue/radio_queue.c:191: return;
+   011B 80 75              1158 	sjmp	00128$
+   011D                    1159 00123$:
+                    011D   1160 	C$radio_queue.c$193$1$1 ==.
+                           1161 ;	libraries/src/radio_queue/radio_queue.c:193: else if (event == RADIO_MAC_EVENT_RX)
+   011D BF 1F 6C           1162 	cjne	r7,#0x1F,00120$
+                    0120   1163 	C$radio_queue.c$195$2$6 ==.
+                           1164 ;	libraries/src/radio_queue/radio_queue.c:195: uint8 XDATA * currentRxPacket = radioQueueRxPacket[radioQueueRxInterruptIndex];
+   0120 E5*01              1165 	mov	a,_radioQueueRxInterruptIndex
+   0122 75 F0 16           1166 	mov	b,#0x16
+   0125 A4                 1167 	mul	ab
+   0126 24r00              1168 	add	a,#_radioQueueRxPacket
+   0128 FD                 1169 	mov	r5,a
+   0129 E4                 1170 	clr	a
+   012A 34s00              1171 	addc	a,#(_radioQueueRxPacket >> 8)
+   012C FE                 1172 	mov	r6,a
+                    012D   1173 	C$radio_queue.c$197$2$6 ==.
+                           1174 ;	libraries/src/radio_queue/radio_queue.c:197: if (!radioQueueAllowCrcErrors && !radioCrcPassed())
+   012D 20*01 3B           1175 	jb	_radioQueueAllowCrcErrors,00108$
+   0130 C0 06              1176 	push	ar6
+   0132 C0 05              1177 	push	ar5
+   0134 12s00r00           1178 	lcall	_radioCrcPassed
+   0137 D0 05              1179 	pop	ar5
+   0139 D0 06              1180 	pop	ar6
+   013B 40 2E              1181 	jc	00108$
+                    013D   1182 	C$radio_queue.c$199$3$7 ==.
+                           1183 ;	libraries/src/radio_queue/radio_queue.c:199: if (radioQueueTxInterruptIndex != radioQueueTxMainLoopIndex)
+   013D E5*02              1184 	mov	a,_radioQueueTxMainLoopIndex
+   013F B5*03 02           1185 	cjne	a,_radioQueueTxInterruptIndex,00151$
+   0142 80 1A              1186 	sjmp	00105$
+   0144                    1187 00151$:
+                    0144   1188 	C$radio_queue.c$201$4$8 ==.
+                           1189 ;	libraries/src/radio_queue/radio_queue.c:201: radioMacRx(currentRxPacket, randomTxDelay());
+   0144 C0 06              1190 	push	ar6
+   0146 C0 05              1191 	push	ar5
+   0148 12s00r33           1192 	lcall	_randomTxDelay
+   014B AC 82              1193 	mov	r4,dpl
+   014D D0 05              1194 	pop	ar5
+   014F D0 06              1195 	pop	ar6
+   0151 78r00              1196 	mov	r0,#_radioMacRx_PARM_2
+   0153 EC                 1197 	mov	a,r4
+   0154 F2                 1198 	movx	@r0,a
+   0155 8D 82              1199 	mov	dpl,r5
+   0157 8E 83              1200 	mov	dph,r6
+   0159 12s00r00           1201 	lcall	_radioMacRx
+   015C 80 0B              1202 	sjmp	00106$
+   015E                    1203 00105$:
+                    015E   1204 	C$radio_queue.c$205$4$9 ==.
+                           1205 ;	libraries/src/radio_queue/radio_queue.c:205: radioMacRx(currentRxPacket, 0);
+   015E 78r00              1206 	mov	r0,#_radioMacRx_PARM_2
+   0160 E4                 1207 	clr	a
+   0161 F2                 1208 	movx	@r0,a
+   0162 8D 82              1209 	mov	dpl,r5
+   0164 8E 83              1210 	mov	dph,r6
+   0166 12s00r00           1211 	lcall	_radioMacRx
+   0169                    1212 00106$:
+                    0169   1213 	C$radio_queue.c$207$3$7 ==.
+                           1214 ;	libraries/src/radio_queue/radio_queue.c:207: return;
+   0169 80 27              1215 	sjmp	00128$
+   016B                    1216 00108$:
+                    016B   1217 	C$radio_queue.c$210$2$6 ==.
+                           1218 ;	libraries/src/radio_queue/radio_queue.c:210: if (currentRxPacket[RADIO_QUEUE_PACKET_LENGTH_OFFSET] > 0)
+   016B 8D 82              1219 	mov	dpl,r5
+   016D 8E 83              1220 	mov	dph,r6
+   016F E0                 1221 	movx	a,@dptr
+   0170 60 15              1222 	jz	00116$
+                    0172   1223 	C$radio_queue.c$217$3$10 ==.
+                           1224 ;	libraries/src/radio_queue/radio_queue.c:217: if (radioQueueRxInterruptIndex == RX_PACKET_COUNT - 1)
+   0172 74 02              1225 	mov	a,#0x02
+   0174 B5*01 04           1226 	cjne	a,_radioQueueRxInterruptIndex,00111$
+                    0177   1227 	C$radio_queue.c$219$4$11 ==.
+                           1228 ;	libraries/src/radio_queue/radio_queue.c:219: nextradioQueueRxInterruptIndex = 0;
+   0177 7E 00              1229 	mov	r6,#0x00
+   0179 80 04              1230 	sjmp	00112$
+   017B                    1231 00111$:
+                    017B   1232 	C$radio_queue.c$223$4$12 ==.
+                           1233 ;	libraries/src/radio_queue/radio_queue.c:223: nextradioQueueRxInterruptIndex = radioQueueRxInterruptIndex + 1;
+   017B E5*01              1234 	mov	a,_radioQueueRxInterruptIndex
+   017D 04                 1235 	inc	a
+   017E FE                 1236 	mov	r6,a
+   017F                    1237 00112$:
+                    017F   1238 	C$radio_queue.c$226$3$10 ==.
+                           1239 ;	libraries/src/radio_queue/radio_queue.c:226: if (nextradioQueueRxInterruptIndex != radioQueueRxMainLoopIndex)
+   017F EE                 1240 	mov	a,r6
+   0180 B5*00 02           1241 	cjne	a,_radioQueueRxMainLoopIndex,00155$
+   0183 80 02              1242 	sjmp	00116$
+   0185                    1243 00155$:
+                    0185   1244 	C$radio_queue.c$229$4$13 ==.
+                           1245 ;	libraries/src/radio_queue/radio_queue.c:229: radioQueueRxInterruptIndex = nextradioQueueRxInterruptIndex;
+   0185 8E*01              1246 	mov	_radioQueueRxInterruptIndex,r6
+   0187                    1247 00116$:
+                    0187   1248 	C$radio_queue.c$233$2$6 ==.
+                           1249 ;	libraries/src/radio_queue/radio_queue.c:233: takeInitiative();
+   0187 12s00rA9           1250 	lcall	_takeInitiative
+                    018A   1251 	C$radio_queue.c$234$2$6 ==.
+                           1252 ;	libraries/src/radio_queue/radio_queue.c:234: return;
+   018A 80 06              1253 	sjmp	00128$
+   018C                    1254 00120$:
+                    018C   1255 	C$radio_queue.c$236$1$1 ==.
+                           1256 ;	libraries/src/radio_queue/radio_queue.c:236: else if (event == RADIO_MAC_EVENT_RX_TIMEOUT)
+   018C BF 20 03           1257 	cjne	r7,#0x20,00128$
+                    018F   1258 	C$radio_queue.c$238$2$14 ==.
+                           1259 ;	libraries/src/radio_queue/radio_queue.c:238: takeInitiative();
+   018F 12s00rA9           1260 	lcall	_takeInitiative
+                    0192   1261 	C$radio_queue.c$239$2$14 ==.
+                           1262 ;	libraries/src/radio_queue/radio_queue.c:239: return;
+   0192                    1263 00128$:
+                    0192   1264 	C$radio_queue.c$241$2$1 ==.
+                    0192   1265 	XG$radioMacEventHandler$0$0 ==.
+   0192 22                 1266 	ret
+                           1267 	.area CSEG    (CODE)
+                           1268 	.area CONST   (CODE)
+                    0000   1269 G$param_radio_channel$0$0 == .
+   0000                    1270 _param_radio_channel:
+   0000 80 00 00 00        1271 	.byte #0x80,#0x00,#0x00,#0x00	;  128
+                           1272 	.area XINIT   (CODE)
+                           1273 	.area CABS    (ABS,CODE)

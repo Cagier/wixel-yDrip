@@ -1,0 +1,2582 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Oct 29 00:37:11 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module aes
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _memset
+                             13 	.globl _AES128_CBC_encrypt_buffer_PARM_5
+                             14 	.globl _AES128_CBC_encrypt_buffer_PARM_4
+                             15 	.globl _AES128_CBC_encrypt_buffer_PARM_3
+                             16 	.globl _AES128_CBC_encrypt_buffer_PARM_2
+                             17 	.globl _AES128_CBC_encrypt_buffer
+                             18 ;--------------------------------------------------------
+                             19 ; special function registers
+                             20 ;--------------------------------------------------------
+                             21 	.area RSEG    (ABS,DATA)
+   0000                      22 	.org 0x0000
+                             23 ;--------------------------------------------------------
+                             24 ; special function bits
+                             25 ;--------------------------------------------------------
+                             26 	.area RSEG    (ABS,DATA)
+   0000                      27 	.org 0x0000
+                             28 ;--------------------------------------------------------
+                             29 ; overlayable register banks
+                             30 ;--------------------------------------------------------
+                             31 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                      32 	.ds 8
+                             33 ;--------------------------------------------------------
+                             34 ; internal ram data
+                             35 ;--------------------------------------------------------
+                             36 	.area DSEG    (DATA)
+                    0000     37 Laes.KeyExpansion$sloc0$1$0==.
+   0000                      38 _KeyExpansion_sloc0_1_0:
+   0000                      39 	.ds 1
+                    0001     40 Laes.KeyExpansion$sloc1$1$0==.
+   0001                      41 _KeyExpansion_sloc1_1_0:
+   0001                      42 	.ds 2
+                    0003     43 Laes.KeyExpansion$sloc2$1$0==.
+   0003                      44 _KeyExpansion_sloc2_1_0:
+   0003                      45 	.ds 4
+                    0007     46 Laes.KeyExpansion$sloc3$1$0==.
+   0007                      47 _KeyExpansion_sloc3_1_0:
+   0007                      48 	.ds 4
+                    000B     49 Laes.KeyExpansion$sloc4$1$0==.
+   000B                      50 _KeyExpansion_sloc4_1_0:
+   000B                      51 	.ds 4
+                    000F     52 Laes.Cipher$sloc0$1$0==.
+   000F                      53 _Cipher_sloc0_1_0:
+   000F                      54 	.ds 1
+                    0010     55 Laes.Cipher$sloc1$1$0==.
+   0010                      56 _Cipher_sloc1_1_0:
+   0010                      57 	.ds 1
+                    0011     58 Laes.Cipher$sloc2$1$0==.
+   0011                      59 _Cipher_sloc2_1_0:
+   0011                      60 	.ds 2
+                    0013     61 Laes.AES128_CBC_encrypt_buffer$sloc0$1$0==.
+   0013                      62 _AES128_CBC_encrypt_buffer_sloc0_1_0:
+   0013                      63 	.ds 4
+                    0017     64 Laes.AES128_CBC_encrypt_buffer$sloc1$1$0==.
+   0017                      65 _AES128_CBC_encrypt_buffer_sloc1_1_0:
+   0017                      66 	.ds 2
+                    0019     67 Laes.AES128_CBC_encrypt_buffer$sloc2$1$0==.
+   0019                      68 _AES128_CBC_encrypt_buffer_sloc2_1_0:
+   0019                      69 	.ds 4
+                    001D     70 Laes.AES128_CBC_encrypt_buffer$sloc3$1$0==.
+   001D                      71 _AES128_CBC_encrypt_buffer_sloc3_1_0:
+   001D                      72 	.ds 3
+                             73 ;--------------------------------------------------------
+                             74 ; overlayable items in internal ram 
+                             75 ;--------------------------------------------------------
+                             76 	.area	OSEG    (OVR,DATA)
+                    0000     77 Laes.AddRoundKey$sloc0$1$0==.
+   0000                      78 _AddRoundKey_sloc0_1_0:
+   0000                      79 	.ds 1
+                    0001     80 Laes.AddRoundKey$sloc1$1$0==.
+   0001                      81 _AddRoundKey_sloc1_1_0:
+   0001                      82 	.ds 1
+                             83 	.area	OSEG    (OVR,DATA)
+                    0000     84 Laes.ShiftRows$sloc0$1$0==.
+   0000                      85 _ShiftRows_sloc0_1_0:
+   0000                      86 	.ds 1
+                    0001     87 Laes.ShiftRows$sloc1$1$0==.
+   0001                      88 _ShiftRows_sloc1_1_0:
+   0001                      89 	.ds 2
+                    0003     90 Laes.ShiftRows$sloc2$1$0==.
+   0003                      91 _ShiftRows_sloc2_1_0:
+   0003                      92 	.ds 2
+                             93 	.area	OSEG    (OVR,DATA)
+                    0000     94 Laes.BlockCopy$sloc0$1$0==.
+   0000                      95 _BlockCopy_sloc0_1_0:
+   0000                      96 	.ds 3
+                             97 ;--------------------------------------------------------
+                             98 ; indirectly addressable internal ram data
+                             99 ;--------------------------------------------------------
+                            100 	.area ISEG    (DATA)
+                            101 ;--------------------------------------------------------
+                            102 ; absolute internal ram data
+                            103 ;--------------------------------------------------------
+                            104 	.area IABS    (ABS,DATA)
+                            105 	.area IABS    (ABS,DATA)
+                            106 ;--------------------------------------------------------
+                            107 ; bit data
+                            108 ;--------------------------------------------------------
+                            109 	.area BSEG    (BIT)
+                            110 ;--------------------------------------------------------
+                            111 ; paged external ram data
+                            112 ;--------------------------------------------------------
+                            113 	.area PSEG    (PAG,XDATA)
+                    0000    114 Faes$state$0$0==.
+   0000                     115 _state:
+   0000                     116 	.ds 2
+                    0002    117 Faes$Key$0$0==.
+   0002                     118 _Key:
+   0002                     119 	.ds 2
+                    0004    120 Faes$Iv$0$0==.
+   0004                     121 _Iv:
+   0004                     122 	.ds 2
+                    0006    123 Laes.BlockCopy$input$1$1==.
+   0006                     124 _BlockCopy_PARM_2:
+   0006                     125 	.ds 3
+                    0009    126 Laes.BlockCopy$output$1$1==.
+   0009                     127 _BlockCopy_output_1_1:
+   0009                     128 	.ds 3
+                            129 ;--------------------------------------------------------
+                            130 ; external ram data
+                            131 ;--------------------------------------------------------
+                            132 	.area XSEG    (XDATA)
+                    0000    133 Faes$RoundKey$0$0==.
+   0000                     134 _RoundKey:
+   0000                     135 	.ds 176
+                    00B0    136 Laes.getSBoxValue$num$1$1==.
+   00B0                     137 _getSBoxValue_num_1_1:
+   00B0                     138 	.ds 1
+                    00B1    139 Laes.KeyExpansion$tempa$1$1==.
+   00B1                     140 _KeyExpansion_tempa_1_1:
+   00B1                     141 	.ds 4
+                    00B5    142 Laes.AddRoundKey$round$1$1==.
+   00B5                     143 _AddRoundKey_round_1_1:
+   00B5                     144 	.ds 1
+                    00B6    145 Laes.xtime$x$1$1==.
+   00B6                     146 _xtime_x_1_1:
+   00B6                     147 	.ds 1
+                    00B7    148 Laes.Multiply$y$1$1==.
+   00B7                     149 _Multiply_PARM_2:
+   00B7                     150 	.ds 1
+                    00B8    151 Laes.Multiply$x$1$1==.
+   00B8                     152 _Multiply_x_1_1:
+   00B8                     153 	.ds 1
+                    00B9    154 Laes.Cipher$k$1$1==.
+   00B9                     155 _Cipher_k_1_1:
+   00B9                     156 	.ds 1
+                    00BA    157 Laes.Cipher$Tmp$1$1==.
+   00BA                     158 _Cipher_Tmp_1_1:
+   00BA                     159 	.ds 1
+                    00BB    160 Laes.Cipher$t$1$1==.
+   00BB                     161 _Cipher_t_1_1:
+   00BB                     162 	.ds 1
+                    00BC    163 Laes.AES128_CBC_encrypt_buffer$input$1$1==.
+   00BC                     164 _AES128_CBC_encrypt_buffer_PARM_2:
+   00BC                     165 	.ds 2
+                    00BE    166 Laes.AES128_CBC_encrypt_buffer$length$1$1==.
+   00BE                     167 _AES128_CBC_encrypt_buffer_PARM_3:
+   00BE                     168 	.ds 4
+                    00C2    169 Laes.AES128_CBC_encrypt_buffer$key$1$1==.
+   00C2                     170 _AES128_CBC_encrypt_buffer_PARM_4:
+   00C2                     171 	.ds 2
+                    00C4    172 Laes.AES128_CBC_encrypt_buffer$iv$1$1==.
+   00C4                     173 _AES128_CBC_encrypt_buffer_PARM_5:
+   00C4                     174 	.ds 2
+                    00C6    175 Laes.AES128_CBC_encrypt_buffer$output$1$1==.
+   00C6                     176 _AES128_CBC_encrypt_buffer_output_1_1:
+   00C6                     177 	.ds 2
+                            178 ;--------------------------------------------------------
+                            179 ; absolute external ram data
+                            180 ;--------------------------------------------------------
+                            181 	.area XABS    (ABS,XDATA)
+                            182 ;--------------------------------------------------------
+                            183 ; external initialized ram data
+                            184 ;--------------------------------------------------------
+                            185 	.area XISEG   (XDATA)
+                            186 	.area HOME    (CODE)
+                            187 	.area GSINIT0 (CODE)
+                            188 	.area GSINIT1 (CODE)
+                            189 	.area GSINIT2 (CODE)
+                            190 	.area GSINIT3 (CODE)
+                            191 	.area GSINIT4 (CODE)
+                            192 	.area GSINIT5 (CODE)
+                            193 	.area GSINIT  (CODE)
+                            194 	.area GSFINAL (CODE)
+                            195 	.area CSEG    (CODE)
+                            196 ;--------------------------------------------------------
+                            197 ; global & static initialisations
+                            198 ;--------------------------------------------------------
+                            199 	.area HOME    (CODE)
+                            200 	.area GSINIT  (CODE)
+                            201 	.area GSFINAL (CODE)
+                            202 	.area GSINIT  (CODE)
+                            203 ;--------------------------------------------------------
+                            204 ; Home
+                            205 ;--------------------------------------------------------
+                            206 	.area HOME    (CODE)
+                            207 	.area HOME    (CODE)
+                            208 ;--------------------------------------------------------
+                            209 ; code
+                            210 ;--------------------------------------------------------
+                            211 	.area CSEG    (CODE)
+                            212 ;------------------------------------------------------------
+                            213 ;Allocation info for local variables in function 'getSBoxValue'
+                            214 ;------------------------------------------------------------
+                            215 ;num                       Allocated with name '_getSBoxValue_num_1_1'
+                            216 ;------------------------------------------------------------
+                    0000    217 	Faes$getSBoxValue$0$0 ==.
+                    0000    218 	C$aes.c$132$0$0 ==.
+                            219 ;	libraries/src/aes/aes.c:132: XDATA static uint8_t getSBoxValue(XDATA uint8_t num)
+                            220 ;	-----------------------------------------
+                            221 ;	 function getSBoxValue
+                            222 ;	-----------------------------------------
+   0000                     223 _getSBoxValue:
+                    0007    224 	ar7 = 0x07
+                    0006    225 	ar6 = 0x06
+                    0005    226 	ar5 = 0x05
+                    0004    227 	ar4 = 0x04
+                    0003    228 	ar3 = 0x03
+                    0002    229 	ar2 = 0x02
+                    0001    230 	ar1 = 0x01
+                    0000    231 	ar0 = 0x00
+   0000 E5 82               232 	mov	a,dpl
+                    0002    233 	C$aes.c$134$1$1 ==.
+                            234 ;	libraries/src/aes/aes.c:134: return sbox[num];
+   0002 90s00rB0            235 	mov	dptr,#_getSBoxValue_num_1_1
+   0005 F0                  236 	movx	@dptr,a
+   0006 90s00r00            237 	mov	dptr,#_sbox
+   0009 93                  238 	movc	a,@a+dptr
+                    000A    239 	C$aes.c$135$1$1 ==.
+                    000A    240 	XFaes$getSBoxValue$0$0 ==.
+   000A F5 82               241 	mov	dpl,a
+   000C 22                  242 	ret
+                            243 ;------------------------------------------------------------
+                            244 ;Allocation info for local variables in function 'KeyExpansion'
+                            245 ;------------------------------------------------------------
+                            246 ;sloc0                     Allocated with name '_KeyExpansion_sloc0_1_0'
+                            247 ;sloc1                     Allocated with name '_KeyExpansion_sloc1_1_0'
+                            248 ;sloc2                     Allocated with name '_KeyExpansion_sloc2_1_0'
+                            249 ;sloc3                     Allocated with name '_KeyExpansion_sloc3_1_0'
+                            250 ;sloc4                     Allocated with name '_KeyExpansion_sloc4_1_0'
+                            251 ;i                         Allocated with name '_KeyExpansion_i_1_1'
+                            252 ;j                         Allocated with name '_KeyExpansion_j_1_1'
+                            253 ;k                         Allocated with name '_KeyExpansion_k_1_1'
+                            254 ;tempa                     Allocated with name '_KeyExpansion_tempa_1_1'
+                            255 ;------------------------------------------------------------
+                    000D    256 	Faes$KeyExpansion$0$0 ==.
+                    000D    257 	C$aes.c$139$1$1 ==.
+                            258 ;	libraries/src/aes/aes.c:139: XDATA static void KeyExpansion(void)
+                            259 ;	-----------------------------------------
+                            260 ;	 function KeyExpansion
+                            261 ;	-----------------------------------------
+   000D                     262 _KeyExpansion:
+                    000D    263 	C$aes.c$145$2$2 ==.
+                            264 ;	libraries/src/aes/aes.c:145: for(i = 0; i < Nk; ++i)
+   000D E4                  265 	clr	a
+   000E F5*03               266 	mov	_KeyExpansion_sloc2_1_0,a
+   0010 F5*04               267 	mov	(_KeyExpansion_sloc2_1_0 + 1),a
+   0012 F5*05               268 	mov	(_KeyExpansion_sloc2_1_0 + 2),a
+   0014 F5*06               269 	mov	(_KeyExpansion_sloc2_1_0 + 3),a
+   0016                     270 00107$:
+   0016 C3                  271 	clr	c
+   0017 E5*03               272 	mov	a,_KeyExpansion_sloc2_1_0
+   0019 94 04               273 	subb	a,#0x04
+   001B E5*04               274 	mov	a,(_KeyExpansion_sloc2_1_0 + 1)
+   001D 94 00               275 	subb	a,#0x00
+   001F E5*05               276 	mov	a,(_KeyExpansion_sloc2_1_0 + 2)
+   0021 94 00               277 	subb	a,#0x00
+   0023 E5*06               278 	mov	a,(_KeyExpansion_sloc2_1_0 + 3)
+   0025 94 00               279 	subb	a,#0x00
+   0027 40 03               280 	jc	00131$
+   0029 02s01r17            281 	ljmp	00127$
+   002C                     282 00131$:
+                    002C    283 	C$aes.c$147$2$2 ==.
+                            284 ;	libraries/src/aes/aes.c:147: RoundKey[(i * 4) + 0] = Key[(i * 4) + 0];
+   002C E5*03               285 	mov	a,_KeyExpansion_sloc2_1_0
+   002E 25 E0               286 	add	a,acc
+   0030 25 E0               287 	add	a,acc
+   0032 F5*00               288 	mov	_KeyExpansion_sloc0_1_0,a
+   0034 24r00               289 	add	a,#_RoundKey
+   0036 F5*01               290 	mov	_KeyExpansion_sloc1_1_0,a
+   0038 E4                  291 	clr	a
+   0039 34s00               292 	addc	a,#(_RoundKey >> 8)
+   003B F5*02               293 	mov	(_KeyExpansion_sloc1_1_0 + 1),a
+   003D E5*03               294 	mov	a,_KeyExpansion_sloc2_1_0
+   003F 25*03               295 	add	a,_KeyExpansion_sloc2_1_0
+   0041 F5*07               296 	mov	_KeyExpansion_sloc3_1_0,a
+   0043 E5*04               297 	mov	a,(_KeyExpansion_sloc2_1_0 + 1)
+   0045 33                  298 	rlc	a
+   0046 F5*08               299 	mov	(_KeyExpansion_sloc3_1_0 + 1),a
+   0048 E5*05               300 	mov	a,(_KeyExpansion_sloc2_1_0 + 2)
+   004A 33                  301 	rlc	a
+   004B F5*09               302 	mov	(_KeyExpansion_sloc3_1_0 + 2),a
+   004D E5*06               303 	mov	a,(_KeyExpansion_sloc2_1_0 + 3)
+   004F 33                  304 	rlc	a
+   0050 F5*0A               305 	mov	(_KeyExpansion_sloc3_1_0 + 3),a
+   0052 E5*07               306 	mov	a,_KeyExpansion_sloc3_1_0
+   0054 25*07               307 	add	a,_KeyExpansion_sloc3_1_0
+   0056 F5*07               308 	mov	_KeyExpansion_sloc3_1_0,a
+   0058 E5*08               309 	mov	a,(_KeyExpansion_sloc3_1_0 + 1)
+   005A 33                  310 	rlc	a
+   005B F5*08               311 	mov	(_KeyExpansion_sloc3_1_0 + 1),a
+   005D E5*09               312 	mov	a,(_KeyExpansion_sloc3_1_0 + 2)
+   005F 33                  313 	rlc	a
+   0060 F5*09               314 	mov	(_KeyExpansion_sloc3_1_0 + 2),a
+   0062 E5*0A               315 	mov	a,(_KeyExpansion_sloc3_1_0 + 3)
+   0064 33                  316 	rlc	a
+   0065 F5*0A               317 	mov	(_KeyExpansion_sloc3_1_0 + 3),a
+   0067 78r02               318 	mov	r0,#_Key
+   0069 E2                  319 	movx	a,@r0
+   006A 25*07               320 	add	a,_KeyExpansion_sloc3_1_0
+   006C F5 82               321 	mov	dpl,a
+   006E 08                  322 	inc	r0
+   006F E2                  323 	movx	a,@r0
+   0070 35*08               324 	addc	a,(_KeyExpansion_sloc3_1_0 + 1)
+   0072 F5 83               325 	mov	dph,a
+   0074 E0                  326 	movx	a,@dptr
+   0075 85*01 82            327 	mov	dpl,_KeyExpansion_sloc1_1_0
+   0078 85*02 83            328 	mov	dph,(_KeyExpansion_sloc1_1_0 + 1)
+   007B F0                  329 	movx	@dptr,a
+                    007C    330 	C$aes.c$148$2$2 ==.
+                            331 ;	libraries/src/aes/aes.c:148: RoundKey[(i * 4) + 1] = Key[(i * 4) + 1];
+   007C E5*00               332 	mov	a,_KeyExpansion_sloc0_1_0
+   007E 04                  333 	inc	a
+   007F 24r00               334 	add	a,#_RoundKey
+   0081 F5*01               335 	mov	_KeyExpansion_sloc1_1_0,a
+   0083 E4                  336 	clr	a
+   0084 34s00               337 	addc	a,#(_RoundKey >> 8)
+   0086 F5*02               338 	mov	(_KeyExpansion_sloc1_1_0 + 1),a
+   0088 74 01               339 	mov	a,#0x01
+   008A 25*07               340 	add	a,_KeyExpansion_sloc3_1_0
+   008C FC                  341 	mov	r4,a
+   008D E4                  342 	clr	a
+   008E 35*08               343 	addc	a,(_KeyExpansion_sloc3_1_0 + 1)
+   0090 FD                  344 	mov	r5,a
+   0091 E4                  345 	clr	a
+   0092 35*09               346 	addc	a,(_KeyExpansion_sloc3_1_0 + 2)
+   0094 E4                  347 	clr	a
+   0095 35*0A               348 	addc	a,(_KeyExpansion_sloc3_1_0 + 3)
+   0097 78r02               349 	mov	r0,#_Key
+   0099 E2                  350 	movx	a,@r0
+   009A 2C                  351 	add	a,r4
+   009B F5 82               352 	mov	dpl,a
+   009D 08                  353 	inc	r0
+   009E E2                  354 	movx	a,@r0
+   009F 3D                  355 	addc	a,r5
+   00A0 F5 83               356 	mov	dph,a
+   00A2 E0                  357 	movx	a,@dptr
+   00A3 85*01 82            358 	mov	dpl,_KeyExpansion_sloc1_1_0
+   00A6 85*02 83            359 	mov	dph,(_KeyExpansion_sloc1_1_0 + 1)
+   00A9 F0                  360 	movx	@dptr,a
+                    00AA    361 	C$aes.c$149$2$2 ==.
+                            362 ;	libraries/src/aes/aes.c:149: RoundKey[(i * 4) + 2] = Key[(i * 4) + 2];
+   00AA 74 02               363 	mov	a,#0x02
+   00AC 25*00               364 	add	a,_KeyExpansion_sloc0_1_0
+   00AE 24r00               365 	add	a,#_RoundKey
+   00B0 FE                  366 	mov	r6,a
+   00B1 E4                  367 	clr	a
+   00B2 34s00               368 	addc	a,#(_RoundKey >> 8)
+   00B4 FF                  369 	mov	r7,a
+   00B5 74 02               370 	mov	a,#0x02
+   00B7 25*07               371 	add	a,_KeyExpansion_sloc3_1_0
+   00B9 FA                  372 	mov	r2,a
+   00BA E4                  373 	clr	a
+   00BB 35*08               374 	addc	a,(_KeyExpansion_sloc3_1_0 + 1)
+   00BD FB                  375 	mov	r3,a
+   00BE E4                  376 	clr	a
+   00BF 35*09               377 	addc	a,(_KeyExpansion_sloc3_1_0 + 2)
+   00C1 E4                  378 	clr	a
+   00C2 35*0A               379 	addc	a,(_KeyExpansion_sloc3_1_0 + 3)
+   00C4 78r02               380 	mov	r0,#_Key
+   00C6 E2                  381 	movx	a,@r0
+   00C7 2A                  382 	add	a,r2
+   00C8 F5 82               383 	mov	dpl,a
+   00CA 08                  384 	inc	r0
+   00CB E2                  385 	movx	a,@r0
+   00CC 3B                  386 	addc	a,r3
+   00CD F5 83               387 	mov	dph,a
+   00CF E0                  388 	movx	a,@dptr
+   00D0 8E 82               389 	mov	dpl,r6
+   00D2 8F 83               390 	mov	dph,r7
+   00D4 F0                  391 	movx	@dptr,a
+                    00D5    392 	C$aes.c$150$2$2 ==.
+                            393 ;	libraries/src/aes/aes.c:150: RoundKey[(i * 4) + 3] = Key[(i * 4) + 3];
+   00D5 74 03               394 	mov	a,#0x03
+   00D7 25*00               395 	add	a,_KeyExpansion_sloc0_1_0
+   00D9 24r00               396 	add	a,#_RoundKey
+   00DB FE                  397 	mov	r6,a
+   00DC E4                  398 	clr	a
+   00DD 34s00               399 	addc	a,#(_RoundKey >> 8)
+   00DF FF                  400 	mov	r7,a
+   00E0 74 03               401 	mov	a,#0x03
+   00E2 25*07               402 	add	a,_KeyExpansion_sloc3_1_0
+   00E4 FA                  403 	mov	r2,a
+   00E5 E4                  404 	clr	a
+   00E6 35*08               405 	addc	a,(_KeyExpansion_sloc3_1_0 + 1)
+   00E8 FB                  406 	mov	r3,a
+   00E9 E4                  407 	clr	a
+   00EA 35*09               408 	addc	a,(_KeyExpansion_sloc3_1_0 + 2)
+   00EC FC                  409 	mov	r4,a
+   00ED E4                  410 	clr	a
+   00EE 35*0A               411 	addc	a,(_KeyExpansion_sloc3_1_0 + 3)
+   00F0 78r02               412 	mov	r0,#_Key
+   00F2 E2                  413 	movx	a,@r0
+   00F3 2A                  414 	add	a,r2
+   00F4 F5 82               415 	mov	dpl,a
+   00F6 08                  416 	inc	r0
+   00F7 E2                  417 	movx	a,@r0
+   00F8 3B                  418 	addc	a,r3
+   00F9 F5 83               419 	mov	dph,a
+   00FB E0                  420 	movx	a,@dptr
+   00FC FD                  421 	mov	r5,a
+   00FD 8E 82               422 	mov	dpl,r6
+   00FF 8F 83               423 	mov	dph,r7
+   0101 F0                  424 	movx	@dptr,a
+                    0102    425 	C$aes.c$145$1$1 ==.
+                            426 ;	libraries/src/aes/aes.c:145: for(i = 0; i < Nk; ++i)
+   0102 05*03               427 	inc	_KeyExpansion_sloc2_1_0
+   0104 E4                  428 	clr	a
+   0105 B5*03 0C            429 	cjne	a,_KeyExpansion_sloc2_1_0,00132$
+   0108 05*04               430 	inc	(_KeyExpansion_sloc2_1_0 + 1)
+   010A B5*04 07            431 	cjne	a,(_KeyExpansion_sloc2_1_0 + 1),00132$
+   010D 05*05               432 	inc	(_KeyExpansion_sloc2_1_0 + 2)
+   010F B5*05 02            433 	cjne	a,(_KeyExpansion_sloc2_1_0 + 2),00132$
+   0112 05*06               434 	inc	(_KeyExpansion_sloc2_1_0 + 3)
+   0114                     435 00132$:
+   0114 02s00r16            436 	ljmp	00107$
+   0117                     437 00127$:
+   0117 85*03*0B            438 	mov	_KeyExpansion_sloc4_1_0,_KeyExpansion_sloc2_1_0
+   011A 85*04*0C            439 	mov	(_KeyExpansion_sloc4_1_0 + 1),(_KeyExpansion_sloc2_1_0 + 1)
+   011D 85*05*0D            440 	mov	(_KeyExpansion_sloc4_1_0 + 2),(_KeyExpansion_sloc2_1_0 + 2)
+   0120 85*06*0E            441 	mov	(_KeyExpansion_sloc4_1_0 + 3),(_KeyExpansion_sloc2_1_0 + 3)
+   0123                     442 00115$:
+                    0123    443 	C$aes.c$154$1$1 ==.
+                            444 ;	libraries/src/aes/aes.c:154: for(; (i < (Nb * (Nr + 1))); ++i)
+   0123 C3                  445 	clr	c
+   0124 E5*0B               446 	mov	a,_KeyExpansion_sloc4_1_0
+   0126 94 2C               447 	subb	a,#0x2C
+   0128 E5*0C               448 	mov	a,(_KeyExpansion_sloc4_1_0 + 1)
+   012A 94 00               449 	subb	a,#0x00
+   012C E5*0D               450 	mov	a,(_KeyExpansion_sloc4_1_0 + 2)
+   012E 94 00               451 	subb	a,#0x00
+   0130 E5*0E               452 	mov	a,(_KeyExpansion_sloc4_1_0 + 3)
+   0132 94 00               453 	subb	a,#0x00
+   0134 40 03               454 	jc	00133$
+   0136 02s02rE8            455 	ljmp	00119$
+   0139                     456 00133$:
+                    0139    457 	C$aes.c$156$3$4 ==.
+                            458 ;	libraries/src/aes/aes.c:156: for(j = 0; j < 4; ++j)
+   0139 85*0B*07            459 	mov	_KeyExpansion_sloc3_1_0,_KeyExpansion_sloc4_1_0
+   013C 85*0C*08            460 	mov	(_KeyExpansion_sloc3_1_0 + 1),(_KeyExpansion_sloc4_1_0 + 1)
+   013F 85*0D*09            461 	mov	(_KeyExpansion_sloc3_1_0 + 2),(_KeyExpansion_sloc4_1_0 + 2)
+   0142 85*0E*0A            462 	mov	(_KeyExpansion_sloc3_1_0 + 3),(_KeyExpansion_sloc4_1_0 + 3)
+   0145 E4                  463 	clr	a
+   0146 F5*03               464 	mov	_KeyExpansion_sloc2_1_0,a
+   0148 F5*04               465 	mov	(_KeyExpansion_sloc2_1_0 + 1),a
+   014A F5*05               466 	mov	(_KeyExpansion_sloc2_1_0 + 2),a
+   014C F5*06               467 	mov	(_KeyExpansion_sloc2_1_0 + 3),a
+   014E                     468 00111$:
+   014E C3                  469 	clr	c
+   014F E5*03               470 	mov	a,_KeyExpansion_sloc2_1_0
+   0151 94 04               471 	subb	a,#0x04
+   0153 E5*04               472 	mov	a,(_KeyExpansion_sloc2_1_0 + 1)
+   0155 94 00               473 	subb	a,#0x00
+   0157 E5*05               474 	mov	a,(_KeyExpansion_sloc2_1_0 + 2)
+   0159 94 00               475 	subb	a,#0x00
+   015B E5*06               476 	mov	a,(_KeyExpansion_sloc2_1_0 + 3)
+   015D 94 00               477 	subb	a,#0x00
+   015F 50 3A               478 	jnc	00114$
+                    0161    479 	C$aes.c$158$1$1 ==.
+                            480 ;	libraries/src/aes/aes.c:158: tempa[j]=RoundKey[(i-1) * 4 + j];
+   0161 E5*03               481 	mov	a,_KeyExpansion_sloc2_1_0
+   0163 24rB1               482 	add	a,#_KeyExpansion_tempa_1_1
+   0165 FA                  483 	mov	r2,a
+   0166 E5*04               484 	mov	a,(_KeyExpansion_sloc2_1_0 + 1)
+   0168 34s00               485 	addc	a,#(_KeyExpansion_tempa_1_1 >> 8)
+   016A FB                  486 	mov	r3,a
+   016B AF*07               487 	mov	r7,_KeyExpansion_sloc3_1_0
+   016D 1F                  488 	dec	r7
+   016E EF                  489 	mov	a,r7
+   016F 2F                  490 	add	a,r7
+   0170 25 E0               491 	add	a,acc
+   0172 FF                  492 	mov	r7,a
+   0173 E5*03               493 	mov	a,_KeyExpansion_sloc2_1_0
+   0175 FE                  494 	mov	r6,a
+   0176 2F                  495 	add	a,r7
+   0177 24r00               496 	add	a,#_RoundKey
+   0179 F5 82               497 	mov	dpl,a
+   017B E4                  498 	clr	a
+   017C 34s00               499 	addc	a,#(_RoundKey >> 8)
+   017E F5 83               500 	mov	dph,a
+   0180 E0                  501 	movx	a,@dptr
+   0181 FF                  502 	mov	r7,a
+   0182 8A 82               503 	mov	dpl,r2
+   0184 8B 83               504 	mov	dph,r3
+   0186 F0                  505 	movx	@dptr,a
+                    0187    506 	C$aes.c$156$2$3 ==.
+                            507 ;	libraries/src/aes/aes.c:156: for(j = 0; j < 4; ++j)
+   0187 05*03               508 	inc	_KeyExpansion_sloc2_1_0
+   0189 E4                  509 	clr	a
+   018A B5*03 0C            510 	cjne	a,_KeyExpansion_sloc2_1_0,00135$
+   018D 05*04               511 	inc	(_KeyExpansion_sloc2_1_0 + 1)
+   018F B5*04 07            512 	cjne	a,(_KeyExpansion_sloc2_1_0 + 1),00135$
+   0192 05*05               513 	inc	(_KeyExpansion_sloc2_1_0 + 2)
+   0194 B5*05 B7            514 	cjne	a,(_KeyExpansion_sloc2_1_0 + 2),00111$
+   0197 05*06               515 	inc	(_KeyExpansion_sloc2_1_0 + 3)
+   0199                     516 00135$:
+   0199 80 B3               517 	sjmp	00111$
+   019B                     518 00114$:
+                    019B    519 	C$aes.c$160$2$3 ==.
+                            520 ;	libraries/src/aes/aes.c:160: if (i % Nk == 0)
+   019B E5*0B               521 	mov	a,_KeyExpansion_sloc4_1_0
+   019D 54 03               522 	anl	a,#0x03
+   019F 60 03               523 	jz	00137$
+   01A1 02s02r38            524 	ljmp	00106$
+   01A4                     525 00137$:
+                    01A4    526 	C$aes.c$167$4$6 ==.
+                            527 ;	libraries/src/aes/aes.c:167: k = tempa[0];
+   01A4 90s00rB1            528 	mov	dptr,#_KeyExpansion_tempa_1_1
+   01A7 E0                  529 	movx	a,@dptr
+   01A8 FA                  530 	mov	r2,a
+                    01A9    531 	C$aes.c$168$4$6 ==.
+                            532 ;	libraries/src/aes/aes.c:168: tempa[0] = tempa[1];
+   01A9 90s00rB2            533 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0001)
+   01AC E0                  534 	movx	a,@dptr
+   01AD FD                  535 	mov	r5,a
+   01AE 90s00rB1            536 	mov	dptr,#_KeyExpansion_tempa_1_1
+   01B1 F0                  537 	movx	@dptr,a
+                    01B2    538 	C$aes.c$169$4$6 ==.
+                            539 ;	libraries/src/aes/aes.c:169: tempa[1] = tempa[2];
+   01B2 90s00rB3            540 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0002)
+   01B5 E0                  541 	movx	a,@dptr
+   01B6 90s00rB2            542 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0001)
+   01B9 F0                  543 	movx	@dptr,a
+                    01BA    544 	C$aes.c$170$4$6 ==.
+                            545 ;	libraries/src/aes/aes.c:170: tempa[2] = tempa[3];
+   01BA 90s00rB4            546 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0003)
+   01BD E0                  547 	movx	a,@dptr
+   01BE 90s00rB3            548 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0002)
+   01C1 F0                  549 	movx	@dptr,a
+                    01C2    550 	C$aes.c$171$4$6 ==.
+                            551 ;	libraries/src/aes/aes.c:171: tempa[3] = k;
+   01C2 90s00rB4            552 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0003)
+   01C5 EA                  553 	mov	a,r2
+   01C6 F0                  554 	movx	@dptr,a
+                    01C7    555 	C$aes.c$179$4$7 ==.
+                            556 ;	libraries/src/aes/aes.c:179: tempa[0] = getSBoxValue(tempa[0]);
+   01C7 8D 82               557 	mov	dpl,r5
+   01C9 12s00r00            558 	lcall	_getSBoxValue
+   01CC AF 82               559 	mov	r7,dpl
+   01CE 90s00rB1            560 	mov	dptr,#_KeyExpansion_tempa_1_1
+   01D1 EF                  561 	mov	a,r7
+   01D2 F0                  562 	movx	@dptr,a
+                    01D3    563 	C$aes.c$180$4$7 ==.
+                            564 ;	libraries/src/aes/aes.c:180: tempa[1] = getSBoxValue(tempa[1]);
+   01D3 90s00rB2            565 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0001)
+   01D6 E0                  566 	movx	a,@dptr
+   01D7 F5 82               567 	mov	dpl,a
+   01D9 12s00r00            568 	lcall	_getSBoxValue
+   01DC AF 82               569 	mov	r7,dpl
+   01DE 90s00rB2            570 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0001)
+   01E1 EF                  571 	mov	a,r7
+   01E2 F0                  572 	movx	@dptr,a
+                    01E3    573 	C$aes.c$181$4$7 ==.
+                            574 ;	libraries/src/aes/aes.c:181: tempa[2] = getSBoxValue(tempa[2]);
+   01E3 90s00rB3            575 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0002)
+   01E6 E0                  576 	movx	a,@dptr
+   01E7 F5 82               577 	mov	dpl,a
+   01E9 12s00r00            578 	lcall	_getSBoxValue
+   01EC AF 82               579 	mov	r7,dpl
+   01EE 90s00rB3            580 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0002)
+   01F1 EF                  581 	mov	a,r7
+   01F2 F0                  582 	movx	@dptr,a
+                    01F3    583 	C$aes.c$182$4$7 ==.
+                            584 ;	libraries/src/aes/aes.c:182: tempa[3] = getSBoxValue(tempa[3]);
+   01F3 90s00rB4            585 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0003)
+   01F6 E0                  586 	movx	a,@dptr
+   01F7 F5 82               587 	mov	dpl,a
+   01F9 12s00r00            588 	lcall	_getSBoxValue
+   01FC AF 82               589 	mov	r7,dpl
+   01FE 90s00rB4            590 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0003)
+   0201 EF                  591 	mov	a,r7
+   0202 F0                  592 	movx	@dptr,a
+                    0203    593 	C$aes.c$185$3$5 ==.
+                            594 ;	libraries/src/aes/aes.c:185: tempa[0] =  tempa[0] ^ Rcon[i/Nk];
+   0203 90s00rB1            595 	mov	dptr,#_KeyExpansion_tempa_1_1
+   0206 E0                  596 	movx	a,@dptr
+   0207 FF                  597 	mov	r7,a
+   0208 E5*0E               598 	mov	a,(_KeyExpansion_sloc4_1_0 + 3)
+   020A C3                  599 	clr	c
+   020B 13                  600 	rrc	a
+   020C FE                  601 	mov	r6,a
+   020D E5*0D               602 	mov	a,(_KeyExpansion_sloc4_1_0 + 2)
+   020F 13                  603 	rrc	a
+   0210 FD                  604 	mov	r5,a
+   0211 E5*0C               605 	mov	a,(_KeyExpansion_sloc4_1_0 + 1)
+   0213 13                  606 	rrc	a
+   0214 FC                  607 	mov	r4,a
+   0215 E5*0B               608 	mov	a,_KeyExpansion_sloc4_1_0
+   0217 13                  609 	rrc	a
+   0218 FB                  610 	mov	r3,a
+   0219 EE                  611 	mov	a,r6
+   021A C3                  612 	clr	c
+   021B 13                  613 	rrc	a
+   021C ED                  614 	mov	a,r5
+   021D 13                  615 	rrc	a
+   021E FD                  616 	mov	r5,a
+   021F EC                  617 	mov	a,r4
+   0220 13                  618 	rrc	a
+   0221 FC                  619 	mov	r4,a
+   0222 EB                  620 	mov	a,r3
+   0223 13                  621 	rrc	a
+   0224 FB                  622 	mov	r3,a
+   0225 24r00               623 	add	a,#_Rcon
+   0227 F5 82               624 	mov	dpl,a
+   0229 EC                  625 	mov	a,r4
+   022A 34s01               626 	addc	a,#(_Rcon >> 8)
+   022C F5 83               627 	mov	dph,a
+   022E E4                  628 	clr	a
+   022F 93                  629 	movc	a,@a+dptr
+   0230 FE                  630 	mov	r6,a
+   0231 62 07               631 	xrl	ar7,a
+   0233 90s00rB1            632 	mov	dptr,#_KeyExpansion_tempa_1_1
+   0236 EF                  633 	mov	a,r7
+   0237 F0                  634 	movx	@dptr,a
+                    0238    635 	C$aes.c$194$2$3 ==.
+                            636 ;	libraries/src/aes/aes.c:194: tempa[3] = getSBoxValue(tempa[3]);
+   0238                     637 00106$:
+                    0238    638 	C$aes.c$197$2$3 ==.
+                            639 ;	libraries/src/aes/aes.c:197: RoundKey[i * 4 + 0] = RoundKey[(i - Nk) * 4 + 0] ^ tempa[0];
+   0238 E5*0B               640 	mov	a,_KeyExpansion_sloc4_1_0
+   023A FC                  641 	mov	r4,a
+   023B 25 E0               642 	add	a,acc
+   023D 25 E0               643 	add	a,acc
+   023F FF                  644 	mov	r7,a
+   0240 24r00               645 	add	a,#_RoundKey
+   0242 FD                  646 	mov	r5,a
+   0243 E4                  647 	clr	a
+   0244 34s00               648 	addc	a,#(_RoundKey >> 8)
+   0246 FE                  649 	mov	r6,a
+   0247 1C                  650 	dec	r4
+   0248 1C                  651 	dec	r4
+   0249 1C                  652 	dec	r4
+   024A 1C                  653 	dec	r4
+   024B EC                  654 	mov	a,r4
+   024C 2C                  655 	add	a,r4
+   024D 25 E0               656 	add	a,acc
+   024F FC                  657 	mov	r4,a
+   0250 24r00               658 	add	a,#_RoundKey
+   0252 F5 82               659 	mov	dpl,a
+   0254 E4                  660 	clr	a
+   0255 34s00               661 	addc	a,#(_RoundKey >> 8)
+   0257 F5 83               662 	mov	dph,a
+   0259 E0                  663 	movx	a,@dptr
+   025A FB                  664 	mov	r3,a
+   025B 90s00rB1            665 	mov	dptr,#_KeyExpansion_tempa_1_1
+   025E E0                  666 	movx	a,@dptr
+   025F 62 03               667 	xrl	ar3,a
+   0261 8D 82               668 	mov	dpl,r5
+   0263 8E 83               669 	mov	dph,r6
+   0265 EB                  670 	mov	a,r3
+   0266 F0                  671 	movx	@dptr,a
+                    0267    672 	C$aes.c$198$2$3 ==.
+                            673 ;	libraries/src/aes/aes.c:198: RoundKey[i * 4 + 1] = RoundKey[(i - Nk) * 4 + 1] ^ tempa[1];
+   0267 EF                  674 	mov	a,r7
+   0268 04                  675 	inc	a
+   0269 24r00               676 	add	a,#_RoundKey
+   026B FD                  677 	mov	r5,a
+   026C E4                  678 	clr	a
+   026D 34s00               679 	addc	a,#(_RoundKey >> 8)
+   026F FE                  680 	mov	r6,a
+   0270 EC                  681 	mov	a,r4
+   0271 04                  682 	inc	a
+   0272 24r00               683 	add	a,#_RoundKey
+   0274 F5 82               684 	mov	dpl,a
+   0276 E4                  685 	clr	a
+   0277 34s00               686 	addc	a,#(_RoundKey >> 8)
+   0279 F5 83               687 	mov	dph,a
+   027B E0                  688 	movx	a,@dptr
+   027C FB                  689 	mov	r3,a
+   027D 90s00rB2            690 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0001)
+   0280 E0                  691 	movx	a,@dptr
+   0281 62 03               692 	xrl	ar3,a
+   0283 8D 82               693 	mov	dpl,r5
+   0285 8E 83               694 	mov	dph,r6
+   0287 EB                  695 	mov	a,r3
+   0288 F0                  696 	movx	@dptr,a
+                    0289    697 	C$aes.c$199$2$3 ==.
+                            698 ;	libraries/src/aes/aes.c:199: RoundKey[i * 4 + 2] = RoundKey[(i - Nk) * 4 + 2] ^ tempa[2];
+   0289 74 02               699 	mov	a,#0x02
+   028B 2F                  700 	add	a,r7
+   028C 24r00               701 	add	a,#_RoundKey
+   028E FD                  702 	mov	r5,a
+   028F E4                  703 	clr	a
+   0290 34s00               704 	addc	a,#(_RoundKey >> 8)
+   0292 FE                  705 	mov	r6,a
+   0293 74 02               706 	mov	a,#0x02
+   0295 2C                  707 	add	a,r4
+   0296 24r00               708 	add	a,#_RoundKey
+   0298 F5 82               709 	mov	dpl,a
+   029A E4                  710 	clr	a
+   029B 34s00               711 	addc	a,#(_RoundKey >> 8)
+   029D F5 83               712 	mov	dph,a
+   029F E0                  713 	movx	a,@dptr
+   02A0 FB                  714 	mov	r3,a
+   02A1 90s00rB3            715 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0002)
+   02A4 E0                  716 	movx	a,@dptr
+   02A5 FA                  717 	mov	r2,a
+   02A6 62 03               718 	xrl	ar3,a
+   02A8 8D 82               719 	mov	dpl,r5
+   02AA 8E 83               720 	mov	dph,r6
+   02AC EB                  721 	mov	a,r3
+   02AD F0                  722 	movx	@dptr,a
+                    02AE    723 	C$aes.c$200$2$3 ==.
+                            724 ;	libraries/src/aes/aes.c:200: RoundKey[i * 4 + 3] = RoundKey[(i - Nk) * 4 + 3] ^ tempa[3];
+   02AE 74 03               725 	mov	a,#0x03
+   02B0 2F                  726 	add	a,r7
+   02B1 24r00               727 	add	a,#_RoundKey
+   02B3 FE                  728 	mov	r6,a
+   02B4 E4                  729 	clr	a
+   02B5 34s00               730 	addc	a,#(_RoundKey >> 8)
+   02B7 FF                  731 	mov	r7,a
+   02B8 74 03               732 	mov	a,#0x03
+   02BA 2C                  733 	add	a,r4
+   02BB 24r00               734 	add	a,#_RoundKey
+   02BD F5 82               735 	mov	dpl,a
+   02BF E4                  736 	clr	a
+   02C0 34s00               737 	addc	a,#(_RoundKey >> 8)
+   02C2 F5 83               738 	mov	dph,a
+   02C4 E0                  739 	movx	a,@dptr
+   02C5 FD                  740 	mov	r5,a
+   02C6 90s00rB4            741 	mov	dptr,#(_KeyExpansion_tempa_1_1 + 0x0003)
+   02C9 E0                  742 	movx	a,@dptr
+   02CA FC                  743 	mov	r4,a
+   02CB 62 05               744 	xrl	ar5,a
+   02CD 8E 82               745 	mov	dpl,r6
+   02CF 8F 83               746 	mov	dph,r7
+   02D1 ED                  747 	mov	a,r5
+   02D2 F0                  748 	movx	@dptr,a
+                    02D3    749 	C$aes.c$154$1$1 ==.
+                            750 ;	libraries/src/aes/aes.c:154: for(; (i < (Nb * (Nr + 1))); ++i)
+   02D3 05*0B               751 	inc	_KeyExpansion_sloc4_1_0
+   02D5 E4                  752 	clr	a
+   02D6 B5*0B 0C            753 	cjne	a,_KeyExpansion_sloc4_1_0,00138$
+   02D9 05*0C               754 	inc	(_KeyExpansion_sloc4_1_0 + 1)
+   02DB B5*0C 07            755 	cjne	a,(_KeyExpansion_sloc4_1_0 + 1),00138$
+   02DE 05*0D               756 	inc	(_KeyExpansion_sloc4_1_0 + 2)
+   02E0 B5*0D 02            757 	cjne	a,(_KeyExpansion_sloc4_1_0 + 2),00138$
+   02E3 05*0E               758 	inc	(_KeyExpansion_sloc4_1_0 + 3)
+   02E5                     759 00138$:
+   02E5 02s01r23            760 	ljmp	00115$
+   02E8                     761 00119$:
+                    02E8    762 	C$aes.c$202$1$1 ==.
+                    02E8    763 	XFaes$KeyExpansion$0$0 ==.
+   02E8 22                  764 	ret
+                            765 ;------------------------------------------------------------
+                            766 ;Allocation info for local variables in function 'AddRoundKey'
+                            767 ;------------------------------------------------------------
+                            768 ;round                     Allocated with name '_AddRoundKey_round_1_1'
+                            769 ;i                         Allocated with name '_AddRoundKey_i_1_1'
+                            770 ;j                         Allocated with name '_AddRoundKey_j_1_1'
+                            771 ;sloc0                     Allocated with name '_AddRoundKey_sloc0_1_0'
+                            772 ;sloc1                     Allocated with name '_AddRoundKey_sloc1_1_0'
+                            773 ;------------------------------------------------------------
+                    02E9    774 	Faes$AddRoundKey$0$0 ==.
+                    02E9    775 	C$aes.c$206$1$1 ==.
+                            776 ;	libraries/src/aes/aes.c:206: static void AddRoundKey(XDATA uint8_t round)
+                            777 ;	-----------------------------------------
+                            778 ;	 function AddRoundKey
+                            779 ;	-----------------------------------------
+   02E9                     780 _AddRoundKey:
+   02E9 E5 82               781 	mov	a,dpl
+                    02EB    782 	C$aes.c$209$3$3 ==.
+                            783 ;	libraries/src/aes/aes.c:209: for(i=0;i<4;++i)
+   02EB 90s00rB5            784 	mov	dptr,#_AddRoundKey_round_1_1
+   02EE F0                  785 	movx	@dptr,a
+   02EF C4                  786 	swap	a
+   02F0 54 F0               787 	anl	a,#0xF0
+   02F2 FF                  788 	mov	r7,a
+   02F3 7E 00               789 	mov	r6,#0x00
+   02F5                     790 00105$:
+   02F5 BE 04 00            791 	cjne	r6,#0x04,00117$
+   02F8                     792 00117$:
+   02F8 50 48               793 	jnc	00109$
+                    02FA    794 	C$aes.c$211$3$3 ==.
+                            795 ;	libraries/src/aes/aes.c:211: for(j = 0; j < 4; ++j)
+   02FA EE                  796 	mov	a,r6
+   02FB 2E                  797 	add	a,r6
+   02FC 25 E0               798 	add	a,acc
+   02FE FD                  799 	mov	r5,a
+   02FF 2F                  800 	add	a,r7
+   0300 F5*00               801 	mov	_AddRoundKey_sloc0_1_0,a
+   0302 7B 00               802 	mov	r3,#0x00
+   0304                     803 00101$:
+   0304 BB 04 00            804 	cjne	r3,#0x04,00119$
+   0307                     805 00119$:
+   0307 50 36               806 	jnc	00107$
+                    0309    807 	C$aes.c$213$1$1 ==.
+                            808 ;	libraries/src/aes/aes.c:213: (*state)[i][j] ^= RoundKey[round * Nb * 4 + i * Nb + j];
+   0309 C0 07               809 	push	ar7
+   030B 78r00               810 	mov	r0,#_state
+   030D E2                  811 	movx	a,@r0
+   030E 2D                  812 	add	a,r5
+   030F FA                  813 	mov	r2,a
+   0310 08                  814 	inc	r0
+   0311 E2                  815 	movx	a,@r0
+   0312 34 00               816 	addc	a,#0x00
+   0314 FF                  817 	mov	r7,a
+   0315 EB                  818 	mov	a,r3
+   0316 2A                  819 	add	a,r2
+   0317 FA                  820 	mov	r2,a
+   0318 E4                  821 	clr	a
+   0319 3F                  822 	addc	a,r7
+   031A FF                  823 	mov	r7,a
+   031B EB                  824 	mov	a,r3
+   031C 25*00               825 	add	a,_AddRoundKey_sloc0_1_0
+   031E 24r00               826 	add	a,#_RoundKey
+   0320 F5 82               827 	mov	dpl,a
+   0322 E4                  828 	clr	a
+   0323 34s00               829 	addc	a,#(_RoundKey >> 8)
+   0325 F5 83               830 	mov	dph,a
+   0327 E0                  831 	movx	a,@dptr
+   0328 F5*01               832 	mov	_AddRoundKey_sloc1_1_0,a
+   032A 8A 82               833 	mov	dpl,r2
+   032C 8F 83               834 	mov	dph,r7
+   032E E0                  835 	movx	a,@dptr
+   032F FC                  836 	mov	r4,a
+   0330 E5*01               837 	mov	a,_AddRoundKey_sloc1_1_0
+   0332 62 04               838 	xrl	ar4,a
+   0334 8A 82               839 	mov	dpl,r2
+   0336 8F 83               840 	mov	dph,r7
+   0338 EC                  841 	mov	a,r4
+   0339 F0                  842 	movx	@dptr,a
+                    033A    843 	C$aes.c$211$2$2 ==.
+                            844 ;	libraries/src/aes/aes.c:211: for(j = 0; j < 4; ++j)
+   033A 0B                  845 	inc	r3
+   033B D0 07               846 	pop	ar7
+   033D 80 C5               847 	sjmp	00101$
+   033F                     848 00107$:
+                    033F    849 	C$aes.c$209$1$1 ==.
+                            850 ;	libraries/src/aes/aes.c:209: for(i=0;i<4;++i)
+   033F 0E                  851 	inc	r6
+   0340 80 B3               852 	sjmp	00105$
+   0342                     853 00109$:
+                    0342    854 	C$aes.c$216$1$1 ==.
+                    0342    855 	XFaes$AddRoundKey$0$0 ==.
+   0342 22                  856 	ret
+                            857 ;------------------------------------------------------------
+                            858 ;Allocation info for local variables in function 'SubBytes'
+                            859 ;------------------------------------------------------------
+                            860 ;i                         Allocated with name '_SubBytes_i_1_1'
+                            861 ;j                         Allocated with name '_SubBytes_j_1_1'
+                            862 ;------------------------------------------------------------
+                    0343    863 	Faes$SubBytes$0$0 ==.
+                    0343    864 	C$aes.c$220$1$1 ==.
+                            865 ;	libraries/src/aes/aes.c:220: XDATA static void SubBytes(void)
+                            866 ;	-----------------------------------------
+                            867 ;	 function SubBytes
+                            868 ;	-----------------------------------------
+   0343                     869 _SubBytes:
+                    0343    870 	C$aes.c$223$1$1 ==.
+                            871 ;	libraries/src/aes/aes.c:223: for(i = 0; i < 4; ++i)
+   0343 7F 00               872 	mov	r7,#0x00
+   0345                     873 00105$:
+   0345 BF 04 00            874 	cjne	r7,#0x04,00117$
+   0348                     875 00117$:
+   0348 50 4A               876 	jnc	00109$
+                    034A    877 	C$aes.c$225$3$3 ==.
+                            878 ;	libraries/src/aes/aes.c:225: for(j = 0; j < 4; ++j)
+   034A 8F 06               879 	mov	ar6,r7
+   034C 7D 00               880 	mov	r5,#0x00
+   034E                     881 00101$:
+   034E BD 04 00            882 	cjne	r5,#0x04,00119$
+   0351                     883 00119$:
+   0351 50 3E               884 	jnc	00107$
+                    0353    885 	C$aes.c$227$3$3 ==.
+                            886 ;	libraries/src/aes/aes.c:227: (*state)[j][i] = getSBoxValue((*state)[j][i]);
+   0353 ED                  887 	mov	a,r5
+   0354 2D                  888 	add	a,r5
+   0355 25 E0               889 	add	a,acc
+   0357 FC                  890 	mov	r4,a
+   0358 78r00               891 	mov	r0,#_state
+   035A E2                  892 	movx	a,@r0
+   035B 2C                  893 	add	a,r4
+   035C FC                  894 	mov	r4,a
+   035D 08                  895 	inc	r0
+   035E E2                  896 	movx	a,@r0
+   035F 34 00               897 	addc	a,#0x00
+   0361 FB                  898 	mov	r3,a
+   0362 EE                  899 	mov	a,r6
+   0363 2C                  900 	add	a,r4
+   0364 FC                  901 	mov	r4,a
+   0365 E4                  902 	clr	a
+   0366 3B                  903 	addc	a,r3
+   0367 FB                  904 	mov	r3,a
+   0368 8C 82               905 	mov	dpl,r4
+   036A 8B 83               906 	mov	dph,r3
+   036C E0                  907 	movx	a,@dptr
+   036D F5 82               908 	mov	dpl,a
+   036F C0 07               909 	push	ar7
+   0371 C0 06               910 	push	ar6
+   0373 C0 05               911 	push	ar5
+   0375 C0 04               912 	push	ar4
+   0377 C0 03               913 	push	ar3
+   0379 12s00r00            914 	lcall	_getSBoxValue
+   037C AA 82               915 	mov	r2,dpl
+   037E D0 03               916 	pop	ar3
+   0380 D0 04               917 	pop	ar4
+   0382 D0 05               918 	pop	ar5
+   0384 D0 06               919 	pop	ar6
+   0386 D0 07               920 	pop	ar7
+   0388 8C 82               921 	mov	dpl,r4
+   038A 8B 83               922 	mov	dph,r3
+   038C EA                  923 	mov	a,r2
+   038D F0                  924 	movx	@dptr,a
+                    038E    925 	C$aes.c$225$2$2 ==.
+                            926 ;	libraries/src/aes/aes.c:225: for(j = 0; j < 4; ++j)
+   038E 0D                  927 	inc	r5
+   038F 80 BD               928 	sjmp	00101$
+   0391                     929 00107$:
+                    0391    930 	C$aes.c$223$1$1 ==.
+                            931 ;	libraries/src/aes/aes.c:223: for(i = 0; i < 4; ++i)
+   0391 0F                  932 	inc	r7
+   0392 80 B1               933 	sjmp	00105$
+   0394                     934 00109$:
+                    0394    935 	C$aes.c$230$1$1 ==.
+                    0394    936 	XFaes$SubBytes$0$0 ==.
+   0394 22                  937 	ret
+                            938 ;------------------------------------------------------------
+                            939 ;Allocation info for local variables in function 'ShiftRows'
+                            940 ;------------------------------------------------------------
+                            941 ;temp                      Allocated with name '_ShiftRows_temp_1_1'
+                            942 ;sloc0                     Allocated with name '_ShiftRows_sloc0_1_0'
+                            943 ;sloc1                     Allocated with name '_ShiftRows_sloc1_1_0'
+                            944 ;sloc2                     Allocated with name '_ShiftRows_sloc2_1_0'
+                            945 ;------------------------------------------------------------
+                    0395    946 	Faes$ShiftRows$0$0 ==.
+                    0395    947 	C$aes.c$235$1$1 ==.
+                            948 ;	libraries/src/aes/aes.c:235: XDATA static void ShiftRows(void)
+                            949 ;	-----------------------------------------
+                            950 ;	 function ShiftRows
+                            951 ;	-----------------------------------------
+   0395                     952 _ShiftRows:
+                    0395    953 	C$aes.c$240$1$1 ==.
+                            954 ;	libraries/src/aes/aes.c:240: temp           = (*state)[0][1];
+   0395 78r00               955 	mov	r0,#_state
+   0397 E2                  956 	movx	a,@r0
+   0398 FE                  957 	mov	r6,a
+   0399 08                  958 	inc	r0
+   039A E2                  959 	movx	a,@r0
+   039B FF                  960 	mov	r7,a
+   039C 74 01               961 	mov	a,#0x01
+   039E 2E                  962 	add	a,r6
+   039F FC                  963 	mov	r4,a
+   03A0 E4                  964 	clr	a
+   03A1 3F                  965 	addc	a,r7
+   03A2 FD                  966 	mov	r5,a
+   03A3 8C 82               967 	mov	dpl,r4
+   03A5 8D 83               968 	mov	dph,r5
+   03A7 E0                  969 	movx	a,@dptr
+   03A8 F5*00               970 	mov	_ShiftRows_sloc0_1_0,a
+                    03AA    971 	C$aes.c$241$1$1 ==.
+                            972 ;	libraries/src/aes/aes.c:241: (*state)[0][1] = (*state)[1][1];
+   03AA 74 05               973 	mov	a,#0x05
+   03AC 2E                  974 	add	a,r6
+   03AD F5*01               975 	mov	_ShiftRows_sloc1_1_0,a
+   03AF E4                  976 	clr	a
+   03B0 3F                  977 	addc	a,r7
+   03B1 F5*02               978 	mov	(_ShiftRows_sloc1_1_0 + 1),a
+   03B3 85*01 82            979 	mov	dpl,_ShiftRows_sloc1_1_0
+   03B6 85*02 83            980 	mov	dph,(_ShiftRows_sloc1_1_0 + 1)
+   03B9 E0                  981 	movx	a,@dptr
+   03BA 8C 82               982 	mov	dpl,r4
+   03BC 8D 83               983 	mov	dph,r5
+   03BE F0                  984 	movx	@dptr,a
+                    03BF    985 	C$aes.c$242$1$1 ==.
+                            986 ;	libraries/src/aes/aes.c:242: (*state)[1][1] = (*state)[2][1];
+   03BF 74 09               987 	mov	a,#0x09
+   03C1 2E                  988 	add	a,r6
+   03C2 FC                  989 	mov	r4,a
+   03C3 E4                  990 	clr	a
+   03C4 3F                  991 	addc	a,r7
+   03C5 FD                  992 	mov	r5,a
+   03C6 8C 82               993 	mov	dpl,r4
+   03C8 8D 83               994 	mov	dph,r5
+   03CA E0                  995 	movx	a,@dptr
+   03CB 85*01 82            996 	mov	dpl,_ShiftRows_sloc1_1_0
+   03CE 85*02 83            997 	mov	dph,(_ShiftRows_sloc1_1_0 + 1)
+   03D1 F0                  998 	movx	@dptr,a
+                    03D2    999 	C$aes.c$243$1$1 ==.
+                           1000 ;	libraries/src/aes/aes.c:243: (*state)[2][1] = (*state)[3][1];
+   03D2 74 0D              1001 	mov	a,#0x0D
+   03D4 2E                 1002 	add	a,r6
+   03D5 F5*01              1003 	mov	_ShiftRows_sloc1_1_0,a
+   03D7 E4                 1004 	clr	a
+   03D8 3F                 1005 	addc	a,r7
+   03D9 F5*02              1006 	mov	(_ShiftRows_sloc1_1_0 + 1),a
+   03DB 85*01 82           1007 	mov	dpl,_ShiftRows_sloc1_1_0
+   03DE 85*02 83           1008 	mov	dph,(_ShiftRows_sloc1_1_0 + 1)
+   03E1 E0                 1009 	movx	a,@dptr
+   03E2 8C 82              1010 	mov	dpl,r4
+   03E4 8D 83              1011 	mov	dph,r5
+   03E6 F0                 1012 	movx	@dptr,a
+                    03E7   1013 	C$aes.c$244$1$1 ==.
+                           1014 ;	libraries/src/aes/aes.c:244: (*state)[3][1] = temp;
+   03E7 85*01 82           1015 	mov	dpl,_ShiftRows_sloc1_1_0
+   03EA 85*02 83           1016 	mov	dph,(_ShiftRows_sloc1_1_0 + 1)
+   03ED E5*00              1017 	mov	a,_ShiftRows_sloc0_1_0
+   03EF F0                 1018 	movx	@dptr,a
+                    03F0   1019 	C$aes.c$247$1$1 ==.
+                           1020 ;	libraries/src/aes/aes.c:247: temp           = (*state)[0][2];
+   03F0 74 02              1021 	mov	a,#0x02
+   03F2 2E                 1022 	add	a,r6
+   03F3 FC                 1023 	mov	r4,a
+   03F4 E4                 1024 	clr	a
+   03F5 3F                 1025 	addc	a,r7
+   03F6 FD                 1026 	mov	r5,a
+   03F7 8C 82              1027 	mov	dpl,r4
+   03F9 8D 83              1028 	mov	dph,r5
+   03FB E0                 1029 	movx	a,@dptr
+   03FC F5*01              1030 	mov	_ShiftRows_sloc1_1_0,a
+                    03FE   1031 	C$aes.c$248$1$1 ==.
+                           1032 ;	libraries/src/aes/aes.c:248: (*state)[0][2] = (*state)[2][2];
+   03FE 74 0A              1033 	mov	a,#0x0A
+   0400 2E                 1034 	add	a,r6
+   0401 F5*03              1035 	mov	_ShiftRows_sloc2_1_0,a
+   0403 E4                 1036 	clr	a
+   0404 3F                 1037 	addc	a,r7
+   0405 F5*04              1038 	mov	(_ShiftRows_sloc2_1_0 + 1),a
+   0407 85*03 82           1039 	mov	dpl,_ShiftRows_sloc2_1_0
+   040A 85*04 83           1040 	mov	dph,(_ShiftRows_sloc2_1_0 + 1)
+   040D E0                 1041 	movx	a,@dptr
+   040E 8C 82              1042 	mov	dpl,r4
+   0410 8D 83              1043 	mov	dph,r5
+   0412 F0                 1044 	movx	@dptr,a
+                    0413   1045 	C$aes.c$249$1$1 ==.
+                           1046 ;	libraries/src/aes/aes.c:249: (*state)[2][2] = temp;
+   0413 85*03 82           1047 	mov	dpl,_ShiftRows_sloc2_1_0
+   0416 85*04 83           1048 	mov	dph,(_ShiftRows_sloc2_1_0 + 1)
+   0419 E5*01              1049 	mov	a,_ShiftRows_sloc1_1_0
+   041B F0                 1050 	movx	@dptr,a
+                    041C   1051 	C$aes.c$251$1$1 ==.
+                           1052 ;	libraries/src/aes/aes.c:251: temp       = (*state)[1][2];
+   041C 74 06              1053 	mov	a,#0x06
+   041E 2E                 1054 	add	a,r6
+   041F FC                 1055 	mov	r4,a
+   0420 E4                 1056 	clr	a
+   0421 3F                 1057 	addc	a,r7
+   0422 FD                 1058 	mov	r5,a
+   0423 8C 82              1059 	mov	dpl,r4
+   0425 8D 83              1060 	mov	dph,r5
+   0427 E0                 1061 	movx	a,@dptr
+   0428 F5*03              1062 	mov	_ShiftRows_sloc2_1_0,a
+                    042A   1063 	C$aes.c$252$1$1 ==.
+                           1064 ;	libraries/src/aes/aes.c:252: (*state)[1][2] = (*state)[3][2];
+   042A 74 0E              1065 	mov	a,#0x0E
+   042C 2E                 1066 	add	a,r6
+   042D F5*01              1067 	mov	_ShiftRows_sloc1_1_0,a
+   042F E4                 1068 	clr	a
+   0430 3F                 1069 	addc	a,r7
+   0431 F5*02              1070 	mov	(_ShiftRows_sloc1_1_0 + 1),a
+   0433 85*01 82           1071 	mov	dpl,_ShiftRows_sloc1_1_0
+   0436 85*02 83           1072 	mov	dph,(_ShiftRows_sloc1_1_0 + 1)
+   0439 E0                 1073 	movx	a,@dptr
+   043A 8C 82              1074 	mov	dpl,r4
+   043C 8D 83              1075 	mov	dph,r5
+   043E F0                 1076 	movx	@dptr,a
+                    043F   1077 	C$aes.c$253$1$1 ==.
+                           1078 ;	libraries/src/aes/aes.c:253: (*state)[3][2] = temp;
+   043F 85*01 82           1079 	mov	dpl,_ShiftRows_sloc1_1_0
+   0442 85*02 83           1080 	mov	dph,(_ShiftRows_sloc1_1_0 + 1)
+   0445 E5*03              1081 	mov	a,_ShiftRows_sloc2_1_0
+   0447 F0                 1082 	movx	@dptr,a
+                    0448   1083 	C$aes.c$256$1$1 ==.
+                           1084 ;	libraries/src/aes/aes.c:256: temp       = (*state)[0][3];
+   0448 74 03              1085 	mov	a,#0x03
+   044A 2E                 1086 	add	a,r6
+   044B FC                 1087 	mov	r4,a
+   044C E4                 1088 	clr	a
+   044D 3F                 1089 	addc	a,r7
+   044E FD                 1090 	mov	r5,a
+   044F 8C 82              1091 	mov	dpl,r4
+   0451 8D 83              1092 	mov	dph,r5
+   0453 E0                 1093 	movx	a,@dptr
+   0454 F5*03              1094 	mov	_ShiftRows_sloc2_1_0,a
+                    0456   1095 	C$aes.c$257$1$1 ==.
+                           1096 ;	libraries/src/aes/aes.c:257: (*state)[0][3] = (*state)[3][3];
+   0456 74 0F              1097 	mov	a,#0x0F
+   0458 2E                 1098 	add	a,r6
+   0459 F5*01              1099 	mov	_ShiftRows_sloc1_1_0,a
+   045B E4                 1100 	clr	a
+   045C 3F                 1101 	addc	a,r7
+   045D F5*02              1102 	mov	(_ShiftRows_sloc1_1_0 + 1),a
+   045F 85*01 82           1103 	mov	dpl,_ShiftRows_sloc1_1_0
+   0462 85*02 83           1104 	mov	dph,(_ShiftRows_sloc1_1_0 + 1)
+   0465 E0                 1105 	movx	a,@dptr
+   0466 8C 82              1106 	mov	dpl,r4
+   0468 8D 83              1107 	mov	dph,r5
+   046A F0                 1108 	movx	@dptr,a
+                    046B   1109 	C$aes.c$258$1$1 ==.
+                           1110 ;	libraries/src/aes/aes.c:258: (*state)[3][3] = (*state)[2][3];
+   046B 74 0B              1111 	mov	a,#0x0B
+   046D 2E                 1112 	add	a,r6
+   046E FC                 1113 	mov	r4,a
+   046F E4                 1114 	clr	a
+   0470 3F                 1115 	addc	a,r7
+   0471 FD                 1116 	mov	r5,a
+   0472 8C 82              1117 	mov	dpl,r4
+   0474 8D 83              1118 	mov	dph,r5
+   0476 E0                 1119 	movx	a,@dptr
+   0477 85*01 82           1120 	mov	dpl,_ShiftRows_sloc1_1_0
+   047A 85*02 83           1121 	mov	dph,(_ShiftRows_sloc1_1_0 + 1)
+   047D F0                 1122 	movx	@dptr,a
+                    047E   1123 	C$aes.c$259$1$1 ==.
+                           1124 ;	libraries/src/aes/aes.c:259: (*state)[2][3] = (*state)[1][3];
+   047E 74 07              1125 	mov	a,#0x07
+   0480 2E                 1126 	add	a,r6
+   0481 FE                 1127 	mov	r6,a
+   0482 E4                 1128 	clr	a
+   0483 3F                 1129 	addc	a,r7
+   0484 FF                 1130 	mov	r7,a
+   0485 8E 82              1131 	mov	dpl,r6
+   0487 8F 83              1132 	mov	dph,r7
+   0489 E0                 1133 	movx	a,@dptr
+   048A 8C 82              1134 	mov	dpl,r4
+   048C 8D 83              1135 	mov	dph,r5
+   048E F0                 1136 	movx	@dptr,a
+                    048F   1137 	C$aes.c$260$1$1 ==.
+                           1138 ;	libraries/src/aes/aes.c:260: (*state)[1][3] = temp;
+   048F 8E 82              1139 	mov	dpl,r6
+   0491 8F 83              1140 	mov	dph,r7
+   0493 E5*03              1141 	mov	a,_ShiftRows_sloc2_1_0
+   0495 F0                 1142 	movx	@dptr,a
+                    0496   1143 	C$aes.c$261$1$1 ==.
+                    0496   1144 	XFaes$ShiftRows$0$0 ==.
+   0496 22                 1145 	ret
+                           1146 ;------------------------------------------------------------
+                           1147 ;Allocation info for local variables in function 'xtime'
+                           1148 ;------------------------------------------------------------
+                           1149 ;x                         Allocated with name '_xtime_x_1_1'
+                           1150 ;------------------------------------------------------------
+                    0497   1151 	Faes$xtime$0$0 ==.
+                    0497   1152 	C$aes.c$263$1$1 ==.
+                           1153 ;	libraries/src/aes/aes.c:263: static XDATA uint8_t xtime(XDATA uint8_t x)
+                           1154 ;	-----------------------------------------
+                           1155 ;	 function xtime
+                           1156 ;	-----------------------------------------
+   0497                    1157 _xtime:
+   0497 E5 82              1158 	mov	a,dpl
+                    0499   1159 	C$aes.c$265$1$1 ==.
+                           1160 ;	libraries/src/aes/aes.c:265: return ((x<<1) ^ (((x>>7) & 1) * 0x1b));
+   0499 90s00rB6           1161 	mov	dptr,#_xtime_x_1_1
+   049C F0                 1162 	movx	@dptr,a
+   049D FF                 1163 	mov	r7,a
+   049E 25 E0              1164 	add	a,acc
+   04A0 FE                 1165 	mov	r6,a
+   04A1 EF                 1166 	mov	a,r7
+   04A2 23                 1167 	rl	a
+   04A3 54 01              1168 	anl	a,#0x01
+   04A5 75 F0 1B           1169 	mov	b,#0x1B
+   04A8 A4                 1170 	mul	ab
+   04A9 62 06              1171 	xrl	ar6,a
+   04AB 8E 82              1172 	mov	dpl,r6
+                    04AD   1173 	C$aes.c$266$1$1 ==.
+                    04AD   1174 	XFaes$xtime$0$0 ==.
+   04AD 22                 1175 	ret
+                           1176 ;------------------------------------------------------------
+                           1177 ;Allocation info for local variables in function 'Multiply'
+                           1178 ;------------------------------------------------------------
+                           1179 ;y                         Allocated with name '_Multiply_PARM_2'
+                           1180 ;x                         Allocated with name '_Multiply_x_1_1'
+                           1181 ;------------------------------------------------------------
+                    04AE   1182 	Faes$Multiply$0$0 ==.
+                    04AE   1183 	C$aes.c$290$1$1 ==.
+                           1184 ;	libraries/src/aes/aes.c:290: static XDATA uint8_t Multiply(XDATA uint8_t x, XDATA uint8_t y)
+                           1185 ;	-----------------------------------------
+                           1186 ;	 function Multiply
+                           1187 ;	-----------------------------------------
+   04AE                    1188 _Multiply:
+   04AE E5 82              1189 	mov	a,dpl
+   04B0 90s00rB8           1190 	mov	dptr,#_Multiply_x_1_1
+   04B3 F0                 1191 	movx	@dptr,a
+                    04B4   1192 	C$aes.c$292$1$1 ==.
+                           1193 ;	libraries/src/aes/aes.c:292: return (((y & 1) * x) ^
+   04B4 90s00rB7           1194 	mov	dptr,#_Multiply_PARM_2
+   04B7 E0                 1195 	movx	a,@dptr
+   04B8 FF                 1196 	mov	r7,a
+   04B9 74 01              1197 	mov	a,#0x01
+   04BB 5F                 1198 	anl	a,r7
+   04BC FE                 1199 	mov	r6,a
+   04BD 90s00rB8           1200 	mov	dptr,#_Multiply_x_1_1
+   04C0 E0                 1201 	movx	a,@dptr
+   04C1 FD                 1202 	mov	r5,a
+   04C2 8E F0              1203 	mov	b,r6
+   04C4 A4                 1204 	mul	ab
+   04C5 FE                 1205 	mov	r6,a
+                    04C6   1206 	C$aes.c$293$1$1 ==.
+                           1207 ;	libraries/src/aes/aes.c:293: ((y>>1 & 1) * xtime(x)) ^
+   04C6 EF                 1208 	mov	a,r7
+   04C7 03                 1209 	rr	a
+   04C8 54 01              1210 	anl	a,#0x01
+   04CA FC                 1211 	mov	r4,a
+   04CB 8D 82              1212 	mov	dpl,r5
+   04CD C0 07              1213 	push	ar7
+   04CF C0 06              1214 	push	ar6
+   04D1 C0 05              1215 	push	ar5
+   04D3 C0 04              1216 	push	ar4
+   04D5 12s04r97           1217 	lcall	_xtime
+   04D8 AB 82              1218 	mov	r3,dpl
+   04DA D0 04              1219 	pop	ar4
+   04DC D0 05              1220 	pop	ar5
+   04DE D0 06              1221 	pop	ar6
+   04E0 D0 07              1222 	pop	ar7
+   04E2 8C F0              1223 	mov	b,r4
+   04E4 EB                 1224 	mov	a,r3
+   04E5 A4                 1225 	mul	ab
+   04E6 62 06              1226 	xrl	ar6,a
+                    04E8   1227 	C$aes.c$294$1$1 ==.
+                           1228 ;	libraries/src/aes/aes.c:294: ((y>>2 & 1) * xtime(xtime(x))) ^
+   04E8 EF                 1229 	mov	a,r7
+   04E9 03                 1230 	rr	a
+   04EA 03                 1231 	rr	a
+   04EB 54 01              1232 	anl	a,#0x01
+   04ED FC                 1233 	mov	r4,a
+   04EE 8D 82              1234 	mov	dpl,r5
+   04F0 C0 07              1235 	push	ar7
+   04F2 C0 06              1236 	push	ar6
+   04F4 C0 05              1237 	push	ar5
+   04F6 C0 04              1238 	push	ar4
+   04F8 12s04r97           1239 	lcall	_xtime
+   04FB 12s04r97           1240 	lcall	_xtime
+   04FE AB 82              1241 	mov	r3,dpl
+   0500 D0 04              1242 	pop	ar4
+   0502 D0 05              1243 	pop	ar5
+   0504 D0 06              1244 	pop	ar6
+   0506 D0 07              1245 	pop	ar7
+   0508 8C F0              1246 	mov	b,r4
+   050A EB                 1247 	mov	a,r3
+   050B A4                 1248 	mul	ab
+   050C 62 06              1249 	xrl	ar6,a
+                    050E   1250 	C$aes.c$295$1$1 ==.
+                           1251 ;	libraries/src/aes/aes.c:295: ((y>>3 & 1) * xtime(xtime(xtime(x)))) ^
+   050E EF                 1252 	mov	a,r7
+   050F A2 E3              1253 	mov	c,acc[3]
+   0511 E4                 1254 	clr	a
+   0512 33                 1255 	rlc	a
+   0513 FC                 1256 	mov	r4,a
+   0514 8D 82              1257 	mov	dpl,r5
+   0516 C0 07              1258 	push	ar7
+   0518 C0 06              1259 	push	ar6
+   051A C0 05              1260 	push	ar5
+   051C C0 04              1261 	push	ar4
+   051E 12s04r97           1262 	lcall	_xtime
+   0521 12s04r97           1263 	lcall	_xtime
+   0524 12s04r97           1264 	lcall	_xtime
+   0527 AB 82              1265 	mov	r3,dpl
+   0529 D0 04              1266 	pop	ar4
+   052B D0 05              1267 	pop	ar5
+   052D D0 06              1268 	pop	ar6
+   052F D0 07              1269 	pop	ar7
+   0531 8C F0              1270 	mov	b,r4
+   0533 EB                 1271 	mov	a,r3
+   0534 A4                 1272 	mul	ab
+   0535 62 06              1273 	xrl	ar6,a
+                    0537   1274 	C$aes.c$296$1$1 ==.
+                           1275 ;	libraries/src/aes/aes.c:296: ((y>>4 & 1) * xtime(xtime(xtime(xtime(x))))));
+   0537 EF                 1276 	mov	a,r7
+   0538 C4                 1277 	swap	a
+   0539 54 01              1278 	anl	a,#0x01
+   053B FF                 1279 	mov	r7,a
+   053C 8D 82              1280 	mov	dpl,r5
+   053E C0 07              1281 	push	ar7
+   0540 C0 06              1282 	push	ar6
+   0542 12s04r97           1283 	lcall	_xtime
+   0545 12s04r97           1284 	lcall	_xtime
+   0548 12s04r97           1285 	lcall	_xtime
+   054B 12s04r97           1286 	lcall	_xtime
+   054E AD 82              1287 	mov	r5,dpl
+   0550 D0 06              1288 	pop	ar6
+   0552 D0 07              1289 	pop	ar7
+   0554 8F F0              1290 	mov	b,r7
+   0556 ED                 1291 	mov	a,r5
+   0557 A4                 1292 	mul	ab
+   0558 62 06              1293 	xrl	ar6,a
+   055A 8E 82              1294 	mov	dpl,r6
+                    055C   1295 	C$aes.c$297$1$1 ==.
+                    055C   1296 	XFaes$Multiply$0$0 ==.
+   055C 22                 1297 	ret
+                           1298 ;------------------------------------------------------------
+                           1299 ;Allocation info for local variables in function 'Cipher'
+                           1300 ;------------------------------------------------------------
+                           1301 ;sloc0                     Allocated with name '_Cipher_sloc0_1_0'
+                           1302 ;sloc1                     Allocated with name '_Cipher_sloc1_1_0'
+                           1303 ;sloc2                     Allocated with name '_Cipher_sloc2_1_0'
+                           1304 ;round                     Allocated with name '_Cipher_round_1_1'
+                           1305 ;i                         Allocated with name '_Cipher_i_1_1'
+                           1306 ;k                         Allocated with name '_Cipher_k_1_1'
+                           1307 ;Tmp                       Allocated with name '_Cipher_Tmp_1_1'
+                           1308 ;Tm                        Allocated with name '_Cipher_Tm_1_1'
+                           1309 ;t                         Allocated with name '_Cipher_t_1_1'
+                           1310 ;------------------------------------------------------------
+                    055D   1311 	Faes$Cipher$0$0 ==.
+                    055D   1312 	C$aes.c$315$1$1 ==.
+                           1313 ;	libraries/src/aes/aes.c:315: static void Cipher(void)
+                           1314 ;	-----------------------------------------
+                           1315 ;	 function Cipher
+                           1316 ;	-----------------------------------------
+   055D                    1317 _Cipher:
+                    055D   1318 	C$aes.c$326$1$1 ==.
+                           1319 ;	libraries/src/aes/aes.c:326: AddRoundKey(0);
+   055D 75 82 00           1320 	mov	dpl,#0x00
+   0560 12s02rE9           1321 	lcall	_AddRoundKey
+                    0563   1322 	C$aes.c$331$1$1 ==.
+                           1323 ;	libraries/src/aes/aes.c:331: for(round = 1; round < Nr; ++round)
+   0563 7F 01              1324 	mov	r7,#0x01
+   0565                    1325 00109$:
+   0565 BF 0A 00           1326 	cjne	r7,#0x0A,00123$
+   0568                    1327 00123$:
+   0568 40 03              1328 	jc	00124$
+   056A 02s06rA5           1329 	ljmp	00112$
+   056D                    1330 00124$:
+                    056D   1331 	C$aes.c$333$2$2 ==.
+                           1332 ;	libraries/src/aes/aes.c:333: SubBytes();
+   056D C0 07              1333 	push	ar7
+   056F 12s03r43           1334 	lcall	_SubBytes
+                    0572   1335 	C$aes.c$334$2$2 ==.
+                           1336 ;	libraries/src/aes/aes.c:334: ShiftRows();
+   0572 12s03r95           1337 	lcall	_ShiftRows
+   0575 D0 07              1338 	pop	ar7
+                    0577   1339 	C$aes.c$341$1$1 ==.
+                           1340 ;	libraries/src/aes/aes.c:341: for(i = 0; i < 4; ++i)
+   0577 7E 00              1341 	mov	r6,#0x00
+   0579                    1342 00105$:
+   0579 BE 04 00           1343 	cjne	r6,#0x04,00125$
+   057C                    1344 00125$:
+   057C 40 03              1345 	jc	00126$
+   057E 02s06r98           1346 	ljmp	00108$
+   0581                    1347 00126$:
+                    0581   1348 	C$aes.c$343$1$1 ==.
+                           1349 ;	libraries/src/aes/aes.c:343: t   = (*state)[i][0];
+   0581 C0 07              1350 	push	ar7
+   0583 EE                 1351 	mov	a,r6
+   0584 2E                 1352 	add	a,r6
+   0585 25 E0              1353 	add	a,acc
+   0587 FD                 1354 	mov	r5,a
+   0588 78r00              1355 	mov	r0,#_state
+   058A E2                 1356 	movx	a,@r0
+   058B 2D                 1357 	add	a,r5
+   058C FB                 1358 	mov	r3,a
+   058D 08                 1359 	inc	r0
+   058E E2                 1360 	movx	a,@r0
+   058F 34 00              1361 	addc	a,#0x00
+   0591 FC                 1362 	mov	r4,a
+   0592 8B 82              1363 	mov	dpl,r3
+   0594 8C 83              1364 	mov	dph,r4
+   0596 E0                 1365 	movx	a,@dptr
+   0597 FA                 1366 	mov	r2,a
+   0598 90s00rBB           1367 	mov	dptr,#_Cipher_t_1_1
+   059B F0                 1368 	movx	@dptr,a
+                    059C   1369 	C$aes.c$344$3$3 ==.
+                           1370 ;	libraries/src/aes/aes.c:344: Tmp = (*state)[i][0] ^ (*state)[i][1] ^ (*state)[i][2] ^ (*state)[i][3] ;
+   059C 8B 82              1371 	mov	dpl,r3
+   059E 8C 83              1372 	mov	dph,r4
+   05A0 A3                 1373 	inc	dptr
+   05A1 E0                 1374 	movx	a,@dptr
+   05A2 62 02              1375 	xrl	ar2,a
+   05A4 8B 82              1376 	mov	dpl,r3
+   05A6 8C 83              1377 	mov	dph,r4
+   05A8 A3                 1378 	inc	dptr
+   05A9 A3                 1379 	inc	dptr
+   05AA E0                 1380 	movx	a,@dptr
+   05AB 62 02              1381 	xrl	ar2,a
+   05AD 8B 82              1382 	mov	dpl,r3
+   05AF 8C 83              1383 	mov	dph,r4
+   05B1 A3                 1384 	inc	dptr
+   05B2 A3                 1385 	inc	dptr
+   05B3 A3                 1386 	inc	dptr
+   05B4 E0                 1387 	movx	a,@dptr
+   05B5 6A                 1388 	xrl	a,r2
+   05B6 F5*0F              1389 	mov	_Cipher_sloc0_1_0,a
+   05B8 90s00rBA           1390 	mov	dptr,#_Cipher_Tmp_1_1
+   05BB F0                 1391 	movx	@dptr,a
+                    05BC   1392 	C$aes.c$346$3$3 ==.
+                           1393 ;	libraries/src/aes/aes.c:346: for(k = 0; k < 3; ++k)
+   05BC 90s00rB9           1394 	mov	dptr,#_Cipher_k_1_1
+   05BF E4                 1395 	clr	a
+   05C0 F0                 1396 	movx	@dptr,a
+                    05C1   1397 	C$aes.c$370$1$1 ==.
+                           1398 ;	libraries/src/aes/aes.c:370: AddRoundKey(Nr);
+   05C1 D0 07              1399 	pop	ar7
+                    05C3   1400 	C$aes.c$346$4$4 ==.
+                           1401 ;	libraries/src/aes/aes.c:346: for(k = 0; k < 3; ++k)
+   05C3 8D*10              1402 	mov	_Cipher_sloc1_1_0,r5
+   05C5                    1403 00101$:
+   05C5 90s00rB9           1404 	mov	dptr,#_Cipher_k_1_1
+   05C8 E0                 1405 	movx	a,@dptr
+   05C9 FB                 1406 	mov	r3,a
+   05CA BB 03 00           1407 	cjne	r3,#0x03,00127$
+   05CD                    1408 00127$:
+   05CD 50 6A              1409 	jnc	00104$
+                    05CF   1410 	C$aes.c$348$1$1 ==.
+                           1411 ;	libraries/src/aes/aes.c:348: Tm  = (*state)[i][k] ^ (*state)[i][k+1] ; Tm = xtime(Tm);  (*state)[i][k] ^= Tm ^ Tmp ;
+   05CF C0 07              1412 	push	ar7
+   05D1 78r00              1413 	mov	r0,#_state
+   05D3 E2                 1414 	movx	a,@r0
+   05D4 25*10              1415 	add	a,_Cipher_sloc1_1_0
+   05D6 FA                 1416 	mov	r2,a
+   05D7 08                 1417 	inc	r0
+   05D8 E2                 1418 	movx	a,@r0
+   05D9 34 00              1419 	addc	a,#0x00
+   05DB FF                 1420 	mov	r7,a
+   05DC EB                 1421 	mov	a,r3
+   05DD 2A                 1422 	add	a,r2
+   05DE F5*11              1423 	mov	_Cipher_sloc2_1_0,a
+   05E0 E4                 1424 	clr	a
+   05E1 3F                 1425 	addc	a,r7
+   05E2 F5*12              1426 	mov	(_Cipher_sloc2_1_0 + 1),a
+   05E4 EB                 1427 	mov	a,r3
+   05E5 04                 1428 	inc	a
+   05E6 FD                 1429 	mov	r5,a
+   05E7 2A                 1430 	add	a,r2
+   05E8 F5 82              1431 	mov	dpl,a
+   05EA E4                 1432 	clr	a
+   05EB 3F                 1433 	addc	a,r7
+   05EC F5 83              1434 	mov	dph,a
+   05EE E0                 1435 	movx	a,@dptr
+   05EF FF                 1436 	mov	r7,a
+   05F0 85*11 82           1437 	mov	dpl,_Cipher_sloc2_1_0
+   05F3 85*12 83           1438 	mov	dph,(_Cipher_sloc2_1_0 + 1)
+   05F6 E0                 1439 	movx	a,@dptr
+   05F7 FC                 1440 	mov	r4,a
+   05F8 EF                 1441 	mov	a,r7
+   05F9 6C                 1442 	xrl	a,r4
+   05FA F5 82              1443 	mov	dpl,a
+   05FC C0 06              1444 	push	ar6
+   05FE C0 05              1445 	push	ar5
+   0600 C0 03              1446 	push	ar3
+   0602 12s04r97           1447 	lcall	_xtime
+   0605 AF 82              1448 	mov	r7,dpl
+   0607 D0 03              1449 	pop	ar3
+   0609 D0 05              1450 	pop	ar5
+   060B D0 06              1451 	pop	ar6
+   060D 78r00              1452 	mov	r0,#_state
+   060F E2                 1453 	movx	a,@r0
+   0610 25*10              1454 	add	a,_Cipher_sloc1_1_0
+   0612 FA                 1455 	mov	r2,a
+   0613 08                 1456 	inc	r0
+   0614 E2                 1457 	movx	a,@r0
+   0615 34 00              1458 	addc	a,#0x00
+   0617 FC                 1459 	mov	r4,a
+   0618 EB                 1460 	mov	a,r3
+   0619 2A                 1461 	add	a,r2
+   061A FA                 1462 	mov	r2,a
+   061B E4                 1463 	clr	a
+   061C 3C                 1464 	addc	a,r4
+   061D FC                 1465 	mov	r4,a
+   061E E5*0F              1466 	mov	a,_Cipher_sloc0_1_0
+   0620 62 07              1467 	xrl	ar7,a
+   0622 8A 82              1468 	mov	dpl,r2
+   0624 8C 83              1469 	mov	dph,r4
+   0626 E0                 1470 	movx	a,@dptr
+   0627 FB                 1471 	mov	r3,a
+   0628 62 07              1472 	xrl	ar7,a
+   062A 8A 82              1473 	mov	dpl,r2
+   062C 8C 83              1474 	mov	dph,r4
+   062E EF                 1475 	mov	a,r7
+   062F F0                 1476 	movx	@dptr,a
+                    0630   1477 	C$aes.c$346$3$3 ==.
+                           1478 ;	libraries/src/aes/aes.c:346: for(k = 0; k < 3; ++k)
+   0630 90s00rB9           1479 	mov	dptr,#_Cipher_k_1_1
+   0633 ED                 1480 	mov	a,r5
+   0634 F0                 1481 	movx	@dptr,a
+   0635 D0 07              1482 	pop	ar7
+   0637 80 8C              1483 	sjmp	00101$
+   0639                    1484 00104$:
+                    0639   1485 	C$aes.c$358$3$3 ==.
+                           1486 ;	libraries/src/aes/aes.c:358: Tm  = (*state)[i][3] ^ t ;        Tm = xtime(Tm);  (*state)[i][3] ^= Tm ^ Tmp ;
+   0639 EE                 1487 	mov	a,r6
+   063A 2E                 1488 	add	a,r6
+   063B 25 E0              1489 	add	a,acc
+   063D FD                 1490 	mov	r5,a
+   063E 78r00              1491 	mov	r0,#_state
+   0640 E2                 1492 	movx	a,@r0
+   0641 2D                 1493 	add	a,r5
+   0642 FB                 1494 	mov	r3,a
+   0643 08                 1495 	inc	r0
+   0644 E2                 1496 	movx	a,@r0
+   0645 34 00              1497 	addc	a,#0x00
+   0647 FC                 1498 	mov	r4,a
+   0648 74 03              1499 	mov	a,#0x03
+   064A 2B                 1500 	add	a,r3
+   064B FB                 1501 	mov	r3,a
+   064C E4                 1502 	clr	a
+   064D 3C                 1503 	addc	a,r4
+   064E FC                 1504 	mov	r4,a
+   064F 90s00rBB           1505 	mov	dptr,#_Cipher_t_1_1
+   0652 E0                 1506 	movx	a,@dptr
+   0653 FA                 1507 	mov	r2,a
+   0654 8B 82              1508 	mov	dpl,r3
+   0656 8C 83              1509 	mov	dph,r4
+   0658 E0                 1510 	movx	a,@dptr
+   0659 FB                 1511 	mov	r3,a
+   065A EA                 1512 	mov	a,r2
+   065B 6B                 1513 	xrl	a,r3
+   065C F5 82              1514 	mov	dpl,a
+   065E C0 07              1515 	push	ar7
+   0660 C0 06              1516 	push	ar6
+   0662 C0 05              1517 	push	ar5
+   0664 12s04r97           1518 	lcall	_xtime
+   0667 AC 82              1519 	mov	r4,dpl
+   0669 D0 05              1520 	pop	ar5
+   066B D0 06              1521 	pop	ar6
+   066D D0 07              1522 	pop	ar7
+   066F 78r00              1523 	mov	r0,#_state
+   0671 E2                 1524 	movx	a,@r0
+   0672 2D                 1525 	add	a,r5
+   0673 FD                 1526 	mov	r5,a
+   0674 08                 1527 	inc	r0
+   0675 E2                 1528 	movx	a,@r0
+   0676 34 00              1529 	addc	a,#0x00
+   0678 FB                 1530 	mov	r3,a
+   0679 74 03              1531 	mov	a,#0x03
+   067B 2D                 1532 	add	a,r5
+   067C FD                 1533 	mov	r5,a
+   067D E4                 1534 	clr	a
+   067E 3B                 1535 	addc	a,r3
+   067F FB                 1536 	mov	r3,a
+   0680 90s00rBA           1537 	mov	dptr,#_Cipher_Tmp_1_1
+   0683 E0                 1538 	movx	a,@dptr
+   0684 62 04              1539 	xrl	ar4,a
+   0686 8D 82              1540 	mov	dpl,r5
+   0688 8B 83              1541 	mov	dph,r3
+   068A E0                 1542 	movx	a,@dptr
+   068B FA                 1543 	mov	r2,a
+   068C 62 04              1544 	xrl	ar4,a
+   068E 8D 82              1545 	mov	dpl,r5
+   0690 8B 83              1546 	mov	dph,r3
+   0692 EC                 1547 	mov	a,r4
+   0693 F0                 1548 	movx	@dptr,a
+                    0694   1549 	C$aes.c$341$2$2 ==.
+                           1550 ;	libraries/src/aes/aes.c:341: for(i = 0; i < 4; ++i)
+   0694 0E                 1551 	inc	r6
+   0695 02s05r79           1552 	ljmp	00105$
+   0698                    1553 00108$:
+                    0698   1554 	C$aes.c$360$2$2 ==.
+                           1555 ;	libraries/src/aes/aes.c:360: AddRoundKey(round);
+   0698 8F 82              1556 	mov	dpl,r7
+   069A C0 07              1557 	push	ar7
+   069C 12s02rE9           1558 	lcall	_AddRoundKey
+   069F D0 07              1559 	pop	ar7
+                    06A1   1560 	C$aes.c$331$1$1 ==.
+                           1561 ;	libraries/src/aes/aes.c:331: for(round = 1; round < Nr; ++round)
+   06A1 0F                 1562 	inc	r7
+   06A2 02s05r65           1563 	ljmp	00109$
+   06A5                    1564 00112$:
+                    06A5   1565 	C$aes.c$368$1$1 ==.
+                           1566 ;	libraries/src/aes/aes.c:368: SubBytes();
+   06A5 12s03r43           1567 	lcall	_SubBytes
+                    06A8   1568 	C$aes.c$369$1$1 ==.
+                           1569 ;	libraries/src/aes/aes.c:369: ShiftRows();
+   06A8 12s03r95           1570 	lcall	_ShiftRows
+                    06AB   1571 	C$aes.c$370$1$1 ==.
+                           1572 ;	libraries/src/aes/aes.c:370: AddRoundKey(Nr);
+   06AB 75 82 0A           1573 	mov	dpl,#0x0A
+   06AE 12s02rE9           1574 	lcall	_AddRoundKey
+                    06B1   1575 	C$aes.c$371$1$1 ==.
+                    06B1   1576 	XFaes$Cipher$0$0 ==.
+   06B1 22                 1577 	ret
+                           1578 ;------------------------------------------------------------
+                           1579 ;Allocation info for local variables in function 'BlockCopy'
+                           1580 ;------------------------------------------------------------
+                           1581 ;i                         Allocated with name '_BlockCopy_i_1_1'
+                           1582 ;sloc0                     Allocated with name '_BlockCopy_sloc0_1_0'
+                           1583 ;------------------------------------------------------------
+                    06B2   1584 	Faes$BlockCopy$0$0 ==.
+                    06B2   1585 	C$aes.c$375$1$1 ==.
+                           1586 ;	libraries/src/aes/aes.c:375: static void BlockCopy(uint8_t* output, uint8_t* input)
+                           1587 ;	-----------------------------------------
+                           1588 ;	 function BlockCopy
+                           1589 ;	-----------------------------------------
+   06B2                    1590 _BlockCopy:
+   06B2 AF F0              1591 	mov	r7,b
+   06B4 AE 83              1592 	mov	r6,dph
+   06B6 E5 82              1593 	mov	a,dpl
+   06B8 78r09              1594 	mov	r0,#_BlockCopy_output_1_1
+   06BA F2                 1595 	movx	@r0,a
+   06BB 08                 1596 	inc	r0
+   06BC EE                 1597 	mov	a,r6
+   06BD F2                 1598 	movx	@r0,a
+   06BE 08                 1599 	inc	r0
+   06BF EF                 1600 	mov	a,r7
+   06C0 F2                 1601 	movx	@r0,a
+                    06C1   1602 	C$aes.c$378$1$1 ==.
+                           1603 ;	libraries/src/aes/aes.c:378: for (i=0;i<KEYLEN;++i)
+   06C1 7C 00              1604 	mov	r4,#0x00
+   06C3                    1605 00101$:
+   06C3 BC 10 00           1606 	cjne	r4,#0x10,00110$
+   06C6                    1607 00110$:
+   06C6 50 36              1608 	jnc	00105$
+                    06C8   1609 	C$aes.c$380$2$2 ==.
+                           1610 ;	libraries/src/aes/aes.c:380: output[i] = input[i];
+   06C8 78r09              1611 	mov	r0,#_BlockCopy_output_1_1
+   06CA E2                 1612 	movx	a,@r0
+   06CB 2C                 1613 	add	a,r4
+   06CC F5*00              1614 	mov	_BlockCopy_sloc0_1_0,a
+   06CE 08                 1615 	inc	r0
+   06CF E2                 1616 	movx	a,@r0
+   06D0 34 00              1617 	addc	a,#0x00
+   06D2 F5*01              1618 	mov	(_BlockCopy_sloc0_1_0 + 1),a
+   06D4 08                 1619 	inc	r0
+   06D5 E2                 1620 	movx	a,@r0
+   06D6 F5*02              1621 	mov	(_BlockCopy_sloc0_1_0 + 2),a
+   06D8 78r06              1622 	mov	r0,#_BlockCopy_PARM_2
+   06DA E2                 1623 	movx	a,@r0
+   06DB 2C                 1624 	add	a,r4
+   06DC FD                 1625 	mov	r5,a
+   06DD 08                 1626 	inc	r0
+   06DE E2                 1627 	movx	a,@r0
+   06DF 34 00              1628 	addc	a,#0x00
+   06E1 FE                 1629 	mov	r6,a
+   06E2 08                 1630 	inc	r0
+   06E3 E2                 1631 	movx	a,@r0
+   06E4 FF                 1632 	mov	r7,a
+   06E5 8D 82              1633 	mov	dpl,r5
+   06E7 8E 83              1634 	mov	dph,r6
+   06E9 8F F0              1635 	mov	b,r7
+   06EB 12s00r00           1636 	lcall	__gptrget
+   06EE FD                 1637 	mov	r5,a
+   06EF 85*00 82           1638 	mov	dpl,_BlockCopy_sloc0_1_0
+   06F2 85*01 83           1639 	mov	dph,(_BlockCopy_sloc0_1_0 + 1)
+   06F5 85*02 F0           1640 	mov	b,(_BlockCopy_sloc0_1_0 + 2)
+   06F8 12s00r00           1641 	lcall	__gptrput
+                    06FB   1642 	C$aes.c$378$1$1 ==.
+                           1643 ;	libraries/src/aes/aes.c:378: for (i=0;i<KEYLEN;++i)
+   06FB 0C                 1644 	inc	r4
+   06FC 80 C5              1645 	sjmp	00101$
+   06FE                    1646 00105$:
+                    06FE   1647 	C$aes.c$382$1$1 ==.
+                    06FE   1648 	XFaes$BlockCopy$0$0 ==.
+   06FE 22                 1649 	ret
+                           1650 ;------------------------------------------------------------
+                           1651 ;Allocation info for local variables in function 'XorWithIv'
+                           1652 ;------------------------------------------------------------
+                           1653 ;i                         Allocated with name '_XorWithIv_i_1_1'
+                           1654 ;------------------------------------------------------------
+                    06FF   1655 	Faes$XorWithIv$0$0 ==.
+                    06FF   1656 	C$aes.c$390$1$1 ==.
+                           1657 ;	libraries/src/aes/aes.c:390: static void XorWithIv(XDATA uint8_t* buf)
+                           1658 ;	-----------------------------------------
+                           1659 ;	 function XorWithIv
+                           1660 ;	-----------------------------------------
+   06FF                    1661 _XorWithIv:
+   06FF AE 82              1662 	mov	r6,dpl
+   0701 AF 83              1663 	mov	r7,dph
+                    0703   1664 	C$aes.c$393$1$1 ==.
+                           1665 ;	libraries/src/aes/aes.c:393: for(i = 0; i < KEYLEN; ++i)
+   0703 7D 00              1666 	mov	r5,#0x00
+   0705                    1667 00101$:
+   0705 BD 10 00           1668 	cjne	r5,#0x10,00110$
+   0708                    1669 00110$:
+   0708 50 2C              1670 	jnc	00105$
+                    070A   1671 	C$aes.c$395$2$2 ==.
+                           1672 ;	libraries/src/aes/aes.c:395: buf[i] ^= Iv[i];
+   070A ED                 1673 	mov	a,r5
+   070B 2E                 1674 	add	a,r6
+   070C FB                 1675 	mov	r3,a
+   070D E4                 1676 	clr	a
+   070E 3F                 1677 	addc	a,r7
+   070F FC                 1678 	mov	r4,a
+   0710 8B 82              1679 	mov	dpl,r3
+   0712 8C 83              1680 	mov	dph,r4
+   0714 E0                 1681 	movx	a,@dptr
+   0715 FA                 1682 	mov	r2,a
+   0716 78r04              1683 	mov	r0,#_Iv
+   0718 E2                 1684 	movx	a,@r0
+   0719 2D                 1685 	add	a,r5
+   071A F5 82              1686 	mov	dpl,a
+   071C 08                 1687 	inc	r0
+   071D E2                 1688 	movx	a,@r0
+   071E 34 00              1689 	addc	a,#0x00
+   0720 F5 83              1690 	mov	dph,a
+   0722 C0 06              1691 	push	ar6
+   0724 C0 07              1692 	push	ar7
+   0726 E0                 1693 	movx	a,@dptr
+   0727 62 02              1694 	xrl	ar2,a
+   0729 8B 82              1695 	mov	dpl,r3
+   072B 8C 83              1696 	mov	dph,r4
+   072D EA                 1697 	mov	a,r2
+   072E F0                 1698 	movx	@dptr,a
+                    072F   1699 	C$aes.c$393$1$1 ==.
+                           1700 ;	libraries/src/aes/aes.c:393: for(i = 0; i < KEYLEN; ++i)
+   072F 0D                 1701 	inc	r5
+   0730 D0 07              1702 	pop	ar7
+   0732 D0 06              1703 	pop	ar6
+   0734 80 CF              1704 	sjmp	00101$
+   0736                    1705 00105$:
+                    0736   1706 	C$aes.c$397$1$1 ==.
+                    0736   1707 	XFaes$XorWithIv$0$0 ==.
+   0736 22                 1708 	ret
+                           1709 ;------------------------------------------------------------
+                           1710 ;Allocation info for local variables in function 'AES128_CBC_encrypt_buffer'
+                           1711 ;------------------------------------------------------------
+                           1712 ;sloc0                     Allocated with name '_AES128_CBC_encrypt_buffer_sloc0_1_0'
+                           1713 ;sloc1                     Allocated with name '_AES128_CBC_encrypt_buffer_sloc1_1_0'
+                           1714 ;sloc2                     Allocated with name '_AES128_CBC_encrypt_buffer_sloc2_1_0'
+                           1715 ;sloc3                     Allocated with name '_AES128_CBC_encrypt_buffer_sloc3_1_0'
+                           1716 ;input                     Allocated with name '_AES128_CBC_encrypt_buffer_PARM_2'
+                           1717 ;length                    Allocated with name '_AES128_CBC_encrypt_buffer_PARM_3'
+                           1718 ;key                       Allocated with name '_AES128_CBC_encrypt_buffer_PARM_4'
+                           1719 ;iv                        Allocated with name '_AES128_CBC_encrypt_buffer_PARM_5'
+                           1720 ;output                    Allocated with name '_AES128_CBC_encrypt_buffer_output_1_1'
+                           1721 ;i                         Allocated with name '_AES128_CBC_encrypt_buffer_i_1_1'
+                           1722 ;remainders                Allocated with name '_AES128_CBC_encrypt_buffer_remainders_1_1'
+                           1723 ;------------------------------------------------------------
+                    0737   1724 	G$AES128_CBC_encrypt_buffer$0$0 ==.
+                    0737   1725 	C$aes.c$399$1$1 ==.
+                           1726 ;	libraries/src/aes/aes.c:399: void AES128_CBC_encrypt_buffer(XDATA uint8_t* XDATA output, XDATA uint8_t* XDATA input, XDATA uint32_t length, XDATA const uint8_t* XDATA key, XDATA const uint8_t* XDATA iv)
+                           1727 ;	-----------------------------------------
+                           1728 ;	 function AES128_CBC_encrypt_buffer
+                           1729 ;	-----------------------------------------
+   0737                    1730 _AES128_CBC_encrypt_buffer:
+   0737 AF 83              1731 	mov	r7,dph
+   0739 E5 82              1732 	mov	a,dpl
+   073B 90s00rC6           1733 	mov	dptr,#_AES128_CBC_encrypt_buffer_output_1_1
+   073E F0                 1734 	movx	@dptr,a
+   073F A3                 1735 	inc	dptr
+   0740 EF                 1736 	mov	a,r7
+   0741 F0                 1737 	movx	@dptr,a
+                    0742   1738 	C$aes.c$403$1$1 ==.
+                           1739 ;	libraries/src/aes/aes.c:403: XDATA uint8_t remainders = length % KEYLEN; /* Remaining bytes in the last non-full block */
+   0742 90s00rBE           1740 	mov	dptr,#_AES128_CBC_encrypt_buffer_PARM_3
+   0745 E0                 1741 	movx	a,@dptr
+   0746 F5*13              1742 	mov	_AES128_CBC_encrypt_buffer_sloc0_1_0,a
+   0748 A3                 1743 	inc	dptr
+   0749 E0                 1744 	movx	a,@dptr
+   074A F5*14              1745 	mov	(_AES128_CBC_encrypt_buffer_sloc0_1_0 + 1),a
+   074C A3                 1746 	inc	dptr
+   074D E0                 1747 	movx	a,@dptr
+   074E F5*15              1748 	mov	(_AES128_CBC_encrypt_buffer_sloc0_1_0 + 2),a
+   0750 A3                 1749 	inc	dptr
+   0751 E0                 1750 	movx	a,@dptr
+   0752 F5*16              1751 	mov	(_AES128_CBC_encrypt_buffer_sloc0_1_0 + 3),a
+   0754 74 0F              1752 	mov	a,#0x0F
+   0756 55*13              1753 	anl	a,_AES128_CBC_encrypt_buffer_sloc0_1_0
+   0758 FA                 1754 	mov	r2,a
+                    0759   1755 	C$aes.c$408$1$1 ==.
+                           1756 ;	libraries/src/aes/aes.c:408: BlockCopy(output, input);
+   0759 90s00rC6           1757 	mov	dptr,#_AES128_CBC_encrypt_buffer_output_1_1
+   075C E0                 1758 	movx	a,@dptr
+   075D FE                 1759 	mov	r6,a
+   075E A3                 1760 	inc	dptr
+   075F E0                 1761 	movx	a,@dptr
+   0760 FF                 1762 	mov	r7,a
+   0761 8E 03              1763 	mov	ar3,r6
+   0763 8F 04              1764 	mov	ar4,r7
+   0765 7D 00              1765 	mov	r5,#0x00
+   0767 90s00rBC           1766 	mov	dptr,#_AES128_CBC_encrypt_buffer_PARM_2
+   076A E0                 1767 	movx	a,@dptr
+   076B F5*17              1768 	mov	_AES128_CBC_encrypt_buffer_sloc1_1_0,a
+   076D A3                 1769 	inc	dptr
+   076E E0                 1770 	movx	a,@dptr
+   076F F5*18              1771 	mov	(_AES128_CBC_encrypt_buffer_sloc1_1_0 + 1),a
+   0771 78r06              1772 	mov	r0,#_BlockCopy_PARM_2
+   0773 E5*17              1773 	mov	a,_AES128_CBC_encrypt_buffer_sloc1_1_0
+   0775 F2                 1774 	movx	@r0,a
+   0776 08                 1775 	inc	r0
+   0777 E5*18              1776 	mov	a,(_AES128_CBC_encrypt_buffer_sloc1_1_0 + 1)
+   0779 F2                 1777 	movx	@r0,a
+   077A 08                 1778 	inc	r0
+   077B E4                 1779 	clr	a
+   077C F2                 1780 	movx	@r0,a
+   077D 8B 82              1781 	mov	dpl,r3
+   077F 8C 83              1782 	mov	dph,r4
+   0781 8D F0              1783 	mov	b,r5
+   0783 C0 07              1784 	push	ar7
+   0785 C0 06              1785 	push	ar6
+   0787 C0 02              1786 	push	ar2
+   0789 12s06rB2           1787 	lcall	_BlockCopy
+   078C D0 02              1788 	pop	ar2
+   078E D0 06              1789 	pop	ar6
+   0790 D0 07              1790 	pop	ar7
+                    0792   1791 	C$aes.c$409$1$1 ==.
+                           1792 ;	libraries/src/aes/aes.c:409: state = (state_t*)output;
+   0792 78r00              1793 	mov	r0,#_state
+   0794 EE                 1794 	mov	a,r6
+   0795 F2                 1795 	movx	@r0,a
+   0796 08                 1796 	inc	r0
+   0797 EF                 1797 	mov	a,r7
+   0798 F2                 1798 	movx	@r0,a
+                    0799   1799 	C$aes.c$412$1$1 ==.
+                           1800 ;	libraries/src/aes/aes.c:412: if(0 != key)
+   0799 90s00rC2           1801 	mov	dptr,#_AES128_CBC_encrypt_buffer_PARM_4
+   079C E0                 1802 	movx	a,@dptr
+   079D FE                 1803 	mov	r6,a
+   079E A3                 1804 	inc	dptr
+   079F E0                 1805 	movx	a,@dptr
+   07A0 FF                 1806 	mov	r7,a
+   07A1 4E                 1807 	orl	a,r6
+   07A2 60 0E              1808 	jz	00102$
+                    07A4   1809 	C$aes.c$414$2$2 ==.
+                           1810 ;	libraries/src/aes/aes.c:414: Key = key;
+   07A4 78r02              1811 	mov	r0,#_Key
+   07A6 EE                 1812 	mov	a,r6
+   07A7 F2                 1813 	movx	@r0,a
+   07A8 08                 1814 	inc	r0
+   07A9 EF                 1815 	mov	a,r7
+   07AA F2                 1816 	movx	@r0,a
+                    07AB   1817 	C$aes.c$415$2$2 ==.
+                           1818 ;	libraries/src/aes/aes.c:415: KeyExpansion();
+   07AB C0 02              1819 	push	ar2
+   07AD 12s00r0D           1820 	lcall	_KeyExpansion
+   07B0 D0 02              1821 	pop	ar2
+   07B2                    1822 00102$:
+                    07B2   1823 	C$aes.c$418$1$1 ==.
+                           1824 ;	libraries/src/aes/aes.c:418: if(iv != 0)
+   07B2 90s00rC4           1825 	mov	dptr,#_AES128_CBC_encrypt_buffer_PARM_5
+   07B5 E0                 1826 	movx	a,@dptr
+   07B6 FE                 1827 	mov	r6,a
+   07B7 A3                 1828 	inc	dptr
+   07B8 E0                 1829 	movx	a,@dptr
+   07B9 FF                 1830 	mov	r7,a
+   07BA 4E                 1831 	orl	a,r6
+   07BB 60 07              1832 	jz	00116$
+                    07BD   1833 	C$aes.c$420$2$3 ==.
+                           1834 ;	libraries/src/aes/aes.c:420: Iv = (uint8_t*)iv;
+   07BD 78r04              1835 	mov	r0,#_Iv
+   07BF EE                 1836 	mov	a,r6
+   07C0 F2                 1837 	movx	@r0,a
+   07C1 08                 1838 	inc	r0
+   07C2 EF                 1839 	mov	a,r7
+   07C3 F2                 1840 	movx	@r0,a
+                    07C4   1841 	C$aes.c$423$2$1 ==.
+                           1842 ;	libraries/src/aes/aes.c:423: for(i = 0; i < length; i += KEYLEN)
+   07C4                    1843 00116$:
+   07C4 90s00rC6           1844 	mov	dptr,#_AES128_CBC_encrypt_buffer_output_1_1
+   07C7 E0                 1845 	movx	a,@dptr
+   07C8 FC                 1846 	mov	r4,a
+   07C9 A3                 1847 	inc	dptr
+   07CA E0                 1848 	movx	a,@dptr
+   07CB FD                 1849 	mov	r5,a
+   07CC E4                 1850 	clr	a
+   07CD F5*19              1851 	mov	_AES128_CBC_encrypt_buffer_sloc2_1_0,a
+   07CF F5*1A              1852 	mov	(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 1),a
+   07D1 F5*1B              1853 	mov	(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 2),a
+   07D3 F5*1C              1854 	mov	(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 3),a
+   07D5                    1855 00107$:
+   07D5 C3                 1856 	clr	c
+   07D6 E5*19              1857 	mov	a,_AES128_CBC_encrypt_buffer_sloc2_1_0
+   07D8 95*13              1858 	subb	a,_AES128_CBC_encrypt_buffer_sloc0_1_0
+   07DA E5*1A              1859 	mov	a,(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 1)
+   07DC 95*14              1860 	subb	a,(_AES128_CBC_encrypt_buffer_sloc0_1_0 + 1)
+   07DE E5*1B              1861 	mov	a,(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 2)
+   07E0 95*15              1862 	subb	a,(_AES128_CBC_encrypt_buffer_sloc0_1_0 + 2)
+   07E2 E5*1C              1863 	mov	a,(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 3)
+   07E4 95*16              1864 	subb	a,(_AES128_CBC_encrypt_buffer_sloc0_1_0 + 3)
+   07E6 40 03              1865 	jc	00121$
+   07E8 02s08r88           1866 	ljmp	00118$
+   07EB                    1867 00121$:
+                    07EB   1868 	C$aes.c$425$2$1 ==.
+                           1869 ;	libraries/src/aes/aes.c:425: XorWithIv(input);
+   07EB C0 02              1870 	push	ar2
+   07ED 85*17 82           1871 	mov	dpl,_AES128_CBC_encrypt_buffer_sloc1_1_0
+   07F0 85*18 83           1872 	mov	dph,(_AES128_CBC_encrypt_buffer_sloc1_1_0 + 1)
+   07F3 C0 05              1873 	push	ar5
+   07F5 C0 04              1874 	push	ar4
+   07F7 C0 02              1875 	push	ar2
+   07F9 12s06rFF           1876 	lcall	_XorWithIv
+   07FC D0 02              1877 	pop	ar2
+   07FE D0 04              1878 	pop	ar4
+   0800 D0 05              1879 	pop	ar5
+                    0802   1880 	C$aes.c$426$2$4 ==.
+                           1881 ;	libraries/src/aes/aes.c:426: BlockCopy(output, input);
+   0802 8C 02              1882 	mov	ar2,r4
+   0804 8D 03              1883 	mov	ar3,r5
+   0806 8A*1D              1884 	mov	_AES128_CBC_encrypt_buffer_sloc3_1_0,r2
+   0808 8B*1E              1885 	mov	(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 1),r3
+   080A 75*1F 00           1886 	mov	(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 2),#0x00
+   080D AE*17              1887 	mov	r6,_AES128_CBC_encrypt_buffer_sloc1_1_0
+   080F AF*18              1888 	mov	r7,(_AES128_CBC_encrypt_buffer_sloc1_1_0 + 1)
+   0811 78r06              1889 	mov	r0,#_BlockCopy_PARM_2
+   0813 EE                 1890 	mov	a,r6
+   0814 F2                 1891 	movx	@r0,a
+   0815 08                 1892 	inc	r0
+   0816 EF                 1893 	mov	a,r7
+   0817 F2                 1894 	movx	@r0,a
+   0818 08                 1895 	inc	r0
+   0819 E4                 1896 	clr	a
+   081A F2                 1897 	movx	@r0,a
+   081B 85*1D 82           1898 	mov	dpl,_AES128_CBC_encrypt_buffer_sloc3_1_0
+   081E 85*1E 83           1899 	mov	dph,(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 1)
+   0821 85*1F F0           1900 	mov	b,(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 2)
+   0824 C0 05              1901 	push	ar5
+   0826 C0 04              1902 	push	ar4
+   0828 C0 02              1903 	push	ar2
+   082A 12s06rB2           1904 	lcall	_BlockCopy
+   082D D0 02              1905 	pop	ar2
+   082F D0 04              1906 	pop	ar4
+   0831 D0 05              1907 	pop	ar5
+                    0833   1908 	C$aes.c$427$2$4 ==.
+                           1909 ;	libraries/src/aes/aes.c:427: state = (state_t*)output;
+   0833 8C 06              1910 	mov	ar6,r4
+   0835 8D 07              1911 	mov	ar7,r5
+   0837 78r00              1912 	mov	r0,#_state
+   0839 EE                 1913 	mov	a,r6
+   083A F2                 1914 	movx	@r0,a
+   083B 08                 1915 	inc	r0
+   083C EF                 1916 	mov	a,r7
+   083D F2                 1917 	movx	@r0,a
+                    083E   1918 	C$aes.c$428$2$4 ==.
+                           1919 ;	libraries/src/aes/aes.c:428: Cipher();
+   083E C0 05              1920 	push	ar5
+   0840 C0 04              1921 	push	ar4
+   0842 C0 02              1922 	push	ar2
+   0844 12s05r5D           1923 	lcall	_Cipher
+   0847 D0 02              1924 	pop	ar2
+   0849 D0 04              1925 	pop	ar4
+   084B D0 05              1926 	pop	ar5
+                    084D   1927 	C$aes.c$429$2$4 ==.
+                           1928 ;	libraries/src/aes/aes.c:429: Iv = output;
+   084D 78r04              1929 	mov	r0,#_Iv
+   084F EC                 1930 	mov	a,r4
+   0850 F2                 1931 	movx	@r0,a
+   0851 08                 1932 	inc	r0
+   0852 ED                 1933 	mov	a,r5
+   0853 F2                 1934 	movx	@r0,a
+                    0854   1935 	C$aes.c$430$2$4 ==.
+                           1936 ;	libraries/src/aes/aes.c:430: input += KEYLEN;
+   0854 74 10              1937 	mov	a,#0x10
+   0856 25*17              1938 	add	a,_AES128_CBC_encrypt_buffer_sloc1_1_0
+   0858 F5*17              1939 	mov	_AES128_CBC_encrypt_buffer_sloc1_1_0,a
+   085A E4                 1940 	clr	a
+   085B 35*18              1941 	addc	a,(_AES128_CBC_encrypt_buffer_sloc1_1_0 + 1)
+   085D F5*18              1942 	mov	(_AES128_CBC_encrypt_buffer_sloc1_1_0 + 1),a
+                    085F   1943 	C$aes.c$431$2$4 ==.
+                           1944 ;	libraries/src/aes/aes.c:431: output += KEYLEN;
+   085F 74 10              1945 	mov	a,#0x10
+   0861 2C                 1946 	add	a,r4
+   0862 FC                 1947 	mov	r4,a
+   0863 E4                 1948 	clr	a
+   0864 3D                 1949 	addc	a,r5
+   0865 FD                 1950 	mov	r5,a
+   0866 90s00rC6           1951 	mov	dptr,#_AES128_CBC_encrypt_buffer_output_1_1
+   0869 EC                 1952 	mov	a,r4
+   086A F0                 1953 	movx	@dptr,a
+   086B A3                 1954 	inc	dptr
+   086C ED                 1955 	mov	a,r5
+   086D F0                 1956 	movx	@dptr,a
+                    086E   1957 	C$aes.c$423$1$1 ==.
+                           1958 ;	libraries/src/aes/aes.c:423: for(i = 0; i < length; i += KEYLEN)
+   086E 74 10              1959 	mov	a,#0x10
+   0870 25*19              1960 	add	a,_AES128_CBC_encrypt_buffer_sloc2_1_0
+   0872 F5*19              1961 	mov	_AES128_CBC_encrypt_buffer_sloc2_1_0,a
+   0874 E4                 1962 	clr	a
+   0875 35*1A              1963 	addc	a,(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 1)
+   0877 F5*1A              1964 	mov	(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 1),a
+   0879 E4                 1965 	clr	a
+   087A 35*1B              1966 	addc	a,(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 2)
+   087C F5*1B              1967 	mov	(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 2),a
+   087E E4                 1968 	clr	a
+   087F 35*1C              1969 	addc	a,(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 3)
+   0881 F5*1C              1970 	mov	(_AES128_CBC_encrypt_buffer_sloc2_1_0 + 3),a
+   0883 D0 02              1971 	pop	ar2
+   0885 02s07rD5           1972 	ljmp	00107$
+   0888                    1973 00118$:
+   0888 90s00rC6           1974 	mov	dptr,#_AES128_CBC_encrypt_buffer_output_1_1
+   088B EC                 1975 	mov	a,r4
+   088C F0                 1976 	movx	@dptr,a
+   088D A3                 1977 	inc	dptr
+   088E ED                 1978 	mov	a,r5
+   088F F0                 1979 	movx	@dptr,a
+                    0890   1980 	C$aes.c$434$1$1 ==.
+                           1981 ;	libraries/src/aes/aes.c:434: if(remainders)
+   0890 EA                 1982 	mov	a,r2
+   0891 60 70              1983 	jz	00111$
+                    0893   1984 	C$aes.c$436$2$5 ==.
+                           1985 ;	libraries/src/aes/aes.c:436: BlockCopy(output, input);
+   0893 8C 06              1986 	mov	ar6,r4
+   0895 8D 07              1987 	mov	ar7,r5
+   0897 8E*1D              1988 	mov	_AES128_CBC_encrypt_buffer_sloc3_1_0,r6
+   0899 8F*1E              1989 	mov	(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 1),r7
+   089B 75*1F 00           1990 	mov	(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 2),#0x00
+   089E AE*17              1991 	mov	r6,_AES128_CBC_encrypt_buffer_sloc1_1_0
+   08A0 AF*18              1992 	mov	r7,(_AES128_CBC_encrypt_buffer_sloc1_1_0 + 1)
+   08A2 78r06              1993 	mov	r0,#_BlockCopy_PARM_2
+   08A4 EE                 1994 	mov	a,r6
+   08A5 F2                 1995 	movx	@r0,a
+   08A6 08                 1996 	inc	r0
+   08A7 EF                 1997 	mov	a,r7
+   08A8 F2                 1998 	movx	@r0,a
+   08A9 08                 1999 	inc	r0
+   08AA E4                 2000 	clr	a
+   08AB F2                 2001 	movx	@r0,a
+   08AC 85*1D 82           2002 	mov	dpl,_AES128_CBC_encrypt_buffer_sloc3_1_0
+   08AF 85*1E 83           2003 	mov	dph,(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 1)
+   08B2 85*1F F0           2004 	mov	b,(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 2)
+   08B5 C0 05              2005 	push	ar5
+   08B7 C0 04              2006 	push	ar4
+   08B9 C0 02              2007 	push	ar2
+   08BB 12s06rB2           2008 	lcall	_BlockCopy
+   08BE D0 02              2009 	pop	ar2
+   08C0 D0 04              2010 	pop	ar4
+   08C2 D0 05              2011 	pop	ar5
+                    08C4   2012 	C$aes.c$437$2$5 ==.
+                           2013 ;	libraries/src/aes/aes.c:437: memset(output + remainders, 0, KEYLEN - remainders); /* add 0-padding */
+   08C4 EA                 2014 	mov	a,r2
+   08C5 2C                 2015 	add	a,r4
+   08C6 FE                 2016 	mov	r6,a
+   08C7 E4                 2017 	clr	a
+   08C8 3D                 2018 	addc	a,r5
+   08C9 FF                 2019 	mov	r7,a
+   08CA 8E*1D              2020 	mov	_AES128_CBC_encrypt_buffer_sloc3_1_0,r6
+   08CC 8F*1E              2021 	mov	(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 1),r7
+   08CE E4                 2022 	clr	a
+   08CF F5*1F              2023 	mov	(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 2),a
+   08D1 FF                 2024 	mov	r7,a
+   08D2 74 10              2025 	mov	a,#0x10
+   08D4 C3                 2026 	clr	c
+   08D5 9A                 2027 	subb	a,r2
+   08D6 FA                 2028 	mov	r2,a
+   08D7 E4                 2029 	clr	a
+   08D8 9F                 2030 	subb	a,r7
+   08D9 FF                 2031 	mov	r7,a
+   08DA 78r00              2032 	mov	r0,#_memset_PARM_3
+   08DC EA                 2033 	mov	a,r2
+   08DD F2                 2034 	movx	@r0,a
+   08DE 08                 2035 	inc	r0
+   08DF EF                 2036 	mov	a,r7
+   08E0 F2                 2037 	movx	@r0,a
+   08E1 78r00              2038 	mov	r0,#_memset_PARM_2
+   08E3 E4                 2039 	clr	a
+   08E4 F2                 2040 	movx	@r0,a
+   08E5 85*1D 82           2041 	mov	dpl,_AES128_CBC_encrypt_buffer_sloc3_1_0
+   08E8 85*1E 83           2042 	mov	dph,(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 1)
+   08EB 85*1F F0           2043 	mov	b,(_AES128_CBC_encrypt_buffer_sloc3_1_0 + 2)
+   08EE C0 05              2044 	push	ar5
+   08F0 C0 04              2045 	push	ar4
+   08F2 12s00r00           2046 	lcall	_memset
+   08F5 D0 04              2047 	pop	ar4
+   08F7 D0 05              2048 	pop	ar5
+                    08F9   2049 	C$aes.c$438$2$5 ==.
+                           2050 ;	libraries/src/aes/aes.c:438: state = (state_t*)output;
+   08F9 78r00              2051 	mov	r0,#_state
+   08FB EC                 2052 	mov	a,r4
+   08FC F2                 2053 	movx	@r0,a
+   08FD 08                 2054 	inc	r0
+   08FE ED                 2055 	mov	a,r5
+   08FF F2                 2056 	movx	@r0,a
+                    0900   2057 	C$aes.c$439$2$5 ==.
+                           2058 ;	libraries/src/aes/aes.c:439: Cipher();
+   0900 12s05r5D           2059 	lcall	_Cipher
+   0903                    2060 00111$:
+                    0903   2061 	C$aes.c$441$2$1 ==.
+                    0903   2062 	XG$AES128_CBC_encrypt_buffer$0$0 ==.
+   0903 22                 2063 	ret
+                           2064 	.area CSEG    (CODE)
+                           2065 	.area CONST   (CODE)
+                    0000   2066 Faes$sbox$0$0 == .
+   0000                    2067 _sbox:
+   0000 63                 2068 	.db #0x63	; 99	'c'
+   0001 7C                 2069 	.db #0x7C	; 124
+   0002 77                 2070 	.db #0x77	; 119	'w'
+   0003 7B                 2071 	.db #0x7B	; 123
+   0004 F2                 2072 	.db #0xF2	; 242
+   0005 6B                 2073 	.db #0x6B	; 107	'k'
+   0006 6F                 2074 	.db #0x6F	; 111	'o'
+   0007 C5                 2075 	.db #0xC5	; 197
+   0008 30                 2076 	.db #0x30	; 48	'0'
+   0009 01                 2077 	.db #0x01	; 1
+   000A 67                 2078 	.db #0x67	; 103	'g'
+   000B 2B                 2079 	.db #0x2B	; 43
+   000C FE                 2080 	.db #0xFE	; 254
+   000D D7                 2081 	.db #0xD7	; 215
+   000E AB                 2082 	.db #0xAB	; 171
+   000F 76                 2083 	.db #0x76	; 118	'v'
+   0010 CA                 2084 	.db #0xCA	; 202
+   0011 82                 2085 	.db #0x82	; 130
+   0012 C9                 2086 	.db #0xC9	; 201
+   0013 7D                 2087 	.db #0x7D	; 125
+   0014 FA                 2088 	.db #0xFA	; 250
+   0015 59                 2089 	.db #0x59	; 89	'Y'
+   0016 47                 2090 	.db #0x47	; 71	'G'
+   0017 F0                 2091 	.db #0xF0	; 240
+   0018 AD                 2092 	.db #0xAD	; 173
+   0019 D4                 2093 	.db #0xD4	; 212
+   001A A2                 2094 	.db #0xA2	; 162
+   001B AF                 2095 	.db #0xAF	; 175
+   001C 9C                 2096 	.db #0x9C	; 156
+   001D A4                 2097 	.db #0xA4	; 164
+   001E 72                 2098 	.db #0x72	; 114	'r'
+   001F C0                 2099 	.db #0xC0	; 192
+   0020 B7                 2100 	.db #0xB7	; 183
+   0021 FD                 2101 	.db #0xFD	; 253
+   0022 93                 2102 	.db #0x93	; 147
+   0023 26                 2103 	.db #0x26	; 38
+   0024 36                 2104 	.db #0x36	; 54	'6'
+   0025 3F                 2105 	.db #0x3F	; 63
+   0026 F7                 2106 	.db #0xF7	; 247
+   0027 CC                 2107 	.db #0xCC	; 204
+   0028 34                 2108 	.db #0x34	; 52	'4'
+   0029 A5                 2109 	.db #0xA5	; 165
+   002A E5                 2110 	.db #0xE5	; 229
+   002B F1                 2111 	.db #0xF1	; 241
+   002C 71                 2112 	.db #0x71	; 113	'q'
+   002D D8                 2113 	.db #0xD8	; 216
+   002E 31                 2114 	.db #0x31	; 49	'1'
+   002F 15                 2115 	.db #0x15	; 21
+   0030 04                 2116 	.db #0x04	; 4
+   0031 C7                 2117 	.db #0xC7	; 199
+   0032 23                 2118 	.db #0x23	; 35
+   0033 C3                 2119 	.db #0xC3	; 195
+   0034 18                 2120 	.db #0x18	; 24
+   0035 96                 2121 	.db #0x96	; 150
+   0036 05                 2122 	.db #0x05	; 5
+   0037 9A                 2123 	.db #0x9A	; 154
+   0038 07                 2124 	.db #0x07	; 7
+   0039 12                 2125 	.db #0x12	; 18
+   003A 80                 2126 	.db #0x80	; 128
+   003B E2                 2127 	.db #0xE2	; 226
+   003C EB                 2128 	.db #0xEB	; 235
+   003D 27                 2129 	.db #0x27	; 39
+   003E B2                 2130 	.db #0xB2	; 178
+   003F 75                 2131 	.db #0x75	; 117	'u'
+   0040 09                 2132 	.db #0x09	; 9
+   0041 83                 2133 	.db #0x83	; 131
+   0042 2C                 2134 	.db #0x2C	; 44
+   0043 1A                 2135 	.db #0x1A	; 26
+   0044 1B                 2136 	.db #0x1B	; 27
+   0045 6E                 2137 	.db #0x6E	; 110	'n'
+   0046 5A                 2138 	.db #0x5A	; 90	'Z'
+   0047 A0                 2139 	.db #0xA0	; 160
+   0048 52                 2140 	.db #0x52	; 82	'R'
+   0049 3B                 2141 	.db #0x3B	; 59
+   004A D6                 2142 	.db #0xD6	; 214
+   004B B3                 2143 	.db #0xB3	; 179
+   004C 29                 2144 	.db #0x29	; 41
+   004D E3                 2145 	.db #0xE3	; 227
+   004E 2F                 2146 	.db #0x2F	; 47
+   004F 84                 2147 	.db #0x84	; 132
+   0050 53                 2148 	.db #0x53	; 83	'S'
+   0051 D1                 2149 	.db #0xD1	; 209
+   0052 00                 2150 	.db #0x00	; 0
+   0053 ED                 2151 	.db #0xED	; 237
+   0054 20                 2152 	.db #0x20	; 32
+   0055 FC                 2153 	.db #0xFC	; 252
+   0056 B1                 2154 	.db #0xB1	; 177
+   0057 5B                 2155 	.db #0x5B	; 91
+   0058 6A                 2156 	.db #0x6A	; 106	'j'
+   0059 CB                 2157 	.db #0xCB	; 203
+   005A BE                 2158 	.db #0xBE	; 190
+   005B 39                 2159 	.db #0x39	; 57	'9'
+   005C 4A                 2160 	.db #0x4A	; 74	'J'
+   005D 4C                 2161 	.db #0x4C	; 76	'L'
+   005E 58                 2162 	.db #0x58	; 88	'X'
+   005F CF                 2163 	.db #0xCF	; 207
+   0060 D0                 2164 	.db #0xD0	; 208
+   0061 EF                 2165 	.db #0xEF	; 239
+   0062 AA                 2166 	.db #0xAA	; 170
+   0063 FB                 2167 	.db #0xFB	; 251
+   0064 43                 2168 	.db #0x43	; 67	'C'
+   0065 4D                 2169 	.db #0x4D	; 77	'M'
+   0066 33                 2170 	.db #0x33	; 51	'3'
+   0067 85                 2171 	.db #0x85	; 133
+   0068 45                 2172 	.db #0x45	; 69	'E'
+   0069 F9                 2173 	.db #0xF9	; 249
+   006A 02                 2174 	.db #0x02	; 2
+   006B 7F                 2175 	.db #0x7F	; 127
+   006C 50                 2176 	.db #0x50	; 80	'P'
+   006D 3C                 2177 	.db #0x3C	; 60
+   006E 9F                 2178 	.db #0x9F	; 159
+   006F A8                 2179 	.db #0xA8	; 168
+   0070 51                 2180 	.db #0x51	; 81	'Q'
+   0071 A3                 2181 	.db #0xA3	; 163
+   0072 40                 2182 	.db #0x40	; 64
+   0073 8F                 2183 	.db #0x8F	; 143
+   0074 92                 2184 	.db #0x92	; 146
+   0075 9D                 2185 	.db #0x9D	; 157
+   0076 38                 2186 	.db #0x38	; 56	'8'
+   0077 F5                 2187 	.db #0xF5	; 245
+   0078 BC                 2188 	.db #0xBC	; 188
+   0079 B6                 2189 	.db #0xB6	; 182
+   007A DA                 2190 	.db #0xDA	; 218
+   007B 21                 2191 	.db #0x21	; 33
+   007C 10                 2192 	.db #0x10	; 16
+   007D FF                 2193 	.db #0xFF	; 255
+   007E F3                 2194 	.db #0xF3	; 243
+   007F D2                 2195 	.db #0xD2	; 210
+   0080 CD                 2196 	.db #0xCD	; 205
+   0081 0C                 2197 	.db #0x0C	; 12
+   0082 13                 2198 	.db #0x13	; 19
+   0083 EC                 2199 	.db #0xEC	; 236
+   0084 5F                 2200 	.db #0x5F	; 95
+   0085 97                 2201 	.db #0x97	; 151
+   0086 44                 2202 	.db #0x44	; 68	'D'
+   0087 17                 2203 	.db #0x17	; 23
+   0088 C4                 2204 	.db #0xC4	; 196
+   0089 A7                 2205 	.db #0xA7	; 167
+   008A 7E                 2206 	.db #0x7E	; 126
+   008B 3D                 2207 	.db #0x3D	; 61
+   008C 64                 2208 	.db #0x64	; 100	'd'
+   008D 5D                 2209 	.db #0x5D	; 93
+   008E 19                 2210 	.db #0x19	; 25
+   008F 73                 2211 	.db #0x73	; 115	's'
+   0090 60                 2212 	.db #0x60	; 96
+   0091 81                 2213 	.db #0x81	; 129
+   0092 4F                 2214 	.db #0x4F	; 79	'O'
+   0093 DC                 2215 	.db #0xDC	; 220
+   0094 22                 2216 	.db #0x22	; 34
+   0095 2A                 2217 	.db #0x2A	; 42
+   0096 90                 2218 	.db #0x90	; 144
+   0097 88                 2219 	.db #0x88	; 136
+   0098 46                 2220 	.db #0x46	; 70	'F'
+   0099 EE                 2221 	.db #0xEE	; 238
+   009A B8                 2222 	.db #0xB8	; 184
+   009B 14                 2223 	.db #0x14	; 20
+   009C DE                 2224 	.db #0xDE	; 222
+   009D 5E                 2225 	.db #0x5E	; 94
+   009E 0B                 2226 	.db #0x0B	; 11
+   009F DB                 2227 	.db #0xDB	; 219
+   00A0 E0                 2228 	.db #0xE0	; 224
+   00A1 32                 2229 	.db #0x32	; 50	'2'
+   00A2 3A                 2230 	.db #0x3A	; 58
+   00A3 0A                 2231 	.db #0x0A	; 10
+   00A4 49                 2232 	.db #0x49	; 73	'I'
+   00A5 06                 2233 	.db #0x06	; 6
+   00A6 24                 2234 	.db #0x24	; 36
+   00A7 5C                 2235 	.db #0x5C	; 92
+   00A8 C2                 2236 	.db #0xC2	; 194
+   00A9 D3                 2237 	.db #0xD3	; 211
+   00AA AC                 2238 	.db #0xAC	; 172
+   00AB 62                 2239 	.db #0x62	; 98	'b'
+   00AC 91                 2240 	.db #0x91	; 145
+   00AD 95                 2241 	.db #0x95	; 149
+   00AE E4                 2242 	.db #0xE4	; 228
+   00AF 79                 2243 	.db #0x79	; 121	'y'
+   00B0 E7                 2244 	.db #0xE7	; 231
+   00B1 C8                 2245 	.db #0xC8	; 200
+   00B2 37                 2246 	.db #0x37	; 55	'7'
+   00B3 6D                 2247 	.db #0x6D	; 109	'm'
+   00B4 8D                 2248 	.db #0x8D	; 141
+   00B5 D5                 2249 	.db #0xD5	; 213
+   00B6 4E                 2250 	.db #0x4E	; 78	'N'
+   00B7 A9                 2251 	.db #0xA9	; 169
+   00B8 6C                 2252 	.db #0x6C	; 108	'l'
+   00B9 56                 2253 	.db #0x56	; 86	'V'
+   00BA F4                 2254 	.db #0xF4	; 244
+   00BB EA                 2255 	.db #0xEA	; 234
+   00BC 65                 2256 	.db #0x65	; 101	'e'
+   00BD 7A                 2257 	.db #0x7A	; 122	'z'
+   00BE AE                 2258 	.db #0xAE	; 174
+   00BF 08                 2259 	.db #0x08	; 8
+   00C0 BA                 2260 	.db #0xBA	; 186
+   00C1 78                 2261 	.db #0x78	; 120	'x'
+   00C2 25                 2262 	.db #0x25	; 37
+   00C3 2E                 2263 	.db #0x2E	; 46
+   00C4 1C                 2264 	.db #0x1C	; 28
+   00C5 A6                 2265 	.db #0xA6	; 166
+   00C6 B4                 2266 	.db #0xB4	; 180
+   00C7 C6                 2267 	.db #0xC6	; 198
+   00C8 E8                 2268 	.db #0xE8	; 232
+   00C9 DD                 2269 	.db #0xDD	; 221
+   00CA 74                 2270 	.db #0x74	; 116	't'
+   00CB 1F                 2271 	.db #0x1F	; 31
+   00CC 4B                 2272 	.db #0x4B	; 75	'K'
+   00CD BD                 2273 	.db #0xBD	; 189
+   00CE 8B                 2274 	.db #0x8B	; 139
+   00CF 8A                 2275 	.db #0x8A	; 138
+   00D0 70                 2276 	.db #0x70	; 112	'p'
+   00D1 3E                 2277 	.db #0x3E	; 62
+   00D2 B5                 2278 	.db #0xB5	; 181
+   00D3 66                 2279 	.db #0x66	; 102	'f'
+   00D4 48                 2280 	.db #0x48	; 72	'H'
+   00D5 03                 2281 	.db #0x03	; 3
+   00D6 F6                 2282 	.db #0xF6	; 246
+   00D7 0E                 2283 	.db #0x0E	; 14
+   00D8 61                 2284 	.db #0x61	; 97	'a'
+   00D9 35                 2285 	.db #0x35	; 53	'5'
+   00DA 57                 2286 	.db #0x57	; 87	'W'
+   00DB B9                 2287 	.db #0xB9	; 185
+   00DC 86                 2288 	.db #0x86	; 134
+   00DD C1                 2289 	.db #0xC1	; 193
+   00DE 1D                 2290 	.db #0x1D	; 29
+   00DF 9E                 2291 	.db #0x9E	; 158
+   00E0 E1                 2292 	.db #0xE1	; 225
+   00E1 F8                 2293 	.db #0xF8	; 248
+   00E2 98                 2294 	.db #0x98	; 152
+   00E3 11                 2295 	.db #0x11	; 17
+   00E4 69                 2296 	.db #0x69	; 105	'i'
+   00E5 D9                 2297 	.db #0xD9	; 217
+   00E6 8E                 2298 	.db #0x8E	; 142
+   00E7 94                 2299 	.db #0x94	; 148
+   00E8 9B                 2300 	.db #0x9B	; 155
+   00E9 1E                 2301 	.db #0x1E	; 30
+   00EA 87                 2302 	.db #0x87	; 135
+   00EB E9                 2303 	.db #0xE9	; 233
+   00EC CE                 2304 	.db #0xCE	; 206
+   00ED 55                 2305 	.db #0x55	; 85	'U'
+   00EE 28                 2306 	.db #0x28	; 40
+   00EF DF                 2307 	.db #0xDF	; 223
+   00F0 8C                 2308 	.db #0x8C	; 140
+   00F1 A1                 2309 	.db #0xA1	; 161
+   00F2 89                 2310 	.db #0x89	; 137
+   00F3 0D                 2311 	.db #0x0D	; 13
+   00F4 BF                 2312 	.db #0xBF	; 191
+   00F5 E6                 2313 	.db #0xE6	; 230
+   00F6 42                 2314 	.db #0x42	; 66	'B'
+   00F7 68                 2315 	.db #0x68	; 104	'h'
+   00F8 41                 2316 	.db #0x41	; 65	'A'
+   00F9 99                 2317 	.db #0x99	; 153
+   00FA 2D                 2318 	.db #0x2D	; 45
+   00FB 0F                 2319 	.db #0x0F	; 15
+   00FC B0                 2320 	.db #0xB0	; 176
+   00FD 54                 2321 	.db #0x54	; 84	'T'
+   00FE BB                 2322 	.db #0xBB	; 187
+   00FF 16                 2323 	.db #0x16	; 22
+                    0100   2324 Faes$Rcon$0$0 == .
+   0100                    2325 _Rcon:
+   0100 8D                 2326 	.db #0x8D	; 141
+   0101 01                 2327 	.db #0x01	; 1
+   0102 02                 2328 	.db #0x02	; 2
+   0103 04                 2329 	.db #0x04	; 4
+   0104 08                 2330 	.db #0x08	; 8
+   0105 10                 2331 	.db #0x10	; 16
+   0106 20                 2332 	.db #0x20	; 32
+   0107 40                 2333 	.db #0x40	; 64
+   0108 80                 2334 	.db #0x80	; 128
+   0109 1B                 2335 	.db #0x1B	; 27
+   010A 36                 2336 	.db #0x36	; 54	'6'
+   010B 6C                 2337 	.db #0x6C	; 108	'l'
+   010C D8                 2338 	.db #0xD8	; 216
+   010D AB                 2339 	.db #0xAB	; 171
+   010E 4D                 2340 	.db #0x4D	; 77	'M'
+   010F 9A                 2341 	.db #0x9A	; 154
+   0110 2F                 2342 	.db #0x2F	; 47
+   0111 5E                 2343 	.db #0x5E	; 94
+   0112 BC                 2344 	.db #0xBC	; 188
+   0113 63                 2345 	.db #0x63	; 99	'c'
+   0114 C6                 2346 	.db #0xC6	; 198
+   0115 97                 2347 	.db #0x97	; 151
+   0116 35                 2348 	.db #0x35	; 53	'5'
+   0117 6A                 2349 	.db #0x6A	; 106	'j'
+   0118 D4                 2350 	.db #0xD4	; 212
+   0119 B3                 2351 	.db #0xB3	; 179
+   011A 7D                 2352 	.db #0x7D	; 125
+   011B FA                 2353 	.db #0xFA	; 250
+   011C EF                 2354 	.db #0xEF	; 239
+   011D C5                 2355 	.db #0xC5	; 197
+   011E 91                 2356 	.db #0x91	; 145
+   011F 39                 2357 	.db #0x39	; 57	'9'
+   0120 72                 2358 	.db #0x72	; 114	'r'
+   0121 E4                 2359 	.db #0xE4	; 228
+   0122 D3                 2360 	.db #0xD3	; 211
+   0123 BD                 2361 	.db #0xBD	; 189
+   0124 61                 2362 	.db #0x61	; 97	'a'
+   0125 C2                 2363 	.db #0xC2	; 194
+   0126 9F                 2364 	.db #0x9F	; 159
+   0127 25                 2365 	.db #0x25	; 37
+   0128 4A                 2366 	.db #0x4A	; 74	'J'
+   0129 94                 2367 	.db #0x94	; 148
+   012A 33                 2368 	.db #0x33	; 51	'3'
+   012B 66                 2369 	.db #0x66	; 102	'f'
+   012C CC                 2370 	.db #0xCC	; 204
+   012D 83                 2371 	.db #0x83	; 131
+   012E 1D                 2372 	.db #0x1D	; 29
+   012F 3A                 2373 	.db #0x3A	; 58
+   0130 74                 2374 	.db #0x74	; 116	't'
+   0131 E8                 2375 	.db #0xE8	; 232
+   0132 CB                 2376 	.db #0xCB	; 203
+   0133 8D                 2377 	.db #0x8D	; 141
+   0134 01                 2378 	.db #0x01	; 1
+   0135 02                 2379 	.db #0x02	; 2
+   0136 04                 2380 	.db #0x04	; 4
+   0137 08                 2381 	.db #0x08	; 8
+   0138 10                 2382 	.db #0x10	; 16
+   0139 20                 2383 	.db #0x20	; 32
+   013A 40                 2384 	.db #0x40	; 64
+   013B 80                 2385 	.db #0x80	; 128
+   013C 1B                 2386 	.db #0x1B	; 27
+   013D 36                 2387 	.db #0x36	; 54	'6'
+   013E 6C                 2388 	.db #0x6C	; 108	'l'
+   013F D8                 2389 	.db #0xD8	; 216
+   0140 AB                 2390 	.db #0xAB	; 171
+   0141 4D                 2391 	.db #0x4D	; 77	'M'
+   0142 9A                 2392 	.db #0x9A	; 154
+   0143 2F                 2393 	.db #0x2F	; 47
+   0144 5E                 2394 	.db #0x5E	; 94
+   0145 BC                 2395 	.db #0xBC	; 188
+   0146 63                 2396 	.db #0x63	; 99	'c'
+   0147 C6                 2397 	.db #0xC6	; 198
+   0148 97                 2398 	.db #0x97	; 151
+   0149 35                 2399 	.db #0x35	; 53	'5'
+   014A 6A                 2400 	.db #0x6A	; 106	'j'
+   014B D4                 2401 	.db #0xD4	; 212
+   014C B3                 2402 	.db #0xB3	; 179
+   014D 7D                 2403 	.db #0x7D	; 125
+   014E FA                 2404 	.db #0xFA	; 250
+   014F EF                 2405 	.db #0xEF	; 239
+   0150 C5                 2406 	.db #0xC5	; 197
+   0151 91                 2407 	.db #0x91	; 145
+   0152 39                 2408 	.db #0x39	; 57	'9'
+   0153 72                 2409 	.db #0x72	; 114	'r'
+   0154 E4                 2410 	.db #0xE4	; 228
+   0155 D3                 2411 	.db #0xD3	; 211
+   0156 BD                 2412 	.db #0xBD	; 189
+   0157 61                 2413 	.db #0x61	; 97	'a'
+   0158 C2                 2414 	.db #0xC2	; 194
+   0159 9F                 2415 	.db #0x9F	; 159
+   015A 25                 2416 	.db #0x25	; 37
+   015B 4A                 2417 	.db #0x4A	; 74	'J'
+   015C 94                 2418 	.db #0x94	; 148
+   015D 33                 2419 	.db #0x33	; 51	'3'
+   015E 66                 2420 	.db #0x66	; 102	'f'
+   015F CC                 2421 	.db #0xCC	; 204
+   0160 83                 2422 	.db #0x83	; 131
+   0161 1D                 2423 	.db #0x1D	; 29
+   0162 3A                 2424 	.db #0x3A	; 58
+   0163 74                 2425 	.db #0x74	; 116	't'
+   0164 E8                 2426 	.db #0xE8	; 232
+   0165 CB                 2427 	.db #0xCB	; 203
+   0166 8D                 2428 	.db #0x8D	; 141
+   0167 01                 2429 	.db #0x01	; 1
+   0168 02                 2430 	.db #0x02	; 2
+   0169 04                 2431 	.db #0x04	; 4
+   016A 08                 2432 	.db #0x08	; 8
+   016B 10                 2433 	.db #0x10	; 16
+   016C 20                 2434 	.db #0x20	; 32
+   016D 40                 2435 	.db #0x40	; 64
+   016E 80                 2436 	.db #0x80	; 128
+   016F 1B                 2437 	.db #0x1B	; 27
+   0170 36                 2438 	.db #0x36	; 54	'6'
+   0171 6C                 2439 	.db #0x6C	; 108	'l'
+   0172 D8                 2440 	.db #0xD8	; 216
+   0173 AB                 2441 	.db #0xAB	; 171
+   0174 4D                 2442 	.db #0x4D	; 77	'M'
+   0175 9A                 2443 	.db #0x9A	; 154
+   0176 2F                 2444 	.db #0x2F	; 47
+   0177 5E                 2445 	.db #0x5E	; 94
+   0178 BC                 2446 	.db #0xBC	; 188
+   0179 63                 2447 	.db #0x63	; 99	'c'
+   017A C6                 2448 	.db #0xC6	; 198
+   017B 97                 2449 	.db #0x97	; 151
+   017C 35                 2450 	.db #0x35	; 53	'5'
+   017D 6A                 2451 	.db #0x6A	; 106	'j'
+   017E D4                 2452 	.db #0xD4	; 212
+   017F B3                 2453 	.db #0xB3	; 179
+   0180 7D                 2454 	.db #0x7D	; 125
+   0181 FA                 2455 	.db #0xFA	; 250
+   0182 EF                 2456 	.db #0xEF	; 239
+   0183 C5                 2457 	.db #0xC5	; 197
+   0184 91                 2458 	.db #0x91	; 145
+   0185 39                 2459 	.db #0x39	; 57	'9'
+   0186 72                 2460 	.db #0x72	; 114	'r'
+   0187 E4                 2461 	.db #0xE4	; 228
+   0188 D3                 2462 	.db #0xD3	; 211
+   0189 BD                 2463 	.db #0xBD	; 189
+   018A 61                 2464 	.db #0x61	; 97	'a'
+   018B C2                 2465 	.db #0xC2	; 194
+   018C 9F                 2466 	.db #0x9F	; 159
+   018D 25                 2467 	.db #0x25	; 37
+   018E 4A                 2468 	.db #0x4A	; 74	'J'
+   018F 94                 2469 	.db #0x94	; 148
+   0190 33                 2470 	.db #0x33	; 51	'3'
+   0191 66                 2471 	.db #0x66	; 102	'f'
+   0192 CC                 2472 	.db #0xCC	; 204
+   0193 83                 2473 	.db #0x83	; 131
+   0194 1D                 2474 	.db #0x1D	; 29
+   0195 3A                 2475 	.db #0x3A	; 58
+   0196 74                 2476 	.db #0x74	; 116	't'
+   0197 E8                 2477 	.db #0xE8	; 232
+   0198 CB                 2478 	.db #0xCB	; 203
+   0199 8D                 2479 	.db #0x8D	; 141
+   019A 01                 2480 	.db #0x01	; 1
+   019B 02                 2481 	.db #0x02	; 2
+   019C 04                 2482 	.db #0x04	; 4
+   019D 08                 2483 	.db #0x08	; 8
+   019E 10                 2484 	.db #0x10	; 16
+   019F 20                 2485 	.db #0x20	; 32
+   01A0 40                 2486 	.db #0x40	; 64
+   01A1 80                 2487 	.db #0x80	; 128
+   01A2 1B                 2488 	.db #0x1B	; 27
+   01A3 36                 2489 	.db #0x36	; 54	'6'
+   01A4 6C                 2490 	.db #0x6C	; 108	'l'
+   01A5 D8                 2491 	.db #0xD8	; 216
+   01A6 AB                 2492 	.db #0xAB	; 171
+   01A7 4D                 2493 	.db #0x4D	; 77	'M'
+   01A8 9A                 2494 	.db #0x9A	; 154
+   01A9 2F                 2495 	.db #0x2F	; 47
+   01AA 5E                 2496 	.db #0x5E	; 94
+   01AB BC                 2497 	.db #0xBC	; 188
+   01AC 63                 2498 	.db #0x63	; 99	'c'
+   01AD C6                 2499 	.db #0xC6	; 198
+   01AE 97                 2500 	.db #0x97	; 151
+   01AF 35                 2501 	.db #0x35	; 53	'5'
+   01B0 6A                 2502 	.db #0x6A	; 106	'j'
+   01B1 D4                 2503 	.db #0xD4	; 212
+   01B2 B3                 2504 	.db #0xB3	; 179
+   01B3 7D                 2505 	.db #0x7D	; 125
+   01B4 FA                 2506 	.db #0xFA	; 250
+   01B5 EF                 2507 	.db #0xEF	; 239
+   01B6 C5                 2508 	.db #0xC5	; 197
+   01B7 91                 2509 	.db #0x91	; 145
+   01B8 39                 2510 	.db #0x39	; 57	'9'
+   01B9 72                 2511 	.db #0x72	; 114	'r'
+   01BA E4                 2512 	.db #0xE4	; 228
+   01BB D3                 2513 	.db #0xD3	; 211
+   01BC BD                 2514 	.db #0xBD	; 189
+   01BD 61                 2515 	.db #0x61	; 97	'a'
+   01BE C2                 2516 	.db #0xC2	; 194
+   01BF 9F                 2517 	.db #0x9F	; 159
+   01C0 25                 2518 	.db #0x25	; 37
+   01C1 4A                 2519 	.db #0x4A	; 74	'J'
+   01C2 94                 2520 	.db #0x94	; 148
+   01C3 33                 2521 	.db #0x33	; 51	'3'
+   01C4 66                 2522 	.db #0x66	; 102	'f'
+   01C5 CC                 2523 	.db #0xCC	; 204
+   01C6 83                 2524 	.db #0x83	; 131
+   01C7 1D                 2525 	.db #0x1D	; 29
+   01C8 3A                 2526 	.db #0x3A	; 58
+   01C9 74                 2527 	.db #0x74	; 116	't'
+   01CA E8                 2528 	.db #0xE8	; 232
+   01CB CB                 2529 	.db #0xCB	; 203
+   01CC 8D                 2530 	.db #0x8D	; 141
+   01CD 01                 2531 	.db #0x01	; 1
+   01CE 02                 2532 	.db #0x02	; 2
+   01CF 04                 2533 	.db #0x04	; 4
+   01D0 08                 2534 	.db #0x08	; 8
+   01D1 10                 2535 	.db #0x10	; 16
+   01D2 20                 2536 	.db #0x20	; 32
+   01D3 40                 2537 	.db #0x40	; 64
+   01D4 80                 2538 	.db #0x80	; 128
+   01D5 1B                 2539 	.db #0x1B	; 27
+   01D6 36                 2540 	.db #0x36	; 54	'6'
+   01D7 6C                 2541 	.db #0x6C	; 108	'l'
+   01D8 D8                 2542 	.db #0xD8	; 216
+   01D9 AB                 2543 	.db #0xAB	; 171
+   01DA 4D                 2544 	.db #0x4D	; 77	'M'
+   01DB 9A                 2545 	.db #0x9A	; 154
+   01DC 2F                 2546 	.db #0x2F	; 47
+   01DD 5E                 2547 	.db #0x5E	; 94
+   01DE BC                 2548 	.db #0xBC	; 188
+   01DF 63                 2549 	.db #0x63	; 99	'c'
+   01E0 C6                 2550 	.db #0xC6	; 198
+   01E1 97                 2551 	.db #0x97	; 151
+   01E2 35                 2552 	.db #0x35	; 53	'5'
+   01E3 6A                 2553 	.db #0x6A	; 106	'j'
+   01E4 D4                 2554 	.db #0xD4	; 212
+   01E5 B3                 2555 	.db #0xB3	; 179
+   01E6 7D                 2556 	.db #0x7D	; 125
+   01E7 FA                 2557 	.db #0xFA	; 250
+   01E8 EF                 2558 	.db #0xEF	; 239
+   01E9 C5                 2559 	.db #0xC5	; 197
+   01EA 91                 2560 	.db #0x91	; 145
+   01EB 39                 2561 	.db #0x39	; 57	'9'
+   01EC 72                 2562 	.db #0x72	; 114	'r'
+   01ED E4                 2563 	.db #0xE4	; 228
+   01EE D3                 2564 	.db #0xD3	; 211
+   01EF BD                 2565 	.db #0xBD	; 189
+   01F0 61                 2566 	.db #0x61	; 97	'a'
+   01F1 C2                 2567 	.db #0xC2	; 194
+   01F2 9F                 2568 	.db #0x9F	; 159
+   01F3 25                 2569 	.db #0x25	; 37
+   01F4 4A                 2570 	.db #0x4A	; 74	'J'
+   01F5 94                 2571 	.db #0x94	; 148
+   01F6 33                 2572 	.db #0x33	; 51	'3'
+   01F7 66                 2573 	.db #0x66	; 102	'f'
+   01F8 CC                 2574 	.db #0xCC	; 204
+   01F9 83                 2575 	.db #0x83	; 131
+   01FA 1D                 2576 	.db #0x1D	; 29
+   01FB 3A                 2577 	.db #0x3A	; 58
+   01FC 74                 2578 	.db #0x74	; 116	't'
+   01FD E8                 2579 	.db #0xE8	; 232
+   01FE CB                 2580 	.db #0xCB	; 203
+                           2581 	.area XINIT   (CODE)
+                           2582 	.area CABS    (ABS,CODE)

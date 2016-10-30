@@ -1,0 +1,1409 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:08 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module radio_mac
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _radioRegistersInit
+                             13 	.globl _radioMacEventHandler
+                             14 	.globl _radioMacRx_PARM_2
+                             15 	.globl _radioTxUnderflowOccurred
+                             16 	.globl _radioRxOverflowOccurred
+                             17 	.globl _savedWOREVT1
+                             18 	.globl _savedRadioMacState
+                             19 	.globl _radioMacState
+                             20 	.globl _ISR_RF
+                             21 	.globl _radioMacStrobe
+                             22 	.globl _radioMacSleep
+                             23 	.globl _radioMacResume
+                             24 	.globl _radioMacInit
+                             25 	.globl _radioMacRx
+                             26 	.globl _radioMacTx
+                             27 ;--------------------------------------------------------
+                             28 ; special function registers
+                             29 ;--------------------------------------------------------
+                             30 	.area RSEG    (ABS,DATA)
+   0000                      31 	.org 0x0000
+                    0080     32 Fradio_mac$P0$0$0 == 0x0080
+                    0080     33 _P0	=	0x0080
+                    0081     34 Fradio_mac$SP$0$0 == 0x0081
+                    0081     35 _SP	=	0x0081
+                    0082     36 Fradio_mac$DPL0$0$0 == 0x0082
+                    0082     37 _DPL0	=	0x0082
+                    0083     38 Fradio_mac$DPH0$0$0 == 0x0083
+                    0083     39 _DPH0	=	0x0083
+                    0084     40 Fradio_mac$DPL1$0$0 == 0x0084
+                    0084     41 _DPL1	=	0x0084
+                    0085     42 Fradio_mac$DPH1$0$0 == 0x0085
+                    0085     43 _DPH1	=	0x0085
+                    0086     44 Fradio_mac$U0CSR$0$0 == 0x0086
+                    0086     45 _U0CSR	=	0x0086
+                    0087     46 Fradio_mac$PCON$0$0 == 0x0087
+                    0087     47 _PCON	=	0x0087
+                    0088     48 Fradio_mac$TCON$0$0 == 0x0088
+                    0088     49 _TCON	=	0x0088
+                    0089     50 Fradio_mac$P0IFG$0$0 == 0x0089
+                    0089     51 _P0IFG	=	0x0089
+                    008A     52 Fradio_mac$P1IFG$0$0 == 0x008a
+                    008A     53 _P1IFG	=	0x008a
+                    008B     54 Fradio_mac$P2IFG$0$0 == 0x008b
+                    008B     55 _P2IFG	=	0x008b
+                    008C     56 Fradio_mac$PICTL$0$0 == 0x008c
+                    008C     57 _PICTL	=	0x008c
+                    008D     58 Fradio_mac$P1IEN$0$0 == 0x008d
+                    008D     59 _P1IEN	=	0x008d
+                    008F     60 Fradio_mac$P0INP$0$0 == 0x008f
+                    008F     61 _P0INP	=	0x008f
+                    0090     62 Fradio_mac$P1$0$0 == 0x0090
+                    0090     63 _P1	=	0x0090
+                    0091     64 Fradio_mac$RFIM$0$0 == 0x0091
+                    0091     65 _RFIM	=	0x0091
+                    0092     66 Fradio_mac$DPS$0$0 == 0x0092
+                    0092     67 _DPS	=	0x0092
+                    0093     68 Fradio_mac$MPAGE$0$0 == 0x0093
+                    0093     69 _MPAGE	=	0x0093
+                    0095     70 Fradio_mac$ENDIAN$0$0 == 0x0095
+                    0095     71 _ENDIAN	=	0x0095
+                    0098     72 Fradio_mac$S0CON$0$0 == 0x0098
+                    0098     73 _S0CON	=	0x0098
+                    009A     74 Fradio_mac$IEN2$0$0 == 0x009a
+                    009A     75 _IEN2	=	0x009a
+                    009B     76 Fradio_mac$S1CON$0$0 == 0x009b
+                    009B     77 _S1CON	=	0x009b
+                    009C     78 Fradio_mac$T2CT$0$0 == 0x009c
+                    009C     79 _T2CT	=	0x009c
+                    009D     80 Fradio_mac$T2PR$0$0 == 0x009d
+                    009D     81 _T2PR	=	0x009d
+                    009E     82 Fradio_mac$T2CTL$0$0 == 0x009e
+                    009E     83 _T2CTL	=	0x009e
+                    00A0     84 Fradio_mac$P2$0$0 == 0x00a0
+                    00A0     85 _P2	=	0x00a0
+                    00A1     86 Fradio_mac$WORIRQ$0$0 == 0x00a1
+                    00A1     87 _WORIRQ	=	0x00a1
+                    00A2     88 Fradio_mac$WORCTRL$0$0 == 0x00a2
+                    00A2     89 _WORCTRL	=	0x00a2
+                    00A3     90 Fradio_mac$WOREVT0$0$0 == 0x00a3
+                    00A3     91 _WOREVT0	=	0x00a3
+                    00A4     92 Fradio_mac$WOREVT1$0$0 == 0x00a4
+                    00A4     93 _WOREVT1	=	0x00a4
+                    00A5     94 Fradio_mac$WORTIME0$0$0 == 0x00a5
+                    00A5     95 _WORTIME0	=	0x00a5
+                    00A6     96 Fradio_mac$WORTIME1$0$0 == 0x00a6
+                    00A6     97 _WORTIME1	=	0x00a6
+                    00A8     98 Fradio_mac$IEN0$0$0 == 0x00a8
+                    00A8     99 _IEN0	=	0x00a8
+                    00A9    100 Fradio_mac$IP0$0$0 == 0x00a9
+                    00A9    101 _IP0	=	0x00a9
+                    00AB    102 Fradio_mac$FWT$0$0 == 0x00ab
+                    00AB    103 _FWT	=	0x00ab
+                    00AC    104 Fradio_mac$FADDRL$0$0 == 0x00ac
+                    00AC    105 _FADDRL	=	0x00ac
+                    00AD    106 Fradio_mac$FADDRH$0$0 == 0x00ad
+                    00AD    107 _FADDRH	=	0x00ad
+                    00AE    108 Fradio_mac$FCTL$0$0 == 0x00ae
+                    00AE    109 _FCTL	=	0x00ae
+                    00AF    110 Fradio_mac$FWDATA$0$0 == 0x00af
+                    00AF    111 _FWDATA	=	0x00af
+                    00B1    112 Fradio_mac$ENCDI$0$0 == 0x00b1
+                    00B1    113 _ENCDI	=	0x00b1
+                    00B2    114 Fradio_mac$ENCDO$0$0 == 0x00b2
+                    00B2    115 _ENCDO	=	0x00b2
+                    00B3    116 Fradio_mac$ENCCS$0$0 == 0x00b3
+                    00B3    117 _ENCCS	=	0x00b3
+                    00B4    118 Fradio_mac$ADCCON1$0$0 == 0x00b4
+                    00B4    119 _ADCCON1	=	0x00b4
+                    00B5    120 Fradio_mac$ADCCON2$0$0 == 0x00b5
+                    00B5    121 _ADCCON2	=	0x00b5
+                    00B6    122 Fradio_mac$ADCCON3$0$0 == 0x00b6
+                    00B6    123 _ADCCON3	=	0x00b6
+                    00B8    124 Fradio_mac$IEN1$0$0 == 0x00b8
+                    00B8    125 _IEN1	=	0x00b8
+                    00B9    126 Fradio_mac$IP1$0$0 == 0x00b9
+                    00B9    127 _IP1	=	0x00b9
+                    00BA    128 Fradio_mac$ADCL$0$0 == 0x00ba
+                    00BA    129 _ADCL	=	0x00ba
+                    00BB    130 Fradio_mac$ADCH$0$0 == 0x00bb
+                    00BB    131 _ADCH	=	0x00bb
+                    00BC    132 Fradio_mac$RNDL$0$0 == 0x00bc
+                    00BC    133 _RNDL	=	0x00bc
+                    00BD    134 Fradio_mac$RNDH$0$0 == 0x00bd
+                    00BD    135 _RNDH	=	0x00bd
+                    00BE    136 Fradio_mac$SLEEP$0$0 == 0x00be
+                    00BE    137 _SLEEP	=	0x00be
+                    00C0    138 Fradio_mac$IRCON$0$0 == 0x00c0
+                    00C0    139 _IRCON	=	0x00c0
+                    00C1    140 Fradio_mac$U0DBUF$0$0 == 0x00c1
+                    00C1    141 _U0DBUF	=	0x00c1
+                    00C2    142 Fradio_mac$U0BAUD$0$0 == 0x00c2
+                    00C2    143 _U0BAUD	=	0x00c2
+                    00C4    144 Fradio_mac$U0UCR$0$0 == 0x00c4
+                    00C4    145 _U0UCR	=	0x00c4
+                    00C5    146 Fradio_mac$U0GCR$0$0 == 0x00c5
+                    00C5    147 _U0GCR	=	0x00c5
+                    00C6    148 Fradio_mac$CLKCON$0$0 == 0x00c6
+                    00C6    149 _CLKCON	=	0x00c6
+                    00C7    150 Fradio_mac$MEMCTR$0$0 == 0x00c7
+                    00C7    151 _MEMCTR	=	0x00c7
+                    00C9    152 Fradio_mac$WDCTL$0$0 == 0x00c9
+                    00C9    153 _WDCTL	=	0x00c9
+                    00CA    154 Fradio_mac$T3CNT$0$0 == 0x00ca
+                    00CA    155 _T3CNT	=	0x00ca
+                    00CB    156 Fradio_mac$T3CTL$0$0 == 0x00cb
+                    00CB    157 _T3CTL	=	0x00cb
+                    00CC    158 Fradio_mac$T3CCTL0$0$0 == 0x00cc
+                    00CC    159 _T3CCTL0	=	0x00cc
+                    00CD    160 Fradio_mac$T3CC0$0$0 == 0x00cd
+                    00CD    161 _T3CC0	=	0x00cd
+                    00CE    162 Fradio_mac$T3CCTL1$0$0 == 0x00ce
+                    00CE    163 _T3CCTL1	=	0x00ce
+                    00CF    164 Fradio_mac$T3CC1$0$0 == 0x00cf
+                    00CF    165 _T3CC1	=	0x00cf
+                    00D0    166 Fradio_mac$PSW$0$0 == 0x00d0
+                    00D0    167 _PSW	=	0x00d0
+                    00D1    168 Fradio_mac$DMAIRQ$0$0 == 0x00d1
+                    00D1    169 _DMAIRQ	=	0x00d1
+                    00D2    170 Fradio_mac$DMA1CFGL$0$0 == 0x00d2
+                    00D2    171 _DMA1CFGL	=	0x00d2
+                    00D3    172 Fradio_mac$DMA1CFGH$0$0 == 0x00d3
+                    00D3    173 _DMA1CFGH	=	0x00d3
+                    00D4    174 Fradio_mac$DMA0CFGL$0$0 == 0x00d4
+                    00D4    175 _DMA0CFGL	=	0x00d4
+                    00D5    176 Fradio_mac$DMA0CFGH$0$0 == 0x00d5
+                    00D5    177 _DMA0CFGH	=	0x00d5
+                    00D6    178 Fradio_mac$DMAARM$0$0 == 0x00d6
+                    00D6    179 _DMAARM	=	0x00d6
+                    00D7    180 Fradio_mac$DMAREQ$0$0 == 0x00d7
+                    00D7    181 _DMAREQ	=	0x00d7
+                    00D8    182 Fradio_mac$TIMIF$0$0 == 0x00d8
+                    00D8    183 _TIMIF	=	0x00d8
+                    00D9    184 Fradio_mac$RFD$0$0 == 0x00d9
+                    00D9    185 _RFD	=	0x00d9
+                    00DA    186 Fradio_mac$T1CC0L$0$0 == 0x00da
+                    00DA    187 _T1CC0L	=	0x00da
+                    00DB    188 Fradio_mac$T1CC0H$0$0 == 0x00db
+                    00DB    189 _T1CC0H	=	0x00db
+                    00DC    190 Fradio_mac$T1CC1L$0$0 == 0x00dc
+                    00DC    191 _T1CC1L	=	0x00dc
+                    00DD    192 Fradio_mac$T1CC1H$0$0 == 0x00dd
+                    00DD    193 _T1CC1H	=	0x00dd
+                    00DE    194 Fradio_mac$T1CC2L$0$0 == 0x00de
+                    00DE    195 _T1CC2L	=	0x00de
+                    00DF    196 Fradio_mac$T1CC2H$0$0 == 0x00df
+                    00DF    197 _T1CC2H	=	0x00df
+                    00E0    198 Fradio_mac$ACC$0$0 == 0x00e0
+                    00E0    199 _ACC	=	0x00e0
+                    00E1    200 Fradio_mac$RFST$0$0 == 0x00e1
+                    00E1    201 _RFST	=	0x00e1
+                    00E2    202 Fradio_mac$T1CNTL$0$0 == 0x00e2
+                    00E2    203 _T1CNTL	=	0x00e2
+                    00E3    204 Fradio_mac$T1CNTH$0$0 == 0x00e3
+                    00E3    205 _T1CNTH	=	0x00e3
+                    00E4    206 Fradio_mac$T1CTL$0$0 == 0x00e4
+                    00E4    207 _T1CTL	=	0x00e4
+                    00E5    208 Fradio_mac$T1CCTL0$0$0 == 0x00e5
+                    00E5    209 _T1CCTL0	=	0x00e5
+                    00E6    210 Fradio_mac$T1CCTL1$0$0 == 0x00e6
+                    00E6    211 _T1CCTL1	=	0x00e6
+                    00E7    212 Fradio_mac$T1CCTL2$0$0 == 0x00e7
+                    00E7    213 _T1CCTL2	=	0x00e7
+                    00E8    214 Fradio_mac$IRCON2$0$0 == 0x00e8
+                    00E8    215 _IRCON2	=	0x00e8
+                    00E9    216 Fradio_mac$RFIF$0$0 == 0x00e9
+                    00E9    217 _RFIF	=	0x00e9
+                    00EA    218 Fradio_mac$T4CNT$0$0 == 0x00ea
+                    00EA    219 _T4CNT	=	0x00ea
+                    00EB    220 Fradio_mac$T4CTL$0$0 == 0x00eb
+                    00EB    221 _T4CTL	=	0x00eb
+                    00EC    222 Fradio_mac$T4CCTL0$0$0 == 0x00ec
+                    00EC    223 _T4CCTL0	=	0x00ec
+                    00ED    224 Fradio_mac$T4CC0$0$0 == 0x00ed
+                    00ED    225 _T4CC0	=	0x00ed
+                    00EE    226 Fradio_mac$T4CCTL1$0$0 == 0x00ee
+                    00EE    227 _T4CCTL1	=	0x00ee
+                    00EF    228 Fradio_mac$T4CC1$0$0 == 0x00ef
+                    00EF    229 _T4CC1	=	0x00ef
+                    00F0    230 Fradio_mac$B$0$0 == 0x00f0
+                    00F0    231 _B	=	0x00f0
+                    00F1    232 Fradio_mac$PERCFG$0$0 == 0x00f1
+                    00F1    233 _PERCFG	=	0x00f1
+                    00F2    234 Fradio_mac$ADCCFG$0$0 == 0x00f2
+                    00F2    235 _ADCCFG	=	0x00f2
+                    00F3    236 Fradio_mac$P0SEL$0$0 == 0x00f3
+                    00F3    237 _P0SEL	=	0x00f3
+                    00F4    238 Fradio_mac$P1SEL$0$0 == 0x00f4
+                    00F4    239 _P1SEL	=	0x00f4
+                    00F5    240 Fradio_mac$P2SEL$0$0 == 0x00f5
+                    00F5    241 _P2SEL	=	0x00f5
+                    00F6    242 Fradio_mac$P1INP$0$0 == 0x00f6
+                    00F6    243 _P1INP	=	0x00f6
+                    00F7    244 Fradio_mac$P2INP$0$0 == 0x00f7
+                    00F7    245 _P2INP	=	0x00f7
+                    00F8    246 Fradio_mac$U1CSR$0$0 == 0x00f8
+                    00F8    247 _U1CSR	=	0x00f8
+                    00F9    248 Fradio_mac$U1DBUF$0$0 == 0x00f9
+                    00F9    249 _U1DBUF	=	0x00f9
+                    00FA    250 Fradio_mac$U1BAUD$0$0 == 0x00fa
+                    00FA    251 _U1BAUD	=	0x00fa
+                    00FB    252 Fradio_mac$U1UCR$0$0 == 0x00fb
+                    00FB    253 _U1UCR	=	0x00fb
+                    00FC    254 Fradio_mac$U1GCR$0$0 == 0x00fc
+                    00FC    255 _U1GCR	=	0x00fc
+                    00FD    256 Fradio_mac$P0DIR$0$0 == 0x00fd
+                    00FD    257 _P0DIR	=	0x00fd
+                    00FE    258 Fradio_mac$P1DIR$0$0 == 0x00fe
+                    00FE    259 _P1DIR	=	0x00fe
+                    00FF    260 Fradio_mac$P2DIR$0$0 == 0x00ff
+                    00FF    261 _P2DIR	=	0x00ff
+                    FFFFD5D4    262 Fradio_mac$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    263 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    264 Fradio_mac$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    265 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    266 Fradio_mac$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    267 _FADDR	=	0xffffadac
+                    FFFFBBBA    268 Fradio_mac$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    269 _ADC	=	0xffffbbba
+                    FFFFDBDA    270 Fradio_mac$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    271 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    272 Fradio_mac$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    273 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    274 Fradio_mac$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    275 _T1CC2	=	0xffffdfde
+                            276 ;--------------------------------------------------------
+                            277 ; special function bits
+                            278 ;--------------------------------------------------------
+                            279 	.area RSEG    (ABS,DATA)
+   0000                     280 	.org 0x0000
+                    0080    281 Fradio_mac$P0_0$0$0 == 0x0080
+                    0080    282 _P0_0	=	0x0080
+                    0081    283 Fradio_mac$P0_1$0$0 == 0x0081
+                    0081    284 _P0_1	=	0x0081
+                    0082    285 Fradio_mac$P0_2$0$0 == 0x0082
+                    0082    286 _P0_2	=	0x0082
+                    0083    287 Fradio_mac$P0_3$0$0 == 0x0083
+                    0083    288 _P0_3	=	0x0083
+                    0084    289 Fradio_mac$P0_4$0$0 == 0x0084
+                    0084    290 _P0_4	=	0x0084
+                    0085    291 Fradio_mac$P0_5$0$0 == 0x0085
+                    0085    292 _P0_5	=	0x0085
+                    0086    293 Fradio_mac$P0_6$0$0 == 0x0086
+                    0086    294 _P0_6	=	0x0086
+                    0087    295 Fradio_mac$P0_7$0$0 == 0x0087
+                    0087    296 _P0_7	=	0x0087
+                    0088    297 Fradio_mac$_TCON_0$0$0 == 0x0088
+                    0088    298 __TCON_0	=	0x0088
+                    0089    299 Fradio_mac$RFTXRXIF$0$0 == 0x0089
+                    0089    300 _RFTXRXIF	=	0x0089
+                    008A    301 Fradio_mac$_TCON_2$0$0 == 0x008a
+                    008A    302 __TCON_2	=	0x008a
+                    008B    303 Fradio_mac$URX0IF$0$0 == 0x008b
+                    008B    304 _URX0IF	=	0x008b
+                    008C    305 Fradio_mac$_TCON_4$0$0 == 0x008c
+                    008C    306 __TCON_4	=	0x008c
+                    008D    307 Fradio_mac$ADCIF$0$0 == 0x008d
+                    008D    308 _ADCIF	=	0x008d
+                    008E    309 Fradio_mac$_TCON_6$0$0 == 0x008e
+                    008E    310 __TCON_6	=	0x008e
+                    008F    311 Fradio_mac$URX1IF$0$0 == 0x008f
+                    008F    312 _URX1IF	=	0x008f
+                    0090    313 Fradio_mac$P1_0$0$0 == 0x0090
+                    0090    314 _P1_0	=	0x0090
+                    0091    315 Fradio_mac$P1_1$0$0 == 0x0091
+                    0091    316 _P1_1	=	0x0091
+                    0092    317 Fradio_mac$P1_2$0$0 == 0x0092
+                    0092    318 _P1_2	=	0x0092
+                    0093    319 Fradio_mac$P1_3$0$0 == 0x0093
+                    0093    320 _P1_3	=	0x0093
+                    0094    321 Fradio_mac$P1_4$0$0 == 0x0094
+                    0094    322 _P1_4	=	0x0094
+                    0095    323 Fradio_mac$P1_5$0$0 == 0x0095
+                    0095    324 _P1_5	=	0x0095
+                    0096    325 Fradio_mac$P1_6$0$0 == 0x0096
+                    0096    326 _P1_6	=	0x0096
+                    0097    327 Fradio_mac$P1_7$0$0 == 0x0097
+                    0097    328 _P1_7	=	0x0097
+                    0098    329 Fradio_mac$ENCIF_0$0$0 == 0x0098
+                    0098    330 _ENCIF_0	=	0x0098
+                    0099    331 Fradio_mac$ENCIF_1$0$0 == 0x0099
+                    0099    332 _ENCIF_1	=	0x0099
+                    009A    333 Fradio_mac$_SOCON2$0$0 == 0x009a
+                    009A    334 __SOCON2	=	0x009a
+                    009B    335 Fradio_mac$_SOCON3$0$0 == 0x009b
+                    009B    336 __SOCON3	=	0x009b
+                    009C    337 Fradio_mac$_SOCON4$0$0 == 0x009c
+                    009C    338 __SOCON4	=	0x009c
+                    009D    339 Fradio_mac$_SOCON5$0$0 == 0x009d
+                    009D    340 __SOCON5	=	0x009d
+                    009E    341 Fradio_mac$_SOCON6$0$0 == 0x009e
+                    009E    342 __SOCON6	=	0x009e
+                    009F    343 Fradio_mac$_SOCON7$0$0 == 0x009f
+                    009F    344 __SOCON7	=	0x009f
+                    00A0    345 Fradio_mac$P2_0$0$0 == 0x00a0
+                    00A0    346 _P2_0	=	0x00a0
+                    00A1    347 Fradio_mac$P2_1$0$0 == 0x00a1
+                    00A1    348 _P2_1	=	0x00a1
+                    00A2    349 Fradio_mac$P2_2$0$0 == 0x00a2
+                    00A2    350 _P2_2	=	0x00a2
+                    00A3    351 Fradio_mac$P2_3$0$0 == 0x00a3
+                    00A3    352 _P2_3	=	0x00a3
+                    00A4    353 Fradio_mac$P2_4$0$0 == 0x00a4
+                    00A4    354 _P2_4	=	0x00a4
+                    00A5    355 Fradio_mac$P2_5$0$0 == 0x00a5
+                    00A5    356 _P2_5	=	0x00a5
+                    00A6    357 Fradio_mac$P2_6$0$0 == 0x00a6
+                    00A6    358 _P2_6	=	0x00a6
+                    00A7    359 Fradio_mac$P2_7$0$0 == 0x00a7
+                    00A7    360 _P2_7	=	0x00a7
+                    00A8    361 Fradio_mac$RFTXRXIE$0$0 == 0x00a8
+                    00A8    362 _RFTXRXIE	=	0x00a8
+                    00A9    363 Fradio_mac$ADCIE$0$0 == 0x00a9
+                    00A9    364 _ADCIE	=	0x00a9
+                    00AA    365 Fradio_mac$URX0IE$0$0 == 0x00aa
+                    00AA    366 _URX0IE	=	0x00aa
+                    00AB    367 Fradio_mac$URX1IE$0$0 == 0x00ab
+                    00AB    368 _URX1IE	=	0x00ab
+                    00AC    369 Fradio_mac$ENCIE$0$0 == 0x00ac
+                    00AC    370 _ENCIE	=	0x00ac
+                    00AD    371 Fradio_mac$STIE$0$0 == 0x00ad
+                    00AD    372 _STIE	=	0x00ad
+                    00AE    373 Fradio_mac$_IEN06$0$0 == 0x00ae
+                    00AE    374 __IEN06	=	0x00ae
+                    00AF    375 Fradio_mac$EA$0$0 == 0x00af
+                    00AF    376 _EA	=	0x00af
+                    00B8    377 Fradio_mac$DMAIE$0$0 == 0x00b8
+                    00B8    378 _DMAIE	=	0x00b8
+                    00B9    379 Fradio_mac$T1IE$0$0 == 0x00b9
+                    00B9    380 _T1IE	=	0x00b9
+                    00BA    381 Fradio_mac$T2IE$0$0 == 0x00ba
+                    00BA    382 _T2IE	=	0x00ba
+                    00BB    383 Fradio_mac$T3IE$0$0 == 0x00bb
+                    00BB    384 _T3IE	=	0x00bb
+                    00BC    385 Fradio_mac$T4IE$0$0 == 0x00bc
+                    00BC    386 _T4IE	=	0x00bc
+                    00BD    387 Fradio_mac$P0IE$0$0 == 0x00bd
+                    00BD    388 _P0IE	=	0x00bd
+                    00BE    389 Fradio_mac$_IEN16$0$0 == 0x00be
+                    00BE    390 __IEN16	=	0x00be
+                    00BF    391 Fradio_mac$_IEN17$0$0 == 0x00bf
+                    00BF    392 __IEN17	=	0x00bf
+                    00C0    393 Fradio_mac$DMAIF$0$0 == 0x00c0
+                    00C0    394 _DMAIF	=	0x00c0
+                    00C1    395 Fradio_mac$T1IF$0$0 == 0x00c1
+                    00C1    396 _T1IF	=	0x00c1
+                    00C2    397 Fradio_mac$T2IF$0$0 == 0x00c2
+                    00C2    398 _T2IF	=	0x00c2
+                    00C3    399 Fradio_mac$T3IF$0$0 == 0x00c3
+                    00C3    400 _T3IF	=	0x00c3
+                    00C4    401 Fradio_mac$T4IF$0$0 == 0x00c4
+                    00C4    402 _T4IF	=	0x00c4
+                    00C5    403 Fradio_mac$P0IF$0$0 == 0x00c5
+                    00C5    404 _P0IF	=	0x00c5
+                    00C6    405 Fradio_mac$_IRCON6$0$0 == 0x00c6
+                    00C6    406 __IRCON6	=	0x00c6
+                    00C7    407 Fradio_mac$STIF$0$0 == 0x00c7
+                    00C7    408 _STIF	=	0x00c7
+                    00D0    409 Fradio_mac$P$0$0 == 0x00d0
+                    00D0    410 _P	=	0x00d0
+                    00D1    411 Fradio_mac$F1$0$0 == 0x00d1
+                    00D1    412 _F1	=	0x00d1
+                    00D2    413 Fradio_mac$OV$0$0 == 0x00d2
+                    00D2    414 _OV	=	0x00d2
+                    00D3    415 Fradio_mac$RS0$0$0 == 0x00d3
+                    00D3    416 _RS0	=	0x00d3
+                    00D4    417 Fradio_mac$RS1$0$0 == 0x00d4
+                    00D4    418 _RS1	=	0x00d4
+                    00D5    419 Fradio_mac$F0$0$0 == 0x00d5
+                    00D5    420 _F0	=	0x00d5
+                    00D6    421 Fradio_mac$AC$0$0 == 0x00d6
+                    00D6    422 _AC	=	0x00d6
+                    00D7    423 Fradio_mac$CY$0$0 == 0x00d7
+                    00D7    424 _CY	=	0x00d7
+                    00D8    425 Fradio_mac$T3OVFIF$0$0 == 0x00d8
+                    00D8    426 _T3OVFIF	=	0x00d8
+                    00D9    427 Fradio_mac$T3CH0IF$0$0 == 0x00d9
+                    00D9    428 _T3CH0IF	=	0x00d9
+                    00DA    429 Fradio_mac$T3CH1IF$0$0 == 0x00da
+                    00DA    430 _T3CH1IF	=	0x00da
+                    00DB    431 Fradio_mac$T4OVFIF$0$0 == 0x00db
+                    00DB    432 _T4OVFIF	=	0x00db
+                    00DC    433 Fradio_mac$T4CH0IF$0$0 == 0x00dc
+                    00DC    434 _T4CH0IF	=	0x00dc
+                    00DD    435 Fradio_mac$T4CH1IF$0$0 == 0x00dd
+                    00DD    436 _T4CH1IF	=	0x00dd
+                    00DE    437 Fradio_mac$OVFIM$0$0 == 0x00de
+                    00DE    438 _OVFIM	=	0x00de
+                    00DF    439 Fradio_mac$_TIMIF7$0$0 == 0x00df
+                    00DF    440 __TIMIF7	=	0x00df
+                    00E0    441 Fradio_mac$ACC_0$0$0 == 0x00e0
+                    00E0    442 _ACC_0	=	0x00e0
+                    00E1    443 Fradio_mac$ACC_1$0$0 == 0x00e1
+                    00E1    444 _ACC_1	=	0x00e1
+                    00E2    445 Fradio_mac$ACC_2$0$0 == 0x00e2
+                    00E2    446 _ACC_2	=	0x00e2
+                    00E3    447 Fradio_mac$ACC_3$0$0 == 0x00e3
+                    00E3    448 _ACC_3	=	0x00e3
+                    00E4    449 Fradio_mac$ACC_4$0$0 == 0x00e4
+                    00E4    450 _ACC_4	=	0x00e4
+                    00E5    451 Fradio_mac$ACC_5$0$0 == 0x00e5
+                    00E5    452 _ACC_5	=	0x00e5
+                    00E6    453 Fradio_mac$ACC_6$0$0 == 0x00e6
+                    00E6    454 _ACC_6	=	0x00e6
+                    00E7    455 Fradio_mac$ACC_7$0$0 == 0x00e7
+                    00E7    456 _ACC_7	=	0x00e7
+                    00E8    457 Fradio_mac$P2IF$0$0 == 0x00e8
+                    00E8    458 _P2IF	=	0x00e8
+                    00E9    459 Fradio_mac$UTX0IF$0$0 == 0x00e9
+                    00E9    460 _UTX0IF	=	0x00e9
+                    00EA    461 Fradio_mac$UTX1IF$0$0 == 0x00ea
+                    00EA    462 _UTX1IF	=	0x00ea
+                    00EB    463 Fradio_mac$P1IF$0$0 == 0x00eb
+                    00EB    464 _P1IF	=	0x00eb
+                    00EC    465 Fradio_mac$WDTIF$0$0 == 0x00ec
+                    00EC    466 _WDTIF	=	0x00ec
+                    00ED    467 Fradio_mac$_IRCON25$0$0 == 0x00ed
+                    00ED    468 __IRCON25	=	0x00ed
+                    00EE    469 Fradio_mac$_IRCON26$0$0 == 0x00ee
+                    00EE    470 __IRCON26	=	0x00ee
+                    00EF    471 Fradio_mac$_IRCON27$0$0 == 0x00ef
+                    00EF    472 __IRCON27	=	0x00ef
+                    00F0    473 Fradio_mac$B_0$0$0 == 0x00f0
+                    00F0    474 _B_0	=	0x00f0
+                    00F1    475 Fradio_mac$B_1$0$0 == 0x00f1
+                    00F1    476 _B_1	=	0x00f1
+                    00F2    477 Fradio_mac$B_2$0$0 == 0x00f2
+                    00F2    478 _B_2	=	0x00f2
+                    00F3    479 Fradio_mac$B_3$0$0 == 0x00f3
+                    00F3    480 _B_3	=	0x00f3
+                    00F4    481 Fradio_mac$B_4$0$0 == 0x00f4
+                    00F4    482 _B_4	=	0x00f4
+                    00F5    483 Fradio_mac$B_5$0$0 == 0x00f5
+                    00F5    484 _B_5	=	0x00f5
+                    00F6    485 Fradio_mac$B_6$0$0 == 0x00f6
+                    00F6    486 _B_6	=	0x00f6
+                    00F7    487 Fradio_mac$B_7$0$0 == 0x00f7
+                    00F7    488 _B_7	=	0x00f7
+                    00F8    489 Fradio_mac$U1ACTIVE$0$0 == 0x00f8
+                    00F8    490 _U1ACTIVE	=	0x00f8
+                    00F9    491 Fradio_mac$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    492 _U1TX_BYTE	=	0x00f9
+                    00FA    493 Fradio_mac$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    494 _U1RX_BYTE	=	0x00fa
+                    00FB    495 Fradio_mac$U1ERR$0$0 == 0x00fb
+                    00FB    496 _U1ERR	=	0x00fb
+                    00FC    497 Fradio_mac$U1FE$0$0 == 0x00fc
+                    00FC    498 _U1FE	=	0x00fc
+                    00FD    499 Fradio_mac$U1SLAVE$0$0 == 0x00fd
+                    00FD    500 _U1SLAVE	=	0x00fd
+                    00FE    501 Fradio_mac$U1RE$0$0 == 0x00fe
+                    00FE    502 _U1RE	=	0x00fe
+                    00FF    503 Fradio_mac$U1MODE$0$0 == 0x00ff
+                    00FF    504 _U1MODE	=	0x00ff
+                            505 ;--------------------------------------------------------
+                            506 ; overlayable register banks
+                            507 ;--------------------------------------------------------
+                            508 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     509 	.ds 8
+                            510 ;--------------------------------------------------------
+                            511 ; overlayable bit register bank
+                            512 ;--------------------------------------------------------
+                            513 	.area BIT_BANK	(REL,OVR,DATA)
+   0000                     514 bits:
+   0000                     515 	.ds 1
+                    8000    516 	b0 = bits[0]
+                    8100    517 	b1 = bits[1]
+                    8200    518 	b2 = bits[2]
+                    8300    519 	b3 = bits[3]
+                    8400    520 	b4 = bits[4]
+                    8500    521 	b5 = bits[5]
+                    8600    522 	b6 = bits[6]
+                    8700    523 	b7 = bits[7]
+                            524 ;--------------------------------------------------------
+                            525 ; internal ram data
+                            526 ;--------------------------------------------------------
+                            527 	.area DSEG    (DATA)
+                    0000    528 G$radioMacState$0$0==.
+   0000                     529 _radioMacState::
+   0000                     530 	.ds 1
+                    0001    531 G$savedRadioMacState$0$0==.
+   0001                     532 _savedRadioMacState::
+   0001                     533 	.ds 1
+                    0002    534 G$savedWOREVT1$0$0==.
+   0002                     535 _savedWOREVT1::
+   0002                     536 	.ds 1
+                            537 ;--------------------------------------------------------
+                            538 ; overlayable items in internal ram 
+                            539 ;--------------------------------------------------------
+                            540 	.area OSEG    (OVR,DATA)
+                            541 ;--------------------------------------------------------
+                            542 ; indirectly addressable internal ram data
+                            543 ;--------------------------------------------------------
+                            544 	.area ISEG    (DATA)
+                            545 ;--------------------------------------------------------
+                            546 ; absolute internal ram data
+                            547 ;--------------------------------------------------------
+                            548 	.area IABS    (ABS,DATA)
+                            549 	.area IABS    (ABS,DATA)
+                            550 ;--------------------------------------------------------
+                            551 ; bit data
+                            552 ;--------------------------------------------------------
+                            553 	.area BSEG    (BIT)
+                    0000    554 Fradio_mac$strobe$0$0==.
+   0000                     555 _strobe:
+   0000                     556 	.ds 1
+                    0001    557 Fradio_mac$sleepRadioMac$0$0==.
+   0001                     558 _sleepRadioMac:
+   0001                     559 	.ds 1
+                    0002    560 G$radioRxOverflowOccurred$0$0==.
+   0002                     561 _radioRxOverflowOccurred::
+   0002                     562 	.ds 1
+                    0003    563 G$radioTxUnderflowOccurred$0$0==.
+   0003                     564 _radioTxUnderflowOccurred::
+   0003                     565 	.ds 1
+                            566 ;--------------------------------------------------------
+                            567 ; paged external ram data
+                            568 ;--------------------------------------------------------
+                            569 	.area PSEG    (PAG,XDATA)
+                    0000    570 Lradio_mac.radioMacRx$timeout$1$1==.
+   0000                     571 _radioMacRx_PARM_2:
+   0000                     572 	.ds 1
+                            573 ;--------------------------------------------------------
+                            574 ; external ram data
+                            575 ;--------------------------------------------------------
+                            576 	.area XSEG    (XDATA)
+                    DF00    577 Fradio_mac$SYNC1$0$0 == 0xdf00
+                    DF00    578 _SYNC1	=	0xdf00
+                    DF01    579 Fradio_mac$SYNC0$0$0 == 0xdf01
+                    DF01    580 _SYNC0	=	0xdf01
+                    DF02    581 Fradio_mac$PKTLEN$0$0 == 0xdf02
+                    DF02    582 _PKTLEN	=	0xdf02
+                    DF03    583 Fradio_mac$PKTCTRL1$0$0 == 0xdf03
+                    DF03    584 _PKTCTRL1	=	0xdf03
+                    DF04    585 Fradio_mac$PKTCTRL0$0$0 == 0xdf04
+                    DF04    586 _PKTCTRL0	=	0xdf04
+                    DF05    587 Fradio_mac$ADDR$0$0 == 0xdf05
+                    DF05    588 _ADDR	=	0xdf05
+                    DF06    589 Fradio_mac$CHANNR$0$0 == 0xdf06
+                    DF06    590 _CHANNR	=	0xdf06
+                    DF07    591 Fradio_mac$FSCTRL1$0$0 == 0xdf07
+                    DF07    592 _FSCTRL1	=	0xdf07
+                    DF08    593 Fradio_mac$FSCTRL0$0$0 == 0xdf08
+                    DF08    594 _FSCTRL0	=	0xdf08
+                    DF09    595 Fradio_mac$FREQ2$0$0 == 0xdf09
+                    DF09    596 _FREQ2	=	0xdf09
+                    DF0A    597 Fradio_mac$FREQ1$0$0 == 0xdf0a
+                    DF0A    598 _FREQ1	=	0xdf0a
+                    DF0B    599 Fradio_mac$FREQ0$0$0 == 0xdf0b
+                    DF0B    600 _FREQ0	=	0xdf0b
+                    DF0C    601 Fradio_mac$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    602 _MDMCFG4	=	0xdf0c
+                    DF0D    603 Fradio_mac$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    604 _MDMCFG3	=	0xdf0d
+                    DF0E    605 Fradio_mac$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    606 _MDMCFG2	=	0xdf0e
+                    DF0F    607 Fradio_mac$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    608 _MDMCFG1	=	0xdf0f
+                    DF10    609 Fradio_mac$MDMCFG0$0$0 == 0xdf10
+                    DF10    610 _MDMCFG0	=	0xdf10
+                    DF11    611 Fradio_mac$DEVIATN$0$0 == 0xdf11
+                    DF11    612 _DEVIATN	=	0xdf11
+                    DF12    613 Fradio_mac$MCSM2$0$0 == 0xdf12
+                    DF12    614 _MCSM2	=	0xdf12
+                    DF13    615 Fradio_mac$MCSM1$0$0 == 0xdf13
+                    DF13    616 _MCSM1	=	0xdf13
+                    DF14    617 Fradio_mac$MCSM0$0$0 == 0xdf14
+                    DF14    618 _MCSM0	=	0xdf14
+                    DF15    619 Fradio_mac$FOCCFG$0$0 == 0xdf15
+                    DF15    620 _FOCCFG	=	0xdf15
+                    DF16    621 Fradio_mac$BSCFG$0$0 == 0xdf16
+                    DF16    622 _BSCFG	=	0xdf16
+                    DF17    623 Fradio_mac$AGCCTRL2$0$0 == 0xdf17
+                    DF17    624 _AGCCTRL2	=	0xdf17
+                    DF18    625 Fradio_mac$AGCCTRL1$0$0 == 0xdf18
+                    DF18    626 _AGCCTRL1	=	0xdf18
+                    DF19    627 Fradio_mac$AGCCTRL0$0$0 == 0xdf19
+                    DF19    628 _AGCCTRL0	=	0xdf19
+                    DF1A    629 Fradio_mac$FREND1$0$0 == 0xdf1a
+                    DF1A    630 _FREND1	=	0xdf1a
+                    DF1B    631 Fradio_mac$FREND0$0$0 == 0xdf1b
+                    DF1B    632 _FREND0	=	0xdf1b
+                    DF1C    633 Fradio_mac$FSCAL3$0$0 == 0xdf1c
+                    DF1C    634 _FSCAL3	=	0xdf1c
+                    DF1D    635 Fradio_mac$FSCAL2$0$0 == 0xdf1d
+                    DF1D    636 _FSCAL2	=	0xdf1d
+                    DF1E    637 Fradio_mac$FSCAL1$0$0 == 0xdf1e
+                    DF1E    638 _FSCAL1	=	0xdf1e
+                    DF1F    639 Fradio_mac$FSCAL0$0$0 == 0xdf1f
+                    DF1F    640 _FSCAL0	=	0xdf1f
+                    DF23    641 Fradio_mac$TEST2$0$0 == 0xdf23
+                    DF23    642 _TEST2	=	0xdf23
+                    DF24    643 Fradio_mac$TEST1$0$0 == 0xdf24
+                    DF24    644 _TEST1	=	0xdf24
+                    DF25    645 Fradio_mac$TEST0$0$0 == 0xdf25
+                    DF25    646 _TEST0	=	0xdf25
+                    DF2E    647 Fradio_mac$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    648 _PA_TABLE0	=	0xdf2e
+                    DF2F    649 Fradio_mac$IOCFG2$0$0 == 0xdf2f
+                    DF2F    650 _IOCFG2	=	0xdf2f
+                    DF30    651 Fradio_mac$IOCFG1$0$0 == 0xdf30
+                    DF30    652 _IOCFG1	=	0xdf30
+                    DF31    653 Fradio_mac$IOCFG0$0$0 == 0xdf31
+                    DF31    654 _IOCFG0	=	0xdf31
+                    DF36    655 Fradio_mac$PARTNUM$0$0 == 0xdf36
+                    DF36    656 _PARTNUM	=	0xdf36
+                    DF37    657 Fradio_mac$VERSION$0$0 == 0xdf37
+                    DF37    658 _VERSION	=	0xdf37
+                    DF38    659 Fradio_mac$FREQEST$0$0 == 0xdf38
+                    DF38    660 _FREQEST	=	0xdf38
+                    DF39    661 Fradio_mac$LQI$0$0 == 0xdf39
+                    DF39    662 _LQI	=	0xdf39
+                    DF3A    663 Fradio_mac$RSSI$0$0 == 0xdf3a
+                    DF3A    664 _RSSI	=	0xdf3a
+                    DF3B    665 Fradio_mac$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    666 _MARCSTATE	=	0xdf3b
+                    DF3C    667 Fradio_mac$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    668 _PKTSTATUS	=	0xdf3c
+                    DF3D    669 Fradio_mac$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    670 _VCO_VC_DAC	=	0xdf3d
+                    DF40    671 Fradio_mac$I2SCFG0$0$0 == 0xdf40
+                    DF40    672 _I2SCFG0	=	0xdf40
+                    DF41    673 Fradio_mac$I2SCFG1$0$0 == 0xdf41
+                    DF41    674 _I2SCFG1	=	0xdf41
+                    DF42    675 Fradio_mac$I2SDATL$0$0 == 0xdf42
+                    DF42    676 _I2SDATL	=	0xdf42
+                    DF43    677 Fradio_mac$I2SDATH$0$0 == 0xdf43
+                    DF43    678 _I2SDATH	=	0xdf43
+                    DF44    679 Fradio_mac$I2SWCNT$0$0 == 0xdf44
+                    DF44    680 _I2SWCNT	=	0xdf44
+                    DF45    681 Fradio_mac$I2SSTAT$0$0 == 0xdf45
+                    DF45    682 _I2SSTAT	=	0xdf45
+                    DF46    683 Fradio_mac$I2SCLKF0$0$0 == 0xdf46
+                    DF46    684 _I2SCLKF0	=	0xdf46
+                    DF47    685 Fradio_mac$I2SCLKF1$0$0 == 0xdf47
+                    DF47    686 _I2SCLKF1	=	0xdf47
+                    DF48    687 Fradio_mac$I2SCLKF2$0$0 == 0xdf48
+                    DF48    688 _I2SCLKF2	=	0xdf48
+                    DE00    689 Fradio_mac$USBADDR$0$0 == 0xde00
+                    DE00    690 _USBADDR	=	0xde00
+                    DE01    691 Fradio_mac$USBPOW$0$0 == 0xde01
+                    DE01    692 _USBPOW	=	0xde01
+                    DE02    693 Fradio_mac$USBIIF$0$0 == 0xde02
+                    DE02    694 _USBIIF	=	0xde02
+                    DE04    695 Fradio_mac$USBOIF$0$0 == 0xde04
+                    DE04    696 _USBOIF	=	0xde04
+                    DE06    697 Fradio_mac$USBCIF$0$0 == 0xde06
+                    DE06    698 _USBCIF	=	0xde06
+                    DE07    699 Fradio_mac$USBIIE$0$0 == 0xde07
+                    DE07    700 _USBIIE	=	0xde07
+                    DE09    701 Fradio_mac$USBOIE$0$0 == 0xde09
+                    DE09    702 _USBOIE	=	0xde09
+                    DE0B    703 Fradio_mac$USBCIE$0$0 == 0xde0b
+                    DE0B    704 _USBCIE	=	0xde0b
+                    DE0C    705 Fradio_mac$USBFRML$0$0 == 0xde0c
+                    DE0C    706 _USBFRML	=	0xde0c
+                    DE0D    707 Fradio_mac$USBFRMH$0$0 == 0xde0d
+                    DE0D    708 _USBFRMH	=	0xde0d
+                    DE0E    709 Fradio_mac$USBINDEX$0$0 == 0xde0e
+                    DE0E    710 _USBINDEX	=	0xde0e
+                    DE10    711 Fradio_mac$USBMAXI$0$0 == 0xde10
+                    DE10    712 _USBMAXI	=	0xde10
+                    DE11    713 Fradio_mac$USBCSIL$0$0 == 0xde11
+                    DE11    714 _USBCSIL	=	0xde11
+                    DE12    715 Fradio_mac$USBCSIH$0$0 == 0xde12
+                    DE12    716 _USBCSIH	=	0xde12
+                    DE13    717 Fradio_mac$USBMAXO$0$0 == 0xde13
+                    DE13    718 _USBMAXO	=	0xde13
+                    DE14    719 Fradio_mac$USBCSOL$0$0 == 0xde14
+                    DE14    720 _USBCSOL	=	0xde14
+                    DE15    721 Fradio_mac$USBCSOH$0$0 == 0xde15
+                    DE15    722 _USBCSOH	=	0xde15
+                    DE16    723 Fradio_mac$USBCNTL$0$0 == 0xde16
+                    DE16    724 _USBCNTL	=	0xde16
+                    DE17    725 Fradio_mac$USBCNTH$0$0 == 0xde17
+                    DE17    726 _USBCNTH	=	0xde17
+                    DE20    727 Fradio_mac$USBF0$0$0 == 0xde20
+                    DE20    728 _USBF0	=	0xde20
+                    DE22    729 Fradio_mac$USBF1$0$0 == 0xde22
+                    DE22    730 _USBF1	=	0xde22
+                    DE24    731 Fradio_mac$USBF2$0$0 == 0xde24
+                    DE24    732 _USBF2	=	0xde24
+                    DE26    733 Fradio_mac$USBF3$0$0 == 0xde26
+                    DE26    734 _USBF3	=	0xde26
+                    DE28    735 Fradio_mac$USBF4$0$0 == 0xde28
+                    DE28    736 _USBF4	=	0xde28
+                    DE2A    737 Fradio_mac$USBF5$0$0 == 0xde2a
+                    DE2A    738 _USBF5	=	0xde2a
+                            739 ;--------------------------------------------------------
+                            740 ; absolute external ram data
+                            741 ;--------------------------------------------------------
+                            742 	.area XABS    (ABS,XDATA)
+                            743 ;--------------------------------------------------------
+                            744 ; external initialized ram data
+                            745 ;--------------------------------------------------------
+                            746 	.area XISEG   (XDATA)
+                            747 	.area HOME    (CODE)
+                            748 	.area GSINIT0 (CODE)
+                            749 	.area GSINIT1 (CODE)
+                            750 	.area GSINIT2 (CODE)
+                            751 	.area GSINIT3 (CODE)
+                            752 	.area GSINIT4 (CODE)
+                            753 	.area GSINIT5 (CODE)
+                            754 	.area GSINIT  (CODE)
+                            755 	.area GSFINAL (CODE)
+                            756 	.area CSEG    (CODE)
+                            757 ;--------------------------------------------------------
+                            758 ; global & static initialisations
+                            759 ;--------------------------------------------------------
+                            760 	.area HOME    (CODE)
+                            761 	.area GSINIT  (CODE)
+                            762 	.area GSFINAL (CODE)
+                            763 	.area GSINIT  (CODE)
+                    0000    764 	G$radioMacTx$0$0 ==.
+                    0000    765 	C$radio_mac.c$56$1$1 ==.
+                            766 ;	libraries/src/radio_mac/radio_mac.c:56: volatile uint8 DATA radioMacState = RADIO_MAC_STATE_OFF;
+   0000 75*00 00            767 	mov	_radioMacState,#0x00
+                    0003    768 	G$radioMacTx$0$0 ==.
+                    0003    769 	C$radio_mac.c$44$1$1 ==.
+                            770 ;	libraries/src/radio_mac/radio_mac.c:44: static volatile BIT strobe = 0;
+   0003 C2*00               771 	clr	_strobe
+                    0005    772 	G$radioMacTx$0$0 ==.
+                    0005    773 	C$radio_mac.c$45$1$1 ==.
+                            774 ;	libraries/src/radio_mac/radio_mac.c:45: static volatile BIT sleepRadioMac = 0;
+   0005 C2*01               775 	clr	_sleepRadioMac
+                    0007    776 	G$radioMacTx$0$0 ==.
+                    0007    777 	C$radio_mac.c$48$1$1 ==.
+                            778 ;	libraries/src/radio_mac/radio_mac.c:48: volatile BIT radioRxOverflowOccurred = 0;
+   0007 C2*02               779 	clr	_radioRxOverflowOccurred
+                    0009    780 	G$radioMacTx$0$0 ==.
+                    0009    781 	C$radio_mac.c$49$1$1 ==.
+                            782 ;	libraries/src/radio_mac/radio_mac.c:49: volatile BIT radioTxUnderflowOccurred = 0;
+   0009 C2*03               783 	clr	_radioTxUnderflowOccurred
+                            784 ;--------------------------------------------------------
+                            785 ; Home
+                            786 ;--------------------------------------------------------
+                            787 	.area HOME    (CODE)
+                            788 	.area HOME    (CODE)
+                            789 ;--------------------------------------------------------
+                            790 ; code
+                            791 ;--------------------------------------------------------
+                            792 	.area CSEG    (CODE)
+                            793 ;------------------------------------------------------------
+                            794 ;Allocation info for local variables in function 'ISR_RF'
+                            795 ;------------------------------------------------------------
+                    0000    796 	G$ISR_RF$0$0 ==.
+                    0000    797 	C$radio_mac.c$60$0$0 ==.
+                            798 ;	libraries/src/radio_mac/radio_mac.c:60: ISR(RF, 0)
+                            799 ;	-----------------------------------------
+                            800 ;	 function ISR_RF
+                            801 ;	-----------------------------------------
+   0000                     802 _ISR_RF:
+                    0007    803 	ar7 = 0x07
+                    0006    804 	ar6 = 0x06
+                    0005    805 	ar5 = 0x05
+                    0004    806 	ar4 = 0x04
+                    0003    807 	ar3 = 0x03
+                    0002    808 	ar2 = 0x02
+                    0001    809 	ar1 = 0x01
+                    0000    810 	ar0 = 0x00
+   0000 C0*00               811 	push	bits
+   0002 C0 E0               812 	push	acc
+   0004 C0 F0               813 	push	b
+   0006 C0 82               814 	push	dpl
+   0008 C0 83               815 	push	dph
+   000A C0 07               816 	push	(0+7)
+   000C C0 06               817 	push	(0+6)
+   000E C0 05               818 	push	(0+5)
+   0010 C0 04               819 	push	(0+4)
+   0012 C0 03               820 	push	(0+3)
+   0014 C0 02               821 	push	(0+2)
+   0016 C0 01               822 	push	(0+1)
+   0018 C0 00               823 	push	(0+0)
+   001A C0 D0               824 	push	psw
+                    001C    825 	C$radio_mac.c$62$1$1 ==.
+                            826 ;	libraries/src/radio_mac/radio_mac.c:62: S1CON = 0; // Clear the general RFIF interrupt registers
+                    001C    827 	C$radio_mac.c$64$1$1 ==.
+                            828 ;	libraries/src/radio_mac/radio_mac.c:64: if (RFIF & 0x10) // Check IRQ_DONE
+   001C E4                  829 	clr	a
+   001D F5 D0               830 	mov	psw,a
+   001F F5 9B               831 	mov	_S1CON,a
+   0021 E5 E9               832 	mov	a,_RFIF
+   0023 30 E4 18            833 	jnb	acc.4,00107$
+                    0026    834 	C$radio_mac.c$66$2$2 ==.
+                            835 ;	libraries/src/radio_mac/radio_mac.c:66: if (radioMacState == RADIO_MAC_STATE_TX)
+   0026 74 03               836 	mov	a,#0x03
+   0028 B5*00 08            837 	cjne	a,_radioMacState,00104$
+                    002B    838 	C$radio_mac.c$69$3$3 ==.
+                            839 ;	libraries/src/radio_mac/radio_mac.c:69: radioMacEvent(RADIO_MAC_EVENT_TX);
+   002B 75 82 1E            840 	mov	dpl,#0x1E
+   002E 12s00rBF            841 	lcall	_radioMacEvent
+   0031 80 0B               842 	sjmp	00107$
+   0033                     843 00104$:
+                    0033    844 	C$radio_mac.c$71$2$2 ==.
+                            845 ;	libraries/src/radio_mac/radio_mac.c:71: else if (radioMacState == RADIO_MAC_STATE_RX)
+   0033 74 02               846 	mov	a,#0x02
+   0035 B5*00 06            847 	cjne	a,_radioMacState,00107$
+                    0038    848 	C$radio_mac.c$75$3$4 ==.
+                            849 ;	libraries/src/radio_mac/radio_mac.c:75: radioMacEvent(RADIO_MAC_EVENT_RX);
+   0038 75 82 1F            850 	mov	dpl,#0x1F
+   003B 12s00rBF            851 	lcall	_radioMacEvent
+   003E                     852 00107$:
+                    003E    853 	C$radio_mac.c$79$1$1 ==.
+                            854 ;	libraries/src/radio_mac/radio_mac.c:79: if (RFIF & 0x20)  // Check IRQ_TIMEOUT
+   003E E5 E9               855 	mov	a,_RFIF
+   0040 30 E5 06            856 	jnb	acc.5,00109$
+                    0043    857 	C$radio_mac.c$83$2$5 ==.
+                            858 ;	libraries/src/radio_mac/radio_mac.c:83: radioMacEvent(RADIO_MAC_EVENT_RX_TIMEOUT);
+   0043 75 82 20            859 	mov	dpl,#0x20
+   0046 12s00rBF            860 	lcall	_radioMacEvent
+   0049                     861 00109$:
+                    0049    862 	C$radio_mac.c$86$1$1 ==.
+                            863 ;	libraries/src/radio_mac/radio_mac.c:86: if (strobe)
+   0049 30*00 42            864 	jnb	_strobe,00123$
+                    004C    865 	C$radio_mac.c$90$2$6 ==.
+                            866 ;	libraries/src/radio_mac/radio_mac.c:90: if (radioMacState == RADIO_MAC_STATE_TX)
+   004C 74 03               867 	mov	a,#0x03
+   004E B5*00 02            868 	cjne	a,_radioMacState,00111$
+                    0051    869 	C$radio_mac.c$94$3$7 ==.
+                            870 ;	libraries/src/radio_mac/radio_mac.c:94: return;
+   0051 80 4F               871 	sjmp	00128$
+   0053                     872 00111$:
+                    0053    873 	C$radio_mac.c$97$2$6 ==.
+                            874 ;	libraries/src/radio_mac/radio_mac.c:97: if (radioMacState == RADIO_MAC_STATE_RX && MARCSTATE == 0x0D)
+   0053 74 02               875 	mov	a,#0x02
+   0055 B5*00 23            876 	cjne	a,_radioMacState,00118$
+   0058 90 DF 3B            877 	mov	dptr,#_MARCSTATE
+   005B E0                  878 	movx	a,@dptr
+   005C FF                  879 	mov	r7,a
+   005D BF 0D 1B            880 	cjne	r7,#0x0D,00118$
+                    0060    881 	C$radio_mac.c$99$3$8 ==.
+                            882 ;	libraries/src/radio_mac/radio_mac.c:99: if (PKTSTATUS & (1<<3))  // Check SFD bit (Start of Frame Delimiter)
+   0060 90 DF 3C            883 	mov	dptr,#_PKTSTATUS
+   0063 E0                  884 	movx	a,@dptr
+   0064 FF                  885 	mov	r7,a
+                    0065    886 	C$radio_mac.c$105$4$9 ==.
+                            887 ;	libraries/src/radio_mac/radio_mac.c:105: return;
+   0065 20 E3 3A            888 	jb	acc.3,00128$
+                    0068    889 	C$radio_mac.c$107$3$8 ==.
+                            890 ;	libraries/src/radio_mac/radio_mac.c:107: if ((MCSM2&7) != 7 && WOREVT1 < MAX_LATENCY_OF_STROBE)
+   0068 90 DF 12            891 	mov	dptr,#_MCSM2
+   006B E0                  892 	movx	a,@dptr
+   006C FF                  893 	mov	r7,a
+   006D 53 07 07            894 	anl	ar7,#0x07
+   0070 BF 07 02            895 	cjne	r7,#0x07,00158$
+   0073 80 06               896 	sjmp	00118$
+   0075                     897 00158$:
+   0075 74 F6               898 	mov	a,#0x100 - 0x0A
+   0077 25 A4               899 	add	a,_WOREVT1
+                    0079    900 	C$radio_mac.c$112$4$10 ==.
+                            901 ;	libraries/src/radio_mac/radio_mac.c:112: return;
+   0079 50 27               902 	jnc	00128$
+   007B                     903 00118$:
+                    007B    904 	C$radio_mac.c$123$2$6 ==.
+                            905 ;	libraries/src/radio_mac/radio_mac.c:123: if (MARCSTATE != 0x0D)
+   007B 90 DF 3B            906 	mov	dptr,#_MARCSTATE
+   007E E0                  907 	movx	a,@dptr
+   007F FF                  908 	mov	r7,a
+   0080 BF 0D 02            909 	cjne	r7,#0x0D,00160$
+   0083 80 03               910 	sjmp	00121$
+   0085                     911 00160$:
+                    0085    912 	C$radio_mac.c$125$3$11 ==.
+                            913 ;	libraries/src/radio_mac/radio_mac.c:125: RFST = SIDLE;
+   0085 75 E1 04            914 	mov	_RFST,#0x04
+   0088                     915 00121$:
+                    0088    916 	C$radio_mac.c$130$2$6 ==.
+                            917 ;	libraries/src/radio_mac/radio_mac.c:130: radioMacEvent(RADIO_MAC_EVENT_STROBE);
+   0088 75 82 21            918 	mov	dpl,#0x21
+   008B 12s00rBF            919 	lcall	_radioMacEvent
+   008E                     920 00123$:
+                    008E    921 	C$radio_mac.c$133$1$1 ==.
+                            922 ;	libraries/src/radio_mac/radio_mac.c:133: if (RFIF & 0x80)   // Check IRQ_TXUNF
+   008E E5 E9               923 	mov	a,_RFIF
+   0090 30 E7 05            924 	jnb	acc.7,00125$
+                    0093    925 	C$radio_mac.c$138$2$12 ==.
+                            926 ;	libraries/src/radio_mac/radio_mac.c:138: radioTxUnderflowOccurred = 1;
+   0093 D2*03               927 	setb	_radioTxUnderflowOccurred
+                    0095    928 	C$radio_mac.c$139$2$12 ==.
+                            929 ;	libraries/src/radio_mac/radio_mac.c:139: RFIF = ~0x80;
+   0095 75 E9 7F            930 	mov	_RFIF,#0x7F
+   0098                     931 00125$:
+                    0098    932 	C$radio_mac.c$142$1$1 ==.
+                            933 ;	libraries/src/radio_mac/radio_mac.c:142: if (RFIF & 0x40)   // Check IRQ_RXOVF
+   0098 E5 E9               934 	mov	a,_RFIF
+   009A 30 E6 05            935 	jnb	acc.6,00128$
+                    009D    936 	C$radio_mac.c$147$2$13 ==.
+                            937 ;	libraries/src/radio_mac/radio_mac.c:147: radioRxOverflowOccurred = 1;
+   009D D2*02               938 	setb	_radioRxOverflowOccurred
+                    009F    939 	C$radio_mac.c$148$2$13 ==.
+                            940 ;	libraries/src/radio_mac/radio_mac.c:148: RFIF = ~0x40;
+   009F 75 E9 BF            941 	mov	_RFIF,#0xBF
+   00A2                     942 00128$:
+   00A2 D0 D0               943 	pop	psw
+   00A4 D0 00               944 	pop	(0+0)
+   00A6 D0 01               945 	pop	(0+1)
+   00A8 D0 02               946 	pop	(0+2)
+   00AA D0 03               947 	pop	(0+3)
+   00AC D0 04               948 	pop	(0+4)
+   00AE D0 05               949 	pop	(0+5)
+   00B0 D0 06               950 	pop	(0+6)
+   00B2 D0 07               951 	pop	(0+7)
+   00B4 D0 83               952 	pop	dph
+   00B6 D0 82               953 	pop	dpl
+   00B8 D0 F0               954 	pop	b
+   00BA D0 E0               955 	pop	acc
+   00BC D0*00               956 	pop	bits
+                    00BE    957 	C$radio_mac.c$156$2$1 ==.
+                    00BE    958 	XG$ISR_RF$0$0 ==.
+   00BE 32                  959 	reti
+                            960 ;------------------------------------------------------------
+                            961 ;Allocation info for local variables in function 'radioMacEvent'
+                            962 ;------------------------------------------------------------
+                    00BF    963 	G$radioMacEvent$0$0 ==.
+                    00BF    964 	C$radio_mac.c$158$2$1 ==.
+                            965 ;	libraries/src/radio_mac/radio_mac.c:158: void radioMacEvent(uint8 event)
+                            966 ;	-----------------------------------------
+                            967 ;	 function radioMacEvent
+                            968 ;	-----------------------------------------
+   00BF                     969 _radioMacEvent:
+   00BF AF 82               970 	mov	r7,dpl
+                    00C1    971 	C$radio_mac.c$166$1$1 ==.
+                            972 ;	libraries/src/radio_mac/radio_mac.c:166: if (MARCSTATE != 0x12 && MARCSTATE != 0x01 && MARCSTATE != 0x00 && MARCSTATE != 0x15)
+   00C1 90 DF 3B            973 	mov	dptr,#_MARCSTATE
+   00C4 E0                  974 	movx	a,@dptr
+   00C5 FE                  975 	mov	r6,a
+   00C6 BE 12 02            976 	cjne	r6,#0x12,00122$
+   00C9 80 1E               977 	sjmp	00102$
+   00CB                     978 00122$:
+   00CB 90 DF 3B            979 	mov	dptr,#_MARCSTATE
+   00CE E0                  980 	movx	a,@dptr
+   00CF FE                  981 	mov	r6,a
+   00D0 BE 01 02            982 	cjne	r6,#0x01,00123$
+   00D3 80 14               983 	sjmp	00102$
+   00D5                     984 00123$:
+   00D5 90 DF 3B            985 	mov	dptr,#_MARCSTATE
+   00D8 E0                  986 	movx	a,@dptr
+   00D9 FE                  987 	mov	r6,a
+   00DA 60 0D               988 	jz	00102$
+   00DC 90 DF 3B            989 	mov	dptr,#_MARCSTATE
+   00DF E0                  990 	movx	a,@dptr
+   00E0 FE                  991 	mov	r6,a
+   00E1 BE 15 02            992 	cjne	r6,#0x15,00125$
+   00E4 80 03               993 	sjmp	00102$
+   00E6                     994 00125$:
+                    00E6    995 	C$radio_mac.c$169$2$2 ==.
+                            996 ;	libraries/src/radio_mac/radio_mac.c:169: RFST = SFSTXON;
+   00E6 75 E1 00            997 	mov	_RFST,#0x00
+   00E9                     998 00102$:
+                    00E9    999 	C$radio_mac.c$173$1$1 ==.
+                           1000 ;	libraries/src/radio_mac/radio_mac.c:173: DMAARM = 0x80 | (1<<DMA_CHANNEL_RADIO); // Abort any ongoing radio DMA transfer.
+   00E9 75 D6 82           1001 	mov	_DMAARM,#0x82
+                    00EC   1002 	C$radio_mac.c$174$1$1 ==.
+                           1003 ;	libraries/src/radio_mac/radio_mac.c:174: DMAIRQ &= ~(1<<DMA_CHANNEL_RADIO);      // Clear any pending radio DMA interrupt
+   00EC AE D1              1004 	mov	r6,_DMAIRQ
+   00EE 53 06 FD           1005 	anl	ar6,#0xFD
+   00F1 8E D1              1006 	mov	_DMAIRQ,r6
+                    00F3   1007 	C$radio_mac.c$177$1$1 ==.
+                           1008 ;	libraries/src/radio_mac/radio_mac.c:177: radioMacState = RADIO_MAC_STATE_RX;    // Default next state: RX
+   00F3 75*00 02           1009 	mov	_radioMacState,#0x02
+                    00F6   1010 	C$radio_mac.c$178$1$1 ==.
+                           1011 ;	libraries/src/radio_mac/radio_mac.c:178: MCSM2 = 0x07;                          // Default next timeout: infinite.
+   00F6 90 DF 12           1012 	mov	dptr,#_MCSM2
+   00F9 74 07              1013 	mov	a,#0x07
+   00FB F0                 1014 	movx	@dptr,a
+                    00FC   1015 	C$radio_mac.c$179$1$1 ==.
+                           1016 ;	libraries/src/radio_mac/radio_mac.c:179: radioMacEventHandler(event);
+   00FC 8F 82              1017 	mov	dpl,r7
+   00FE 12s00r00           1018 	lcall	_radioMacEventHandler
+                    0101   1019 	C$radio_mac.c$181$1$1 ==.
+                           1020 ;	libraries/src/radio_mac/radio_mac.c:181: if (sleepRadioMac)
+   0101 30*01 12           1021 	jnb	_sleepRadioMac,00107$
+                    0104   1022 	C$radio_mac.c$183$2$3 ==.
+                           1023 ;	libraries/src/radio_mac/radio_mac.c:183: IEN2 &= ~0x01;    // Disable RF general interrupt
+   0104 AF 9A              1024 	mov	r7,_IEN2
+   0106 53 07 FE           1025 	anl	ar7,#0xFE
+   0109 8F 9A              1026 	mov	_IEN2,r7
+                    010B   1027 	C$radio_mac.c$184$2$3 ==.
+                           1028 ;	libraries/src/radio_mac/radio_mac.c:184: savedWOREVT1 = WOREVT1;
+   010B 85 A4*02           1029 	mov	_savedWOREVT1,_WOREVT1
+                    010E   1030 	C$radio_mac.c$185$2$3 ==.
+                           1031 ;	libraries/src/radio_mac/radio_mac.c:185: savedRadioMacState = radioMacState;
+   010E 85*00*01           1032 	mov	_savedRadioMacState,_radioMacState
+                    0111   1033 	C$radio_mac.c$186$2$3 ==.
+                           1034 ;	libraries/src/radio_mac/radio_mac.c:186: radioMacState = RADIO_MAC_STATE_IDLE;
+   0111 75*00 01           1035 	mov	_radioMacState,#0x01
+                    0114   1036 	C$radio_mac.c$187$2$3 ==.
+                           1037 ;	libraries/src/radio_mac/radio_mac.c:187: sleepRadioMac = 0;
+   0114 C2*01              1038 	clr	_sleepRadioMac
+   0116                    1039 00107$:
+                    0116   1040 	C$radio_mac.c$194$1$1 ==.
+                           1041 ;	libraries/src/radio_mac/radio_mac.c:194: RFIF = ~0x30;  // Clear IRQ_DONE and IRQ_TIMEOUT if they are set.
+   0116 75 E9 CF           1042 	mov	_RFIF,#0xCF
+                    0119   1043 	C$radio_mac.c$197$1$1 ==.
+                           1044 ;	libraries/src/radio_mac/radio_mac.c:197: switch(radioMacState)
+   0119 AF*00              1045 	mov	r7,_radioMacState
+   011B BF 01 02           1046 	cjne	r7,#0x01,00127$
+   011E 80 1A              1047 	sjmp	00110$
+   0120                    1048 00127$:
+   0120 BF 02 02           1049 	cjne	r7,#0x02,00128$
+   0123 80 05              1050 	sjmp	00108$
+   0125                    1051 00128$:
+                    0125   1052 	C$radio_mac.c$199$2$4 ==.
+                           1053 ;	libraries/src/radio_mac/radio_mac.c:199: case RADIO_MAC_STATE_RX:
+   0125 BF 03 15           1054 	cjne	r7,#0x03,00111$
+   0128 80 08              1055 	sjmp	00109$
+   012A                    1056 00108$:
+                    012A   1057 	C$radio_mac.c$200$2$4 ==.
+                           1058 ;	libraries/src/radio_mac/radio_mac.c:200: DMAARM |= (1<<DMA_CHANNEL_RADIO);   // Arm DMA channel.
+   012A 43 D6 02           1059 	orl	_DMAARM,#0x02
+                    012D   1060 	C$radio_mac.c$201$2$4 ==.
+                           1061 ;	libraries/src/radio_mac/radio_mac.c:201: RFST = SRX;                         // Switch radio to RX.
+   012D 75 E1 02           1062 	mov	_RFST,#0x02
+                    0130   1063 	C$radio_mac.c$202$2$4 ==.
+                           1064 ;	libraries/src/radio_mac/radio_mac.c:202: break;
+                    0130   1065 	C$radio_mac.c$203$2$4 ==.
+                           1066 ;	libraries/src/radio_mac/radio_mac.c:203: case RADIO_MAC_STATE_TX:
+   0130 80 0B              1067 	sjmp	00111$
+   0132                    1068 00109$:
+                    0132   1069 	C$radio_mac.c$204$2$4 ==.
+                           1070 ;	libraries/src/radio_mac/radio_mac.c:204: DMAARM |= (1<<DMA_CHANNEL_RADIO);   // Arm DMA channel.
+   0132 43 D6 02           1071 	orl	_DMAARM,#0x02
+                    0135   1072 	C$radio_mac.c$205$2$4 ==.
+                           1073 ;	libraries/src/radio_mac/radio_mac.c:205: RFST = STX;                         // Switch radio to TX.
+   0135 75 E1 03           1074 	mov	_RFST,#0x03
+                    0138   1075 	C$radio_mac.c$206$2$4 ==.
+                           1076 ;	libraries/src/radio_mac/radio_mac.c:206: break;
+                    0138   1077 	C$radio_mac.c$207$2$4 ==.
+                           1078 ;	libraries/src/radio_mac/radio_mac.c:207: case RADIO_MAC_STATE_IDLE:
+   0138 80 03              1079 	sjmp	00111$
+   013A                    1080 00110$:
+                    013A   1081 	C$radio_mac.c$208$2$4 ==.
+                           1082 ;	libraries/src/radio_mac/radio_mac.c:208: RFST = SIDLE;
+   013A 75 E1 04           1083 	mov	_RFST,#0x04
+                    013D   1084 	C$radio_mac.c$210$1$1 ==.
+                           1085 ;	libraries/src/radio_mac/radio_mac.c:210: }
+   013D                    1086 00111$:
+                    013D   1087 	C$radio_mac.c$213$1$1 ==.
+                           1088 ;	libraries/src/radio_mac/radio_mac.c:213: strobe = 0;
+   013D C2*00              1089 	clr	_strobe
+                    013F   1090 	C$radio_mac.c$214$1$1 ==.
+                    013F   1091 	XG$radioMacEvent$0$0 ==.
+   013F 22                 1092 	ret
+                           1093 ;------------------------------------------------------------
+                           1094 ;Allocation info for local variables in function 'radioMacStrobe'
+                           1095 ;------------------------------------------------------------
+                    0140   1096 	G$radioMacStrobe$0$0 ==.
+                    0140   1097 	C$radio_mac.c$216$1$1 ==.
+                           1098 ;	libraries/src/radio_mac/radio_mac.c:216: void radioMacStrobe()
+                           1099 ;	-----------------------------------------
+                           1100 ;	 function radioMacStrobe
+                           1101 ;	-----------------------------------------
+   0140                    1102 _radioMacStrobe:
+                    0140   1103 	C$radio_mac.c$218$1$1 ==.
+                           1104 ;	libraries/src/radio_mac/radio_mac.c:218: strobe = 1;
+   0140 D2*00              1105 	setb	_strobe
+                    0142   1106 	C$radio_mac.c$219$1$1 ==.
+                           1107 ;	libraries/src/radio_mac/radio_mac.c:219: S1CON |= 3;
+   0142 43 9B 03           1108 	orl	_S1CON,#0x03
+                    0145   1109 	C$radio_mac.c$220$1$1 ==.
+                    0145   1110 	XG$radioMacStrobe$0$0 ==.
+   0145 22                 1111 	ret
+                           1112 ;------------------------------------------------------------
+                           1113 ;Allocation info for local variables in function 'radioMacSleep'
+                           1114 ;------------------------------------------------------------
+                    0146   1115 	G$radioMacSleep$0$0 ==.
+                    0146   1116 	C$radio_mac.c$222$1$1 ==.
+                           1117 ;	libraries/src/radio_mac/radio_mac.c:222: void radioMacSleep()
+                           1118 ;	-----------------------------------------
+                           1119 ;	 function radioMacSleep
+                           1120 ;	-----------------------------------------
+   0146                    1121 _radioMacSleep:
+                    0146   1122 	C$radio_mac.c$224$1$1 ==.
+                           1123 ;	libraries/src/radio_mac/radio_mac.c:224: sleepRadioMac = 1;
+   0146 D2*01              1124 	setb	_sleepRadioMac
+                    0148   1125 	C$radio_mac.c$225$1$1 ==.
+                           1126 ;	libraries/src/radio_mac/radio_mac.c:225: radioMacStrobe();
+   0148 12s01r40           1127 	lcall	_radioMacStrobe
+                    014B   1128 	C$radio_mac.c$226$1$1 ==.
+                           1129 ;	libraries/src/radio_mac/radio_mac.c:226: while (strobe);
+   014B                    1130 00101$:
+   014B 20*00 FD           1131 	jb	_strobe,00101$
+                    014E   1132 	C$radio_mac.c$227$1$1 ==.
+                    014E   1133 	XG$radioMacSleep$0$0 ==.
+   014E 22                 1134 	ret
+                           1135 ;------------------------------------------------------------
+                           1136 ;Allocation info for local variables in function 'radioMacResume'
+                           1137 ;------------------------------------------------------------
+                    014F   1138 	G$radioMacResume$0$0 ==.
+                    014F   1139 	C$radio_mac.c$229$1$1 ==.
+                           1140 ;	libraries/src/radio_mac/radio_mac.c:229: void radioMacResume()
+                           1141 ;	-----------------------------------------
+                           1142 ;	 function radioMacResume
+                           1143 ;	-----------------------------------------
+   014F                    1144 _radioMacResume:
+                    014F   1145 	C$radio_mac.c$231$1$1 ==.
+                           1146 ;	libraries/src/radio_mac/radio_mac.c:231: radioMacState = savedRadioMacState;
+   014F 85*01*00           1147 	mov	_radioMacState,_savedRadioMacState
+                    0152   1148 	C$radio_mac.c$233$1$1 ==.
+                           1149 ;	libraries/src/radio_mac/radio_mac.c:233: if (MCSM2 == 0x00)
+   0152 90 DF 12           1150 	mov	dptr,#_MCSM2
+   0155 E0                 1151 	movx	a,@dptr
+   0156 FF                 1152 	mov	r7,a
+                    0157   1153 	C$radio_mac.c$235$2$2 ==.
+                           1154 ;	libraries/src/radio_mac/radio_mac.c:235: WORCTRL = 0;
+                    0157   1155 	C$radio_mac.c$236$2$2 ==.
+                           1156 ;	libraries/src/radio_mac/radio_mac.c:236: WOREVT1 = savedWOREVT1;
+                    0157   1157 	C$radio_mac.c$237$2$2 ==.
+                           1158 ;	libraries/src/radio_mac/radio_mac.c:237: WOREVT0 = 0;
+   0157 70 07              1159 	jnz	00102$
+   0159 F5 A2              1160 	mov	_WORCTRL,a
+   015B 85*02 A4           1161 	mov	_WOREVT1,_savedWOREVT1
+   015E F5 A3              1162 	mov	_WOREVT0,a
+   0160                    1163 00102$:
+                    0160   1164 	C$radio_mac.c$240$1$1 ==.
+                           1165 ;	libraries/src/radio_mac/radio_mac.c:240: IEN2 |= 0x01;    // Enable RF general interrupt
+   0160 43 9A 01           1166 	orl	_IEN2,#0x01
+                    0163   1167 	C$radio_mac.c$242$1$1 ==.
+                           1168 ;	libraries/src/radio_mac/radio_mac.c:242: switch(radioMacState)
+   0163 AF*00              1169 	mov	r7,_radioMacState
+   0165 BF 02 02           1170 	cjne	r7,#0x02,00112$
+   0168 80 05              1171 	sjmp	00103$
+   016A                    1172 00112$:
+                    016A   1173 	C$radio_mac.c$244$2$3 ==.
+                           1174 ;	libraries/src/radio_mac/radio_mac.c:244: case RADIO_MAC_STATE_RX:
+   016A BF 03 10           1175 	cjne	r7,#0x03,00106$
+   016D 80 08              1176 	sjmp	00104$
+   016F                    1177 00103$:
+                    016F   1178 	C$radio_mac.c$245$2$3 ==.
+                           1179 ;	libraries/src/radio_mac/radio_mac.c:245: DMAARM |= (1<<DMA_CHANNEL_RADIO);   // Arm DMA channel.
+   016F 43 D6 02           1180 	orl	_DMAARM,#0x02
+                    0172   1181 	C$radio_mac.c$246$2$3 ==.
+                           1182 ;	libraries/src/radio_mac/radio_mac.c:246: RFST = SRX;                         // Switch radio to RX.
+   0172 75 E1 02           1183 	mov	_RFST,#0x02
+                    0175   1184 	C$radio_mac.c$247$2$3 ==.
+                           1185 ;	libraries/src/radio_mac/radio_mac.c:247: break;
+                    0175   1186 	C$radio_mac.c$248$2$3 ==.
+                           1187 ;	libraries/src/radio_mac/radio_mac.c:248: case RADIO_MAC_STATE_TX:
+   0175 80 06              1188 	sjmp	00106$
+   0177                    1189 00104$:
+                    0177   1190 	C$radio_mac.c$249$2$3 ==.
+                           1191 ;	libraries/src/radio_mac/radio_mac.c:249: DMAARM |= (1<<DMA_CHANNEL_RADIO);   // Arm DMA channel.
+   0177 43 D6 02           1192 	orl	_DMAARM,#0x02
+                    017A   1193 	C$radio_mac.c$250$2$3 ==.
+                           1194 ;	libraries/src/radio_mac/radio_mac.c:250: RFST = STX;                         // Switch radio to TX.
+   017A 75 E1 03           1195 	mov	_RFST,#0x03
+                    017D   1196 	C$radio_mac.c$252$1$1 ==.
+                           1197 ;	libraries/src/radio_mac/radio_mac.c:252: }
+   017D                    1198 00106$:
+                    017D   1199 	C$radio_mac.c$253$1$1 ==.
+                    017D   1200 	XG$radioMacResume$0$0 ==.
+   017D 22                 1201 	ret
+                           1202 ;------------------------------------------------------------
+                           1203 ;Allocation info for local variables in function 'radioMacInit'
+                           1204 ;------------------------------------------------------------
+                    017E   1205 	G$radioMacInit$0$0 ==.
+                    017E   1206 	C$radio_mac.c$257$1$1 ==.
+                           1207 ;	libraries/src/radio_mac/radio_mac.c:257: void radioMacInit()
+                           1208 ;	-----------------------------------------
+                           1209 ;	 function radioMacInit
+                           1210 ;	-----------------------------------------
+   017E                    1211 _radioMacInit:
+                    017E   1212 	C$radio_mac.c$259$1$1 ==.
+                           1213 ;	libraries/src/radio_mac/radio_mac.c:259: radioRegistersInit();
+   017E 12s00r00           1214 	lcall	_radioRegistersInit
+                    0181   1215 	C$radio_mac.c$262$1$1 ==.
+                           1216 ;	libraries/src/radio_mac/radio_mac.c:262: MCSM0 = 0x14;    // Main Radio Control State Machine Configuration
+   0181 90 DF 14           1217 	mov	dptr,#_MCSM0
+   0184 74 14              1218 	mov	a,#0x14
+   0186 F0                 1219 	movx	@dptr,a
+                    0187   1220 	C$radio_mac.c$263$1$1 ==.
+                           1221 ;	libraries/src/radio_mac/radio_mac.c:263: MCSM1 = 0x05;    // Disable CCA.  After RX, go to FSTXON.  After TX, go to FSTXON.
+   0187 90 DF 13           1222 	mov	dptr,#_MCSM1
+   018A 74 05              1223 	mov	a,#0x05
+   018C F0                 1224 	movx	@dptr,a
+                    018D   1225 	C$radio_mac.c$264$1$1 ==.
+                           1226 ;	libraries/src/radio_mac/radio_mac.c:264: MCSM2 = 0x07;    // NOTE: MCSM2 also gets set every time we go into RX mode.
+   018D 90 DF 12           1227 	mov	dptr,#_MCSM2
+   0190 74 07              1228 	mov	a,#0x07
+   0192 F0                 1229 	movx	@dptr,a
+                    0193   1230 	C$radio_mac.c$266$1$1 ==.
+                           1231 ;	libraries/src/radio_mac/radio_mac.c:266: IEN2 |= 0x01;    // Enable RF general interrupt
+   0193 43 9A 01           1232 	orl	_IEN2,#0x01
+                    0196   1233 	C$radio_mac.c$267$1$1 ==.
+                           1234 ;	libraries/src/radio_mac/radio_mac.c:267: RFIM = 0xF0;     // Enable these interrupts: DONE, RXOVF, TXUNF, TIMEOUT
+   0196 75 91 F0           1235 	mov	_RFIM,#0xF0
+                    0199   1236 	C$radio_mac.c$269$1$1 ==.
+                           1237 ;	libraries/src/radio_mac/radio_mac.c:269: EA = 1;          // Enable interrupts in general
+   0199 D2 AF              1238 	setb	_EA
+                    019B   1239 	C$radio_mac.c$271$1$1 ==.
+                           1240 ;	libraries/src/radio_mac/radio_mac.c:271: dmaConfig.radio.DC6 = 19; // WORDSIZE = 0, TMODE = 0, TRIG = 19
+   019B 90s00r06           1241 	mov	dptr,#(_dmaConfig + 0x0006)
+   019E 74 13              1242 	mov	a,#0x13
+   01A0 F0                 1243 	movx	@dptr,a
+                    01A1   1244 	C$radio_mac.c$272$1$1 ==.
+                    01A1   1245 	XG$radioMacInit$0$0 ==.
+   01A1 22                 1246 	ret
+                           1247 ;------------------------------------------------------------
+                           1248 ;Allocation info for local variables in function 'radioMacRx'
+                           1249 ;------------------------------------------------------------
+                    01A2   1250 	G$radioMacRx$0$0 ==.
+                    01A2   1251 	C$radio_mac.c$274$1$1 ==.
+                           1252 ;	libraries/src/radio_mac/radio_mac.c:274: void radioMacRx(uint8 XDATA * packet, uint8 timeout)
+                           1253 ;	-----------------------------------------
+                           1254 ;	 function radioMacRx
+                           1255 ;	-----------------------------------------
+   01A2                    1256 _radioMacRx:
+   01A2 AE 82              1257 	mov	r6,dpl
+   01A4 AF 83              1258 	mov	r7,dph
+                    01A6   1259 	C$radio_mac.c$276$1$1 ==.
+                           1260 ;	libraries/src/radio_mac/radio_mac.c:276: if (timeout)
+   01A6 78r00              1261 	mov	r0,#_radioMacRx_PARM_2
+   01A8 E2                 1262 	movx	a,@r0
+   01A9 60 12              1263 	jz	00102$
+                    01AB   1264 	C$radio_mac.c$278$2$2 ==.
+                           1265 ;	libraries/src/radio_mac/radio_mac.c:278: MCSM2 = 0x00;   // RX_TIME = 0.  Helps determine the units of the RX timeout period.
+   01AB 90 DF 12           1266 	mov	dptr,#_MCSM2
+   01AE E4                 1267 	clr	a
+   01AF F0                 1268 	movx	@dptr,a
+                    01B0   1269 	C$radio_mac.c$279$2$2 ==.
+                           1270 ;	libraries/src/radio_mac/radio_mac.c:279: WORCTRL = 0;    // WOR_RES = 0.  Helps determine the units of the RX timeout period.
+   01B0 75 A2 00           1271 	mov	_WORCTRL,#0x00
+                    01B3   1272 	C$radio_mac.c$280$2$2 ==.
+                           1273 ;	libraries/src/radio_mac/radio_mac.c:280: WOREVT1 = timeout;
+   01B3 78r00              1274 	mov	r0,#_radioMacRx_PARM_2
+   01B5 E2                 1275 	movx	a,@r0
+   01B6 F5 A4              1276 	mov	_WOREVT1,a
+                    01B8   1277 	C$radio_mac.c$281$2$2 ==.
+                           1278 ;	libraries/src/radio_mac/radio_mac.c:281: WOREVT0 = 0;
+   01B8 75 A3 00           1279 	mov	_WOREVT0,#0x00
+   01BB 80 06              1280 	sjmp	00103$
+   01BD                    1281 00102$:
+                    01BD   1282 	C$radio_mac.c$285$2$3 ==.
+                           1283 ;	libraries/src/radio_mac/radio_mac.c:285: MCSM2 = 0x07;  // RX_TIME = 7: No timeout.
+   01BD 90 DF 12           1284 	mov	dptr,#_MCSM2
+   01C0 74 07              1285 	mov	a,#0x07
+   01C2 F0                 1286 	movx	@dptr,a
+   01C3                    1287 00103$:
+                    01C3   1288 	C$radio_mac.c$288$1$1 ==.
+                           1289 ;	libraries/src/radio_mac/radio_mac.c:288: dmaConfig.radio.SRCADDRH = XDATA_SFR_ADDRESS(RFD) >> 8;
+   01C3 7C D9              1290 	mov	r4,#_RFD
+   01C5 7D 00              1291 	mov	r5,#0x00
+   01C7 74 DF              1292 	mov	a,#0xDF
+   01C9 2D                 1293 	add	a,r5
+   01CA FC                 1294 	mov	r4,a
+   01CB 90s00r00           1295 	mov	dptr,#_dmaConfig
+   01CE EC                 1296 	mov	a,r4
+   01CF F0                 1297 	movx	@dptr,a
+                    01D0   1298 	C$radio_mac.c$289$1$1 ==.
+                           1299 ;	libraries/src/radio_mac/radio_mac.c:289: dmaConfig.radio.SRCADDRL = XDATA_SFR_ADDRESS(RFD);
+   01D0 7C D9              1300 	mov	r4,#_RFD
+   01D2 90s00r01           1301 	mov	dptr,#(_dmaConfig + 0x0001)
+   01D5 EC                 1302 	mov	a,r4
+   01D6 F0                 1303 	movx	@dptr,a
+                    01D7   1304 	C$radio_mac.c$290$1$1 ==.
+                           1305 ;	libraries/src/radio_mac/radio_mac.c:290: dmaConfig.radio.DESTADDRH = (unsigned int)packet >> 8;
+   01D7 8F 05              1306 	mov	ar5,r7
+   01D9 90s00r02           1307 	mov	dptr,#(_dmaConfig + 0x0002)
+   01DC ED                 1308 	mov	a,r5
+   01DD F0                 1309 	movx	@dptr,a
+                    01DE   1310 	C$radio_mac.c$291$1$1 ==.
+                           1311 ;	libraries/src/radio_mac/radio_mac.c:291: dmaConfig.radio.DESTADDRL = (unsigned int)packet;
+   01DE 90s00r03           1312 	mov	dptr,#(_dmaConfig + 0x0003)
+   01E1 EE                 1313 	mov	a,r6
+   01E2 F0                 1314 	movx	@dptr,a
+                    01E3   1315 	C$radio_mac.c$292$1$1 ==.
+                           1316 ;	libraries/src/radio_mac/radio_mac.c:292: dmaConfig.radio.LENL = 1 + PKTLEN + 2;
+   01E3 90 DF 02           1317 	mov	dptr,#_PKTLEN
+   01E6 E0                 1318 	movx	a,@dptr
+   01E7 FF                 1319 	mov	r7,a
+   01E8 0F                 1320 	inc	r7
+   01E9 0F                 1321 	inc	r7
+   01EA 0F                 1322 	inc	r7
+   01EB 90s00r05           1323 	mov	dptr,#(_dmaConfig + 0x0005)
+   01EE EF                 1324 	mov	a,r7
+   01EF F0                 1325 	movx	@dptr,a
+                    01F0   1326 	C$radio_mac.c$293$1$1 ==.
+                           1327 ;	libraries/src/radio_mac/radio_mac.c:293: dmaConfig.radio.VLEN_LENH = 0b10000000; // Transfer length is FirstByte+3
+   01F0 90s00r04           1328 	mov	dptr,#(_dmaConfig + 0x0004)
+   01F3 74 80              1329 	mov	a,#0x80
+   01F5 F0                 1330 	movx	@dptr,a
+                    01F6   1331 	C$radio_mac.c$295$1$1 ==.
+                           1332 ;	libraries/src/radio_mac/radio_mac.c:295: dmaConfig.radio.DC7 = 0x10; // SRCINC = 0, DESTINC = 1, IRQMASK = 0, M8 = 0, PRIORITY = 0
+   01F6 90s00r07           1333 	mov	dptr,#(_dmaConfig + 0x0007)
+   01F9 74 10              1334 	mov	a,#0x10
+   01FB F0                 1335 	movx	@dptr,a
+                    01FC   1336 	C$radio_mac.c$297$1$1 ==.
+                           1337 ;	libraries/src/radio_mac/radio_mac.c:297: radioMacState = RADIO_MAC_STATE_RX;
+   01FC 75*00 02           1338 	mov	_radioMacState,#0x02
+                    01FF   1339 	C$radio_mac.c$298$1$1 ==.
+                    01FF   1340 	XG$radioMacRx$0$0 ==.
+   01FF 22                 1341 	ret
+                           1342 ;------------------------------------------------------------
+                           1343 ;Allocation info for local variables in function 'radioMacTx'
+                           1344 ;------------------------------------------------------------
+                    0200   1345 	G$radioMacTx$0$0 ==.
+                    0200   1346 	C$radio_mac.c$302$1$1 ==.
+                           1347 ;	libraries/src/radio_mac/radio_mac.c:302: void radioMacTx(uint8 XDATA * packet)
+                           1348 ;	-----------------------------------------
+                           1349 ;	 function radioMacTx
+                           1350 ;	-----------------------------------------
+   0200                    1351 _radioMacTx:
+   0200 AE 82              1352 	mov	r6,dpl
+   0202 AF 83              1353 	mov	r7,dph
+                    0204   1354 	C$radio_mac.c$304$1$1 ==.
+                           1355 ;	libraries/src/radio_mac/radio_mac.c:304: dmaConfig.radio.SRCADDRH = (unsigned int)packet >> 8;
+   0204 8F 05              1356 	mov	ar5,r7
+   0206 90s00r00           1357 	mov	dptr,#_dmaConfig
+   0209 ED                 1358 	mov	a,r5
+   020A F0                 1359 	movx	@dptr,a
+                    020B   1360 	C$radio_mac.c$305$1$1 ==.
+                           1361 ;	libraries/src/radio_mac/radio_mac.c:305: dmaConfig.radio.SRCADDRL = (unsigned int)packet;
+   020B 90s00r01           1362 	mov	dptr,#(_dmaConfig + 0x0001)
+   020E EE                 1363 	mov	a,r6
+   020F F0                 1364 	movx	@dptr,a
+                    0210   1365 	C$radio_mac.c$306$1$1 ==.
+                           1366 ;	libraries/src/radio_mac/radio_mac.c:306: dmaConfig.radio.DESTADDRH = XDATA_SFR_ADDRESS(RFD) >> 8;
+   0210 7E D9              1367 	mov	r6,#_RFD
+   0212 7F 00              1368 	mov	r7,#0x00
+   0214 74 DF              1369 	mov	a,#0xDF
+   0216 2F                 1370 	add	a,r7
+   0217 FE                 1371 	mov	r6,a
+   0218 90s00r02           1372 	mov	dptr,#(_dmaConfig + 0x0002)
+   021B EE                 1373 	mov	a,r6
+   021C F0                 1374 	movx	@dptr,a
+                    021D   1375 	C$radio_mac.c$307$1$1 ==.
+                           1376 ;	libraries/src/radio_mac/radio_mac.c:307: dmaConfig.radio.DESTADDRL = XDATA_SFR_ADDRESS(RFD);
+   021D 7E D9              1377 	mov	r6,#_RFD
+   021F 90s00r03           1378 	mov	dptr,#(_dmaConfig + 0x0003)
+   0222 EE                 1379 	mov	a,r6
+   0223 F0                 1380 	movx	@dptr,a
+                    0224   1381 	C$radio_mac.c$308$1$1 ==.
+                           1382 ;	libraries/src/radio_mac/radio_mac.c:308: dmaConfig.radio.LENL = 1 + PKTLEN;
+   0224 90 DF 02           1383 	mov	dptr,#_PKTLEN
+   0227 E0                 1384 	movx	a,@dptr
+   0228 FF                 1385 	mov	r7,a
+   0229 0F                 1386 	inc	r7
+   022A 90s00r05           1387 	mov	dptr,#(_dmaConfig + 0x0005)
+   022D EF                 1388 	mov	a,r7
+   022E F0                 1389 	movx	@dptr,a
+                    022F   1390 	C$radio_mac.c$309$1$1 ==.
+                           1391 ;	libraries/src/radio_mac/radio_mac.c:309: dmaConfig.radio.VLEN_LENH = 0b00100000; // Transfer length is FirstByte+1
+   022F 90s00r04           1392 	mov	dptr,#(_dmaConfig + 0x0004)
+   0232 74 20              1393 	mov	a,#0x20
+   0234 F0                 1394 	movx	@dptr,a
+                    0235   1395 	C$radio_mac.c$311$1$1 ==.
+                           1396 ;	libraries/src/radio_mac/radio_mac.c:311: dmaConfig.radio.DC7 = 0x40; // SRCINC = 1, DESTINC = 0, IRQMASK = 0, M8 = 0, PRIORITY = 0
+   0235 90s00r07           1397 	mov	dptr,#(_dmaConfig + 0x0007)
+   0238 74 40              1398 	mov	a,#0x40
+   023A F0                 1399 	movx	@dptr,a
+                    023B   1400 	C$radio_mac.c$313$1$1 ==.
+                           1401 ;	libraries/src/radio_mac/radio_mac.c:313: radioMacState = RADIO_MAC_STATE_TX;
+   023B 75*00 03           1402 	mov	_radioMacState,#0x03
+                    023E   1403 	C$radio_mac.c$314$1$1 ==.
+                    023E   1404 	XG$radioMacTx$0$0 ==.
+   023E 22                 1405 	ret
+                           1406 	.area CSEG    (CODE)
+                           1407 	.area CONST   (CODE)
+                           1408 	.area XINIT   (CODE)
+                           1409 	.area CABS    (ABS,CODE)

@@ -1,0 +1,440 @@
+;!FILE libraries/src/random/random.asm
+XH
+H 1B areas 172 global symbols
+M random
+O -mmcs51 --model-medium
+S Frandom$IRCON2$0$0 Def00E8
+S Frandom$WORCTRL$0$0 Def00A2
+S Frandom$PKTLEN$0$0 DefDF02
+S Frandom$AGCCTRL0$0$0 DefDF19
+S Frandom$ADCH$0$0 Def00BB
+S Frandom$AGCCTRL1$0$0 DefDF18
+S Frandom$FWT$0$0 Def00AB
+S Frandom$AGCCTRL2$0$0 DefDF17
+S Frandom$DMA0CFG$0$0 DefFFFFD5D4
+S Frandom$T1CNTH$0$0 Def00E3
+S Frandom$DMA1CFG$0$0 DefFFFFD3D2
+S Frandom$ENCIF_0$0$0 Def0098
+S Frandom$ADCL$0$0 Def00BA
+S Frandom$RS0$0$0 Def00D3
+S Frandom$ENCIF_1$0$0 Def0099
+S Frandom$F0$0$0 Def00D5
+S Frandom$RS1$0$0 Def00D4
+S Frandom$T1CNTL$0$0 Def00E2
+S Frandom$P0IFG$0$0 Def0089
+S Frandom$F1$0$0 Def00D1
+S Frandom$WOREVT0$0$0 Def00A3
+S Frandom$P1IFG$0$0 Def008A
+S Frandom$ADCCFG$0$0 Def00F2
+S Frandom$WOREVT1$0$0 Def00A4
+S Frandom$P2IFG$0$0 Def008B
+S Frandom$TIMIF$0$0 Def00D8
+S Frandom$SLEEP$0$0 Def00BE
+S Frandom$ADCCON1$0$0 Def00B4
+S Frandom$PSW$0$0 Def00D0
+S Frandom$ADCCON2$0$0 Def00B5
+S Frandom$ADDR$0$0 DefDF05
+S Frandom$T1CC0$0$0 DefFFFFDBDA
+S Frandom$IRCON$0$0 Def00C0
+S Frandom$ADCCON3$0$0 Def00B6
+S Frandom$CY$0$0 Def00D7
+S Frandom$T1CC1$0$0 DefFFFFDDDC
+S Frandom$PICTL$0$0 Def008C
+S Frandom$URX0IE$0$0 Def00AA
+S Frandom$T1CC2$0$0 DefFFFFDFDE
+S Frandom$T3CC0$0$0 Def00CD
+S Frandom$P1IEN$0$0 Def008D
+S Frandom$I2SCLKF0$0$0 DefDF46
+S Frandom$MDMCFG0$0$0 DefDF10
+S Frandom$FREQ0$0$0 DefDF0B
+S Frandom$WDTIF$0$0 Def00EC
+S Frandom$URX1IE$0$0 Def00AB
+S Frandom$URX0IF$0$0 Def008B
+S Frandom$T4CC0$0$0 Def00ED
+S Frandom$T3CC1$0$0 Def00CF
+S Frandom$WDCTL$0$0 Def00C9
+S Frandom$I2SCLKF1$0$0 DefDF47
+S Frandom$MDMCFG1$0$0 DefDF0F
+S Frandom$FREQ1$0$0 DefDF0A
+S Frandom$URX1IF$0$0 Def008F
+S Frandom$P0DIR$0$0 Def00FD
+S Frandom$T4CC1$0$0 Def00EF
+S Frandom$USBF0$0$0 DefDE20
+S Frandom$USBPOW$0$0 DefDE01
+S Frandom$I2SCLKF2$0$0 DefDF48
+S Frandom$MCSM0$0$0 DefDF14
+S Frandom$MDMCFG2$0$0 DefDF0E
+S Frandom$FREQ2$0$0 DefDF09
+S Frandom$UTX0IF$0$0 Def00E9
+S Frandom$P1DIR$0$0 Def00FE
+S Frandom$P0$0$0 Def0080
+S Frandom$USBF1$0$0 DefDE22
+S Frandom$MCSM1$0$0 DefDF13
+S Frandom$MDMCFG3$0$0 DefDF0D
+S Frandom$_IRCON25$0$0 Def00ED
+S Frandom$UTX1IF$0$0 Def00EA
+S Frandom$OVFIM$0$0 Def00DE
+S Frandom$P2DIR$0$0 Def00FF
+S Frandom$U0GCR$0$0 Def00C5
+S Frandom$P1$0$0 Def0090
+S Frandom$USBF2$0$0 DefDE24
+S Frandom$USBINDEX$0$0 DefDE0E
+S Frandom$MCSM2$0$0 DefDF12
+S Frandom$MDMCFG4$0$0 DefDF0C
+S Frandom$U1ACTIVE$0$0 Def00F8
+S Frandom$_IRCON26$0$0 Def00EE
+S Frandom$_TCON_0$0$0 Def0088
+S Frandom$U1GCR$0$0 Def00FC
+S Frandom$B$0$0 Def00F0
+S Frandom$P2$0$0 Def00A0
+S Frandom$USBF3$0$0 DefDE26
+S Frandom$U1RX_BYTE$0$0 Def00FA
+S Frandom$_IRCON27$0$0 Def00EF
+S Frandom$S0CON$0$0 Def0098
+S Frandom$SP$0$0 Def0081
+S Frandom$USBF4$0$0 DefDE28
+S Frandom$_TCON_2$0$0 Def008A
+S Frandom$P0SEL$0$0 Def00F3
+S Frandom$WORIRQ$0$0 Def00A1
+S Frandom$S1CON$0$0 Def009B
+S Frandom$USBF5$0$0 DefDE2A
+S Frandom$USBADDR$0$0 DefDE00
+S Frandom$U1TX_BYTE$0$0 Def00F9
+S Frandom$OV$0$0 Def00D2
+S Frandom$P1SEL$0$0 Def00F4
+S Frandom$_TCON_4$0$0 Def008C
+S Frandom$P2SEL$0$0 Def00F5
+S Frandom$RFIF$0$0 Def00E9
+S Frandom$ACC$0$0 Def00E0
+S Frandom$P0INP$0$0 Def008F
+S Frandom$PA_TABLE0$0$0 DefDF2E
+S Frandom$FOCCFG$0$0 DefDF15
+S Frandom$_TCON_6$0$0 Def008E
+S Frandom$ADC$0$0 DefFFFFBBBA
+S Frandom$P1INP$0$0 Def00F6
+S Frandom$T1CTL$0$0 Def00E4
+S Frandom$P2INP$0$0 Def00F7
+S Frandom$FCTL$0$0 Def00AE
+S Frandom$FADDRH$0$0 Def00AD
+S Frandom$T2CTL$0$0 Def009E
+S Frandom$T3CTL$0$0 Def00CB
+S Frandom$DEVIATN$0$0 DefDF11
+S Frandom$T4CTL$0$0 Def00EB
+S Frandom$T3CNT$0$0 Def00CA
+S Frandom$RNDH$0$0 Def00BD
+S Frandom$IEN0$0$0 Def00A8
+S Frandom$DPH0$0$0 Def0083
+S Frandom$SYNC0$0$0 DefDF01
+S Frandom$T4CNT$0$0 Def00EA
+S Frandom$IEN1$0$0 Def00B8
+S Frandom$FADDRL$0$0 Def00AC
+S Frandom$U0CSR$0$0 Def0086
+S Frandom$DPH1$0$0 Def0085
+S Frandom$I2SCFG0$0$0 DefDF40
+S Frandom$SYNC1$0$0 DefDF00
+S Frandom$P0IE$0$0 Def00BD
+S Frandom$U1CSR$0$0 Def00F8
+S Frandom$IEN2$0$0 Def009A
+S Frandom$RFIM$0$0 Def0091
+S Frandom$I2SDATH$0$0 DefDF43
+S Frandom$I2SCFG1$0$0 DefDF41
+S Frandom$U1ERR$0$0 Def00FB
+S Frandom$_TIMIF7$0$0 Def00DF
+S Frandom$P0IF$0$0 Def00C5
+S Frandom$P0_0$0$0 Def0080
+S Frandom$U0UCR$0$0 Def00C4
+S Frandom$ENDIAN$0$0 Def0095
+S Frandom$TEST0$0$0 DefDF25
+S Frandom$P1IF$0$0 Def00EB
+S Frandom$P$0$0 Def00D0
+S Frandom$_IRCON6$0$0 Def00C6
+S Frandom$P1_0$0$0 Def0090
+S Frandom$P0_1$0$0 Def0081
+S Frandom$U1UCR$0$0 Def00FB
+S Frandom$RNDL$0$0 Def00BC
+S Frandom$PCON$0$0 Def0087
+S Frandom$DPL0$0$0 Def0082
+S Frandom$USBCSIH$0$0 DefDE12
+S Frandom$TEST1$0$0 DefDF24
+S Frandom$U1FE$0$0 Def00FC
+S Frandom$B_0$0$0 Def00F0
+S Frandom$P2IF$0$0 Def00E8
+S Frandom$T3CH0IF$0$0 Def00D9
+S Frandom$P2_0$0$0 Def00A0
+S Frandom$P1_1$0$0 Def0091
+S Frandom$P0_2$0$0 Def0082
+S Frandom$DPL1$0$0 Def0084
+S Frandom$TEST2$0$0 DefDF23
+S Frandom$B_1$0$0 Def00F1
+S Frandom$T4CH0IF$0$0 Def00DC
+S Frandom$T3CH1IF$0$0 Def00DA
+S Frandom$P2_1$0$0 Def00A1
+S Frandom$P1_2$0$0 Def0092
+S Frandom$P0_3$0$0 Def0083
+S Frandom$DMAARM$0$0 Def00D6
+S Frandom$I2SDATL$0$0 DefDF42
+S Frandom$PKTSTATUS$0$0 DefDF3C
+S Frandom$B_2$0$0 Def00F2
+S Frandom$T4CH1IF$0$0 Def00DD
+S Frandom$T1IE$0$0 Def00B9
+S Frandom$P2_2$0$0 Def00A2
+S Frandom$_SOCON2$0$0 Def009A
+S Frandom$P1_3$0$0 Def0093
+S Frandom$P0_4$0$0 Def0084
+S Frandom$PKTCTRL0$0$0 DefDF04
+S Frandom$B_3$0$0 Def00F3
+S Frandom$T1IF$0$0 Def00C1
+S Frandom$T2IE$0$0 Def00BA
+S Frandom$P2_3$0$0 Def00A3
+S Frandom$_SOCON3$0$0 Def009B
+S Frandom$P1_4$0$0 Def0094
+S Frandom$P0_5$0$0 Def0085
+S Frandom$TCON$0$0 Def0088
+S Frandom$USBCSIL$0$0 DefDE11
+S Frandom$PKTCTRL1$0$0 DefDF03
+S Frandom$B_4$0$0 Def00F4
+S Frandom$T2IF$0$0 Def00C2
+S Frandom$T3IE$0$0 Def00BB
+S Frandom$STIE$0$0 Def00AD
+S Frandom$P2_4$0$0 Def00A4
+S Frandom$_SOCON4$0$0 Def009C
+S Frandom$P1_5$0$0 Def0095
+S Frandom$P0_6$0$0 Def0086
+S Frandom$B_5$0$0 Def00F5
+S Frandom$ACC_0$0$0 Def00E0
+S Frandom$STIF$0$0 Def00C7
+S Frandom$T3IF$0$0 Def00C3
+S Frandom$T4IE$0$0 Def00BC
+S Frandom$ADCIE$0$0 Def00A9
+S Frandom$P2_5$0$0 Def00A5
+S Frandom$_SOCON5$0$0 Def009D
+S Frandom$P1_6$0$0 Def0096
+S Frandom$P0_7$0$0 Def0087
+S Frandom$USBCNTH$0$0 DefDE17
+S Frandom$USBCSOH$0$0 DefDE15
+S Frandom$USBFRMH$0$0 DefDE0D
+S Frandom$B_6$0$0 Def00F6
+S Frandom$ACC_1$0$0 Def00E1
+S Frandom$T4IF$0$0 Def00C4
+S Frandom$P2_6$0$0 Def00A6
+S Frandom$_SOCON6$0$0 Def009E
+S Frandom$P1_7$0$0 Def0097
+S Frandom$ADCIF$0$0 Def008D
+S Frandom$PERCFG$0$0 Def00F1
+S Frandom$FWDATA$0$0 Def00AF
+S Frandom$WORTIME0$0$0 Def00A5
+S Frandom$IOCFG0$0$0 DefDF31
+S Frandom$B_7$0$0 Def00F7
+S Frandom$ACC_2$0$0 Def00E2
+S Frandom$P2_7$0$0 Def00A7
+S Frandom$_SOCON7$0$0 Def009F
+S Frandom$WORTIME1$0$0 Def00A6
+S Frandom$USBMAXI$0$0 DefDE10
+S Frandom$IOCFG1$0$0 DefDF30
+S Frandom$FSCAL0$0$0 DefDF1F
+S Frandom$ACC_3$0$0 Def00E3
+S Frandom$FREQEST$0$0 DefDF38
+S Frandom$IOCFG2$0$0 DefDF2F
+S Frandom$FSCAL1$0$0 DefDF1E
+S Frandom$CHANNR$0$0 DefDF06
+S Frandom$ACC_4$0$0 Def00E4
+S Frandom$DMAREQ$0$0 Def00D7
+S Frandom$DMA0CFGH$0$0 Def00D5
+S Frandom$CLKCON$0$0 Def00C6
+S Frandom$USBCNTL$0$0 DefDE16
+S Frandom$USBCSOL$0$0 DefDE14
+S Frandom$USBFRML$0$0 DefDE0C
+S Frandom$USBCIE$0$0 DefDE0B
+S Frandom$FSCAL2$0$0 DefDF1D
+S Frandom$ACC_5$0$0 Def00E5
+S Frandom$T1CCTL0$0$0 Def00E5
+S Frandom$DMA1CFGH$0$0 Def00D3
+S Frandom$USBCIF$0$0 DefDE06
+S Frandom$FSCAL3$0$0 DefDF1C
+S Frandom$ACC_6$0$0 Def00E6
+S Frandom$RFTXRXIE$0$0 Def00A8
+S Frandom$T1CCTL1$0$0 Def00E6
+S Frandom$RFD$0$0 Def00D9
+S Frandom$U1RE$0$0 Def00FE
+S Frandom$ACC_7$0$0 Def00E7
+S Frandom$RFTXRXIF$0$0 Def0089
+S Frandom$T1CCTL2$0$0 Def00E7
+S Frandom$T3CCTL0$0$0 Def00CC
+S Frandom$T2CT$0$0 Def009C
+S Frandom$FSCTRL0$0$0 DefDF08
+S Frandom$T4CCTL0$0$0 Def00EC
+S Frandom$DMA0CFGL$0$0 Def00D4
+S Frandom$DMAIRQ$0$0 Def00D1
+S Frandom$T3CCTL1$0$0 Def00CE
+S Frandom$USBMAXO$0$0 DefDE13
+S Frandom$FREND0$0$0 DefDF1B
+S Frandom$FSCTRL1$0$0 DefDF07
+S Frandom$T4CCTL1$0$0 Def00EE
+S Frandom$RFST$0$0 Def00E1
+S Frandom$DMA1CFGL$0$0 Def00D2
+S Frandom$FREND1$0$0 DefDF1A
+S Frandom$DMAIE$0$0 Def00B8
+S Frandom$USBIIE$0$0 DefDE07
+S Frandom$RSSI$0$0 DefDF3A
+S Frandom$U1SLAVE$0$0 Def00FD
+S Frandom$T3OVFIF$0$0 Def00D8
+S Frandom$DMAIF$0$0 Def00C0
+S Frandom$_IEN06$0$0 Def00AE
+S Frandom$FADDR$0$0 DefFFFFADAC
+S Frandom$U0BAUD$0$0 Def00C2
+S Frandom$USBIIF$0$0 DefDE02
+S Frandom$T4OVFIF$0$0 Def00DB
+S Frandom$_IEN16$0$0 Def00BE
+S Frandom$U1BAUD$0$0 Def00FA
+S Frandom$_IEN17$0$0 Def00BF
+S Frandom$T1CC0H$0$0 Def00DB
+S Frandom$ENCDI$0$0 Def00B1
+S Frandom$MARCSTATE$0$0 DefDF3B
+S Frandom$AC$0$0 Def00D6
+S Frandom$ENCIE$0$0 Def00AC
+S Frandom$T1CC1H$0$0 Def00DD
+S Frandom$BSCFG$0$0 DefDF16
+S Frandom$T1CC2H$0$0 Def00DF
+S Frandom$LQI$0$0 DefDF39
+S Frandom$VERSION$0$0 DefDF37
+S Frandom$EA$0$0 Def00AF
+S Frandom$U0DBUF$0$0 Def00C1
+S Frandom$USBOIE$0$0 DefDE09
+S Frandom$VCO_VC_DAC$0$0 DefDF3D
+S Frandom$PARTNUM$0$0 DefDF36
+S Frandom$U1DBUF$0$0 Def00F9
+S Frandom$T1CC0L$0$0 Def00DA
+S Frandom$DPS$0$0 Def0092
+S Frandom$USBOIF$0$0 DefDE04
+S Frandom$T1CC1L$0$0 Def00DC
+S Frandom$MEMCTR$0$0 Def00C7
+S Frandom$T2PR$0$0 Def009D
+S Frandom$T1CC2L$0$0 Def00DE
+S Frandom$ENCDO$0$0 Def00B2
+S Frandom$IP0$0$0 Def00A9
+S Frandom$I2SSTAT$0$0 DefDF45
+S Frandom$I2SWCNT$0$0 DefDF44
+S Frandom$IP1$0$0 Def00B9
+S Frandom$MPAGE$0$0 Def0093
+S Frandom$U1MODE$0$0 Def00FF
+S .__.ABS. Def0000
+S Frandom$ENCCS$0$0 Def00B3
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A OSEG size 0 flags 4 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 0 flags 80 addr 0
+A PSEG size 1 flags 50 addr 0
+S Lrandom.randomSeed$seed_lsb$1$1 Def0000
+S _randomSeed_PARM_2 Def0000
+A XSEG size 0 flags 40 addr 0
+A XABS size 0 flags 48 addr 0
+A XISEG size 0 flags 40 addr 0
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size 3D flags 20 addr 0
+S _randomSeed Def0014
+S A$random$801 Def002E
+S A$random$802 Def0030
+S A$random$812 Def0039
+S A$random$803 Def0031
+S A$random$750 Def0006
+S A$random$760 Def0011
+S A$random$815 Def003C
+S A$random$806 Def0033
+S A$random$780 Def0018
+S A$random$781 Def0019
+S A$random$754 Def0008
+S C$random.c$30$1$1 Def0033
+S C$random.c$12$1$1 Def0000
+S A$random$809 Def0036
+S A$random$782 Def001B
+S C$random.c$31$1$1 Def0036
+S C$random.c$13$1$1 Def0008
+S A$random$792 Def0027
+S A$random$783 Def001C
+S A$random$765 Def0013
+S A$random$747 Def0000
+S C$random.c$32$1$1 Def0039
+S C$random.c$23$1$1 Def0016
+S C$random.c$14$1$1 Def000B
+S A$random$793 Def0029
+S A$random$757 Def000B
+S A$random$748 Def0002
+S XG$randomSeed$0$0 Def003C
+S C$random.c$33$1$1 Def003C
+S C$random.c$15$1$1 Def0013
+S A$random$794 Def002B
+S A$random$785 Def001E
+S A$random$776 Def0014
+S A$random$758 Def000D
+S A$random$749 Def0004
+S C$random.c$16$1$1 Def0013
+S A$random$786 Def0020
+S A$random$759 Def000F
+S A$random$787 Def0021
+S C$random.c$25$2$2 Def0027
+S C$random.c$18$1$1 Def0014
+S A$random$788 Def0024
+S A$random$779 Def0016
+S C$random.c$28$1$1 Def002C
+S A$random$798 Def002C
+S C$random.c$29$1$1 Def002E
+S G$randomSeed$0$0 Def0014
+S C$random.c$9$0$0 Def0000
+S _randomNumber Def0000
+S XG$randomNumber$0$0 Def0013
+S G$randomNumber$0$0 Def0000
+A CONST size 0 flags 20 addr 0
+A XINIT size 0 flags 20 addr 0
+A CABS size 0 flags 28 addr 0
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00
+R 00 00 00 04
+T 00 00
+R 00 00 00 0A
+T 00 00
+R 00 00 00 0A
+T 00 00
+R 00 00 00 17
+T 00 00
+R 00 00 00 17
+T 00 00 E5 B4 54 0C 60 02 80 F8
+R 00 00 00 17
+T 00 08
+R 00 00 00 17
+T 00 08 85 BC 82 74 30 55 B4 44 07 F5 B4 22
+R 00 00 00 17
+T 00 14
+R 00 00 00 17
+T 00 14 AF 82 78 00 00 00 E2 70 03 EF 60 09
+R 00 00 00 17 F1 01 05 00 0A
+T 00 1E
+R 00 00 00 17
+T 00 1E 78 00 00 00 E2 B4 03 08 BF 80 05
+R 00 00 00 17 F1 01 03 00 0A
+T 00 27
+R 00 00 00 17
+T 00 27 78 00 00 00 74 AA F2
+R 00 00 00 17 F1 01 03 00 0A
+T 00 2C
+R 00 00 00 17
+T 00 2C 8F BC 78 00 00 00 E2 F5 BC 12 00 00 12
+R 00 00 00 17 F1 01 05 00 0A 00 0C 00 17
+T 00 37 00 00 12 00 00 22
+R 00 00 00 17 00 02 00 17 00 05 00 17

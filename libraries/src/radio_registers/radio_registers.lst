@@ -1,0 +1,992 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:08 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module radio_registers
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _radioRegistersInit
+                             13 	.globl _radioCrcPassed
+                             14 	.globl _radioLqi
+                             15 	.globl _radioRssi
+                             16 ;--------------------------------------------------------
+                             17 ; special function registers
+                             18 ;--------------------------------------------------------
+                             19 	.area RSEG    (ABS,DATA)
+   0000                      20 	.org 0x0000
+                    0080     21 Fradio_registers$P0$0$0 == 0x0080
+                    0080     22 _P0	=	0x0080
+                    0081     23 Fradio_registers$SP$0$0 == 0x0081
+                    0081     24 _SP	=	0x0081
+                    0082     25 Fradio_registers$DPL0$0$0 == 0x0082
+                    0082     26 _DPL0	=	0x0082
+                    0083     27 Fradio_registers$DPH0$0$0 == 0x0083
+                    0083     28 _DPH0	=	0x0083
+                    0084     29 Fradio_registers$DPL1$0$0 == 0x0084
+                    0084     30 _DPL1	=	0x0084
+                    0085     31 Fradio_registers$DPH1$0$0 == 0x0085
+                    0085     32 _DPH1	=	0x0085
+                    0086     33 Fradio_registers$U0CSR$0$0 == 0x0086
+                    0086     34 _U0CSR	=	0x0086
+                    0087     35 Fradio_registers$PCON$0$0 == 0x0087
+                    0087     36 _PCON	=	0x0087
+                    0088     37 Fradio_registers$TCON$0$0 == 0x0088
+                    0088     38 _TCON	=	0x0088
+                    0089     39 Fradio_registers$P0IFG$0$0 == 0x0089
+                    0089     40 _P0IFG	=	0x0089
+                    008A     41 Fradio_registers$P1IFG$0$0 == 0x008a
+                    008A     42 _P1IFG	=	0x008a
+                    008B     43 Fradio_registers$P2IFG$0$0 == 0x008b
+                    008B     44 _P2IFG	=	0x008b
+                    008C     45 Fradio_registers$PICTL$0$0 == 0x008c
+                    008C     46 _PICTL	=	0x008c
+                    008D     47 Fradio_registers$P1IEN$0$0 == 0x008d
+                    008D     48 _P1IEN	=	0x008d
+                    008F     49 Fradio_registers$P0INP$0$0 == 0x008f
+                    008F     50 _P0INP	=	0x008f
+                    0090     51 Fradio_registers$P1$0$0 == 0x0090
+                    0090     52 _P1	=	0x0090
+                    0091     53 Fradio_registers$RFIM$0$0 == 0x0091
+                    0091     54 _RFIM	=	0x0091
+                    0092     55 Fradio_registers$DPS$0$0 == 0x0092
+                    0092     56 _DPS	=	0x0092
+                    0093     57 Fradio_registers$MPAGE$0$0 == 0x0093
+                    0093     58 _MPAGE	=	0x0093
+                    0095     59 Fradio_registers$ENDIAN$0$0 == 0x0095
+                    0095     60 _ENDIAN	=	0x0095
+                    0098     61 Fradio_registers$S0CON$0$0 == 0x0098
+                    0098     62 _S0CON	=	0x0098
+                    009A     63 Fradio_registers$IEN2$0$0 == 0x009a
+                    009A     64 _IEN2	=	0x009a
+                    009B     65 Fradio_registers$S1CON$0$0 == 0x009b
+                    009B     66 _S1CON	=	0x009b
+                    009C     67 Fradio_registers$T2CT$0$0 == 0x009c
+                    009C     68 _T2CT	=	0x009c
+                    009D     69 Fradio_registers$T2PR$0$0 == 0x009d
+                    009D     70 _T2PR	=	0x009d
+                    009E     71 Fradio_registers$T2CTL$0$0 == 0x009e
+                    009E     72 _T2CTL	=	0x009e
+                    00A0     73 Fradio_registers$P2$0$0 == 0x00a0
+                    00A0     74 _P2	=	0x00a0
+                    00A1     75 Fradio_registers$WORIRQ$0$0 == 0x00a1
+                    00A1     76 _WORIRQ	=	0x00a1
+                    00A2     77 Fradio_registers$WORCTRL$0$0 == 0x00a2
+                    00A2     78 _WORCTRL	=	0x00a2
+                    00A3     79 Fradio_registers$WOREVT0$0$0 == 0x00a3
+                    00A3     80 _WOREVT0	=	0x00a3
+                    00A4     81 Fradio_registers$WOREVT1$0$0 == 0x00a4
+                    00A4     82 _WOREVT1	=	0x00a4
+                    00A5     83 Fradio_registers$WORTIME0$0$0 == 0x00a5
+                    00A5     84 _WORTIME0	=	0x00a5
+                    00A6     85 Fradio_registers$WORTIME1$0$0 == 0x00a6
+                    00A6     86 _WORTIME1	=	0x00a6
+                    00A8     87 Fradio_registers$IEN0$0$0 == 0x00a8
+                    00A8     88 _IEN0	=	0x00a8
+                    00A9     89 Fradio_registers$IP0$0$0 == 0x00a9
+                    00A9     90 _IP0	=	0x00a9
+                    00AB     91 Fradio_registers$FWT$0$0 == 0x00ab
+                    00AB     92 _FWT	=	0x00ab
+                    00AC     93 Fradio_registers$FADDRL$0$0 == 0x00ac
+                    00AC     94 _FADDRL	=	0x00ac
+                    00AD     95 Fradio_registers$FADDRH$0$0 == 0x00ad
+                    00AD     96 _FADDRH	=	0x00ad
+                    00AE     97 Fradio_registers$FCTL$0$0 == 0x00ae
+                    00AE     98 _FCTL	=	0x00ae
+                    00AF     99 Fradio_registers$FWDATA$0$0 == 0x00af
+                    00AF    100 _FWDATA	=	0x00af
+                    00B1    101 Fradio_registers$ENCDI$0$0 == 0x00b1
+                    00B1    102 _ENCDI	=	0x00b1
+                    00B2    103 Fradio_registers$ENCDO$0$0 == 0x00b2
+                    00B2    104 _ENCDO	=	0x00b2
+                    00B3    105 Fradio_registers$ENCCS$0$0 == 0x00b3
+                    00B3    106 _ENCCS	=	0x00b3
+                    00B4    107 Fradio_registers$ADCCON1$0$0 == 0x00b4
+                    00B4    108 _ADCCON1	=	0x00b4
+                    00B5    109 Fradio_registers$ADCCON2$0$0 == 0x00b5
+                    00B5    110 _ADCCON2	=	0x00b5
+                    00B6    111 Fradio_registers$ADCCON3$0$0 == 0x00b6
+                    00B6    112 _ADCCON3	=	0x00b6
+                    00B8    113 Fradio_registers$IEN1$0$0 == 0x00b8
+                    00B8    114 _IEN1	=	0x00b8
+                    00B9    115 Fradio_registers$IP1$0$0 == 0x00b9
+                    00B9    116 _IP1	=	0x00b9
+                    00BA    117 Fradio_registers$ADCL$0$0 == 0x00ba
+                    00BA    118 _ADCL	=	0x00ba
+                    00BB    119 Fradio_registers$ADCH$0$0 == 0x00bb
+                    00BB    120 _ADCH	=	0x00bb
+                    00BC    121 Fradio_registers$RNDL$0$0 == 0x00bc
+                    00BC    122 _RNDL	=	0x00bc
+                    00BD    123 Fradio_registers$RNDH$0$0 == 0x00bd
+                    00BD    124 _RNDH	=	0x00bd
+                    00BE    125 Fradio_registers$SLEEP$0$0 == 0x00be
+                    00BE    126 _SLEEP	=	0x00be
+                    00C0    127 Fradio_registers$IRCON$0$0 == 0x00c0
+                    00C0    128 _IRCON	=	0x00c0
+                    00C1    129 Fradio_registers$U0DBUF$0$0 == 0x00c1
+                    00C1    130 _U0DBUF	=	0x00c1
+                    00C2    131 Fradio_registers$U0BAUD$0$0 == 0x00c2
+                    00C2    132 _U0BAUD	=	0x00c2
+                    00C4    133 Fradio_registers$U0UCR$0$0 == 0x00c4
+                    00C4    134 _U0UCR	=	0x00c4
+                    00C5    135 Fradio_registers$U0GCR$0$0 == 0x00c5
+                    00C5    136 _U0GCR	=	0x00c5
+                    00C6    137 Fradio_registers$CLKCON$0$0 == 0x00c6
+                    00C6    138 _CLKCON	=	0x00c6
+                    00C7    139 Fradio_registers$MEMCTR$0$0 == 0x00c7
+                    00C7    140 _MEMCTR	=	0x00c7
+                    00C9    141 Fradio_registers$WDCTL$0$0 == 0x00c9
+                    00C9    142 _WDCTL	=	0x00c9
+                    00CA    143 Fradio_registers$T3CNT$0$0 == 0x00ca
+                    00CA    144 _T3CNT	=	0x00ca
+                    00CB    145 Fradio_registers$T3CTL$0$0 == 0x00cb
+                    00CB    146 _T3CTL	=	0x00cb
+                    00CC    147 Fradio_registers$T3CCTL0$0$0 == 0x00cc
+                    00CC    148 _T3CCTL0	=	0x00cc
+                    00CD    149 Fradio_registers$T3CC0$0$0 == 0x00cd
+                    00CD    150 _T3CC0	=	0x00cd
+                    00CE    151 Fradio_registers$T3CCTL1$0$0 == 0x00ce
+                    00CE    152 _T3CCTL1	=	0x00ce
+                    00CF    153 Fradio_registers$T3CC1$0$0 == 0x00cf
+                    00CF    154 _T3CC1	=	0x00cf
+                    00D0    155 Fradio_registers$PSW$0$0 == 0x00d0
+                    00D0    156 _PSW	=	0x00d0
+                    00D1    157 Fradio_registers$DMAIRQ$0$0 == 0x00d1
+                    00D1    158 _DMAIRQ	=	0x00d1
+                    00D2    159 Fradio_registers$DMA1CFGL$0$0 == 0x00d2
+                    00D2    160 _DMA1CFGL	=	0x00d2
+                    00D3    161 Fradio_registers$DMA1CFGH$0$0 == 0x00d3
+                    00D3    162 _DMA1CFGH	=	0x00d3
+                    00D4    163 Fradio_registers$DMA0CFGL$0$0 == 0x00d4
+                    00D4    164 _DMA0CFGL	=	0x00d4
+                    00D5    165 Fradio_registers$DMA0CFGH$0$0 == 0x00d5
+                    00D5    166 _DMA0CFGH	=	0x00d5
+                    00D6    167 Fradio_registers$DMAARM$0$0 == 0x00d6
+                    00D6    168 _DMAARM	=	0x00d6
+                    00D7    169 Fradio_registers$DMAREQ$0$0 == 0x00d7
+                    00D7    170 _DMAREQ	=	0x00d7
+                    00D8    171 Fradio_registers$TIMIF$0$0 == 0x00d8
+                    00D8    172 _TIMIF	=	0x00d8
+                    00D9    173 Fradio_registers$RFD$0$0 == 0x00d9
+                    00D9    174 _RFD	=	0x00d9
+                    00DA    175 Fradio_registers$T1CC0L$0$0 == 0x00da
+                    00DA    176 _T1CC0L	=	0x00da
+                    00DB    177 Fradio_registers$T1CC0H$0$0 == 0x00db
+                    00DB    178 _T1CC0H	=	0x00db
+                    00DC    179 Fradio_registers$T1CC1L$0$0 == 0x00dc
+                    00DC    180 _T1CC1L	=	0x00dc
+                    00DD    181 Fradio_registers$T1CC1H$0$0 == 0x00dd
+                    00DD    182 _T1CC1H	=	0x00dd
+                    00DE    183 Fradio_registers$T1CC2L$0$0 == 0x00de
+                    00DE    184 _T1CC2L	=	0x00de
+                    00DF    185 Fradio_registers$T1CC2H$0$0 == 0x00df
+                    00DF    186 _T1CC2H	=	0x00df
+                    00E0    187 Fradio_registers$ACC$0$0 == 0x00e0
+                    00E0    188 _ACC	=	0x00e0
+                    00E1    189 Fradio_registers$RFST$0$0 == 0x00e1
+                    00E1    190 _RFST	=	0x00e1
+                    00E2    191 Fradio_registers$T1CNTL$0$0 == 0x00e2
+                    00E2    192 _T1CNTL	=	0x00e2
+                    00E3    193 Fradio_registers$T1CNTH$0$0 == 0x00e3
+                    00E3    194 _T1CNTH	=	0x00e3
+                    00E4    195 Fradio_registers$T1CTL$0$0 == 0x00e4
+                    00E4    196 _T1CTL	=	0x00e4
+                    00E5    197 Fradio_registers$T1CCTL0$0$0 == 0x00e5
+                    00E5    198 _T1CCTL0	=	0x00e5
+                    00E6    199 Fradio_registers$T1CCTL1$0$0 == 0x00e6
+                    00E6    200 _T1CCTL1	=	0x00e6
+                    00E7    201 Fradio_registers$T1CCTL2$0$0 == 0x00e7
+                    00E7    202 _T1CCTL2	=	0x00e7
+                    00E8    203 Fradio_registers$IRCON2$0$0 == 0x00e8
+                    00E8    204 _IRCON2	=	0x00e8
+                    00E9    205 Fradio_registers$RFIF$0$0 == 0x00e9
+                    00E9    206 _RFIF	=	0x00e9
+                    00EA    207 Fradio_registers$T4CNT$0$0 == 0x00ea
+                    00EA    208 _T4CNT	=	0x00ea
+                    00EB    209 Fradio_registers$T4CTL$0$0 == 0x00eb
+                    00EB    210 _T4CTL	=	0x00eb
+                    00EC    211 Fradio_registers$T4CCTL0$0$0 == 0x00ec
+                    00EC    212 _T4CCTL0	=	0x00ec
+                    00ED    213 Fradio_registers$T4CC0$0$0 == 0x00ed
+                    00ED    214 _T4CC0	=	0x00ed
+                    00EE    215 Fradio_registers$T4CCTL1$0$0 == 0x00ee
+                    00EE    216 _T4CCTL1	=	0x00ee
+                    00EF    217 Fradio_registers$T4CC1$0$0 == 0x00ef
+                    00EF    218 _T4CC1	=	0x00ef
+                    00F0    219 Fradio_registers$B$0$0 == 0x00f0
+                    00F0    220 _B	=	0x00f0
+                    00F1    221 Fradio_registers$PERCFG$0$0 == 0x00f1
+                    00F1    222 _PERCFG	=	0x00f1
+                    00F2    223 Fradio_registers$ADCCFG$0$0 == 0x00f2
+                    00F2    224 _ADCCFG	=	0x00f2
+                    00F3    225 Fradio_registers$P0SEL$0$0 == 0x00f3
+                    00F3    226 _P0SEL	=	0x00f3
+                    00F4    227 Fradio_registers$P1SEL$0$0 == 0x00f4
+                    00F4    228 _P1SEL	=	0x00f4
+                    00F5    229 Fradio_registers$P2SEL$0$0 == 0x00f5
+                    00F5    230 _P2SEL	=	0x00f5
+                    00F6    231 Fradio_registers$P1INP$0$0 == 0x00f6
+                    00F6    232 _P1INP	=	0x00f6
+                    00F7    233 Fradio_registers$P2INP$0$0 == 0x00f7
+                    00F7    234 _P2INP	=	0x00f7
+                    00F8    235 Fradio_registers$U1CSR$0$0 == 0x00f8
+                    00F8    236 _U1CSR	=	0x00f8
+                    00F9    237 Fradio_registers$U1DBUF$0$0 == 0x00f9
+                    00F9    238 _U1DBUF	=	0x00f9
+                    00FA    239 Fradio_registers$U1BAUD$0$0 == 0x00fa
+                    00FA    240 _U1BAUD	=	0x00fa
+                    00FB    241 Fradio_registers$U1UCR$0$0 == 0x00fb
+                    00FB    242 _U1UCR	=	0x00fb
+                    00FC    243 Fradio_registers$U1GCR$0$0 == 0x00fc
+                    00FC    244 _U1GCR	=	0x00fc
+                    00FD    245 Fradio_registers$P0DIR$0$0 == 0x00fd
+                    00FD    246 _P0DIR	=	0x00fd
+                    00FE    247 Fradio_registers$P1DIR$0$0 == 0x00fe
+                    00FE    248 _P1DIR	=	0x00fe
+                    00FF    249 Fradio_registers$P2DIR$0$0 == 0x00ff
+                    00FF    250 _P2DIR	=	0x00ff
+                    FFFFD5D4    251 Fradio_registers$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    252 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    253 Fradio_registers$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    254 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    255 Fradio_registers$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    256 _FADDR	=	0xffffadac
+                    FFFFBBBA    257 Fradio_registers$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    258 _ADC	=	0xffffbbba
+                    FFFFDBDA    259 Fradio_registers$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    260 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    261 Fradio_registers$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    262 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    263 Fradio_registers$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    264 _T1CC2	=	0xffffdfde
+                            265 ;--------------------------------------------------------
+                            266 ; special function bits
+                            267 ;--------------------------------------------------------
+                            268 	.area RSEG    (ABS,DATA)
+   0000                     269 	.org 0x0000
+                    0080    270 Fradio_registers$P0_0$0$0 == 0x0080
+                    0080    271 _P0_0	=	0x0080
+                    0081    272 Fradio_registers$P0_1$0$0 == 0x0081
+                    0081    273 _P0_1	=	0x0081
+                    0082    274 Fradio_registers$P0_2$0$0 == 0x0082
+                    0082    275 _P0_2	=	0x0082
+                    0083    276 Fradio_registers$P0_3$0$0 == 0x0083
+                    0083    277 _P0_3	=	0x0083
+                    0084    278 Fradio_registers$P0_4$0$0 == 0x0084
+                    0084    279 _P0_4	=	0x0084
+                    0085    280 Fradio_registers$P0_5$0$0 == 0x0085
+                    0085    281 _P0_5	=	0x0085
+                    0086    282 Fradio_registers$P0_6$0$0 == 0x0086
+                    0086    283 _P0_6	=	0x0086
+                    0087    284 Fradio_registers$P0_7$0$0 == 0x0087
+                    0087    285 _P0_7	=	0x0087
+                    0088    286 Fradio_registers$_TCON_0$0$0 == 0x0088
+                    0088    287 __TCON_0	=	0x0088
+                    0089    288 Fradio_registers$RFTXRXIF$0$0 == 0x0089
+                    0089    289 _RFTXRXIF	=	0x0089
+                    008A    290 Fradio_registers$_TCON_2$0$0 == 0x008a
+                    008A    291 __TCON_2	=	0x008a
+                    008B    292 Fradio_registers$URX0IF$0$0 == 0x008b
+                    008B    293 _URX0IF	=	0x008b
+                    008C    294 Fradio_registers$_TCON_4$0$0 == 0x008c
+                    008C    295 __TCON_4	=	0x008c
+                    008D    296 Fradio_registers$ADCIF$0$0 == 0x008d
+                    008D    297 _ADCIF	=	0x008d
+                    008E    298 Fradio_registers$_TCON_6$0$0 == 0x008e
+                    008E    299 __TCON_6	=	0x008e
+                    008F    300 Fradio_registers$URX1IF$0$0 == 0x008f
+                    008F    301 _URX1IF	=	0x008f
+                    0090    302 Fradio_registers$P1_0$0$0 == 0x0090
+                    0090    303 _P1_0	=	0x0090
+                    0091    304 Fradio_registers$P1_1$0$0 == 0x0091
+                    0091    305 _P1_1	=	0x0091
+                    0092    306 Fradio_registers$P1_2$0$0 == 0x0092
+                    0092    307 _P1_2	=	0x0092
+                    0093    308 Fradio_registers$P1_3$0$0 == 0x0093
+                    0093    309 _P1_3	=	0x0093
+                    0094    310 Fradio_registers$P1_4$0$0 == 0x0094
+                    0094    311 _P1_4	=	0x0094
+                    0095    312 Fradio_registers$P1_5$0$0 == 0x0095
+                    0095    313 _P1_5	=	0x0095
+                    0096    314 Fradio_registers$P1_6$0$0 == 0x0096
+                    0096    315 _P1_6	=	0x0096
+                    0097    316 Fradio_registers$P1_7$0$0 == 0x0097
+                    0097    317 _P1_7	=	0x0097
+                    0098    318 Fradio_registers$ENCIF_0$0$0 == 0x0098
+                    0098    319 _ENCIF_0	=	0x0098
+                    0099    320 Fradio_registers$ENCIF_1$0$0 == 0x0099
+                    0099    321 _ENCIF_1	=	0x0099
+                    009A    322 Fradio_registers$_SOCON2$0$0 == 0x009a
+                    009A    323 __SOCON2	=	0x009a
+                    009B    324 Fradio_registers$_SOCON3$0$0 == 0x009b
+                    009B    325 __SOCON3	=	0x009b
+                    009C    326 Fradio_registers$_SOCON4$0$0 == 0x009c
+                    009C    327 __SOCON4	=	0x009c
+                    009D    328 Fradio_registers$_SOCON5$0$0 == 0x009d
+                    009D    329 __SOCON5	=	0x009d
+                    009E    330 Fradio_registers$_SOCON6$0$0 == 0x009e
+                    009E    331 __SOCON6	=	0x009e
+                    009F    332 Fradio_registers$_SOCON7$0$0 == 0x009f
+                    009F    333 __SOCON7	=	0x009f
+                    00A0    334 Fradio_registers$P2_0$0$0 == 0x00a0
+                    00A0    335 _P2_0	=	0x00a0
+                    00A1    336 Fradio_registers$P2_1$0$0 == 0x00a1
+                    00A1    337 _P2_1	=	0x00a1
+                    00A2    338 Fradio_registers$P2_2$0$0 == 0x00a2
+                    00A2    339 _P2_2	=	0x00a2
+                    00A3    340 Fradio_registers$P2_3$0$0 == 0x00a3
+                    00A3    341 _P2_3	=	0x00a3
+                    00A4    342 Fradio_registers$P2_4$0$0 == 0x00a4
+                    00A4    343 _P2_4	=	0x00a4
+                    00A5    344 Fradio_registers$P2_5$0$0 == 0x00a5
+                    00A5    345 _P2_5	=	0x00a5
+                    00A6    346 Fradio_registers$P2_6$0$0 == 0x00a6
+                    00A6    347 _P2_6	=	0x00a6
+                    00A7    348 Fradio_registers$P2_7$0$0 == 0x00a7
+                    00A7    349 _P2_7	=	0x00a7
+                    00A8    350 Fradio_registers$RFTXRXIE$0$0 == 0x00a8
+                    00A8    351 _RFTXRXIE	=	0x00a8
+                    00A9    352 Fradio_registers$ADCIE$0$0 == 0x00a9
+                    00A9    353 _ADCIE	=	0x00a9
+                    00AA    354 Fradio_registers$URX0IE$0$0 == 0x00aa
+                    00AA    355 _URX0IE	=	0x00aa
+                    00AB    356 Fradio_registers$URX1IE$0$0 == 0x00ab
+                    00AB    357 _URX1IE	=	0x00ab
+                    00AC    358 Fradio_registers$ENCIE$0$0 == 0x00ac
+                    00AC    359 _ENCIE	=	0x00ac
+                    00AD    360 Fradio_registers$STIE$0$0 == 0x00ad
+                    00AD    361 _STIE	=	0x00ad
+                    00AE    362 Fradio_registers$_IEN06$0$0 == 0x00ae
+                    00AE    363 __IEN06	=	0x00ae
+                    00AF    364 Fradio_registers$EA$0$0 == 0x00af
+                    00AF    365 _EA	=	0x00af
+                    00B8    366 Fradio_registers$DMAIE$0$0 == 0x00b8
+                    00B8    367 _DMAIE	=	0x00b8
+                    00B9    368 Fradio_registers$T1IE$0$0 == 0x00b9
+                    00B9    369 _T1IE	=	0x00b9
+                    00BA    370 Fradio_registers$T2IE$0$0 == 0x00ba
+                    00BA    371 _T2IE	=	0x00ba
+                    00BB    372 Fradio_registers$T3IE$0$0 == 0x00bb
+                    00BB    373 _T3IE	=	0x00bb
+                    00BC    374 Fradio_registers$T4IE$0$0 == 0x00bc
+                    00BC    375 _T4IE	=	0x00bc
+                    00BD    376 Fradio_registers$P0IE$0$0 == 0x00bd
+                    00BD    377 _P0IE	=	0x00bd
+                    00BE    378 Fradio_registers$_IEN16$0$0 == 0x00be
+                    00BE    379 __IEN16	=	0x00be
+                    00BF    380 Fradio_registers$_IEN17$0$0 == 0x00bf
+                    00BF    381 __IEN17	=	0x00bf
+                    00C0    382 Fradio_registers$DMAIF$0$0 == 0x00c0
+                    00C0    383 _DMAIF	=	0x00c0
+                    00C1    384 Fradio_registers$T1IF$0$0 == 0x00c1
+                    00C1    385 _T1IF	=	0x00c1
+                    00C2    386 Fradio_registers$T2IF$0$0 == 0x00c2
+                    00C2    387 _T2IF	=	0x00c2
+                    00C3    388 Fradio_registers$T3IF$0$0 == 0x00c3
+                    00C3    389 _T3IF	=	0x00c3
+                    00C4    390 Fradio_registers$T4IF$0$0 == 0x00c4
+                    00C4    391 _T4IF	=	0x00c4
+                    00C5    392 Fradio_registers$P0IF$0$0 == 0x00c5
+                    00C5    393 _P0IF	=	0x00c5
+                    00C6    394 Fradio_registers$_IRCON6$0$0 == 0x00c6
+                    00C6    395 __IRCON6	=	0x00c6
+                    00C7    396 Fradio_registers$STIF$0$0 == 0x00c7
+                    00C7    397 _STIF	=	0x00c7
+                    00D0    398 Fradio_registers$P$0$0 == 0x00d0
+                    00D0    399 _P	=	0x00d0
+                    00D1    400 Fradio_registers$F1$0$0 == 0x00d1
+                    00D1    401 _F1	=	0x00d1
+                    00D2    402 Fradio_registers$OV$0$0 == 0x00d2
+                    00D2    403 _OV	=	0x00d2
+                    00D3    404 Fradio_registers$RS0$0$0 == 0x00d3
+                    00D3    405 _RS0	=	0x00d3
+                    00D4    406 Fradio_registers$RS1$0$0 == 0x00d4
+                    00D4    407 _RS1	=	0x00d4
+                    00D5    408 Fradio_registers$F0$0$0 == 0x00d5
+                    00D5    409 _F0	=	0x00d5
+                    00D6    410 Fradio_registers$AC$0$0 == 0x00d6
+                    00D6    411 _AC	=	0x00d6
+                    00D7    412 Fradio_registers$CY$0$0 == 0x00d7
+                    00D7    413 _CY	=	0x00d7
+                    00D8    414 Fradio_registers$T3OVFIF$0$0 == 0x00d8
+                    00D8    415 _T3OVFIF	=	0x00d8
+                    00D9    416 Fradio_registers$T3CH0IF$0$0 == 0x00d9
+                    00D9    417 _T3CH0IF	=	0x00d9
+                    00DA    418 Fradio_registers$T3CH1IF$0$0 == 0x00da
+                    00DA    419 _T3CH1IF	=	0x00da
+                    00DB    420 Fradio_registers$T4OVFIF$0$0 == 0x00db
+                    00DB    421 _T4OVFIF	=	0x00db
+                    00DC    422 Fradio_registers$T4CH0IF$0$0 == 0x00dc
+                    00DC    423 _T4CH0IF	=	0x00dc
+                    00DD    424 Fradio_registers$T4CH1IF$0$0 == 0x00dd
+                    00DD    425 _T4CH1IF	=	0x00dd
+                    00DE    426 Fradio_registers$OVFIM$0$0 == 0x00de
+                    00DE    427 _OVFIM	=	0x00de
+                    00DF    428 Fradio_registers$_TIMIF7$0$0 == 0x00df
+                    00DF    429 __TIMIF7	=	0x00df
+                    00E0    430 Fradio_registers$ACC_0$0$0 == 0x00e0
+                    00E0    431 _ACC_0	=	0x00e0
+                    00E1    432 Fradio_registers$ACC_1$0$0 == 0x00e1
+                    00E1    433 _ACC_1	=	0x00e1
+                    00E2    434 Fradio_registers$ACC_2$0$0 == 0x00e2
+                    00E2    435 _ACC_2	=	0x00e2
+                    00E3    436 Fradio_registers$ACC_3$0$0 == 0x00e3
+                    00E3    437 _ACC_3	=	0x00e3
+                    00E4    438 Fradio_registers$ACC_4$0$0 == 0x00e4
+                    00E4    439 _ACC_4	=	0x00e4
+                    00E5    440 Fradio_registers$ACC_5$0$0 == 0x00e5
+                    00E5    441 _ACC_5	=	0x00e5
+                    00E6    442 Fradio_registers$ACC_6$0$0 == 0x00e6
+                    00E6    443 _ACC_6	=	0x00e6
+                    00E7    444 Fradio_registers$ACC_7$0$0 == 0x00e7
+                    00E7    445 _ACC_7	=	0x00e7
+                    00E8    446 Fradio_registers$P2IF$0$0 == 0x00e8
+                    00E8    447 _P2IF	=	0x00e8
+                    00E9    448 Fradio_registers$UTX0IF$0$0 == 0x00e9
+                    00E9    449 _UTX0IF	=	0x00e9
+                    00EA    450 Fradio_registers$UTX1IF$0$0 == 0x00ea
+                    00EA    451 _UTX1IF	=	0x00ea
+                    00EB    452 Fradio_registers$P1IF$0$0 == 0x00eb
+                    00EB    453 _P1IF	=	0x00eb
+                    00EC    454 Fradio_registers$WDTIF$0$0 == 0x00ec
+                    00EC    455 _WDTIF	=	0x00ec
+                    00ED    456 Fradio_registers$_IRCON25$0$0 == 0x00ed
+                    00ED    457 __IRCON25	=	0x00ed
+                    00EE    458 Fradio_registers$_IRCON26$0$0 == 0x00ee
+                    00EE    459 __IRCON26	=	0x00ee
+                    00EF    460 Fradio_registers$_IRCON27$0$0 == 0x00ef
+                    00EF    461 __IRCON27	=	0x00ef
+                    00F0    462 Fradio_registers$B_0$0$0 == 0x00f0
+                    00F0    463 _B_0	=	0x00f0
+                    00F1    464 Fradio_registers$B_1$0$0 == 0x00f1
+                    00F1    465 _B_1	=	0x00f1
+                    00F2    466 Fradio_registers$B_2$0$0 == 0x00f2
+                    00F2    467 _B_2	=	0x00f2
+                    00F3    468 Fradio_registers$B_3$0$0 == 0x00f3
+                    00F3    469 _B_3	=	0x00f3
+                    00F4    470 Fradio_registers$B_4$0$0 == 0x00f4
+                    00F4    471 _B_4	=	0x00f4
+                    00F5    472 Fradio_registers$B_5$0$0 == 0x00f5
+                    00F5    473 _B_5	=	0x00f5
+                    00F6    474 Fradio_registers$B_6$0$0 == 0x00f6
+                    00F6    475 _B_6	=	0x00f6
+                    00F7    476 Fradio_registers$B_7$0$0 == 0x00f7
+                    00F7    477 _B_7	=	0x00f7
+                    00F8    478 Fradio_registers$U1ACTIVE$0$0 == 0x00f8
+                    00F8    479 _U1ACTIVE	=	0x00f8
+                    00F9    480 Fradio_registers$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    481 _U1TX_BYTE	=	0x00f9
+                    00FA    482 Fradio_registers$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    483 _U1RX_BYTE	=	0x00fa
+                    00FB    484 Fradio_registers$U1ERR$0$0 == 0x00fb
+                    00FB    485 _U1ERR	=	0x00fb
+                    00FC    486 Fradio_registers$U1FE$0$0 == 0x00fc
+                    00FC    487 _U1FE	=	0x00fc
+                    00FD    488 Fradio_registers$U1SLAVE$0$0 == 0x00fd
+                    00FD    489 _U1SLAVE	=	0x00fd
+                    00FE    490 Fradio_registers$U1RE$0$0 == 0x00fe
+                    00FE    491 _U1RE	=	0x00fe
+                    00FF    492 Fradio_registers$U1MODE$0$0 == 0x00ff
+                    00FF    493 _U1MODE	=	0x00ff
+                            494 ;--------------------------------------------------------
+                            495 ; overlayable register banks
+                            496 ;--------------------------------------------------------
+                            497 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     498 	.ds 8
+                            499 ;--------------------------------------------------------
+                            500 ; internal ram data
+                            501 ;--------------------------------------------------------
+                            502 	.area DSEG    (DATA)
+                            503 ;--------------------------------------------------------
+                            504 ; overlayable items in internal ram 
+                            505 ;--------------------------------------------------------
+                            506 	.area OSEG    (OVR,DATA)
+                            507 ;--------------------------------------------------------
+                            508 ; indirectly addressable internal ram data
+                            509 ;--------------------------------------------------------
+                            510 	.area ISEG    (DATA)
+                            511 ;--------------------------------------------------------
+                            512 ; absolute internal ram data
+                            513 ;--------------------------------------------------------
+                            514 	.area IABS    (ABS,DATA)
+                            515 	.area IABS    (ABS,DATA)
+                            516 ;--------------------------------------------------------
+                            517 ; bit data
+                            518 ;--------------------------------------------------------
+                            519 	.area BSEG    (BIT)
+                            520 ;--------------------------------------------------------
+                            521 ; paged external ram data
+                            522 ;--------------------------------------------------------
+                            523 	.area PSEG    (PAG,XDATA)
+                            524 ;--------------------------------------------------------
+                            525 ; external ram data
+                            526 ;--------------------------------------------------------
+                            527 	.area XSEG    (XDATA)
+                    DF00    528 Fradio_registers$SYNC1$0$0 == 0xdf00
+                    DF00    529 _SYNC1	=	0xdf00
+                    DF01    530 Fradio_registers$SYNC0$0$0 == 0xdf01
+                    DF01    531 _SYNC0	=	0xdf01
+                    DF02    532 Fradio_registers$PKTLEN$0$0 == 0xdf02
+                    DF02    533 _PKTLEN	=	0xdf02
+                    DF03    534 Fradio_registers$PKTCTRL1$0$0 == 0xdf03
+                    DF03    535 _PKTCTRL1	=	0xdf03
+                    DF04    536 Fradio_registers$PKTCTRL0$0$0 == 0xdf04
+                    DF04    537 _PKTCTRL0	=	0xdf04
+                    DF05    538 Fradio_registers$ADDR$0$0 == 0xdf05
+                    DF05    539 _ADDR	=	0xdf05
+                    DF06    540 Fradio_registers$CHANNR$0$0 == 0xdf06
+                    DF06    541 _CHANNR	=	0xdf06
+                    DF07    542 Fradio_registers$FSCTRL1$0$0 == 0xdf07
+                    DF07    543 _FSCTRL1	=	0xdf07
+                    DF08    544 Fradio_registers$FSCTRL0$0$0 == 0xdf08
+                    DF08    545 _FSCTRL0	=	0xdf08
+                    DF09    546 Fradio_registers$FREQ2$0$0 == 0xdf09
+                    DF09    547 _FREQ2	=	0xdf09
+                    DF0A    548 Fradio_registers$FREQ1$0$0 == 0xdf0a
+                    DF0A    549 _FREQ1	=	0xdf0a
+                    DF0B    550 Fradio_registers$FREQ0$0$0 == 0xdf0b
+                    DF0B    551 _FREQ0	=	0xdf0b
+                    DF0C    552 Fradio_registers$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    553 _MDMCFG4	=	0xdf0c
+                    DF0D    554 Fradio_registers$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    555 _MDMCFG3	=	0xdf0d
+                    DF0E    556 Fradio_registers$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    557 _MDMCFG2	=	0xdf0e
+                    DF0F    558 Fradio_registers$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    559 _MDMCFG1	=	0xdf0f
+                    DF10    560 Fradio_registers$MDMCFG0$0$0 == 0xdf10
+                    DF10    561 _MDMCFG0	=	0xdf10
+                    DF11    562 Fradio_registers$DEVIATN$0$0 == 0xdf11
+                    DF11    563 _DEVIATN	=	0xdf11
+                    DF12    564 Fradio_registers$MCSM2$0$0 == 0xdf12
+                    DF12    565 _MCSM2	=	0xdf12
+                    DF13    566 Fradio_registers$MCSM1$0$0 == 0xdf13
+                    DF13    567 _MCSM1	=	0xdf13
+                    DF14    568 Fradio_registers$MCSM0$0$0 == 0xdf14
+                    DF14    569 _MCSM0	=	0xdf14
+                    DF15    570 Fradio_registers$FOCCFG$0$0 == 0xdf15
+                    DF15    571 _FOCCFG	=	0xdf15
+                    DF16    572 Fradio_registers$BSCFG$0$0 == 0xdf16
+                    DF16    573 _BSCFG	=	0xdf16
+                    DF17    574 Fradio_registers$AGCCTRL2$0$0 == 0xdf17
+                    DF17    575 _AGCCTRL2	=	0xdf17
+                    DF18    576 Fradio_registers$AGCCTRL1$0$0 == 0xdf18
+                    DF18    577 _AGCCTRL1	=	0xdf18
+                    DF19    578 Fradio_registers$AGCCTRL0$0$0 == 0xdf19
+                    DF19    579 _AGCCTRL0	=	0xdf19
+                    DF1A    580 Fradio_registers$FREND1$0$0 == 0xdf1a
+                    DF1A    581 _FREND1	=	0xdf1a
+                    DF1B    582 Fradio_registers$FREND0$0$0 == 0xdf1b
+                    DF1B    583 _FREND0	=	0xdf1b
+                    DF1C    584 Fradio_registers$FSCAL3$0$0 == 0xdf1c
+                    DF1C    585 _FSCAL3	=	0xdf1c
+                    DF1D    586 Fradio_registers$FSCAL2$0$0 == 0xdf1d
+                    DF1D    587 _FSCAL2	=	0xdf1d
+                    DF1E    588 Fradio_registers$FSCAL1$0$0 == 0xdf1e
+                    DF1E    589 _FSCAL1	=	0xdf1e
+                    DF1F    590 Fradio_registers$FSCAL0$0$0 == 0xdf1f
+                    DF1F    591 _FSCAL0	=	0xdf1f
+                    DF23    592 Fradio_registers$TEST2$0$0 == 0xdf23
+                    DF23    593 _TEST2	=	0xdf23
+                    DF24    594 Fradio_registers$TEST1$0$0 == 0xdf24
+                    DF24    595 _TEST1	=	0xdf24
+                    DF25    596 Fradio_registers$TEST0$0$0 == 0xdf25
+                    DF25    597 _TEST0	=	0xdf25
+                    DF2E    598 Fradio_registers$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    599 _PA_TABLE0	=	0xdf2e
+                    DF2F    600 Fradio_registers$IOCFG2$0$0 == 0xdf2f
+                    DF2F    601 _IOCFG2	=	0xdf2f
+                    DF30    602 Fradio_registers$IOCFG1$0$0 == 0xdf30
+                    DF30    603 _IOCFG1	=	0xdf30
+                    DF31    604 Fradio_registers$IOCFG0$0$0 == 0xdf31
+                    DF31    605 _IOCFG0	=	0xdf31
+                    DF36    606 Fradio_registers$PARTNUM$0$0 == 0xdf36
+                    DF36    607 _PARTNUM	=	0xdf36
+                    DF37    608 Fradio_registers$VERSION$0$0 == 0xdf37
+                    DF37    609 _VERSION	=	0xdf37
+                    DF38    610 Fradio_registers$FREQEST$0$0 == 0xdf38
+                    DF38    611 _FREQEST	=	0xdf38
+                    DF39    612 Fradio_registers$LQI$0$0 == 0xdf39
+                    DF39    613 _LQI	=	0xdf39
+                    DF3A    614 Fradio_registers$RSSI$0$0 == 0xdf3a
+                    DF3A    615 _RSSI	=	0xdf3a
+                    DF3B    616 Fradio_registers$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    617 _MARCSTATE	=	0xdf3b
+                    DF3C    618 Fradio_registers$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    619 _PKTSTATUS	=	0xdf3c
+                    DF3D    620 Fradio_registers$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    621 _VCO_VC_DAC	=	0xdf3d
+                    DF40    622 Fradio_registers$I2SCFG0$0$0 == 0xdf40
+                    DF40    623 _I2SCFG0	=	0xdf40
+                    DF41    624 Fradio_registers$I2SCFG1$0$0 == 0xdf41
+                    DF41    625 _I2SCFG1	=	0xdf41
+                    DF42    626 Fradio_registers$I2SDATL$0$0 == 0xdf42
+                    DF42    627 _I2SDATL	=	0xdf42
+                    DF43    628 Fradio_registers$I2SDATH$0$0 == 0xdf43
+                    DF43    629 _I2SDATH	=	0xdf43
+                    DF44    630 Fradio_registers$I2SWCNT$0$0 == 0xdf44
+                    DF44    631 _I2SWCNT	=	0xdf44
+                    DF45    632 Fradio_registers$I2SSTAT$0$0 == 0xdf45
+                    DF45    633 _I2SSTAT	=	0xdf45
+                    DF46    634 Fradio_registers$I2SCLKF0$0$0 == 0xdf46
+                    DF46    635 _I2SCLKF0	=	0xdf46
+                    DF47    636 Fradio_registers$I2SCLKF1$0$0 == 0xdf47
+                    DF47    637 _I2SCLKF1	=	0xdf47
+                    DF48    638 Fradio_registers$I2SCLKF2$0$0 == 0xdf48
+                    DF48    639 _I2SCLKF2	=	0xdf48
+                    DE00    640 Fradio_registers$USBADDR$0$0 == 0xde00
+                    DE00    641 _USBADDR	=	0xde00
+                    DE01    642 Fradio_registers$USBPOW$0$0 == 0xde01
+                    DE01    643 _USBPOW	=	0xde01
+                    DE02    644 Fradio_registers$USBIIF$0$0 == 0xde02
+                    DE02    645 _USBIIF	=	0xde02
+                    DE04    646 Fradio_registers$USBOIF$0$0 == 0xde04
+                    DE04    647 _USBOIF	=	0xde04
+                    DE06    648 Fradio_registers$USBCIF$0$0 == 0xde06
+                    DE06    649 _USBCIF	=	0xde06
+                    DE07    650 Fradio_registers$USBIIE$0$0 == 0xde07
+                    DE07    651 _USBIIE	=	0xde07
+                    DE09    652 Fradio_registers$USBOIE$0$0 == 0xde09
+                    DE09    653 _USBOIE	=	0xde09
+                    DE0B    654 Fradio_registers$USBCIE$0$0 == 0xde0b
+                    DE0B    655 _USBCIE	=	0xde0b
+                    DE0C    656 Fradio_registers$USBFRML$0$0 == 0xde0c
+                    DE0C    657 _USBFRML	=	0xde0c
+                    DE0D    658 Fradio_registers$USBFRMH$0$0 == 0xde0d
+                    DE0D    659 _USBFRMH	=	0xde0d
+                    DE0E    660 Fradio_registers$USBINDEX$0$0 == 0xde0e
+                    DE0E    661 _USBINDEX	=	0xde0e
+                    DE10    662 Fradio_registers$USBMAXI$0$0 == 0xde10
+                    DE10    663 _USBMAXI	=	0xde10
+                    DE11    664 Fradio_registers$USBCSIL$0$0 == 0xde11
+                    DE11    665 _USBCSIL	=	0xde11
+                    DE12    666 Fradio_registers$USBCSIH$0$0 == 0xde12
+                    DE12    667 _USBCSIH	=	0xde12
+                    DE13    668 Fradio_registers$USBMAXO$0$0 == 0xde13
+                    DE13    669 _USBMAXO	=	0xde13
+                    DE14    670 Fradio_registers$USBCSOL$0$0 == 0xde14
+                    DE14    671 _USBCSOL	=	0xde14
+                    DE15    672 Fradio_registers$USBCSOH$0$0 == 0xde15
+                    DE15    673 _USBCSOH	=	0xde15
+                    DE16    674 Fradio_registers$USBCNTL$0$0 == 0xde16
+                    DE16    675 _USBCNTL	=	0xde16
+                    DE17    676 Fradio_registers$USBCNTH$0$0 == 0xde17
+                    DE17    677 _USBCNTH	=	0xde17
+                    DE20    678 Fradio_registers$USBF0$0$0 == 0xde20
+                    DE20    679 _USBF0	=	0xde20
+                    DE22    680 Fradio_registers$USBF1$0$0 == 0xde22
+                    DE22    681 _USBF1	=	0xde22
+                    DE24    682 Fradio_registers$USBF2$0$0 == 0xde24
+                    DE24    683 _USBF2	=	0xde24
+                    DE26    684 Fradio_registers$USBF3$0$0 == 0xde26
+                    DE26    685 _USBF3	=	0xde26
+                    DE28    686 Fradio_registers$USBF4$0$0 == 0xde28
+                    DE28    687 _USBF4	=	0xde28
+                    DE2A    688 Fradio_registers$USBF5$0$0 == 0xde2a
+                    DE2A    689 _USBF5	=	0xde2a
+                            690 ;--------------------------------------------------------
+                            691 ; absolute external ram data
+                            692 ;--------------------------------------------------------
+                            693 	.area XABS    (ABS,XDATA)
+                            694 ;--------------------------------------------------------
+                            695 ; external initialized ram data
+                            696 ;--------------------------------------------------------
+                            697 	.area XISEG   (XDATA)
+                            698 	.area HOME    (CODE)
+                            699 	.area GSINIT0 (CODE)
+                            700 	.area GSINIT1 (CODE)
+                            701 	.area GSINIT2 (CODE)
+                            702 	.area GSINIT3 (CODE)
+                            703 	.area GSINIT4 (CODE)
+                            704 	.area GSINIT5 (CODE)
+                            705 	.area GSINIT  (CODE)
+                            706 	.area GSFINAL (CODE)
+                            707 	.area CSEG    (CODE)
+                            708 ;--------------------------------------------------------
+                            709 ; global & static initialisations
+                            710 ;--------------------------------------------------------
+                            711 	.area HOME    (CODE)
+                            712 	.area GSINIT  (CODE)
+                            713 	.area GSFINAL (CODE)
+                            714 	.area GSINIT  (CODE)
+                            715 ;--------------------------------------------------------
+                            716 ; Home
+                            717 ;--------------------------------------------------------
+                            718 	.area HOME    (CODE)
+                            719 	.area HOME    (CODE)
+                            720 ;--------------------------------------------------------
+                            721 ; code
+                            722 ;--------------------------------------------------------
+                            723 	.area CSEG    (CODE)
+                            724 ;------------------------------------------------------------
+                            725 ;Allocation info for local variables in function 'radioRegistersInit'
+                            726 ;------------------------------------------------------------
+                    0000    727 	G$radioRegistersInit$0$0 ==.
+                    0000    728 	C$radio_registers.c$4$0$0 ==.
+                            729 ;	libraries/src/radio_registers/radio_registers.c:4: void radioRegistersInit()
+                            730 ;	-----------------------------------------
+                            731 ;	 function radioRegistersInit
+                            732 ;	-----------------------------------------
+   0000                     733 _radioRegistersInit:
+                    0007    734 	ar7 = 0x07
+                    0006    735 	ar6 = 0x06
+                    0005    736 	ar5 = 0x05
+                    0004    737 	ar4 = 0x04
+                    0003    738 	ar3 = 0x03
+                    0002    739 	ar2 = 0x02
+                    0001    740 	ar1 = 0x01
+                    0000    741 	ar0 = 0x00
+                    0000    742 	C$radio_registers.c$8$1$1 ==.
+                            743 ;	libraries/src/radio_registers/radio_registers.c:8: IOCFG0   =0x0E;
+   0000 90 DF 31            744 	mov	dptr,#_IOCFG0
+   0003 74 0E               745 	mov	a,#0x0E
+   0005 F0                  746 	movx	@dptr,a
+                    0006    747 	C$radio_registers.c$9$1$1 ==.
+                            748 ;	libraries/src/radio_registers/radio_registers.c:9: CHANNR   =0x00;
+   0006 90 DF 06            749 	mov	dptr,#_CHANNR
+   0009 E4                  750 	clr	a
+   000A F0                  751 	movx	@dptr,a
+                    000B    752 	C$radio_registers.c$10$1$1 ==.
+                            753 ;	libraries/src/radio_registers/radio_registers.c:10: FSCTRL1  =0x0A;
+   000B 90 DF 07            754 	mov	dptr,#_FSCTRL1
+   000E 74 0A               755 	mov	a,#0x0A
+   0010 F0                  756 	movx	@dptr,a
+                    0011    757 	C$radio_registers.c$11$1$1 ==.
+                            758 ;	libraries/src/radio_registers/radio_registers.c:11: FSCTRL0	 =0x00;
+   0011 90 DF 08            759 	mov	dptr,#_FSCTRL0
+   0014 E4                  760 	clr	a
+   0015 F0                  761 	movx	@dptr,a
+                    0016    762 	C$radio_registers.c$12$1$1 ==.
+                            763 ;	libraries/src/radio_registers/radio_registers.c:12: FREQ2    =0x65;
+   0016 90 DF 09            764 	mov	dptr,#_FREQ2
+   0019 74 65               765 	mov	a,#0x65
+   001B F0                  766 	movx	@dptr,a
+                    001C    767 	C$radio_registers.c$13$1$1 ==.
+                            768 ;	libraries/src/radio_registers/radio_registers.c:13: FREQ1    =0x0A;
+   001C 90 DF 0A            769 	mov	dptr,#_FREQ1
+   001F 74 0A               770 	mov	a,#0x0A
+   0021 F0                  771 	movx	@dptr,a
+                    0022    772 	C$radio_registers.c$14$1$1 ==.
+                            773 ;	libraries/src/radio_registers/radio_registers.c:14: FREQ0    =0xAA;
+   0022 90 DF 0B            774 	mov	dptr,#_FREQ0
+   0025 74 AA               775 	mov	a,#0xAA
+   0027 F0                  776 	movx	@dptr,a
+                    0028    777 	C$radio_registers.c$15$1$1 ==.
+                            778 ;	libraries/src/radio_registers/radio_registers.c:15: MDMCFG4  =0x4B;
+   0028 90 DF 0C            779 	mov	dptr,#_MDMCFG4
+   002B 74 4B               780 	mov	a,#0x4B
+   002D F0                  781 	movx	@dptr,a
+                    002E    782 	C$radio_registers.c$16$1$1 ==.
+                            783 ;	libraries/src/radio_registers/radio_registers.c:16: MDMCFG3  =0x11;
+   002E 90 DF 0D            784 	mov	dptr,#_MDMCFG3
+   0031 74 11               785 	mov	a,#0x11
+   0033 F0                  786 	movx	@dptr,a
+                    0034    787 	C$radio_registers.c$17$1$1 ==.
+                            788 ;	libraries/src/radio_registers/radio_registers.c:17: MDMCFG2  =0x73;
+   0034 90 DF 0E            789 	mov	dptr,#_MDMCFG2
+   0037 74 73               790 	mov	a,#0x73
+   0039 F0                  791 	movx	@dptr,a
+                    003A    792 	C$radio_registers.c$18$1$1 ==.
+                            793 ;	libraries/src/radio_registers/radio_registers.c:18: MDMCFG1  =0x03;
+   003A 90 DF 0F            794 	mov	dptr,#_MDMCFG1
+   003D 74 03               795 	mov	a,#0x03
+   003F F0                  796 	movx	@dptr,a
+                    0040    797 	C$radio_registers.c$19$1$1 ==.
+                            798 ;	libraries/src/radio_registers/radio_registers.c:19: MDMCFG0  =0x55;
+   0040 90 DF 10            799 	mov	dptr,#_MDMCFG0
+   0043 74 55               800 	mov	a,#0x55
+   0045 F0                  801 	movx	@dptr,a
+                    0046    802 	C$radio_registers.c$20$1$1 ==.
+                            803 ;	libraries/src/radio_registers/radio_registers.c:20: DEVIATN  =0x00;
+   0046 90 DF 11            804 	mov	dptr,#_DEVIATN
+   0049 E4                  805 	clr	a
+   004A F0                  806 	movx	@dptr,a
+                    004B    807 	C$radio_registers.c$21$1$1 ==.
+                            808 ;	libraries/src/radio_registers/radio_registers.c:21: MCSM0    =0x14;
+   004B 90 DF 14            809 	mov	dptr,#_MCSM0
+   004E 74 14               810 	mov	a,#0x14
+   0050 F0                  811 	movx	@dptr,a
+                    0051    812 	C$radio_registers.c$22$1$1 ==.
+                            813 ;	libraries/src/radio_registers/radio_registers.c:22: FOCCFG   =0x0A;
+   0051 90 DF 15            814 	mov	dptr,#_FOCCFG
+   0054 74 0A               815 	mov	a,#0x0A
+   0056 F0                  816 	movx	@dptr,a
+                    0057    817 	C$radio_registers.c$24$1$1 ==.
+                            818 ;	libraries/src/radio_registers/radio_registers.c:24: FSCAL3   =0xA9;
+   0057 90 DF 1C            819 	mov	dptr,#_FSCAL3
+   005A 74 A9               820 	mov	a,#0xA9
+   005C F0                  821 	movx	@dptr,a
+                    005D    822 	C$radio_registers.c$25$1$1 ==.
+                            823 ;	libraries/src/radio_registers/radio_registers.c:25: FSCAL2   =0x0A;
+   005D 90 DF 1D            824 	mov	dptr,#_FSCAL2
+   0060 74 0A               825 	mov	a,#0x0A
+   0062 F0                  826 	movx	@dptr,a
+                    0063    827 	C$radio_registers.c$26$1$1 ==.
+                            828 ;	libraries/src/radio_registers/radio_registers.c:26: FSCAL1   =0x20;
+   0063 90 DF 1E            829 	mov	dptr,#_FSCAL1
+   0066 74 20               830 	mov	a,#0x20
+   0068 F0                  831 	movx	@dptr,a
+                    0069    832 	C$radio_registers.c$27$1$1 ==.
+                            833 ;	libraries/src/radio_registers/radio_registers.c:27: FSCAL0   =0x0D;
+   0069 90 DF 1F            834 	mov	dptr,#_FSCAL0
+   006C 74 0D               835 	mov	a,#0x0D
+   006E F0                  836 	movx	@dptr,a
+                    006F    837 	C$radio_registers.c$29$1$1 ==.
+                            838 ;	libraries/src/radio_registers/radio_registers.c:29: TEST2    =0x81;
+   006F 90 DF 23            839 	mov	dptr,#_TEST2
+   0072 74 81               840 	mov	a,#0x81
+   0074 F0                  841 	movx	@dptr,a
+                    0075    842 	C$radio_registers.c$30$1$1 ==.
+                            843 ;	libraries/src/radio_registers/radio_registers.c:30: TEST1    =0x35;
+   0075 90 DF 24            844 	mov	dptr,#_TEST1
+   0078 74 35               845 	mov	a,#0x35
+   007A F0                  846 	movx	@dptr,a
+                    007B    847 	C$radio_registers.c$31$1$1 ==.
+                            848 ;	libraries/src/radio_registers/radio_registers.c:31: TEST0    =0x0B;
+   007B 90 DF 25            849 	mov	dptr,#_TEST0
+   007E 74 0B               850 	mov	a,#0x0B
+   0080 F0                  851 	movx	@dptr,a
+                    0081    852 	C$radio_registers.c$33$1$1 ==.
+                            853 ;	libraries/src/radio_registers/radio_registers.c:33: PA_TABLE0=0x00;
+   0081 90 DF 2E            854 	mov	dptr,#_PA_TABLE0
+   0084 E4                  855 	clr	a
+   0085 F0                  856 	movx	@dptr,a
+                    0086    857 	C$radio_registers.c$35$1$1 ==.
+                            858 ;	libraries/src/radio_registers/radio_registers.c:35: SYNC1	 =0xD3;
+   0086 90 DF 00            859 	mov	dptr,#_SYNC1
+   0089 74 D3               860 	mov	a,#0xD3
+   008B F0                  861 	movx	@dptr,a
+                    008C    862 	C$radio_registers.c$36$1$1 ==.
+                            863 ;	libraries/src/radio_registers/radio_registers.c:36: SYNC0	 =0x91;
+   008C 90 DF 01            864 	mov	dptr,#_SYNC0
+   008F 74 91               865 	mov	a,#0x91
+   0091 F0                  866 	movx	@dptr,a
+                    0092    867 	C$radio_registers.c$38$1$1 ==.
+                            868 ;	libraries/src/radio_registers/radio_registers.c:38: ADDR	 =0x00;
+   0092 90 DF 05            869 	mov	dptr,#_ADDR
+   0095 E4                  870 	clr	a
+   0096 F0                  871 	movx	@dptr,a
+                    0097    872 	C$radio_registers.c$40$1$1 ==.
+                            873 ;	libraries/src/radio_registers/radio_registers.c:40: FREND1	 =0xB6;
+   0097 90 DF 1A            874 	mov	dptr,#_FREND1
+   009A 74 B6               875 	mov	a,#0xB6
+   009C F0                  876 	movx	@dptr,a
+                    009D    877 	C$radio_registers.c$41$1$1 ==.
+                            878 ;	libraries/src/radio_registers/radio_registers.c:41: FREND0	 =0x10;
+   009D 90 DF 1B            879 	mov	dptr,#_FREND0
+   00A0 74 10               880 	mov	a,#0x10
+   00A2 F0                  881 	movx	@dptr,a
+                    00A3    882 	C$radio_registers.c$43$1$1 ==.
+                            883 ;	libraries/src/radio_registers/radio_registers.c:43: BSCFG	 =0x6C;
+   00A3 90 DF 16            884 	mov	dptr,#_BSCFG
+   00A6 74 6C               885 	mov	a,#0x6C
+   00A8 F0                  886 	movx	@dptr,a
+                    00A9    887 	C$radio_registers.c$45$1$1 ==.
+                            888 ;	libraries/src/radio_registers/radio_registers.c:45: AGCCTRL2 =0x44;
+   00A9 90 DF 17            889 	mov	dptr,#_AGCCTRL2
+   00AC 74 44               890 	mov	a,#0x44
+   00AE F0                  891 	movx	@dptr,a
+                    00AF    892 	C$radio_registers.c$47$1$1 ==.
+                            893 ;	libraries/src/radio_registers/radio_registers.c:47: AGCCTRL1 =0x00;
+   00AF 90 DF 18            894 	mov	dptr,#_AGCCTRL1
+   00B2 E4                  895 	clr	a
+   00B3 F0                  896 	movx	@dptr,a
+                    00B4    897 	C$radio_registers.c$51$1$1 ==.
+                            898 ;	libraries/src/radio_registers/radio_registers.c:51: AGCCTRL0 =0xB2;
+   00B4 90 DF 19            899 	mov	dptr,#_AGCCTRL0
+   00B7 74 B2               900 	mov	a,#0xB2
+   00B9 F0                  901 	movx	@dptr,a
+                    00BA    902 	C$radio_registers.c$54$1$1 ==.
+                            903 ;	libraries/src/radio_registers/radio_registers.c:54: PKTCTRL1 =0x04;
+   00BA 90 DF 03            904 	mov	dptr,#_PKTCTRL1
+   00BD 74 04               905 	mov	a,#0x04
+   00BF F0                  906 	movx	@dptr,a
+                    00C0    907 	C$radio_registers.c$55$1$1 ==.
+                            908 ;	libraries/src/radio_registers/radio_registers.c:55: PKTCTRL0 =0x05;
+   00C0 90 DF 04            909 	mov	dptr,#_PKTCTRL0
+   00C3 74 05               910 	mov	a,#0x05
+   00C5 F0                  911 	movx	@dptr,a
+                    00C6    912 	C$radio_registers.c$57$1$1 ==.
+                    00C6    913 	XG$radioRegistersInit$0$0 ==.
+   00C6 22                  914 	ret
+                            915 ;------------------------------------------------------------
+                            916 ;Allocation info for local variables in function 'radioCrcPassed'
+                            917 ;------------------------------------------------------------
+                    00C7    918 	G$radioCrcPassed$0$0 ==.
+                    00C7    919 	C$radio_registers.c$59$1$1 ==.
+                            920 ;	libraries/src/radio_registers/radio_registers.c:59: BIT radioCrcPassed()
+                            921 ;	-----------------------------------------
+                            922 ;	 function radioCrcPassed
+                            923 ;	-----------------------------------------
+   00C7                     924 _radioCrcPassed:
+                    00C7    925 	C$radio_registers.c$61$1$1 ==.
+                            926 ;	libraries/src/radio_registers/radio_registers.c:61: return (LQI & 0x80) ? 1 : 0;
+   00C7 90 DF 39            927 	mov	dptr,#_LQI
+   00CA E0                  928 	movx	a,@dptr
+   00CB 23                  929 	rl	a
+   00CC 54 01               930 	anl	a,#0x01
+   00CE 24 FF               931 	add	a,#0xff
+                    00D0    932 	C$radio_registers.c$62$1$1 ==.
+                    00D0    933 	XG$radioCrcPassed$0$0 ==.
+   00D0 22                  934 	ret
+                            935 ;------------------------------------------------------------
+                            936 ;Allocation info for local variables in function 'radioLqi'
+                            937 ;------------------------------------------------------------
+                    00D1    938 	G$radioLqi$0$0 ==.
+                    00D1    939 	C$radio_registers.c$64$1$1 ==.
+                            940 ;	libraries/src/radio_registers/radio_registers.c:64: uint8 radioLqi()
+                            941 ;	-----------------------------------------
+                            942 ;	 function radioLqi
+                            943 ;	-----------------------------------------
+   00D1                     944 _radioLqi:
+                    00D1    945 	C$radio_registers.c$66$1$1 ==.
+                            946 ;	libraries/src/radio_registers/radio_registers.c:66: return LQI & 0x7F;
+   00D1 90 DF 39            947 	mov	dptr,#_LQI
+   00D4 E0                  948 	movx	a,@dptr
+   00D5 FF                  949 	mov	r7,a
+   00D6 74 7F               950 	mov	a,#0x7F
+   00D8 5F                  951 	anl	a,r7
+   00D9 F5 82               952 	mov	dpl,a
+                    00DB    953 	C$radio_registers.c$67$1$1 ==.
+                    00DB    954 	XG$radioLqi$0$0 ==.
+   00DB 22                  955 	ret
+                            956 ;------------------------------------------------------------
+                            957 ;Allocation info for local variables in function 'radioRssi'
+                            958 ;------------------------------------------------------------
+                    00DC    959 	G$radioRssi$0$0 ==.
+                    00DC    960 	C$radio_registers.c$69$1$1 ==.
+                            961 ;	libraries/src/radio_registers/radio_registers.c:69: int8 radioRssi()
+                            962 ;	-----------------------------------------
+                            963 ;	 function radioRssi
+                            964 ;	-----------------------------------------
+   00DC                     965 _radioRssi:
+                    00DC    966 	C$radio_registers.c$71$1$1 ==.
+                            967 ;	libraries/src/radio_registers/radio_registers.c:71: return ((int8)RSSI)/2 - RSSI_OFFSET;
+   00DC 90 DF 3A            968 	mov	dptr,#_RSSI
+   00DF E0                  969 	movx	a,@dptr
+   00E0 FF                  970 	mov	r7,a
+   00E1 C2 D5               971 	clr	F0
+   00E3 75 F0 02            972 	mov	b,#0x02
+   00E6 EF                  973 	mov	a,r7
+   00E7 30 E7 04            974 	jnb	acc.7,00103$
+   00EA B2 D5               975 	cpl	F0
+   00EC F4                  976 	cpl	a
+   00ED 04                  977 	inc	a
+   00EE                     978 00103$:
+   00EE 84                  979 	div	ab
+   00EF 30 D5 02            980 	jnb	F0,00104$
+   00F2 F4                  981 	cpl	a
+   00F3 04                  982 	inc	a
+   00F4                     983 00104$:
+   00F4 24 B9               984 	add	a,#0xB9
+   00F6 F5 82               985 	mov	dpl,a
+                    00F8    986 	C$radio_registers.c$72$1$1 ==.
+                    00F8    987 	XG$radioRssi$0$0 ==.
+   00F8 22                  988 	ret
+                            989 	.area CSEG    (CODE)
+                            990 	.area CONST   (CODE)
+                            991 	.area XINIT   (CODE)
+                            992 	.area CABS    (ABS,CODE)

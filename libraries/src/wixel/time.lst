@@ -1,0 +1,903 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
+                              4 ; This file was generated Sat Jan 23 21:06:09 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module time
+                              7 	.optsdcc -mmcs51 --model-medium
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _delayMicroseconds
+                             13 	.globl _timeMs
+                             14 	.globl _ISR_T4
+                             15 	.globl _getMs
+                             16 	.globl _timeInit
+                             17 	.globl _delayMs
+                             18 ;--------------------------------------------------------
+                             19 ; special function registers
+                             20 ;--------------------------------------------------------
+                             21 	.area RSEG    (ABS,DATA)
+   0000                      22 	.org 0x0000
+                    0080     23 Ftime$P0$0$0 == 0x0080
+                    0080     24 _P0	=	0x0080
+                    0081     25 Ftime$SP$0$0 == 0x0081
+                    0081     26 _SP	=	0x0081
+                    0082     27 Ftime$DPL0$0$0 == 0x0082
+                    0082     28 _DPL0	=	0x0082
+                    0083     29 Ftime$DPH0$0$0 == 0x0083
+                    0083     30 _DPH0	=	0x0083
+                    0084     31 Ftime$DPL1$0$0 == 0x0084
+                    0084     32 _DPL1	=	0x0084
+                    0085     33 Ftime$DPH1$0$0 == 0x0085
+                    0085     34 _DPH1	=	0x0085
+                    0086     35 Ftime$U0CSR$0$0 == 0x0086
+                    0086     36 _U0CSR	=	0x0086
+                    0087     37 Ftime$PCON$0$0 == 0x0087
+                    0087     38 _PCON	=	0x0087
+                    0088     39 Ftime$TCON$0$0 == 0x0088
+                    0088     40 _TCON	=	0x0088
+                    0089     41 Ftime$P0IFG$0$0 == 0x0089
+                    0089     42 _P0IFG	=	0x0089
+                    008A     43 Ftime$P1IFG$0$0 == 0x008a
+                    008A     44 _P1IFG	=	0x008a
+                    008B     45 Ftime$P2IFG$0$0 == 0x008b
+                    008B     46 _P2IFG	=	0x008b
+                    008C     47 Ftime$PICTL$0$0 == 0x008c
+                    008C     48 _PICTL	=	0x008c
+                    008D     49 Ftime$P1IEN$0$0 == 0x008d
+                    008D     50 _P1IEN	=	0x008d
+                    008F     51 Ftime$P0INP$0$0 == 0x008f
+                    008F     52 _P0INP	=	0x008f
+                    0090     53 Ftime$P1$0$0 == 0x0090
+                    0090     54 _P1	=	0x0090
+                    0091     55 Ftime$RFIM$0$0 == 0x0091
+                    0091     56 _RFIM	=	0x0091
+                    0092     57 Ftime$DPS$0$0 == 0x0092
+                    0092     58 _DPS	=	0x0092
+                    0093     59 Ftime$MPAGE$0$0 == 0x0093
+                    0093     60 _MPAGE	=	0x0093
+                    0095     61 Ftime$ENDIAN$0$0 == 0x0095
+                    0095     62 _ENDIAN	=	0x0095
+                    0098     63 Ftime$S0CON$0$0 == 0x0098
+                    0098     64 _S0CON	=	0x0098
+                    009A     65 Ftime$IEN2$0$0 == 0x009a
+                    009A     66 _IEN2	=	0x009a
+                    009B     67 Ftime$S1CON$0$0 == 0x009b
+                    009B     68 _S1CON	=	0x009b
+                    009C     69 Ftime$T2CT$0$0 == 0x009c
+                    009C     70 _T2CT	=	0x009c
+                    009D     71 Ftime$T2PR$0$0 == 0x009d
+                    009D     72 _T2PR	=	0x009d
+                    009E     73 Ftime$T2CTL$0$0 == 0x009e
+                    009E     74 _T2CTL	=	0x009e
+                    00A0     75 Ftime$P2$0$0 == 0x00a0
+                    00A0     76 _P2	=	0x00a0
+                    00A1     77 Ftime$WORIRQ$0$0 == 0x00a1
+                    00A1     78 _WORIRQ	=	0x00a1
+                    00A2     79 Ftime$WORCTRL$0$0 == 0x00a2
+                    00A2     80 _WORCTRL	=	0x00a2
+                    00A3     81 Ftime$WOREVT0$0$0 == 0x00a3
+                    00A3     82 _WOREVT0	=	0x00a3
+                    00A4     83 Ftime$WOREVT1$0$0 == 0x00a4
+                    00A4     84 _WOREVT1	=	0x00a4
+                    00A5     85 Ftime$WORTIME0$0$0 == 0x00a5
+                    00A5     86 _WORTIME0	=	0x00a5
+                    00A6     87 Ftime$WORTIME1$0$0 == 0x00a6
+                    00A6     88 _WORTIME1	=	0x00a6
+                    00A8     89 Ftime$IEN0$0$0 == 0x00a8
+                    00A8     90 _IEN0	=	0x00a8
+                    00A9     91 Ftime$IP0$0$0 == 0x00a9
+                    00A9     92 _IP0	=	0x00a9
+                    00AB     93 Ftime$FWT$0$0 == 0x00ab
+                    00AB     94 _FWT	=	0x00ab
+                    00AC     95 Ftime$FADDRL$0$0 == 0x00ac
+                    00AC     96 _FADDRL	=	0x00ac
+                    00AD     97 Ftime$FADDRH$0$0 == 0x00ad
+                    00AD     98 _FADDRH	=	0x00ad
+                    00AE     99 Ftime$FCTL$0$0 == 0x00ae
+                    00AE    100 _FCTL	=	0x00ae
+                    00AF    101 Ftime$FWDATA$0$0 == 0x00af
+                    00AF    102 _FWDATA	=	0x00af
+                    00B1    103 Ftime$ENCDI$0$0 == 0x00b1
+                    00B1    104 _ENCDI	=	0x00b1
+                    00B2    105 Ftime$ENCDO$0$0 == 0x00b2
+                    00B2    106 _ENCDO	=	0x00b2
+                    00B3    107 Ftime$ENCCS$0$0 == 0x00b3
+                    00B3    108 _ENCCS	=	0x00b3
+                    00B4    109 Ftime$ADCCON1$0$0 == 0x00b4
+                    00B4    110 _ADCCON1	=	0x00b4
+                    00B5    111 Ftime$ADCCON2$0$0 == 0x00b5
+                    00B5    112 _ADCCON2	=	0x00b5
+                    00B6    113 Ftime$ADCCON3$0$0 == 0x00b6
+                    00B6    114 _ADCCON3	=	0x00b6
+                    00B8    115 Ftime$IEN1$0$0 == 0x00b8
+                    00B8    116 _IEN1	=	0x00b8
+                    00B9    117 Ftime$IP1$0$0 == 0x00b9
+                    00B9    118 _IP1	=	0x00b9
+                    00BA    119 Ftime$ADCL$0$0 == 0x00ba
+                    00BA    120 _ADCL	=	0x00ba
+                    00BB    121 Ftime$ADCH$0$0 == 0x00bb
+                    00BB    122 _ADCH	=	0x00bb
+                    00BC    123 Ftime$RNDL$0$0 == 0x00bc
+                    00BC    124 _RNDL	=	0x00bc
+                    00BD    125 Ftime$RNDH$0$0 == 0x00bd
+                    00BD    126 _RNDH	=	0x00bd
+                    00BE    127 Ftime$SLEEP$0$0 == 0x00be
+                    00BE    128 _SLEEP	=	0x00be
+                    00C0    129 Ftime$IRCON$0$0 == 0x00c0
+                    00C0    130 _IRCON	=	0x00c0
+                    00C1    131 Ftime$U0DBUF$0$0 == 0x00c1
+                    00C1    132 _U0DBUF	=	0x00c1
+                    00C2    133 Ftime$U0BAUD$0$0 == 0x00c2
+                    00C2    134 _U0BAUD	=	0x00c2
+                    00C4    135 Ftime$U0UCR$0$0 == 0x00c4
+                    00C4    136 _U0UCR	=	0x00c4
+                    00C5    137 Ftime$U0GCR$0$0 == 0x00c5
+                    00C5    138 _U0GCR	=	0x00c5
+                    00C6    139 Ftime$CLKCON$0$0 == 0x00c6
+                    00C6    140 _CLKCON	=	0x00c6
+                    00C7    141 Ftime$MEMCTR$0$0 == 0x00c7
+                    00C7    142 _MEMCTR	=	0x00c7
+                    00C9    143 Ftime$WDCTL$0$0 == 0x00c9
+                    00C9    144 _WDCTL	=	0x00c9
+                    00CA    145 Ftime$T3CNT$0$0 == 0x00ca
+                    00CA    146 _T3CNT	=	0x00ca
+                    00CB    147 Ftime$T3CTL$0$0 == 0x00cb
+                    00CB    148 _T3CTL	=	0x00cb
+                    00CC    149 Ftime$T3CCTL0$0$0 == 0x00cc
+                    00CC    150 _T3CCTL0	=	0x00cc
+                    00CD    151 Ftime$T3CC0$0$0 == 0x00cd
+                    00CD    152 _T3CC0	=	0x00cd
+                    00CE    153 Ftime$T3CCTL1$0$0 == 0x00ce
+                    00CE    154 _T3CCTL1	=	0x00ce
+                    00CF    155 Ftime$T3CC1$0$0 == 0x00cf
+                    00CF    156 _T3CC1	=	0x00cf
+                    00D0    157 Ftime$PSW$0$0 == 0x00d0
+                    00D0    158 _PSW	=	0x00d0
+                    00D1    159 Ftime$DMAIRQ$0$0 == 0x00d1
+                    00D1    160 _DMAIRQ	=	0x00d1
+                    00D2    161 Ftime$DMA1CFGL$0$0 == 0x00d2
+                    00D2    162 _DMA1CFGL	=	0x00d2
+                    00D3    163 Ftime$DMA1CFGH$0$0 == 0x00d3
+                    00D3    164 _DMA1CFGH	=	0x00d3
+                    00D4    165 Ftime$DMA0CFGL$0$0 == 0x00d4
+                    00D4    166 _DMA0CFGL	=	0x00d4
+                    00D5    167 Ftime$DMA0CFGH$0$0 == 0x00d5
+                    00D5    168 _DMA0CFGH	=	0x00d5
+                    00D6    169 Ftime$DMAARM$0$0 == 0x00d6
+                    00D6    170 _DMAARM	=	0x00d6
+                    00D7    171 Ftime$DMAREQ$0$0 == 0x00d7
+                    00D7    172 _DMAREQ	=	0x00d7
+                    00D8    173 Ftime$TIMIF$0$0 == 0x00d8
+                    00D8    174 _TIMIF	=	0x00d8
+                    00D9    175 Ftime$RFD$0$0 == 0x00d9
+                    00D9    176 _RFD	=	0x00d9
+                    00DA    177 Ftime$T1CC0L$0$0 == 0x00da
+                    00DA    178 _T1CC0L	=	0x00da
+                    00DB    179 Ftime$T1CC0H$0$0 == 0x00db
+                    00DB    180 _T1CC0H	=	0x00db
+                    00DC    181 Ftime$T1CC1L$0$0 == 0x00dc
+                    00DC    182 _T1CC1L	=	0x00dc
+                    00DD    183 Ftime$T1CC1H$0$0 == 0x00dd
+                    00DD    184 _T1CC1H	=	0x00dd
+                    00DE    185 Ftime$T1CC2L$0$0 == 0x00de
+                    00DE    186 _T1CC2L	=	0x00de
+                    00DF    187 Ftime$T1CC2H$0$0 == 0x00df
+                    00DF    188 _T1CC2H	=	0x00df
+                    00E0    189 Ftime$ACC$0$0 == 0x00e0
+                    00E0    190 _ACC	=	0x00e0
+                    00E1    191 Ftime$RFST$0$0 == 0x00e1
+                    00E1    192 _RFST	=	0x00e1
+                    00E2    193 Ftime$T1CNTL$0$0 == 0x00e2
+                    00E2    194 _T1CNTL	=	0x00e2
+                    00E3    195 Ftime$T1CNTH$0$0 == 0x00e3
+                    00E3    196 _T1CNTH	=	0x00e3
+                    00E4    197 Ftime$T1CTL$0$0 == 0x00e4
+                    00E4    198 _T1CTL	=	0x00e4
+                    00E5    199 Ftime$T1CCTL0$0$0 == 0x00e5
+                    00E5    200 _T1CCTL0	=	0x00e5
+                    00E6    201 Ftime$T1CCTL1$0$0 == 0x00e6
+                    00E6    202 _T1CCTL1	=	0x00e6
+                    00E7    203 Ftime$T1CCTL2$0$0 == 0x00e7
+                    00E7    204 _T1CCTL2	=	0x00e7
+                    00E8    205 Ftime$IRCON2$0$0 == 0x00e8
+                    00E8    206 _IRCON2	=	0x00e8
+                    00E9    207 Ftime$RFIF$0$0 == 0x00e9
+                    00E9    208 _RFIF	=	0x00e9
+                    00EA    209 Ftime$T4CNT$0$0 == 0x00ea
+                    00EA    210 _T4CNT	=	0x00ea
+                    00EB    211 Ftime$T4CTL$0$0 == 0x00eb
+                    00EB    212 _T4CTL	=	0x00eb
+                    00EC    213 Ftime$T4CCTL0$0$0 == 0x00ec
+                    00EC    214 _T4CCTL0	=	0x00ec
+                    00ED    215 Ftime$T4CC0$0$0 == 0x00ed
+                    00ED    216 _T4CC0	=	0x00ed
+                    00EE    217 Ftime$T4CCTL1$0$0 == 0x00ee
+                    00EE    218 _T4CCTL1	=	0x00ee
+                    00EF    219 Ftime$T4CC1$0$0 == 0x00ef
+                    00EF    220 _T4CC1	=	0x00ef
+                    00F0    221 Ftime$B$0$0 == 0x00f0
+                    00F0    222 _B	=	0x00f0
+                    00F1    223 Ftime$PERCFG$0$0 == 0x00f1
+                    00F1    224 _PERCFG	=	0x00f1
+                    00F2    225 Ftime$ADCCFG$0$0 == 0x00f2
+                    00F2    226 _ADCCFG	=	0x00f2
+                    00F3    227 Ftime$P0SEL$0$0 == 0x00f3
+                    00F3    228 _P0SEL	=	0x00f3
+                    00F4    229 Ftime$P1SEL$0$0 == 0x00f4
+                    00F4    230 _P1SEL	=	0x00f4
+                    00F5    231 Ftime$P2SEL$0$0 == 0x00f5
+                    00F5    232 _P2SEL	=	0x00f5
+                    00F6    233 Ftime$P1INP$0$0 == 0x00f6
+                    00F6    234 _P1INP	=	0x00f6
+                    00F7    235 Ftime$P2INP$0$0 == 0x00f7
+                    00F7    236 _P2INP	=	0x00f7
+                    00F8    237 Ftime$U1CSR$0$0 == 0x00f8
+                    00F8    238 _U1CSR	=	0x00f8
+                    00F9    239 Ftime$U1DBUF$0$0 == 0x00f9
+                    00F9    240 _U1DBUF	=	0x00f9
+                    00FA    241 Ftime$U1BAUD$0$0 == 0x00fa
+                    00FA    242 _U1BAUD	=	0x00fa
+                    00FB    243 Ftime$U1UCR$0$0 == 0x00fb
+                    00FB    244 _U1UCR	=	0x00fb
+                    00FC    245 Ftime$U1GCR$0$0 == 0x00fc
+                    00FC    246 _U1GCR	=	0x00fc
+                    00FD    247 Ftime$P0DIR$0$0 == 0x00fd
+                    00FD    248 _P0DIR	=	0x00fd
+                    00FE    249 Ftime$P1DIR$0$0 == 0x00fe
+                    00FE    250 _P1DIR	=	0x00fe
+                    00FF    251 Ftime$P2DIR$0$0 == 0x00ff
+                    00FF    252 _P2DIR	=	0x00ff
+                    FFFFD5D4    253 Ftime$DMA0CFG$0$0 == 0xffffd5d4
+                    FFFFD5D4    254 _DMA0CFG	=	0xffffd5d4
+                    FFFFD3D2    255 Ftime$DMA1CFG$0$0 == 0xffffd3d2
+                    FFFFD3D2    256 _DMA1CFG	=	0xffffd3d2
+                    FFFFADAC    257 Ftime$FADDR$0$0 == 0xffffadac
+                    FFFFADAC    258 _FADDR	=	0xffffadac
+                    FFFFBBBA    259 Ftime$ADC$0$0 == 0xffffbbba
+                    FFFFBBBA    260 _ADC	=	0xffffbbba
+                    FFFFDBDA    261 Ftime$T1CC0$0$0 == 0xffffdbda
+                    FFFFDBDA    262 _T1CC0	=	0xffffdbda
+                    FFFFDDDC    263 Ftime$T1CC1$0$0 == 0xffffdddc
+                    FFFFDDDC    264 _T1CC1	=	0xffffdddc
+                    FFFFDFDE    265 Ftime$T1CC2$0$0 == 0xffffdfde
+                    FFFFDFDE    266 _T1CC2	=	0xffffdfde
+                            267 ;--------------------------------------------------------
+                            268 ; special function bits
+                            269 ;--------------------------------------------------------
+                            270 	.area RSEG    (ABS,DATA)
+   0000                     271 	.org 0x0000
+                    0080    272 Ftime$P0_0$0$0 == 0x0080
+                    0080    273 _P0_0	=	0x0080
+                    0081    274 Ftime$P0_1$0$0 == 0x0081
+                    0081    275 _P0_1	=	0x0081
+                    0082    276 Ftime$P0_2$0$0 == 0x0082
+                    0082    277 _P0_2	=	0x0082
+                    0083    278 Ftime$P0_3$0$0 == 0x0083
+                    0083    279 _P0_3	=	0x0083
+                    0084    280 Ftime$P0_4$0$0 == 0x0084
+                    0084    281 _P0_4	=	0x0084
+                    0085    282 Ftime$P0_5$0$0 == 0x0085
+                    0085    283 _P0_5	=	0x0085
+                    0086    284 Ftime$P0_6$0$0 == 0x0086
+                    0086    285 _P0_6	=	0x0086
+                    0087    286 Ftime$P0_7$0$0 == 0x0087
+                    0087    287 _P0_7	=	0x0087
+                    0088    288 Ftime$_TCON_0$0$0 == 0x0088
+                    0088    289 __TCON_0	=	0x0088
+                    0089    290 Ftime$RFTXRXIF$0$0 == 0x0089
+                    0089    291 _RFTXRXIF	=	0x0089
+                    008A    292 Ftime$_TCON_2$0$0 == 0x008a
+                    008A    293 __TCON_2	=	0x008a
+                    008B    294 Ftime$URX0IF$0$0 == 0x008b
+                    008B    295 _URX0IF	=	0x008b
+                    008C    296 Ftime$_TCON_4$0$0 == 0x008c
+                    008C    297 __TCON_4	=	0x008c
+                    008D    298 Ftime$ADCIF$0$0 == 0x008d
+                    008D    299 _ADCIF	=	0x008d
+                    008E    300 Ftime$_TCON_6$0$0 == 0x008e
+                    008E    301 __TCON_6	=	0x008e
+                    008F    302 Ftime$URX1IF$0$0 == 0x008f
+                    008F    303 _URX1IF	=	0x008f
+                    0090    304 Ftime$P1_0$0$0 == 0x0090
+                    0090    305 _P1_0	=	0x0090
+                    0091    306 Ftime$P1_1$0$0 == 0x0091
+                    0091    307 _P1_1	=	0x0091
+                    0092    308 Ftime$P1_2$0$0 == 0x0092
+                    0092    309 _P1_2	=	0x0092
+                    0093    310 Ftime$P1_3$0$0 == 0x0093
+                    0093    311 _P1_3	=	0x0093
+                    0094    312 Ftime$P1_4$0$0 == 0x0094
+                    0094    313 _P1_4	=	0x0094
+                    0095    314 Ftime$P1_5$0$0 == 0x0095
+                    0095    315 _P1_5	=	0x0095
+                    0096    316 Ftime$P1_6$0$0 == 0x0096
+                    0096    317 _P1_6	=	0x0096
+                    0097    318 Ftime$P1_7$0$0 == 0x0097
+                    0097    319 _P1_7	=	0x0097
+                    0098    320 Ftime$ENCIF_0$0$0 == 0x0098
+                    0098    321 _ENCIF_0	=	0x0098
+                    0099    322 Ftime$ENCIF_1$0$0 == 0x0099
+                    0099    323 _ENCIF_1	=	0x0099
+                    009A    324 Ftime$_SOCON2$0$0 == 0x009a
+                    009A    325 __SOCON2	=	0x009a
+                    009B    326 Ftime$_SOCON3$0$0 == 0x009b
+                    009B    327 __SOCON3	=	0x009b
+                    009C    328 Ftime$_SOCON4$0$0 == 0x009c
+                    009C    329 __SOCON4	=	0x009c
+                    009D    330 Ftime$_SOCON5$0$0 == 0x009d
+                    009D    331 __SOCON5	=	0x009d
+                    009E    332 Ftime$_SOCON6$0$0 == 0x009e
+                    009E    333 __SOCON6	=	0x009e
+                    009F    334 Ftime$_SOCON7$0$0 == 0x009f
+                    009F    335 __SOCON7	=	0x009f
+                    00A0    336 Ftime$P2_0$0$0 == 0x00a0
+                    00A0    337 _P2_0	=	0x00a0
+                    00A1    338 Ftime$P2_1$0$0 == 0x00a1
+                    00A1    339 _P2_1	=	0x00a1
+                    00A2    340 Ftime$P2_2$0$0 == 0x00a2
+                    00A2    341 _P2_2	=	0x00a2
+                    00A3    342 Ftime$P2_3$0$0 == 0x00a3
+                    00A3    343 _P2_3	=	0x00a3
+                    00A4    344 Ftime$P2_4$0$0 == 0x00a4
+                    00A4    345 _P2_4	=	0x00a4
+                    00A5    346 Ftime$P2_5$0$0 == 0x00a5
+                    00A5    347 _P2_5	=	0x00a5
+                    00A6    348 Ftime$P2_6$0$0 == 0x00a6
+                    00A6    349 _P2_6	=	0x00a6
+                    00A7    350 Ftime$P2_7$0$0 == 0x00a7
+                    00A7    351 _P2_7	=	0x00a7
+                    00A8    352 Ftime$RFTXRXIE$0$0 == 0x00a8
+                    00A8    353 _RFTXRXIE	=	0x00a8
+                    00A9    354 Ftime$ADCIE$0$0 == 0x00a9
+                    00A9    355 _ADCIE	=	0x00a9
+                    00AA    356 Ftime$URX0IE$0$0 == 0x00aa
+                    00AA    357 _URX0IE	=	0x00aa
+                    00AB    358 Ftime$URX1IE$0$0 == 0x00ab
+                    00AB    359 _URX1IE	=	0x00ab
+                    00AC    360 Ftime$ENCIE$0$0 == 0x00ac
+                    00AC    361 _ENCIE	=	0x00ac
+                    00AD    362 Ftime$STIE$0$0 == 0x00ad
+                    00AD    363 _STIE	=	0x00ad
+                    00AE    364 Ftime$_IEN06$0$0 == 0x00ae
+                    00AE    365 __IEN06	=	0x00ae
+                    00AF    366 Ftime$EA$0$0 == 0x00af
+                    00AF    367 _EA	=	0x00af
+                    00B8    368 Ftime$DMAIE$0$0 == 0x00b8
+                    00B8    369 _DMAIE	=	0x00b8
+                    00B9    370 Ftime$T1IE$0$0 == 0x00b9
+                    00B9    371 _T1IE	=	0x00b9
+                    00BA    372 Ftime$T2IE$0$0 == 0x00ba
+                    00BA    373 _T2IE	=	0x00ba
+                    00BB    374 Ftime$T3IE$0$0 == 0x00bb
+                    00BB    375 _T3IE	=	0x00bb
+                    00BC    376 Ftime$T4IE$0$0 == 0x00bc
+                    00BC    377 _T4IE	=	0x00bc
+                    00BD    378 Ftime$P0IE$0$0 == 0x00bd
+                    00BD    379 _P0IE	=	0x00bd
+                    00BE    380 Ftime$_IEN16$0$0 == 0x00be
+                    00BE    381 __IEN16	=	0x00be
+                    00BF    382 Ftime$_IEN17$0$0 == 0x00bf
+                    00BF    383 __IEN17	=	0x00bf
+                    00C0    384 Ftime$DMAIF$0$0 == 0x00c0
+                    00C0    385 _DMAIF	=	0x00c0
+                    00C1    386 Ftime$T1IF$0$0 == 0x00c1
+                    00C1    387 _T1IF	=	0x00c1
+                    00C2    388 Ftime$T2IF$0$0 == 0x00c2
+                    00C2    389 _T2IF	=	0x00c2
+                    00C3    390 Ftime$T3IF$0$0 == 0x00c3
+                    00C3    391 _T3IF	=	0x00c3
+                    00C4    392 Ftime$T4IF$0$0 == 0x00c4
+                    00C4    393 _T4IF	=	0x00c4
+                    00C5    394 Ftime$P0IF$0$0 == 0x00c5
+                    00C5    395 _P0IF	=	0x00c5
+                    00C6    396 Ftime$_IRCON6$0$0 == 0x00c6
+                    00C6    397 __IRCON6	=	0x00c6
+                    00C7    398 Ftime$STIF$0$0 == 0x00c7
+                    00C7    399 _STIF	=	0x00c7
+                    00D0    400 Ftime$P$0$0 == 0x00d0
+                    00D0    401 _P	=	0x00d0
+                    00D1    402 Ftime$F1$0$0 == 0x00d1
+                    00D1    403 _F1	=	0x00d1
+                    00D2    404 Ftime$OV$0$0 == 0x00d2
+                    00D2    405 _OV	=	0x00d2
+                    00D3    406 Ftime$RS0$0$0 == 0x00d3
+                    00D3    407 _RS0	=	0x00d3
+                    00D4    408 Ftime$RS1$0$0 == 0x00d4
+                    00D4    409 _RS1	=	0x00d4
+                    00D5    410 Ftime$F0$0$0 == 0x00d5
+                    00D5    411 _F0	=	0x00d5
+                    00D6    412 Ftime$AC$0$0 == 0x00d6
+                    00D6    413 _AC	=	0x00d6
+                    00D7    414 Ftime$CY$0$0 == 0x00d7
+                    00D7    415 _CY	=	0x00d7
+                    00D8    416 Ftime$T3OVFIF$0$0 == 0x00d8
+                    00D8    417 _T3OVFIF	=	0x00d8
+                    00D9    418 Ftime$T3CH0IF$0$0 == 0x00d9
+                    00D9    419 _T3CH0IF	=	0x00d9
+                    00DA    420 Ftime$T3CH1IF$0$0 == 0x00da
+                    00DA    421 _T3CH1IF	=	0x00da
+                    00DB    422 Ftime$T4OVFIF$0$0 == 0x00db
+                    00DB    423 _T4OVFIF	=	0x00db
+                    00DC    424 Ftime$T4CH0IF$0$0 == 0x00dc
+                    00DC    425 _T4CH0IF	=	0x00dc
+                    00DD    426 Ftime$T4CH1IF$0$0 == 0x00dd
+                    00DD    427 _T4CH1IF	=	0x00dd
+                    00DE    428 Ftime$OVFIM$0$0 == 0x00de
+                    00DE    429 _OVFIM	=	0x00de
+                    00DF    430 Ftime$_TIMIF7$0$0 == 0x00df
+                    00DF    431 __TIMIF7	=	0x00df
+                    00E0    432 Ftime$ACC_0$0$0 == 0x00e0
+                    00E0    433 _ACC_0	=	0x00e0
+                    00E1    434 Ftime$ACC_1$0$0 == 0x00e1
+                    00E1    435 _ACC_1	=	0x00e1
+                    00E2    436 Ftime$ACC_2$0$0 == 0x00e2
+                    00E2    437 _ACC_2	=	0x00e2
+                    00E3    438 Ftime$ACC_3$0$0 == 0x00e3
+                    00E3    439 _ACC_3	=	0x00e3
+                    00E4    440 Ftime$ACC_4$0$0 == 0x00e4
+                    00E4    441 _ACC_4	=	0x00e4
+                    00E5    442 Ftime$ACC_5$0$0 == 0x00e5
+                    00E5    443 _ACC_5	=	0x00e5
+                    00E6    444 Ftime$ACC_6$0$0 == 0x00e6
+                    00E6    445 _ACC_6	=	0x00e6
+                    00E7    446 Ftime$ACC_7$0$0 == 0x00e7
+                    00E7    447 _ACC_7	=	0x00e7
+                    00E8    448 Ftime$P2IF$0$0 == 0x00e8
+                    00E8    449 _P2IF	=	0x00e8
+                    00E9    450 Ftime$UTX0IF$0$0 == 0x00e9
+                    00E9    451 _UTX0IF	=	0x00e9
+                    00EA    452 Ftime$UTX1IF$0$0 == 0x00ea
+                    00EA    453 _UTX1IF	=	0x00ea
+                    00EB    454 Ftime$P1IF$0$0 == 0x00eb
+                    00EB    455 _P1IF	=	0x00eb
+                    00EC    456 Ftime$WDTIF$0$0 == 0x00ec
+                    00EC    457 _WDTIF	=	0x00ec
+                    00ED    458 Ftime$_IRCON25$0$0 == 0x00ed
+                    00ED    459 __IRCON25	=	0x00ed
+                    00EE    460 Ftime$_IRCON26$0$0 == 0x00ee
+                    00EE    461 __IRCON26	=	0x00ee
+                    00EF    462 Ftime$_IRCON27$0$0 == 0x00ef
+                    00EF    463 __IRCON27	=	0x00ef
+                    00F0    464 Ftime$B_0$0$0 == 0x00f0
+                    00F0    465 _B_0	=	0x00f0
+                    00F1    466 Ftime$B_1$0$0 == 0x00f1
+                    00F1    467 _B_1	=	0x00f1
+                    00F2    468 Ftime$B_2$0$0 == 0x00f2
+                    00F2    469 _B_2	=	0x00f2
+                    00F3    470 Ftime$B_3$0$0 == 0x00f3
+                    00F3    471 _B_3	=	0x00f3
+                    00F4    472 Ftime$B_4$0$0 == 0x00f4
+                    00F4    473 _B_4	=	0x00f4
+                    00F5    474 Ftime$B_5$0$0 == 0x00f5
+                    00F5    475 _B_5	=	0x00f5
+                    00F6    476 Ftime$B_6$0$0 == 0x00f6
+                    00F6    477 _B_6	=	0x00f6
+                    00F7    478 Ftime$B_7$0$0 == 0x00f7
+                    00F7    479 _B_7	=	0x00f7
+                    00F8    480 Ftime$U1ACTIVE$0$0 == 0x00f8
+                    00F8    481 _U1ACTIVE	=	0x00f8
+                    00F9    482 Ftime$U1TX_BYTE$0$0 == 0x00f9
+                    00F9    483 _U1TX_BYTE	=	0x00f9
+                    00FA    484 Ftime$U1RX_BYTE$0$0 == 0x00fa
+                    00FA    485 _U1RX_BYTE	=	0x00fa
+                    00FB    486 Ftime$U1ERR$0$0 == 0x00fb
+                    00FB    487 _U1ERR	=	0x00fb
+                    00FC    488 Ftime$U1FE$0$0 == 0x00fc
+                    00FC    489 _U1FE	=	0x00fc
+                    00FD    490 Ftime$U1SLAVE$0$0 == 0x00fd
+                    00FD    491 _U1SLAVE	=	0x00fd
+                    00FE    492 Ftime$U1RE$0$0 == 0x00fe
+                    00FE    493 _U1RE	=	0x00fe
+                    00FF    494 Ftime$U1MODE$0$0 == 0x00ff
+                    00FF    495 _U1MODE	=	0x00ff
+                            496 ;--------------------------------------------------------
+                            497 ; overlayable register banks
+                            498 ;--------------------------------------------------------
+                            499 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     500 	.ds 8
+                            501 ;--------------------------------------------------------
+                            502 ; internal ram data
+                            503 ;--------------------------------------------------------
+                            504 	.area DSEG    (DATA)
+                            505 ;--------------------------------------------------------
+                            506 ; overlayable items in internal ram 
+                            507 ;--------------------------------------------------------
+                            508 	.area OSEG    (OVR,DATA)
+                            509 ;--------------------------------------------------------
+                            510 ; indirectly addressable internal ram data
+                            511 ;--------------------------------------------------------
+                            512 	.area ISEG    (DATA)
+                            513 ;--------------------------------------------------------
+                            514 ; absolute internal ram data
+                            515 ;--------------------------------------------------------
+                            516 	.area IABS    (ABS,DATA)
+                            517 	.area IABS    (ABS,DATA)
+                            518 ;--------------------------------------------------------
+                            519 ; bit data
+                            520 ;--------------------------------------------------------
+                            521 	.area BSEG    (BIT)
+                            522 ;--------------------------------------------------------
+                            523 ; paged external ram data
+                            524 ;--------------------------------------------------------
+                            525 	.area PSEG    (PAG,XDATA)
+                    0000    526 G$timeMs$0$0==.
+   0000                     527 _timeMs::
+   0000                     528 	.ds 4
+                            529 ;--------------------------------------------------------
+                            530 ; external ram data
+                            531 ;--------------------------------------------------------
+                            532 	.area XSEG    (XDATA)
+                    DF00    533 Ftime$SYNC1$0$0 == 0xdf00
+                    DF00    534 _SYNC1	=	0xdf00
+                    DF01    535 Ftime$SYNC0$0$0 == 0xdf01
+                    DF01    536 _SYNC0	=	0xdf01
+                    DF02    537 Ftime$PKTLEN$0$0 == 0xdf02
+                    DF02    538 _PKTLEN	=	0xdf02
+                    DF03    539 Ftime$PKTCTRL1$0$0 == 0xdf03
+                    DF03    540 _PKTCTRL1	=	0xdf03
+                    DF04    541 Ftime$PKTCTRL0$0$0 == 0xdf04
+                    DF04    542 _PKTCTRL0	=	0xdf04
+                    DF05    543 Ftime$ADDR$0$0 == 0xdf05
+                    DF05    544 _ADDR	=	0xdf05
+                    DF06    545 Ftime$CHANNR$0$0 == 0xdf06
+                    DF06    546 _CHANNR	=	0xdf06
+                    DF07    547 Ftime$FSCTRL1$0$0 == 0xdf07
+                    DF07    548 _FSCTRL1	=	0xdf07
+                    DF08    549 Ftime$FSCTRL0$0$0 == 0xdf08
+                    DF08    550 _FSCTRL0	=	0xdf08
+                    DF09    551 Ftime$FREQ2$0$0 == 0xdf09
+                    DF09    552 _FREQ2	=	0xdf09
+                    DF0A    553 Ftime$FREQ1$0$0 == 0xdf0a
+                    DF0A    554 _FREQ1	=	0xdf0a
+                    DF0B    555 Ftime$FREQ0$0$0 == 0xdf0b
+                    DF0B    556 _FREQ0	=	0xdf0b
+                    DF0C    557 Ftime$MDMCFG4$0$0 == 0xdf0c
+                    DF0C    558 _MDMCFG4	=	0xdf0c
+                    DF0D    559 Ftime$MDMCFG3$0$0 == 0xdf0d
+                    DF0D    560 _MDMCFG3	=	0xdf0d
+                    DF0E    561 Ftime$MDMCFG2$0$0 == 0xdf0e
+                    DF0E    562 _MDMCFG2	=	0xdf0e
+                    DF0F    563 Ftime$MDMCFG1$0$0 == 0xdf0f
+                    DF0F    564 _MDMCFG1	=	0xdf0f
+                    DF10    565 Ftime$MDMCFG0$0$0 == 0xdf10
+                    DF10    566 _MDMCFG0	=	0xdf10
+                    DF11    567 Ftime$DEVIATN$0$0 == 0xdf11
+                    DF11    568 _DEVIATN	=	0xdf11
+                    DF12    569 Ftime$MCSM2$0$0 == 0xdf12
+                    DF12    570 _MCSM2	=	0xdf12
+                    DF13    571 Ftime$MCSM1$0$0 == 0xdf13
+                    DF13    572 _MCSM1	=	0xdf13
+                    DF14    573 Ftime$MCSM0$0$0 == 0xdf14
+                    DF14    574 _MCSM0	=	0xdf14
+                    DF15    575 Ftime$FOCCFG$0$0 == 0xdf15
+                    DF15    576 _FOCCFG	=	0xdf15
+                    DF16    577 Ftime$BSCFG$0$0 == 0xdf16
+                    DF16    578 _BSCFG	=	0xdf16
+                    DF17    579 Ftime$AGCCTRL2$0$0 == 0xdf17
+                    DF17    580 _AGCCTRL2	=	0xdf17
+                    DF18    581 Ftime$AGCCTRL1$0$0 == 0xdf18
+                    DF18    582 _AGCCTRL1	=	0xdf18
+                    DF19    583 Ftime$AGCCTRL0$0$0 == 0xdf19
+                    DF19    584 _AGCCTRL0	=	0xdf19
+                    DF1A    585 Ftime$FREND1$0$0 == 0xdf1a
+                    DF1A    586 _FREND1	=	0xdf1a
+                    DF1B    587 Ftime$FREND0$0$0 == 0xdf1b
+                    DF1B    588 _FREND0	=	0xdf1b
+                    DF1C    589 Ftime$FSCAL3$0$0 == 0xdf1c
+                    DF1C    590 _FSCAL3	=	0xdf1c
+                    DF1D    591 Ftime$FSCAL2$0$0 == 0xdf1d
+                    DF1D    592 _FSCAL2	=	0xdf1d
+                    DF1E    593 Ftime$FSCAL1$0$0 == 0xdf1e
+                    DF1E    594 _FSCAL1	=	0xdf1e
+                    DF1F    595 Ftime$FSCAL0$0$0 == 0xdf1f
+                    DF1F    596 _FSCAL0	=	0xdf1f
+                    DF23    597 Ftime$TEST2$0$0 == 0xdf23
+                    DF23    598 _TEST2	=	0xdf23
+                    DF24    599 Ftime$TEST1$0$0 == 0xdf24
+                    DF24    600 _TEST1	=	0xdf24
+                    DF25    601 Ftime$TEST0$0$0 == 0xdf25
+                    DF25    602 _TEST0	=	0xdf25
+                    DF2E    603 Ftime$PA_TABLE0$0$0 == 0xdf2e
+                    DF2E    604 _PA_TABLE0	=	0xdf2e
+                    DF2F    605 Ftime$IOCFG2$0$0 == 0xdf2f
+                    DF2F    606 _IOCFG2	=	0xdf2f
+                    DF30    607 Ftime$IOCFG1$0$0 == 0xdf30
+                    DF30    608 _IOCFG1	=	0xdf30
+                    DF31    609 Ftime$IOCFG0$0$0 == 0xdf31
+                    DF31    610 _IOCFG0	=	0xdf31
+                    DF36    611 Ftime$PARTNUM$0$0 == 0xdf36
+                    DF36    612 _PARTNUM	=	0xdf36
+                    DF37    613 Ftime$VERSION$0$0 == 0xdf37
+                    DF37    614 _VERSION	=	0xdf37
+                    DF38    615 Ftime$FREQEST$0$0 == 0xdf38
+                    DF38    616 _FREQEST	=	0xdf38
+                    DF39    617 Ftime$LQI$0$0 == 0xdf39
+                    DF39    618 _LQI	=	0xdf39
+                    DF3A    619 Ftime$RSSI$0$0 == 0xdf3a
+                    DF3A    620 _RSSI	=	0xdf3a
+                    DF3B    621 Ftime$MARCSTATE$0$0 == 0xdf3b
+                    DF3B    622 _MARCSTATE	=	0xdf3b
+                    DF3C    623 Ftime$PKTSTATUS$0$0 == 0xdf3c
+                    DF3C    624 _PKTSTATUS	=	0xdf3c
+                    DF3D    625 Ftime$VCO_VC_DAC$0$0 == 0xdf3d
+                    DF3D    626 _VCO_VC_DAC	=	0xdf3d
+                    DF40    627 Ftime$I2SCFG0$0$0 == 0xdf40
+                    DF40    628 _I2SCFG0	=	0xdf40
+                    DF41    629 Ftime$I2SCFG1$0$0 == 0xdf41
+                    DF41    630 _I2SCFG1	=	0xdf41
+                    DF42    631 Ftime$I2SDATL$0$0 == 0xdf42
+                    DF42    632 _I2SDATL	=	0xdf42
+                    DF43    633 Ftime$I2SDATH$0$0 == 0xdf43
+                    DF43    634 _I2SDATH	=	0xdf43
+                    DF44    635 Ftime$I2SWCNT$0$0 == 0xdf44
+                    DF44    636 _I2SWCNT	=	0xdf44
+                    DF45    637 Ftime$I2SSTAT$0$0 == 0xdf45
+                    DF45    638 _I2SSTAT	=	0xdf45
+                    DF46    639 Ftime$I2SCLKF0$0$0 == 0xdf46
+                    DF46    640 _I2SCLKF0	=	0xdf46
+                    DF47    641 Ftime$I2SCLKF1$0$0 == 0xdf47
+                    DF47    642 _I2SCLKF1	=	0xdf47
+                    DF48    643 Ftime$I2SCLKF2$0$0 == 0xdf48
+                    DF48    644 _I2SCLKF2	=	0xdf48
+                    DE00    645 Ftime$USBADDR$0$0 == 0xde00
+                    DE00    646 _USBADDR	=	0xde00
+                    DE01    647 Ftime$USBPOW$0$0 == 0xde01
+                    DE01    648 _USBPOW	=	0xde01
+                    DE02    649 Ftime$USBIIF$0$0 == 0xde02
+                    DE02    650 _USBIIF	=	0xde02
+                    DE04    651 Ftime$USBOIF$0$0 == 0xde04
+                    DE04    652 _USBOIF	=	0xde04
+                    DE06    653 Ftime$USBCIF$0$0 == 0xde06
+                    DE06    654 _USBCIF	=	0xde06
+                    DE07    655 Ftime$USBIIE$0$0 == 0xde07
+                    DE07    656 _USBIIE	=	0xde07
+                    DE09    657 Ftime$USBOIE$0$0 == 0xde09
+                    DE09    658 _USBOIE	=	0xde09
+                    DE0B    659 Ftime$USBCIE$0$0 == 0xde0b
+                    DE0B    660 _USBCIE	=	0xde0b
+                    DE0C    661 Ftime$USBFRML$0$0 == 0xde0c
+                    DE0C    662 _USBFRML	=	0xde0c
+                    DE0D    663 Ftime$USBFRMH$0$0 == 0xde0d
+                    DE0D    664 _USBFRMH	=	0xde0d
+                    DE0E    665 Ftime$USBINDEX$0$0 == 0xde0e
+                    DE0E    666 _USBINDEX	=	0xde0e
+                    DE10    667 Ftime$USBMAXI$0$0 == 0xde10
+                    DE10    668 _USBMAXI	=	0xde10
+                    DE11    669 Ftime$USBCSIL$0$0 == 0xde11
+                    DE11    670 _USBCSIL	=	0xde11
+                    DE12    671 Ftime$USBCSIH$0$0 == 0xde12
+                    DE12    672 _USBCSIH	=	0xde12
+                    DE13    673 Ftime$USBMAXO$0$0 == 0xde13
+                    DE13    674 _USBMAXO	=	0xde13
+                    DE14    675 Ftime$USBCSOL$0$0 == 0xde14
+                    DE14    676 _USBCSOL	=	0xde14
+                    DE15    677 Ftime$USBCSOH$0$0 == 0xde15
+                    DE15    678 _USBCSOH	=	0xde15
+                    DE16    679 Ftime$USBCNTL$0$0 == 0xde16
+                    DE16    680 _USBCNTL	=	0xde16
+                    DE17    681 Ftime$USBCNTH$0$0 == 0xde17
+                    DE17    682 _USBCNTH	=	0xde17
+                    DE20    683 Ftime$USBF0$0$0 == 0xde20
+                    DE20    684 _USBF0	=	0xde20
+                    DE22    685 Ftime$USBF1$0$0 == 0xde22
+                    DE22    686 _USBF1	=	0xde22
+                    DE24    687 Ftime$USBF2$0$0 == 0xde24
+                    DE24    688 _USBF2	=	0xde24
+                    DE26    689 Ftime$USBF3$0$0 == 0xde26
+                    DE26    690 _USBF3	=	0xde26
+                    DE28    691 Ftime$USBF4$0$0 == 0xde28
+                    DE28    692 _USBF4	=	0xde28
+                    DE2A    693 Ftime$USBF5$0$0 == 0xde2a
+                    DE2A    694 _USBF5	=	0xde2a
+                            695 ;--------------------------------------------------------
+                            696 ; absolute external ram data
+                            697 ;--------------------------------------------------------
+                            698 	.area XABS    (ABS,XDATA)
+                            699 ;--------------------------------------------------------
+                            700 ; external initialized ram data
+                            701 ;--------------------------------------------------------
+                            702 	.area XISEG   (XDATA)
+                            703 	.area HOME    (CODE)
+                            704 	.area GSINIT0 (CODE)
+                            705 	.area GSINIT1 (CODE)
+                            706 	.area GSINIT2 (CODE)
+                            707 	.area GSINIT3 (CODE)
+                            708 	.area GSINIT4 (CODE)
+                            709 	.area GSINIT5 (CODE)
+                            710 	.area GSINIT  (CODE)
+                            711 	.area GSFINAL (CODE)
+                            712 	.area CSEG    (CODE)
+                            713 ;--------------------------------------------------------
+                            714 ; global & static initialisations
+                            715 ;--------------------------------------------------------
+                            716 	.area HOME    (CODE)
+                            717 	.area GSINIT  (CODE)
+                            718 	.area GSFINAL (CODE)
+                            719 	.area GSINIT  (CODE)
+                            720 ;--------------------------------------------------------
+                            721 ; Home
+                            722 ;--------------------------------------------------------
+                            723 	.area HOME    (CODE)
+                            724 	.area HOME    (CODE)
+                            725 ;--------------------------------------------------------
+                            726 ; code
+                            727 ;--------------------------------------------------------
+                            728 	.area CSEG    (CODE)
+                            729 ;------------------------------------------------------------
+                            730 ;Allocation info for local variables in function 'ISR_T4'
+                            731 ;------------------------------------------------------------
+                    0000    732 	G$ISR_T4$0$0 ==.
+                    0000    733 	C$time.c$13$0$0 ==.
+                            734 ;	libraries/src/wixel/time.c:13: ISR(T4, 0)
+                            735 ;	-----------------------------------------
+                            736 ;	 function ISR_T4
+                            737 ;	-----------------------------------------
+   0000                     738 _ISR_T4:
+                    0007    739 	ar7 = 0x07
+                    0006    740 	ar6 = 0x06
+                    0005    741 	ar5 = 0x05
+                    0004    742 	ar4 = 0x04
+                    0003    743 	ar3 = 0x03
+                    0002    744 	ar2 = 0x02
+                    0001    745 	ar1 = 0x01
+                    0000    746 	ar0 = 0x00
+   0000 C0 E0               747 	push	acc
+   0002 C0 00               748 	push	ar0
+   0004 C0 D0               749 	push	psw
+   0006 75 D0 00            750 	mov	psw,#0x00
+                    0009    751 	C$time.c$15$1$1 ==.
+                            752 ;	libraries/src/wixel/time.c:15: timeMs++;
+   0009 78r00               753 	mov	r0,#_timeMs
+   000B E2                  754 	movx	a,@r0
+   000C 24 01               755 	add	a,#0x01
+   000E F2                  756 	movx	@r0,a
+   000F 08                  757 	inc	r0
+   0010 E2                  758 	movx	a,@r0
+   0011 34 00               759 	addc	a,#0x00
+   0013 F2                  760 	movx	@r0,a
+   0014 08                  761 	inc	r0
+   0015 E2                  762 	movx	a,@r0
+   0016 34 00               763 	addc	a,#0x00
+   0018 F2                  764 	movx	@r0,a
+   0019 08                  765 	inc	r0
+   001A E2                  766 	movx	a,@r0
+   001B 34 00               767 	addc	a,#0x00
+   001D F2                  768 	movx	@r0,a
+   001E D0 D0               769 	pop	psw
+   0020 D0 00               770 	pop	ar0
+   0022 D0 E0               771 	pop	acc
+                    0024    772 	C$time.c$17$1$1 ==.
+                    0024    773 	XG$ISR_T4$0$0 ==.
+   0024 32                  774 	reti
+                            775 ;	eliminated unneeded push/pop ar1
+                            776 ;	eliminated unneeded push/pop dpl
+                            777 ;	eliminated unneeded push/pop dph
+                            778 ;	eliminated unneeded push/pop b
+                            779 ;------------------------------------------------------------
+                            780 ;Allocation info for local variables in function 'getMs'
+                            781 ;------------------------------------------------------------
+                    0025    782 	G$getMs$0$0 ==.
+                    0025    783 	C$time.c$19$1$1 ==.
+                            784 ;	libraries/src/wixel/time.c:19: uint32 getMs()
+                            785 ;	-----------------------------------------
+                            786 ;	 function getMs
+                            787 ;	-----------------------------------------
+   0025                     788 _getMs:
+                    0025    789 	C$time.c$21$1$1 ==.
+                            790 ;	libraries/src/wixel/time.c:21: uint8 oldT4IE = T4IE;   // store state of timer 4 interrupt (active/inactive?)
+   0025 A2 BC               791 	mov	c,_T4IE
+   0027 E4                  792 	clr	a
+   0028 33                  793 	rlc	a
+   0029 FF                  794 	mov	r7,a
+                    002A    795 	C$time.c$23$1$1 ==.
+                            796 ;	libraries/src/wixel/time.c:23: T4IE = 0;               // disable timer 4 interrupt
+   002A C2 BC               797 	clr	_T4IE
+                    002C    798 	C$time.c$24$1$1 ==.
+                            799 ;	libraries/src/wixel/time.c:24: time = timeMs;          // copy millisecond timer count into a safe variable
+   002C 78r00               800 	mov	r0,#_timeMs
+   002E E2                  801 	movx	a,@r0
+   002F FB                  802 	mov	r3,a
+   0030 08                  803 	inc	r0
+   0031 E2                  804 	movx	a,@r0
+   0032 FC                  805 	mov	r4,a
+   0033 08                  806 	inc	r0
+   0034 E2                  807 	movx	a,@r0
+   0035 FD                  808 	mov	r5,a
+   0036 08                  809 	inc	r0
+   0037 E2                  810 	movx	a,@r0
+   0038 FE                  811 	mov	r6,a
+                    0039    812 	C$time.c$25$1$1 ==.
+                            813 ;	libraries/src/wixel/time.c:25: T4IE = oldT4IE;         // restore timer 4 interrupt to its original state
+   0039 EF                  814 	mov	a,r7
+   003A 24 FF               815 	add	a,#0xff
+   003C 92 BC               816 	mov	_T4IE,c
+                    003E    817 	C$time.c$26$1$1 ==.
+                            818 ;	libraries/src/wixel/time.c:26: return time;            // return timer count copy
+   003E 8B 82               819 	mov	dpl,r3
+   0040 8C 83               820 	mov	dph,r4
+   0042 8D F0               821 	mov	b,r5
+   0044 EE                  822 	mov	a,r6
+                    0045    823 	C$time.c$27$1$1 ==.
+                    0045    824 	XG$getMs$0$0 ==.
+   0045 22                  825 	ret
+                            826 ;------------------------------------------------------------
+                            827 ;Allocation info for local variables in function 'timeInit'
+                            828 ;------------------------------------------------------------
+                    0046    829 	G$timeInit$0$0 ==.
+                    0046    830 	C$time.c$29$1$1 ==.
+                            831 ;	libraries/src/wixel/time.c:29: void timeInit()
+                            832 ;	-----------------------------------------
+                            833 ;	 function timeInit
+                            834 ;	-----------------------------------------
+   0046                     835 _timeInit:
+                    0046    836 	C$time.c$31$1$1 ==.
+                            837 ;	libraries/src/wixel/time.c:31: T4CC0 = 187;
+   0046 75 ED BB            838 	mov	_T4CC0,#0xBB
+                    0049    839 	C$time.c$32$1$1 ==.
+                            840 ;	libraries/src/wixel/time.c:32: T4IE = 1;     // Enable Timer 4 interrupt.  (IEN1.T4IE=1)
+   0049 D2 BC               841 	setb	_T4IE
+                    004B    842 	C$time.c$38$1$1 ==.
+                            843 ;	libraries/src/wixel/time.c:38: T4CTL = 0b11111010;
+   004B 75 EB FA            844 	mov	_T4CTL,#0xFA
+                    004E    845 	C$time.c$40$1$1 ==.
+                            846 ;	libraries/src/wixel/time.c:40: EA = 1; // Globally enable interrupts (IEN0.EA=1).
+   004E D2 AF               847 	setb	_EA
+                    0050    848 	C$time.c$41$1$1 ==.
+                    0050    849 	XG$timeInit$0$0 ==.
+   0050 22                  850 	ret
+                            851 ;------------------------------------------------------------
+                            852 ;Allocation info for local variables in function 'delayMs'
+                            853 ;------------------------------------------------------------
+                    0051    854 	G$delayMs$0$0 ==.
+                    0051    855 	C$time.c$43$1$1 ==.
+                            856 ;	libraries/src/wixel/time.c:43: void delayMs(uint16 milliseconds)
+                            857 ;	-----------------------------------------
+                            858 ;	 function delayMs
+                            859 ;	-----------------------------------------
+   0051                     860 _delayMs:
+   0051 AE 82               861 	mov	r6,dpl
+   0053 AF 83               862 	mov	r7,dph
+                    0055    863 	C$time.c$49$1$1 ==.
+                            864 ;	libraries/src/wixel/time.c:49: while(milliseconds--)
+   0055                     865 00101$:
+   0055 8E 04               866 	mov	ar4,r6
+   0057 8F 05               867 	mov	ar5,r7
+   0059 1E                  868 	dec	r6
+   005A BE FF 01            869 	cjne	r6,#0xFF,00109$
+   005D 1F                  870 	dec	r7
+   005E                     871 00109$:
+   005E EC                  872 	mov	a,r4
+   005F 4D                  873 	orl	a,r5
+   0060 60 22               874 	jz	00104$
+                    0062    875 	C$time.c$51$2$2 ==.
+                            876 ;	libraries/src/wixel/time.c:51: delayMicroseconds(250);
+   0062 75 82 FA            877 	mov	dpl,#0xFA
+   0065 C0 07               878 	push	ar7
+   0067 C0 06               879 	push	ar6
+   0069 12s00r00            880 	lcall	_delayMicroseconds
+                    006C    881 	C$time.c$52$2$2 ==.
+                            882 ;	libraries/src/wixel/time.c:52: delayMicroseconds(250);
+   006C 75 82 FA            883 	mov	dpl,#0xFA
+   006F 12s00r00            884 	lcall	_delayMicroseconds
+                    0072    885 	C$time.c$53$2$2 ==.
+                            886 ;	libraries/src/wixel/time.c:53: delayMicroseconds(250);
+   0072 75 82 FA            887 	mov	dpl,#0xFA
+   0075 12s00r00            888 	lcall	_delayMicroseconds
+                    0078    889 	C$time.c$54$2$2 ==.
+                            890 ;	libraries/src/wixel/time.c:54: delayMicroseconds(249); // there's some overhead, so only delay by 249 here
+   0078 75 82 F9            891 	mov	dpl,#0xF9
+   007B 12s00r00            892 	lcall	_delayMicroseconds
+   007E D0 06               893 	pop	ar6
+   0080 D0 07               894 	pop	ar7
+   0082 80 D1               895 	sjmp	00101$
+   0084                     896 00104$:
+                    0084    897 	C$time.c$56$1$1 ==.
+                    0084    898 	XG$delayMs$0$0 ==.
+   0084 22                  899 	ret
+                            900 	.area CSEG    (CODE)
+                            901 	.area CONST   (CODE)
+                            902 	.area XINIT   (CODE)
+                            903 	.area CABS    (ABS,CODE)

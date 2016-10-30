@@ -1,0 +1,827 @@
+;!FILE libraries/src/wixel/sleep.asm
+XH
+H 1C areas 272 global symbols
+M sleep
+O -mmcs51 --model-medium
+S Fsleep$USBCSIL$0$0 DefDE11
+S Fsleep$PKTCTRL1$0$0 DefDF03
+S Fsleep$B_4$0$0 Def00F4
+S Fsleep$T2IF$0$0 Def00C2
+S Fsleep$T3IE$0$0 Def00BB
+S Fsleep$STIE$0$0 Def00AD
+S Fsleep$P2_4$0$0 Def00A4
+S Fsleep$_SOCON4$0$0 Def009C
+S Fsleep$P1_5$0$0 Def0095
+S Fsleep$P0_6$0$0 Def0086
+S Fsleep$B_5$0$0 Def00F5
+S Fsleep$ACC_0$0$0 Def00E0
+S Fsleep$STIF$0$0 Def00C7
+S Fsleep$T3IF$0$0 Def00C3
+S Fsleep$T4IE$0$0 Def00BC
+S Fsleep$ADCIE$0$0 Def00A9
+S Fsleep$P2_5$0$0 Def00A5
+S Fsleep$_SOCON5$0$0 Def009D
+S Fsleep$P1_6$0$0 Def0096
+S Fsleep$P0_7$0$0 Def0087
+S Fsleep$USBCNTH$0$0 DefDE17
+S Fsleep$USBCSOH$0$0 DefDE15
+S Fsleep$USBFRMH$0$0 DefDE0D
+S Fsleep$B_6$0$0 Def00F6
+S Fsleep$ACC_1$0$0 Def00E1
+S Fsleep$T4IF$0$0 Def00C4
+S Fsleep$P2_6$0$0 Def00A6
+S Fsleep$_SOCON6$0$0 Def009E
+S Fsleep$P1_7$0$0 Def0097
+S Fsleep$ADCIF$0$0 Def008D
+S Fsleep$PERCFG$0$0 Def00F1
+S Fsleep$FWDATA$0$0 Def00AF
+S Fsleep$WORTIME0$0$0 Def00A5
+S Fsleep$IOCFG0$0$0 DefDF31
+S Fsleep$B_7$0$0 Def00F7
+S Fsleep$ACC_2$0$0 Def00E2
+S Fsleep$P2_7$0$0 Def00A7
+S Fsleep$_SOCON7$0$0 Def009F
+S Fsleep$WORTIME1$0$0 Def00A6
+S Fsleep$USBMAXI$0$0 DefDE10
+S Fsleep$IOCFG1$0$0 DefDF30
+S Fsleep$FSCAL0$0$0 DefDF1F
+S Fsleep$ACC_3$0$0 Def00E3
+S Fsleep$FREQEST$0$0 DefDF38
+S Fsleep$IOCFG2$0$0 DefDF2F
+S Fsleep$FSCAL1$0$0 DefDF1E
+S Fsleep$CHANNR$0$0 DefDF06
+S Fsleep$ACC_4$0$0 Def00E4
+S Fsleep$DMAREQ$0$0 Def00D7
+S Fsleep$DMA0CFGH$0$0 Def00D5
+S Fsleep$CLKCON$0$0 Def00C6
+S Fsleep$USBCNTL$0$0 DefDE16
+S Fsleep$USBCSOL$0$0 DefDE14
+S Fsleep$USBFRML$0$0 DefDE0C
+S Fsleep$USBCIE$0$0 DefDE0B
+S Fsleep$FSCAL2$0$0 DefDF1D
+S Fsleep$ACC_5$0$0 Def00E5
+S Fsleep$T1CCTL0$0$0 Def00E5
+S Fsleep$DMA1CFGH$0$0 Def00D3
+S Fsleep$USBCIF$0$0 DefDE06
+S Fsleep$FSCAL3$0$0 DefDF1C
+S Fsleep$ACC_6$0$0 Def00E6
+S Fsleep$RFTXRXIE$0$0 Def00A8
+S Fsleep$T1CCTL1$0$0 Def00E6
+S Fsleep$RFD$0$0 Def00D9
+S Fsleep$U1RE$0$0 Def00FE
+S Fsleep$ACC_7$0$0 Def00E7
+S Fsleep$RFTXRXIF$0$0 Def0089
+S Fsleep$T1CCTL2$0$0 Def00E7
+S Fsleep$T3CCTL0$0$0 Def00CC
+S Fsleep$T2CT$0$0 Def009C
+S Fsleep$FSCTRL0$0$0 DefDF08
+S Fsleep$T4CCTL0$0$0 Def00EC
+S Fsleep$DMA0CFGL$0$0 Def00D4
+S Fsleep$DMAIRQ$0$0 Def00D1
+S Fsleep$T3CCTL1$0$0 Def00CE
+S Fsleep$USBMAXO$0$0 DefDE13
+S Fsleep$FREND0$0$0 DefDF1B
+S Fsleep$FSCTRL1$0$0 DefDF07
+S Fsleep$T4CCTL1$0$0 Def00EE
+S Fsleep$RFST$0$0 Def00E1
+S Fsleep$DMA1CFGL$0$0 Def00D2
+S Fsleep$FREND1$0$0 DefDF1A
+S Fsleep$DMAIE$0$0 Def00B8
+S Fsleep$USBIIE$0$0 DefDE07
+S Fsleep$RSSI$0$0 DefDF3A
+S Fsleep$U1SLAVE$0$0 Def00FD
+S Fsleep$T3OVFIF$0$0 Def00D8
+S Fsleep$DMAIF$0$0 Def00C0
+S Fsleep$_IEN06$0$0 Def00AE
+S Fsleep$FADDR$0$0 DefFFFFADAC
+S Fsleep$U0BAUD$0$0 Def00C2
+S Fsleep$USBIIF$0$0 DefDE02
+S Fsleep$T4OVFIF$0$0 Def00DB
+S Fsleep$_IEN16$0$0 Def00BE
+S Fsleep$U1BAUD$0$0 Def00FA
+S Fsleep$_IEN17$0$0 Def00BF
+S Fsleep$T1CC0H$0$0 Def00DB
+S Fsleep$ENCDI$0$0 Def00B1
+S Fsleep$MARCSTATE$0$0 DefDF3B
+S Fsleep$AC$0$0 Def00D6
+S Fsleep$ENCIE$0$0 Def00AC
+S Fsleep$T1CC1H$0$0 Def00DD
+S Fsleep$BSCFG$0$0 DefDF16
+S Fsleep$T1CC2H$0$0 Def00DF
+S Fsleep$LQI$0$0 DefDF39
+S Fsleep$VERSION$0$0 DefDF37
+S Fsleep$EA$0$0 Def00AF
+S Fsleep$U0DBUF$0$0 Def00C1
+S Fsleep$USBOIE$0$0 DefDE09
+S Fsleep$VCO_VC_DAC$0$0 DefDF3D
+S Fsleep$PARTNUM$0$0 DefDF36
+S Fsleep$U1DBUF$0$0 Def00F9
+S Fsleep$T1CC0L$0$0 Def00DA
+S Fsleep$DPS$0$0 Def0092
+S Fsleep$USBOIF$0$0 DefDE04
+S Fsleep$T1CC1L$0$0 Def00DC
+S Fsleep$MEMCTR$0$0 Def00C7
+S Fsleep$T2PR$0$0 Def009D
+S Fsleep$T1CC2L$0$0 Def00DE
+S Fsleep$ENCDO$0$0 Def00B2
+S Fsleep$IP0$0$0 Def00A9
+S Fsleep$I2SSTAT$0$0 DefDF45
+S Fsleep$I2SWCNT$0$0 DefDF44
+S Fsleep$IP1$0$0 Def00B9
+S Fsleep$MPAGE$0$0 Def0093
+S Fsleep$U1MODE$0$0 Def00FF
+S Fsleep$ENCCS$0$0 Def00B3
+S Fsleep$IRCON2$0$0 Def00E8
+S Fsleep$WORCTRL$0$0 Def00A2
+S Fsleep$PKTLEN$0$0 DefDF02
+S Fsleep$AGCCTRL0$0$0 DefDF19
+S Fsleep$ADCH$0$0 Def00BB
+S Fsleep$AGCCTRL1$0$0 DefDF18
+S Fsleep$FWT$0$0 Def00AB
+S Fsleep$AGCCTRL2$0$0 DefDF17
+S Fsleep$DMA0CFG$0$0 DefFFFFD5D4
+S Fsleep$T1CNTH$0$0 Def00E3
+S Fsleep$DMA1CFG$0$0 DefFFFFD3D2
+S Fsleep$ENCIF_0$0$0 Def0098
+S Fsleep$ADCL$0$0 Def00BA
+S Fsleep$RS0$0$0 Def00D3
+S Fsleep$ENCIF_1$0$0 Def0099
+S Fsleep$F0$0$0 Def00D5
+S Fsleep$RS1$0$0 Def00D4
+S Fsleep$T1CNTL$0$0 Def00E2
+S Fsleep$P0IFG$0$0 Def0089
+S Fsleep$F1$0$0 Def00D1
+S Fsleep$WOREVT0$0$0 Def00A3
+S Fsleep$P1IFG$0$0 Def008A
+S Fsleep$ADCCFG$0$0 Def00F2
+S Fsleep$WOREVT1$0$0 Def00A4
+S Fsleep$P2IFG$0$0 Def008B
+S Fsleep$TIMIF$0$0 Def00D8
+S Fsleep$SLEEP$0$0 Def00BE
+S Fsleep$ADCCON1$0$0 Def00B4
+S Fsleep$PSW$0$0 Def00D0
+S Fsleep$ADCCON2$0$0 Def00B5
+S Fsleep$ADDR$0$0 DefDF05
+S Fsleep$T1CC0$0$0 DefFFFFDBDA
+S Fsleep$IRCON$0$0 Def00C0
+S Fsleep$ADCCON3$0$0 Def00B6
+S Fsleep$CY$0$0 Def00D7
+S Fsleep$T1CC1$0$0 DefFFFFDDDC
+S Fsleep$PICTL$0$0 Def008C
+S _boardClockInit Ref0000
+S Fsleep$URX0IE$0$0 Def00AA
+S Fsleep$T1CC2$0$0 DefFFFFDFDE
+S Fsleep$T3CC0$0$0 Def00CD
+S Fsleep$P1IEN$0$0 Def008D
+S Fsleep$I2SCLKF0$0$0 DefDF46
+S Fsleep$MDMCFG0$0$0 DefDF10
+S Fsleep$FREQ0$0$0 DefDF0B
+S Fsleep$WDTIF$0$0 Def00EC
+S Fsleep$URX1IE$0$0 Def00AB
+S Fsleep$URX0IF$0$0 Def008B
+S Fsleep$T4CC0$0$0 Def00ED
+S Fsleep$T3CC1$0$0 Def00CF
+S Fsleep$WDCTL$0$0 Def00C9
+S Fsleep$I2SCLKF1$0$0 DefDF47
+S Fsleep$MDMCFG1$0$0 DefDF0F
+S Fsleep$FREQ1$0$0 DefDF0A
+S Fsleep$URX1IF$0$0 Def008F
+S Fsleep$P0DIR$0$0 Def00FD
+S Fsleep$T4CC1$0$0 Def00EF
+S Fsleep$USBF0$0$0 DefDE20
+S Fsleep$USBPOW$0$0 DefDE01
+S Fsleep$I2SCLKF2$0$0 DefDF48
+S Fsleep$MCSM0$0$0 DefDF14
+S Fsleep$MDMCFG2$0$0 DefDF0E
+S Fsleep$FREQ2$0$0 DefDF09
+S Fsleep$UTX0IF$0$0 Def00E9
+S Fsleep$P1DIR$0$0 Def00FE
+S Fsleep$P0$0$0 Def0080
+S Fsleep$USBF1$0$0 DefDE22
+S Fsleep$MCSM1$0$0 DefDF13
+S Fsleep$MDMCFG3$0$0 DefDF0D
+S Fsleep$_IRCON25$0$0 Def00ED
+S Fsleep$UTX1IF$0$0 Def00EA
+S Fsleep$OVFIM$0$0 Def00DE
+S Fsleep$P2DIR$0$0 Def00FF
+S Fsleep$U0GCR$0$0 Def00C5
+S Fsleep$P1$0$0 Def0090
+S Fsleep$USBF2$0$0 DefDE24
+S Fsleep$USBINDEX$0$0 DefDE0E
+S Fsleep$MCSM2$0$0 DefDF12
+S Fsleep$MDMCFG4$0$0 DefDF0C
+S Fsleep$U1ACTIVE$0$0 Def00F8
+S Fsleep$_IRCON26$0$0 Def00EE
+S Fsleep$_TCON_0$0$0 Def0088
+S Fsleep$U1GCR$0$0 Def00FC
+S Fsleep$B$0$0 Def00F0
+S Fsleep$P2$0$0 Def00A0
+S Fsleep$USBF3$0$0 DefDE26
+S Fsleep$U1RX_BYTE$0$0 Def00FA
+S Fsleep$_IRCON27$0$0 Def00EF
+S Fsleep$S0CON$0$0 Def0098
+S Fsleep$SP$0$0 Def0081
+S Fsleep$USBF4$0$0 DefDE28
+S Fsleep$_TCON_2$0$0 Def008A
+S Fsleep$P0SEL$0$0 Def00F3
+S Fsleep$WORIRQ$0$0 Def00A1
+S Fsleep$S1CON$0$0 Def009B
+S Fsleep$USBF5$0$0 DefDE2A
+S Fsleep$USBADDR$0$0 DefDE00
+S Fsleep$U1TX_BYTE$0$0 Def00F9
+S Fsleep$OV$0$0 Def00D2
+S Fsleep$P1SEL$0$0 Def00F4
+S Fsleep$_TCON_4$0$0 Def008C
+S Fsleep$P2SEL$0$0 Def00F5
+S Fsleep$RFIF$0$0 Def00E9
+S Fsleep$ACC$0$0 Def00E0
+S Fsleep$P0INP$0$0 Def008F
+S Fsleep$PA_TABLE0$0$0 DefDF2E
+S Fsleep$FOCCFG$0$0 DefDF15
+S Fsleep$_TCON_6$0$0 Def008E
+S Fsleep$ADC$0$0 DefFFFFBBBA
+S Fsleep$P1INP$0$0 Def00F6
+S Fsleep$T1CTL$0$0 Def00E4
+S Fsleep$P2INP$0$0 Def00F7
+S Fsleep$FCTL$0$0 Def00AE
+S Fsleep$FADDRH$0$0 Def00AD
+S Fsleep$T2CTL$0$0 Def009E
+S Fsleep$T3CTL$0$0 Def00CB
+S Fsleep$DEVIATN$0$0 DefDF11
+S Fsleep$T4CTL$0$0 Def00EB
+S Fsleep$T3CNT$0$0 Def00CA
+S Fsleep$RNDH$0$0 Def00BD
+S Fsleep$IEN0$0$0 Def00A8
+S Fsleep$DPH0$0$0 Def0083
+S Fsleep$SYNC0$0$0 DefDF01
+S Fsleep$T4CNT$0$0 Def00EA
+S Fsleep$IEN1$0$0 Def00B8
+S Fsleep$FADDRL$0$0 Def00AC
+S Fsleep$U0CSR$0$0 Def0086
+S Fsleep$DPH1$0$0 Def0085
+S Fsleep$I2SCFG0$0$0 DefDF40
+S Fsleep$SYNC1$0$0 DefDF00
+S Fsleep$P0IE$0$0 Def00BD
+S Fsleep$U1CSR$0$0 Def00F8
+S Fsleep$IEN2$0$0 Def009A
+S Fsleep$RFIM$0$0 Def0091
+S Fsleep$I2SDATH$0$0 DefDF43
+S Fsleep$I2SCFG1$0$0 DefDF41
+S Fsleep$U1ERR$0$0 Def00FB
+S Fsleep$_TIMIF7$0$0 Def00DF
+S Fsleep$P0IF$0$0 Def00C5
+S Fsleep$P0_0$0$0 Def0080
+S Fsleep$U0UCR$0$0 Def00C4
+S Fsleep$ENDIAN$0$0 Def0095
+S Fsleep$TEST0$0$0 DefDF25
+S Fsleep$P1IF$0$0 Def00EB
+S Fsleep$P$0$0 Def00D0
+S Fsleep$_IRCON6$0$0 Def00C6
+S Fsleep$P1_0$0$0 Def0090
+S Fsleep$P0_1$0$0 Def0081
+S Fsleep$U1UCR$0$0 Def00FB
+S Fsleep$RNDL$0$0 Def00BC
+S Fsleep$PCON$0$0 Def0087
+S Fsleep$DPL0$0$0 Def0082
+S Fsleep$USBCSIH$0$0 DefDE12
+S Fsleep$TEST1$0$0 DefDF24
+S Fsleep$U1FE$0$0 Def00FC
+S Fsleep$B_0$0$0 Def00F0
+S Fsleep$P2IF$0$0 Def00E8
+S Fsleep$T3CH0IF$0$0 Def00D9
+S Fsleep$P2_0$0$0 Def00A0
+S Fsleep$P1_1$0$0 Def0091
+S Fsleep$P0_2$0$0 Def0082
+S Fsleep$DPL1$0$0 Def0084
+S Fsleep$TEST2$0$0 DefDF23
+S Fsleep$B_1$0$0 Def00F1
+S Fsleep$T4CH0IF$0$0 Def00DC
+S Fsleep$T3CH1IF$0$0 Def00DA
+S Fsleep$P2_1$0$0 Def00A1
+S Fsleep$P1_2$0$0 Def0092
+S Fsleep$P0_3$0$0 Def0083
+S Fsleep$DMAARM$0$0 Def00D6
+S Fsleep$I2SDATL$0$0 DefDF42
+S Fsleep$PKTSTATUS$0$0 DefDF3C
+S Fsleep$B_2$0$0 Def00F2
+S Fsleep$T4CH1IF$0$0 Def00DD
+S Fsleep$T1IE$0$0 Def00B9
+S Fsleep$P2_2$0$0 Def00A2
+S Fsleep$_SOCON2$0$0 Def009A
+S Fsleep$P1_3$0$0 Def0093
+S Fsleep$P0_4$0$0 Def0084
+S .__.ABS. Def0000
+S Fsleep$PKTCTRL0$0$0 DefDF04
+S Fsleep$B_3$0$0 Def00F3
+S Fsleep$T1IF$0$0 Def00C1
+S Fsleep$T2IE$0$0 Def00BA
+S Fsleep$P2_3$0$0 Def00A3
+S Fsleep$_SOCON3$0$0 Def009B
+S Fsleep$P1_4$0$0 Def0094
+S Fsleep$P0_5$0$0 Def0085
+S Fsleep$TCON$0$0 Def0088
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A REG_BANK_1 size 8 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A OSEG size 0 flags 4 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 2 flags 80 addr 0
+S Lsleep.sleepMode2$storedDma0Armed$1$1 Def0000
+S Lsleep.sleepMode3$storedDma0Armed$1$1 Def0001
+A PSEG size 0 flags 50 addr 0
+A XSEG size 0 flags 40 addr 0
+A XABS size 0 flags 48 addr 0
+A XISEG size 16 flags 40 addr 0
+S G$dmaDesc$0$0 Def000E
+S _PM2_BUF Def0000
+S _PM3_BUF Def0007
+S G$PM2_BUF$0$0 Def0000
+S G$PM3_BUF$0$0 Def0007
+S _dmaDesc Def000E
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size 167 flags 20 addr 0
+S G$sleepInit$0$0 Def0000
+S G$switchToRCOSC$0$0 Def000E
+S A$sleep$1100 Def00FB
+S A$sleep$1010 Def00B1
+S A$sleep$1001 Def00AB
+S A$sleep$1110 Def0103
+S A$sleep$1201 Def0154
+S A$sleep$1021 Def00BE
+S A$sleep$1220 Def0160
+S A$sleep$1211 Def0159
+S A$sleep$1103 Def00FD
+S A$sleep$1022 Def00C0
+S A$sleep$1013 Def00B4
+S A$sleep$1004 Def00AD
+S G$ISR_ST$0$0 Def0004
+S A$sleep$1140 Def0115
+S A$sleep$1113 Def0106
+S A$sleep$1023 Def00C3
+S A$sleep$1204 Def0155
+S A$sleep$1150 Def0122
+S A$sleep$1141 Def0117
+S A$sleep$1132 Def010D
+S A$sleep$1033 Def00CA
+S A$sleep$1214 Def015B
+S A$sleep$1151 Def0125
+S A$sleep$1106 Def0100
+S A$sleep$1070 Def00E5
+S A$sleep$1061 Def00E2
+S A$sleep$1052 Def00DA
+S A$sleep$1043 Def00D2
+S A$sleep$1034 Def00CB
+S A$sleep$1016 Def00B7
+S A$sleep$1007 Def00AF
+S A$sleep$1224 Def0163
+S A$sleep$1152 Def0126
+S A$sleep$1071 Def00E7
+S A$sleep$1044 Def00D3
+S A$sleep$1035 Def00CE
+S A$sleep$1026 Def00C5
+S A$sleep$1017 Def00B9
+S A$sleep$1207 Def0158
+S A$sleep$1162 Def0130
+S A$sleep$1144 Def0119
+S A$sleep$1135 Def010F
+S A$sleep$1126 Def0107
+S A$sleep$1081 Def00EF
+S A$sleep$1072 Def00E9
+S A$sleep$1045 Def00D6
+S A$sleep$1018 Def00BC
+S A$sleep$1217 Def015D
+S A$sleep$1190 Def014A
+S A$sleep$1181 Def0145
+S A$sleep$1172 Def013C
+S A$sleep$1163 Def0132
+S A$sleep$1091 Def00F5
+S A$sleep$1064 Def00E3
+S A$sleep$1055 Def00DC
+S A$sleep$1227 Def0166
+S A$sleep$1164 Def0134
+S A$sleep$1155 Def0127
+S A$sleep$1029 Def00C8
+S _sleepMode1 Def002D
+S A$sleep$1156 Def0129
+S A$sleep$1147 Def011C
+S A$sleep$1138 Def0111
+S A$sleep$1129 Def010A
+S A$sleep$1084 Def00F2
+S A$sleep$1075 Def00EB
+S A$sleep$1039 Def00D0
+S _sleepMode2 Def0067
+S A$sleep$1193 Def014B
+S A$sleep$1184 Def0148
+S A$sleep$1175 Def013F
+S A$sleep$1157 Def012B
+S A$sleep$1148 Def011E
+S A$sleep$1139 Def0113
+S A$sleep$1094 Def00F7
+S A$sleep$1067 Def00E4
+S A$sleep$1058 Def00DF
+S A$sleep$1049 Def00D8
+S _sleepMode3 Def0107
+S A$sleep$1194 Def014D
+S A$sleep$1167 Def0136
+S A$sleep$1158 Def012E
+S A$sleep$1149 Def0120
+S C$sleep.c$101$1$1 Def0067
+S A$sleep$1195 Def014F
+S A$sleep$1168 Def0138
+S A$sleep$1159 Def012F
+S A$sleep$1078 Def00EE
+S A$sleep$1187 Def0149
+S A$sleep$1178 Def0142
+S A$sleep$1169 Def013A
+S A$sleep$1097 Def00F9
+S A$sleep$1088 Def00F3
+S C$sleep.c$211$1$1 Def011C
+S C$sleep.c$130$1$1 Def0093
+S C$sleep.c$221$1$1 Def0142
+S C$sleep.c$212$1$1 Def0127
+S C$sleep.c$113$1$1 Def006B
+S A$sleep$1198 Def0151
+S C$sleep.c$240$1$1 Def0160
+S C$sleep.c$222$1$1 Def0145
+S C$sleep.c$150$1$1 Def00C5
+S C$sleep.c$132$1$1 Def009C
+S C$sleep.c$230$2$2 Def0151
+S C$sleep.c$214$1$1 Def0130
+S C$sleep.c$151$1$1 Def00C8
+S C$sleep.c$133$1$1 Def00A2
+S C$sleep.c$124$1$1 Def0079
+S C$sleep.c$115$1$1 Def006E
+S C$sleep.c$231$2$2 Def0154
+S C$sleep.c$224$1$1 Def0148
+S C$sleep.c$215$1$1 Def0136
+S C$sleep.c$206$1$1 Def010D
+S C$sleep.c$161$1$1 Def00E2
+S C$sleep.c$152$1$1 Def00CA
+S C$sleep.c$143$1$1 Def00B1
+S C$sleep.c$134$1$1 Def00A8
+S C$sleep.c$125$1$1 Def007B
+S C$sleep.c$243$1$1 Def0163
+S C$sleep.c$232$2$2 Def0155
+S C$sleep.c$225$1$1 Def0149
+S C$sleep.c$216$1$1 Def013C
+S C$sleep.c$207$1$1 Def010F
+S C$sleep.c$180$1$1 Def00FB
+S C$sleep.c$162$1$1 Def00E3
+S C$sleep.c$153$1$1 Def00D0
+S C$sleep.c$126$1$1 Def007D
+S C$sleep.c$244$1$1 Def0166
+S C$sleep.c$233$2$2 Def0158
+S C$sleep.c$226$1$1 Def014A
+S C$sleep.c$208$1$1 Def0111
+S C$sleep.c$181$1$1 Def00FD
+S C$sleep.c$170$2$2 Def00F2
+S C$sleep.c$163$1$1 Def00E4
+S C$sleep.c$154$1$1 Def00D2
+S C$sleep.c$127$1$1 Def0085
+S A$sleep$800 Def000D
+S C$sleep.c$209$1$1 Def0119
+S C$sleep.c$182$1$1 Def0100
+S C$sleep.c$155$1$1 Def00D8
+S C$sleep.c$146$1$1 Def00B4
+S C$sleep.c$137$1$1 Def00AB
+S XG$sleepMode1$0$0 Def0066
+S A$sleep$900 Def004C
+S C$sleep.c$237$1$1 Def0159
+S C$sleep.c$228$1$1 Def014B
+S C$sleep.c$219$1$1 Def013F
+S XG$sleepMode2$0$0 Def0106
+S C$sleep.c$174$1$1 Def00F3
+S C$sleep.c$165$1$1 Def00E5
+S C$sleep.c$156$1$1 Def00DA
+S C$sleep.c$147$1$1 Def00B7
+S C$sleep.c$138$1$1 Def00AD
+S C$sleep.c$129$1$1 Def0088
+S XG$sleepMode3$0$0 Def0166
+S C$sleep.c$238$1$1 Def015B
+S C$sleep.c$175$1$1 Def00F5
+S C$sleep.c$148$1$1 Def00BE
+S C$sleep.c$139$1$1 Def00AF
+S A$sleep$920 Def005D
+S C$sleep.c$239$1$1 Def015D
+S C$sleep.c$185$1$1 Def0103
+S C$sleep.c$176$1$1 Def00F7
+S C$sleep.c$158$1$1 Def00DC
+S A$sleep$930 Def0063
+S A$sleep$912 Def0057
+S A$sleep$903 Def004E
+S A$sleep$840 Def001F
+S C$sleep.c$195$1$1 Def0107
+S C$sleep.c$186$1$1 Def0106
+S C$sleep.c$159$1$1 Def00DF
+S A$sleep$904 Def0050
+S A$sleep$850 Def0029
+S A$sleep$841 Def0021
+S C$sleep.c$167$2$2 Def00EB
+S A$sleep$923 Def005F
+S A$sleep$905 Def0052
+S A$sleep$842 Def0022
+S A$sleep$833 Def0015
+S A$sleep$770 Def0003
+S C$sleep.c$197$1$1 Def010A
+S C$sleep.c$179$1$1 Def00F9
+S C$sleep.c$168$2$2 Def00EE
+S A$sleep$951 Def006E
+S A$sleep$933 Def0066
+S A$sleep$915 Def0058
+S A$sleep$906 Def0054
+S A$sleep$834 Def0017
+S C$sleep.c$189$1$1 Def0107
+S C$sleep.c$169$2$2 Def00EF
+S C$sleep.c$20$1$1 Def0004
+S A$sleep$970 Def0085
+S A$sleep$961 Def007B
+S A$sleep$952 Def0070
+S A$sleep$871 Def0034
+S A$sleep$853 Def002C
+S G$sleepMode1$0$0 Def002D
+S A$sleep$953 Def0072
+S A$sleep$944 Def0067
+S A$sleep$926 Def0062
+S A$sleep$881 Def003C
+S A$sleep$827 Def000E
+S A$sleep$791 Def0004
+S G$sleepMode2$0$0 Def0067
+S C$sleep.c$31$1$1 Def000E
+S C$sleep.c$15$0$0 Def0000
+S A$sleep$990 Def00A0
+S A$sleep$981 Def0093
+S A$sleep$954 Def0075
+S A$sleep$945 Def0069
+S A$sleep$918 Def0059
+S A$sleep$909 Def0056
+S A$sleep$891 Def0044
+S A$sleep$882 Def003D
+S A$sleep$864 Def002D
+S A$sleep$846 Def0024
+S A$sleep$837 Def001A
+S A$sleep$828 Def0010
+S G$sleepMode3$0$0 Def0107
+S C$sleep.c$41$1$1 Def0024
+S C$sleep.c$23$1$1 Def0004
+S A$sleep$982 Def0095
+S A$sleep$973 Def0088
+S A$sleep$964 Def007D
+S A$sleep$955 Def0077
+S A$sleep$919 Def005B
+S A$sleep$892 Def0045
+S A$sleep$883 Def0040
+S A$sleep$874 Def0037
+S A$sleep$865 Def002F
+S A$sleep$847 Def0026
+S A$sleep$838 Def001C
+S A$sleep$829 Def0013
+S C$sleep.c$60$1$1 Def003A
+S A$sleep$983 Def0097
+S A$sleep$974 Def008A
+S A$sleep$965 Def007F
+S A$sleep$893 Def0048
+S A$sleep$839 Def001E
+S A$sleep$794 Def0007
+S A$sleep$767 Def0000
+S C$sleep.c$61$1$1 Def003C
+S C$sleep.c$43$1$1 Def0029
+S C$sleep.c$34$1$1 Def000E
+S A$sleep$993 Def00A2
+S A$sleep$984 Def009A
+S A$sleep$975 Def008C
+S A$sleep$966 Def0081
+S A$sleep$948 Def006B
+S C$sleep.c$80$1$1 Def0058
+S C$sleep.c$62$1$1 Def0042
+S C$sleep.c$44$1$1 Def002C
+S C$sleep.c$26$1$1 Def0007
+S C$sleep.c$17$1$1 Def0000
+S A$sleep$994 Def00A4
+S A$sleep$985 Def009B
+S A$sleep$976 Def008E
+S A$sleep$967 Def0083
+S A$sleep$958 Def0079
+S A$sleep$877 Def003A
+S A$sleep$868 Def0031
+S C$sleep.c$63$1$1 Def0044
+S C$sleep.c$54$1$1 Def0031
+S C$sleep.c$36$1$1 Def0015
+S C$sleep.c$18$1$1 Def0003
+S A$sleep$995 Def00A6
+S A$sleep$977 Def0091
+S A$sleep$887 Def0042
+S A$sleep$797 Def000A
+S C$sleep.c$64$1$1 Def004A
+S C$sleep.c$46$1$1 Def002D
+S C$sleep.c$28$1$1 Def000A
+S A$sleep$978 Def0092
+S A$sleep$897 Def004A
+S C$sleep.c$65$1$1 Def004C
+S C$sleep.c$29$1$1 Def000D
+S A$sleep$988 Def009C
+S C$sleep.c$91$2$2 Def005F
+S C$sleep.c$57$1$1 Def0034
+S C$sleep.c$39$1$1 Def001A
+S A$sleep$998 Def00A8
+S A$sleep$989 Def009E
+S _sleepInit Def0000
+S C$sleep.c$68$1$1 Def004E
+S C$sleep.c$59$1$1 Def0037
+S C$sleep.c$94$2$2 Def0062
+S C$sleep.c$78$1$1 Def0056
+S _switchToRCOSC Def000E
+S C$sleep.c$88$1$1 Def0059
+S C$sleep.c$79$1$1 Def0057
+S C$sleep.c$98$1$1 Def0063
+S C$sleep.c$99$1$1 Def0066
+S _ISR_ST Def0004
+S XG$sleepInit$0$0 Def0003
+S XG$switchToRCOSC$0$0 Def002C
+S XG$ISR_ST$0$0 Def000D
+A CONST size 0 flags 20 addr 0
+A XINIT size 16 flags 20 addr 0
+S Fsleep$__xinit_PM3_BUF$0$0 Def0007
+S Fsleep$__xinit_dmaDesc$0$0 Def000E
+S Fsleep$__xinit_PM2_BUF$0$0 Def0000
+A CABS size 0 flags 28 addr 0
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00
+R 00 00 00 04
+T 00 00
+R 00 00 00 05
+T 00 00
+R 00 00 00 0A
+T 00 00
+R 00 00 00 0A
+T 00 01
+R 00 00 00 0A
+T 00 01
+R 00 00 00 0A
+T 00 00
+R 00 00 00 0E
+T 00 00
+R 00 00 00 0E
+T 00 07
+R 00 00 00 0E
+T 00 07
+R 00 00 00 0E
+T 00 0E
+R 00 00 00 0E
+T 00 0E
+R 00 00 00 0E
+T 00 00
+R 00 00 00 18
+T 00 00 43 A1 10 22
+R 00 00 00 18
+T 00 04
+R 00 00 00 18
+T 00 04 53 C0 7F 53 A1 FE 53 BE FC 32
+R 00 00 00 18
+T 00 0E
+R 00 00 00 18
+T 00 0E AF BE 53 07 FB 8F BE
+R 00 00 00 18
+T 00 15
+R 00 00 00 18
+T 00 15 E5 BE 30 E5 FB AF C6 74 F8 5F 44 41 FF 8F
+R 00 00 00 18
+T 00 23 C6
+R 00 00 00 18
+T 00 24
+R 00 00 00 18
+T 00 24 E5 C6 30 E6 FB 43 BE 04 22
+R 00 00 00 18
+T 00 2D
+R 00 00 00 18
+T 00 2D AE 82 AF 83 43 A2 03 43 A8 A0 43 A2 04 AD
+R 00 00 00 18
+T 00 3B A5
+R 00 00 00 18
+T 00 3C
+R 00 00 00 18
+T 00 3C ED B5 A5 02 80 FA
+R 00 00 00 18
+T 00 42
+R 00 00 00 18
+T 00 42 AD A5
+R 00 00 00 18
+T 00 44
+R 00 00 00 18
+T 00 44 ED B5 A5 02 80 FA
+R 00 00 00 18
+T 00 4A
+R 00 00 00 18
+T 00 4A 8F A4 8E A3 74 FC 55 BE 44 01 F5 BE 00 00
+R 00 00 00 18
+T 00 58 00 E5 BE 54 03 60 04 43 87 01 00
+R 00 00 00 18
+T 00 63
+R 00 00 00 18
+T 00 63 12 00 00 22
+R 00 00 00 18 02 03 00 A5
+T 00 67
+R 00 00 00 18
+T 00 67 AE 82 AF 83 43 A2 03 C0 07 C0 06 12 00 0E
+R 00 00 00 18 00 0E 00 18
+T 00 75 D0 06 D0 07 AD D5 AC D4 E5 D6 54 01 24 FF
+R 00 00 00 18
+T 00 83 92 00 00 00 43 D6 81 7A 00 00 00 7B
+R 00 00 00 18 F1 21 03 00 0A F1 01 0A 00 0E
+T 00 8B 00 00 00 8B 02 90 00 0E EA F0 7A
+R 00 00 00 18 F1 81 02 00 0E 00 08 00 0E
+T 00 94 00 00 00 7B 00 00 00 90
+R 00 00 00 18 F1 01 02 00 0E F1 81 06 00 0E
+T 00 98 00 0F EA F0 7A 00 00 0E 7B
+R 00 00 00 18 00 02 00 0E F1 01 07 00 0E
+T 00 9F 00 00 0E 8B D5 7A 00 00 0E 7B
+R 00 00 00 18 F1 81 02 00 0E F1 01 08 00 0E
+T 00 A5 00 00 0E 8A D4 75 D6 01 AB A8 AA B8 A9 9A
+R 00 00 00 18 F1 81 02 00 0E
+T 00 B1 43 A8 A0 53 A8 A0 A8 B8 53 00 C0 88 B8 A8
+R 00 00 00 18
+T 00 BF 9A 53 00 C0 88 9A 43 A2 04 A8 A5
+R 00 00 00 18
+T 00 CA
+R 00 00 00 18
+T 00 CA E8 B5 A5 02 80 FA
+R 00 00 00 18
+T 00 D0
+R 00 00 00 18
+T 00 D0 A8 A5
+R 00 00 00 18
+T 00 D2
+R 00 00 00 18
+T 00 D2 E8 B5 A5 02 80 FA
+R 00 00 00 18
+T 00 D8
+R 00 00 00 18
+T 00 D8 8F A4 8E A3 43 C7 02 75 BE 06 00 00 00 E5
+R 00 00 00 18
+T 00 E6 BE 54 03 60 08 75 D7 01 00 43 87 01 00
+R 00 00 00 18
+T 00 F3
+R 00 00 00 18
+T 00 F3 8B A8 8A B8 89 9A 8D D5 8C D4 30 00 00 00
+R 00 00 00 18 F1 21 0D 00 0A
+T 00 FF 03 43 D6 01
+R 00 00 00 18
+T 01 03
+R 00 00 00 18
+T 01 03 12 00 00 22
+R 00 00 00 18 02 03 00 A5
+T 01 07
+R 00 00 00 18
+T 01 07 43 A2 03 12 00 0E AF D5 AE D4 E5 D6 54 01
+R 00 00 00 18 00 06 00 18
+T 01 15 24 FF 92 00 00 01 43 D6 81 7C 00 00 07 7D
+R 00 00 00 18 F1 21 05 00 0A F1 01 0C 00 0E
+T 01 1F 00 00 07 8D 04 90 00 0E EC F0 7C
+R 00 00 00 18 F1 81 02 00 0E 00 08 00 0E
+T 01 28 00 00 07 7D 00 00 07 90
+R 00 00 00 18 F1 01 02 00 0E F1 81 06 00 0E
+T 01 2C 00 0F EC F0 7C 00 00 0E 7D
+R 00 00 00 18 00 02 00 0E F1 01 07 00 0E
+T 01 33 00 00 0E 8D D5 7C 00 00 0E 7D
+R 00 00 00 18 F1 81 02 00 0E F1 01 08 00 0E
+T 01 39 00 00 0E 8C D4 75 D6 01 43 A8 80 43 C7 02
+R 00 00 00 18 F1 81 02 00 0E
+T 01 45 75 BE 07 00 00 00 E5 BE 54 03 60 08 75 D7
+R 00 00 00 18
+T 01 53 01 00 43 87 01 00
+R 00 00 00 18
+T 01 59
+R 00 00 00 18
+T 01 59 8F D5 8E D4 30 00 00 01 03 43 D6 01
+R 00 00 00 18 F1 21 07 00 0A
+T 01 63
+R 00 00 00 18
+T 01 63 12 00 00 22
+R 00 00 00 18 02 03 00 A5
+T 00 00
+R 00 00 00 1A
+T 00 00 06 06 06 06 06 06 04
+R 00 00 00 1A
+T 00 07
+R 00 00 00 1A
+T 00 07 07 07 07 07 07 07 04
+R 00 00 00 1A
+T 00 0E
+R 00 00 00 1A
+T 00 0E 00 00 DF BE 00 07 20 42
+R 00 00 00 1A

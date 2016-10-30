@@ -1,0 +1,3306 @@
+<SDCCLIB>
+
+<INDEX>
+     27335
+<MODULE>
+random 11
+Frandom$IRCON2$0$0
+Frandom$WORCTRL$0$0
+Frandom$PKTLEN$0$0
+Frandom$AGCCTRL0$0$0
+Frandom$ADCH$0$0
+Frandom$AGCCTRL1$0$0
+Frandom$FWT$0$0
+Frandom$AGCCTRL2$0$0
+Frandom$DMA0CFG$0$0
+Frandom$T1CNTH$0$0
+Frandom$DMA1CFG$0$0
+Frandom$ENCIF_0$0$0
+Frandom$ADCL$0$0
+Frandom$RS0$0$0
+Frandom$ENCIF_1$0$0
+Frandom$F0$0$0
+Frandom$RS1$0$0
+Frandom$T1CNTL$0$0
+Frandom$P0IFG$0$0
+Frandom$F1$0$0
+Frandom$WOREVT0$0$0
+Frandom$P1IFG$0$0
+Frandom$ADCCFG$0$0
+Frandom$WOREVT1$0$0
+Frandom$P2IFG$0$0
+Frandom$TIMIF$0$0
+Frandom$SLEEP$0$0
+Frandom$ADCCON1$0$0
+Frandom$PSW$0$0
+Frandom$ADCCON2$0$0
+Frandom$ADDR$0$0
+Frandom$T1CC0$0$0
+Frandom$IRCON$0$0
+Frandom$ADCCON3$0$0
+Frandom$CY$0$0
+Frandom$T1CC1$0$0
+Frandom$PICTL$0$0
+Frandom$URX0IE$0$0
+Frandom$T1CC2$0$0
+Frandom$T3CC0$0$0
+Frandom$P1IEN$0$0
+Frandom$I2SCLKF0$0$0
+Frandom$MDMCFG0$0$0
+Frandom$FREQ0$0$0
+Frandom$WDTIF$0$0
+Frandom$URX1IE$0$0
+Frandom$URX0IF$0$0
+Frandom$T4CC0$0$0
+Frandom$T3CC1$0$0
+Frandom$WDCTL$0$0
+Frandom$I2SCLKF1$0$0
+Frandom$MDMCFG1$0$0
+Frandom$FREQ1$0$0
+Frandom$URX1IF$0$0
+Frandom$P0DIR$0$0
+Frandom$T4CC1$0$0
+Frandom$USBF0$0$0
+Frandom$USBPOW$0$0
+Frandom$I2SCLKF2$0$0
+Frandom$MCSM0$0$0
+Frandom$MDMCFG2$0$0
+Frandom$FREQ2$0$0
+Frandom$UTX0IF$0$0
+Frandom$P1DIR$0$0
+Frandom$P0$0$0
+Frandom$USBF1$0$0
+Frandom$MCSM1$0$0
+Frandom$MDMCFG3$0$0
+Frandom$_IRCON25$0$0
+Frandom$UTX1IF$0$0
+Frandom$OVFIM$0$0
+Frandom$P2DIR$0$0
+Frandom$U0GCR$0$0
+Frandom$P1$0$0
+Frandom$USBF2$0$0
+Frandom$USBINDEX$0$0
+Frandom$MCSM2$0$0
+Frandom$MDMCFG4$0$0
+Frandom$U1ACTIVE$0$0
+Frandom$_IRCON26$0$0
+Frandom$_TCON_0$0$0
+Frandom$U1GCR$0$0
+Frandom$B$0$0
+Frandom$P2$0$0
+Frandom$USBF3$0$0
+Frandom$U1RX_BYTE$0$0
+Frandom$_IRCON27$0$0
+Frandom$S0CON$0$0
+Frandom$SP$0$0
+Frandom$USBF4$0$0
+Frandom$_TCON_2$0$0
+Frandom$P0SEL$0$0
+Frandom$WORIRQ$0$0
+Frandom$S1CON$0$0
+Frandom$USBF5$0$0
+Frandom$USBADDR$0$0
+Frandom$U1TX_BYTE$0$0
+Frandom$OV$0$0
+Frandom$P1SEL$0$0
+Frandom$_TCON_4$0$0
+Frandom$P2SEL$0$0
+Frandom$RFIF$0$0
+Frandom$ACC$0$0
+Frandom$P0INP$0$0
+Frandom$PA_TABLE0$0$0
+Frandom$FOCCFG$0$0
+Frandom$_TCON_6$0$0
+Frandom$ADC$0$0
+Frandom$P1INP$0$0
+Frandom$T1CTL$0$0
+Frandom$P2INP$0$0
+Frandom$FCTL$0$0
+Frandom$FADDRH$0$0
+Frandom$T2CTL$0$0
+Frandom$T3CTL$0$0
+Frandom$DEVIATN$0$0
+Frandom$T4CTL$0$0
+Frandom$T3CNT$0$0
+Frandom$RNDH$0$0
+Frandom$IEN0$0$0
+Frandom$DPH0$0$0
+Frandom$SYNC0$0$0
+Frandom$T4CNT$0$0
+Frandom$IEN1$0$0
+Frandom$FADDRL$0$0
+Frandom$U0CSR$0$0
+Frandom$DPH1$0$0
+Frandom$I2SCFG0$0$0
+Frandom$SYNC1$0$0
+Frandom$P0IE$0$0
+Frandom$U1CSR$0$0
+Frandom$IEN2$0$0
+Frandom$RFIM$0$0
+Frandom$I2SDATH$0$0
+Frandom$I2SCFG1$0$0
+Frandom$U1ERR$0$0
+Frandom$_TIMIF7$0$0
+Frandom$P0IF$0$0
+Frandom$P0_0$0$0
+Frandom$U0UCR$0$0
+Frandom$ENDIAN$0$0
+Frandom$TEST0$0$0
+Frandom$P1IF$0$0
+Frandom$P$0$0
+Frandom$_IRCON6$0$0
+Frandom$P1_0$0$0
+Frandom$P0_1$0$0
+Frandom$U1UCR$0$0
+Frandom$RNDL$0$0
+Frandom$PCON$0$0
+Frandom$DPL0$0$0
+Frandom$USBCSIH$0$0
+Frandom$TEST1$0$0
+Frandom$U1FE$0$0
+Frandom$B_0$0$0
+Frandom$P2IF$0$0
+Frandom$T3CH0IF$0$0
+Frandom$P2_0$0$0
+Frandom$P1_1$0$0
+Frandom$P0_2$0$0
+Frandom$DPL1$0$0
+Frandom$TEST2$0$0
+Frandom$B_1$0$0
+Frandom$T4CH0IF$0$0
+Frandom$T3CH1IF$0$0
+Frandom$P2_1$0$0
+Frandom$P1_2$0$0
+Frandom$P0_3$0$0
+Frandom$DMAARM$0$0
+Frandom$I2SDATL$0$0
+Frandom$PKTSTATUS$0$0
+Frandom$B_2$0$0
+Frandom$T4CH1IF$0$0
+Frandom$T1IE$0$0
+Frandom$P2_2$0$0
+Frandom$_SOCON2$0$0
+Frandom$P1_3$0$0
+Frandom$P0_4$0$0
+Frandom$PKTCTRL0$0$0
+Frandom$B_3$0$0
+Frandom$T1IF$0$0
+Frandom$T2IE$0$0
+Frandom$P2_3$0$0
+Frandom$_SOCON3$0$0
+Frandom$P1_4$0$0
+Frandom$P0_5$0$0
+Frandom$TCON$0$0
+Frandom$USBCSIL$0$0
+Frandom$PKTCTRL1$0$0
+Frandom$B_4$0$0
+Frandom$T2IF$0$0
+Frandom$T3IE$0$0
+Frandom$STIE$0$0
+Frandom$P2_4$0$0
+Frandom$_SOCON4$0$0
+Frandom$P1_5$0$0
+Frandom$P0_6$0$0
+Frandom$B_5$0$0
+Frandom$ACC_0$0$0
+Frandom$STIF$0$0
+Frandom$T3IF$0$0
+Frandom$T4IE$0$0
+Frandom$ADCIE$0$0
+Frandom$P2_5$0$0
+Frandom$_SOCON5$0$0
+Frandom$P1_6$0$0
+Frandom$P0_7$0$0
+Frandom$USBCNTH$0$0
+Frandom$USBCSOH$0$0
+Frandom$USBFRMH$0$0
+Frandom$B_6$0$0
+Frandom$ACC_1$0$0
+Frandom$T4IF$0$0
+Frandom$P2_6$0$0
+Frandom$_SOCON6$0$0
+Frandom$P1_7$0$0
+Frandom$ADCIF$0$0
+Frandom$PERCFG$0$0
+Frandom$FWDATA$0$0
+Frandom$WORTIME0$0$0
+Frandom$IOCFG0$0$0
+Frandom$B_7$0$0
+Frandom$ACC_2$0$0
+Frandom$P2_7$0$0
+Frandom$_SOCON7$0$0
+Frandom$WORTIME1$0$0
+Frandom$USBMAXI$0$0
+Frandom$IOCFG1$0$0
+Frandom$FSCAL0$0$0
+Frandom$ACC_3$0$0
+Frandom$FREQEST$0$0
+Frandom$IOCFG2$0$0
+Frandom$FSCAL1$0$0
+Frandom$CHANNR$0$0
+Frandom$ACC_4$0$0
+Frandom$DMAREQ$0$0
+Frandom$DMA0CFGH$0$0
+Frandom$CLKCON$0$0
+Frandom$USBCNTL$0$0
+Frandom$USBCSOL$0$0
+Frandom$USBFRML$0$0
+Frandom$USBCIE$0$0
+Frandom$FSCAL2$0$0
+Frandom$ACC_5$0$0
+Frandom$T1CCTL0$0$0
+Frandom$DMA1CFGH$0$0
+Frandom$USBCIF$0$0
+Frandom$FSCAL3$0$0
+Frandom$ACC_6$0$0
+Frandom$RFTXRXIE$0$0
+Frandom$T1CCTL1$0$0
+Frandom$RFD$0$0
+Frandom$U1RE$0$0
+Frandom$ACC_7$0$0
+Frandom$RFTXRXIF$0$0
+Frandom$T1CCTL2$0$0
+Frandom$T3CCTL0$0$0
+Frandom$T2CT$0$0
+Frandom$FSCTRL0$0$0
+Frandom$T4CCTL0$0$0
+Frandom$DMA0CFGL$0$0
+Frandom$DMAIRQ$0$0
+Frandom$T3CCTL1$0$0
+Frandom$USBMAXO$0$0
+Frandom$FREND0$0$0
+Frandom$FSCTRL1$0$0
+Frandom$T4CCTL1$0$0
+Frandom$RFST$0$0
+Frandom$DMA1CFGL$0$0
+Frandom$FREND1$0$0
+Frandom$DMAIE$0$0
+Frandom$USBIIE$0$0
+Frandom$RSSI$0$0
+Frandom$U1SLAVE$0$0
+Frandom$T3OVFIF$0$0
+Frandom$DMAIF$0$0
+Frandom$_IEN06$0$0
+Frandom$FADDR$0$0
+Frandom$U0BAUD$0$0
+Frandom$USBIIF$0$0
+Frandom$T4OVFIF$0$0
+Frandom$_IEN16$0$0
+Frandom$U1BAUD$0$0
+Frandom$_IEN17$0$0
+Frandom$T1CC0H$0$0
+Frandom$ENCDI$0$0
+Frandom$MARCSTATE$0$0
+Frandom$AC$0$0
+Frandom$ENCIE$0$0
+Frandom$T1CC1H$0$0
+Frandom$BSCFG$0$0
+Frandom$T1CC2H$0$0
+Frandom$LQI$0$0
+Frandom$VERSION$0$0
+Frandom$EA$0$0
+Frandom$U0DBUF$0$0
+Frandom$USBOIE$0$0
+Frandom$VCO_VC_DAC$0$0
+Frandom$PARTNUM$0$0
+Frandom$U1DBUF$0$0
+Frandom$T1CC0L$0$0
+Frandom$DPS$0$0
+Frandom$USBOIF$0$0
+Frandom$T1CC1L$0$0
+Frandom$MEMCTR$0$0
+Frandom$T2PR$0$0
+Frandom$T1CC2L$0$0
+Frandom$ENCDO$0$0
+Frandom$IP0$0$0
+Frandom$I2SSTAT$0$0
+Frandom$I2SWCNT$0$0
+Frandom$IP1$0$0
+Frandom$MPAGE$0$0
+Frandom$U1MODE$0$0
+.__.ABS.
+Frandom$ENCCS$0$0
+Lrandom.randomSeed$seed_lsb$1$1
+_randomSeed_PARM_2
+_randomSeed
+A$random$801
+A$random$802
+A$random$812
+A$random$803
+A$random$750
+A$random$760
+A$random$815
+A$random$806
+A$random$780
+A$random$781
+A$random$754
+C$random.c$30$1$1
+C$random.c$12$1$1
+A$random$809
+A$random$782
+C$random.c$31$1$1
+C$random.c$13$1$1
+A$random$792
+A$random$783
+A$random$765
+A$random$747
+C$random.c$32$1$1
+C$random.c$23$1$1
+C$random.c$14$1$1
+A$random$793
+A$random$757
+A$random$748
+XG$randomSeed$0$0
+C$random.c$33$1$1
+C$random.c$15$1$1
+A$random$794
+A$random$785
+A$random$776
+A$random$758
+A$random$749
+C$random.c$16$1$1
+A$random$786
+A$random$759
+A$random$787
+C$random.c$25$2$2
+C$random.c$18$1$1
+A$random$788
+A$random$779
+C$random.c$28$1$1
+A$random$798
+C$random.c$29$1$1
+G$randomSeed$0$0
+C$random.c$9$0$0
+_randomNumber
+XG$randomNumber$0$0
+G$randomNumber$0$0
+</MODULE>
+
+<MODULE>
+random_from_sernum 24670
+Frandom_from_sernum$USBIIE$0$0
+Frandom_from_sernum$RSSI$0$0
+Frandom_from_sernum$U1SLAVE$0$0
+Frandom_from_sernum$T3OVFIF$0$0
+Frandom_from_sernum$DMAIF$0$0
+Frandom_from_sernum$_IEN06$0$0
+Frandom_from_sernum$FADDR$0$0
+Frandom_from_sernum$U0BAUD$0$0
+Frandom_from_sernum$USBIIF$0$0
+Frandom_from_sernum$T4OVFIF$0$0
+Frandom_from_sernum$_IEN16$0$0
+Frandom_from_sernum$U1BAUD$0$0
+Frandom_from_sernum$_IEN17$0$0
+Frandom_from_sernum$T1CC0H$0$0
+Frandom_from_sernum$ENCDI$0$0
+Frandom_from_sernum$MARCSTATE$0$0
+Frandom_from_sernum$AC$0$0
+Frandom_from_sernum$ENCIE$0$0
+Frandom_from_sernum$T1CC1H$0$0
+Frandom_from_sernum$BSCFG$0$0
+Frandom_from_sernum$T1CC2H$0$0
+Frandom_from_sernum$LQI$0$0
+Frandom_from_sernum$VERSION$0$0
+Frandom_from_sernum$EA$0$0
+Frandom_from_sernum$U0DBUF$0$0
+Frandom_from_sernum$USBOIE$0$0
+Frandom_from_sernum$VCO_VC_DAC$0$0
+Frandom_from_sernum$PARTNUM$0$0
+Frandom_from_sernum$U1DBUF$0$0
+Frandom_from_sernum$T1CC0L$0$0
+Frandom_from_sernum$DPS$0$0
+Frandom_from_sernum$USBOIF$0$0
+Frandom_from_sernum$T1CC1L$0$0
+Frandom_from_sernum$MEMCTR$0$0
+Frandom_from_sernum$T2PR$0$0
+Frandom_from_sernum$T1CC2L$0$0
+Frandom_from_sernum$ENCDO$0$0
+Frandom_from_sernum$IP0$0$0
+Frandom_from_sernum$I2SSTAT$0$0
+Frandom_from_sernum$I2SWCNT$0$0
+Frandom_from_sernum$IP1$0$0
+Frandom_from_sernum$MPAGE$0$0
+Frandom_from_sernum$U1MODE$0$0
+Frandom_from_sernum$ENCCS$0$0
+Frandom_from_sernum$IRCON2$0$0
+Frandom_from_sernum$WORCTRL$0$0
+Frandom_from_sernum$PKTLEN$0$0
+Frandom_from_sernum$AGCCTRL0$0$0
+Frandom_from_sernum$ADCH$0$0
+Frandom_from_sernum$AGCCTRL1$0$0
+Frandom_from_sernum$FWT$0$0
+Frandom_from_sernum$AGCCTRL2$0$0
+Frandom_from_sernum$DMA0CFG$0$0
+Frandom_from_sernum$T1CNTH$0$0
+Frandom_from_sernum$DMA1CFG$0$0
+Frandom_from_sernum$ENCIF_0$0$0
+Frandom_from_sernum$ADCL$0$0
+Frandom_from_sernum$RS0$0$0
+Frandom_from_sernum$ENCIF_1$0$0
+Frandom_from_sernum$F0$0$0
+Frandom_from_sernum$RS1$0$0
+Frandom_from_sernum$T1CNTL$0$0
+Frandom_from_sernum$P0IFG$0$0
+Frandom_from_sernum$F1$0$0
+Frandom_from_sernum$WOREVT0$0$0
+Frandom_from_sernum$P1IFG$0$0
+Frandom_from_sernum$ADCCFG$0$0
+Frandom_from_sernum$WOREVT1$0$0
+Frandom_from_sernum$P2IFG$0$0
+Frandom_from_sernum$TIMIF$0$0
+Frandom_from_sernum$SLEEP$0$0
+Frandom_from_sernum$ADCCON1$0$0
+Frandom_from_sernum$PSW$0$0
+Frandom_from_sernum$ADCCON2$0$0
+Frandom_from_sernum$ADDR$0$0
+Frandom_from_sernum$T1CC0$0$0
+Frandom_from_sernum$IRCON$0$0
+Frandom_from_sernum$ADCCON3$0$0
+Frandom_from_sernum$CY$0$0
+Frandom_from_sernum$T1CC1$0$0
+Frandom_from_sernum$PICTL$0$0
+Frandom_from_sernum$URX0IE$0$0
+Frandom_from_sernum$T1CC2$0$0
+Frandom_from_sernum$T3CC0$0$0
+Frandom_from_sernum$P1IEN$0$0
+Frandom_from_sernum$I2SCLKF0$0$0
+Frandom_from_sernum$MDMCFG0$0$0
+Frandom_from_sernum$FREQ0$0$0
+Frandom_from_sernum$WDTIF$0$0
+Frandom_from_sernum$URX1IE$0$0
+Frandom_from_sernum$URX0IF$0$0
+Frandom_from_sernum$T4CC0$0$0
+Frandom_from_sernum$T3CC1$0$0
+Frandom_from_sernum$WDCTL$0$0
+Frandom_from_sernum$I2SCLKF1$0$0
+Frandom_from_sernum$MDMCFG1$0$0
+Frandom_from_sernum$FREQ1$0$0
+Frandom_from_sernum$URX1IF$0$0
+Frandom_from_sernum$P0DIR$0$0
+Frandom_from_sernum$T4CC1$0$0
+Frandom_from_sernum$USBF0$0$0
+Frandom_from_sernum$USBPOW$0$0
+Frandom_from_sernum$I2SCLKF2$0$0
+Frandom_from_sernum$MCSM0$0$0
+Frandom_from_sernum$MDMCFG2$0$0
+Frandom_from_sernum$FREQ2$0$0
+Frandom_from_sernum$UTX0IF$0$0
+Frandom_from_sernum$P1DIR$0$0
+Frandom_from_sernum$P0$0$0
+Frandom_from_sernum$USBF1$0$0
+Frandom_from_sernum$MCSM1$0$0
+Frandom_from_sernum$MDMCFG3$0$0
+Frandom_from_sernum$_IRCON25$0$0
+Frandom_from_sernum$UTX1IF$0$0
+Frandom_from_sernum$OVFIM$0$0
+Frandom_from_sernum$P2DIR$0$0
+Frandom_from_sernum$U0GCR$0$0
+Frandom_from_sernum$P1$0$0
+Frandom_from_sernum$USBF2$0$0
+Frandom_from_sernum$USBINDEX$0$0
+Frandom_from_sernum$MCSM2$0$0
+Frandom_from_sernum$MDMCFG4$0$0
+Frandom_from_sernum$U1ACTIVE$0$0
+Frandom_from_sernum$_IRCON26$0$0
+Frandom_from_sernum$_TCON_0$0$0
+Frandom_from_sernum$U1GCR$0$0
+Frandom_from_sernum$B$0$0
+Frandom_from_sernum$P2$0$0
+Frandom_from_sernum$USBF3$0$0
+Frandom_from_sernum$U1RX_BYTE$0$0
+Frandom_from_sernum$_IRCON27$0$0
+Frandom_from_sernum$S0CON$0$0
+Frandom_from_sernum$SP$0$0
+Frandom_from_sernum$USBF4$0$0
+Frandom_from_sernum$_TCON_2$0$0
+Frandom_from_sernum$P0SEL$0$0
+Frandom_from_sernum$WORIRQ$0$0
+Frandom_from_sernum$S1CON$0$0
+Frandom_from_sernum$USBF5$0$0
+Frandom_from_sernum$USBADDR$0$0
+Frandom_from_sernum$U1TX_BYTE$0$0
+Frandom_from_sernum$OV$0$0
+Frandom_from_sernum$P1SEL$0$0
+Frandom_from_sernum$_TCON_4$0$0
+Frandom_from_sernum$P2SEL$0$0
+Frandom_from_sernum$RFIF$0$0
+Frandom_from_sernum$ACC$0$0
+Frandom_from_sernum$P0INP$0$0
+Frandom_from_sernum$PA_TABLE0$0$0
+Frandom_from_sernum$FOCCFG$0$0
+Frandom_from_sernum$_TCON_6$0$0
+Frandom_from_sernum$ADC$0$0
+Frandom_from_sernum$P1INP$0$0
+Frandom_from_sernum$T1CTL$0$0
+Frandom_from_sernum$P2INP$0$0
+Frandom_from_sernum$FCTL$0$0
+Frandom_from_sernum$FADDRH$0$0
+Frandom_from_sernum$T2CTL$0$0
+Frandom_from_sernum$T3CTL$0$0
+Frandom_from_sernum$DEVIATN$0$0
+Frandom_from_sernum$T4CTL$0$0
+Frandom_from_sernum$T3CNT$0$0
+Frandom_from_sernum$RNDH$0$0
+Frandom_from_sernum$IEN0$0$0
+Frandom_from_sernum$DPH0$0$0
+Frandom_from_sernum$SYNC0$0$0
+Frandom_from_sernum$T4CNT$0$0
+Frandom_from_sernum$IEN1$0$0
+Frandom_from_sernum$FADDRL$0$0
+Frandom_from_sernum$U0CSR$0$0
+Frandom_from_sernum$DPH1$0$0
+Frandom_from_sernum$I2SCFG0$0$0
+Frandom_from_sernum$SYNC1$0$0
+Frandom_from_sernum$P0IE$0$0
+Frandom_from_sernum$U1CSR$0$0
+Frandom_from_sernum$IEN2$0$0
+Frandom_from_sernum$RFIM$0$0
+Frandom_from_sernum$I2SDATH$0$0
+Frandom_from_sernum$I2SCFG1$0$0
+Frandom_from_sernum$U1ERR$0$0
+Frandom_from_sernum$_TIMIF7$0$0
+Frandom_from_sernum$P0IF$0$0
+Frandom_from_sernum$P0_0$0$0
+Frandom_from_sernum$U0UCR$0$0
+Frandom_from_sernum$ENDIAN$0$0
+Frandom_from_sernum$TEST0$0$0
+Frandom_from_sernum$P1IF$0$0
+Frandom_from_sernum$P$0$0
+Frandom_from_sernum$_IRCON6$0$0
+Frandom_from_sernum$P1_0$0$0
+Frandom_from_sernum$P0_1$0$0
+Frandom_from_sernum$U1UCR$0$0
+Frandom_from_sernum$RNDL$0$0
+Frandom_from_sernum$PCON$0$0
+Frandom_from_sernum$DPL0$0$0
+Frandom_from_sernum$USBCSIH$0$0
+Frandom_from_sernum$TEST1$0$0
+Frandom_from_sernum$U1FE$0$0
+Frandom_from_sernum$B_0$0$0
+Frandom_from_sernum$P2IF$0$0
+Frandom_from_sernum$T3CH0IF$0$0
+Frandom_from_sernum$P2_0$0$0
+Frandom_from_sernum$P1_1$0$0
+Frandom_from_sernum$P0_2$0$0
+Frandom_from_sernum$DPL1$0$0
+Frandom_from_sernum$TEST2$0$0
+Frandom_from_sernum$B_1$0$0
+Frandom_from_sernum$T4CH0IF$0$0
+Frandom_from_sernum$T3CH1IF$0$0
+Frandom_from_sernum$P2_1$0$0
+Frandom_from_sernum$P1_2$0$0
+Frandom_from_sernum$P0_3$0$0
+Frandom_from_sernum$DMAARM$0$0
+Frandom_from_sernum$I2SDATL$0$0
+Frandom_from_sernum$PKTSTATUS$0$0
+Frandom_from_sernum$B_2$0$0
+Frandom_from_sernum$T4CH1IF$0$0
+Frandom_from_sernum$T1IE$0$0
+Frandom_from_sernum$P2_2$0$0
+Frandom_from_sernum$_SOCON2$0$0
+Frandom_from_sernum$P1_3$0$0
+Frandom_from_sernum$P0_4$0$0
+Frandom_from_sernum$PKTCTRL0$0$0
+Frandom_from_sernum$B_3$0$0
+Frandom_from_sernum$T1IF$0$0
+Frandom_from_sernum$T2IE$0$0
+Frandom_from_sernum$P2_3$0$0
+Frandom_from_sernum$_SOCON3$0$0
+Frandom_from_sernum$P1_4$0$0
+Frandom_from_sernum$P0_5$0$0
+Frandom_from_sernum$TCON$0$0
+Frandom_from_sernum$USBCSIL$0$0
+Frandom_from_sernum$PKTCTRL1$0$0
+Frandom_from_sernum$B_4$0$0
+Frandom_from_sernum$T2IF$0$0
+Frandom_from_sernum$T3IE$0$0
+Frandom_from_sernum$STIE$0$0
+Frandom_from_sernum$P2_4$0$0
+Frandom_from_sernum$_SOCON4$0$0
+Frandom_from_sernum$P1_5$0$0
+Frandom_from_sernum$P0_6$0$0
+Frandom_from_sernum$B_5$0$0
+Frandom_from_sernum$ACC_0$0$0
+Frandom_from_sernum$STIF$0$0
+Frandom_from_sernum$T3IF$0$0
+Frandom_from_sernum$T4IE$0$0
+Frandom_from_sernum$ADCIE$0$0
+Frandom_from_sernum$P2_5$0$0
+Frandom_from_sernum$_SOCON5$0$0
+Frandom_from_sernum$P1_6$0$0
+Frandom_from_sernum$P0_7$0$0
+Frandom_from_sernum$USBCNTH$0$0
+Frandom_from_sernum$USBCSOH$0$0
+Frandom_from_sernum$USBFRMH$0$0
+Frandom_from_sernum$B_6$0$0
+Frandom_from_sernum$ACC_1$0$0
+Frandom_from_sernum$T4IF$0$0
+Frandom_from_sernum$P2_6$0$0
+Frandom_from_sernum$_SOCON6$0$0
+Frandom_from_sernum$P1_7$0$0
+Frandom_from_sernum$ADCIF$0$0
+Frandom_from_sernum$PERCFG$0$0
+Frandom_from_sernum$FWDATA$0$0
+Frandom_from_sernum$WORTIME0$0$0
+Frandom_from_sernum$IOCFG0$0$0
+Frandom_from_sernum$B_7$0$0
+Frandom_from_sernum$ACC_2$0$0
+Frandom_from_sernum$P2_7$0$0
+Frandom_from_sernum$_SOCON7$0$0
+Frandom_from_sernum$WORTIME1$0$0
+Frandom_from_sernum$USBMAXI$0$0
+Frandom_from_sernum$IOCFG1$0$0
+Frandom_from_sernum$FSCAL0$0$0
+Frandom_from_sernum$ACC_3$0$0
+Frandom_from_sernum$FREQEST$0$0
+Frandom_from_sernum$IOCFG2$0$0
+Frandom_from_sernum$FSCAL1$0$0
+Frandom_from_sernum$CHANNR$0$0
+Frandom_from_sernum$ACC_4$0$0
+Frandom_from_sernum$DMAREQ$0$0
+Frandom_from_sernum$DMA0CFGH$0$0
+Frandom_from_sernum$CLKCON$0$0
+Frandom_from_sernum$USBCNTL$0$0
+Frandom_from_sernum$USBCSOL$0$0
+Frandom_from_sernum$USBFRML$0$0
+Frandom_from_sernum$USBCIE$0$0
+Frandom_from_sernum$FSCAL2$0$0
+Frandom_from_sernum$ACC_5$0$0
+Frandom_from_sernum$T1CCTL0$0$0
+Frandom_from_sernum$DMA1CFGH$0$0
+Frandom_from_sernum$USBCIF$0$0
+Frandom_from_sernum$FSCAL3$0$0
+Frandom_from_sernum$ACC_6$0$0
+Frandom_from_sernum$RFTXRXIE$0$0
+Frandom_from_sernum$T1CCTL1$0$0
+Frandom_from_sernum$RFD$0$0
+Frandom_from_sernum$U1RE$0$0
+Frandom_from_sernum$ACC_7$0$0
+Frandom_from_sernum$RFTXRXIF$0$0
+Frandom_from_sernum$T1CCTL2$0$0
+Frandom_from_sernum$T3CCTL0$0$0
+Frandom_from_sernum$T2CT$0$0
+Frandom_from_sernum$FSCTRL0$0$0
+Frandom_from_sernum$T4CCTL0$0$0
+Frandom_from_sernum$DMA0CFGL$0$0
+Frandom_from_sernum$DMAIRQ$0$0
+Frandom_from_sernum$T3CCTL1$0$0
+Frandom_from_sernum$USBMAXO$0$0
+Frandom_from_sernum$FREND0$0$0
+Frandom_from_sernum$FSCTRL1$0$0
+Frandom_from_sernum$T4CCTL1$0$0
+Frandom_from_sernum$RFST$0$0
+Frandom_from_sernum$DMA1CFGL$0$0
+.__.ABS.
+Frandom_from_sernum$FREND1$0$0
+Frandom_from_sernum$DMAIE$0$0
+XG$randomSeedFromSerialNumber$0$0
+A$random_from_sernum$750
+G$randomSeedFromSerialNumber$0$0
+A$random_from_sernum$751
+A$random_from_sernum$742
+A$random_from_sernum$752
+A$random_from_sernum$743
+A$random_from_sernum$744
+A$random_from_sernum$745
+A$random_from_sernum$755
+A$random_from_sernum$746
+A$random_from_sernum$747
+A$random_from_sernum$748
+A$random_from_sernum$749
+C$random_from_sernum.c$17$1$1
+C$random_from_sernum.c$18$1$1
+C$random_from_sernum.c$9$0$0
+_randomSeedFromSerialNumber
+</MODULE>
+
+<MODULE>
+random_from_adc 56170
+Frandom_from_adc$I2SDATL$0$0
+Frandom_from_adc$PKTSTATUS$0$0
+Frandom_from_adc$B_2$0$0
+Frandom_from_adc$T4CH1IF$0$0
+Frandom_from_adc$T1IE$0$0
+Frandom_from_adc$P2_2$0$0
+Frandom_from_adc$_SOCON2$0$0
+Frandom_from_adc$P1_3$0$0
+Frandom_from_adc$P0_4$0$0
+Frandom_from_adc$PKTCTRL0$0$0
+Frandom_from_adc$B_3$0$0
+Frandom_from_adc$T1IF$0$0
+Frandom_from_adc$T2IE$0$0
+Frandom_from_adc$P2_3$0$0
+Frandom_from_adc$_SOCON3$0$0
+Frandom_from_adc$P1_4$0$0
+Frandom_from_adc$P0_5$0$0
+Frandom_from_adc$TCON$0$0
+Frandom_from_adc$USBCSIL$0$0
+Frandom_from_adc$PKTCTRL1$0$0
+Frandom_from_adc$B_4$0$0
+Frandom_from_adc$T2IF$0$0
+Frandom_from_adc$T3IE$0$0
+Frandom_from_adc$STIE$0$0
+Frandom_from_adc$P2_4$0$0
+Frandom_from_adc$_SOCON4$0$0
+Frandom_from_adc$P1_5$0$0
+Frandom_from_adc$P0_6$0$0
+Frandom_from_adc$B_5$0$0
+Frandom_from_adc$ACC_0$0$0
+Frandom_from_adc$STIF$0$0
+Frandom_from_adc$T3IF$0$0
+Frandom_from_adc$T4IE$0$0
+Frandom_from_adc$ADCIE$0$0
+Frandom_from_adc$P2_5$0$0
+Frandom_from_adc$_SOCON5$0$0
+Frandom_from_adc$P1_6$0$0
+Frandom_from_adc$P0_7$0$0
+Frandom_from_adc$USBCNTH$0$0
+Frandom_from_adc$USBCSOH$0$0
+Frandom_from_adc$USBFRMH$0$0
+Frandom_from_adc$B_6$0$0
+Frandom_from_adc$ACC_1$0$0
+Frandom_from_adc$T4IF$0$0
+Frandom_from_adc$P2_6$0$0
+Frandom_from_adc$_SOCON6$0$0
+Frandom_from_adc$P1_7$0$0
+Frandom_from_adc$ADCIF$0$0
+Frandom_from_adc$PERCFG$0$0
+Frandom_from_adc$FWDATA$0$0
+Frandom_from_adc$WORTIME0$0$0
+Frandom_from_adc$IOCFG0$0$0
+Frandom_from_adc$B_7$0$0
+Frandom_from_adc$ACC_2$0$0
+Frandom_from_adc$P2_7$0$0
+Frandom_from_adc$_SOCON7$0$0
+Frandom_from_adc$WORTIME1$0$0
+Frandom_from_adc$USBMAXI$0$0
+Frandom_from_adc$IOCFG1$0$0
+Frandom_from_adc$FSCAL0$0$0
+Frandom_from_adc$ACC_3$0$0
+Frandom_from_adc$FREQEST$0$0
+Frandom_from_adc$IOCFG2$0$0
+Frandom_from_adc$FSCAL1$0$0
+Frandom_from_adc$CHANNR$0$0
+Frandom_from_adc$ACC_4$0$0
+Frandom_from_adc$DMAREQ$0$0
+Frandom_from_adc$DMA0CFGH$0$0
+Frandom_from_adc$CLKCON$0$0
+Frandom_from_adc$USBCNTL$0$0
+Frandom_from_adc$USBCSOL$0$0
+Frandom_from_adc$USBFRML$0$0
+Frandom_from_adc$USBCIE$0$0
+Frandom_from_adc$FSCAL2$0$0
+Frandom_from_adc$ACC_5$0$0
+Frandom_from_adc$T1CCTL0$0$0
+Frandom_from_adc$DMA1CFGH$0$0
+Frandom_from_adc$USBCIF$0$0
+Frandom_from_adc$FSCAL3$0$0
+Frandom_from_adc$ACC_6$0$0
+Frandom_from_adc$RFTXRXIE$0$0
+Frandom_from_adc$T1CCTL1$0$0
+Frandom_from_adc$RFD$0$0
+Frandom_from_adc$U1RE$0$0
+Frandom_from_adc$ACC_7$0$0
+Frandom_from_adc$RFTXRXIF$0$0
+Frandom_from_adc$T1CCTL2$0$0
+Frandom_from_adc$T3CCTL0$0$0
+Frandom_from_adc$T2CT$0$0
+Frandom_from_adc$FSCTRL0$0$0
+Frandom_from_adc$T4CCTL0$0$0
+Frandom_from_adc$DMA0CFGL$0$0
+Frandom_from_adc$DMAIRQ$0$0
+Frandom_from_adc$T3CCTL1$0$0
+Frandom_from_adc$USBMAXO$0$0
+Frandom_from_adc$FREND0$0$0
+Frandom_from_adc$FSCTRL1$0$0
+Frandom_from_adc$T4CCTL1$0$0
+Frandom_from_adc$RFST$0$0
+Frandom_from_adc$DMA1CFGL$0$0
+Frandom_from_adc$FREND1$0$0
+Frandom_from_adc$DMAIE$0$0
+Frandom_from_adc$USBIIE$0$0
+Frandom_from_adc$RSSI$0$0
+Frandom_from_adc$U1SLAVE$0$0
+Frandom_from_adc$T3OVFIF$0$0
+Frandom_from_adc$DMAIF$0$0
+Frandom_from_adc$_IEN06$0$0
+Frandom_from_adc$FADDR$0$0
+Frandom_from_adc$U0BAUD$0$0
+Frandom_from_adc$USBIIF$0$0
+Frandom_from_adc$T4OVFIF$0$0
+Frandom_from_adc$_IEN16$0$0
+Frandom_from_adc$U1BAUD$0$0
+Frandom_from_adc$_IEN17$0$0
+Frandom_from_adc$T1CC0H$0$0
+Frandom_from_adc$ENCDI$0$0
+Frandom_from_adc$MARCSTATE$0$0
+Frandom_from_adc$AC$0$0
+Frandom_from_adc$ENCIE$0$0
+Frandom_from_adc$T1CC1H$0$0
+Frandom_from_adc$BSCFG$0$0
+Frandom_from_adc$T1CC2H$0$0
+Frandom_from_adc$LQI$0$0
+Frandom_from_adc$VERSION$0$0
+Frandom_from_adc$EA$0$0
+Frandom_from_adc$U0DBUF$0$0
+Frandom_from_adc$USBOIE$0$0
+Frandom_from_adc$VCO_VC_DAC$0$0
+Frandom_from_adc$PARTNUM$0$0
+Frandom_from_adc$U1DBUF$0$0
+Frandom_from_adc$T1CC0L$0$0
+Frandom_from_adc$DPS$0$0
+Frandom_from_adc$USBOIF$0$0
+Frandom_from_adc$T1CC1L$0$0
+Frandom_from_adc$MEMCTR$0$0
+Frandom_from_adc$T2PR$0$0
+Frandom_from_adc$T1CC2L$0$0
+Frandom_from_adc$ENCDO$0$0
+Frandom_from_adc$IP0$0$0
+Frandom_from_adc$I2SSTAT$0$0
+Frandom_from_adc$I2SWCNT$0$0
+Frandom_from_adc$IP1$0$0
+Frandom_from_adc$MPAGE$0$0
+Frandom_from_adc$U1MODE$0$0
+Frandom_from_adc$ENCCS$0$0
+Frandom_from_adc$IRCON2$0$0
+Frandom_from_adc$WORCTRL$0$0
+Frandom_from_adc$PKTLEN$0$0
+Frandom_from_adc$AGCCTRL0$0$0
+Frandom_from_adc$ADCH$0$0
+Frandom_from_adc$AGCCTRL1$0$0
+Frandom_from_adc$FWT$0$0
+Frandom_from_adc$AGCCTRL2$0$0
+Frandom_from_adc$DMA0CFG$0$0
+Frandom_from_adc$T1CNTH$0$0
+Frandom_from_adc$DMA1CFG$0$0
+Frandom_from_adc$ENCIF_0$0$0
+Frandom_from_adc$ADCL$0$0
+Frandom_from_adc$RS0$0$0
+Frandom_from_adc$ENCIF_1$0$0
+Frandom_from_adc$F0$0$0
+Frandom_from_adc$RS1$0$0
+Frandom_from_adc$T1CNTL$0$0
+Frandom_from_adc$P0IFG$0$0
+Frandom_from_adc$F1$0$0
+Frandom_from_adc$WOREVT0$0$0
+Frandom_from_adc$P1IFG$0$0
+Frandom_from_adc$ADCCFG$0$0
+Frandom_from_adc$WOREVT1$0$0
+Frandom_from_adc$P2IFG$0$0
+Frandom_from_adc$TIMIF$0$0
+Frandom_from_adc$SLEEP$0$0
+Frandom_from_adc$ADCCON1$0$0
+Frandom_from_adc$PSW$0$0
+Frandom_from_adc$ADCCON2$0$0
+Frandom_from_adc$ADDR$0$0
+Frandom_from_adc$T1CC0$0$0
+Frandom_from_adc$IRCON$0$0
+Frandom_from_adc$ADCCON3$0$0
+Frandom_from_adc$CY$0$0
+Frandom_from_adc$T1CC1$0$0
+Frandom_from_adc$PICTL$0$0
+Frandom_from_adc$URX0IE$0$0
+Frandom_from_adc$T1CC2$0$0
+Frandom_from_adc$T3CC0$0$0
+Frandom_from_adc$P1IEN$0$0
+Frandom_from_adc$I2SCLKF0$0$0
+Frandom_from_adc$MDMCFG0$0$0
+Frandom_from_adc$FREQ0$0$0
+Frandom_from_adc$WDTIF$0$0
+Frandom_from_adc$URX1IE$0$0
+Frandom_from_adc$URX0IF$0$0
+Frandom_from_adc$T4CC0$0$0
+Frandom_from_adc$T3CC1$0$0
+Frandom_from_adc$WDCTL$0$0
+Frandom_from_adc$I2SCLKF1$0$0
+Frandom_from_adc$MDMCFG1$0$0
+Frandom_from_adc$FREQ1$0$0
+Frandom_from_adc$URX1IF$0$0
+Frandom_from_adc$P0DIR$0$0
+Frandom_from_adc$T4CC1$0$0
+Frandom_from_adc$USBF0$0$0
+Frandom_from_adc$USBPOW$0$0
+Frandom_from_adc$I2SCLKF2$0$0
+Frandom_from_adc$MCSM0$0$0
+Frandom_from_adc$MDMCFG2$0$0
+Frandom_from_adc$FREQ2$0$0
+Frandom_from_adc$UTX0IF$0$0
+Frandom_from_adc$P1DIR$0$0
+Frandom_from_adc$P0$0$0
+Frandom_from_adc$USBF1$0$0
+Frandom_from_adc$MCSM1$0$0
+Frandom_from_adc$MDMCFG3$0$0
+Frandom_from_adc$_IRCON25$0$0
+Frandom_from_adc$UTX1IF$0$0
+Frandom_from_adc$OVFIM$0$0
+Frandom_from_adc$P2DIR$0$0
+Frandom_from_adc$U0GCR$0$0
+Frandom_from_adc$P1$0$0
+Frandom_from_adc$USBF2$0$0
+Frandom_from_adc$USBINDEX$0$0
+Frandom_from_adc$MCSM2$0$0
+Frandom_from_adc$MDMCFG4$0$0
+Frandom_from_adc$U1ACTIVE$0$0
+Frandom_from_adc$_IRCON26$0$0
+Frandom_from_adc$_TCON_0$0$0
+Frandom_from_adc$U1GCR$0$0
+Frandom_from_adc$B$0$0
+Frandom_from_adc$P2$0$0
+Frandom_from_adc$USBF3$0$0
+Frandom_from_adc$U1RX_BYTE$0$0
+Frandom_from_adc$_IRCON27$0$0
+Frandom_from_adc$S0CON$0$0
+Frandom_from_adc$SP$0$0
+Frandom_from_adc$USBF4$0$0
+Frandom_from_adc$_TCON_2$0$0
+Frandom_from_adc$P0SEL$0$0
+Frandom_from_adc$WORIRQ$0$0
+Frandom_from_adc$S1CON$0$0
+Frandom_from_adc$USBF5$0$0
+Frandom_from_adc$USBADDR$0$0
+Frandom_from_adc$U1TX_BYTE$0$0
+Frandom_from_adc$OV$0$0
+Frandom_from_adc$P1SEL$0$0
+Frandom_from_adc$_TCON_4$0$0
+Frandom_from_adc$P2SEL$0$0
+Frandom_from_adc$RFIF$0$0
+Frandom_from_adc$ACC$0$0
+Frandom_from_adc$P0INP$0$0
+Frandom_from_adc$PA_TABLE0$0$0
+Frandom_from_adc$FOCCFG$0$0
+Frandom_from_adc$_TCON_6$0$0
+Frandom_from_adc$ADC$0$0
+Frandom_from_adc$P1INP$0$0
+Frandom_from_adc$T1CTL$0$0
+Frandom_from_adc$P2INP$0$0
+Frandom_from_adc$FCTL$0$0
+Frandom_from_adc$FADDRH$0$0
+Frandom_from_adc$T2CTL$0$0
+Frandom_from_adc$T3CTL$0$0
+Frandom_from_adc$DEVIATN$0$0
+Frandom_from_adc$T4CTL$0$0
+Frandom_from_adc$T3CNT$0$0
+Frandom_from_adc$RNDH$0$0
+Frandom_from_adc$IEN0$0$0
+Frandom_from_adc$DPH0$0$0
+Frandom_from_adc$SYNC0$0$0
+Frandom_from_adc$T4CNT$0$0
+Frandom_from_adc$IEN1$0$0
+Frandom_from_adc$FADDRL$0$0
+Frandom_from_adc$U0CSR$0$0
+Frandom_from_adc$DPH1$0$0
+Frandom_from_adc$I2SCFG0$0$0
+Frandom_from_adc$SYNC1$0$0
+Frandom_from_adc$P0IE$0$0
+Frandom_from_adc$U1CSR$0$0
+Frandom_from_adc$IEN2$0$0
+Frandom_from_adc$RFIM$0$0
+Frandom_from_adc$I2SDATH$0$0
+Frandom_from_adc$I2SCFG1$0$0
+Frandom_from_adc$U1ERR$0$0
+Frandom_from_adc$_TIMIF7$0$0
+Frandom_from_adc$P0IF$0$0
+Frandom_from_adc$P0_0$0$0
+Frandom_from_adc$U0UCR$0$0
+Frandom_from_adc$ENDIAN$0$0
+Frandom_from_adc$TEST0$0$0
+Frandom_from_adc$P1IF$0$0
+Frandom_from_adc$P$0$0
+Frandom_from_adc$_IRCON6$0$0
+Frandom_from_adc$P1_0$0$0
+Frandom_from_adc$P0_1$0$0
+Frandom_from_adc$U1UCR$0$0
+Frandom_from_adc$RNDL$0$0
+Frandom_from_adc$PCON$0$0
+Frandom_from_adc$DPL0$0$0
+Frandom_from_adc$USBCSIH$0$0
+Frandom_from_adc$TEST1$0$0
+Frandom_from_adc$U1FE$0$0
+Frandom_from_adc$B_0$0$0
+Frandom_from_adc$P2IF$0$0
+Frandom_from_adc$T3CH0IF$0$0
+Frandom_from_adc$P2_0$0$0
+Frandom_from_adc$P1_1$0$0
+Frandom_from_adc$P0_2$0$0
+Frandom_from_adc$DPL1$0$0
+.__.ABS.
+Frandom_from_adc$TEST2$0$0
+Frandom_from_adc$B_1$0$0
+Frandom_from_adc$T4CH0IF$0$0
+Frandom_from_adc$T3CH1IF$0$0
+Frandom_from_adc$P2_1$0$0
+Frandom_from_adc$P1_2$0$0
+Frandom_from_adc$P0_3$0$0
+Frandom_from_adc$DMAARM$0$0
+Frandom_from_adc$adcReadTemp$0$0
+_randomSeedFromAdc
+A$random_from_adc$742
+A$random_from_adc$770
+A$random_from_adc$752
+A$random_from_adc$771
+C$random_from_adc.c$20$1$1
+C$random_from_adc.c$11$1$1
+A$random_from_adc$781
+A$random_from_adc$772
+A$random_from_adc$745
+C$random_from_adc.c$12$1$1
+A$random_from_adc$773
+A$random_from_adc$755
+C$random_from_adc.c$13$1$1
+A$random_from_adc$774
+C$random_from_adc.c$14$1$1
+A$random_from_adc$775
+C$random_from_adc.c$15$1$1
+A$random_from_adc$776
+A$random_from_adc$749
+A$random_from_adc$777
+A$random_from_adc$768
+XG$randomSeedFromAdc$0$0
+C$random_from_adc.c$17$1$1
+A$random_from_adc$778
+A$random_from_adc$769
+C$random_from_adc.c$19$1$1
+G$randomSeedFromAdc$0$0
+C$random_from_adc.c$9$0$0
+XFrandom_from_adc$adcReadTemp$0$0
+</MODULE>
+
+</INDEX>
+
+<FILES>
+
+<FILE>
+random
+<REL>
+;!FILE libraries/src/random/random.asm
+XH
+H 1B areas 172 global symbols
+M random
+O -mmcs51 --model-medium
+S Frandom$IRCON2$0$0 Def00E8
+S Frandom$WORCTRL$0$0 Def00A2
+S Frandom$PKTLEN$0$0 DefDF02
+S Frandom$AGCCTRL0$0$0 DefDF19
+S Frandom$ADCH$0$0 Def00BB
+S Frandom$AGCCTRL1$0$0 DefDF18
+S Frandom$FWT$0$0 Def00AB
+S Frandom$AGCCTRL2$0$0 DefDF17
+S Frandom$DMA0CFG$0$0 DefFFFFD5D4
+S Frandom$T1CNTH$0$0 Def00E3
+S Frandom$DMA1CFG$0$0 DefFFFFD3D2
+S Frandom$ENCIF_0$0$0 Def0098
+S Frandom$ADCL$0$0 Def00BA
+S Frandom$RS0$0$0 Def00D3
+S Frandom$ENCIF_1$0$0 Def0099
+S Frandom$F0$0$0 Def00D5
+S Frandom$RS1$0$0 Def00D4
+S Frandom$T1CNTL$0$0 Def00E2
+S Frandom$P0IFG$0$0 Def0089
+S Frandom$F1$0$0 Def00D1
+S Frandom$WOREVT0$0$0 Def00A3
+S Frandom$P1IFG$0$0 Def008A
+S Frandom$ADCCFG$0$0 Def00F2
+S Frandom$WOREVT1$0$0 Def00A4
+S Frandom$P2IFG$0$0 Def008B
+S Frandom$TIMIF$0$0 Def00D8
+S Frandom$SLEEP$0$0 Def00BE
+S Frandom$ADCCON1$0$0 Def00B4
+S Frandom$PSW$0$0 Def00D0
+S Frandom$ADCCON2$0$0 Def00B5
+S Frandom$ADDR$0$0 DefDF05
+S Frandom$T1CC0$0$0 DefFFFFDBDA
+S Frandom$IRCON$0$0 Def00C0
+S Frandom$ADCCON3$0$0 Def00B6
+S Frandom$CY$0$0 Def00D7
+S Frandom$T1CC1$0$0 DefFFFFDDDC
+S Frandom$PICTL$0$0 Def008C
+S Frandom$URX0IE$0$0 Def00AA
+S Frandom$T1CC2$0$0 DefFFFFDFDE
+S Frandom$T3CC0$0$0 Def00CD
+S Frandom$P1IEN$0$0 Def008D
+S Frandom$I2SCLKF0$0$0 DefDF46
+S Frandom$MDMCFG0$0$0 DefDF10
+S Frandom$FREQ0$0$0 DefDF0B
+S Frandom$WDTIF$0$0 Def00EC
+S Frandom$URX1IE$0$0 Def00AB
+S Frandom$URX0IF$0$0 Def008B
+S Frandom$T4CC0$0$0 Def00ED
+S Frandom$T3CC1$0$0 Def00CF
+S Frandom$WDCTL$0$0 Def00C9
+S Frandom$I2SCLKF1$0$0 DefDF47
+S Frandom$MDMCFG1$0$0 DefDF0F
+S Frandom$FREQ1$0$0 DefDF0A
+S Frandom$URX1IF$0$0 Def008F
+S Frandom$P0DIR$0$0 Def00FD
+S Frandom$T4CC1$0$0 Def00EF
+S Frandom$USBF0$0$0 DefDE20
+S Frandom$USBPOW$0$0 DefDE01
+S Frandom$I2SCLKF2$0$0 DefDF48
+S Frandom$MCSM0$0$0 DefDF14
+S Frandom$MDMCFG2$0$0 DefDF0E
+S Frandom$FREQ2$0$0 DefDF09
+S Frandom$UTX0IF$0$0 Def00E9
+S Frandom$P1DIR$0$0 Def00FE
+S Frandom$P0$0$0 Def0080
+S Frandom$USBF1$0$0 DefDE22
+S Frandom$MCSM1$0$0 DefDF13
+S Frandom$MDMCFG3$0$0 DefDF0D
+S Frandom$_IRCON25$0$0 Def00ED
+S Frandom$UTX1IF$0$0 Def00EA
+S Frandom$OVFIM$0$0 Def00DE
+S Frandom$P2DIR$0$0 Def00FF
+S Frandom$U0GCR$0$0 Def00C5
+S Frandom$P1$0$0 Def0090
+S Frandom$USBF2$0$0 DefDE24
+S Frandom$USBINDEX$0$0 DefDE0E
+S Frandom$MCSM2$0$0 DefDF12
+S Frandom$MDMCFG4$0$0 DefDF0C
+S Frandom$U1ACTIVE$0$0 Def00F8
+S Frandom$_IRCON26$0$0 Def00EE
+S Frandom$_TCON_0$0$0 Def0088
+S Frandom$U1GCR$0$0 Def00FC
+S Frandom$B$0$0 Def00F0
+S Frandom$P2$0$0 Def00A0
+S Frandom$USBF3$0$0 DefDE26
+S Frandom$U1RX_BYTE$0$0 Def00FA
+S Frandom$_IRCON27$0$0 Def00EF
+S Frandom$S0CON$0$0 Def0098
+S Frandom$SP$0$0 Def0081
+S Frandom$USBF4$0$0 DefDE28
+S Frandom$_TCON_2$0$0 Def008A
+S Frandom$P0SEL$0$0 Def00F3
+S Frandom$WORIRQ$0$0 Def00A1
+S Frandom$S1CON$0$0 Def009B
+S Frandom$USBF5$0$0 DefDE2A
+S Frandom$USBADDR$0$0 DefDE00
+S Frandom$U1TX_BYTE$0$0 Def00F9
+S Frandom$OV$0$0 Def00D2
+S Frandom$P1SEL$0$0 Def00F4
+S Frandom$_TCON_4$0$0 Def008C
+S Frandom$P2SEL$0$0 Def00F5
+S Frandom$RFIF$0$0 Def00E9
+S Frandom$ACC$0$0 Def00E0
+S Frandom$P0INP$0$0 Def008F
+S Frandom$PA_TABLE0$0$0 DefDF2E
+S Frandom$FOCCFG$0$0 DefDF15
+S Frandom$_TCON_6$0$0 Def008E
+S Frandom$ADC$0$0 DefFFFFBBBA
+S Frandom$P1INP$0$0 Def00F6
+S Frandom$T1CTL$0$0 Def00E4
+S Frandom$P2INP$0$0 Def00F7
+S Frandom$FCTL$0$0 Def00AE
+S Frandom$FADDRH$0$0 Def00AD
+S Frandom$T2CTL$0$0 Def009E
+S Frandom$T3CTL$0$0 Def00CB
+S Frandom$DEVIATN$0$0 DefDF11
+S Frandom$T4CTL$0$0 Def00EB
+S Frandom$T3CNT$0$0 Def00CA
+S Frandom$RNDH$0$0 Def00BD
+S Frandom$IEN0$0$0 Def00A8
+S Frandom$DPH0$0$0 Def0083
+S Frandom$SYNC0$0$0 DefDF01
+S Frandom$T4CNT$0$0 Def00EA
+S Frandom$IEN1$0$0 Def00B8
+S Frandom$FADDRL$0$0 Def00AC
+S Frandom$U0CSR$0$0 Def0086
+S Frandom$DPH1$0$0 Def0085
+S Frandom$I2SCFG0$0$0 DefDF40
+S Frandom$SYNC1$0$0 DefDF00
+S Frandom$P0IE$0$0 Def00BD
+S Frandom$U1CSR$0$0 Def00F8
+S Frandom$IEN2$0$0 Def009A
+S Frandom$RFIM$0$0 Def0091
+S Frandom$I2SDATH$0$0 DefDF43
+S Frandom$I2SCFG1$0$0 DefDF41
+S Frandom$U1ERR$0$0 Def00FB
+S Frandom$_TIMIF7$0$0 Def00DF
+S Frandom$P0IF$0$0 Def00C5
+S Frandom$P0_0$0$0 Def0080
+S Frandom$U0UCR$0$0 Def00C4
+S Frandom$ENDIAN$0$0 Def0095
+S Frandom$TEST0$0$0 DefDF25
+S Frandom$P1IF$0$0 Def00EB
+S Frandom$P$0$0 Def00D0
+S Frandom$_IRCON6$0$0 Def00C6
+S Frandom$P1_0$0$0 Def0090
+S Frandom$P0_1$0$0 Def0081
+S Frandom$U1UCR$0$0 Def00FB
+S Frandom$RNDL$0$0 Def00BC
+S Frandom$PCON$0$0 Def0087
+S Frandom$DPL0$0$0 Def0082
+S Frandom$USBCSIH$0$0 DefDE12
+S Frandom$TEST1$0$0 DefDF24
+S Frandom$U1FE$0$0 Def00FC
+S Frandom$B_0$0$0 Def00F0
+S Frandom$P2IF$0$0 Def00E8
+S Frandom$T3CH0IF$0$0 Def00D9
+S Frandom$P2_0$0$0 Def00A0
+S Frandom$P1_1$0$0 Def0091
+S Frandom$P0_2$0$0 Def0082
+S Frandom$DPL1$0$0 Def0084
+S Frandom$TEST2$0$0 DefDF23
+S Frandom$B_1$0$0 Def00F1
+S Frandom$T4CH0IF$0$0 Def00DC
+S Frandom$T3CH1IF$0$0 Def00DA
+S Frandom$P2_1$0$0 Def00A1
+S Frandom$P1_2$0$0 Def0092
+S Frandom$P0_3$0$0 Def0083
+S Frandom$DMAARM$0$0 Def00D6
+S Frandom$I2SDATL$0$0 DefDF42
+S Frandom$PKTSTATUS$0$0 DefDF3C
+S Frandom$B_2$0$0 Def00F2
+S Frandom$T4CH1IF$0$0 Def00DD
+S Frandom$T1IE$0$0 Def00B9
+S Frandom$P2_2$0$0 Def00A2
+S Frandom$_SOCON2$0$0 Def009A
+S Frandom$P1_3$0$0 Def0093
+S Frandom$P0_4$0$0 Def0084
+S Frandom$PKTCTRL0$0$0 DefDF04
+S Frandom$B_3$0$0 Def00F3
+S Frandom$T1IF$0$0 Def00C1
+S Frandom$T2IE$0$0 Def00BA
+S Frandom$P2_3$0$0 Def00A3
+S Frandom$_SOCON3$0$0 Def009B
+S Frandom$P1_4$0$0 Def0094
+S Frandom$P0_5$0$0 Def0085
+S Frandom$TCON$0$0 Def0088
+S Frandom$USBCSIL$0$0 DefDE11
+S Frandom$PKTCTRL1$0$0 DefDF03
+S Frandom$B_4$0$0 Def00F4
+S Frandom$T2IF$0$0 Def00C2
+S Frandom$T3IE$0$0 Def00BB
+S Frandom$STIE$0$0 Def00AD
+S Frandom$P2_4$0$0 Def00A4
+S Frandom$_SOCON4$0$0 Def009C
+S Frandom$P1_5$0$0 Def0095
+S Frandom$P0_6$0$0 Def0086
+S Frandom$B_5$0$0 Def00F5
+S Frandom$ACC_0$0$0 Def00E0
+S Frandom$STIF$0$0 Def00C7
+S Frandom$T3IF$0$0 Def00C3
+S Frandom$T4IE$0$0 Def00BC
+S Frandom$ADCIE$0$0 Def00A9
+S Frandom$P2_5$0$0 Def00A5
+S Frandom$_SOCON5$0$0 Def009D
+S Frandom$P1_6$0$0 Def0096
+S Frandom$P0_7$0$0 Def0087
+S Frandom$USBCNTH$0$0 DefDE17
+S Frandom$USBCSOH$0$0 DefDE15
+S Frandom$USBFRMH$0$0 DefDE0D
+S Frandom$B_6$0$0 Def00F6
+S Frandom$ACC_1$0$0 Def00E1
+S Frandom$T4IF$0$0 Def00C4
+S Frandom$P2_6$0$0 Def00A6
+S Frandom$_SOCON6$0$0 Def009E
+S Frandom$P1_7$0$0 Def0097
+S Frandom$ADCIF$0$0 Def008D
+S Frandom$PERCFG$0$0 Def00F1
+S Frandom$FWDATA$0$0 Def00AF
+S Frandom$WORTIME0$0$0 Def00A5
+S Frandom$IOCFG0$0$0 DefDF31
+S Frandom$B_7$0$0 Def00F7
+S Frandom$ACC_2$0$0 Def00E2
+S Frandom$P2_7$0$0 Def00A7
+S Frandom$_SOCON7$0$0 Def009F
+S Frandom$WORTIME1$0$0 Def00A6
+S Frandom$USBMAXI$0$0 DefDE10
+S Frandom$IOCFG1$0$0 DefDF30
+S Frandom$FSCAL0$0$0 DefDF1F
+S Frandom$ACC_3$0$0 Def00E3
+S Frandom$FREQEST$0$0 DefDF38
+S Frandom$IOCFG2$0$0 DefDF2F
+S Frandom$FSCAL1$0$0 DefDF1E
+S Frandom$CHANNR$0$0 DefDF06
+S Frandom$ACC_4$0$0 Def00E4
+S Frandom$DMAREQ$0$0 Def00D7
+S Frandom$DMA0CFGH$0$0 Def00D5
+S Frandom$CLKCON$0$0 Def00C6
+S Frandom$USBCNTL$0$0 DefDE16
+S Frandom$USBCSOL$0$0 DefDE14
+S Frandom$USBFRML$0$0 DefDE0C
+S Frandom$USBCIE$0$0 DefDE0B
+S Frandom$FSCAL2$0$0 DefDF1D
+S Frandom$ACC_5$0$0 Def00E5
+S Frandom$T1CCTL0$0$0 Def00E5
+S Frandom$DMA1CFGH$0$0 Def00D3
+S Frandom$USBCIF$0$0 DefDE06
+S Frandom$FSCAL3$0$0 DefDF1C
+S Frandom$ACC_6$0$0 Def00E6
+S Frandom$RFTXRXIE$0$0 Def00A8
+S Frandom$T1CCTL1$0$0 Def00E6
+S Frandom$RFD$0$0 Def00D9
+S Frandom$U1RE$0$0 Def00FE
+S Frandom$ACC_7$0$0 Def00E7
+S Frandom$RFTXRXIF$0$0 Def0089
+S Frandom$T1CCTL2$0$0 Def00E7
+S Frandom$T3CCTL0$0$0 Def00CC
+S Frandom$T2CT$0$0 Def009C
+S Frandom$FSCTRL0$0$0 DefDF08
+S Frandom$T4CCTL0$0$0 Def00EC
+S Frandom$DMA0CFGL$0$0 Def00D4
+S Frandom$DMAIRQ$0$0 Def00D1
+S Frandom$T3CCTL1$0$0 Def00CE
+S Frandom$USBMAXO$0$0 DefDE13
+S Frandom$FREND0$0$0 DefDF1B
+S Frandom$FSCTRL1$0$0 DefDF07
+S Frandom$T4CCTL1$0$0 Def00EE
+S Frandom$RFST$0$0 Def00E1
+S Frandom$DMA1CFGL$0$0 Def00D2
+S Frandom$FREND1$0$0 DefDF1A
+S Frandom$DMAIE$0$0 Def00B8
+S Frandom$USBIIE$0$0 DefDE07
+S Frandom$RSSI$0$0 DefDF3A
+S Frandom$U1SLAVE$0$0 Def00FD
+S Frandom$T3OVFIF$0$0 Def00D8
+S Frandom$DMAIF$0$0 Def00C0
+S Frandom$_IEN06$0$0 Def00AE
+S Frandom$FADDR$0$0 DefFFFFADAC
+S Frandom$U0BAUD$0$0 Def00C2
+S Frandom$USBIIF$0$0 DefDE02
+S Frandom$T4OVFIF$0$0 Def00DB
+S Frandom$_IEN16$0$0 Def00BE
+S Frandom$U1BAUD$0$0 Def00FA
+S Frandom$_IEN17$0$0 Def00BF
+S Frandom$T1CC0H$0$0 Def00DB
+S Frandom$ENCDI$0$0 Def00B1
+S Frandom$MARCSTATE$0$0 DefDF3B
+S Frandom$AC$0$0 Def00D6
+S Frandom$ENCIE$0$0 Def00AC
+S Frandom$T1CC1H$0$0 Def00DD
+S Frandom$BSCFG$0$0 DefDF16
+S Frandom$T1CC2H$0$0 Def00DF
+S Frandom$LQI$0$0 DefDF39
+S Frandom$VERSION$0$0 DefDF37
+S Frandom$EA$0$0 Def00AF
+S Frandom$U0DBUF$0$0 Def00C1
+S Frandom$USBOIE$0$0 DefDE09
+S Frandom$VCO_VC_DAC$0$0 DefDF3D
+S Frandom$PARTNUM$0$0 DefDF36
+S Frandom$U1DBUF$0$0 Def00F9
+S Frandom$T1CC0L$0$0 Def00DA
+S Frandom$DPS$0$0 Def0092
+S Frandom$USBOIF$0$0 DefDE04
+S Frandom$T1CC1L$0$0 Def00DC
+S Frandom$MEMCTR$0$0 Def00C7
+S Frandom$T2PR$0$0 Def009D
+S Frandom$T1CC2L$0$0 Def00DE
+S Frandom$ENCDO$0$0 Def00B2
+S Frandom$IP0$0$0 Def00A9
+S Frandom$I2SSTAT$0$0 DefDF45
+S Frandom$I2SWCNT$0$0 DefDF44
+S Frandom$IP1$0$0 Def00B9
+S Frandom$MPAGE$0$0 Def0093
+S Frandom$U1MODE$0$0 Def00FF
+S .__.ABS. Def0000
+S Frandom$ENCCS$0$0 Def00B3
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A OSEG size 0 flags 4 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 0 flags 80 addr 0
+A PSEG size 1 flags 50 addr 0
+S Lrandom.randomSeed$seed_lsb$1$1 Def0000
+S _randomSeed_PARM_2 Def0000
+A XSEG size 0 flags 40 addr 0
+A XABS size 0 flags 48 addr 0
+A XISEG size 0 flags 40 addr 0
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size 3D flags 20 addr 0
+S _randomSeed Def0014
+S A$random$801 Def002E
+S A$random$802 Def0030
+S A$random$812 Def0039
+S A$random$803 Def0031
+S A$random$750 Def0006
+S A$random$760 Def0011
+S A$random$815 Def003C
+S A$random$806 Def0033
+S A$random$780 Def0018
+S A$random$781 Def0019
+S A$random$754 Def0008
+S C$random.c$30$1$1 Def0033
+S C$random.c$12$1$1 Def0000
+S A$random$809 Def0036
+S A$random$782 Def001B
+S C$random.c$31$1$1 Def0036
+S C$random.c$13$1$1 Def0008
+S A$random$792 Def0027
+S A$random$783 Def001C
+S A$random$765 Def0013
+S A$random$747 Def0000
+S C$random.c$32$1$1 Def0039
+S C$random.c$23$1$1 Def0016
+S C$random.c$14$1$1 Def000B
+S A$random$793 Def0029
+S A$random$757 Def000B
+S A$random$748 Def0002
+S XG$randomSeed$0$0 Def003C
+S C$random.c$33$1$1 Def003C
+S C$random.c$15$1$1 Def0013
+S A$random$794 Def002B
+S A$random$785 Def001E
+S A$random$776 Def0014
+S A$random$758 Def000D
+S A$random$749 Def0004
+S C$random.c$16$1$1 Def0013
+S A$random$786 Def0020
+S A$random$759 Def000F
+S A$random$787 Def0021
+S C$random.c$25$2$2 Def0027
+S C$random.c$18$1$1 Def0014
+S A$random$788 Def0024
+S A$random$779 Def0016
+S C$random.c$28$1$1 Def002C
+S A$random$798 Def002C
+S C$random.c$29$1$1 Def002E
+S G$randomSeed$0$0 Def0014
+S C$random.c$9$0$0 Def0000
+S _randomNumber Def0000
+S XG$randomNumber$0$0 Def0013
+S G$randomNumber$0$0 Def0000
+A CONST size 0 flags 20 addr 0
+A XINIT size 0 flags 20 addr 0
+A CABS size 0 flags 28 addr 0
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00
+R 00 00 00 04
+T 00 00
+R 00 00 00 0A
+T 00 00
+R 00 00 00 0A
+T 00 00
+R 00 00 00 17
+T 00 00
+R 00 00 00 17
+T 00 00 E5 B4 54 0C 60 02 80 F8
+R 00 00 00 17
+T 00 08
+R 00 00 00 17
+T 00 08 85 BC 82 74 30 55 B4 44 07 F5 B4 22
+R 00 00 00 17
+T 00 14
+R 00 00 00 17
+T 00 14 AF 82 78 00 00 00 E2 70 03 EF 60 09
+R 00 00 00 17 F1 01 05 00 0A
+T 00 1E
+R 00 00 00 17
+T 00 1E 78 00 00 00 E2 B4 03 08 BF 80 05
+R 00 00 00 17 F1 01 03 00 0A
+T 00 27
+R 00 00 00 17
+T 00 27 78 00 00 00 74 AA F2
+R 00 00 00 17 F1 01 03 00 0A
+T 00 2C
+R 00 00 00 17
+T 00 2C 8F BC 78 00 00 00 E2 F5 BC 12 00 00 12
+R 00 00 00 17 F1 01 05 00 0A 00 0C 00 17
+T 00 37 00 00 12 00 00 22
+R 00 00 00 17 00 02 00 17 00 05 00 17
+</REL>
+<ADB>
+M:random
+F:G$randomNumber$0$0({2}DF,SC:U),Z,0,0,0,0,0
+F:G$randomSeed$0$0({2}DF,SV:S),Z,0,0,0,0,0
+T:Frandom$__00010000[({0}S:S$SRCADDRH$0$0({1}SC:U),Z,0,0)({1}S:S$SRCADDRL$0$0({1}SC:U),Z,0,0)({2}S:S$DESTADDRH$0$0({1}SC:U),Z,0,0)({3}S:S$DESTADDRL$0$0({1}SC:U),Z,0,0)({4}S:S$VLEN_LENH$0$0({1}SC:U),Z,0,0)({5}S:S$LENL$0$0({1}SC:U),Z,0,0)({6}S:S$DC6$0$0({
+
+
+1}SC:U),Z,0,0)({7}S:S$DC7$0$0({1}SC:U),Z,0,0)]
+S:Lrandom.randomNumber$rand$1$1({1}SC:U),R,0,0,[]
+S:Lrandom.randomSeed$seed_lsb$1$1({1}SC:U),P,0,0
+S:Lrandom.randomSeed$seed_msb$1$1({1}SC:U),R,0,0,[r7]
+S:Frandom$SYNC1$0$0({1}SC:U),F,0,0
+S:Frandom$SYNC0$0$0({1}SC:U),F,0,0
+S:Frandom$PKTLEN$0$0({1}SC:U),F,0,0
+S:Frandom$PKTCTRL1$0$0({1}SC:U),F,0,0
+S:Frandom$PKTCTRL0$0$0({1}SC:U),F,0,0
+S:Frandom$ADDR$0$0({1}SC:U),F,0,0
+S:Frandom$CHANNR$0$0({1}SC:U),F,0,0
+S:Frandom$FSCTRL1$0$0({1}SC:U),F,0,0
+S:Frandom$FSCTRL0$0$0({1}SC:U),F,0,0
+S:Frandom$FREQ2$0$0({1}SC:U),F,0,0
+S:Frandom$FREQ1$0$0({1}SC:U),F,0,0
+S:Frandom$FREQ0$0$0({1}SC:U),F,0,0
+S:Frandom$MDMCFG4$0$0({1}SC:U),F,0,0
+S:Frandom$MDMCFG3$0$0({1}SC:U),F,0,0
+S:Frandom$MDMCFG2$0$0({1}SC:U),F,0,0
+S:Frandom$MDMCFG1$0$0({1}SC:U),F,0,0
+S:Frandom$MDMCFG0$0$0({1}SC:U),F,0,0
+S:Frandom$DEVIATN$0$0({1}SC:U),F,0,0
+S:Frandom$MCSM2$0$0({1}SC:U),F,0,0
+S:Frandom$MCSM1$0$0({1}SC:U),F,0,0
+S:Frandom$MCSM0$0$0({1}SC:U),F,0,0
+S:Frandom$FOCCFG$0$0({1}SC:U),F,0,0
+S:Frandom$BSCFG$0$0({1}SC:U),F,0,0
+S:Frandom$AGCCTRL2$0$0({1}SC:U),F,0,0
+S:Frandom$AGCCTRL1$0$0({1}SC:U),F,0,0
+S:Frandom$AGCCTRL0$0$0({1}SC:U),F,0,0
+S:Frandom$FREND1$0$0({1}SC:U),F,0,0
+S:Frandom$FREND0$0$0({1}SC:U),F,0,0
+S:Frandom$FSCAL3$0$0({1}SC:U),F,0,0
+S:Frandom$FSCAL2$0$0({1}SC:U),F,0,0
+S:Frandom$FSCAL1$0$0({1}SC:U),F,0,0
+S:Frandom$FSCAL0$0$0({1}SC:U),F,0,0
+S:Frandom$TEST2$0$0({1}SC:U),F,0,0
+S:Frandom$TEST1$0$0({1}SC:U),F,0,0
+S:Frandom$TEST0$0$0({1}SC:U),F,0,0
+S:Frandom$PA_TABLE0$0$0({1}SC:U),F,0,0
+S:Frandom$IOCFG2$0$0({1}SC:U),F,0,0
+S:Frandom$IOCFG1$0$0({1}SC:U),F,0,0
+S:Frandom$IOCFG0$0$0({1}SC:U),F,0,0
+S:Frandom$PARTNUM$0$0({1}SC:U),F,0,0
+S:Frandom$VERSION$0$0({1}SC:U),F,0,0
+S:Frandom$FREQEST$0$0({1}SC:U),F,0,0
+S:Frandom$LQI$0$0({1}SC:U),F,0,0
+S:Frandom$RSSI$0$0({1}SC:U),F,0,0
+S:Frandom$MARCSTATE$0$0({1}SC:U),F,0,0
+S:Frandom$PKTSTATUS$0$0({1}SC:U),F,0,0
+S:Frandom$VCO_VC_DAC$0$0({1}SC:U),F,0,0
+S:Frandom$I2SCFG0$0$0({1}SC:U),F,0,0
+S:Frandom$I2SCFG1$0$0({1}SC:U),F,0,0
+S:Frandom$I2SDATL$0$0({1}SC:U),F,0,0
+S:Frandom$I2SDATH$0$0({1}SC:U),F,0,0
+S:Frandom$I2SWCNT$0$0({1}SC:U),F,0,0
+S:Frandom$I2SSTAT$0$0({1}SC:U),F,0,0
+S:Frandom$I2SCLKF0$0$0({1}SC:U),F,0,0
+S:Frandom$I2SCLKF1$0$0({1}SC:U),F,0,0
+S:Frandom$I2SCLKF2$0$0({1}SC:U),F,0,0
+S:Frandom$USBADDR$0$0({1}SC:U),F,0,0
+S:Frandom$USBPOW$0$0({1}SC:U),F,0,0
+S:Frandom$USBIIF$0$0({1}SC:U),F,0,0
+S:Frandom$USBOIF$0$0({1}SC:U),F,0,0
+S:Frandom$USBCIF$0$0({1}SC:U),F,0,0
+S:Frandom$USBIIE$0$0({1}SC:U),F,0,0
+S:Frandom$USBOIE$0$0({1}SC:U),F,0,0
+S:Frandom$USBCIE$0$0({1}SC:U),F,0,0
+S:Frandom$USBFRML$0$0({1}SC:U),F,0,0
+S:Frandom$USBFRMH$0$0({1}SC:U),F,0,0
+S:Frandom$USBINDEX$0$0({1}SC:U),F,0,0
+S:Frandom$USBMAXI$0$0({1}SC:U),F,0,0
+S:Frandom$USBCSIL$0$0({1}SC:U),F,0,0
+S:Frandom$USBCSIH$0$0({1}SC:U),F,0,0
+S:Frandom$USBMAXO$0$0({1}SC:U),F,0,0
+S:Frandom$USBCSOL$0$0({1}SC:U),F,0,0
+S:Frandom$USBCSOH$0$0({1}SC:U),F,0,0
+S:Frandom$USBCNTL$0$0({1}SC:U),F,0,0
+S:Frandom$USBCNTH$0$0({1}SC:U),F,0,0
+S:Frandom$USBF0$0$0({1}SC:U),F,0,0
+S:Frandom$USBF1$0$0({1}SC:U),F,0,0
+S:Frandom$USBF2$0$0({1}SC:U),F,0,0
+S:Frandom$USBF3$0$0({1}SC:U),F,0,0
+S:Frandom$USBF4$0$0({1}SC:U),F,0,0
+S:Frandom$USBF5$0$0({1}SC:U),F,0,0
+S:Frandom$P0$0$0({1}SC:U),I,0,0
+S:Frandom$SP$0$0({1}SC:U),I,0,0
+S:Frandom$DPL0$0$0({1}SC:U),I,0,0
+S:Frandom$DPH0$0$0({1}SC:U),I,0,0
+S:Frandom$DPL1$0$0({1}SC:U),I,0,0
+S:Frandom$DPH1$0$0({1}SC:U),I,0,0
+S:Frandom$U0CSR$0$0({1}SC:U),I,0,0
+S:Frandom$PCON$0$0({1}SC:U),I,0,0
+S:Frandom$TCON$0$0({1}SC:U),I,0,0
+S:Frandom$P0IFG$0$0({1}SC:U),I,0,0
+S:Frandom$P1IFG$0$0({1}SC:U),I,0,0
+S:Frandom$P2IFG$0$0({1}SC:U),I,0,0
+S:Frandom$PICTL$0$0({1}SC:U),I,0,0
+S:Frandom$P1IEN$0$0({1}SC:U),I,0,0
+S:Frandom$P0INP$0$0({1}SC:U),I,0,0
+S:Frandom$P1$0$0({1}SC:U),I,0,0
+S:Frandom$RFIM$0$0({1}SC:U),I,0,0
+S:Frandom$DPS$0$0({1}SC:U),I,0,0
+S:Frandom$MPAGE$0$0({1}SC:U),I,0,0
+S:Frandom$ENDIAN$0$0({1}SC:U),I,0,0
+S:Frandom$S0CON$0$0({1}SC:U),I,0,0
+S:Frandom$IEN2$0$0({1}SC:U),I,0,0
+S:Frandom$S1CON$0$0({1}SC:U),I,0,0
+S:Frandom$T2CT$0$0({1}SC:U),I,0,0
+S:Frandom$T2PR$0$0({1}SC:U),I,0,0
+S:Frandom$T2CTL$0$0({1}SC:U),I,0,0
+S:Frandom$P2$0$0({1}SC:U),I,0,0
+S:Frandom$WORIRQ$0$0({1}SC:U),I,0,0
+S:Frandom$WORCTRL$0$0({1}SC:U),I,0,0
+S:Frandom$WOREVT0$0$0({1}SC:U),I,0,0
+S:Frandom$WOREVT1$0$0({1}SC:U),I,0,0
+S:Frandom$WORTIME0$0$0({1}SC:U),I,0,0
+S:Frandom$WORTIME1$0$0({1}SC:U),I,0,0
+S:Frandom$IEN0$0$0({1}SC:U),I,0,0
+S:Frandom$IP0$0$0({1}SC:U),I,0,0
+S:Frandom$FWT$0$0({1}SC:U),I,0,0
+S:Frandom$FADDRL$0$0({1}SC:U),I,0,0
+S:Frandom$FADDRH$0$0({1}SC:U),I,0,0
+S:Frandom$FCTL$0$0({1}SC:U),I,0,0
+S:Frandom$FWDATA$0$0({1}SC:U),I,0,0
+S:Frandom$ENCDI$0$0({1}SC:U),I,0,0
+S:Frandom$ENCDO$0$0({1}SC:U),I,0,0
+S:Frandom$ENCCS$0$0({1}SC:U),I,0,0
+S:Frandom$ADCCON1$0$0({1}SC:U),I,0,0
+S:Frandom$ADCCON2$0$0({1}SC:U),I,0,0
+S:Frandom$ADCCON3$0$0({1}SC:U),I,0,0
+S:Frandom$IEN1$0$0({1}SC:U),I,0,0
+S:Frandom$IP1$0$0({1}SC:U),I,0,0
+S:Frandom$ADCL$0$0({1}SC:U),I,0,0
+S:Frandom$ADCH$0$0({1}SC:U),I,0,0
+S:Frandom$RNDL$0$0({1}SC:U),I,0,0
+S:Frandom$RNDH$0$0({1}SC:U),I,0,0
+S:Frandom$SLEEP$0$0({1}SC:U),I,0,0
+S:Frandom$IRCON$0$0({1}SC:U),I,0,0
+S:Frandom$U0DBUF$0$0({1}SC:U),I,0,0
+S:Frandom$U0BAUD$0$0({1}SC:U),I,0,0
+S:Frandom$U0UCR$0$0({1}SC:U),I,0,0
+S:Frandom$U0GCR$0$0({1}SC:U),I,0,0
+S:Frandom$CLKCON$0$0({1}SC:U),I,0,0
+S:Frandom$MEMCTR$0$0({1}SC:U),I,0,0
+S:Frandom$WDCTL$0$0({1}SC:U),I,0,0
+S:Frandom$T3CNT$0$0({1}SC:U),I,0,0
+S:Frandom$T3CTL$0$0({1}SC:U),I,0,0
+S:Frandom$T3CCTL0$0$0({1}SC:U),I,0,0
+S:Frandom$T3CC0$0$0({1}SC:U),I,0,0
+S:Frandom$T3CCTL1$0$0({1}SC:U),I,0,0
+S:Frandom$T3CC1$0$0({1}SC:U),I,0,0
+S:Frandom$PSW$0$0({1}SC:U),I,0,0
+S:Frandom$DMAIRQ$0$0({1}SC:U),I,0,0
+S:Frandom$DMA1CFGL$0$0({1}SC:U),I,0,0
+S:Frandom$DMA1CFGH$0$0({1}SC:U),I,0,0
+S:Frandom$DMA0CFGL$0$0({1}SC:U),I,0,0
+S:Frandom$DMA0CFGH$0$0({1}SC:U),I,0,0
+S:Frandom$DMAARM$0$0({1}SC:U),I,0,0
+S:Frandom$DMAREQ$0$0({1}SC:U),I,0,0
+S:Frandom$TIMIF$0$0({1}SC:U),I,0,0
+S:Frandom$RFD$0$0({1}SC:U),I,0,0
+S:Frandom$T1CC0L$0$0({1}SC:U),I,0,0
+S:Frandom$T1CC0H$0$0({1}SC:U),I,0,0
+S:Frandom$T1CC1L$0$0({1}SC:U),I,0,0
+S:Frandom$T1CC1H$0$0({1}SC:U),I,0,0
+S:Frandom$T1CC2L$0$0({1}SC:U),I,0,0
+S:Frandom$T1CC2H$0$0({1}SC:U),I,0,0
+S:Frandom$ACC$0$0({1}SC:U),I,0,0
+S:Frandom$RFST$0$0({1}SC:U),I,0,0
+S:Frandom$T1CNTL$0$0({1}SC:U),I,0,0
+S:Frandom$T1CNTH$0$0({1}SC:U),I,0,0
+S:Frandom$T1CTL$0$0({1}SC:U),I,0,0
+S:Frandom$T1CCTL0$0$0({1}SC:U),I,0,0
+S:Frandom$T1CCTL1$0$0({1}SC:U),I,0,0
+S:Frandom$T1CCTL2$0$0({1}SC:U),I,0,0
+S:Frandom$IRCON2$0$0({1}SC:U),I,0,0
+S:Frandom$RFIF$0$0({1}SC:U),I,0,0
+S:Frandom$T4CNT$0$0({1}SC:U),I,0,0
+S:Frandom$T4CTL$0$0({1}SC:U),I,0,0
+S:Frandom$T4CCTL0$0$0({1}SC:U),I,0,0
+S:Frandom$T4CC0$0$0({1}SC:U),I,0,0
+S:Frandom$T4CCTL1$0$0({1}SC:U),I,0,0
+S:Frandom$T4CC1$0$0({1}SC:U),I,0,0
+S:Frandom$B$0$0({1}SC:U),I,0,0
+S:Frandom$PERCFG$0$0({1}SC:U),I,0,0
+S:Frandom$ADCCFG$0$0({1}SC:U),I,0,0
+S:Frandom$P0SEL$0$0({1}SC:U),I,0,0
+S:Frandom$P1SEL$0$0({1}SC:U),I,0,0
+S:Frandom$P2SEL$0$0({1}SC:U),I,0,0
+S:Frandom$P1INP$0$0({1}SC:U),I,0,0
+S:Frandom$P2INP$0$0({1}SC:U),I,0,0
+S:Frandom$U1CSR$0$0({1}SC:U),I,0,0
+S:Frandom$U1DBUF$0$0({1}SC:U),I,0,0
+S:Frandom$U1BAUD$0$0({1}SC:U),I,0,0
+S:Frandom$U1UCR$0$0({1}SC:U),I,0,0
+S:Frandom$U1GCR$0$0({1}SC:U),I,0,0
+S:Frandom$P0DIR$0$0({1}SC:U),I,0,0
+S:Frandom$P1DIR$0$0({1}SC:U),I,0,0
+S:Frandom$P2DIR$0$0({1}SC:U),I,0,0
+S:Frandom$DMA0CFG$0$0({2}SI:U),I,0,0
+S:Frandom$DMA1CFG$0$0({2}SI:U),I,0,0
+S:Frandom$FADDR$0$0({2}SI:U),I,0,0
+S:Frandom$ADC$0$0({2}SI:U),I,0,0
+S:Frandom$T1CC0$0$0({2}SI:U),I,0,0
+S:Frandom$T1CC1$0$0({2}SI:U),I,0,0
+S:Frandom$T1CC2$0$0({2}SI:U),I,0,0
+S:Frandom$P0_0$0$0({1}SX:U),J,0,0
+S:Frandom$P0_1$0$0({1}SX:U),J,0,0
+S:Frandom$P0_2$0$0({1}SX:U),J,0,0
+S:Frandom$P0_3$0$0({1}SX:U),J,0,0
+S:Frandom$P0_4$0$0({1}SX:U),J,0,0
+S:Frandom$P0_5$0$0({1}SX:U),J,0,0
+S:Frandom$P0_6$0$0({1}SX:U),J,0,0
+S:Frandom$P0_7$0$0({1}SX:U),J,0,0
+S:Frandom$_TCON_0$0$0({1}SX:U),J,0,0
+S:Frandom$RFTXRXIF$0$0({1}SX:U),J,0,0
+S:Frandom$_TCON_2$0$0({1}SX:U),J,0,0
+S:Frandom$URX0IF$0$0({1}SX:U),J,0,0
+S:Frandom$_TCON_4$0$0({1}SX:U),J,0,0
+S:Frandom$ADCIF$0$0({1}SX:U),J,0,0
+S:Frandom$_TCON_6$0$0({1}SX:U),J,0,0
+S:Frandom$URX1IF$0$0({1}SX:U),J,0,0
+S:Frandom$P1_0$0$0({1}SX:U),J,0,0
+S:Frandom$P1_1$0$0({1}SX:U),J,0,0
+S:Frandom$P1_2$0$0({1}SX:U),J,0,0
+S:Frandom$P1_3$0$0({1}SX:U),J,0,0
+S:Frandom$P1_4$0$0({1}SX:U),J,0,0
+S:Frandom$P1_5$0$0({1}SX:U),J,0,0
+S:Frandom$P1_6$0$0({1}SX:U),J,0,0
+S:Frandom$P1_7$0$0({1}SX:U),J,0,0
+S:Frandom$ENCIF_0$0$0({1}SX:U),J,0,0
+S:Frandom$ENCIF_1$0$0({1}SX:U),J,0,0
+S:Frandom$_SOCON2$0$0({1}SX:U),J,0,0
+S:Frandom$_SOCON3$0$0({1}SX:U),J,0,0
+S:Frandom$_SOCON4$0$0({1}SX:U),J,0,0
+S:Frandom$_SOCON5$0$0({1}SX:U),J,0,0
+S:Frandom$_SOCON6$0$0({1}SX:U),J,0,0
+S:Frandom$_SOCON7$0$0({1}SX:U),J,0,0
+S:Frandom$P2_0$0$0({1}SX:U),J,0,0
+S:Frandom$P2_1$0$0({1}SX:U),J,0,0
+S:Frandom$P2_2$0$0({1}SX:U),J,0,0
+S:Frandom$P2_3$0$0({1}SX:U),J,0,0
+S:Frandom$P2_4$0$0({1}SX:U),J,0,0
+S:Frandom$P2_5$0$0({1}SX:U),J,0,0
+S:Frandom$P2_6$0$0({1}SX:U),J,0,0
+S:Frandom$P2_7$0$0({1}SX:U),J,0,0
+S:Frandom$RFTXRXIE$0$0({1}SX:U),J,0,0
+S:Frandom$ADCIE$0$0({1}SX:U),J,0,0
+S:Frandom$URX0IE$0$0({1}SX:U),J,0,0
+S:Frandom$URX1IE$0$0({1}SX:U),J,0,0
+S:Frandom$ENCIE$0$0({1}SX:U),J,0,0
+S:Frandom$STIE$0$0({1}SX:U),J,0,0
+S:Frandom$_IEN06$0$0({1}SX:U),J,0,0
+S:Frandom$EA$0$0({1}SX:U),J,0,0
+S:Frandom$DMAIE$0$0({1}SX:U),J,0,0
+S:Frandom$T1IE$0$0({1}SX:U),J,0,0
+S:Frandom$T2IE$0$0({1}SX:U),J,0,0
+S:Frandom$T3IE$0$0({1}SX:U),J,0,0
+S:Frandom$T4IE$0$0({1}SX:U),J,0,0
+S:Frandom$P0IE$0$0({1}SX:U),J,0,0
+S:Frandom$_IEN16$0$0({1}SX:U),J,0,0
+S:Frandom$_IEN17$0$0({1}SX:U),J,0,0
+S:Frandom$DMAIF$0$0({1}SX:U),J,0,0
+S:Frandom$T1IF$0$0({1}SX:U),J,0,0
+S:Frandom$T2IF$0$0({1}SX:U),J,0,0
+S:Frandom$T3IF$0$0({1}SX:U),J,0,0
+S:Frandom$T4IF$0$0({1}SX:U),J,0,0
+S:Frandom$P0IF$0$0({1}SX:U),J,0,0
+S:Frandom$_IRCON6$0$0({1}SX:U),J,0,0
+S:Frandom$STIF$0$0({1}SX:U),J,0,0
+S:Frandom$P$0$0({1}SX:U),J,0,0
+S:Frandom$F1$0$0({1}SX:U),J,0,0
+S:Frandom$OV$0$0({1}SX:U),J,0,0
+S:Frandom$RS0$0$0({1}SX:U),J,0,0
+S:Frandom$RS1$0$0({1}SX:U),J,0,0
+S:Frandom$F0$0$0({1}SX:U),J,0,0
+S:Frandom$AC$0$0({1}SX:U),J,0,0
+S:Frandom$CY$0$0({1}SX:U),J,0,0
+S:Frandom$T3OVFIF$0$0({1}SX:U),J,0,0
+S:Frandom$T3CH0IF$0$0({1}SX:U),J,0,0
+S:Frandom$T3CH1IF$0$0({1}SX:U),J,0,0
+S:Frandom$T4OVFIF$0$0({1}SX:U),J,0,0
+S:Frandom$T4CH0IF$0$0({1}SX:U),J,0,0
+S:Frandom$T4CH1IF$0$0({1}SX:U),J,0,0
+S:Frandom$OVFIM$0$0({1}SX:U),J,0,0
+S:Frandom$_TIMIF7$0$0({1}SX:U),J,0,0
+S:Frandom$ACC_0$0$0({1}SX:U),J,0,0
+S:Frandom$ACC_1$0$0({1}SX:U),J,0,0
+S:Frandom$ACC_2$0$0({1}SX:U),J,0,0
+S:Frandom$ACC_3$0$0({1}SX:U),J,0,0
+S:Frandom$ACC_4$0$0({1}SX:U),J,0,0
+S:Frandom$ACC_5$0$0({1}SX:U),J,0,0
+S:Frandom$ACC_6$0$0({1}SX:U),J,0,0
+S:Frandom$ACC_7$0$0({1}SX:U),J,0,0
+S:Frandom$P2IF$0$0({1}SX:U),J,0,0
+S:Frandom$UTX0IF$0$0({1}SX:U),J,0,0
+S:Frandom$UTX1IF$0$0({1}SX:U),J,0,0
+S:Frandom$P1IF$0$0({1}SX:U),J,0,0
+S:Frandom$WDTIF$0$0({1}SX:U),J,0,0
+S:Frandom$_IRCON25$0$0({1}SX:U),J,0,0
+S:Frandom$_IRCON26$0$0({1}SX:U),J,0,0
+S:Frandom$_IRCON27$0$0({1}SX:U),J,0,0
+S:Frandom$B_0$0$0({1}SX:U),J,0,0
+S:Frandom$B_1$0$0({1}SX:U),J,0,0
+S:Frandom$B_2$0$0({1}SX:U),J,0,0
+S:Frandom$B_3$0$0({1}SX:U),J,0,0
+S:Frandom$B_4$0$0({1}SX:U),J,0,0
+S:Frandom$B_5$0$0({1}SX:U),J,0,0
+S:Frandom$B_6$0$0({1}SX:U),J,0,0
+S:Frandom$B_7$0$0({1}SX:U),J,0,0
+S:Frandom$U1ACTIVE$0$0({1}SX:U),J,0,0
+S:Frandom$U1TX_BYTE$0$0({1}SX:U),J,0,0
+S:Frandom$U1RX_BYTE$0$0({1}SX:U),J,0,0
+S:Frandom$U1ERR$0$0({1}SX:U),J,0,0
+S:Frandom$U1FE$0$0({1}SX:U),J,0,0
+S:Frandom$U1SLAVE$0$0({1}SX:U),J,0,0
+S:Frandom$U1RE$0$0({1}SX:U),J,0,0
+S:Frandom$U1MODE$0$0({1}SX:U),J,0,0
+S:G$randomSeedFromAdc$0$0({2}DF,SV:S),C,0,0
+S:G$randomSeedFromSerialNumber$0$0({2}DF,SV:S),C,0,0
+</ADB>
+</FILE>
+
+<FILE>
+random_from_sernum
+<REL>
+;!FILE libraries/src/random/random_from_sernum.asm
+XH
+H 1B areas 151 global symbols
+M random_from_sernum
+O -mmcs51 --model-medium
+S Frandom_from_sernum$USBIIE$0$0 DefDE07
+S Frandom_from_sernum$RSSI$0$0 DefDF3A
+S Frandom_from_sernum$U1SLAVE$0$0 Def00FD
+S Frandom_from_sernum$T3OVFIF$0$0 Def00D8
+S Frandom_from_sernum$DMAIF$0$0 Def00C0
+S Frandom_from_sernum$_IEN06$0$0 Def00AE
+S Frandom_from_sernum$FADDR$0$0 DefFFFFADAC
+S Frandom_from_sernum$U0BAUD$0$0 Def00C2
+S Frandom_from_sernum$USBIIF$0$0 DefDE02
+S Frandom_from_sernum$T4OVFIF$0$0 Def00DB
+S Frandom_from_sernum$_IEN16$0$0 Def00BE
+S Frandom_from_sernum$U1BAUD$0$0 Def00FA
+S _randomSeed Ref0000
+S Frandom_from_sernum$_IEN17$0$0 Def00BF
+S Frandom_from_sernum$T1CC0H$0$0 Def00DB
+S Frandom_from_sernum$ENCDI$0$0 Def00B1
+S Frandom_from_sernum$MARCSTATE$0$0 DefDF3B
+S Frandom_from_sernum$AC$0$0 Def00D6
+S Frandom_from_sernum$ENCIE$0$0 Def00AC
+S Frandom_from_sernum$T1CC1H$0$0 Def00DD
+S Frandom_from_sernum$BSCFG$0$0 DefDF16
+S Frandom_from_sernum$T1CC2H$0$0 Def00DF
+S Frandom_from_sernum$LQI$0$0 DefDF39
+S Frandom_from_sernum$VERSION$0$0 DefDF37
+S Frandom_from_sernum$EA$0$0 Def00AF
+S Frandom_from_sernum$U0DBUF$0$0 Def00C1
+S Frandom_from_sernum$USBOIE$0$0 DefDE09
+S Frandom_from_sernum$VCO_VC_DAC$0$0 DefDF3D
+S Frandom_from_sernum$PARTNUM$0$0 DefDF36
+S Frandom_from_sernum$U1DBUF$0$0 Def00F9
+S Frandom_from_sernum$T1CC0L$0$0 Def00DA
+S Frandom_from_sernum$DPS$0$0 Def0092
+S Frandom_from_sernum$USBOIF$0$0 DefDE04
+S Frandom_from_sernum$T1CC1L$0$0 Def00DC
+S Frandom_from_sernum$MEMCTR$0$0 Def00C7
+S Frandom_from_sernum$T2PR$0$0 Def009D
+S Frandom_from_sernum$T1CC2L$0$0 Def00DE
+S Frandom_from_sernum$ENCDO$0$0 Def00B2
+S Frandom_from_sernum$IP0$0$0 Def00A9
+S Frandom_from_sernum$I2SSTAT$0$0 DefDF45
+S Frandom_from_sernum$I2SWCNT$0$0 DefDF44
+S Frandom_from_sernum$IP1$0$0 Def00B9
+S Frandom_from_sernum$MPAGE$0$0 Def0093
+S Frandom_from_sernum$U1MODE$0$0 Def00FF
+S Frandom_from_sernum$ENCCS$0$0 Def00B3
+S Frandom_from_sernum$IRCON2$0$0 Def00E8
+S Frandom_from_sernum$WORCTRL$0$0 Def00A2
+S Frandom_from_sernum$PKTLEN$0$0 DefDF02
+S Frandom_from_sernum$AGCCTRL0$0$0 DefDF19
+S Frandom_from_sernum$ADCH$0$0 Def00BB
+S Frandom_from_sernum$AGCCTRL1$0$0 DefDF18
+S Frandom_from_sernum$FWT$0$0 Def00AB
+S Frandom_from_sernum$AGCCTRL2$0$0 DefDF17
+S Frandom_from_sernum$DMA0CFG$0$0 DefFFFFD5D4
+S Frandom_from_sernum$T1CNTH$0$0 Def00E3
+S Frandom_from_sernum$DMA1CFG$0$0 DefFFFFD3D2
+S Frandom_from_sernum$ENCIF_0$0$0 Def0098
+S Frandom_from_sernum$ADCL$0$0 Def00BA
+S Frandom_from_sernum$RS0$0$0 Def00D3
+S Frandom_from_sernum$ENCIF_1$0$0 Def0099
+S Frandom_from_sernum$F0$0$0 Def00D5
+S Frandom_from_sernum$RS1$0$0 Def00D4
+S Frandom_from_sernum$T1CNTL$0$0 Def00E2
+S Frandom_from_sernum$P0IFG$0$0 Def0089
+S Frandom_from_sernum$F1$0$0 Def00D1
+S Frandom_from_sernum$WOREVT0$0$0 Def00A3
+S Frandom_from_sernum$P1IFG$0$0 Def008A
+S Frandom_from_sernum$ADCCFG$0$0 Def00F2
+S Frandom_from_sernum$WOREVT1$0$0 Def00A4
+S Frandom_from_sernum$P2IFG$0$0 Def008B
+S Frandom_from_sernum$TIMIF$0$0 Def00D8
+S Frandom_from_sernum$SLEEP$0$0 Def00BE
+S Frandom_from_sernum$ADCCON1$0$0 Def00B4
+S Frandom_from_sernum$PSW$0$0 Def00D0
+S Frandom_from_sernum$ADCCON2$0$0 Def00B5
+S Frandom_from_sernum$ADDR$0$0 DefDF05
+S Frandom_from_sernum$T1CC0$0$0 DefFFFFDBDA
+S Frandom_from_sernum$IRCON$0$0 Def00C0
+S Frandom_from_sernum$ADCCON3$0$0 Def00B6
+S Frandom_from_sernum$CY$0$0 Def00D7
+S Frandom_from_sernum$T1CC1$0$0 DefFFFFDDDC
+S Frandom_from_sernum$PICTL$0$0 Def008C
+S Frandom_from_sernum$URX0IE$0$0 Def00AA
+S Frandom_from_sernum$T1CC2$0$0 DefFFFFDFDE
+S Frandom_from_sernum$T3CC0$0$0 Def00CD
+S Frandom_from_sernum$P1IEN$0$0 Def008D
+S Frandom_from_sernum$I2SCLKF0$0$0 DefDF46
+S Frandom_from_sernum$MDMCFG0$0$0 DefDF10
+S Frandom_from_sernum$FREQ0$0$0 DefDF0B
+S Frandom_from_sernum$WDTIF$0$0 Def00EC
+S Frandom_from_sernum$URX1IE$0$0 Def00AB
+S Frandom_from_sernum$URX0IF$0$0 Def008B
+S Frandom_from_sernum$T4CC0$0$0 Def00ED
+S Frandom_from_sernum$T3CC1$0$0 Def00CF
+S Frandom_from_sernum$WDCTL$0$0 Def00C9
+S Frandom_from_sernum$I2SCLKF1$0$0 DefDF47
+S Frandom_from_sernum$MDMCFG1$0$0 DefDF0F
+S Frandom_from_sernum$FREQ1$0$0 DefDF0A
+S Frandom_from_sernum$URX1IF$0$0 Def008F
+S Frandom_from_sernum$P0DIR$0$0 Def00FD
+S Frandom_from_sernum$T4CC1$0$0 Def00EF
+S Frandom_from_sernum$USBF0$0$0 DefDE20
+S Frandom_from_sernum$USBPOW$0$0 DefDE01
+S Frandom_from_sernum$I2SCLKF2$0$0 DefDF48
+S Frandom_from_sernum$MCSM0$0$0 DefDF14
+S Frandom_from_sernum$MDMCFG2$0$0 DefDF0E
+S Frandom_from_sernum$FREQ2$0$0 DefDF09
+S Frandom_from_sernum$UTX0IF$0$0 Def00E9
+S Frandom_from_sernum$P1DIR$0$0 Def00FE
+S Frandom_from_sernum$P0$0$0 Def0080
+S Frandom_from_sernum$USBF1$0$0 DefDE22
+S Frandom_from_sernum$MCSM1$0$0 DefDF13
+S Frandom_from_sernum$MDMCFG3$0$0 DefDF0D
+S Frandom_from_sernum$_IRCON25$0$0 Def00ED
+S Frandom_from_sernum$UTX1IF$0$0 Def00EA
+S Frandom_from_sernum$OVFIM$0$0 Def00DE
+S Frandom_from_sernum$P2DIR$0$0 Def00FF
+S Frandom_from_sernum$U0GCR$0$0 Def00C5
+S Frandom_from_sernum$P1$0$0 Def0090
+S _randomSeed_PARM_2 Ref0000
+S Frandom_from_sernum$USBF2$0$0 DefDE24
+S Frandom_from_sernum$USBINDEX$0$0 DefDE0E
+S Frandom_from_sernum$MCSM2$0$0 DefDF12
+S Frandom_from_sernum$MDMCFG4$0$0 DefDF0C
+S Frandom_from_sernum$U1ACTIVE$0$0 Def00F8
+S Frandom_from_sernum$_IRCON26$0$0 Def00EE
+S Frandom_from_sernum$_TCON_0$0$0 Def0088
+S Frandom_from_sernum$U1GCR$0$0 Def00FC
+S Frandom_from_sernum$B$0$0 Def00F0
+S Frandom_from_sernum$P2$0$0 Def00A0
+S Frandom_from_sernum$USBF3$0$0 DefDE26
+S Frandom_from_sernum$U1RX_BYTE$0$0 Def00FA
+S Frandom_from_sernum$_IRCON27$0$0 Def00EF
+S Frandom_from_sernum$S0CON$0$0 Def0098
+S Frandom_from_sernum$SP$0$0 Def0081
+S Frandom_from_sernum$USBF4$0$0 DefDE28
+S Frandom_from_sernum$_TCON_2$0$0 Def008A
+S Frandom_from_sernum$P0SEL$0$0 Def00F3
+S Frandom_from_sernum$WORIRQ$0$0 Def00A1
+S Frandom_from_sernum$S1CON$0$0 Def009B
+S Frandom_from_sernum$USBF5$0$0 DefDE2A
+S Frandom_from_sernum$USBADDR$0$0 DefDE00
+S Frandom_from_sernum$U1TX_BYTE$0$0 Def00F9
+S Frandom_from_sernum$OV$0$0 Def00D2
+S Frandom_from_sernum$P1SEL$0$0 Def00F4
+S Frandom_from_sernum$_TCON_4$0$0 Def008C
+S Frandom_from_sernum$P2SEL$0$0 Def00F5
+S Frandom_from_sernum$RFIF$0$0 Def00E9
+S Frandom_from_sernum$ACC$0$0 Def00E0
+S Frandom_from_sernum$P0INP$0$0 Def008F
+S Frandom_from_sernum$PA_TABLE0$0$0 DefDF2E
+S Frandom_from_sernum$FOCCFG$0$0 DefDF15
+S Frandom_from_sernum$_TCON_6$0$0 Def008E
+S Frandom_from_sernum$ADC$0$0 DefFFFFBBBA
+S Frandom_from_sernum$P1INP$0$0 Def00F6
+S Frandom_from_sernum$T1CTL$0$0 Def00E4
+S _serialNumber Ref0000
+S Frandom_from_sernum$P2INP$0$0 Def00F7
+S Frandom_from_sernum$FCTL$0$0 Def00AE
+S Frandom_from_sernum$FADDRH$0$0 Def00AD
+S Frandom_from_sernum$T2CTL$0$0 Def009E
+S Frandom_from_sernum$T3CTL$0$0 Def00CB
+S Frandom_from_sernum$DEVIATN$0$0 DefDF11
+S Frandom_from_sernum$T4CTL$0$0 Def00EB
+S Frandom_from_sernum$T3CNT$0$0 Def00CA
+S Frandom_from_sernum$RNDH$0$0 Def00BD
+S Frandom_from_sernum$IEN0$0$0 Def00A8
+S Frandom_from_sernum$DPH0$0$0 Def0083
+S Frandom_from_sernum$SYNC0$0$0 DefDF01
+S Frandom_from_sernum$T4CNT$0$0 Def00EA
+S Frandom_from_sernum$IEN1$0$0 Def00B8
+S Frandom_from_sernum$FADDRL$0$0 Def00AC
+S Frandom_from_sernum$U0CSR$0$0 Def0086
+S Frandom_from_sernum$DPH1$0$0 Def0085
+S Frandom_from_sernum$I2SCFG0$0$0 DefDF40
+S Frandom_from_sernum$SYNC1$0$0 DefDF00
+S Frandom_from_sernum$P0IE$0$0 Def00BD
+S Frandom_from_sernum$U1CSR$0$0 Def00F8
+S Frandom_from_sernum$IEN2$0$0 Def009A
+S Frandom_from_sernum$RFIM$0$0 Def0091
+S Frandom_from_sernum$I2SDATH$0$0 DefDF43
+S Frandom_from_sernum$I2SCFG1$0$0 DefDF41
+S Frandom_from_sernum$U1ERR$0$0 Def00FB
+S Frandom_from_sernum$_TIMIF7$0$0 Def00DF
+S Frandom_from_sernum$P0IF$0$0 Def00C5
+S Frandom_from_sernum$P0_0$0$0 Def0080
+S Frandom_from_sernum$U0UCR$0$0 Def00C4
+S Frandom_from_sernum$ENDIAN$0$0 Def0095
+S Frandom_from_sernum$TEST0$0$0 DefDF25
+S Frandom_from_sernum$P1IF$0$0 Def00EB
+S Frandom_from_sernum$P$0$0 Def00D0
+S Frandom_from_sernum$_IRCON6$0$0 Def00C6
+S Frandom_from_sernum$P1_0$0$0 Def0090
+S Frandom_from_sernum$P0_1$0$0 Def0081
+S Frandom_from_sernum$U1UCR$0$0 Def00FB
+S Frandom_from_sernum$RNDL$0$0 Def00BC
+S Frandom_from_sernum$PCON$0$0 Def0087
+S Frandom_from_sernum$DPL0$0$0 Def0082
+S Frandom_from_sernum$USBCSIH$0$0 DefDE12
+S Frandom_from_sernum$TEST1$0$0 DefDF24
+S Frandom_from_sernum$U1FE$0$0 Def00FC
+S Frandom_from_sernum$B_0$0$0 Def00F0
+S Frandom_from_sernum$P2IF$0$0 Def00E8
+S Frandom_from_sernum$T3CH0IF$0$0 Def00D9
+S Frandom_from_sernum$P2_0$0$0 Def00A0
+S Frandom_from_sernum$P1_1$0$0 Def0091
+S Frandom_from_sernum$P0_2$0$0 Def0082
+S Frandom_from_sernum$DPL1$0$0 Def0084
+S Frandom_from_sernum$TEST2$0$0 DefDF23
+S Frandom_from_sernum$B_1$0$0 Def00F1
+S Frandom_from_sernum$T4CH0IF$0$0 Def00DC
+S Frandom_from_sernum$T3CH1IF$0$0 Def00DA
+S Frandom_from_sernum$P2_1$0$0 Def00A1
+S Frandom_from_sernum$P1_2$0$0 Def0092
+S Frandom_from_sernum$P0_3$0$0 Def0083
+S Frandom_from_sernum$DMAARM$0$0 Def00D6
+S Frandom_from_sernum$I2SDATL$0$0 DefDF42
+S Frandom_from_sernum$PKTSTATUS$0$0 DefDF3C
+S Frandom_from_sernum$B_2$0$0 Def00F2
+S Frandom_from_sernum$T4CH1IF$0$0 Def00DD
+S Frandom_from_sernum$T1IE$0$0 Def00B9
+S Frandom_from_sernum$P2_2$0$0 Def00A2
+S Frandom_from_sernum$_SOCON2$0$0 Def009A
+S Frandom_from_sernum$P1_3$0$0 Def0093
+S Frandom_from_sernum$P0_4$0$0 Def0084
+S Frandom_from_sernum$PKTCTRL0$0$0 DefDF04
+S Frandom_from_sernum$B_3$0$0 Def00F3
+S Frandom_from_sernum$T1IF$0$0 Def00C1
+S Frandom_from_sernum$T2IE$0$0 Def00BA
+S Frandom_from_sernum$P2_3$0$0 Def00A3
+S Frandom_from_sernum$_SOCON3$0$0 Def009B
+S Frandom_from_sernum$P1_4$0$0 Def0094
+S Frandom_from_sernum$P0_5$0$0 Def0085
+S Frandom_from_sernum$TCON$0$0 Def0088
+S Frandom_from_sernum$USBCSIL$0$0 DefDE11
+S Frandom_from_sernum$PKTCTRL1$0$0 DefDF03
+S Frandom_from_sernum$B_4$0$0 Def00F4
+S Frandom_from_sernum$T2IF$0$0 Def00C2
+S Frandom_from_sernum$T3IE$0$0 Def00BB
+S Frandom_from_sernum$STIE$0$0 Def00AD
+S Frandom_from_sernum$P2_4$0$0 Def00A4
+S Frandom_from_sernum$_SOCON4$0$0 Def009C
+S Frandom_from_sernum$P1_5$0$0 Def0095
+S Frandom_from_sernum$P0_6$0$0 Def0086
+S Frandom_from_sernum$B_5$0$0 Def00F5
+S Frandom_from_sernum$ACC_0$0$0 Def00E0
+S Frandom_from_sernum$STIF$0$0 Def00C7
+S Frandom_from_sernum$T3IF$0$0 Def00C3
+S Frandom_from_sernum$T4IE$0$0 Def00BC
+S Frandom_from_sernum$ADCIE$0$0 Def00A9
+S Frandom_from_sernum$P2_5$0$0 Def00A5
+S Frandom_from_sernum$_SOCON5$0$0 Def009D
+S Frandom_from_sernum$P1_6$0$0 Def0096
+S Frandom_from_sernum$P0_7$0$0 Def0087
+S Frandom_from_sernum$USBCNTH$0$0 DefDE17
+S Frandom_from_sernum$USBCSOH$0$0 DefDE15
+S Frandom_from_sernum$USBFRMH$0$0 DefDE0D
+S Frandom_from_sernum$B_6$0$0 Def00F6
+S Frandom_from_sernum$ACC_1$0$0 Def00E1
+S Frandom_from_sernum$T4IF$0$0 Def00C4
+S Frandom_from_sernum$P2_6$0$0 Def00A6
+S Frandom_from_sernum$_SOCON6$0$0 Def009E
+S Frandom_from_sernum$P1_7$0$0 Def0097
+S Frandom_from_sernum$ADCIF$0$0 Def008D
+S Frandom_from_sernum$PERCFG$0$0 Def00F1
+S Frandom_from_sernum$FWDATA$0$0 Def00AF
+S Frandom_from_sernum$WORTIME0$0$0 Def00A5
+S Frandom_from_sernum$IOCFG0$0$0 DefDF31
+S Frandom_from_sernum$B_7$0$0 Def00F7
+S Frandom_from_sernum$ACC_2$0$0 Def00E2
+S Frandom_from_sernum$P2_7$0$0 Def00A7
+S Frandom_from_sernum$_SOCON7$0$0 Def009F
+S Frandom_from_sernum$WORTIME1$0$0 Def00A6
+S Frandom_from_sernum$USBMAXI$0$0 DefDE10
+S Frandom_from_sernum$IOCFG1$0$0 DefDF30
+S Frandom_from_sernum$FSCAL0$0$0 DefDF1F
+S Frandom_from_sernum$ACC_3$0$0 Def00E3
+S Frandom_from_sernum$FREQEST$0$0 DefDF38
+S Frandom_from_sernum$IOCFG2$0$0 DefDF2F
+S Frandom_from_sernum$FSCAL1$0$0 DefDF1E
+S Frandom_from_sernum$CHANNR$0$0 DefDF06
+S Frandom_from_sernum$ACC_4$0$0 Def00E4
+S Frandom_from_sernum$DMAREQ$0$0 Def00D7
+S Frandom_from_sernum$DMA0CFGH$0$0 Def00D5
+S Frandom_from_sernum$CLKCON$0$0 Def00C6
+S Frandom_from_sernum$USBCNTL$0$0 DefDE16
+S Frandom_from_sernum$USBCSOL$0$0 DefDE14
+S Frandom_from_sernum$USBFRML$0$0 DefDE0C
+S Frandom_from_sernum$USBCIE$0$0 DefDE0B
+S Frandom_from_sernum$FSCAL2$0$0 DefDF1D
+S Frandom_from_sernum$ACC_5$0$0 Def00E5
+S Frandom_from_sernum$T1CCTL0$0$0 Def00E5
+S Frandom_from_sernum$DMA1CFGH$0$0 Def00D3
+S Frandom_from_sernum$USBCIF$0$0 DefDE06
+S Frandom_from_sernum$FSCAL3$0$0 DefDF1C
+S Frandom_from_sernum$ACC_6$0$0 Def00E6
+S Frandom_from_sernum$RFTXRXIE$0$0 Def00A8
+S Frandom_from_sernum$T1CCTL1$0$0 Def00E6
+S Frandom_from_sernum$RFD$0$0 Def00D9
+S Frandom_from_sernum$U1RE$0$0 Def00FE
+S Frandom_from_sernum$ACC_7$0$0 Def00E7
+S Frandom_from_sernum$RFTXRXIF$0$0 Def0089
+S Frandom_from_sernum$T1CCTL2$0$0 Def00E7
+S Frandom_from_sernum$T3CCTL0$0$0 Def00CC
+S Frandom_from_sernum$T2CT$0$0 Def009C
+S Frandom_from_sernum$FSCTRL0$0$0 DefDF08
+S Frandom_from_sernum$T4CCTL0$0$0 Def00EC
+S Frandom_from_sernum$DMA0CFGL$0$0 Def00D4
+S Frandom_from_sernum$DMAIRQ$0$0 Def00D1
+S Frandom_from_sernum$T3CCTL1$0$0 Def00CE
+S Frandom_from_sernum$USBMAXO$0$0 DefDE13
+S Frandom_from_sernum$FREND0$0$0 DefDF1B
+S Frandom_from_sernum$FSCTRL1$0$0 DefDF07
+S Frandom_from_sernum$T4CCTL1$0$0 Def00EE
+S Frandom_from_sernum$RFST$0$0 Def00E1
+S Frandom_from_sernum$DMA1CFGL$0$0 Def00D2
+S .__.ABS. Def0000
+S Frandom_from_sernum$FREND1$0$0 DefDF1A
+S Frandom_from_sernum$DMAIE$0$0 Def00B8
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A OSEG size 0 flags 4 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 0 flags 80 addr 0
+A PSEG size 0 flags 50 addr 0
+A XSEG size 0 flags 40 addr 0
+A XABS size 0 flags 48 addr 0
+A XISEG size 0 flags 40 addr 0
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size 14 flags 20 addr 0
+S XG$randomSeedFromSerialNumber$0$0 Def0013
+S A$random_from_sernum$750 Def000D
+S G$randomSeedFromSerialNumber$0$0 Def0000
+S A$random_from_sernum$751 Def000E
+S A$random_from_sernum$742 Def0000
+S A$random_from_sernum$752 Def0010
+S A$random_from_sernum$743 Def0003
+S A$random_from_sernum$744 Def0004
+S A$random_from_sernum$745 Def0005
+S A$random_from_sernum$755 Def0013
+S A$random_from_sernum$746 Def0006
+S A$random_from_sernum$747 Def0009
+S A$random_from_sernum$748 Def000A
+S A$random_from_sernum$749 Def000B
+S C$random_from_sernum.c$17$1$1 Def0000
+S C$random_from_sernum.c$18$1$1 Def0013
+S C$random_from_sernum.c$9$0$0 Def0000
+S _randomSeedFromSerialNumber Def0000
+A CONST size 0 flags 20 addr 0
+A XINIT size 0 flags 20 addr 0
+A CABS size 0 flags 28 addr 0
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00
+R 00 00 00 04
+T 00 00
+R 00 00 00 17
+T 00 00 90 00 00 E4 93 FF 90 00 01 E4 93 78
+R 00 00 00 17 02 03 00 9C 02 09 00 9C
+T 00 0C 00 00 00 F2 8F 82 12 00 00 22
+R 00 00 00 17 F1 03 02 00 77 02 09 00 0C
+</REL>
+<ADB>
+M:random_from_sernum
+F:G$randomSeedFromSerialNumber$0$0({2}DF,SV:S),Z,0,0,0,0,0
+T:Frandom_from_sernum$__00010000[({0}S:S$SRCADDRH$0$0({1}SC:U),Z,0,0)({1}S:S$SRCADDRL$0$0({1}SC:U),Z,0,0)({2}S:S$DESTADDRH$0$0({1}SC:U),Z,0,0)({3}S:S$DESTADDRL$0$0({1}SC:U),Z,0,0)({4}S:S$VLEN_LENH$0$0({1}SC:U),Z,0,0)({5}S:S$LENL$0$0({1}SC:U),Z,0,0)({6}S
+
+:S$DC6$0$0({1}SC:U),Z,0,0)({7}S:S$DC7$0$0({1}SC:U),Z,0,0)]
+S:Frandom_from_sernum$SYNC1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$SYNC0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$PKTLEN$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$PKTCTRL1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$PKTCTRL0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$ADDR$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$CHANNR$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FSCTRL1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FSCTRL0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FREQ2$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FREQ1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FREQ0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$MDMCFG4$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$MDMCFG3$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$MDMCFG2$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$MDMCFG1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$MDMCFG0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$DEVIATN$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$MCSM2$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$MCSM1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$MCSM0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FOCCFG$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$BSCFG$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$AGCCTRL2$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$AGCCTRL1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$AGCCTRL0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FREND1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FREND0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FSCAL3$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FSCAL2$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FSCAL1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FSCAL0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$TEST2$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$TEST1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$TEST0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$PA_TABLE0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$IOCFG2$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$IOCFG1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$IOCFG0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$PARTNUM$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$VERSION$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$FREQEST$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$LQI$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$RSSI$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$MARCSTATE$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$PKTSTATUS$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$VCO_VC_DAC$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$I2SCFG0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$I2SCFG1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$I2SDATL$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$I2SDATH$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$I2SWCNT$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$I2SSTAT$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$I2SCLKF0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$I2SCLKF1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$I2SCLKF2$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBADDR$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBPOW$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBIIF$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBOIF$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBCIF$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBIIE$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBOIE$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBCIE$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBFRML$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBFRMH$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBINDEX$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBMAXI$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBCSIL$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBCSIH$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBMAXO$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBCSOL$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBCSOH$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBCNTL$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBCNTH$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBF0$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBF1$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBF2$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBF3$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBF4$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$USBF5$0$0({1}SC:U),F,0,0
+S:Frandom_from_sernum$P0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$SP$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DPL0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DPH0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DPL1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DPH1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U0CSR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$PCON$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$TCON$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P0IFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P1IFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P2IFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$PICTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P1IEN$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P0INP$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$RFIM$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DPS$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$MPAGE$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ENDIAN$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$S0CON$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$IEN2$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$S1CON$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T2CT$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T2PR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T2CTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P2$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$WORIRQ$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$WORCTRL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$WOREVT0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$WOREVT1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$WORTIME0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$WORTIME1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$IEN0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$IP0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$FWT$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$FADDRL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$FADDRH$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$FCTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$FWDATA$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ENCDI$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ENCDO$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ENCCS$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ADCCON1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ADCCON2$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ADCCON3$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$IEN1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$IP1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ADCL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ADCH$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$RNDL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$RNDH$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$SLEEP$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$IRCON$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U0DBUF$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U0BAUD$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U0UCR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U0GCR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$CLKCON$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$MEMCTR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$WDCTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T3CNT$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T3CTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T3CCTL0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T3CC0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T3CCTL1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T3CC1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$PSW$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DMAIRQ$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DMA1CFGL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DMA1CFGH$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DMA0CFGL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DMA0CFGH$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DMAARM$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DMAREQ$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$TIMIF$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$RFD$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CC0L$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CC0H$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CC1L$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CC1H$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CC2L$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CC2H$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ACC$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$RFST$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CNTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CNTH$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CCTL0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CCTL1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T1CCTL2$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$IRCON2$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$RFIF$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T4CNT$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T4CTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T4CCTL0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T4CC0$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T4CCTL1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$T4CC1$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$B$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$PERCFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$ADCCFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P0SEL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P1SEL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P2SEL$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P1INP$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P2INP$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U1CSR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U1DBUF$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U1BAUD$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U1UCR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$U1GCR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P0DIR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P1DIR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$P2DIR$0$0({1}SC:U),I,0,0
+S:Frandom_from_sernum$DMA0CFG$0$0({2}SI:U),I,0,0
+S:Frandom_from_sernum$DMA1CFG$0$0({2}SI:U),I,0,0
+S:Frandom_from_sernum$FADDR$0$0({2}SI:U),I,0,0
+S:Frandom_from_sernum$ADC$0$0({2}SI:U),I,0,0
+S:Frandom_from_sernum$T1CC0$0$0({2}SI:U),I,0,0
+S:Frandom_from_sernum$T1CC1$0$0({2}SI:U),I,0,0
+S:Frandom_from_sernum$T1CC2$0$0({2}SI:U),I,0,0
+S:Frandom_from_sernum$P0_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P0_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P0_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P0_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P0_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P0_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P0_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P0_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_TCON_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$RFTXRXIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_TCON_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$URX0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_TCON_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ADCIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_TCON_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$URX1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P1_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P1_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P1_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P1_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P1_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P1_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P1_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P1_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ENCIF_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ENCIF_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_SOCON2$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_SOCON3$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_SOCON4$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_SOCON5$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_SOCON6$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_SOCON7$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P2_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P2_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P2_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P2_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P2_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P2_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P2_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P2_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$RFTXRXIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ADCIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$URX0IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$URX1IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ENCIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$STIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_IEN06$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$EA$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$DMAIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T1IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T2IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T3IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T4IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P0IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_IEN16$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_IEN17$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$DMAIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T2IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T3IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T4IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_IRCON6$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$STIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$F1$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$OV$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$RS0$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$RS1$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$F0$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$AC$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$CY$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T3OVFIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T3CH0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T3CH1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T4OVFIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T4CH0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$T4CH1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$OVFIM$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_TIMIF7$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ACC_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ACC_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ACC_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ACC_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ACC_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ACC_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ACC_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$ACC_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P2IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$UTX0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$UTX1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$P1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$WDTIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_IRCON25$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_IRCON26$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$_IRCON27$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$B_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$B_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$B_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$B_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$B_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$B_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$B_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$B_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$U1ACTIVE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$U1TX_BYTE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$U1RX_BYTE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$U1ERR$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$U1FE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$U1SLAVE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$U1RE$0$0({1}SX:U),J,0,0
+S:Frandom_from_sernum$U1MODE$0$0({1}SX:U),J,0,0
+S:G$randomSeedFromAdc$0$0({2}DF,SV:S),C,0,0
+S:G$randomNumber$0$0({2}DF,SC:U),C,0,0
+S:G$randomSeed$0$0({2}DF,SV:S),C,0,0
+S:G$systemInit$0$0({2}DF,SV:S),C,0,0
+S:G$boardIoInit$0$0({2}DF,SV:S),C,0,0
+S:G$boardClockInit$0$0({2}DF,SV:S),C,0,0
+S:G$boardService$0$0({2}DF,SV:S),C,0,0
+S:G$boardStartBootloaderIfNeeded$0$0({2}DF,SV:S),C,0,0
+S:G$boardStartBootloader$0$0({2}DF,SV:S),C,0,0
+S:G$usbPowerPresent$0$0({2}DF,SB0$1:U),C,0,0
+S:G$vinPowerPresent$0$0({2}DF,SB0$1:U),C,0,0
+S:G$enableUsbPullup$0$0({2}DF,SV:S),C,0,0
+S:G$disableUsbPullup$0$0({2}DF,SV:S),C,0,0
+S:G$serialNumber$0$0({4}DA4,SC:U),D,0,0
+S:G$serialNumberStringDescriptor$0$0({0}DA0,SI:U),D,0,0
+</ADB>
+</FILE>
+
+<FILE>
+random_from_adc
+<REL>
+;!FILE libraries/src/random/random_from_adc.asm
+XH
+H 1B areas 15D global symbols
+M random_from_adc
+O -mmcs51 --model-medium
+S Frandom_from_adc$I2SDATL$0$0 DefDF42
+S Frandom_from_adc$PKTSTATUS$0$0 DefDF3C
+S Frandom_from_adc$B_2$0$0 Def00F2
+S Frandom_from_adc$T4CH1IF$0$0 Def00DD
+S Frandom_from_adc$T1IE$0$0 Def00B9
+S Frandom_from_adc$P2_2$0$0 Def00A2
+S Frandom_from_adc$_SOCON2$0$0 Def009A
+S Frandom_from_adc$P1_3$0$0 Def0093
+S Frandom_from_adc$P0_4$0$0 Def0084
+S Frandom_from_adc$PKTCTRL0$0$0 DefDF04
+S Frandom_from_adc$B_3$0$0 Def00F3
+S Frandom_from_adc$T1IF$0$0 Def00C1
+S Frandom_from_adc$T2IE$0$0 Def00BA
+S Frandom_from_adc$P2_3$0$0 Def00A3
+S Frandom_from_adc$_SOCON3$0$0 Def009B
+S Frandom_from_adc$P1_4$0$0 Def0094
+S Frandom_from_adc$P0_5$0$0 Def0085
+S Frandom_from_adc$TCON$0$0 Def0088
+S _randomSeed Ref0000
+S Frandom_from_adc$USBCSIL$0$0 DefDE11
+S Frandom_from_adc$PKTCTRL1$0$0 DefDF03
+S Frandom_from_adc$B_4$0$0 Def00F4
+S Frandom_from_adc$T2IF$0$0 Def00C2
+S Frandom_from_adc$T3IE$0$0 Def00BB
+S Frandom_from_adc$STIE$0$0 Def00AD
+S Frandom_from_adc$P2_4$0$0 Def00A4
+S Frandom_from_adc$_SOCON4$0$0 Def009C
+S Frandom_from_adc$P1_5$0$0 Def0095
+S Frandom_from_adc$P0_6$0$0 Def0086
+S Frandom_from_adc$B_5$0$0 Def00F5
+S Frandom_from_adc$ACC_0$0$0 Def00E0
+S Frandom_from_adc$STIF$0$0 Def00C7
+S Frandom_from_adc$T3IF$0$0 Def00C3
+S Frandom_from_adc$T4IE$0$0 Def00BC
+S Frandom_from_adc$ADCIE$0$0 Def00A9
+S Frandom_from_adc$P2_5$0$0 Def00A5
+S Frandom_from_adc$_SOCON5$0$0 Def009D
+S Frandom_from_adc$P1_6$0$0 Def0096
+S Frandom_from_adc$P0_7$0$0 Def0087
+S Frandom_from_adc$USBCNTH$0$0 DefDE17
+S Frandom_from_adc$USBCSOH$0$0 DefDE15
+S Frandom_from_adc$USBFRMH$0$0 DefDE0D
+S Frandom_from_adc$B_6$0$0 Def00F6
+S Frandom_from_adc$ACC_1$0$0 Def00E1
+S Frandom_from_adc$T4IF$0$0 Def00C4
+S Frandom_from_adc$P2_6$0$0 Def00A6
+S Frandom_from_adc$_SOCON6$0$0 Def009E
+S Frandom_from_adc$P1_7$0$0 Def0097
+S Frandom_from_adc$ADCIF$0$0 Def008D
+S Frandom_from_adc$PERCFG$0$0 Def00F1
+S Frandom_from_adc$FWDATA$0$0 Def00AF
+S Frandom_from_adc$WORTIME0$0$0 Def00A5
+S Frandom_from_adc$IOCFG0$0$0 DefDF31
+S Frandom_from_adc$B_7$0$0 Def00F7
+S Frandom_from_adc$ACC_2$0$0 Def00E2
+S Frandom_from_adc$P2_7$0$0 Def00A7
+S Frandom_from_adc$_SOCON7$0$0 Def009F
+S Frandom_from_adc$WORTIME1$0$0 Def00A6
+S Frandom_from_adc$USBMAXI$0$0 DefDE10
+S Frandom_from_adc$IOCFG1$0$0 DefDF30
+S Frandom_from_adc$FSCAL0$0$0 DefDF1F
+S Frandom_from_adc$ACC_3$0$0 Def00E3
+S Frandom_from_adc$FREQEST$0$0 DefDF38
+S Frandom_from_adc$IOCFG2$0$0 DefDF2F
+S Frandom_from_adc$FSCAL1$0$0 DefDF1E
+S Frandom_from_adc$CHANNR$0$0 DefDF06
+S Frandom_from_adc$ACC_4$0$0 Def00E4
+S Frandom_from_adc$DMAREQ$0$0 Def00D7
+S Frandom_from_adc$DMA0CFGH$0$0 Def00D5
+S Frandom_from_adc$CLKCON$0$0 Def00C6
+S Frandom_from_adc$USBCNTL$0$0 DefDE16
+S Frandom_from_adc$USBCSOL$0$0 DefDE14
+S Frandom_from_adc$USBFRML$0$0 DefDE0C
+S Frandom_from_adc$USBCIE$0$0 DefDE0B
+S Frandom_from_adc$FSCAL2$0$0 DefDF1D
+S Frandom_from_adc$ACC_5$0$0 Def00E5
+S Frandom_from_adc$T1CCTL0$0$0 Def00E5
+S Frandom_from_adc$DMA1CFGH$0$0 Def00D3
+S Frandom_from_adc$USBCIF$0$0 DefDE06
+S Frandom_from_adc$FSCAL3$0$0 DefDF1C
+S Frandom_from_adc$ACC_6$0$0 Def00E6
+S Frandom_from_adc$RFTXRXIE$0$0 Def00A8
+S Frandom_from_adc$T1CCTL1$0$0 Def00E6
+S Frandom_from_adc$RFD$0$0 Def00D9
+S Frandom_from_adc$U1RE$0$0 Def00FE
+S Frandom_from_adc$ACC_7$0$0 Def00E7
+S Frandom_from_adc$RFTXRXIF$0$0 Def0089
+S Frandom_from_adc$T1CCTL2$0$0 Def00E7
+S Frandom_from_adc$T3CCTL0$0$0 Def00CC
+S Frandom_from_adc$T2CT$0$0 Def009C
+S Frandom_from_adc$FSCTRL0$0$0 DefDF08
+S Frandom_from_adc$T4CCTL0$0$0 Def00EC
+S Frandom_from_adc$DMA0CFGL$0$0 Def00D4
+S Frandom_from_adc$DMAIRQ$0$0 Def00D1
+S Frandom_from_adc$T3CCTL1$0$0 Def00CE
+S Frandom_from_adc$USBMAXO$0$0 DefDE13
+S Frandom_from_adc$FREND0$0$0 DefDF1B
+S Frandom_from_adc$FSCTRL1$0$0 DefDF07
+S Frandom_from_adc$T4CCTL1$0$0 Def00EE
+S Frandom_from_adc$RFST$0$0 Def00E1
+S Frandom_from_adc$DMA1CFGL$0$0 Def00D2
+S Frandom_from_adc$FREND1$0$0 DefDF1A
+S Frandom_from_adc$DMAIE$0$0 Def00B8
+S Frandom_from_adc$USBIIE$0$0 DefDE07
+S Frandom_from_adc$RSSI$0$0 DefDF3A
+S Frandom_from_adc$U1SLAVE$0$0 Def00FD
+S Frandom_from_adc$T3OVFIF$0$0 Def00D8
+S Frandom_from_adc$DMAIF$0$0 Def00C0
+S Frandom_from_adc$_IEN06$0$0 Def00AE
+S Frandom_from_adc$FADDR$0$0 DefFFFFADAC
+S Frandom_from_adc$U0BAUD$0$0 Def00C2
+S Frandom_from_adc$USBIIF$0$0 DefDE02
+S Frandom_from_adc$T4OVFIF$0$0 Def00DB
+S Frandom_from_adc$_IEN16$0$0 Def00BE
+S Frandom_from_adc$U1BAUD$0$0 Def00FA
+S Frandom_from_adc$_IEN17$0$0 Def00BF
+S Frandom_from_adc$T1CC0H$0$0 Def00DB
+S Frandom_from_adc$ENCDI$0$0 Def00B1
+S Frandom_from_adc$MARCSTATE$0$0 DefDF3B
+S Frandom_from_adc$AC$0$0 Def00D6
+S Frandom_from_adc$ENCIE$0$0 Def00AC
+S Frandom_from_adc$T1CC1H$0$0 Def00DD
+S Frandom_from_adc$BSCFG$0$0 DefDF16
+S Frandom_from_adc$T1CC2H$0$0 Def00DF
+S Frandom_from_adc$LQI$0$0 DefDF39
+S Frandom_from_adc$VERSION$0$0 DefDF37
+S Frandom_from_adc$EA$0$0 Def00AF
+S Frandom_from_adc$U0DBUF$0$0 Def00C1
+S Frandom_from_adc$USBOIE$0$0 DefDE09
+S Frandom_from_adc$VCO_VC_DAC$0$0 DefDF3D
+S Frandom_from_adc$PARTNUM$0$0 DefDF36
+S Frandom_from_adc$U1DBUF$0$0 Def00F9
+S Frandom_from_adc$T1CC0L$0$0 Def00DA
+S Frandom_from_adc$DPS$0$0 Def0092
+S Frandom_from_adc$USBOIF$0$0 DefDE04
+S Frandom_from_adc$T1CC1L$0$0 Def00DC
+S Frandom_from_adc$MEMCTR$0$0 Def00C7
+S Frandom_from_adc$T2PR$0$0 Def009D
+S Frandom_from_adc$T1CC2L$0$0 Def00DE
+S Frandom_from_adc$ENCDO$0$0 Def00B2
+S Frandom_from_adc$IP0$0$0 Def00A9
+S Frandom_from_adc$I2SSTAT$0$0 DefDF45
+S Frandom_from_adc$I2SWCNT$0$0 DefDF44
+S Frandom_from_adc$IP1$0$0 Def00B9
+S Frandom_from_adc$MPAGE$0$0 Def0093
+S Frandom_from_adc$U1MODE$0$0 Def00FF
+S Frandom_from_adc$ENCCS$0$0 Def00B3
+S Frandom_from_adc$IRCON2$0$0 Def00E8
+S Frandom_from_adc$WORCTRL$0$0 Def00A2
+S Frandom_from_adc$PKTLEN$0$0 DefDF02
+S Frandom_from_adc$AGCCTRL0$0$0 DefDF19
+S Frandom_from_adc$ADCH$0$0 Def00BB
+S Frandom_from_adc$AGCCTRL1$0$0 DefDF18
+S Frandom_from_adc$FWT$0$0 Def00AB
+S Frandom_from_adc$AGCCTRL2$0$0 DefDF17
+S Frandom_from_adc$DMA0CFG$0$0 DefFFFFD5D4
+S Frandom_from_adc$T1CNTH$0$0 Def00E3
+S Frandom_from_adc$DMA1CFG$0$0 DefFFFFD3D2
+S _randomSeed_PARM_2 Ref0000
+S Frandom_from_adc$ENCIF_0$0$0 Def0098
+S Frandom_from_adc$ADCL$0$0 Def00BA
+S Frandom_from_adc$RS0$0$0 Def00D3
+S Frandom_from_adc$ENCIF_1$0$0 Def0099
+S Frandom_from_adc$F0$0$0 Def00D5
+S Frandom_from_adc$RS1$0$0 Def00D4
+S Frandom_from_adc$T1CNTL$0$0 Def00E2
+S Frandom_from_adc$P0IFG$0$0 Def0089
+S Frandom_from_adc$F1$0$0 Def00D1
+S Frandom_from_adc$WOREVT0$0$0 Def00A3
+S Frandom_from_adc$P1IFG$0$0 Def008A
+S Frandom_from_adc$ADCCFG$0$0 Def00F2
+S Frandom_from_adc$WOREVT1$0$0 Def00A4
+S Frandom_from_adc$P2IFG$0$0 Def008B
+S Frandom_from_adc$TIMIF$0$0 Def00D8
+S Frandom_from_adc$SLEEP$0$0 Def00BE
+S Frandom_from_adc$ADCCON1$0$0 Def00B4
+S Frandom_from_adc$PSW$0$0 Def00D0
+S Frandom_from_adc$ADCCON2$0$0 Def00B5
+S Frandom_from_adc$ADDR$0$0 DefDF05
+S Frandom_from_adc$T1CC0$0$0 DefFFFFDBDA
+S Frandom_from_adc$IRCON$0$0 Def00C0
+S Frandom_from_adc$ADCCON3$0$0 Def00B6
+S Frandom_from_adc$CY$0$0 Def00D7
+S Frandom_from_adc$T1CC1$0$0 DefFFFFDDDC
+S Frandom_from_adc$PICTL$0$0 Def008C
+S Frandom_from_adc$URX0IE$0$0 Def00AA
+S Frandom_from_adc$T1CC2$0$0 DefFFFFDFDE
+S Frandom_from_adc$T3CC0$0$0 Def00CD
+S Frandom_from_adc$P1IEN$0$0 Def008D
+S Frandom_from_adc$I2SCLKF0$0$0 DefDF46
+S Frandom_from_adc$MDMCFG0$0$0 DefDF10
+S Frandom_from_adc$FREQ0$0$0 DefDF0B
+S Frandom_from_adc$WDTIF$0$0 Def00EC
+S Frandom_from_adc$URX1IE$0$0 Def00AB
+S Frandom_from_adc$URX0IF$0$0 Def008B
+S Frandom_from_adc$T4CC0$0$0 Def00ED
+S Frandom_from_adc$T3CC1$0$0 Def00CF
+S Frandom_from_adc$WDCTL$0$0 Def00C9
+S Frandom_from_adc$I2SCLKF1$0$0 DefDF47
+S Frandom_from_adc$MDMCFG1$0$0 DefDF0F
+S Frandom_from_adc$FREQ1$0$0 DefDF0A
+S Frandom_from_adc$URX1IF$0$0 Def008F
+S Frandom_from_adc$P0DIR$0$0 Def00FD
+S Frandom_from_adc$T4CC1$0$0 Def00EF
+S Frandom_from_adc$USBF0$0$0 DefDE20
+S Frandom_from_adc$USBPOW$0$0 DefDE01
+S Frandom_from_adc$I2SCLKF2$0$0 DefDF48
+S Frandom_from_adc$MCSM0$0$0 DefDF14
+S Frandom_from_adc$MDMCFG2$0$0 DefDF0E
+S Frandom_from_adc$FREQ2$0$0 DefDF09
+S Frandom_from_adc$UTX0IF$0$0 Def00E9
+S Frandom_from_adc$P1DIR$0$0 Def00FE
+S Frandom_from_adc$P0$0$0 Def0080
+S Frandom_from_adc$USBF1$0$0 DefDE22
+S Frandom_from_adc$MCSM1$0$0 DefDF13
+S Frandom_from_adc$MDMCFG3$0$0 DefDF0D
+S Frandom_from_adc$_IRCON25$0$0 Def00ED
+S Frandom_from_adc$UTX1IF$0$0 Def00EA
+S Frandom_from_adc$OVFIM$0$0 Def00DE
+S Frandom_from_adc$P2DIR$0$0 Def00FF
+S Frandom_from_adc$U0GCR$0$0 Def00C5
+S Frandom_from_adc$P1$0$0 Def0090
+S Frandom_from_adc$USBF2$0$0 DefDE24
+S Frandom_from_adc$USBINDEX$0$0 DefDE0E
+S Frandom_from_adc$MCSM2$0$0 DefDF12
+S Frandom_from_adc$MDMCFG4$0$0 DefDF0C
+S Frandom_from_adc$U1ACTIVE$0$0 Def00F8
+S Frandom_from_adc$_IRCON26$0$0 Def00EE
+S Frandom_from_adc$_TCON_0$0$0 Def0088
+S Frandom_from_adc$U1GCR$0$0 Def00FC
+S Frandom_from_adc$B$0$0 Def00F0
+S Frandom_from_adc$P2$0$0 Def00A0
+S Frandom_from_adc$USBF3$0$0 DefDE26
+S Frandom_from_adc$U1RX_BYTE$0$0 Def00FA
+S Frandom_from_adc$_IRCON27$0$0 Def00EF
+S Frandom_from_adc$S0CON$0$0 Def0098
+S Frandom_from_adc$SP$0$0 Def0081
+S Frandom_from_adc$USBF4$0$0 DefDE28
+S Frandom_from_adc$_TCON_2$0$0 Def008A
+S Frandom_from_adc$P0SEL$0$0 Def00F3
+S Frandom_from_adc$WORIRQ$0$0 Def00A1
+S Frandom_from_adc$S1CON$0$0 Def009B
+S Frandom_from_adc$USBF5$0$0 DefDE2A
+S Frandom_from_adc$USBADDR$0$0 DefDE00
+S Frandom_from_adc$U1TX_BYTE$0$0 Def00F9
+S Frandom_from_adc$OV$0$0 Def00D2
+S Frandom_from_adc$P1SEL$0$0 Def00F4
+S Frandom_from_adc$_TCON_4$0$0 Def008C
+S Frandom_from_adc$P2SEL$0$0 Def00F5
+S Frandom_from_adc$RFIF$0$0 Def00E9
+S Frandom_from_adc$ACC$0$0 Def00E0
+S Frandom_from_adc$P0INP$0$0 Def008F
+S Frandom_from_adc$PA_TABLE0$0$0 DefDF2E
+S Frandom_from_adc$FOCCFG$0$0 DefDF15
+S Frandom_from_adc$_TCON_6$0$0 Def008E
+S Frandom_from_adc$ADC$0$0 DefFFFFBBBA
+S Frandom_from_adc$P1INP$0$0 Def00F6
+S Frandom_from_adc$T1CTL$0$0 Def00E4
+S Frandom_from_adc$P2INP$0$0 Def00F7
+S Frandom_from_adc$FCTL$0$0 Def00AE
+S Frandom_from_adc$FADDRH$0$0 Def00AD
+S Frandom_from_adc$T2CTL$0$0 Def009E
+S Frandom_from_adc$T3CTL$0$0 Def00CB
+S Frandom_from_adc$DEVIATN$0$0 DefDF11
+S Frandom_from_adc$T4CTL$0$0 Def00EB
+S Frandom_from_adc$T3CNT$0$0 Def00CA
+S Frandom_from_adc$RNDH$0$0 Def00BD
+S Frandom_from_adc$IEN0$0$0 Def00A8
+S Frandom_from_adc$DPH0$0$0 Def0083
+S Frandom_from_adc$SYNC0$0$0 DefDF01
+S Frandom_from_adc$T4CNT$0$0 Def00EA
+S Frandom_from_adc$IEN1$0$0 Def00B8
+S Frandom_from_adc$FADDRL$0$0 Def00AC
+S Frandom_from_adc$U0CSR$0$0 Def0086
+S Frandom_from_adc$DPH1$0$0 Def0085
+S Frandom_from_adc$I2SCFG0$0$0 DefDF40
+S Frandom_from_adc$SYNC1$0$0 DefDF00
+S Frandom_from_adc$P0IE$0$0 Def00BD
+S Frandom_from_adc$U1CSR$0$0 Def00F8
+S Frandom_from_adc$IEN2$0$0 Def009A
+S Frandom_from_adc$RFIM$0$0 Def0091
+S Frandom_from_adc$I2SDATH$0$0 DefDF43
+S Frandom_from_adc$I2SCFG1$0$0 DefDF41
+S Frandom_from_adc$U1ERR$0$0 Def00FB
+S Frandom_from_adc$_TIMIF7$0$0 Def00DF
+S Frandom_from_adc$P0IF$0$0 Def00C5
+S Frandom_from_adc$P0_0$0$0 Def0080
+S Frandom_from_adc$U0UCR$0$0 Def00C4
+S Frandom_from_adc$ENDIAN$0$0 Def0095
+S Frandom_from_adc$TEST0$0$0 DefDF25
+S Frandom_from_adc$P1IF$0$0 Def00EB
+S Frandom_from_adc$P$0$0 Def00D0
+S Frandom_from_adc$_IRCON6$0$0 Def00C6
+S Frandom_from_adc$P1_0$0$0 Def0090
+S Frandom_from_adc$P0_1$0$0 Def0081
+S Frandom_from_adc$U1UCR$0$0 Def00FB
+S Frandom_from_adc$RNDL$0$0 Def00BC
+S Frandom_from_adc$PCON$0$0 Def0087
+S Frandom_from_adc$DPL0$0$0 Def0082
+S Frandom_from_adc$USBCSIH$0$0 DefDE12
+S Frandom_from_adc$TEST1$0$0 DefDF24
+S Frandom_from_adc$U1FE$0$0 Def00FC
+S Frandom_from_adc$B_0$0$0 Def00F0
+S Frandom_from_adc$P2IF$0$0 Def00E8
+S Frandom_from_adc$T3CH0IF$0$0 Def00D9
+S Frandom_from_adc$P2_0$0$0 Def00A0
+S Frandom_from_adc$P1_1$0$0 Def0091
+S Frandom_from_adc$P0_2$0$0 Def0082
+S Frandom_from_adc$DPL1$0$0 Def0084
+S .__.ABS. Def0000
+S Frandom_from_adc$TEST2$0$0 DefDF23
+S Frandom_from_adc$B_1$0$0 Def00F1
+S Frandom_from_adc$T4CH0IF$0$0 Def00DC
+S Frandom_from_adc$T3CH1IF$0$0 Def00DA
+S Frandom_from_adc$P2_1$0$0 Def00A1
+S Frandom_from_adc$P1_2$0$0 Def0092
+S Frandom_from_adc$P0_3$0$0 Def0083
+S Frandom_from_adc$DMAARM$0$0 Def00D6
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A OSEG size 0 flags 4 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 0 flags 80 addr 0
+A PSEG size 0 flags 50 addr 0
+A XSEG size 0 flags 40 addr 0
+A XABS size 0 flags 48 addr 0
+A XISEG size 0 flags 40 addr 0
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size 24 flags 20 addr 0
+S Frandom_from_adc$adcReadTemp$0$0 Def0000
+S _randomSeedFromAdc Def000C
+S A$random_from_adc$742 Def0000
+S A$random_from_adc$770 Def0011
+S A$random_from_adc$752 Def0008
+S A$random_from_adc$771 Def0013
+S C$random_from_adc.c$20$1$1 Def0023
+S C$random_from_adc.c$11$1$1 Def0000
+S A$random_from_adc$781 Def0023
+S A$random_from_adc$772 Def0016
+S A$random_from_adc$745 Def0002
+S C$random_from_adc.c$12$1$1 Def0002
+S A$random_from_adc$773 Def0018
+S A$random_from_adc$755 Def000B
+S C$random_from_adc.c$13$1$1 Def0005
+S A$random_from_adc$774 Def001A
+S C$random_from_adc.c$14$1$1 Def0008
+S A$random_from_adc$775 Def001C
+S C$random_from_adc.c$15$1$1 Def000B
+S A$random_from_adc$776 Def001D
+S A$random_from_adc$749 Def0005
+S A$random_from_adc$777 Def001E
+S A$random_from_adc$768 Def000C
+S XG$randomSeedFromAdc$0$0 Def0023
+S C$random_from_adc.c$17$1$1 Def000C
+S A$random_from_adc$778 Def0020
+S A$random_from_adc$769 Def000F
+S C$random_from_adc.c$19$1$1 Def000C
+S G$randomSeedFromAdc$0$0 Def000C
+S C$random_from_adc.c$9$0$0 Def0000
+S XFrandom_from_adc$adcReadTemp$0$0 Def000B
+A CONST size 0 flags 20 addr 0
+A XINIT size 0 flags 20 addr 0
+A CABS size 0 flags 28 addr 0
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00
+R 00 00 00 04
+T 00 00
+R 00 00 00 17
+T 00 00 C2 8D 75 B6 8E
+R 00 00 00 17
+T 00 05
+R 00 00 00 17
+T 00 05 30 8D FD 85 BA 82 22
+R 00 00 00 17
+T 00 0C
+R 00 00 00 17
+T 00 0C 12 00 00 AF 82 C0 07 12 00 00 AE 82 D0 07
+R 00 00 00 17 00 03 00 17 00 0A 00 17
+T 00 1A 78 00 00 00 EE F2 8F 82 12 00 00 22
+R 00 00 00 17 F1 03 03 00 9E 02 0B 00 12
+</REL>
+<ADB>
+M:random_from_adc
+F:Frandom_from_adc$adcReadTemp$0$0({2}DF,SC:U),C,0,0,0,0,0
+F:G$randomSeedFromAdc$0$0({2}DF,SV:S),Z,0,0,0,0,0
+T:Frandom_from_adc$__00010000[({0}S:S$SRCADDRH$0$0({1}SC:U),Z,0,0)({1}S:S$SRCADDRL$0$0({1}SC:U),Z,0,0)({2}S:S$DESTADDRH$0$0({1}SC:U),Z,0,0)({3}S:S$DESTADDRL$0$0({1}SC:U),Z,0,0)({4}S:S$VLEN_LENH$0$0({1}SC:U),Z,0,0)({5}S:S$LENL$0$0({1}SC:U),Z,0,0)({6}S:S$
+DC6$0$0({1}SC:U),Z,0,0)({7}S:S$DC7$0$0({1}SC:U),Z,0,0)]
+S:Frandom_from_adc$SYNC1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$SYNC0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$PKTLEN$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$PKTCTRL1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$PKTCTRL0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$ADDR$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$CHANNR$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FSCTRL1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FSCTRL0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FREQ2$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FREQ1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FREQ0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$MDMCFG4$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$MDMCFG3$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$MDMCFG2$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$MDMCFG1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$MDMCFG0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$DEVIATN$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$MCSM2$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$MCSM1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$MCSM0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FOCCFG$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$BSCFG$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$AGCCTRL2$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$AGCCTRL1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$AGCCTRL0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FREND1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FREND0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FSCAL3$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FSCAL2$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FSCAL1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FSCAL0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$TEST2$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$TEST1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$TEST0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$PA_TABLE0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$IOCFG2$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$IOCFG1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$IOCFG0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$PARTNUM$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$VERSION$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$FREQEST$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$LQI$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$RSSI$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$MARCSTATE$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$PKTSTATUS$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$VCO_VC_DAC$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$I2SCFG0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$I2SCFG1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$I2SDATL$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$I2SDATH$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$I2SWCNT$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$I2SSTAT$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$I2SCLKF0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$I2SCLKF1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$I2SCLKF2$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBADDR$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBPOW$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBIIF$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBOIF$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBCIF$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBIIE$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBOIE$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBCIE$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBFRML$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBFRMH$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBINDEX$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBMAXI$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBCSIL$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBCSIH$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBMAXO$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBCSOL$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBCSOH$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBCNTL$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBCNTH$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBF0$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBF1$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBF2$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBF3$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBF4$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$USBF5$0$0({1}SC:U),F,0,0
+S:Frandom_from_adc$P0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$SP$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DPL0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DPH0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DPL1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DPH1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U0CSR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$PCON$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$TCON$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P0IFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P1IFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P2IFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$PICTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P1IEN$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P0INP$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$RFIM$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DPS$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$MPAGE$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ENDIAN$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$S0CON$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$IEN2$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$S1CON$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T2CT$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T2PR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T2CTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P2$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$WORIRQ$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$WORCTRL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$WOREVT0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$WOREVT1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$WORTIME0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$WORTIME1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$IEN0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$IP0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$FWT$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$FADDRL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$FADDRH$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$FCTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$FWDATA$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ENCDI$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ENCDO$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ENCCS$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ADCCON1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ADCCON2$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ADCCON3$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$IEN1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$IP1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ADCL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ADCH$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$RNDL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$RNDH$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$SLEEP$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$IRCON$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U0DBUF$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U0BAUD$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U0UCR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U0GCR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$CLKCON$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$MEMCTR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$WDCTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T3CNT$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T3CTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T3CCTL0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T3CC0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T3CCTL1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T3CC1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$PSW$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DMAIRQ$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DMA1CFGL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DMA1CFGH$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DMA0CFGL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DMA0CFGH$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DMAARM$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DMAREQ$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$TIMIF$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$RFD$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CC0L$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CC0H$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CC1L$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CC1H$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CC2L$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CC2H$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ACC$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$RFST$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CNTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CNTH$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CCTL0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CCTL1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T1CCTL2$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$IRCON2$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$RFIF$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T4CNT$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T4CTL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T4CCTL0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T4CC0$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T4CCTL1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$T4CC1$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$B$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$PERCFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$ADCCFG$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P0SEL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P1SEL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P2SEL$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P1INP$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P2INP$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U1CSR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U1DBUF$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U1BAUD$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U1UCR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$U1GCR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P0DIR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P1DIR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$P2DIR$0$0({1}SC:U),I,0,0
+S:Frandom_from_adc$DMA0CFG$0$0({2}SI:U),I,0,0
+S:Frandom_from_adc$DMA1CFG$0$0({2}SI:U),I,0,0
+S:Frandom_from_adc$FADDR$0$0({2}SI:U),I,0,0
+S:Frandom_from_adc$ADC$0$0({2}SI:U),I,0,0
+S:Frandom_from_adc$T1CC0$0$0({2}SI:U),I,0,0
+S:Frandom_from_adc$T1CC1$0$0({2}SI:U),I,0,0
+S:Frandom_from_adc$T1CC2$0$0({2}SI:U),I,0,0
+S:Frandom_from_adc$P0_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P0_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P0_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P0_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P0_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P0_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P0_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P0_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_TCON_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$RFTXRXIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_TCON_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$URX0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_TCON_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ADCIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_TCON_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$URX1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P1_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P1_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P1_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P1_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P1_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P1_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P1_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P1_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ENCIF_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ENCIF_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_SOCON2$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_SOCON3$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_SOCON4$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_SOCON5$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_SOCON6$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_SOCON7$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P2_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P2_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P2_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P2_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P2_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P2_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P2_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P2_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$RFTXRXIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ADCIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$URX0IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$URX1IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ENCIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$STIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_IEN06$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$EA$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$DMAIE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T1IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T2IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T3IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T4IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P0IE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_IEN16$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_IEN17$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$DMAIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T2IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T3IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T4IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_IRCON6$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$STIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$F1$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$OV$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$RS0$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$RS1$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$F0$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$AC$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$CY$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T3OVFIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T3CH0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T3CH1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T4OVFIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T4CH0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$T4CH1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$OVFIM$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_TIMIF7$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ACC_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ACC_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ACC_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ACC_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ACC_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ACC_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ACC_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$ACC_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P2IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$UTX0IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$UTX1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$P1IF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$WDTIF$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_IRCON25$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_IRCON26$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$_IRCON27$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$B_0$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$B_1$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$B_2$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$B_3$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$B_4$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$B_5$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$B_6$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$B_7$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$U1ACTIVE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$U1TX_BYTE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$U1RX_BYTE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$U1ERR$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$U1FE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$U1SLAVE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$U1RE$0$0({1}SX:U),J,0,0
+S:Frandom_from_adc$U1MODE$0$0({1}SX:U),J,0,0
+S:G$randomSeedFromSerialNumber$0$0({2}DF,SV:S),C,0,0
+S:G$randomNumber$0$0({2}DF,SC:U),C,0,0
+S:G$randomSeed$0$0({2}DF,SV:S),C,0,0
+S:Frandom_from_adc$adcReadTemp$0$0({2}DF,SC:U),C,0,0
+</ADB>
+</FILE>
+
+</FILES>
+
+</SDCCLIB>
