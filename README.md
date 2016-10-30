@@ -91,6 +91,10 @@ wixel back into bootloader mode.
 
 * step 5: Done with this part! Now hook it up to something!!!
 
+The yDrip is built with the following wiring:
+
+![yDrip picture](./ydrip.png?raw=true "yDrip wiring diagram")
+
 * step 6: Set up a Dexie Server to get the data and send it to your uploader phone - see links below
 
 ##### NOTE:
