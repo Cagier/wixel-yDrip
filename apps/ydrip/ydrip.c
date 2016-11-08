@@ -39,14 +39,6 @@
 #include <ctype.h>
 #include <adc.h>
 #include <aes.h>
-// #define cli()
-// #define sei()
-
-// Following for AES	****************************************************************************************************
-#include <stdint.h>		// Not sure if I need this - try commenting it out
-static void phex(uint8_t* str);	// Temporarily use for testing but can probably include logic directly in code later
-// End of AES section	****************************************************************************************************
-
 
 // There are some references to Fona or Wixfone in this code as it a variation of the mDrip which
 // uses the Fona (SIM800L) module.  I will tidy these up at some point in the future!
@@ -60,10 +52,10 @@ static void phex(uint8_t* str);	// Temporarily use for testing but can probably 
 //                                   1 = TRUE       0 = FALSE                                       //
 //                                                                                                  //
   static XDATA const char transmitter_id[] = "6F5YP";                                               
-
+// Replace the above characters with the G4 Transmitter Serial Number (required if flag below is 1) //
 //                                                                                                  //
   static volatile BIT only_listen_for_my_transmitter = 1;                                           //
-// 1 is recommended                                                                                 //
+// 1 is recommended - otherwise any G4 can be received                                              //
 //                                                                                                  //
   static volatile BIT status_lights = 1;                                                            //
 // if status_lights = 1; the yellow light flashes while actively scanning                           //
@@ -544,7 +536,7 @@ BIT wifiConnect() {
 	intWifiStatus = getWifiStatus();
 
 //	Different networks are hard-coded here in order of likelihood.  I should probably stick these in array at the top and turn this into a loop
-//	In the meantime manually change the names below yoursel, in order of most likely to be connected to
+//	In the meantime manually change the names below yourself, in order of most likely to be connected to
 	
 //	HOME	
 	if (intWifiStatus != 5) {
@@ -561,7 +553,7 @@ BIT wifiConnect() {
 		delayMs(defaultATWait);
 		printf("wifi.sta.config(\"SchoolWifiDdownstairs\",\"SchoolPassword\")  wifi.sta.connect()\r\n");	// Connect to AP1
 		wifiFlash();
-		wifiFlash();														// wait longer as slower netword
+		wifiFlash();							// Add in an extra round of flashing if this network can take longer to connect														// wait longer as slower netword
 		intWifiStatus = getWifiStatus();
 	}
 
@@ -571,11 +563,11 @@ BIT wifiConnect() {
 		delayMs(defaultATWait);
 		printf("wifi.sta.config(\"SchoolUpstairs\",\"SchoolPassword\")  wifi.sta.connect()\r\n");	// Connect to AP1
 		wifiFlash();
-		wifiFlash();														// wait longer as slower netword
+		wifiFlash();							// Add in an extra round of flashing if this network can take longer to connect														// wait longer as slower netword
 		intWifiStatus = getWifiStatus();
 	}
 
-//	COMMENT OUT ANY YOU DO NOT NEED
+//	COMMENT OUT ANY ENTRIES THAT YOU DO NOT NEED
 	
 //	AVON RI
 /*	if (intWifiStatus != 5) {
@@ -592,7 +584,7 @@ BIT wifiConnect() {
 	if (intWifiStatus != 5) {
 		printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
 		delayMs(defaultATWait);
-		printf("wifi.sta.config(\"Hillside\",\"VariousChars\")  wifi.sta.connect()\r\n");	// Connect to AP1
+		printf("wifi.sta.config(\"Hillside\",\"RandomChars\")  wifi.sta.connect()\r\n");	// Connect to AP1
 		wifiFlash();
 //		delayMs(5000);
 		intWifiStatus = getWifiStatus();
@@ -1125,7 +1117,7 @@ void main() {
 			int sleep_time = (245 - first_square + second_square);
 			goToSleep(sleep_time);
         } else {
-			goToSleep(260);		// Wixel sleep for 260 seconds
+			goToSleep(250);		// Wixel sleep for 250 seconds
         }
 				
         radioMacResume();

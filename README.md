@@ -3,9 +3,9 @@ yDrip for Wixel
 
 ### What is it?
 This project is a variation of the original wixel-xDrip project created by Stephen Black.
-However, it uses the ESP2866 WiFi module INSTEAD of a bluetooth module.
-Basically I just took the core wixel-xdrip stuff and added in some stuff 
-so I cannot claim credit for most of this.
+However, it uses the Adafruit Feather HUZZAH with ESP8266 WiFi module INSTEAD of a bluetooth module.
+Basically I just took the core wixel-xdrip stuff (including a lot of this ReadMe) and added in some stuff 
+so I cannot claim credit for a lot of this.
 
 This project can be loaded onto a wixel, it will catch the wireless signals
 sent from a dexcom transmitter, read, break up the different parts, and then send it using UART so it can be
