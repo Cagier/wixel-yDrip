@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
-; This file was generated Sun Oct 30 00:48:27 2016
+; This file was generated Wed Feb 01 23:23:27 2017
 ;--------------------------------------------------------
 	.module ydrip
 	.optsdcc -mmcs51 --model-medium
@@ -30,7 +30,7 @@
 	.globl _getWifiStatus
 	.globl _enableESP
 	.globl _sendAT
-	.globl _getFonaString
+	.globl _getESPString
 	.globl _initUart1
 	.globl _doServices
 	.globl _clearRxErrors
@@ -65,6 +65,7 @@
 	.globl _uart1TxAvailable
 	.globl _uart1SetBaudRate
 	.globl _uart1Init
+	.globl _setDigitalInput
 	.globl _setDigitalOutput
 	.globl _radioQueueRxDoneWithPacket
 	.globl _radioQueueRxCurrentPacket
@@ -606,9 +607,6 @@ bits:
 ; internal ram data
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
-Lydrip.getFonaString$sloc0$1$0==.
-_getFonaString_sloc0_1_0:
-	.ds 4
 Lydrip.print_packet$sloc0$1$0==.
 _print_packet_sloc0_1_0:
 	.ds 2
@@ -965,14 +963,17 @@ _dexcom_src_to_ascii_src_1_1:
 Lydrip.getSrcValue$srcVal$1$1==.
 _getSrcValue_srcVal_1_1:
 	.ds 1
-Lydrip.getFonaString$uartCharacters$1$1==.
-_getFonaString_uartCharacters_1_1:
+Lydrip.getESPString$uartCharacters$1$1==.
+_getESPString_uartCharacters_1_1:
 	.ds 80
-Lydrip.getFonaString$stop$1$1==.
-_getFonaString_stop_1_1:
+Lydrip.getESPString$i$1$1==.
+_getESPString_i_1_1:
+	.ds 1
+Lydrip.getESPString$stop$1$1==.
+_getESPString_stop_1_1:
 	.ds 4
-Lydrip.getFonaString$now$1$1==.
-_getFonaString_now_1_1:
+Lydrip.getESPString$now$1$1==.
+_getESPString_now_1_1:
 	.ds 4
 Lydrip.sendAT$atString$1$1==.
 _sendAT_atString_1_1:
@@ -986,6 +987,9 @@ _enableESP_c_1_1:
 Lydrip.enableESP$nofile$1$1==.
 _enableESP_nofile_1_1:
 	.ds 7
+Lydrip.enableESP$clen$1$1==.
+_enableESP_clen_1_1:
+	.ds 2
 Lydrip.getWifiStatus$i$1$1==.
 _getWifiStatus_i_1_1:
 	.ds 2
@@ -995,6 +999,9 @@ _getWifiStatus_intStatus_1_1:
 Lydrip.getWifiStatus$c$1$1==.
 _getWifiStatus_c_1_1:
 	.ds 80
+Lydrip.wifiFlash$intWifiStatus$1$1==.
+_wifiFlash_intWifiStatus_1_1:
+	.ds 2
 Lydrip.wifiConnect$atString$1$1==.
 _wifiConnect_atString_1_1:
 	.ds 40
@@ -1065,7 +1072,7 @@ _transmitter_id:
 	.ds 6
 Fydrip$dexie_host_address$0$0==.
 _dexie_host_address:
-	.ds 25
+	.ds 22
 Fydrip$dexie_host_port$0$0==.
 _dexie_host_port:
 	.ds 6
@@ -1090,8 +1097,8 @@ _dmaDesc::
 G$AT_TIMEOUT$0$0==.
 _AT_TIMEOUT::
 	.ds 1
-Fydrip$defaultATWait$0$0==.
-_defaultATWait:
+Fydrip$defaultWaitTime$0$0==.
+_defaultWaitTime:
 	.ds 4
 G$SrcNameTable$0$0==.
 _SrcNameTable::
@@ -1159,6 +1166,21 @@ __interrupt_vect:
 	.globl __mcs51_genXRAMCLEAR
 	.globl __mcs51_genRAMCLEAR
 ;------------------------------------------------------------
+;Allocation info for local variables in function 'enableESP'
+;------------------------------------------------------------
+;c                         Allocated with name '_enableESP_c_1_1'
+;nofile                    Allocated with name '_enableESP_nofile_1_1'
+;clen                      Allocated with name '_enableESP_clen_1_1'
+;------------------------------------------------------------
+	G$enableESP$0$0 ==.
+	C$ydrip.c$356$1$1 ==.
+;	apps/ydrip/ydrip.c:356: XDATA static int16 clen=0;
+	mov	dptr,#_enableESP_clen_1_1
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+;------------------------------------------------------------
 ;Allocation info for local variables in function 'getWifiStatus'
 ;------------------------------------------------------------
 ;i                         Allocated with name '_getWifiStatus_i_1_1'
@@ -1166,56 +1188,56 @@ __interrupt_vect:
 ;c                         Allocated with name '_getWifiStatus_c_1_1'
 ;------------------------------------------------------------
 	G$getWifiStatus$0$0 ==.
-	C$ydrip.c$475$1$1 ==.
-;	apps/ydrip/ydrip.c:475: XDATA static int16 i=0;
+	C$ydrip.c$430$1$1 ==.
+;	apps/ydrip/ydrip.c:430: XDATA static int16 i=0;
 	mov	dptr,#_getWifiStatus_i_1_1
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
 	G$main$0$0 ==.
-	C$ydrip.c$65$1$1 ==.
-;	apps/ydrip/ydrip.c:65: static volatile BIT only_listen_for_my_transmitter = 1;                                           //
+	C$ydrip.c$54$1$1 ==.
+;	apps/ydrip/ydrip.c:54: static volatile BIT only_listen_for_my_transmitter = 1;                                           //
 	setb	_only_listen_for_my_transmitter
 	G$main$0$0 ==.
-	C$ydrip.c$68$1$1 ==.
-;	apps/ydrip/ydrip.c:68: static volatile BIT status_lights = 1;                                                            //
+	C$ydrip.c$57$1$1 ==.
+;	apps/ydrip/ydrip.c:57: static volatile BIT status_lights = 1;                                                            //
 	setb	_status_lights
 	G$main$0$0 ==.
-	C$ydrip.c$72$1$1 ==.
-;	apps/ydrip/ydrip.c:72: static volatile BIT allow_alternate_usb_protocol = 0;
+	C$ydrip.c$61$1$1 ==.
+;	apps/ydrip/ydrip.c:61: static volatile BIT allow_alternate_usb_protocol = 0;
 	clr	_allow_alternate_usb_protocol
 	G$main$0$0 ==.
-	C$ydrip.c$76$1$1 ==.
-;	apps/ydrip/ydrip.c:76: static volatile BIT debug_mode = 0;
+	C$ydrip.c$65$1$1 ==.
+;	apps/ydrip/ydrip.c:65: static volatile BIT debug_mode = 0;
 	clr	_debug_mode
 	G$main$0$0 ==.
-	C$ydrip.c$104$1$1 ==.
-;	apps/ydrip/ydrip.c:104: static volatile BIT encrypt_output = 1;
+	C$ydrip.c$93$1$1 ==.
+;	apps/ydrip/ydrip.c:93: static volatile BIT encrypt_output = 1;
 	setb	_encrypt_output
 	G$main$0$0 ==.
-	C$ydrip.c$144$1$1 ==.
-;	apps/ydrip/ydrip.c:144: BIT needsTimingCalibration = 1;
+	C$ydrip.c$126$1$1 ==.
+;	apps/ydrip/ydrip.c:126: BIT needsTimingCalibration = 1;
 	setb	_needsTimingCalibration
 	G$main$0$0 ==.
-	C$ydrip.c$145$1$1 ==.
-;	apps/ydrip/ydrip.c:145: BIT usbEnabled = 1;
+	C$ydrip.c$127$1$1 ==.
+;	apps/ydrip/ydrip.c:127: BIT usbEnabled = 1;
 	setb	_usbEnabled
 	G$main$0$0 ==.
-	C$ydrip.c$93$1$1 ==.
-;	apps/ydrip/ydrip.c:93: static volatile uint8 wake_earlier_for_next_miss = 20;                                            //
+	C$ydrip.c$82$1$1 ==.
+;	apps/ydrip/ydrip.c:82: static volatile uint8 wake_earlier_for_next_miss = 20;                                            //
 	mov	r0,#_wake_earlier_for_next_miss
 	mov	a,#0x14
 	movx	@r0,a
 	G$main$0$0 ==.
-	C$ydrip.c$97$1$1 ==.
-;	apps/ydrip/ydrip.c:97: static volatile uint8 misses_until_failure = 0;                                                   //
+	C$ydrip.c$86$1$1 ==.
+;	apps/ydrip/ydrip.c:86: static volatile uint8 misses_until_failure = 1;                                                   //
 	mov	r0,#_misses_until_failure
-	clr	a
+	mov	a,#0x01
 	movx	@r0,a
 	G$main$0$0 ==.
-	C$ydrip.c$136$1$1 ==.
-;	apps/ydrip/ydrip.c:136: static int8 fOffset[NUM_CHANNELS] = {0xCE,0xD5,0xE6,0xE5};
+	C$ydrip.c$118$1$1 ==.
+;	apps/ydrip/ydrip.c:118: static int8 fOffset[NUM_CHANNELS] = {0xCE,0xD5,0xE6,0xE5};
 	mov	r0,#_fOffset
 	mov	a,#0xCE
 	movx	@r0,a
@@ -1229,8 +1251,8 @@ __interrupt_vect:
 	mov	a,#0xE5
 	movx	@r0,a
 	G$main$0$0 ==.
-	C$ydrip.c$138$1$1 ==.
-;	apps/ydrip/ydrip.c:138: static uint8 nChannels[NUM_CHANNELS] = { 0, 100, 199, 209 };
+	C$ydrip.c$120$1$1 ==.
+;	apps/ydrip/ydrip.c:120: static uint8 nChannels[NUM_CHANNELS] = { 0, 100, 199, 209 };
 	mov	r0,#_nChannels
 	clr	a
 	movx	@r0,a
@@ -1244,8 +1266,8 @@ __interrupt_vect:
 	mov	a,#0xD1
 	movx	@r0,a
 	G$main$0$0 ==.
-	C$ydrip.c$139$1$1 ==.
-;	apps/ydrip/ydrip.c:139: static uint32 waitTimes[NUM_CHANNELS] = { 13500, 500, 500, 500 };
+	C$ydrip.c$121$1$1 ==.
+;	apps/ydrip/ydrip.c:121: static uint32 waitTimes[NUM_CHANNELS] = { 13500, 500, 500, 500 };
 	mov	r0,#_waitTimes
 	mov	a,#0xBC
 	movx	@r0,a
@@ -1291,8 +1313,8 @@ __interrupt_vect:
 	inc	r0
 	movx	@r0,a
 	G$main$0$0 ==.
-	C$ydrip.c$141$1$1 ==.
-;	apps/ydrip/ydrip.c:141: static uint32 delayedWaitTimes[NUM_CHANNELS] = { 0, 700, 700, 700 };
+	C$ydrip.c$123$1$1 ==.
+;	apps/ydrip/ydrip.c:123: static uint32 delayedWaitTimes[NUM_CHANNELS] = { 0, 700, 700, 700 };
 	mov	r0,#_delayedWaitTimes
 	clr	a
 	movx	@r0,a
@@ -1336,8 +1358,8 @@ __interrupt_vect:
 	inc	r0
 	movx	@r0,a
 	G$main$0$0 ==.
-	C$ydrip.c$142$1$1 ==.
-;	apps/ydrip/ydrip.c:142: static uint32 catch_offsets[NUM_CHANNELS] = { 0, 0, 0, 0 };
+	C$ydrip.c$124$1$1 ==.
+;	apps/ydrip/ydrip.c:124: static uint32 catch_offsets[NUM_CHANNELS] = { 0, 0, 0, 0 };
 	mov	r0,#_catch_offsets
 	clr	a
 	movx	@r0,a
@@ -1375,20 +1397,20 @@ __interrupt_vect:
 	inc	r0
 	movx	@r0,a
 	G$main$0$0 ==.
-	C$ydrip.c$143$1$1 ==.
-;	apps/ydrip/ydrip.c:143: static uint8 last_catch_channel = 0;
+	C$ydrip.c$125$1$1 ==.
+;	apps/ydrip/ydrip.c:125: static uint8 last_catch_channel = 0;
 	mov	r0,#_last_catch_channel
 	clr	a
 	movx	@r0,a
 	G$main$0$0 ==.
-	C$ydrip.c$151$1$1 ==.
-;	apps/ydrip/ydrip.c:151: volatile uint8 sequential_missed_packets = 0;
+	C$ydrip.c$133$1$1 ==.
+;	apps/ydrip/ydrip.c:133: volatile uint8 sequential_missed_packets = 0;
 	mov	r0,#_sequential_missed_packets
 	clr	a
 	movx	@r0,a
 	G$main$0$0 ==.
-	C$ydrip.c$153$1$1 ==.
-;	apps/ydrip/ydrip.c:153: uint8 intMaxStrLen = 80;
+	C$ydrip.c$135$1$1 ==.
+;	apps/ydrip/ydrip.c:135: uint8 intMaxStrLen = 80;
 	mov	r0,#_intMaxStrLen
 	mov	a,#0x50
 	movx	@r0,a
@@ -1411,8 +1433,8 @@ __sdcc_program_startup:
 ;Allocation info for local variables in function 'sleepInit'
 ;------------------------------------------------------------
 	G$sleepInit$0$0 ==.
-	C$ydrip.c$179$0$0 ==.
-;	apps/ydrip/ydrip.c:179: void sleepInit(void) {
+	C$ydrip.c$161$0$0 ==.
+;	apps/ydrip/ydrip.c:161: void sleepInit(void) {
 ;	-----------------------------------------
 ;	 function sleepInit
 ;	-----------------------------------------
@@ -1425,18 +1447,18 @@ _sleepInit:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
-	C$ydrip.c$180$1$1 ==.
-;	apps/ydrip/ydrip.c:180: WORIRQ  |= (1<<4);
+	C$ydrip.c$162$1$1 ==.
+;	apps/ydrip/ydrip.c:162: WORIRQ  |= (1<<4);
 	orl	_WORIRQ,#0x10
-	C$ydrip.c$181$1$1 ==.
+	C$ydrip.c$163$1$1 ==.
 	XG$sleepInit$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'ISR_ST'
 ;------------------------------------------------------------
 	G$ISR_ST$0$0 ==.
-	C$ydrip.c$183$1$1 ==.
-;	apps/ydrip/ydrip.c:183: ISR(ST, 1) {
+	C$ydrip.c$165$1$1 ==.
+;	apps/ydrip/ydrip.c:165: ISR(ST, 1) {
 ;	-----------------------------------------
 ;	 function ISR_ST
 ;	-----------------------------------------
@@ -1449,16 +1471,16 @@ _ISR_ST:
 	ar2 = 0x0A
 	ar1 = 0x09
 	ar0 = 0x08
-	C$ydrip.c$184$1$1 ==.
-;	apps/ydrip/ydrip.c:184: IRCON &= 0x7F;
+	C$ydrip.c$166$1$1 ==.
+;	apps/ydrip/ydrip.c:166: IRCON &= 0x7F;
 	anl	_IRCON,#0x7F
-	C$ydrip.c$185$1$1 ==.
-;	apps/ydrip/ydrip.c:185: WORIRQ &= 0xFE;
+	C$ydrip.c$167$1$1 ==.
+;	apps/ydrip/ydrip.c:167: WORIRQ &= 0xFE;
 	anl	_WORIRQ,#0xFE
-	C$ydrip.c$186$1$1 ==.
-;	apps/ydrip/ydrip.c:186: SLEEP &= 0xFC;
+	C$ydrip.c$168$1$1 ==.
+;	apps/ydrip/ydrip.c:168: SLEEP &= 0xFC;
 	anl	_SLEEP,#0xFC
-	C$ydrip.c$187$1$1 ==.
+	C$ydrip.c$169$1$1 ==.
 	XG$ISR_ST$0$0 ==.
 	reti
 ;	eliminated unneeded mov psw,# (no regs used in bank)
@@ -1471,8 +1493,8 @@ _ISR_ST:
 ;Allocation info for local variables in function 'switchToRCOSC'
 ;------------------------------------------------------------
 	G$switchToRCOSC$0$0 ==.
-	C$ydrip.c$189$1$1 ==.
-;	apps/ydrip/ydrip.c:189: void switchToRCOSC(void) {
+	C$ydrip.c$171$1$1 ==.
+;	apps/ydrip/ydrip.c:171: void switchToRCOSC(void) {
 ;	-----------------------------------------
 ;	 function switchToRCOSC
 ;	-----------------------------------------
@@ -1485,102 +1507,102 @@ _switchToRCOSC:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
-	C$ydrip.c$190$1$1 ==.
-;	apps/ydrip/ydrip.c:190: SLEEP &= ~0x04;
+	C$ydrip.c$172$1$1 ==.
+;	apps/ydrip/ydrip.c:172: SLEEP &= ~0x04;
 	mov	r7,_SLEEP
 	anl	ar7,#0xFB
 	mov	_SLEEP,r7
-	C$ydrip.c$191$1$1 ==.
-;	apps/ydrip/ydrip.c:191: while ( ! (SLEEP & 0x20) );
+	C$ydrip.c$173$1$1 ==.
+;	apps/ydrip/ydrip.c:173: while ( ! (SLEEP & 0x20) );
 00101$:
 	mov	a,_SLEEP
 	jnb	acc.5,00101$
-	C$ydrip.c$192$1$1 ==.
-;	apps/ydrip/ydrip.c:192: CLKCON = (CLKCON & ~0x07) | 0x40 | 0x01;
+	C$ydrip.c$174$1$1 ==.
+;	apps/ydrip/ydrip.c:174: CLKCON = (CLKCON & ~0x07) | 0x40 | 0x01;
 	mov	r7,_CLKCON
 	mov	a,#0xF8
 	anl	a,r7
 	orl	a,#0x41
 	mov	r7,a
 	mov	_CLKCON,r7
-	C$ydrip.c$193$1$1 ==.
-;	apps/ydrip/ydrip.c:193: while ( !(CLKCON & 0x40) );
+	C$ydrip.c$175$1$1 ==.
+;	apps/ydrip/ydrip.c:175: while ( !(CLKCON & 0x40) );
 00104$:
 	mov	a,_CLKCON
 	jnb	acc.6,00104$
-	C$ydrip.c$194$1$1 ==.
-;	apps/ydrip/ydrip.c:194: SLEEP |= 0x04;
+	C$ydrip.c$176$1$1 ==.
+;	apps/ydrip/ydrip.c:176: SLEEP |= 0x04;
 	orl	_SLEEP,#0x04
-	C$ydrip.c$195$1$1 ==.
+	C$ydrip.c$177$1$1 ==.
 	XG$switchToRCOSC$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'uartEnable'
 ;------------------------------------------------------------
 	G$uartEnable$0$0 ==.
-	C$ydrip.c$197$1$1 ==.
-;	apps/ydrip/ydrip.c:197: void uartEnable() {
+	C$ydrip.c$179$1$1 ==.
+;	apps/ydrip/ydrip.c:179: void uartEnable() {
 ;	-----------------------------------------
 ;	 function uartEnable
 ;	-----------------------------------------
 _uartEnable:
-	C$ydrip.c$199$1$1 ==.
-;	apps/ydrip/ydrip.c:199: U1UCR &= ~0x40; //CTS/RTS Off
+	C$ydrip.c$181$1$1 ==.
+;	apps/ydrip/ydrip.c:181: U1UCR &= ~0x40; //CTS/RTS Off
 	mov	r7,_U1UCR
 	anl	ar7,#0xBF
 	mov	_U1UCR,r7
-	C$ydrip.c$200$1$1 ==.
-;	apps/ydrip/ydrip.c:200: U1CSR |= 0x40;
+	C$ydrip.c$182$1$1 ==.
+;	apps/ydrip/ydrip.c:182: U1CSR |= 0x40;
 	orl	_U1CSR,#0x40
-	C$ydrip.c$201$1$1 ==.
-;	apps/ydrip/ydrip.c:201: delayMs(100);
+	C$ydrip.c$183$1$1 ==.
+;	apps/ydrip/ydrip.c:183: delayMs(100);
 	mov	dptr,#0x0064
 	lcall	_delayMs
-	C$ydrip.c$202$1$1 ==.
+	C$ydrip.c$184$1$1 ==.
 	XG$uartEnable$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'uartDisable'
 ;------------------------------------------------------------
 	G$uartDisable$0$0 ==.
-	C$ydrip.c$204$1$1 ==.
-;	apps/ydrip/ydrip.c:204: void uartDisable() {
+	C$ydrip.c$186$1$1 ==.
+;	apps/ydrip/ydrip.c:186: void uartDisable() {
 ;	-----------------------------------------
 ;	 function uartDisable
 ;	-----------------------------------------
 _uartDisable:
-	C$ydrip.c$205$1$1 ==.
-;	apps/ydrip/ydrip.c:205: delayMs(100);
+	C$ydrip.c$187$1$1 ==.
+;	apps/ydrip/ydrip.c:187: delayMs(100);
 	mov	dptr,#0x0064
 	lcall	_delayMs
-	C$ydrip.c$206$1$1 ==.
-;	apps/ydrip/ydrip.c:206: U1UCR &= ~0x40; //CTS/RTS Off
+	C$ydrip.c$188$1$1 ==.
+;	apps/ydrip/ydrip.c:188: U1UCR &= ~0x40; //CTS/RTS Off
 	mov	r7,_U1UCR
 	anl	ar7,#0xBF
 	mov	_U1UCR,r7
-	C$ydrip.c$207$1$1 ==.
-;	apps/ydrip/ydrip.c:207: U1CSR &= ~0x40; // Receiver disable
+	C$ydrip.c$189$1$1 ==.
+;	apps/ydrip/ydrip.c:189: U1CSR &= ~0x40; // Receiver disable
 	mov	r7,_U1CSR
 	anl	ar7,#0xBF
 	mov	_U1CSR,r7
-	C$ydrip.c$208$1$1 ==.
+	C$ydrip.c$190$1$1 ==.
 	XG$uartDisable$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'blink_yellow_led'
 ;------------------------------------------------------------
 	G$blink_yellow_led$0$0 ==.
-	C$ydrip.c$210$1$1 ==.
-;	apps/ydrip/ydrip.c:210: void blink_yellow_led() {
+	C$ydrip.c$192$1$1 ==.
+;	apps/ydrip/ydrip.c:192: void blink_yellow_led() {
 ;	-----------------------------------------
 ;	 function blink_yellow_led
 ;	-----------------------------------------
 _blink_yellow_led:
-	C$ydrip.c$211$1$1 ==.
-;	apps/ydrip/ydrip.c:211: if(status_lights) {
+	C$ydrip.c$193$1$1 ==.
+;	apps/ydrip/ydrip.c:193: if(status_lights) {
 	jnb	_status_lights,00103$
-	C$ydrip.c$212$3$3 ==.
-;	apps/ydrip/ydrip.c:212: LED_YELLOW(((getMs()/250) % 2));//Blink quarter seconds
+	C$ydrip.c$194$3$3 ==.
+;	apps/ydrip/ydrip.c:194: LED_YELLOW(((getMs()/250) % 2));//Blink quarter seconds
 	lcall	_getMs
 	mov	r4,dpl
 	mov	r5,dph
@@ -1614,24 +1636,24 @@ _blink_yellow_led:
 	anl	ar7,#0xFB
 	mov	_P2DIR,r7
 00103$:
-	C$ydrip.c$214$3$1 ==.
+	C$ydrip.c$196$3$1 ==.
 	XG$blink_yellow_led$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'blink_red_led'
 ;------------------------------------------------------------
 	G$blink_red_led$0$0 ==.
-	C$ydrip.c$216$3$1 ==.
-;	apps/ydrip/ydrip.c:216: void blink_red_led() {
+	C$ydrip.c$198$3$1 ==.
+;	apps/ydrip/ydrip.c:198: void blink_red_led() {
 ;	-----------------------------------------
 ;	 function blink_red_led
 ;	-----------------------------------------
 _blink_red_led:
-	C$ydrip.c$217$1$1 ==.
-;	apps/ydrip/ydrip.c:217: if(status_lights) {
+	C$ydrip.c$199$1$1 ==.
+;	apps/ydrip/ydrip.c:199: if(status_lights) {
 	jnb	_status_lights,00103$
-	C$ydrip.c$218$3$3 ==.
-;	apps/ydrip/ydrip.c:218: LED_RED(((getMs()/500) % 2));//Blink half seconds
+	C$ydrip.c$200$3$3 ==.
+;	apps/ydrip/ydrip.c:200: LED_RED(((getMs()/500) % 2));//Blink half seconds
 	lcall	_getMs
 	mov	r4,dpl
 	mov	r5,dph
@@ -1666,23 +1688,23 @@ _blink_red_led:
 	anl	ar7,#0xFD
 	mov	_P2DIR,r7
 00103$:
-	C$ydrip.c$220$3$1 ==.
+	C$ydrip.c$202$3$1 ==.
 	XG$blink_red_led$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'getPacketPassedChecksum'
 ;------------------------------------------------------------
 	G$getPacketPassedChecksum$0$0 ==.
-	C$ydrip.c$228$3$1 ==.
-;	apps/ydrip/ydrip.c:228: uint8 getPacketPassedChecksum(Dexcom_packet* p) {
+	C$ydrip.c$204$3$1 ==.
+;	apps/ydrip/ydrip.c:204: uint8 getPacketPassedChecksum(Dexcom_packet* p) {
 ;	-----------------------------------------
 ;	 function getPacketPassedChecksum
 ;	-----------------------------------------
 _getPacketPassedChecksum:
 	mov	r6,dpl
 	mov	r7,dph
-	C$ydrip.c$229$1$1 ==.
-;	apps/ydrip/ydrip.c:229: return ((p->LQI & 0x80)==0x80) ? 1:0;
+	C$ydrip.c$205$1$1 ==.
+;	apps/ydrip/ydrip.c:205: return ((p->LQI & 0x80)==0x80) ? 1:0;
 	mov	a,#0x14
 	add	a,r6
 	mov	dpl,a
@@ -1699,7 +1721,7 @@ _getPacketPassedChecksum:
 	mov	r7,#0x00
 00104$:
 	mov	dpl,r7
-	C$ydrip.c$230$1$1 ==.
+	C$ydrip.c$206$1$1 ==.
 	XG$getPacketPassedChecksum$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1708,117 +1730,117 @@ _getPacketPassedChecksum:
 ;bRet                      Allocated with name '_bit_reverse_byte_bRet_1_1'
 ;------------------------------------------------------------
 	G$bit_reverse_byte$0$0 ==.
-	C$ydrip.c$232$1$1 ==.
-;	apps/ydrip/ydrip.c:232: uint8 bit_reverse_byte(uint8 in) {
+	C$ydrip.c$208$1$1 ==.
+;	apps/ydrip/ydrip.c:208: uint8 bit_reverse_byte(uint8 in) {
 ;	-----------------------------------------
 ;	 function bit_reverse_byte
 ;	-----------------------------------------
 _bit_reverse_byte:
 	mov	r7,dpl
-	C$ydrip.c$233$1$1 ==.
-;	apps/ydrip/ydrip.c:233: uint8 XDATA bRet = 0;
+	C$ydrip.c$209$1$1 ==.
+;	apps/ydrip/ydrip.c:209: uint8 XDATA bRet = 0;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$234$1$1 ==.
-;	apps/ydrip/ydrip.c:234: if(in & 0x01)
+	C$ydrip.c$210$1$1 ==.
+;	apps/ydrip/ydrip.c:210: if(in & 0x01)
 	mov	a,r7
 	jnb	acc.0,00102$
-	C$ydrip.c$235$1$1 ==.
-;	apps/ydrip/ydrip.c:235: bRet |= 0x80;
+	C$ydrip.c$211$1$1 ==.
+;	apps/ydrip/ydrip.c:211: bRet |= 0x80;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	mov	a,#0x80
 	movx	@dptr,a
 00102$:
-	C$ydrip.c$236$1$1 ==.
-;	apps/ydrip/ydrip.c:236: if(in & 0x02)
+	C$ydrip.c$212$1$1 ==.
+;	apps/ydrip/ydrip.c:212: if(in & 0x02)
 	mov	a,r7
 	jnb	acc.1,00104$
-	C$ydrip.c$237$1$1 ==.
-;	apps/ydrip/ydrip.c:237: bRet |= 0x40;
+	C$ydrip.c$213$1$1 ==.
+;	apps/ydrip/ydrip.c:213: bRet |= 0x40;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	movx	a,@dptr
 	mov	r6,a
 	orl	a,#0x40
 	movx	@dptr,a
 00104$:
-	C$ydrip.c$238$1$1 ==.
-;	apps/ydrip/ydrip.c:238: if(in & 0x04)
+	C$ydrip.c$214$1$1 ==.
+;	apps/ydrip/ydrip.c:214: if(in & 0x04)
 	mov	a,r7
 	jnb	acc.2,00106$
-	C$ydrip.c$239$1$1 ==.
-;	apps/ydrip/ydrip.c:239: bRet |= 0x20;
+	C$ydrip.c$215$1$1 ==.
+;	apps/ydrip/ydrip.c:215: bRet |= 0x20;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	movx	a,@dptr
 	mov	r6,a
 	orl	a,#0x20
 	movx	@dptr,a
 00106$:
-	C$ydrip.c$240$1$1 ==.
-;	apps/ydrip/ydrip.c:240: if(in & 0x08)
+	C$ydrip.c$216$1$1 ==.
+;	apps/ydrip/ydrip.c:216: if(in & 0x08)
 	mov	a,r7
 	jnb	acc.3,00108$
-	C$ydrip.c$241$1$1 ==.
-;	apps/ydrip/ydrip.c:241: bRet |= 0x10;
+	C$ydrip.c$217$1$1 ==.
+;	apps/ydrip/ydrip.c:217: bRet |= 0x10;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	movx	a,@dptr
 	mov	r6,a
 	orl	a,#0x10
 	movx	@dptr,a
 00108$:
-	C$ydrip.c$242$1$1 ==.
-;	apps/ydrip/ydrip.c:242: if(in & 0x10)
+	C$ydrip.c$218$1$1 ==.
+;	apps/ydrip/ydrip.c:218: if(in & 0x10)
 	mov	a,r7
 	jnb	acc.4,00110$
-	C$ydrip.c$243$1$1 ==.
-;	apps/ydrip/ydrip.c:243: bRet |= 0x08;
+	C$ydrip.c$219$1$1 ==.
+;	apps/ydrip/ydrip.c:219: bRet |= 0x08;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	movx	a,@dptr
 	mov	r6,a
 	orl	a,#0x08
 	movx	@dptr,a
 00110$:
-	C$ydrip.c$244$1$1 ==.
-;	apps/ydrip/ydrip.c:244: if(in & 0x20)
+	C$ydrip.c$220$1$1 ==.
+;	apps/ydrip/ydrip.c:220: if(in & 0x20)
 	mov	a,r7
 	jnb	acc.5,00112$
-	C$ydrip.c$245$1$1 ==.
-;	apps/ydrip/ydrip.c:245: bRet |= 0x04;
+	C$ydrip.c$221$1$1 ==.
+;	apps/ydrip/ydrip.c:221: bRet |= 0x04;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	movx	a,@dptr
 	mov	r6,a
 	orl	a,#0x04
 	movx	@dptr,a
 00112$:
-	C$ydrip.c$246$1$1 ==.
-;	apps/ydrip/ydrip.c:246: if(in & 0x40)
+	C$ydrip.c$222$1$1 ==.
+;	apps/ydrip/ydrip.c:222: if(in & 0x40)
 	mov	a,r7
 	jnb	acc.6,00114$
-	C$ydrip.c$247$1$1 ==.
-;	apps/ydrip/ydrip.c:247: bRet |= 0x02;
+	C$ydrip.c$223$1$1 ==.
+;	apps/ydrip/ydrip.c:223: bRet |= 0x02;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	movx	a,@dptr
 	mov	r6,a
 	orl	a,#0x02
 	movx	@dptr,a
 00114$:
-	C$ydrip.c$248$1$1 ==.
-;	apps/ydrip/ydrip.c:248: if(in & 0x80)
+	C$ydrip.c$224$1$1 ==.
+;	apps/ydrip/ydrip.c:224: if(in & 0x80)
 	mov	a,r7
 	jnb	acc.7,00116$
-	C$ydrip.c$249$1$1 ==.
-;	apps/ydrip/ydrip.c:249: bRet |= 0x01;
+	C$ydrip.c$225$1$1 ==.
+;	apps/ydrip/ydrip.c:225: bRet |= 0x01;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	movx	a,@dptr
 	mov	r7,a
 	orl	a,#0x01
 	movx	@dptr,a
 00116$:
-	C$ydrip.c$250$1$1 ==.
-;	apps/ydrip/ydrip.c:250: return bRet;
+	C$ydrip.c$226$1$1 ==.
+;	apps/ydrip/ydrip.c:226: return bRet;
 	mov	dptr,#_bit_reverse_byte_bRet_1_1
 	movx	a,@dptr
-	C$ydrip.c$251$1$1 ==.
+	C$ydrip.c$227$1$1 ==.
 	XG$bit_reverse_byte$0$0 ==.
 	mov	dpl,a
 	ret
@@ -1826,15 +1848,15 @@ _bit_reverse_byte:
 ;Allocation info for local variables in function 'min8'
 ;------------------------------------------------------------
 	G$min8$0$0 ==.
-	C$ydrip.c$253$1$1 ==.
-;	apps/ydrip/ydrip.c:253: uint8 min8(uint8 a, uint8 b) {
+	C$ydrip.c$229$1$1 ==.
+;	apps/ydrip/ydrip.c:229: uint8 min8(uint8 a, uint8 b) {
 ;	-----------------------------------------
 ;	 function min8
 ;	-----------------------------------------
 _min8:
 	mov	r7,dpl
-	C$ydrip.c$254$1$1 ==.
-;	apps/ydrip/ydrip.c:254: if(a < b) return a;
+	C$ydrip.c$230$1$1 ==.
+;	apps/ydrip/ydrip.c:230: if(a < b) return a;
 	mov	r0,#_min8_PARM_2
 	clr	c
 	movx	a,@r0
@@ -1845,13 +1867,13 @@ _min8:
 	mov	dpl,r7
 	sjmp	00103$
 00102$:
-	C$ydrip.c$255$1$1 ==.
-;	apps/ydrip/ydrip.c:255: return b;
+	C$ydrip.c$231$1$1 ==.
+;	apps/ydrip/ydrip.c:231: return b;
 	mov	r0,#_min8_PARM_2
 	movx	a,@r0
 	mov	dpl,a
 00103$:
-	C$ydrip.c$256$1$1 ==.
+	C$ydrip.c$232$1$1 ==.
 	XG$min8$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1860,8 +1882,8 @@ _min8:
 ;i                         Allocated with name '_bit_reverse_bytes_i_1_1'
 ;------------------------------------------------------------
 	G$bit_reverse_bytes$0$0 ==.
-	C$ydrip.c$258$1$1 ==.
-;	apps/ydrip/ydrip.c:258: void bit_reverse_bytes(uint8* buf, uint8 nLen) {
+	C$ydrip.c$234$1$1 ==.
+;	apps/ydrip/ydrip.c:234: void bit_reverse_bytes(uint8* buf, uint8 nLen) {
 ;	-----------------------------------------
 ;	 function bit_reverse_bytes
 ;	-----------------------------------------
@@ -1877,12 +1899,12 @@ _bit_reverse_bytes:
 	inc	r0
 	mov	a,r7
 	movx	@r0,a
-	C$ydrip.c$259$1$1 ==.
-;	apps/ydrip/ydrip.c:259: uint8 XDATA i = 0;
+	C$ydrip.c$235$1$1 ==.
+;	apps/ydrip/ydrip.c:235: uint8 XDATA i = 0;
 	mov	r4,#0x00
 00101$:
-	C$ydrip.c$260$1$1 ==.
-;	apps/ydrip/ydrip.c:260: for(; i < nLen; i++) {
+	C$ydrip.c$236$1$1 ==.
+;	apps/ydrip/ydrip.c:236: for(; i < nLen; i++) {
 	mov	r0,#_bit_reverse_bytes_PARM_2
 	clr	c
 	movx	a,@r0
@@ -1890,8 +1912,8 @@ _bit_reverse_bytes:
 	mov	a,r4
 	subb	a,b
 	jnc	00105$
-	C$ydrip.c$261$2$2 ==.
-;	apps/ydrip/ydrip.c:261: buf[i] = bit_reverse_byte(buf[i]);
+	C$ydrip.c$237$2$2 ==.
+;	apps/ydrip/ydrip.c:237: buf[i] = bit_reverse_byte(buf[i]);
 	mov	r0,#_bit_reverse_bytes_buf_1_1
 	movx	a,@r0
 	add	a,r4
@@ -1923,12 +1945,12 @@ _bit_reverse_bytes:
 	mov	b,r7
 	mov	a,r6
 	lcall	__gptrput
-	C$ydrip.c$260$1$1 ==.
-;	apps/ydrip/ydrip.c:260: for(; i < nLen; i++) {
+	C$ydrip.c$236$1$1 ==.
+;	apps/ydrip/ydrip.c:236: for(; i < nLen; i++) {
 	inc	r4
 	sjmp	00101$
 00105$:
-	C$ydrip.c$263$1$1 ==.
+	C$ydrip.c$239$1$1 ==.
 	XG$bit_reverse_bytes$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1939,24 +1961,24 @@ _bit_reverse_bytes:
 ;usMantissa                Allocated with name '_dex_num_decoder_usMantissa_1_1'
 ;------------------------------------------------------------
 	G$dex_num_decoder$0$0 ==.
-	C$ydrip.c$265$1$1 ==.
-;	apps/ydrip/ydrip.c:265: uint32 dex_num_decoder(uint16 usShortFloat) {
+	C$ydrip.c$241$1$1 ==.
+;	apps/ydrip/ydrip.c:241: uint32 dex_num_decoder(uint16 usShortFloat) {
 ;	-----------------------------------------
 ;	 function dex_num_decoder
 ;	-----------------------------------------
 _dex_num_decoder:
 	mov	r6,dpl
 	mov	r7,dph
-	C$ydrip.c$266$1$1 ==.
-;	apps/ydrip/ydrip.c:266: uint16 XDATA usReversed = usShortFloat;
+	C$ydrip.c$242$1$1 ==.
+;	apps/ydrip/ydrip.c:242: uint16 XDATA usReversed = usShortFloat;
 	mov	dptr,#_dex_num_decoder_usReversed_1_1
 	mov	a,r6
 	movx	@dptr,a
 	inc	dptr
 	mov	a,r7
 	movx	@dptr,a
-	C$ydrip.c$269$1$1 ==.
-;	apps/ydrip/ydrip.c:269: bit_reverse_bytes((uint8*)&usReversed, 2);
+	C$ydrip.c$245$1$1 ==.
+;	apps/ydrip/ydrip.c:245: bit_reverse_bytes((uint8*)&usReversed, 2);
 	mov	r6,#_dex_num_decoder_usReversed_1_1
 	mov	r7,#(_dex_num_decoder_usReversed_1_1 >> 8)
 	mov	r5,#0x00
@@ -1967,8 +1989,8 @@ _dex_num_decoder:
 	mov	dph,r7
 	mov	b,r5
 	lcall	_bit_reverse_bytes
-	C$ydrip.c$270$1$1 ==.
-;	apps/ydrip/ydrip.c:270: usExponent = ((usReversed & 0xE000) >> 13);
+	C$ydrip.c$246$1$1 ==.
+;	apps/ydrip/ydrip.c:246: usExponent = ((usReversed & 0xE000) >> 13);
 	mov	dptr,#_dex_num_decoder_usReversed_1_1
 	movx	a,@dptr
 	mov	r6,a
@@ -1981,13 +2003,13 @@ _dex_num_decoder:
 	rr	a
 	anl	a,#0x07
 	mov	r4,a
-	C$ydrip.c$271$1$1 ==.
-;	apps/ydrip/ydrip.c:271: usMantissa = (usReversed & 0x1FFF);
+	C$ydrip.c$247$1$1 ==.
+;	apps/ydrip/ydrip.c:247: usMantissa = (usReversed & 0x1FFF);
 	anl	ar7,#0x1F
 	mov	r5,#0x00
 	mov	r3,#0x00
-	C$ydrip.c$272$1$1 ==.
-;	apps/ydrip/ydrip.c:272: return usMantissa << usExponent;
+	C$ydrip.c$248$1$1 ==.
+;	apps/ydrip/ydrip.c:248: return usMantissa << usExponent;
 	mov	b,r4
 	inc	b
 	sjmp	00104$
@@ -2010,7 +2032,7 @@ _dex_num_decoder:
 	mov	dph,r7
 	mov	b,r5
 	mov	a,r3
-	C$ydrip.c$273$1$1 ==.
+	C$ydrip.c$249$1$1 ==.
 	XG$dex_num_decoder$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -2021,8 +2043,8 @@ _dex_num_decoder:
 ;sloc0                     Allocated with name '_dexcom_src_to_ascii_sloc0_1_0'
 ;------------------------------------------------------------
 	G$dexcom_src_to_ascii$0$0 ==.
-	C$ydrip.c$280$1$1 ==.
-;	apps/ydrip/ydrip.c:280: void dexcom_src_to_ascii(XDATA uint32 src, XDATA char addr[6]) {
+	C$ydrip.c$256$1$1 ==.
+;	apps/ydrip/ydrip.c:256: void dexcom_src_to_ascii(XDATA uint32 src, XDATA char addr[6]) {
 ;	-----------------------------------------
 ;	 function dexcom_src_to_ascii
 ;	-----------------------------------------
@@ -2043,8 +2065,8 @@ _dexcom_src_to_ascii:
 	inc	dptr
 	mov	a,r4
 	movx	@dptr,a
-	C$ydrip.c$281$1$1 ==.
-;	apps/ydrip/ydrip.c:281: addr[0] = SrcNameTable[(src >> 20) & 0x1F];
+	C$ydrip.c$257$1$1 ==.
+;	apps/ydrip/ydrip.c:257: addr[0] = SrcNameTable[(src >> 20) & 0x1F];
 	mov	dptr,#_dexcom_src_to_ascii_PARM_2
 	movx	a,@dptr
 	mov	r6,a
@@ -2087,8 +2109,8 @@ _dexcom_src_to_ascii:
 	mov	dpl,r6
 	mov	dph,r7
 	movx	@dptr,a
-	C$ydrip.c$282$1$1 ==.
-;	apps/ydrip/ydrip.c:282: addr[1] = SrcNameTable[(src >> 15) & 0x1F];
+	C$ydrip.c$258$1$1 ==.
+;	apps/ydrip/ydrip.c:258: addr[1] = SrcNameTable[(src >> 15) & 0x1F];
 	mov	a,#0x01
 	add	a,r6
 	mov	r4,a
@@ -2124,8 +2146,8 @@ _dexcom_src_to_ascii:
 	mov	dpl,r4
 	mov	dph,r5
 	movx	@dptr,a
-	C$ydrip.c$283$1$1 ==.
-;	apps/ydrip/ydrip.c:283: addr[2] = SrcNameTable[(src >> 10) & 0x1F];
+	C$ydrip.c$259$1$1 ==.
+;	apps/ydrip/ydrip.c:259: addr[2] = SrcNameTable[(src >> 10) & 0x1F];
 	mov	a,#0x02
 	add	a,r6
 	mov	r4,a
@@ -2167,8 +2189,8 @@ _dexcom_src_to_ascii:
 	mov	dpl,r4
 	mov	dph,r5
 	movx	@dptr,a
-	C$ydrip.c$284$1$1 ==.
-;	apps/ydrip/ydrip.c:284: addr[3] = SrcNameTable[(src >> 5) & 0x1F];
+	C$ydrip.c$260$1$1 ==.
+;	apps/ydrip/ydrip.c:260: addr[3] = SrcNameTable[(src >> 5) & 0x1F];
 	mov	a,#0x03
 	add	a,r6
 	mov	r4,a
@@ -2222,8 +2244,8 @@ _dexcom_src_to_ascii:
 	mov	dpl,r4
 	mov	dph,r5
 	movx	@dptr,a
-	C$ydrip.c$285$1$1 ==.
-;	apps/ydrip/ydrip.c:285: addr[4] = SrcNameTable[(src >> 0) & 0x1F];
+	C$ydrip.c$261$1$1 ==.
+;	apps/ydrip/ydrip.c:261: addr[4] = SrcNameTable[(src >> 0) & 0x1F];
 	mov	a,#0x04
 	add	a,r6
 	mov	r4,a
@@ -2244,8 +2266,8 @@ _dexcom_src_to_ascii:
 	mov	dpl,r4
 	mov	dph,r5
 	movx	@dptr,a
-	C$ydrip.c$286$1$1 ==.
-;	apps/ydrip/ydrip.c:286: addr[5] = 0;
+	C$ydrip.c$262$1$1 ==.
+;	apps/ydrip/ydrip.c:262: addr[5] = 0;
 	mov	dpl,r6
 	mov	dph,r7
 	inc	dptr
@@ -2255,117 +2277,131 @@ _dexcom_src_to_ascii:
 	inc	dptr
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$287$1$1 ==.
+	C$ydrip.c$263$1$1 ==.
 	XG$dexcom_src_to_ascii$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'clearRxErrors'
 ;------------------------------------------------------------
 	G$clearRxErrors$0$0 ==.
-	C$ydrip.c$289$1$1 ==.
-;	apps/ydrip/ydrip.c:289: void clearRxErrors() {	
+	C$ydrip.c$265$1$1 ==.
+;	apps/ydrip/ydrip.c:265: void clearRxErrors() {	
 ;	-----------------------------------------
 ;	 function clearRxErrors
 ;	-----------------------------------------
 _clearRxErrors:
-	C$ydrip.c$290$1$1 ==.
-;	apps/ydrip/ydrip.c:290: if (uart1RxBufferFullOccurred)
-	C$ydrip.c$291$2$2 ==.
-;	apps/ydrip/ydrip.c:291: {   uart1RxBufferFullOccurred = 0;							// Clear Buffer Full Errors
+	C$ydrip.c$266$1$1 ==.
+;	apps/ydrip/ydrip.c:266: if (uart1RxBufferFullOccurred)
+	C$ydrip.c$267$2$2 ==.
+;	apps/ydrip/ydrip.c:267: {   uart1RxBufferFullOccurred = 0;							// Clear Buffer Full Errors
 	jbc	_uart1RxBufferFullOccurred,00112$
 	sjmp	00102$
 00112$:
-	C$ydrip.c$292$3$3 ==.
-;	apps/ydrip/ydrip.c:292: LED_RED(1);												// Error Indicator
+	C$ydrip.c$268$3$3 ==.
+;	apps/ydrip/ydrip.c:268: LED_RED(1);												// Error Indicator
 	orl	_P2DIR,#0x02
+	C$ydrip.c$269$3$4 ==.
+;	apps/ydrip/ydrip.c:269: LED_YELLOW(1);
+	orl	_P2DIR,#0x04
 00102$:
-	C$ydrip.c$294$1$1 ==.
-;	apps/ydrip/ydrip.c:294: if (uart1RxParityErrorOccurred)
-	C$ydrip.c$295$2$4 ==.
-;	apps/ydrip/ydrip.c:295: {   uart1RxParityErrorOccurred = 0;							// Clear Parity Errors
+	C$ydrip.c$271$1$1 ==.
+;	apps/ydrip/ydrip.c:271: if (uart1RxParityErrorOccurred)
+	C$ydrip.c$272$2$5 ==.
+;	apps/ydrip/ydrip.c:272: {   uart1RxParityErrorOccurred = 0;							// Clear Parity Errors
 	jbc	_uart1RxParityErrorOccurred,00113$
 	sjmp	00104$
 00113$:
-	C$ydrip.c$296$3$5 ==.
-;	apps/ydrip/ydrip.c:296: LED_RED(1);												// Error Indicator
+	C$ydrip.c$273$3$6 ==.
+;	apps/ydrip/ydrip.c:273: LED_RED(1);												// Error Indicator
 	orl	_P2DIR,#0x02
+	C$ydrip.c$274$3$7 ==.
+;	apps/ydrip/ydrip.c:274: LED_YELLOW(1);
+	orl	_P2DIR,#0x04
 00104$:
-	C$ydrip.c$298$1$1 ==.
-;	apps/ydrip/ydrip.c:298: if (uart1RxFramingErrorOccurred)
-	C$ydrip.c$299$2$6 ==.
-;	apps/ydrip/ydrip.c:299: {   uart1RxFramingErrorOccurred = 0;
+	C$ydrip.c$276$1$1 ==.
+;	apps/ydrip/ydrip.c:276: if (uart1RxFramingErrorOccurred)
+	C$ydrip.c$277$2$8 ==.
+;	apps/ydrip/ydrip.c:277: {   uart1RxFramingErrorOccurred = 0;
 	jbc	_uart1RxFramingErrorOccurred,00114$
 	sjmp	00106$
 00114$:
-	C$ydrip.c$300$3$7 ==.
-;	apps/ydrip/ydrip.c:300: LED_RED(1);												// Put the red LED on to show there was an error
+	C$ydrip.c$278$3$9 ==.
+;	apps/ydrip/ydrip.c:278: LED_RED(1);												// Put the red LED on to show there was an error
 	orl	_P2DIR,#0x02
-	C$ydrip.c$301$2$6 ==.
-;	apps/ydrip/ydrip.c:301: uartDisable();
+	C$ydrip.c$279$3$10 ==.
+;	apps/ydrip/ydrip.c:279: LED_YELLOW(1);
+	orl	_P2DIR,#0x04
+	C$ydrip.c$280$2$8 ==.
+;	apps/ydrip/ydrip.c:280: uartDisable();
 	lcall	_uartDisable
-	C$ydrip.c$303$2$6 ==.
-;	apps/ydrip/ydrip.c:303: delayMs(250);											// Crude and will slow us down but we can take the small hit
+	C$ydrip.c$282$2$8 ==.
+;	apps/ydrip/ydrip.c:282: delayMs(250);											// Crude and will slow us down but we can take the small hit
 	mov	dptr,#0x00FA
 	lcall	_delayMs
-	C$ydrip.c$306$2$6 ==.
-;	apps/ydrip/ydrip.c:306: uartEnable();
+	C$ydrip.c$284$2$8 ==.
+;	apps/ydrip/ydrip.c:284: uartEnable();											// It would be nice to check the uart status here before we switch it on again
 	lcall	_uartEnable
 00106$:
-	C$ydrip.c$308$2$8 ==.
-;	apps/ydrip/ydrip.c:308: LED_RED(0);												// Error Indicator
+	C$ydrip.c$286$2$11 ==.
+;	apps/ydrip/ydrip.c:286: LED_RED(0);												// Error Indicator
 	mov	r7,_P2DIR
 	anl	ar7,#0xFD
 	mov	_P2DIR,r7
-	C$ydrip.c$309$2$8 ==.
+	C$ydrip.c$287$2$12 ==.
+;	apps/ydrip/ydrip.c:287: LED_YELLOW(0);
+	mov	r7,_P2DIR
+	anl	ar7,#0xFB
+	mov	_P2DIR,r7
+	C$ydrip.c$288$2$12 ==.
 	XG$clearRxErrors$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'doServices'
 ;------------------------------------------------------------
 	G$doServices$0$0 ==.
-	C$ydrip.c$311$2$8 ==.
-;	apps/ydrip/ydrip.c:311: void doServices() {
+	C$ydrip.c$290$2$12 ==.
+;	apps/ydrip/ydrip.c:290: void doServices() {
 ;	-----------------------------------------
 ;	 function doServices
 ;	-----------------------------------------
 _doServices:
-	C$ydrip.c$312$1$1 ==.
-;	apps/ydrip/ydrip.c:312: boardService();
+	C$ydrip.c$291$1$1 ==.
+;	apps/ydrip/ydrip.c:291: boardService();
 	lcall	_boardService
-	C$ydrip.c$313$1$1 ==.
-;	apps/ydrip/ydrip.c:313: if(usbPowerPresent()) {
+	C$ydrip.c$292$1$1 ==.
+;	apps/ydrip/ydrip.c:292: if(usbPowerPresent()) {
 	lcall	_usbPowerPresent
 	jnc	00103$
-	C$ydrip.c$314$2$2 ==.
-;	apps/ydrip/ydrip.c:314: usbComService();
+	C$ydrip.c$293$2$2 ==.
+;	apps/ydrip/ydrip.c:293: usbComService();
 	lcall	_usbComService
-	C$ydrip.c$315$2$2 ==.
-;	apps/ydrip/ydrip.c:315: usbShowStatusWithGreenLed();
+	C$ydrip.c$294$2$2 ==.
+;	apps/ydrip/ydrip.c:294: usbShowStatusWithGreenLed();
 	lcall	_usbShowStatusWithGreenLed
 00103$:
-	C$ydrip.c$319$2$1 ==.
+	C$ydrip.c$297$2$1 ==.
 	XG$doServices$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'initUart1'
 ;------------------------------------------------------------
 	G$initUart1$0$0 ==.
-	C$ydrip.c$321$2$1 ==.
-;	apps/ydrip/ydrip.c:321: void initUart1() {
+	C$ydrip.c$299$2$1 ==.
+;	apps/ydrip/ydrip.c:299: void initUart1() {
 ;	-----------------------------------------
 ;	 function initUart1
 ;	-----------------------------------------
 _initUart1:
-	C$ydrip.c$322$1$1 ==.
-;	apps/ydrip/ydrip.c:322: uart1Init();
+	C$ydrip.c$300$1$1 ==.
+;	apps/ydrip/ydrip.c:300: uart1Init();
 	lcall	_uart1Init
-	C$ydrip.c$323$1$1 ==.
-;	apps/ydrip/ydrip.c:323: uart1SetBaudRate(9600);
+	C$ydrip.c$301$1$1 ==.
+;	apps/ydrip/ydrip.c:301: uart1SetBaudRate(9600);
 	mov	dptr,#0x2580
 	clr	a
 	mov	b,a
 	lcall	_uart1SetBaudRate
-	C$ydrip.c$324$1$1 ==.
+	C$ydrip.c$302$1$1 ==.
 	XG$initUart1$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -2375,15 +2411,15 @@ _initUart1:
 ;i                         Allocated with name '_getSrcValue_i_1_1'
 ;------------------------------------------------------------
 	G$getSrcValue$0$0 ==.
-	C$ydrip.c$338$1$1 ==.
-;	apps/ydrip/ydrip.c:338: uint32 getSrcValue(XDATA char srcVal) {
+	C$ydrip.c$304$1$1 ==.
+;	apps/ydrip/ydrip.c:304: uint32 getSrcValue(XDATA char srcVal) {
 ;	-----------------------------------------
 ;	 function getSrcValue
 ;	-----------------------------------------
 _getSrcValue:
 	mov	a,dpl
-	C$ydrip.c$340$2$2 ==.
-;	apps/ydrip/ydrip.c:340: for(i = 0; i < 32; i++) {
+	C$ydrip.c$306$2$2 ==.
+;	apps/ydrip/ydrip.c:306: for(i = 0; i < 32; i++) {
 	mov	dptr,#_getSrcValue_srcVal_1_1
 	movx	@dptr,a
 	mov	r7,a
@@ -2392,8 +2428,8 @@ _getSrcValue:
 	cjne	r6,#0x20,00113$
 00113$:
 	jnc	00106$
-	C$ydrip.c$341$2$2 ==.
-;	apps/ydrip/ydrip.c:341: if (SrcNameTable[i]==srcVal) break;
+	C$ydrip.c$307$2$2 ==.
+;	apps/ydrip/ydrip.c:307: if (SrcNameTable[i]==srcVal) break;
 	mov	a,r6
 	add	a,#_SrcNameTable
 	mov	dpl,a
@@ -2405,13 +2441,13 @@ _getSrcValue:
 	cjne	a,ar7,00115$
 	sjmp	00106$
 00115$:
-	C$ydrip.c$340$1$1 ==.
-;	apps/ydrip/ydrip.c:340: for(i = 0; i < 32; i++) {
+	C$ydrip.c$306$1$1 ==.
+;	apps/ydrip/ydrip.c:306: for(i = 0; i < 32; i++) {
 	inc	r6
 	sjmp	00103$
 00106$:
-	C$ydrip.c$343$1$1 ==.
-;	apps/ydrip/ydrip.c:343: return i & 0xFF;
+	C$ydrip.c$309$1$1 ==.
+;	apps/ydrip/ydrip.c:309: return i & 0xFF;
 	mov	r7,#0x00
 	mov	r5,#0x00
 	mov	r4,#0x00
@@ -2419,252 +2455,286 @@ _getSrcValue:
 	mov	dph,r7
 	mov	b,r5
 	mov	a,r4
-	C$ydrip.c$344$1$1 ==.
+	C$ydrip.c$310$1$1 ==.
 	XG$getSrcValue$0$0 ==.
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'getFonaString'
+;Allocation info for local variables in function 'getESPString'
 ;------------------------------------------------------------
-;sloc0                     Allocated with name '_getFonaString_sloc0_1_0'
-;uartCharacters            Allocated with name '_getFonaString_uartCharacters_1_1'
-;i                         Allocated with name '_getFonaString_i_1_1'
-;stop                      Allocated with name '_getFonaString_stop_1_1'
-;now                       Allocated with name '_getFonaString_now_1_1'
+;uartCharacters            Allocated with name '_getESPString_uartCharacters_1_1'
+;i                         Allocated with name '_getESPString_i_1_1'
+;stop                      Allocated with name '_getESPString_stop_1_1'
+;now                       Allocated with name '_getESPString_now_1_1'
 ;------------------------------------------------------------
-	G$getFonaString$0$0 ==.
-	C$ydrip.c$346$1$1 ==.
-;	apps/ydrip/ydrip.c:346: XDATA char * getFonaString() {					// Read the uart input buffer once character at a time
+	G$getESPString$0$0 ==.
+	C$ydrip.c$312$1$1 ==.
+;	apps/ydrip/ydrip.c:312: XDATA char * getESPString() {					// Read the uart input buffer once character at a time
 ;	-----------------------------------------
-;	 function getFonaString
+;	 function getESPString
 ;	-----------------------------------------
-_getFonaString:
-	C$ydrip.c$354$1$1 ==.
-;	apps/ydrip/ydrip.c:354: stop = (getMs() + (AT_TIMEOUT * 1000));
-	lcall	_getMs
-	mov	_getFonaString_sloc0_1_0,dpl
-	mov	(_getFonaString_sloc0_1_0 + 1),dph
-	mov	(_getFonaString_sloc0_1_0 + 2),b
-	mov	(_getFonaString_sloc0_1_0 + 3),a
-	mov	dptr,#_AT_TIMEOUT
-	movx	a,@dptr
-	mov	r0,#__mulint_PARM_2
-	movx	@r0,a
-	inc	r0
+_getESPString:
+	C$ydrip.c$317$1$1 ==.
+;	apps/ydrip/ydrip.c:317: i=0;
+	mov	dptr,#_getESPString_i_1_1
 	clr	a
-	movx	@r0,a
-	mov	dptr,#0x03E8
-	lcall	__mulint
-	mov	r2,dpl
-	mov	a,dph
+	movx	@dptr,a
+	C$ydrip.c$320$1$1 ==.
+;	apps/ydrip/ydrip.c:320: stop = (getMs() + (defaultWaitTime * 2));
+	lcall	_getMs
+	mov	r4,dpl
+	mov	r5,dph
+	mov	r6,b
+	mov	r7,a
+	mov	dptr,#_defaultWaitTime
+	movx	a,@dptr
+	mov	r0,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r1,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
 	mov	r3,a
+	mov	a,r0
+	add	a,r0
+	mov	r0,a
+	mov	a,r1
 	rlc	a
-	subb	a,acc
-	mov	r6,a
-	mov	r7,a
+	mov	r1,a
 	mov	a,r2
-	add	a,_getFonaString_sloc0_1_0
+	rlc	a
 	mov	r2,a
 	mov	a,r3
-	addc	a,(_getFonaString_sloc0_1_0 + 1)
+	rlc	a
 	mov	r3,a
-	mov	a,r6
-	addc	a,(_getFonaString_sloc0_1_0 + 2)
-	mov	r6,a
-	mov	a,r7
-	addc	a,(_getFonaString_sloc0_1_0 + 3)
-	mov	r7,a
-	mov	dptr,#_getFonaString_stop_1_1
-	mov	a,r2
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r3
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r6
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r7
-	movx	@dptr,a
-	C$ydrip.c$355$1$1 ==.
-;	apps/ydrip/ydrip.c:355: now  = getMs();
-	lcall	_getMs
-	mov	r4,dpl
-	mov	r5,dph
-	mov	r6,b
-	mov	r7,a
-	mov	dptr,#_getFonaString_now_1_1
-	mov	a,r4
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r5
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r6
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r7
-	movx	@dptr,a
-	C$ydrip.c$357$1$1 ==.
-;	apps/ydrip/ydrip.c:357: while (uart1RxAvailable() == 0 && stop > now) {				// This && is still using up some DSEG but is cheaper than comparing stop to getMS()
-	mov	dptr,#_getFonaString_stop_1_1
-	movx	a,@dptr
-	mov	_getFonaString_sloc0_1_0,a
-	inc	dptr
-	movx	a,@dptr
-	mov	(_getFonaString_sloc0_1_0 + 1),a
-	inc	dptr
-	movx	a,@dptr
-	mov	(_getFonaString_sloc0_1_0 + 2),a
-	inc	dptr
-	movx	a,@dptr
-	mov	(_getFonaString_sloc0_1_0 + 3),a
-00102$:
-	lcall	_uart1RxAvailable
-	mov	a,dpl
-	jnz	00123$
-	mov	dptr,#_getFonaString_now_1_1
-	movx	a,@dptr
-	mov	r2,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r3,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r6,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r7,a
-	clr	c
-	mov	a,r2
-	subb	a,_getFonaString_sloc0_1_0
-	mov	a,r3
-	subb	a,(_getFonaString_sloc0_1_0 + 1)
-	mov	a,r6
-	subb	a,(_getFonaString_sloc0_1_0 + 2)
-	mov	a,r7
-	xrl	a,#0x80
-	mov	b,(_getFonaString_sloc0_1_0 + 3)
-	xrl	b,#0x80
-	subb	a,b
-	jnc	00123$
-	C$ydrip.c$358$2$2 ==.
-;	apps/ydrip/ydrip.c:358: now  = getMs();
-	lcall	_getMs
-	mov	r4,dpl
-	mov	r5,dph
-	mov	r6,b
-	mov	r7,a
-	mov	dptr,#_getFonaString_now_1_1
-	mov	a,r4
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r5
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r6
-	movx	@dptr,a
-	inc	dptr
-	mov	a,r7
-	movx	@dptr,a
-	C$ydrip.c$359$2$2 ==.
-;	apps/ydrip/ydrip.c:359: delayMs(10);
-	mov	dptr,#0x000A
-	lcall	_delayMs
-	C$ydrip.c$362$1$1 ==.
-;	apps/ydrip/ydrip.c:362: while (uart1RxAvailable() && i < 80) {
-	sjmp	00102$
-00123$:
-	mov	r7,#0x00
-00111$:
-	push	ar7
-	lcall	_uart1RxAvailable
-	mov	a,dpl
-	pop	ar7
-	jz	00113$
-	clr	c
-	mov	a,r7
-	xrl	a,#0x80
-	subb	a,#0xd0
-	jnc	00113$
-	C$ydrip.c$364$2$3 ==.
-;	apps/ydrip/ydrip.c:364: uartCharacters[i] = uart1RxReceiveByte();
-	mov	a,r7
-	add	a,#_getFonaString_uartCharacters_1_1
+	mov	a,r0
+	add	a,r4
+	mov	r4,a
+	mov	a,r1
+	addc	a,r5
 	mov	r5,a
-	clr	a
-	addc	a,#(_getFonaString_uartCharacters_1_1 >> 8)
+	mov	a,r2
+	addc	a,r6
 	mov	r6,a
+	mov	a,r3
+	addc	a,r7
+	mov	r7,a
+	mov	dptr,#_getESPString_stop_1_1
+	mov	a,r4
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r5
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r6
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r7
+	movx	@dptr,a
+	C$ydrip.c$321$1$1 ==.
+;	apps/ydrip/ydrip.c:321: now  = getMs();
+	lcall	_getMs
+	mov	r4,dpl
+	mov	r5,dph
+	mov	r6,b
+	mov	r7,a
+	mov	dptr,#_getESPString_now_1_1
+	mov	a,r4
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r5
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r6
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r7
+	movx	@dptr,a
+	C$ydrip.c$323$1$1 ==.
+;	apps/ydrip/ydrip.c:323: while (uart1RxAvailable() == 0 && stop > now) {				// This && is still using up some DSEG but is cheaper than comparing stop to getMS()
+	mov	dptr,#_getESPString_stop_1_1
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r6,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r7,a
+00102$:
 	push	ar7
 	push	ar6
 	push	ar5
-	lcall	_uart1RxReceiveByte
-	mov	r4,dpl
+	push	ar4
+	lcall	_uart1RxAvailable
+	mov	a,dpl
+	pop	ar4
 	pop	ar5
 	pop	ar6
-	mov	dpl,r5
-	mov	dph,r6
-	mov	a,r4
-	movx	@dptr,a
-	C$ydrip.c$367$2$3 ==.
-;	apps/ydrip/ydrip.c:367: if (usbPowerPresent()) {
-	lcall	_usbPowerPresent
 	pop	ar7
-	jnc	00109$
-	C$ydrip.c$368$3$4 ==.
-;	apps/ydrip/ydrip.c:368: while(usbComTxAvailable() == 0) {							//  Loop until space in the TX buffer to send a character
-00105$:
+	jnz	00126$
+	mov	dptr,#_getESPString_now_1_1
+	movx	a,@dptr
+	mov	r0,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r1,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+	clr	c
+	mov	a,r0
+	subb	a,r4
+	mov	a,r1
+	subb	a,r5
+	mov	a,r2
+	subb	a,r6
+	mov	a,r3
+	xrl	a,#0x80
+	mov	b,r7
+	xrl	b,#0x80
+	subb	a,b
+	jnc	00126$
+	C$ydrip.c$324$2$2 ==.
+;	apps/ydrip/ydrip.c:324: now  = getMs();
 	push	ar7
+	push	ar6
+	push	ar5
+	push	ar4
+	lcall	_getMs
+	mov	r0,dpl
+	mov	r1,dph
+	mov	r2,b
+	mov	r3,a
+	mov	dptr,#_getESPString_now_1_1
+	mov	a,r0
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+	C$ydrip.c$325$2$2 ==.
+;	apps/ydrip/ydrip.c:325: delayMs(10);
+	mov	dptr,#0x000A
+	lcall	_delayMs
+	pop	ar4
+	pop	ar5
+	pop	ar6
+	pop	ar7
+	C$ydrip.c$328$1$1 ==.
+;	apps/ydrip/ydrip.c:328: while (uart1RxAvailable() && i < 80) {
+	sjmp	00102$
+00126$:
+00114$:
+	lcall	_uart1RxAvailable
+	mov	a,dpl
+	jz	00116$
+	mov	dptr,#_getESPString_i_1_1
+	movx	a,@dptr
+	mov	r7,a
+	clr	c
+	xrl	a,#0x80
+	subb	a,#0xd0
+	jnc	00116$
+	C$ydrip.c$329$2$3 ==.
+;	apps/ydrip/ydrip.c:329: uartCharacters[i] = uart1RxReceiveByte();
+	mov	a,r7
+	add	a,#_getESPString_uartCharacters_1_1
+	mov	r7,a
+	clr	a
+	addc	a,#(_getESPString_uartCharacters_1_1 >> 8)
+	mov	r6,a
+	push	ar7
+	push	ar6
+	lcall	_uart1RxReceiveByte
+	mov	r5,dpl
+	pop	ar6
+	pop	ar7
+	mov	dpl,r7
+	mov	dph,r6
+	mov	a,r5
+	movx	@dptr,a
+	C$ydrip.c$331$2$3 ==.
+;	apps/ydrip/ydrip.c:331: if (usbPowerPresent()) {
+	lcall	_usbPowerPresent
+	jnc	00109$
+	C$ydrip.c$332$3$4 ==.
+;	apps/ydrip/ydrip.c:332: while(usbComTxAvailable() == 0) {							//  Loop until space in the TX buffer to send a character
+00105$:
 	lcall	_usbComTxAvailable
 	mov	a,dpl
-	pop	ar7
 	jnz	00107$
-	C$ydrip.c$370$4$5 ==.
-;	apps/ydrip/ydrip.c:370: doServices();
-	push	ar7
+	C$ydrip.c$333$4$5 ==.
+;	apps/ydrip/ydrip.c:333: doServices();
 	lcall	_doServices
-	pop	ar7
 	sjmp	00105$
 00107$:
-	C$ydrip.c$372$3$4 ==.
-;	apps/ydrip/ydrip.c:372: usbComTxSendByte(uartCharacters[i]);
-	mov	a,r7
-	add	a,#_getFonaString_uartCharacters_1_1
+	C$ydrip.c$335$3$4 ==.
+;	apps/ydrip/ydrip.c:335: usbComTxSendByte(uartCharacters[i]);
+	mov	dptr,#_getESPString_i_1_1
+	movx	a,@dptr
+	add	a,#_getESPString_uartCharacters_1_1
 	mov	dpl,a
 	clr	a
-	addc	a,#(_getFonaString_uartCharacters_1_1 >> 8)
+	addc	a,#(_getESPString_uartCharacters_1_1 >> 8)
 	mov	dph,a
 	movx	a,@dptr
 	mov	dpl,a
-	push	ar7
 	lcall	_usbComTxSendByte
-	pop	ar7
 00109$:
-	C$ydrip.c$374$2$3 ==.
-;	apps/ydrip/ydrip.c:374: delayMs(10);
+	C$ydrip.c$337$2$3 ==.
+;	apps/ydrip/ydrip.c:337: delayMs(10);
 	mov	dptr,#0x000A
-	push	ar7
 	lcall	_delayMs
-	pop	ar7
-	C$ydrip.c$375$2$3 ==.
-;	apps/ydrip/ydrip.c:375: i++;
-	inc	r7
-	sjmp	00111$
-00113$:
-	C$ydrip.c$378$1$1 ==.
-;	apps/ydrip/ydrip.c:378: uartCharacters[i] = 0;										// Add an end-of-string character after copying the input into the character array
-	mov	a,r7
-	add	a,#_getFonaString_uartCharacters_1_1
+	C$ydrip.c$338$2$3 ==.
+;	apps/ydrip/ydrip.c:338: i++;
+	mov	dptr,#_getESPString_i_1_1
+	movx	a,@dptr
+	add	a,#0x01
+	movx	@dptr,a
+	C$ydrip.c$339$2$3 ==.
+;	apps/ydrip/ydrip.c:339: if (uart1RxAvailable() && i == 80) i=0;					// wrap around for another line if more text (very crude)
+	lcall	_uart1RxAvailable
+	mov	a,dpl
+	jz	00114$
+	mov	dptr,#_getESPString_i_1_1
+	movx	a,@dptr
+	mov	r7,a
+	cjne	r7,#0x50,00114$
+	mov	dptr,#_getESPString_i_1_1
+	clr	a
+	movx	@dptr,a
+	sjmp	00114$
+00116$:
+	C$ydrip.c$341$1$1 ==.
+;	apps/ydrip/ydrip.c:341: uartCharacters[i] = 0;										// Add an end-of-string character after copying the input into the character array
+	mov	dptr,#_getESPString_i_1_1
+	movx	a,@dptr
+	add	a,#_getESPString_uartCharacters_1_1
 	mov	dpl,a
 	clr	a
-	addc	a,#(_getFonaString_uartCharacters_1_1 >> 8)
+	addc	a,#(_getESPString_uartCharacters_1_1 >> 8)
 	mov	dph,a
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$379$1$1 ==.
-;	apps/ydrip/ydrip.c:379: return uartCharacters;
-	mov	dptr,#_getFonaString_uartCharacters_1_1
-	C$ydrip.c$380$1$1 ==.
-	XG$getFonaString$0$0 ==.
+	C$ydrip.c$342$1$1 ==.
+;	apps/ydrip/ydrip.c:342: return uartCharacters;
+	mov	dptr,#_getESPString_uartCharacters_1_1
+	C$ydrip.c$343$1$1 ==.
+	XG$getESPString$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'sendAT'
@@ -2673,8 +2743,8 @@ _getFonaString:
 ;ATresponse                Allocated with name '_sendAT_ATresponse_1_1'
 ;------------------------------------------------------------
 	G$sendAT$0$0 ==.
-	C$ydrip.c$382$1$1 ==.
-;	apps/ydrip/ydrip.c:382: void sendAT(XDATA char atString[40]) {
+	C$ydrip.c$345$1$1 ==.
+;	apps/ydrip/ydrip.c:345: void sendAT(XDATA char atString[40]) {
 ;	-----------------------------------------
 ;	 function sendAT
 ;	-----------------------------------------
@@ -2686,8 +2756,8 @@ _sendAT:
 	inc	dptr
 	mov	a,r7
 	movx	@dptr,a
-	C$ydrip.c$383$1$1 ==.
-;	apps/ydrip/ydrip.c:383: XDATA char ATresponse[80]={0};
+	C$ydrip.c$346$1$1 ==.
+;	apps/ydrip/ydrip.c:346: XDATA char ATresponse[80]={0};
 	mov	dptr,#_sendAT_ATresponse_1_1
 	clr	a
 	movx	@dptr,a
@@ -2868,11 +2938,11 @@ _sendAT:
 	movx	@dptr,a
 	mov	dptr,#(_sendAT_ATresponse_1_1 + 0x004f)
 	movx	@dptr,a
-	C$ydrip.c$384$1$1 ==.
-;	apps/ydrip/ydrip.c:384: uartEnable();
+	C$ydrip.c$347$1$1 ==.
+;	apps/ydrip/ydrip.c:347: uartEnable();
 	lcall	_uartEnable
-	C$ydrip.c$385$1$1 ==.
-;	apps/ydrip/ydrip.c:385: printf(atString);
+	C$ydrip.c$348$1$1 ==.
+;	apps/ydrip/ydrip.c:348: printf(atString);
 	mov	dptr,#_sendAT_atString_1_1
 	movx	a,@dptr
 	mov	r6,a
@@ -2887,9 +2957,9 @@ _sendAT:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$386$1$1 ==.
-;	apps/ydrip/ydrip.c:386: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	C$ydrip.c$349$1$1 ==.
+;	apps/ydrip/ydrip.c:349: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -2902,7 +2972,7 @@ _sendAT:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$387$1$1 ==.
+	C$ydrip.c$350$1$1 ==.
 	XG$sendAT$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -2910,16 +2980,17 @@ _sendAT:
 ;------------------------------------------------------------
 ;c                         Allocated with name '_enableESP_c_1_1'
 ;nofile                    Allocated with name '_enableESP_nofile_1_1'
+;clen                      Allocated with name '_enableESP_clen_1_1'
 ;------------------------------------------------------------
 	G$enableESP$0$0 ==.
-	C$ydrip.c$389$1$1 ==.
-;	apps/ydrip/ydrip.c:389: void enableESP() {
+	C$ydrip.c$352$1$1 ==.
+;	apps/ydrip/ydrip.c:352: void enableESP() {
 ;	-----------------------------------------
 ;	 function enableESP
 ;	-----------------------------------------
 _enableESP:
-	C$ydrip.c$390$1$1 ==.
-;	apps/ydrip/ydrip.c:390: XDATA char c[80] = {0};
+	C$ydrip.c$353$1$1 ==.
+;	apps/ydrip/ydrip.c:353: XDATA char c[80] = {0};
 	mov	dptr,#_enableESP_c_1_1
 	clr	a
 	movx	@dptr,a
@@ -3100,8 +3171,8 @@ _enableESP:
 	movx	@dptr,a
 	mov	dptr,#(_enableESP_c_1_1 + 0x004f)
 	movx	@dptr,a
-	C$ydrip.c$392$1$1 ==.
-;	apps/ydrip/ydrip.c:392: XDATA char nofile[] = "cannot";
+	C$ydrip.c$355$1$1 ==.
+;	apps/ydrip/ydrip.c:355: XDATA char nofile[] = "cannot";
 	mov	dptr,#_enableESP_nofile_1_1
 	mov	a,#0x63
 	movx	@dptr,a
@@ -3123,12 +3194,70 @@ _enableESP:
 	mov	dptr,#(_enableESP_nofile_1_1 + 0x0006)
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$393$1$1 ==.
-;	apps/ydrip/ydrip.c:393: uartEnable();													// Enable the serial connection
+	C$ydrip.c$359$1$1 ==.
+;	apps/ydrip/ydrip.c:359: if (debug_mode) {
+	jnb	_debug_mode,00102$
+	C$ydrip.c$360$3$3 ==.
+;	apps/ydrip/ydrip.c:360: LED_YELLOW(1);	LED_RED(1);	delayMs(1500);				// Let it do startup messages etc.
+	orl	_P2DIR,#0x04
+	orl	_P2DIR,#0x02
+	mov	dptr,#0x05DC
+	lcall	_delayMs
+	C$ydrip.c$361$3$5 ==.
+;	apps/ydrip/ydrip.c:361: LED_YELLOW(0);	LED_RED(0);	delayMs(1000);				// Let it do startup messages etc.
+	mov	r7,_P2DIR
+	anl	ar7,#0xFB
+	mov	_P2DIR,r7
+	mov	r7,_P2DIR
+	anl	ar7,#0xFD
+	mov	_P2DIR,r7
+	mov	dptr,#0x03E8
+	lcall	_delayMs
+	C$ydrip.c$362$3$7 ==.
+;	apps/ydrip/ydrip.c:362: LED_YELLOW(1);	LED_RED(1);	delayMs(1500);				// Let it do startup messages etc.
+	orl	_P2DIR,#0x04
+	orl	_P2DIR,#0x02
+	mov	dptr,#0x05DC
+	lcall	_delayMs
+00102$:
+	C$ydrip.c$364$1$1 ==.
+;	apps/ydrip/ydrip.c:364: setDigitalOutput(10,HIGH);									// Set pin high in order to reset the ESP
+	setb	b[0]
+	mov	bits,b
+	mov	dpl,#0x0A
+	lcall	_setDigitalOutput
+	C$ydrip.c$365$1$1 ==.
+;	apps/ydrip/ydrip.c:365: boardService();
+	lcall	_boardService
+	C$ydrip.c$366$1$1 ==.
+;	apps/ydrip/ydrip.c:366: delayMs(500);												// Wait .2 seconds
+	mov	dptr,#0x01F4
+	lcall	_delayMs
+	C$ydrip.c$367$1$1 ==.
+;	apps/ydrip/ydrip.c:367: setDigitalInput(10,HIGH_IMPEDANCE);							// Have to release it afterwards to let it start functioning
+	clr	b[0]
+	mov	bits,b
+	mov	dpl,#0x0A
+	lcall	_setDigitalInput
+	C$ydrip.c$368$1$1 ==.
+;	apps/ydrip/ydrip.c:368: boardService();
+	lcall	_boardService
+	C$ydrip.c$370$2$9 ==.
+;	apps/ydrip/ydrip.c:370: LED_YELLOW(0);	delayMs(3000);								// Let it do startup messages etc.
+	mov	r7,_P2DIR
+	anl	ar7,#0xFB
+	mov	_P2DIR,r7
+	mov	dptr,#0x0BB8
+	lcall	_delayMs
+	C$ydrip.c$371$2$10 ==.
+;	apps/ydrip/ydrip.c:371: LED_RED(0);    uartEnable();								// Enable the serial connection
+	mov	r7,_P2DIR
+	anl	ar7,#0xFD
+	mov	_P2DIR,r7
 	lcall	_uartEnable
-	C$ydrip.c$395$1$1 ==.
-;	apps/ydrip/ydrip.c:395: strcpy(c, (getFonaString())); // Clear buffer
-	lcall	_getFonaString
+	C$ydrip.c$373$1$1 ==.
+;	apps/ydrip/ydrip.c:373: strcpy(c, (getESPString())); // Clear buffer
+	lcall	_getESPString
 	mov	r6,dpl
 	mov	r7,dph
 	mov	r0,#_strcpy_PARM_2
@@ -3143,8 +3272,8 @@ _enableESP:
 	mov	dptr,#_enableESP_c_1_1
 	mov	b,#0x00
 	lcall	_strcpy
-	C$ydrip.c$396$1$1 ==.
-;	apps/ydrip/ydrip.c:396: printf("dofile(\"init.lua\")\r\n");; delayMs(3000);
+	C$ydrip.c$374$1$1 ==.
+;	apps/ydrip/ydrip.c:374: printf("dofile(\"init.lua\")\r\n");; delayMs(5000);
 	mov	a,#__str_1
 	push	acc
 	mov	a,#(__str_1 >> 8)
@@ -3155,11 +3284,11 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#0x0BB8
+	mov	dptr,#0x1388
 	lcall	_delayMs
-	C$ydrip.c$397$1$1 ==.
-;	apps/ydrip/ydrip.c:397: strcpy(c, (getFonaString())); // Clear buffer
-	lcall	_getFonaString
+	C$ydrip.c$375$1$1 ==.
+;	apps/ydrip/ydrip.c:375: strcpy(c, (getESPString())); // Clear buffer
+	lcall	_getESPString
 	mov	r6,dpl
 	mov	r7,dph
 	mov	r0,#_strcpy_PARM_2
@@ -3174,8 +3303,21 @@ _enableESP:
 	mov	dptr,#_enableESP_c_1_1
 	mov	b,#0x00
 	lcall	_strcpy
-	C$ydrip.c$398$1$1 ==.
-;	apps/ydrip/ydrip.c:398: point = strstr(c,nofile);
+	C$ydrip.c$376$1$1 ==.
+;	apps/ydrip/ydrip.c:376: clen = strlen(c);
+	mov	dptr,#_enableESP_c_1_1
+	mov	b,#0x00
+	lcall	_strlen
+	mov	r6,dpl
+	mov	r7,dph
+	mov	dptr,#_enableESP_clen_1_1
+	mov	a,r6
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r7
+	movx	@dptr,a
+	C$ydrip.c$377$1$1 ==.
+;	apps/ydrip/ydrip.c:377: point = strstr(c,nofile);									// Find the word "cannot".  The variable "point" will be null if that text if init.lua runs OK.
 	mov	r0,#_strstr_PARM_2
 	mov	a,#_enableESP_nofile_1_1
 	movx	@r0,a
@@ -3191,13 +3333,13 @@ _enableESP:
 	mov	r5,dpl
 	mov	r6,dph
 	mov	r7,b
-	C$ydrip.c$400$1$1 ==.
-;	apps/ydrip/ydrip.c:400: if (point == NULL) {											// This check doesn't seem to work.  I might need to check the pointer contents
+	C$ydrip.c$379$1$1 ==.
+;	apps/ydrip/ydrip.c:379: if (point == NULL) {										// This check doesn't seem to work.  I might need to check the pointer contents
 	mov	a,r5
 	orl	a,r6
-	jnz	00102$
-	C$ydrip.c$401$2$2 ==.
-;	apps/ydrip/ydrip.c:401: printf("-- No need to write out .lua files as they seem to already exist --\r\n");; delayMs(defaultATWait);
+	jnz	00104$
+	C$ydrip.c$380$2$11 ==.
+;	apps/ydrip/ydrip.c:380: printf("-- No need to write out .lua files as they seem to already exist --\r\n");; delayMs(defaultWaitTime);
 	mov	a,#__str_2
 	push	acc
 	mov	a,#(__str_2 >> 8)
@@ -3208,7 +3350,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3221,10 +3363,10 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	ljmp	00104$
-00102$:
-	C$ydrip.c$405$2$3 ==.
-;	apps/ydrip/ydrip.c:405: printf("-- Writing out .lua files as they cannot be found --\r\n"); delayMs(defaultATWait);
+	ljmp	00106$
+00104$:
+	C$ydrip.c$384$2$12 ==.
+;	apps/ydrip/ydrip.c:384: printf("-- Writing out .lua files as they cannot be found --\r\n"); delayMs(defaultWaitTime);
 	mov	a,#__str_3
 	push	acc
 	mov	a,#(__str_3 >> 8)
@@ -3235,7 +3377,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3248,8 +3390,14 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$407$2$3 ==.
-;	apps/ydrip/ydrip.c:407: printf("file.open(\"init.lua\", \"w\")\r\n");; delayMs(defaultATWait)	; delayMs(defaultATWait);
+	C$ydrip.c$385$2$12 ==.
+;	apps/ydrip/ydrip.c:385: printf("-- Length is %d\r\n",clen); delayMs(defaultWaitTime);
+	mov	dptr,#_enableESP_clen_1_1
+	movx	a,@dptr
+	push	acc
+	inc	dptr
+	movx	a,@dptr
+	push	acc
 	mov	a,#__str_4
 	push	acc
 	mov	a,#(__str_4 >> 8)
@@ -3257,10 +3405,10 @@ _enableESP:
 	mov	a,#0x80
 	push	acc
 	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3273,21 +3421,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	mov	dptr,#_defaultATWait
-	movx	a,@dptr
-	mov	r4,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r5,a
-	inc	dptr
-	movx	a,@dptr
-	inc	dptr
-	movx	a,@dptr
-	mov	dpl,r4
-	mov	dph,r5
-	lcall	_delayMs
-	C$ydrip.c$408$2$3 ==.
-;	apps/ydrip/ydrip.c:408: printf("file.writeline([[gpio.mode(3, gpio.OUTPUT)]])\r\n")				; delayMs(defaultATWait);	delayMs(defaultATWait);
+	C$ydrip.c$387$2$12 ==.
+;	apps/ydrip/ydrip.c:387: printf("file.open(\"init.lua\", \"w\")\r\n");; delayMs(defaultWaitTime)	; delayMs(defaultWaitTime);
 	mov	a,#__str_5
 	push	acc
 	mov	a,#(__str_5 >> 8)
@@ -3298,7 +3433,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3311,7 +3446,7 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3324,8 +3459,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$409$2$3 ==.
-;	apps/ydrip/ydrip.c:409: printf("file.writeline([[gpio.write(3, gpio.LOW)]])\r\n")				; delayMs(defaultATWait);	delayMs(defaultATWait);
+	C$ydrip.c$388$2$12 ==.
+;	apps/ydrip/ydrip.c:388: printf("file.writeline([[gpio.mode(3, gpio.OUTPUT)]])\r\n")				; delayMs(defaultWaitTime);	delayMs(defaultWaitTime);
 	mov	a,#__str_6
 	push	acc
 	mov	a,#(__str_6 >> 8)
@@ -3336,7 +3471,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3349,7 +3484,7 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3362,8 +3497,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$410$2$3 ==.
-;	apps/ydrip/ydrip.c:410: printf("file.writeline([[gpio.mode(5, gpio.OUTPUT)]])\r\n")				; delayMs(defaultATWait);	delayMs(defaultATWait);
+	C$ydrip.c$389$2$12 ==.
+;	apps/ydrip/ydrip.c:389: printf("file.writeline([[gpio.write(3, gpio.LOW)]])\r\n")				; delayMs(defaultWaitTime);	delayMs(defaultWaitTime);
 	mov	a,#__str_7
 	push	acc
 	mov	a,#(__str_7 >> 8)
@@ -3374,7 +3509,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3387,7 +3522,7 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3400,8 +3535,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$411$2$3 ==.
-;	apps/ydrip/ydrip.c:411: printf("file.writeline([[gpio.write(5, gpio.LOW)]])\r\n")				; delayMs(defaultATWait);	delayMs(defaultATWait);
+	C$ydrip.c$390$2$12 ==.
+;	apps/ydrip/ydrip.c:390: printf("file.writeline([[gpio.mode(5, gpio.OUTPUT)]])\r\n")				; delayMs(defaultWaitTime);	delayMs(defaultWaitTime);
 	mov	a,#__str_8
 	push	acc
 	mov	a,#(__str_8 >> 8)
@@ -3412,7 +3547,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3425,7 +3560,7 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3438,8 +3573,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$412$2$3 ==.
-;	apps/ydrip/ydrip.c:412: printf("file.writeline([[gpio.mode(4, gpio.OUTPUT)]])\r\n")				; delayMs(defaultATWait);	delayMs(defaultATWait);
+	C$ydrip.c$391$2$12 ==.
+;	apps/ydrip/ydrip.c:391: printf("file.writeline([[gpio.write(5, gpio.LOW)]])\r\n")				; delayMs(defaultWaitTime);	delayMs(defaultWaitTime);
 	mov	a,#__str_9
 	push	acc
 	mov	a,#(__str_9 >> 8)
@@ -3450,7 +3585,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3463,7 +3598,7 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3476,8 +3611,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$413$2$3 ==.
-;	apps/ydrip/ydrip.c:413: printf("file.close()\r\n")												; delayMs(defaultATWait);
+	C$ydrip.c$392$2$12 ==.
+;	apps/ydrip/ydrip.c:392: printf("file.writeline([[gpio.mode(4, gpio.OUTPUT)]])\r\n")				; delayMs(defaultWaitTime);	delayMs(defaultWaitTime);
 	mov	a,#__str_10
 	push	acc
 	mov	a,#(__str_10 >> 8)
@@ -3488,7 +3623,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3501,8 +3636,21 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$439$2$3 ==.
-;	apps/ydrip/ydrip.c:439: printf("file.remove('googletime.lua')\r\n");																		; delayMs(defaultATWait);
+	mov	dptr,#_defaultWaitTime
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	inc	dptr
+	movx	a,@dptr
+	mov	dpl,r4
+	mov	dph,r5
+	lcall	_delayMs
+	C$ydrip.c$393$2$12 ==.
+;	apps/ydrip/ydrip.c:393: printf("file.close()\r\n")												; delayMs(defaultWaitTime);
 	mov	a,#__str_11
 	push	acc
 	mov	a,#(__str_11 >> 8)
@@ -3513,7 +3661,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3526,8 +3674,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$440$2$3 ==.
-;	apps/ydrip/ydrip.c:440: printf("file.open(\"googletime.lua\", \"w\")\r\n");											; delayMs(defaultATWait); delayMs(defaultATWait);
+	C$ydrip.c$396$2$12 ==.
+;	apps/ydrip/ydrip.c:396: printf("file.remove('googletime.lua')\r\n");																		; delayMs(defaultWaitTime);
 	mov	a,#__str_12
 	push	acc
 	mov	a,#(__str_12 >> 8)
@@ -3538,7 +3686,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3551,21 +3699,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	mov	dptr,#_defaultATWait
-	movx	a,@dptr
-	mov	r4,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r5,a
-	inc	dptr
-	movx	a,@dptr
-	inc	dptr
-	movx	a,@dptr
-	mov	dpl,r4
-	mov	dph,r5
-	lcall	_delayMs
-	C$ydrip.c$442$2$3 ==.
-;	apps/ydrip/ydrip.c:442: printf("file.writeline([[connG=net.createConnection(net.TCP, 0)]])\r\n")											; delayMs(defaultATWait);
+	C$ydrip.c$397$2$12 ==.
+;	apps/ydrip/ydrip.c:397: printf("file.open(\"googletime.lua\", \"w\")\r\n");										; delayMs(defaultWaitTime); delayMs(defaultWaitTime);
 	mov	a,#__str_13
 	push	acc
 	mov	a,#(__str_13 >> 8)
@@ -3576,7 +3711,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3589,8 +3724,21 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$443$2$3 ==.
-;	apps/ydrip/ydrip.c:443: printf("file.writeline([[connG:on(\"connection\",function(conn, payload)]])\r\n")									; delayMs(defaultATWait);
+	mov	dptr,#_defaultWaitTime
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	inc	dptr
+	movx	a,@dptr
+	mov	dpl,r4
+	mov	dph,r5
+	lcall	_delayMs
+	C$ydrip.c$399$2$12 ==.
+;	apps/ydrip/ydrip.c:399: printf("file.writeline([[connG=net.createConnection(net.TCP, 0)]])\r\n")											; delayMs(defaultWaitTime);
 	mov	a,#__str_14
 	push	acc
 	mov	a,#(__str_14 >> 8)
@@ -3601,7 +3749,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3614,8 +3762,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$445$2$3 ==.
-;	apps/ydrip/ydrip.c:445: printf("file.writeline([[connG:send(\"HEAD / HTTP/1.1\\r\\nHost: google.com\\r\\n\Accept: */*\\r\\n\"..]])\r\n")	; delayMs(defaultATWait);
+	C$ydrip.c$400$2$12 ==.
+;	apps/ydrip/ydrip.c:400: printf("file.writeline([[connG:on(\"connection\",function(conn, payload)]])\r\n")									; delayMs(defaultWaitTime);
 	mov	a,#__str_15
 	push	acc
 	mov	a,#(__str_15 >> 8)
@@ -3626,7 +3774,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3639,8 +3787,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$446$2$3 ==.
-;	apps/ydrip/ydrip.c:446: printf("file.writeline([[\"User-Agent: Mozilla/4.0 (compatible; esp8266 Lua;)\\r\\n\\r\\n\") end)]])\r\n")			; delayMs(defaultATWait);
+	C$ydrip.c$402$2$12 ==.
+;	apps/ydrip/ydrip.c:402: printf("file.writeline([[connG:send(\"HEAD / HTTP/1.1\\r\\nHost: google.com\\r\\n\Accept: */*\\r\\n\"..]])\r\n")	; delayMs(defaultWaitTime);
 	mov	a,#__str_16
 	push	acc
 	mov	a,#(__str_16 >> 8)
@@ -3651,7 +3799,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3664,8 +3812,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$448$2$3 ==.
-;	apps/ydrip/ydrip.c:448: printf("file.writeline(\"connG:on(\\\"receive\\\", function(connG, payload)\")\r\n")														; delayMs(defaultATWait);
+	C$ydrip.c$403$2$12 ==.
+;	apps/ydrip/ydrip.c:403: printf("file.writeline([[\"User-Agent: Mozilla/4.0 (compatible; esp8266 Lua;)\\r\\n\\r\\n\") end)]])\r\n")			; delayMs(defaultWaitTime);
 	mov	a,#__str_17
 	push	acc
 	mov	a,#(__str_17 >> 8)
@@ -3676,7 +3824,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3689,8 +3837,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$449$2$3 ==.
-;	apps/ydrip/ydrip.c:449: printf("file.writeline(\"print(string.sub(payload,string.find(payload,\\\"Date:\\\")+18,string.find(payload,\\\"Date:\\\")+21)..\")\r\n")	; delayMs(defaultATWait);
+	C$ydrip.c$405$2$12 ==.
+;	apps/ydrip/ydrip.c:405: printf("file.writeline(\"connG:on(\\\"receive\\\", function(connG, payload)\")\r\n")														; delayMs(defaultWaitTime);
 	mov	a,#__str_18
 	push	acc
 	mov	a,#(__str_18 >> 8)
@@ -3701,7 +3849,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3714,8 +3862,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$450$2$3 ==.
-;	apps/ydrip/ydrip.c:450: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+15,string.find(payload,\\\"Date:\\\")+16)..\")\r\n")			; delayMs(defaultATWait);
+	C$ydrip.c$406$2$12 ==.
+;	apps/ydrip/ydrip.c:406: printf("file.writeline(\"print(string.sub(payload,string.find(payload,\\\"Date:\\\")+18,string.find(payload,\\\"Date:\\\")+21)..\")\r\n")	; delayMs(defaultWaitTime);
 	mov	a,#__str_19
 	push	acc
 	mov	a,#(__str_19 >> 8)
@@ -3726,7 +3874,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3739,8 +3887,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$451$2$3 ==.
-;	apps/ydrip/ydrip.c:451: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+11,string.find(payload,\\\"Date:\\\")+12)..\")\r\n")			; delayMs(defaultATWait);
+	C$ydrip.c$407$2$12 ==.
+;	apps/ydrip/ydrip.c:407: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+15,string.find(payload,\\\"Date:\\\")+16)..\")\r\n")			; delayMs(defaultWaitTime);
 	mov	a,#__str_20
 	push	acc
 	mov	a,#(__str_20 >> 8)
@@ -3751,7 +3899,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3764,8 +3912,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$452$2$3 ==.
-;	apps/ydrip/ydrip.c:452: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+23,string.find(payload,\\\"Date:\\\")+24)..\")\r\n")			; delayMs(defaultATWait);
+	C$ydrip.c$408$2$12 ==.
+;	apps/ydrip/ydrip.c:408: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+11,string.find(payload,\\\"Date:\\\")+12)..\")\r\n")			; delayMs(defaultWaitTime);
 	mov	a,#__str_21
 	push	acc
 	mov	a,#(__str_21 >> 8)
@@ -3776,7 +3924,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3789,8 +3937,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$453$2$3 ==.
-;	apps/ydrip/ydrip.c:453: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+26,string.find(payload,\\\"Date:\\\")+27)..\")\r\n")			; delayMs(defaultATWait);
+	C$ydrip.c$409$2$12 ==.
+;	apps/ydrip/ydrip.c:409: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+23,string.find(payload,\\\"Date:\\\")+24)..\")\r\n")			; delayMs(defaultWaitTime);
 	mov	a,#__str_22
 	push	acc
 	mov	a,#(__str_22 >> 8)
@@ -3801,7 +3949,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3814,8 +3962,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$454$2$3 ==.
-;	apps/ydrip/ydrip.c:454: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+29,string.find(payload,\\\"Date:\\\")+30)..\")\r\n")			; delayMs(defaultATWait);
+	C$ydrip.c$410$2$12 ==.
+;	apps/ydrip/ydrip.c:410: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+26,string.find(payload,\\\"Date:\\\")+27)..\")\r\n")			; delayMs(defaultWaitTime);
 	mov	a,#__str_23
 	push	acc
 	mov	a,#(__str_23 >> 8)
@@ -3826,7 +3974,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3839,8 +3987,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$455$2$3 ==.
-;	apps/ydrip/ydrip.c:455: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+14,string.find(payload,\\\"Date:\\\")+16)..\\\"\\\\r\\\\n\\\")\")\r\n")	; delayMs(defaultATWait);
+	C$ydrip.c$411$2$12 ==.
+;	apps/ydrip/ydrip.c:411: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+29,string.find(payload,\\\"Date:\\\")+30)..\")\r\n")			; delayMs(defaultWaitTime);
 	mov	a,#__str_24
 	push	acc
 	mov	a,#(__str_24 >> 8)
@@ -3851,7 +3999,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3864,8 +4012,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$458$2$3 ==.
-;	apps/ydrip/ydrip.c:458: printf("file.writeline(\"connG:close()\")\r\n")																		; delayMs(defaultATWait);
+	C$ydrip.c$412$2$12 ==.
+;	apps/ydrip/ydrip.c:412: printf("file.writeline(\"string.sub(payload,string.find(payload,\\\"Date:\\\")+14,string.find(payload,\\\"Date:\\\")+16)..\\\"\\\\r\\\\n\\\")\")\r\n")	; delayMs(defaultWaitTime);
 	mov	a,#__str_25
 	push	acc
 	mov	a,#(__str_25 >> 8)
@@ -3876,7 +4024,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3889,8 +4037,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$459$2$3 ==.
-;	apps/ydrip/ydrip.c:459: printf("file.writeline(\"end)\")\r\n")																				; delayMs(defaultATWait);
+	C$ydrip.c$415$2$12 ==.
+;	apps/ydrip/ydrip.c:415: printf("file.writeline(\"connG:close()\")\r\n")																		; delayMs(defaultWaitTime);
 	mov	a,#__str_26
 	push	acc
 	mov	a,#(__str_26 >> 8)
@@ -3901,7 +4049,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3914,8 +4062,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$460$2$3 ==.
-;	apps/ydrip/ydrip.c:460: printf("file.writeline([[connG:connect(80,'google.com')]])\r\n")													; delayMs(defaultATWait);	// trigger output of date
+	C$ydrip.c$416$2$12 ==.
+;	apps/ydrip/ydrip.c:416: printf("file.writeline(\"end)\")\r\n")																				; delayMs(defaultWaitTime);
 	mov	a,#__str_27
 	push	acc
 	mov	a,#(__str_27 >> 8)
@@ -3926,7 +4074,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3939,33 +4087,8 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$461$2$3 ==.
-;	apps/ydrip/ydrip.c:461: printf("file.close()\r\n");																							; delayMs(defaultATWait);
-	mov	a,#__str_10
-	push	acc
-	mov	a,#(__str_10 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	mov	dptr,#_defaultATWait
-	movx	a,@dptr
-	mov	r4,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r5,a
-	inc	dptr
-	movx	a,@dptr
-	inc	dptr
-	movx	a,@dptr
-	mov	dpl,r4
-	mov	dph,r5
-	lcall	_delayMs
-	C$ydrip.c$463$2$3 ==.
-;	apps/ydrip/ydrip.c:463: printf("print('connG ready\\r\\n')\r\n");																			; delayMs(defaultATWait);
+	C$ydrip.c$417$2$12 ==.
+;	apps/ydrip/ydrip.c:417: printf("file.writeline([[connG:connect(80,'google.com')]])\r\n")													; delayMs(defaultWaitTime);	// trigger output of date
 	mov	a,#__str_28
 	push	acc
 	mov	a,#(__str_28 >> 8)
@@ -3976,7 +4099,7 @@ _enableESP:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -3989,9 +4112,59 @@ _enableESP:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$467$2$3 ==.
-;	apps/ydrip/ydrip.c:467: strcpy(c, (getFonaString())); // Clear buffer
-	lcall	_getFonaString
+	C$ydrip.c$418$2$12 ==.
+;	apps/ydrip/ydrip.c:418: printf("file.close()\r\n");																							; delayMs(defaultWaitTime);
+	mov	a,#__str_11
+	push	acc
+	mov	a,#(__str_11 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	mov	dptr,#_defaultWaitTime
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	inc	dptr
+	movx	a,@dptr
+	mov	dpl,r4
+	mov	dph,r5
+	lcall	_delayMs
+	C$ydrip.c$420$2$12 ==.
+;	apps/ydrip/ydrip.c:420: printf("print('connG ready\\r\\n')\r\n");																			; delayMs(defaultWaitTime);
+	mov	a,#__str_29
+	push	acc
+	mov	a,#(__str_29 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	mov	dptr,#_defaultWaitTime
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	inc	dptr
+	movx	a,@dptr
+	mov	dpl,r4
+	mov	dph,r5
+	lcall	_delayMs
+	C$ydrip.c$423$2$12 ==.
+;	apps/ydrip/ydrip.c:423: strcpy(c, (getESPString())); // Clear buffer
+	lcall	_getESPString
 	mov	r6,dpl
 	mov	r7,dph
 	mov	r0,#_strcpy_PARM_2
@@ -4006,8 +4179,8 @@ _enableESP:
 	mov	dptr,#_enableESP_c_1_1
 	mov	b,#0x00
 	lcall	_strcpy
-	C$ydrip.c$468$2$3 ==.
-;	apps/ydrip/ydrip.c:468: printf("dofile(\"init.lua\")\r\n");; delayMs(3000);
+	C$ydrip.c$424$2$12 ==.
+;	apps/ydrip/ydrip.c:424: printf("dofile(\"init.lua\")\r\n");; delayMs(3000);
 	mov	a,#__str_1
 	push	acc
 	mov	a,#(__str_1 >> 8)
@@ -4020,8 +4193,8 @@ _enableESP:
 	dec	sp
 	mov	dptr,#0x0BB8
 	lcall	_delayMs
-00104$:
-	C$ydrip.c$472$1$1 ==.
+00106$:
+	C$ydrip.c$427$1$1 ==.
 	XG$enableESP$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -4032,14 +4205,14 @@ _enableESP:
 ;c                         Allocated with name '_getWifiStatus_c_1_1'
 ;------------------------------------------------------------
 	G$getWifiStatus$0$0 ==.
-	C$ydrip.c$474$1$1 ==.
-;	apps/ydrip/ydrip.c:474: XDATA int16 getWifiStatus() {						// Read responses from ESP2866 module to see if there is a Wifi Connection (status 5)
+	C$ydrip.c$429$1$1 ==.
+;	apps/ydrip/ydrip.c:429: XDATA int16 getWifiStatus() {						// Read responses from ESP2866 module to see if there is a Wifi Connection (status 5)
 ;	-----------------------------------------
 ;	 function getWifiStatus
 ;	-----------------------------------------
 _getWifiStatus:
-	C$ydrip.c$477$1$1 ==.
-;	apps/ydrip/ydrip.c:477: XDATA char c[80] = {0};
+	C$ydrip.c$432$1$1 ==.
+;	apps/ydrip/ydrip.c:432: XDATA char c[80] = {0};
 	mov	dptr,#_getWifiStatus_c_1_1
 	clr	a
 	movx	@dptr,a
@@ -4220,23 +4393,23 @@ _getWifiStatus:
 	movx	@dptr,a
 	mov	dptr,#(_getWifiStatus_c_1_1 + 0x004f)
 	movx	@dptr,a
-	C$ydrip.c$479$1$1 ==.
-;	apps/ydrip/ydrip.c:479: c[0]=0;											// And mark string as empty
+	C$ydrip.c$434$1$1 ==.
+;	apps/ydrip/ydrip.c:434: c[0]=0;											// And mark string as empty
 	mov	dptr,#_getWifiStatus_c_1_1
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$480$1$1 ==.
-;	apps/ydrip/ydrip.c:480: clearRxErrors();
+	C$ydrip.c$435$1$1 ==.
+;	apps/ydrip/ydrip.c:435: clearRxErrors();
 	lcall	_clearRxErrors
-	C$ydrip.c$482$1$1 ==.
-;	apps/ydrip/ydrip.c:482: boardService();
+	C$ydrip.c$437$1$1 ==.
+;	apps/ydrip/ydrip.c:437: boardService();
 	lcall	_boardService
-	C$ydrip.c$483$1$1 ==.
-;	apps/ydrip/ydrip.c:483: uartEnable();
+	C$ydrip.c$438$1$1 ==.
+;	apps/ydrip/ydrip.c:438: uartEnable();
 	lcall	_uartEnable
-	C$ydrip.c$484$1$1 ==.
-;	apps/ydrip/ydrip.c:484: strcpy(c, (getFonaString()));					// Clear input buffer
-	lcall	_getFonaString
+	C$ydrip.c$439$1$1 ==.
+;	apps/ydrip/ydrip.c:439: strcpy(c, (getESPString()));					// Clear input buffer
+	lcall	_getESPString
 	mov	r6,dpl
 	mov	r7,dph
 	mov	r0,#_strcpy_PARM_2
@@ -4251,11 +4424,11 @@ _getWifiStatus:
 	mov	dptr,#_getWifiStatus_c_1_1
 	mov	b,#0x00
 	lcall	_strcpy
-	C$ydrip.c$486$1$1 ==.
-;	apps/ydrip/ydrip.c:486: printf("print(wifi.sta.status())\r\n");
-	mov	a,#__str_29
+	C$ydrip.c$441$1$1 ==.
+;	apps/ydrip/ydrip.c:441: printf("print(wifi.sta.status())\r\n");	delayMs(defaultWaitTime);
+	mov	a,#__str_30
 	push	acc
-	mov	a,#(__str_29 >> 8)
+	mov	a,#(__str_30 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -4263,9 +4436,7 @@ _getWifiStatus:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$487$1$1 ==.
-;	apps/ydrip/ydrip.c:487: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -4278,15 +4449,15 @@ _getWifiStatus:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$490$2$2 ==.
-;	apps/ydrip/ydrip.c:490: while (uart1RxAvailable() > 0) {
+	C$ydrip.c$443$2$2 ==.
+;	apps/ydrip/ydrip.c:443: while (uart1RxAvailable() > 0) {
 00101$:
 	lcall	_uart1RxAvailable
 	mov	a,dpl
 	jz	00103$
-	C$ydrip.c$491$2$2 ==.
-;	apps/ydrip/ydrip.c:491: strcpy(c, (getFonaString()));
-	lcall	_getFonaString
+	C$ydrip.c$444$2$2 ==.
+;	apps/ydrip/ydrip.c:444: strcpy(c, (getESPString()));
+	lcall	_getESPString
 	mov	r6,dpl
 	mov	r7,dph
 	mov	r0,#_strcpy_PARM_2
@@ -4303,8 +4474,8 @@ _getWifiStatus:
 	lcall	_strcpy
 	sjmp	00101$
 00103$:
-	C$ydrip.c$494$1$1 ==.
-;	apps/ydrip/ydrip.c:494: i = strlen(c);
+	C$ydrip.c$447$1$1 ==.
+;	apps/ydrip/ydrip.c:447: i = strlen(c);
 	mov	dptr,#_getWifiStatus_c_1_1
 	mov	b,#0x00
 	lcall	_strlen
@@ -4316,8 +4487,8 @@ _getWifiStatus:
 	inc	dptr
 	mov	a,r7
 	movx	@dptr,a
-	C$ydrip.c$495$1$1 ==.
-;	apps/ydrip/ydrip.c:495: if  (i>5) {
+	C$ydrip.c$448$1$1 ==.
+;	apps/ydrip/ydrip.c:448: if  (i>5) {
 	clr	c
 	mov	a,#0x05
 	subb	a,r6
@@ -4327,8 +4498,8 @@ _getWifiStatus:
 	xrl	b,#0x80
 	subb	a,b
 	jnc	00105$
-	C$ydrip.c$496$2$3 ==.
-;	apps/ydrip/ydrip.c:496: intStatus=(((c[i-5])-'0'));					// Convert character to integer.  1 connecting, 5 connected, etc.
+	C$ydrip.c$449$2$3 ==.
+;	apps/ydrip/ydrip.c:449: intStatus=(((c[i-5])-'0'));					// Convert character to integer.  1 connecting, 5 connected, etc.
 	mov	a,r6
 	add	a,#0xFB
 	add	a,#_getWifiStatus_c_1_1
@@ -4355,22 +4526,22 @@ _getWifiStatus:
 	movx	@dptr,a
 	sjmp	00106$
 00105$:
-	C$ydrip.c$498$2$4 ==.
-;	apps/ydrip/ydrip.c:498: intStatus=0;
+	C$ydrip.c$451$2$4 ==.
+;	apps/ydrip/ydrip.c:451: intStatus=0;
 	mov	dptr,#_getWifiStatus_intStatus_1_1
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
 00106$:
-	C$ydrip.c$501$1$1 ==.
-;	apps/ydrip/ydrip.c:501: return intStatus;
+	C$ydrip.c$454$1$1 ==.
+;	apps/ydrip/ydrip.c:454: return intStatus;
 	mov	dptr,#_getWifiStatus_intStatus_1_1
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
 	movx	a,@dptr
-	C$ydrip.c$502$1$1 ==.
+	C$ydrip.c$455$1$1 ==.
 	XG$getWifiStatus$0$0 ==.
 	mov	dpl,r6
 	mov	dph,a
@@ -4378,257 +4549,58 @@ _getWifiStatus:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'wifiFlash'
 ;------------------------------------------------------------
+;i                         Allocated with name '_wifiFlash_i_1_1'
+;intWifiStatus             Allocated with name '_wifiFlash_intWifiStatus_1_1'
+;------------------------------------------------------------
 	G$wifiFlash$0$0 ==.
-	C$ydrip.c$504$1$1 ==.
-;	apps/ydrip/ydrip.c:504: void wifiFlash() {									// Should probably tighten this up with a loop and check for WiFi status every second
+	C$ydrip.c$457$1$1 ==.
+;	apps/ydrip/ydrip.c:457: void wifiFlash() {	
 ;	-----------------------------------------
 ;	 function wifiFlash
 ;	-----------------------------------------
 _wifiFlash:
-	C$ydrip.c$505$1$1 ==.
-;	apps/ydrip/ydrip.c:505: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
-	mov	a,#__str_30
-	push	acc
-	mov	a,#(__str_30 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$506$1$1 ==.
-;	apps/ydrip/ydrip.c:506: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$507$1$1 ==.
-;	apps/ydrip/ydrip.c:507: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
-	mov	a,#__str_31
-	push	acc
-	mov	a,#(__str_31 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$508$1$1 ==.
-;	apps/ydrip/ydrip.c:508: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$509$1$1 ==.
-;	apps/ydrip/ydrip.c:509: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
-	mov	a,#__str_30
-	push	acc
-	mov	a,#(__str_30 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$510$1$1 ==.
-;	apps/ydrip/ydrip.c:510: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$511$1$1 ==.
-;	apps/ydrip/ydrip.c:511: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
-	mov	a,#__str_31
-	push	acc
-	mov	a,#(__str_31 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$512$1$1 ==.
-;	apps/ydrip/ydrip.c:512: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$513$1$1 ==.
-;	apps/ydrip/ydrip.c:513: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
-	mov	a,#__str_30
-	push	acc
-	mov	a,#(__str_30 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$514$1$1 ==.
-;	apps/ydrip/ydrip.c:514: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$515$1$1 ==.
-;	apps/ydrip/ydrip.c:515: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
-	mov	a,#__str_31
-	push	acc
-	mov	a,#(__str_31 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$516$1$1 ==.
-;	apps/ydrip/ydrip.c:516: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$517$1$1 ==.
-;	apps/ydrip/ydrip.c:517: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
-	mov	a,#__str_30
-	push	acc
-	mov	a,#(__str_30 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$518$1$1 ==.
-;	apps/ydrip/ydrip.c:518: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$519$1$1 ==.
-;	apps/ydrip/ydrip.c:519: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
-	mov	a,#__str_31
-	push	acc
-	mov	a,#(__str_31 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$520$1$1 ==.
-;	apps/ydrip/ydrip.c:520: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$521$1$1 ==.
-;	apps/ydrip/ydrip.c:521: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
-	mov	a,#__str_30
-	push	acc
-	mov	a,#(__str_30 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$522$1$1 ==.
-;	apps/ydrip/ydrip.c:522: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$523$1$1 ==.
-;	apps/ydrip/ydrip.c:523: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
-	mov	a,#__str_31
-	push	acc
-	mov	a,#(__str_31 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$524$1$1 ==.
-;	apps/ydrip/ydrip.c:524: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$525$1$1 ==.
-;	apps/ydrip/ydrip.c:525: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (Flash)
-	mov	a,#__str_30
-	push	acc
-	mov	a,#(__str_30 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$526$1$1 ==.
-;	apps/ydrip/ydrip.c:526: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$527$1$1 ==.
-;	apps/ydrip/ydrip.c:527: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED (Flash)
-	mov	a,#__str_31
-	push	acc
-	mov	a,#(__str_31 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$528$1$1 ==.
-;	apps/ydrip/ydrip.c:528: delayMs(500);
-	mov	dptr,#0x01F4
-	lcall	_delayMs
-	C$ydrip.c$529$1$1 ==.
-	XG$wifiFlash$0$0 ==.
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'wifiConnect'
-;------------------------------------------------------------
-;atString                  Allocated with name '_wifiConnect_atString_1_1'
-;intWifiStatus             Allocated with name '_wifiConnect_intWifiStatus_1_1'
-;------------------------------------------------------------
-	G$wifiConnect$0$0 ==.
-	C$ydrip.c$531$1$1 ==.
-;	apps/ydrip/ydrip.c:531: BIT wifiConnect() {
-;	-----------------------------------------
-;	 function wifiConnect
-;	-----------------------------------------
-_wifiConnect:
-	C$ydrip.c$535$1$1 ==.
-;	apps/ydrip/ydrip.c:535: uartEnable();													// Enable the serial connection
-	lcall	_uartEnable
-	C$ydrip.c$536$1$1 ==.
-;	apps/ydrip/ydrip.c:536: delayMs(100);													// Wait for it to open
-	mov	dptr,#0x0064
-	lcall	_delayMs
-	C$ydrip.c$538$1$1 ==.
-;	apps/ydrip/ydrip.c:538: printf("gpio.write(4, gpio.LOW)\r\n");							// Switch on Blue LED
-	mov	a,#__str_31
-	push	acc
-	mov	a,#(__str_31 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$539$1$1 ==.
-;	apps/ydrip/ydrip.c:539: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
-	movx	a,@dptr
-	mov	r4,a
+	C$ydrip.c$459$1$1 ==.
+;	apps/ydrip/ydrip.c:459: XDATA int16 intWifiStatus = 1;
+	mov	dptr,#_wifiFlash_intWifiStatus_1_1
+	mov	a,#0x01
+	movx	@dptr,a
 	inc	dptr
+	clr	a
+	movx	@dptr,a
+	mov	r7,#0x00
+00102$:
+	C$ydrip.c$460$1$1 ==.
+;	apps/ydrip/ydrip.c:460: for(; i < 16 && intWifiStatus == 1; i++) {		// Loop unti status is not "Connecting" or after about 8 seconds
+	cjne	r7,#0x10,00112$
+00112$:
+	jnc	00106$
+	mov	dptr,#_wifiFlash_intWifiStatus_1_1
 	movx	a,@dptr
 	mov	r5,a
 	inc	dptr
 	movx	a,@dptr
-	inc	dptr
-	movx	a,@dptr
-	mov	dpl,r4
-	mov	dph,r5
+	mov	r6,a
+	cjne	r5,#0x01,00106$
+	cjne	r6,#0x00,00106$
+	C$ydrip.c$461$2$2 ==.
+;	apps/ydrip/ydrip.c:461: printf("gpio.write(4, gpio.HIGH)\r\n");		// Switch off Blue LED (Flash)
+	push	ar7
+	mov	a,#__str_31
+	push	acc
+	mov	a,#(__str_31 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$ydrip.c$462$2$2 ==.
+;	apps/ydrip/ydrip.c:462: delayMs(250);
+	mov	dptr,#0x00FA
 	lcall	_delayMs
-	C$ydrip.c$541$1$1 ==.
-;	apps/ydrip/ydrip.c:541: printf("wifi.sta.connect()\r\n");
+	C$ydrip.c$463$2$2 ==.
+;	apps/ydrip/ydrip.c:463: printf("gpio.write(4, gpio.LOW)\r\n");		// Switch on Blue LED (Flash)
 	mov	a,#__str_32
 	push	acc
 	mov	a,#(__str_32 >> 8)
@@ -4639,31 +4611,54 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$542$1$1 ==.
-;	apps/ydrip/ydrip.c:542: wifiFlash();													// Should probably loop here and check every second rather than waiting for 5
-	lcall	_wifiFlash
-	C$ydrip.c$544$1$1 ==.
-;	apps/ydrip/ydrip.c:544: intWifiStatus = getWifiStatus();
+	C$ydrip.c$464$2$2 ==.
+;	apps/ydrip/ydrip.c:464: delayMs(100);
+	mov	dptr,#0x0064
+	lcall	_delayMs
+	C$ydrip.c$465$2$2 ==.
+;	apps/ydrip/ydrip.c:465: intWifiStatus = getWifiStatus();
 	lcall	_getWifiStatus
-	mov	r6,dpl
-	mov	r7,dph
-	mov	dptr,#_wifiConnect_intWifiStatus_1_1
-	mov	a,r6
+	mov	a,dpl
+	mov	b,dph
+	pop	ar7
+	mov	dptr,#_wifiFlash_intWifiStatus_1_1
 	movx	@dptr,a
 	inc	dptr
-	mov	a,r7
+	mov	a,b
 	movx	@dptr,a
-	C$ydrip.c$549$1$1 ==.
-;	apps/ydrip/ydrip.c:549: if (intWifiStatus != 5) {
-	cjne	r6,#0x05,00122$
-	cjne	r7,#0x00,00122$
+	C$ydrip.c$460$1$1 ==.
+;	apps/ydrip/ydrip.c:460: for(; i < 16 && intWifiStatus == 1; i++) {		// Loop unti status is not "Connecting" or after about 8 seconds
+	inc	r7
 	sjmp	00102$
-00122$:
-	C$ydrip.c$550$2$2 ==.
-;	apps/ydrip/ydrip.c:550: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (to make it flash)
-	mov	a,#__str_30
+00106$:
+	C$ydrip.c$467$1$1 ==.
+	XG$wifiFlash$0$0 ==.
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'wifiConnect'
+;------------------------------------------------------------
+;atString                  Allocated with name '_wifiConnect_atString_1_1'
+;intWifiStatus             Allocated with name '_wifiConnect_intWifiStatus_1_1'
+;------------------------------------------------------------
+	G$wifiConnect$0$0 ==.
+	C$ydrip.c$469$1$1 ==.
+;	apps/ydrip/ydrip.c:469: BIT wifiConnect() {
+;	-----------------------------------------
+;	 function wifiConnect
+;	-----------------------------------------
+_wifiConnect:
+	C$ydrip.c$473$1$1 ==.
+;	apps/ydrip/ydrip.c:473: uartEnable();									// Enable the serial connection
+	lcall	_uartEnable
+	C$ydrip.c$474$1$1 ==.
+;	apps/ydrip/ydrip.c:474: delayMs(100);									// Wait for it to open
+	mov	dptr,#0x0064
+	lcall	_delayMs
+	C$ydrip.c$476$1$1 ==.
+;	apps/ydrip/ydrip.c:476: printf("gpio.write(4, gpio.LOW)\r\n");	delayMs(defaultWaitTime);	// Switch on Blue LED
+	mov	a,#__str_32
 	push	acc
-	mov	a,#(__str_30 >> 8)
+	mov	a,#(__str_32 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -4671,9 +4666,7 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$551$2$2 ==.
-;	apps/ydrip/ydrip.c:551: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -4686,8 +4679,8 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$552$2$2 ==.
-;	apps/ydrip/ydrip.c:552: printf("wifi.sta.config(\"Intersect_1\",\"Alongkey123\")  wifi.sta.connect()\r\n");	// Connect to AP1
+	C$ydrip.c$478$1$1 ==.
+;	apps/ydrip/ydrip.c:478: printf("wifi.sta.connect()\r\n");	delayMs(defaultWaitTime);
 	mov	a,#__str_33
 	push	acc
 	mov	a,#(__str_33 >> 8)
@@ -4698,47 +4691,7 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$553$2$2 ==.
-;	apps/ydrip/ydrip.c:553: wifiFlash();
-	lcall	_wifiFlash
-	C$ydrip.c$554$2$2 ==.
-;	apps/ydrip/ydrip.c:554: intWifiStatus = getWifiStatus();
-	lcall	_getWifiStatus
-	mov	a,dpl
-	mov	b,dph
-	mov	dptr,#_wifiConnect_intWifiStatus_1_1
-	movx	@dptr,a
-	inc	dptr
-	mov	a,b
-	movx	@dptr,a
-00102$:
-	C$ydrip.c$561$1$1 ==.
-;	apps/ydrip/ydrip.c:561: if (intWifiStatus != 5) {
-	mov	dptr,#_wifiConnect_intWifiStatus_1_1
-	movx	a,@dptr
-	mov	r6,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r7,a
-	cjne	r6,#0x05,00123$
-	cjne	r7,#0x00,00123$
-	sjmp	00104$
-00123$:
-	C$ydrip.c$562$2$3 ==.
-;	apps/ydrip/ydrip.c:562: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
-	mov	a,#__str_31
-	push	acc
-	mov	a,#(__str_31 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$563$2$3 ==.
-;	apps/ydrip/ydrip.c:563: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -4751,8 +4704,55 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$564$2$3 ==.
-;	apps/ydrip/ydrip.c:564: printf("wifi.sta.config(\"TRENDnet653{downstairs}\",\"stonebr!dge\")  wifi.sta.connect()\r\n");	// Connect to AP1
+	C$ydrip.c$479$1$1 ==.
+;	apps/ydrip/ydrip.c:479: wifiFlash();									// Flash the blue LED until the connection status changes
+	lcall	_wifiFlash
+	C$ydrip.c$481$1$1 ==.
+;	apps/ydrip/ydrip.c:481: intWifiStatus = getWifiStatus();
+	lcall	_getWifiStatus
+	mov	r6,dpl
+	mov	r7,dph
+	mov	dptr,#_wifiConnect_intWifiStatus_1_1
+	mov	a,r6
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r7
+	movx	@dptr,a
+	C$ydrip.c$487$1$1 ==.
+;	apps/ydrip/ydrip.c:487: if (intWifiStatus != 5) {
+	cjne	r6,#0x05,00122$
+	cjne	r7,#0x00,00122$
+	sjmp	00102$
+00122$:
+	C$ydrip.c$488$2$2 ==.
+;	apps/ydrip/ydrip.c:488: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (to make it flash)
+	mov	a,#__str_31
+	push	acc
+	mov	a,#(__str_31 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$ydrip.c$489$2$2 ==.
+;	apps/ydrip/ydrip.c:489: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	inc	dptr
+	movx	a,@dptr
+	mov	dpl,r4
+	mov	dph,r5
+	lcall	_delayMs
+	C$ydrip.c$490$2$2 ==.
+;	apps/ydrip/ydrip.c:490: printf("wifi.sta.config(\"HomeWifiName\",\"HomeWifiKey\")  wifi.sta.connect()\r\n");	// Connect to AP1
 	mov	a,#__str_34
 	push	acc
 	mov	a,#(__str_34 >> 8)
@@ -4763,14 +4763,11 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$565$2$3 ==.
-;	apps/ydrip/ydrip.c:565: wifiFlash();
+	C$ydrip.c$491$2$2 ==.
+;	apps/ydrip/ydrip.c:491: wifiFlash();
 	lcall	_wifiFlash
-	C$ydrip.c$566$2$3 ==.
-;	apps/ydrip/ydrip.c:566: wifiFlash();
-	lcall	_wifiFlash
-	C$ydrip.c$567$2$3 ==.
-;	apps/ydrip/ydrip.c:567: intWifiStatus = getWifiStatus();
+	C$ydrip.c$492$2$2 ==.
+;	apps/ydrip/ydrip.c:492: intWifiStatus = getWifiStatus();
 	lcall	_getWifiStatus
 	mov	a,dpl
 	mov	b,dph
@@ -4779,24 +4776,24 @@ _wifiConnect:
 	inc	dptr
 	mov	a,b
 	movx	@dptr,a
-00104$:
-	C$ydrip.c$571$1$1 ==.
-;	apps/ydrip/ydrip.c:571: if (intWifiStatus != 5) {
+00102$:
+	C$ydrip.c$496$1$1 ==.
+;	apps/ydrip/ydrip.c:496: if (intWifiStatus != 5) {
 	mov	dptr,#_wifiConnect_intWifiStatus_1_1
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
 	movx	a,@dptr
 	mov	r7,a
-	cjne	r6,#0x05,00124$
-	cjne	r7,#0x00,00124$
-	sjmp	00106$
-00124$:
-	C$ydrip.c$572$2$4 ==.
-;	apps/ydrip/ydrip.c:572: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
-	mov	a,#__str_31
+	cjne	r6,#0x05,00123$
+	cjne	r7,#0x00,00123$
+	sjmp	00104$
+00123$:
+	C$ydrip.c$497$2$3 ==.
+;	apps/ydrip/ydrip.c:497: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
+	mov	a,#__str_32
 	push	acc
-	mov	a,#(__str_31 >> 8)
+	mov	a,#(__str_32 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -4804,9 +4801,9 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$573$2$4 ==.
-;	apps/ydrip/ydrip.c:573: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	C$ydrip.c$498$2$3 ==.
+;	apps/ydrip/ydrip.c:498: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -4819,8 +4816,8 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$574$2$4 ==.
-;	apps/ydrip/ydrip.c:574: printf("wifi.sta.config(\"TRENDnet653{upstairs}\",\"stonebr!dge\")  wifi.sta.connect()\r\n");	// Connect to AP1
+	C$ydrip.c$499$2$3 ==.
+;	apps/ydrip/ydrip.c:499: printf("wifi.sta.config(\"SchoolWifiDdownstairs\",\"SchoolPassword\")  wifi.sta.connect()\r\n");	// Connect to AP1
 	mov	a,#__str_35
 	push	acc
 	mov	a,#(__str_35 >> 8)
@@ -4831,14 +4828,14 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$575$2$4 ==.
-;	apps/ydrip/ydrip.c:575: wifiFlash();
+	C$ydrip.c$500$2$3 ==.
+;	apps/ydrip/ydrip.c:500: wifiFlash();
 	lcall	_wifiFlash
-	C$ydrip.c$576$2$4 ==.
-;	apps/ydrip/ydrip.c:576: wifiFlash();
+	C$ydrip.c$501$2$3 ==.
+;	apps/ydrip/ydrip.c:501: wifiFlash();							// Add in an extra round of flashing if this network can take longer to connect														// wait longer as slower netword
 	lcall	_wifiFlash
-	C$ydrip.c$577$2$4 ==.
-;	apps/ydrip/ydrip.c:577: intWifiStatus = getWifiStatus();
+	C$ydrip.c$502$2$3 ==.
+;	apps/ydrip/ydrip.c:502: intWifiStatus = getWifiStatus();
 	lcall	_getWifiStatus
 	mov	a,dpl
 	mov	b,dph
@@ -4847,24 +4844,24 @@ _wifiConnect:
 	inc	dptr
 	mov	a,b
 	movx	@dptr,a
-00106$:
-	C$ydrip.c$591$1$1 ==.
-;	apps/ydrip/ydrip.c:591: if (intWifiStatus != 5) {
+00104$:
+	C$ydrip.c$506$1$1 ==.
+;	apps/ydrip/ydrip.c:506: if (intWifiStatus != 5) {
 	mov	dptr,#_wifiConnect_intWifiStatus_1_1
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
 	movx	a,@dptr
 	mov	r7,a
-	cjne	r6,#0x05,00125$
-	cjne	r7,#0x00,00125$
-	sjmp	00108$
-00125$:
-	C$ydrip.c$592$2$5 ==.
-;	apps/ydrip/ydrip.c:592: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
-	mov	a,#__str_31
+	cjne	r6,#0x05,00124$
+	cjne	r7,#0x00,00124$
+	sjmp	00106$
+00124$:
+	C$ydrip.c$507$2$4 ==.
+;	apps/ydrip/ydrip.c:507: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
+	mov	a,#__str_32
 	push	acc
-	mov	a,#(__str_31 >> 8)
+	mov	a,#(__str_32 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -4872,9 +4869,9 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$593$2$5 ==.
-;	apps/ydrip/ydrip.c:593: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	C$ydrip.c$508$2$4 ==.
+;	apps/ydrip/ydrip.c:508: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -4887,8 +4884,8 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$594$2$5 ==.
-;	apps/ydrip/ydrip.c:594: printf("wifi.sta.config(\"Hillside\",\"VariousChars\")  wifi.sta.connect()\r\n");	// Connect to AP1
+	C$ydrip.c$509$2$4 ==.
+;	apps/ydrip/ydrip.c:509: printf("wifi.sta.config(\"SchoolUpstairs\",\"SchoolPassword\")  wifi.sta.connect()\r\n");	// Connect to AP1
 	mov	a,#__str_36
 	push	acc
 	mov	a,#(__str_36 >> 8)
@@ -4899,11 +4896,14 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$595$2$5 ==.
-;	apps/ydrip/ydrip.c:595: wifiFlash();
+	C$ydrip.c$510$2$4 ==.
+;	apps/ydrip/ydrip.c:510: wifiFlash();
 	lcall	_wifiFlash
-	C$ydrip.c$597$2$5 ==.
-;	apps/ydrip/ydrip.c:597: intWifiStatus = getWifiStatus();
+	C$ydrip.c$511$2$4 ==.
+;	apps/ydrip/ydrip.c:511: wifiFlash();							// Add in an extra round of flashing if this network can take longer to connect														// wait longer as slower netword
+	lcall	_wifiFlash
+	C$ydrip.c$512$2$4 ==.
+;	apps/ydrip/ydrip.c:512: intWifiStatus = getWifiStatus();
 	lcall	_getWifiStatus
 	mov	a,dpl
 	mov	b,dph
@@ -4912,24 +4912,24 @@ _wifiConnect:
 	inc	dptr
 	mov	a,b
 	movx	@dptr,a
-00108$:
-	C$ydrip.c$601$1$1 ==.
-;	apps/ydrip/ydrip.c:601: if (intWifiStatus != 5) {
+00106$:
+	C$ydrip.c$529$1$1 ==.
+;	apps/ydrip/ydrip.c:529: if (intWifiStatus != 5) {
 	mov	dptr,#_wifiConnect_intWifiStatus_1_1
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
 	movx	a,@dptr
 	mov	r7,a
-	cjne	r6,#0x05,00126$
-	cjne	r7,#0x00,00126$
-	sjmp	00110$
-00126$:
-	C$ydrip.c$602$2$6 ==.
-;	apps/ydrip/ydrip.c:602: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (to make it flash)
-	mov	a,#__str_30
+	cjne	r6,#0x05,00125$
+	cjne	r7,#0x00,00125$
+	sjmp	00108$
+00125$:
+	C$ydrip.c$530$2$5 ==.
+;	apps/ydrip/ydrip.c:530: printf("gpio.write(4, gpio.LOW)\r\n");								// Switch on Blue LED
+	mov	a,#__str_32
 	push	acc
-	mov	a,#(__str_30 >> 8)
+	mov	a,#(__str_32 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -4937,9 +4937,9 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$603$2$6 ==.
-;	apps/ydrip/ydrip.c:603: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	C$ydrip.c$531$2$5 ==.
+;	apps/ydrip/ydrip.c:531: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -4952,8 +4952,8 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$604$2$6 ==.
-;	apps/ydrip/ydrip.c:604: printf("wifi.sta.config(\"Cagey_HTC\",\"1234567890\")  wifi.sta.connect()\r\n");	// Connect to AP1
+	C$ydrip.c$532$2$5 ==.
+;	apps/ydrip/ydrip.c:532: printf("wifi.sta.config(\"Hillside\",\"RandomChars\")  wifi.sta.connect()\r\n");	// Connect to AP1
 	mov	a,#__str_37
 	push	acc
 	mov	a,#(__str_37 >> 8)
@@ -4964,11 +4964,76 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$605$2$6 ==.
-;	apps/ydrip/ydrip.c:605: wifiFlash();
+	C$ydrip.c$533$2$5 ==.
+;	apps/ydrip/ydrip.c:533: wifiFlash();
 	lcall	_wifiFlash
-	C$ydrip.c$607$2$6 ==.
-;	apps/ydrip/ydrip.c:607: intWifiStatus = getWifiStatus();
+	C$ydrip.c$535$2$5 ==.
+;	apps/ydrip/ydrip.c:535: intWifiStatus = getWifiStatus();
+	lcall	_getWifiStatus
+	mov	a,dpl
+	mov	b,dph
+	mov	dptr,#_wifiConnect_intWifiStatus_1_1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,b
+	movx	@dptr,a
+00108$:
+	C$ydrip.c$539$1$1 ==.
+;	apps/ydrip/ydrip.c:539: if (intWifiStatus != 5) {
+	mov	dptr,#_wifiConnect_intWifiStatus_1_1
+	movx	a,@dptr
+	mov	r6,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r7,a
+	cjne	r6,#0x05,00126$
+	cjne	r7,#0x00,00126$
+	sjmp	00110$
+00126$:
+	C$ydrip.c$540$2$6 ==.
+;	apps/ydrip/ydrip.c:540: printf("gpio.write(4, gpio.HIGH)\r\n");								// Switch off Blue LED (to make it flash)
+	mov	a,#__str_31
+	push	acc
+	mov	a,#(__str_31 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$ydrip.c$541$2$6 ==.
+;	apps/ydrip/ydrip.c:541: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	inc	dptr
+	movx	a,@dptr
+	mov	dpl,r4
+	mov	dph,r5
+	lcall	_delayMs
+	C$ydrip.c$542$2$6 ==.
+;	apps/ydrip/ydrip.c:542: printf("wifi.sta.config(\"Cagey_HTC\",\"Cagey1234567890\")  wifi.sta.connect()\r\n");	// Connect to AP1
+	mov	a,#__str_38
+	push	acc
+	mov	a,#(__str_38 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$ydrip.c$543$2$6 ==.
+;	apps/ydrip/ydrip.c:543: wifiFlash();
+	lcall	_wifiFlash
+	C$ydrip.c$545$2$6 ==.
+;	apps/ydrip/ydrip.c:545: intWifiStatus = getWifiStatus();
 	lcall	_getWifiStatus
 	mov	a,dpl
 	mov	b,dph
@@ -4978,8 +5043,8 @@ _wifiConnect:
 	mov	a,b
 	movx	@dptr,a
 00110$:
-	C$ydrip.c$623$1$1 ==.
-;	apps/ydrip/ydrip.c:623: if (intWifiStatus == 5) {
+	C$ydrip.c$551$1$1 ==.
+;	apps/ydrip/ydrip.c:551: if (intWifiStatus == 5) {
 	mov	dptr,#_wifiConnect_intWifiStatus_1_1
 	movx	a,@dptr
 	mov	r6,a
@@ -4992,11 +5057,11 @@ _wifiConnect:
 00127$:
 	ljmp	00112$
 00128$:
-	C$ydrip.c$624$2$7 ==.
-;	apps/ydrip/ydrip.c:624: printf("gpio.write(4, gpio.LOW)\r\n");								// Make sure Blue LED is still on
-	mov	a,#__str_31
+	C$ydrip.c$552$2$7 ==.
+;	apps/ydrip/ydrip.c:552: printf("gpio.write(4, gpio.LOW)\r\n");																		// Make sure Blue LED is still on
+	mov	a,#__str_32
 	push	acc
-	mov	a,#(__str_31 >> 8)
+	mov	a,#(__str_32 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -5004,9 +5069,9 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$625$2$7 ==.
-;	apps/ydrip/ydrip.c:625: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	C$ydrip.c$553$2$7 ==.
+;	apps/ydrip/ydrip.c:553: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -5019,39 +5084,8 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$626$2$7 ==.
-;	apps/ydrip/ydrip.c:626: strcpy(atString, "sk=net.createConnection(net.TCP, 0)\r\n"); sendAT(atString); // delayMs(defaultATWait);					// Save changes
-	mov	r0,#_strcpy_PARM_2
-	mov	a,#__str_38
-	movx	@r0,a
-	inc	r0
-	mov	a,#(__str_38 >> 8)
-	movx	@r0,a
-	inc	r0
-	mov	a,#0x80
-	movx	@r0,a
-	mov	dptr,#_wifiConnect_atString_1_1
-	mov	b,#0x00
-	lcall	_strcpy
-	mov	dptr,#_wifiConnect_atString_1_1
-	lcall	_sendAT
-	C$ydrip.c$627$2$7 ==.
-;	apps/ydrip/ydrip.c:627: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
-	movx	a,@dptr
-	mov	r4,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r5,a
-	inc	dptr
-	movx	a,@dptr
-	inc	dptr
-	movx	a,@dptr
-	mov	dpl,r4
-	mov	dph,r5
-	lcall	_delayMs
-	C$ydrip.c$628$2$7 ==.
-;	apps/ydrip/ydrip.c:628: strcpy(atString, "sk:on(\"receive\", function(sck, c) print(c) end )\r\n"); sendAT(atString); // print stuff you get back
+	C$ydrip.c$554$2$7 ==.
+;	apps/ydrip/ydrip.c:554: strcpy(atString, "sk=net.createConnection(net.TCP, 0)\r\n"); sendAT(atString); delayMs(defaultWaitTime);	// Save changes
 	mov	r0,#_strcpy_PARM_2
 	mov	a,#__str_39
 	movx	@r0,a
@@ -5066,9 +5100,7 @@ _wifiConnect:
 	lcall	_strcpy
 	mov	dptr,#_wifiConnect_atString_1_1
 	lcall	_sendAT
-	C$ydrip.c$629$2$7 ==.
-;	apps/ydrip/ydrip.c:629: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -5081,8 +5113,8 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$631$2$7 ==.
-;	apps/ydrip/ydrip.c:631: strcpy(atString, "sk:connect(");
+	C$ydrip.c$555$2$7 ==.
+;	apps/ydrip/ydrip.c:555: strcpy(atString, "sk:on(\"receive\", function(sck, c) print(c) end )\r\n"); sendAT(atString);				// print stuff you get back
 	mov	r0,#_strcpy_PARM_2
 	mov	a,#__str_40
 	movx	@r0,a
@@ -5095,8 +5127,39 @@ _wifiConnect:
 	mov	dptr,#_wifiConnect_atString_1_1
 	mov	b,#0x00
 	lcall	_strcpy
-	C$ydrip.c$632$2$7 ==.
-;	apps/ydrip/ydrip.c:632: strcat(atString, dexie_host_port);
+	mov	dptr,#_wifiConnect_atString_1_1
+	lcall	_sendAT
+	C$ydrip.c$556$2$7 ==.
+;	apps/ydrip/ydrip.c:556: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	inc	dptr
+	movx	a,@dptr
+	mov	dpl,r4
+	mov	dph,r5
+	lcall	_delayMs
+	C$ydrip.c$557$2$7 ==.
+;	apps/ydrip/ydrip.c:557: strcpy(atString, "sk:connect(");
+	mov	r0,#_strcpy_PARM_2
+	mov	a,#__str_41
+	movx	@r0,a
+	inc	r0
+	mov	a,#(__str_41 >> 8)
+	movx	@r0,a
+	inc	r0
+	mov	a,#0x80
+	movx	@r0,a
+	mov	dptr,#_wifiConnect_atString_1_1
+	mov	b,#0x00
+	lcall	_strcpy
+	C$ydrip.c$558$2$7 ==.
+;	apps/ydrip/ydrip.c:558: strcat(atString, dexie_host_port);
 	mov	r0,#_strcat_PARM_2
 	mov	a,#_dexie_host_port
 	movx	@r0,a
@@ -5109,36 +5172,8 @@ _wifiConnect:
 	mov	dptr,#_wifiConnect_atString_1_1
 	mov	b,#0x00
 	lcall	_strcat
-	C$ydrip.c$633$2$7 ==.
-;	apps/ydrip/ydrip.c:633: strcat(atString, ",\"");
-	mov	r0,#_strcat_PARM_2
-	mov	a,#__str_41
-	movx	@r0,a
-	inc	r0
-	mov	a,#(__str_41 >> 8)
-	movx	@r0,a
-	inc	r0
-	mov	a,#0x80
-	movx	@r0,a
-	mov	dptr,#_wifiConnect_atString_1_1
-	mov	b,#0x00
-	lcall	_strcat
-	C$ydrip.c$634$2$7 ==.
-;	apps/ydrip/ydrip.c:634: strcat(atString, dexie_host_address);
-	mov	r0,#_strcat_PARM_2
-	mov	a,#_dexie_host_address
-	movx	@r0,a
-	inc	r0
-	mov	a,#(_dexie_host_address >> 8)
-	movx	@r0,a
-	inc	r0
-	clr	a
-	movx	@r0,a
-	mov	dptr,#_wifiConnect_atString_1_1
-	mov	b,#0x00
-	lcall	_strcat
-	C$ydrip.c$635$2$7 ==.
-;	apps/ydrip/ydrip.c:635: strcat(atString, "\")\r\n");
+	C$ydrip.c$559$2$7 ==.
+;	apps/ydrip/ydrip.c:559: strcat(atString, ",\"");
 	mov	r0,#_strcat_PARM_2
 	mov	a,#__str_42
 	movx	@r0,a
@@ -5151,13 +5186,41 @@ _wifiConnect:
 	mov	dptr,#_wifiConnect_atString_1_1
 	mov	b,#0x00
 	lcall	_strcat
-	C$ydrip.c$636$2$7 ==.
-;	apps/ydrip/ydrip.c:636: sendAT(atString);
+	C$ydrip.c$560$2$7 ==.
+;	apps/ydrip/ydrip.c:560: strcat(atString, dexie_host_address);
+	mov	r0,#_strcat_PARM_2
+	mov	a,#_dexie_host_address
+	movx	@r0,a
+	inc	r0
+	mov	a,#(_dexie_host_address >> 8)
+	movx	@r0,a
+	inc	r0
+	clr	a
+	movx	@r0,a
+	mov	dptr,#_wifiConnect_atString_1_1
+	mov	b,#0x00
+	lcall	_strcat
+	C$ydrip.c$561$2$7 ==.
+;	apps/ydrip/ydrip.c:561: strcat(atString, "\")\r\n");
+	mov	r0,#_strcat_PARM_2
+	mov	a,#__str_43
+	movx	@r0,a
+	inc	r0
+	mov	a,#(__str_43 >> 8)
+	movx	@r0,a
+	inc	r0
+	mov	a,#0x80
+	movx	@r0,a
+	mov	dptr,#_wifiConnect_atString_1_1
+	mov	b,#0x00
+	lcall	_strcat
+	C$ydrip.c$562$2$7 ==.
+;	apps/ydrip/ydrip.c:562: sendAT(atString);
 	mov	dptr,#_wifiConnect_atString_1_1
 	lcall	_sendAT
-	C$ydrip.c$637$2$7 ==.
-;	apps/ydrip/ydrip.c:637: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	C$ydrip.c$564$2$7 ==.
+;	apps/ydrip/ydrip.c:564: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -5170,9 +5233,9 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$638$2$7 ==.
-;	apps/ydrip/ydrip.c:638: delayMs(defaultATWait);								        // another delay to be sure server is listening
-	mov	dptr,#_defaultATWait
+	C$ydrip.c$565$2$7 ==.
+;	apps/ydrip/ydrip.c:565: delayMs(defaultWaitTime);								        	// another delay to be sure server is listening
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -5185,16 +5248,16 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$639$2$7 ==.
-;	apps/ydrip/ydrip.c:639: return 1;
+	C$ydrip.c$566$2$7 ==.
+;	apps/ydrip/ydrip.c:566: return 1;
 	setb	c
 	sjmp	00114$
 00112$:
-	C$ydrip.c$641$2$8 ==.
-;	apps/ydrip/ydrip.c:641: printf("gpio.write(4, gpio.HIGH)\r\n");delayMs(defaultATWait);			// Switch off Blue LED (to show no wifi connection)
-	mov	a,#__str_30
+	C$ydrip.c$568$2$8 ==.
+;	apps/ydrip/ydrip.c:568: printf("gpio.write(4, gpio.HIGH)\r\n");delayMs(defaultWaitTime);	// Switch off Blue LED (to show no wifi connection)
+	mov	a,#__str_31
 	push	acc
-	mov	a,#(__str_30 >> 8)
+	mov	a,#(__str_31 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -5202,7 +5265,7 @@ _wifiConnect:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -5215,11 +5278,11 @@ _wifiConnect:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$642$2$8 ==.
-;	apps/ydrip/ydrip.c:642: return 0;
+	C$ydrip.c$569$2$8 ==.
+;	apps/ydrip/ydrip.c:569: return 0;
 	clr	c
 00114$:
-	C$ydrip.c$647$1$1 ==.
+	C$ydrip.c$571$1$1 ==.
 	XG$wifiConnect$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -5231,8 +5294,8 @@ _wifiConnect:
 ;strMMM                    Allocated with name '_getTimeBytes_strMMM_1_1'
 ;------------------------------------------------------------
 	G$getTimeBytes$0$0 ==.
-	C$ydrip.c$649$1$1 ==.
-;	apps/ydrip/ydrip.c:649: void getTimeBytes(InitVect* tVector) {
+	C$ydrip.c$573$1$1 ==.
+;	apps/ydrip/ydrip.c:573: void getTimeBytes(InitVect* tVector) {
 ;	-----------------------------------------
 ;	 function getTimeBytes
 ;	-----------------------------------------
@@ -5244,13 +5307,13 @@ _getTimeBytes:
 	inc	r0
 	mov	a,r7
 	movx	@r0,a
-	C$ydrip.c$673$1$1 ==.
-;	apps/ydrip/ydrip.c:673: while (uart1RxAvailable()) strcpy(c, getFonaString());										// Clear RX buffer
+	C$ydrip.c$596$1$1 ==.
+;	apps/ydrip/ydrip.c:596: while (uart1RxAvailable()) strcpy(c, getESPString());					// Clear RX buffer
 00101$:
 	lcall	_uart1RxAvailable
 	mov	a,dpl
 	jz	00103$
-	lcall	_getFonaString
+	lcall	_getESPString
 	mov	r4,dpl
 	mov	r5,dph
 	mov	r0,#_strcpy_PARM_2
@@ -5267,9 +5330,9 @@ _getTimeBytes:
 	lcall	_strcpy
 	sjmp	00101$
 00103$:
-	C$ydrip.c$675$1$1 ==.
-;	apps/ydrip/ydrip.c:675: strcpy(c, (getFonaString())); // Clear buffer
-	lcall	_getFonaString
+	C$ydrip.c$597$1$1 ==.
+;	apps/ydrip/ydrip.c:597: strcpy(c, (getESPString())); // Clear buffer
+	lcall	_getESPString
 	mov	r4,dpl
 	mov	r5,dph
 	mov	r0,#_strcpy_PARM_2
@@ -5284,11 +5347,11 @@ _getTimeBytes:
 	mov	dptr,#_getTimeBytes_c_1_1
 	mov	b,#0x00
 	lcall	_strcpy
-	C$ydrip.c$676$1$1 ==.
-;	apps/ydrip/ydrip.c:676: printf("dofile(\"googletime.lua\")\r\n")	;delayMs(defaultATWait);	// Make connection and trigger output of date
-	mov	a,#__str_43
+	C$ydrip.c$598$1$1 ==.
+;	apps/ydrip/ydrip.c:598: printf("dofile(\"googletime.lua\")\r\n") ; delayMs(defaultWaitTime);	// Make connection and trigger output of date
+	mov	a,#__str_44
 	push	acc
-	mov	a,#(__str_43 >> 8)
+	mov	a,#(__str_44 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -5296,7 +5359,7 @@ _getTimeBytes:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r2,a
 	inc	dptr
@@ -5309,9 +5372,9 @@ _getTimeBytes:
 	mov	dpl,r2
 	mov	dph,r3
 	lcall	_delayMs
-	C$ydrip.c$678$1$1 ==.
-;	apps/ydrip/ydrip.c:678: strcpy(c, getFonaString());
-	lcall	_getFonaString
+	C$ydrip.c$599$1$1 ==.
+;	apps/ydrip/ydrip.c:599: strcpy(c, getESPString());
+	lcall	_getESPString
 	mov	r4,dpl
 	mov	r5,dph
 	mov	r0,#_strcpy_PARM_2
@@ -5326,23 +5389,23 @@ _getTimeBytes:
 	mov	dptr,#_getTimeBytes_c_1_1
 	mov	b,#0x00
 	lcall	_strcpy
-	C$ydrip.c$679$1$1 ==.
-;	apps/ydrip/ydrip.c:679: lenC=strlen(c);
+	C$ydrip.c$600$1$1 ==.
+;	apps/ydrip/ydrip.c:600: lenC=strlen(c);
 	mov	dptr,#_getTimeBytes_c_1_1
 	mov	b,#0x00
 	lcall	_strlen
 	mov	r4,dpl
 	mov	r5,dph
-	C$ydrip.c$680$1$1 ==.
-;	apps/ydrip/ydrip.c:680: if (debug_mode) printf("-- **DEBUG** length of C is %d\r\n", lenC);
+	C$ydrip.c$601$1$1 ==.
+;	apps/ydrip/ydrip.c:601: if (debug_mode) printf("-- **DEBUG** length of C is %d\r\n", lenC);
 	jnb	_debug_mode,00105$
 	push	ar5
 	push	ar4
 	push	ar4
 	push	ar5
-	mov	a,#__str_44
+	mov	a,#__str_45
 	push	acc
-	mov	a,#(__str_44 >> 8)
+	mov	a,#(__str_45 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -5353,15 +5416,15 @@ _getTimeBytes:
 	pop	ar4
 	pop	ar5
 00105$:
-	C$ydrip.c$682$1$1 ==.
-;	apps/ydrip/ydrip.c:682: printf("\r\n"); delayMs(defaultATWait);							//	Press return a couple of times
+	C$ydrip.c$602$1$1 ==.
+;	apps/ydrip/ydrip.c:602: printf("\r\n"); delayMs(defaultWaitTime);						//	Press return a couple of times
 	push	ar4
 	push	ar5
 	push	ar5
 	push	ar4
-	mov	a,#__str_45
+	mov	a,#__str_46
 	push	acc
-	mov	a,#(__str_45 >> 8)
+	mov	a,#(__str_46 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -5371,7 +5434,7 @@ _getTimeBytes:
 	dec	sp
 	pop	ar4
 	pop	ar5
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r2,a
 	inc	dptr
@@ -5388,11 +5451,11 @@ _getTimeBytes:
 	push	ar5
 	push	ar4
 	lcall	_delayMs
-	C$ydrip.c$683$1$1 ==.
-;	apps/ydrip/ydrip.c:683: printf("\r\n"); delayMs(defaultATWait);							//	to get ESP back to normal prompt
-	mov	a,#__str_45
+	C$ydrip.c$603$1$1 ==.
+;	apps/ydrip/ydrip.c:603: printf("\r\n"); delayMs(defaultWaitTime);						//	to get ESP back to normal prompt
+	mov	a,#__str_46
 	push	acc
-	mov	a,#(__str_45 >> 8)
+	mov	a,#(__str_46 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -5402,7 +5465,7 @@ _getTimeBytes:
 	dec	sp
 	pop	ar4
 	pop	ar5
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r2,a
 	inc	dptr
@@ -5421,12 +5484,12 @@ _getTimeBytes:
 	lcall	_delayMs
 	pop	ar4
 	pop	ar5
-	C$ydrip.c$712$1$1 ==.
-;	apps/ydrip/ydrip.c:712: if (strcmp(strMMM,"Dec") == 0)	tVector->iv[5] = '2';
+	C$ydrip.c$631$1$1 ==.
+;	apps/ydrip/ydrip.c:631: if (strcmp(strMMM,"Dec") == 0)	tVector->iv[5] = '2';
 	pop	ar5
 	pop	ar4
-	C$ydrip.c$687$1$1 ==.
-;	apps/ydrip/ydrip.c:687: while (i < 14) {												//	Put the relevant characters from the response string into the IV array
+	C$ydrip.c$606$1$1 ==.
+;	apps/ydrip/ydrip.c:606: while (i < 14) {												//	Put the relevant characters from the response string into the IV array
 	mov	r3,#0x00
 00106$:
 	clr	c
@@ -5434,8 +5497,8 @@ _getTimeBytes:
 	xrl	a,#0x80
 	subb	a,#0x8e
 	jnc	00108$
-	C$ydrip.c$688$2$2 ==.
-;	apps/ydrip/ydrip.c:688: tVector->iv[i] =  c[(lenC - 21) + i];
+	C$ydrip.c$607$2$2 ==.
+;	apps/ydrip/ydrip.c:607: tVector->iv[i] =  c[(lenC - 21) + i];
 	mov	r0,#_getTimeBytes_tVector_1_1
 	movx	a,@r0
 	add	a,r3
@@ -5458,13 +5521,13 @@ _getTimeBytes:
 	mov	dpl,r2
 	mov	dph,r7
 	movx	@dptr,a
-	C$ydrip.c$689$2$2 ==.
-;	apps/ydrip/ydrip.c:689: i++;
+	C$ydrip.c$608$2$2 ==.
+;	apps/ydrip/ydrip.c:608: i++;
 	inc	r3
 	sjmp	00106$
 00108$:
-	C$ydrip.c$693$1$1 ==.
-;	apps/ydrip/ydrip.c:693: strMMM[0]=c[(lenC - 21) + 14];
+	C$ydrip.c$612$1$1 ==.
+;	apps/ydrip/ydrip.c:612: strMMM[0]=c[(lenC - 21) + 14];
 	mov	a,#0xF9
 	add	a,r4
 	add	a,#_getTimeBytes_c_1_1
@@ -5475,8 +5538,8 @@ _getTimeBytes:
 	movx	a,@dptr
 	mov	dptr,#_getTimeBytes_strMMM_1_1
 	movx	@dptr,a
-	C$ydrip.c$694$1$1 ==.
-;	apps/ydrip/ydrip.c:694: strMMM[1]=c[(lenC - 21) + 15];
+	C$ydrip.c$613$1$1 ==.
+;	apps/ydrip/ydrip.c:613: strMMM[1]=c[(lenC - 21) + 15];
 	mov	a,#0xFA
 	add	a,r4
 	add	a,#_getTimeBytes_c_1_1
@@ -5487,8 +5550,8 @@ _getTimeBytes:
 	movx	a,@dptr
 	mov	dptr,#(_getTimeBytes_strMMM_1_1 + 0x0001)
 	movx	@dptr,a
-	C$ydrip.c$695$1$1 ==.
-;	apps/ydrip/ydrip.c:695: strMMM[2]=c[(lenC - 21) + 16];
+	C$ydrip.c$614$1$1 ==.
+;	apps/ydrip/ydrip.c:614: strMMM[2]=c[(lenC - 21) + 16];
 	mov	a,#0xFB
 	add	a,r4
 	add	a,#_getTimeBytes_c_1_1
@@ -5499,13 +5562,13 @@ _getTimeBytes:
 	movx	a,@dptr
 	mov	dptr,#(_getTimeBytes_strMMM_1_1 + 0x0002)
 	movx	@dptr,a
-	C$ydrip.c$696$1$1 ==.
-;	apps/ydrip/ydrip.c:696: strMMM[3]='\0';
+	C$ydrip.c$615$1$1 ==.
+;	apps/ydrip/ydrip.c:615: strMMM[3]='\0';
 	mov	dptr,#(_getTimeBytes_strMMM_1_1 + 0x0003)
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$698$1$1 ==.
-;	apps/ydrip/ydrip.c:698: tVector->iv[4] = '0';
+	C$ydrip.c$617$1$1 ==.
+;	apps/ydrip/ydrip.c:617: tVector->iv[4] = '0';
 	mov	r0,#_getTimeBytes_tVector_1_1
 	movx	a,@r0
 	add	a,#0x04
@@ -5518,13 +5581,13 @@ _getTimeBytes:
 	mov	dph,r7
 	mov	a,#0x30
 	movx	@dptr,a
-	C$ydrip.c$699$1$1 ==.
-;	apps/ydrip/ydrip.c:699: if (strcmp(strMMM,"Jan") == 0) tVector->iv[5] = '1';
+	C$ydrip.c$618$1$1 ==.
+;	apps/ydrip/ydrip.c:618: if (strcmp(strMMM,"Jan") == 0) tVector->iv[5] = '1';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_46
+	mov	a,#__str_47
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_46 >> 8)
+	mov	a,#(__str_47 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5551,13 +5614,13 @@ _getTimeBytes:
 	mov	a,#0x31
 	movx	@dptr,a
 00110$:
-	C$ydrip.c$700$1$1 ==.
-;	apps/ydrip/ydrip.c:700: if (strcmp(strMMM,"Feb") == 0)	tVector->iv[5] = '2';
+	C$ydrip.c$619$1$1 ==.
+;	apps/ydrip/ydrip.c:619: if (strcmp(strMMM,"Feb") == 0)	tVector->iv[5] = '2';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_47
+	mov	a,#__str_48
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_47 >> 8)
+	mov	a,#(__str_48 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5584,13 +5647,13 @@ _getTimeBytes:
 	mov	a,#0x32
 	movx	@dptr,a
 00112$:
-	C$ydrip.c$701$1$1 ==.
-;	apps/ydrip/ydrip.c:701: if (strcmp(strMMM,"Mar") == 0)	tVector->iv[5] = '3';
+	C$ydrip.c$620$1$1 ==.
+;	apps/ydrip/ydrip.c:620: if (strcmp(strMMM,"Mar") == 0)	tVector->iv[5] = '3';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_48
+	mov	a,#__str_49
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_48 >> 8)
+	mov	a,#(__str_49 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5617,13 +5680,13 @@ _getTimeBytes:
 	mov	a,#0x33
 	movx	@dptr,a
 00114$:
-	C$ydrip.c$702$1$1 ==.
-;	apps/ydrip/ydrip.c:702: if (strcmp(strMMM,"Apr") == 0)	tVector->iv[5] = '4';
+	C$ydrip.c$621$1$1 ==.
+;	apps/ydrip/ydrip.c:621: if (strcmp(strMMM,"Apr") == 0)	tVector->iv[5] = '4';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_49
+	mov	a,#__str_50
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_49 >> 8)
+	mov	a,#(__str_50 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5650,13 +5713,13 @@ _getTimeBytes:
 	mov	a,#0x34
 	movx	@dptr,a
 00116$:
-	C$ydrip.c$703$1$1 ==.
-;	apps/ydrip/ydrip.c:703: if (strcmp(strMMM,"May") == 0)	tVector->iv[5] = '5';
+	C$ydrip.c$622$1$1 ==.
+;	apps/ydrip/ydrip.c:622: if (strcmp(strMMM,"May") == 0)	tVector->iv[5] = '5';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_50
+	mov	a,#__str_51
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_50 >> 8)
+	mov	a,#(__str_51 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5683,13 +5746,13 @@ _getTimeBytes:
 	mov	a,#0x35
 	movx	@dptr,a
 00118$:
-	C$ydrip.c$704$1$1 ==.
-;	apps/ydrip/ydrip.c:704: if (strcmp(strMMM,"Jun") == 0)	tVector->iv[5] = '6';
+	C$ydrip.c$623$1$1 ==.
+;	apps/ydrip/ydrip.c:623: if (strcmp(strMMM,"Jun") == 0)	tVector->iv[5] = '6';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_51
+	mov	a,#__str_52
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_51 >> 8)
+	mov	a,#(__str_52 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5716,13 +5779,13 @@ _getTimeBytes:
 	mov	a,#0x36
 	movx	@dptr,a
 00120$:
-	C$ydrip.c$705$1$1 ==.
-;	apps/ydrip/ydrip.c:705: if (strcmp(strMMM,"Jul") == 0)	tVector->iv[5] = '7';
+	C$ydrip.c$624$1$1 ==.
+;	apps/ydrip/ydrip.c:624: if (strcmp(strMMM,"Jul") == 0)	tVector->iv[5] = '7';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_52
+	mov	a,#__str_53
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_52 >> 8)
+	mov	a,#(__str_53 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5749,13 +5812,13 @@ _getTimeBytes:
 	mov	a,#0x37
 	movx	@dptr,a
 00122$:
-	C$ydrip.c$706$1$1 ==.
-;	apps/ydrip/ydrip.c:706: if (strcmp(strMMM,"Aug") == 0)	tVector->iv[5] = '8';
+	C$ydrip.c$625$1$1 ==.
+;	apps/ydrip/ydrip.c:625: if (strcmp(strMMM,"Aug") == 0)	tVector->iv[5] = '8';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_53
+	mov	a,#__str_54
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_53 >> 8)
+	mov	a,#(__str_54 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5782,13 +5845,13 @@ _getTimeBytes:
 	mov	a,#0x38
 	movx	@dptr,a
 00124$:
-	C$ydrip.c$707$1$1 ==.
-;	apps/ydrip/ydrip.c:707: if (strcmp(strMMM,"Sep") == 0)	tVector->iv[5] = '9';
+	C$ydrip.c$626$1$1 ==.
+;	apps/ydrip/ydrip.c:626: if (strcmp(strMMM,"Sep") == 0)	tVector->iv[5] = '9';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_54
+	mov	a,#__str_55
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_54 >> 8)
+	mov	a,#(__str_55 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5815,13 +5878,13 @@ _getTimeBytes:
 	mov	a,#0x39
 	movx	@dptr,a
 00126$:
-	C$ydrip.c$708$1$1 ==.
-;	apps/ydrip/ydrip.c:708: if (strcmp(strMMM,"Oct") == 0)	tVector->iv[5] = '0';
+	C$ydrip.c$627$1$1 ==.
+;	apps/ydrip/ydrip.c:627: if (strcmp(strMMM,"Oct") == 0)	tVector->iv[5] = '0';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_55
+	mov	a,#__str_56
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_55 >> 8)
+	mov	a,#(__str_56 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5848,28 +5911,8 @@ _getTimeBytes:
 	mov	a,#0x30
 	movx	@dptr,a
 00128$:
-	C$ydrip.c$710$1$1 ==.
-;	apps/ydrip/ydrip.c:710: if ((strcmp(strMMM,"Oct") == 0) ||(strcmp(strMMM,"Nov") == 0) || (strcmp(strMMM,"Dec")) == 0)	tVector->iv[4] = '1';
-	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_55
-	movx	@r0,a
-	inc	r0
-	mov	a,#(__str_55 >> 8)
-	movx	@r0,a
-	inc	r0
-	mov	a,#0x80
-	movx	@r0,a
-	mov	dptr,#_getTimeBytes_strMMM_1_1
-	mov	b,#0x00
-	push	ar7
-	push	ar6
-	lcall	_strcmp
-	mov	a,dpl
-	mov	b,dph
-	pop	ar6
-	pop	ar7
-	orl	a,b
-	jz	00129$
+	C$ydrip.c$629$1$1 ==.
+;	apps/ydrip/ydrip.c:629: if ((strcmp(strMMM,"Oct") == 0) ||(strcmp(strMMM,"Nov") == 0) || (strcmp(strMMM,"Dec")) == 0)	tVector->iv[4] = '1';
 	mov	r0,#_strcmp_PARM_2
 	mov	a,#__str_56
 	movx	@r0,a
@@ -5909,6 +5952,26 @@ _getTimeBytes:
 	pop	ar6
 	pop	ar7
 	orl	a,b
+	jz	00129$
+	mov	r0,#_strcmp_PARM_2
+	mov	a,#__str_58
+	movx	@r0,a
+	inc	r0
+	mov	a,#(__str_58 >> 8)
+	movx	@r0,a
+	inc	r0
+	mov	a,#0x80
+	movx	@r0,a
+	mov	dptr,#_getTimeBytes_strMMM_1_1
+	mov	b,#0x00
+	push	ar7
+	push	ar6
+	lcall	_strcmp
+	mov	a,dpl
+	mov	b,dph
+	pop	ar6
+	pop	ar7
+	orl	a,b
 	jnz	00130$
 00129$:
 	mov	dpl,r6
@@ -5916,13 +5979,13 @@ _getTimeBytes:
 	mov	a,#0x31
 	movx	@dptr,a
 00130$:
-	C$ydrip.c$711$1$1 ==.
-;	apps/ydrip/ydrip.c:711: if (strcmp(strMMM,"Nov") == 0)	tVector->iv[5] = '1';
+	C$ydrip.c$630$1$1 ==.
+;	apps/ydrip/ydrip.c:630: if (strcmp(strMMM,"Nov") == 0)	tVector->iv[5] = '1';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_56
+	mov	a,#__str_57
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_56 >> 8)
+	mov	a,#(__str_57 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5945,13 +6008,13 @@ _getTimeBytes:
 	mov	a,#0x31
 	movx	@dptr,a
 00134$:
-	C$ydrip.c$712$1$1 ==.
-;	apps/ydrip/ydrip.c:712: if (strcmp(strMMM,"Dec") == 0)	tVector->iv[5] = '2';
+	C$ydrip.c$631$1$1 ==.
+;	apps/ydrip/ydrip.c:631: if (strcmp(strMMM,"Dec") == 0)	tVector->iv[5] = '2';
 	mov	r0,#_strcmp_PARM_2
-	mov	a,#__str_57
+	mov	a,#__str_58
 	movx	@r0,a
 	inc	r0
-	mov	a,#(__str_57 >> 8)
+	mov	a,#(__str_58 >> 8)
 	movx	@r0,a
 	inc	r0
 	mov	a,#0x80
@@ -5974,48 +6037,21 @@ _getTimeBytes:
 	mov	a,#0x32
 	movx	@dptr,a
 00137$:
-	C$ydrip.c$713$1$1 ==.
+	C$ydrip.c$632$1$1 ==.
 	XG$getTimeBytes$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'ESPsleep'
 ;------------------------------------------------------------
 	G$ESPsleep$0$0 ==.
-	C$ydrip.c$716$1$1 ==.
-;	apps/ydrip/ydrip.c:716: void ESPsleep () {
+	C$ydrip.c$635$1$1 ==.
+;	apps/ydrip/ydrip.c:635: void ESPsleep () {
 ;	-----------------------------------------
 ;	 function ESPsleep
 ;	-----------------------------------------
 _ESPsleep:
-	C$ydrip.c$717$1$1 ==.
-;	apps/ydrip/ydrip.c:717: printf("sk:close()\r\n");										// Close the TCP connection	- Response should be CLOSE OK
-	mov	a,#__str_58
-	push	acc
-	mov	a,#(__str_58 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$ydrip.c$718$1$1 ==.
-;	apps/ydrip/ydrip.c:718: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
-	movx	a,@dptr
-	mov	r4,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r5,a
-	inc	dptr
-	movx	a,@dptr
-	inc	dptr
-	movx	a,@dptr
-	mov	dpl,r4
-	mov	dph,r5
-	lcall	_delayMs
-	C$ydrip.c$719$1$1 ==.
-;	apps/ydrip/ydrip.c:719: printf("node.dsleep(270000000)\r\n");							// Deep Sleep 4.5 minutes (270 Seconds) - probably tweak this a bit
+	C$ydrip.c$636$1$1 ==.
+;	apps/ydrip/ydrip.c:636: printf("sk:close()\r\n");									// Close the TCP connection	- Response should be CLOSE OK
 	mov	a,#__str_59
 	push	acc
 	mov	a,#(__str_59 >> 8)
@@ -6026,9 +6062,9 @@ _ESPsleep:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$720$1$1 ==.
-;	apps/ydrip/ydrip.c:720: delayMs(defaultATWait);
-	mov	dptr,#_defaultATWait
+	C$ydrip.c$637$1$1 ==.
+;	apps/ydrip/ydrip.c:637: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -6041,7 +6077,34 @@ _ESPsleep:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$721$1$1 ==.
+	C$ydrip.c$638$1$1 ==.
+;	apps/ydrip/ydrip.c:638: printf("node.dsleep(270000000)\r\n");							// Deep Sleep 4.5 minutes (270 Seconds) - probably tweak this a bit
+	mov	a,#__str_60
+	push	acc
+	mov	a,#(__str_60 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$ydrip.c$640$1$1 ==.
+;	apps/ydrip/ydrip.c:640: delayMs(defaultWaitTime);
+	mov	dptr,#_defaultWaitTime
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+	inc	dptr
+	movx	a,@dptr
+	inc	dptr
+	movx	a,@dptr
+	mov	dpl,r4
+	mov	dph,r5
+	lcall	_delayMs
+	C$ydrip.c$641$1$1 ==.
 	XG$ESPsleep$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -6059,8 +6122,8 @@ _ESPsleep:
 ;getTimeResponse           Allocated with name '_print_packet_getTimeResponse_1_1'
 ;------------------------------------------------------------
 	G$print_packet$0$0 ==.
-	C$ydrip.c$724$1$1 ==.
-;	apps/ydrip/ydrip.c:724: XDATA void print_packet(Dexcom_packet* pPkt) {
+	C$ydrip.c$644$1$1 ==.
+;	apps/ydrip/ydrip.c:644: XDATA void print_packet(Dexcom_packet* pPkt) {
 ;	-----------------------------------------
 ;	 function print_packet
 ;	-----------------------------------------
@@ -6072,8 +6135,8 @@ _print_packet:
 	inc	r0
 	mov	a,r7
 	movx	@r0,a
-	C$ydrip.c$725$1$1 ==.
-;	apps/ydrip/ydrip.c:725: XDATA char transID[] = "BLANK"; 
+	C$ydrip.c$645$1$1 ==.
+;	apps/ydrip/ydrip.c:645: XDATA char transID[] = "BLANK"; 
 	mov	dptr,#_print_packet_transID_1_1
 	mov	a,#0x42
 	movx	@dptr,a
@@ -6090,8 +6153,8 @@ _print_packet:
 	mov	a,#0x4B
 	movx	@dptr,a
 	mov	dptr,#(_print_packet_transID_1_1 + 0x0005)
-	C$ydrip.c$732$1$1 ==.
-;	apps/ydrip/ydrip.c:732: XDATA uint8_t iv[16]  = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+	C$ydrip.c$652$1$1 ==.
+;	apps/ydrip/ydrip.c:652: XDATA uint8_t iv[16]  = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
 	clr	a
 	movx	@dptr,a
 	mov	dptr,#_print_packet_iv_1_1
@@ -6141,25 +6204,25 @@ _print_packet:
 	mov	dptr,#(_print_packet_iv_1_1 + 0x000f)
 	mov	a,#0x0F
 	movx	@dptr,a
-	C$ydrip.c$741$1$1 ==.
-;	apps/ydrip/ydrip.c:741: uartEnable();
+	C$ydrip.c$661$1$1 ==.
+;	apps/ydrip/ydrip.c:661: uartEnable();
 	lcall	_uartEnable
-	C$ydrip.c$744$2$2 ==.
-;	apps/ydrip/ydrip.c:744: LED_YELLOW(0);
+	C$ydrip.c$664$2$2 ==.
+;	apps/ydrip/ydrip.c:664: LED_YELLOW(0);
 	mov	r5,_P2DIR
 	anl	ar5,#0xFB
 	mov	_P2DIR,r5
-	C$ydrip.c$745$2$3 ==.
-;	apps/ydrip/ydrip.c:745: LED_RED(0);
+	C$ydrip.c$665$2$3 ==.
+;	apps/ydrip/ydrip.c:665: LED_RED(0);
 	mov	r5,_P2DIR
 	anl	ar5,#0xFD
 	mov	_P2DIR,r5
-	C$ydrip.c$747$1$1 ==.
-;	apps/ydrip/ydrip.c:747: getTimeBytes(&getTimeResponse);							//	Connect to google and get the time
+	C$ydrip.c$667$1$1 ==.
+;	apps/ydrip/ydrip.c:667: getTimeBytes(&getTimeResponse);							//	Connect to google and get the time
 	mov	dptr,#_print_packet_getTimeResponse_1_1
 	lcall	_getTimeBytes
-	C$ydrip.c$748$1$1 ==.
-;	apps/ydrip/ydrip.c:748: strcpy(iv, getTimeResponse.iv);							//	and use this to populate the Initialisation Vector
+	C$ydrip.c$668$1$1 ==.
+;	apps/ydrip/ydrip.c:668: strcpy(iv, getTimeResponse.iv);							//	and use this to populate the Initialisation Vector
 	mov	r0,#_strcpy_PARM_2
 	mov	a,#_print_packet_getTimeResponse_1_1
 	movx	@r0,a
@@ -6172,8 +6235,8 @@ _print_packet:
 	mov	dptr,#_print_packet_iv_1_1
 	mov	b,#0x00
 	lcall	_strcpy
-	C$ydrip.c$749$1$1 ==.
-;	apps/ydrip/ydrip.c:749: if (debug_mode) printf("-- **DEBUG** iv is %s\r\n", iv);
+	C$ydrip.c$669$1$1 ==.
+;	apps/ydrip/ydrip.c:669: if (debug_mode) printf("-- **DEBUG** iv is %s\r\n", iv);
 	jnb	_debug_mode,00102$
 	mov	a,#_print_packet_iv_1_1
 	push	acc
@@ -6181,9 +6244,9 @@ _print_packet:
 	push	acc
 	clr	a
 	push	acc
-	mov	a,#__str_61
+	mov	a,#__str_62
 	push	acc
-	mov	a,#(__str_61 >> 8)
+	mov	a,#(__str_62 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -6192,8 +6255,8 @@ _print_packet:
 	add	a,#0xfa
 	mov	sp,a
 00102$:
-	C$ydrip.c$751$1$1 ==.
-;	apps/ydrip/ydrip.c:751: iv[14]=pPkt->txId;										//	Randomise the IV further by updating this spare byte with the packet sequence number
+	C$ydrip.c$671$1$1 ==.
+;	apps/ydrip/ydrip.c:671: iv[14]=pPkt->txId;										//	Randomise the IV further by updating this spare byte with the packet sequence number
 	mov	r0,#_print_packet_pPkt_1_1
 	movx	a,@r0
 	add	a,#0x0B
@@ -6207,8 +6270,8 @@ _print_packet:
 	movx	a,@dptr
 	mov	dptr,#(_print_packet_iv_1_1 + 0x000e)
 	movx	@dptr,a
-	C$ydrip.c$752$1$1 ==.
-;	apps/ydrip/ydrip.c:752: iv[15]=pPkt->checksum;									//	Randomise the IV further by updating this other spare byte with the packet checksum
+	C$ydrip.c$672$1$1 ==.
+;	apps/ydrip/ydrip.c:672: iv[15]=pPkt->checksum;									//	Randomise the IV further by updating this other spare byte with the packet checksum
 	mov	r0,#_print_packet_pPkt_1_1
 	movx	a,@r0
 	add	a,#0x12
@@ -6220,8 +6283,8 @@ _print_packet:
 	movx	a,@dptr
 	mov	dptr,#(_print_packet_iv_1_1 + 0x000f)
 	movx	@dptr,a
-	C$ydrip.c$754$1$1 ==.
-;	apps/ydrip/ydrip.c:754: if (wifiConnect()) {		// Establish a connection to the Dexie server
+	C$ydrip.c$674$1$1 ==.
+;	apps/ydrip/ydrip.c:674: if (wifiConnect()) {		// Establish a connection to the Dexie server
 	push	ar5
 	push	ar4
 	lcall	_wifiConnect
@@ -6230,11 +6293,11 @@ _print_packet:
 	jc	00135$
 	ljmp	00107$
 00135$:
-	C$ydrip.c$755$3$5 ==.
-;	apps/ydrip/ydrip.c:755: LED_RED(1);
+	C$ydrip.c$675$3$5 ==.
+;	apps/ydrip/ydrip.c:675: LED_RED(1);
 	orl	_P2DIR,#0x02
-	C$ydrip.c$756$2$4 ==.
-;	apps/ydrip/ydrip.c:756: dexcom_src_to_ascii(pPkt->src_addr, transID);			// Get a human-readable version of the Dexcom Transmitter ID
+	C$ydrip.c$676$2$4 ==.
+;	apps/ydrip/ydrip.c:676: dexcom_src_to_ascii(pPkt->src_addr, transID);		// Get a human-readable version of the Dexcom Transmitter ID
 	mov	r0,#_print_packet_pPkt_1_1
 	movx	a,@r0
 	add	a,#0x05
@@ -6269,8 +6332,8 @@ _print_packet:
 	lcall	_dexcom_src_to_ascii
 	pop	ar4
 	pop	ar5
-	C$ydrip.c$765$2$4 ==.
-;	apps/ydrip/ydrip.c:765: (((pPkt->RSSI)/2)-73));							//		Received Signal Strength Indicator
+	C$ydrip.c$684$2$4 ==.
+;	apps/ydrip/ydrip.c:684: (((pPkt->RSSI)/2)-73));							//		Received Signal Strength Indicator
 	mov	r0,#_print_packet_pPkt_1_1
 	movx	a,@r0
 	add	a,#0x13
@@ -6304,8 +6367,8 @@ _print_packet:
 	mov	a,b
 	addc	a,#0xFF
 	mov	(_print_packet_sloc1_1_0 + 1),a
-	C$ydrip.c$764$2$4 ==.
-;	apps/ydrip/ydrip.c:764: pPkt->battery, 					 				// 		Dexcom Transmitter Battery
+	C$ydrip.c$683$2$4 ==.
+;	apps/ydrip/ydrip.c:683: pPkt->battery, 					 				// 		Dexcom Transmitter Battery
 	mov	r0,#_print_packet_pPkt_1_1
 	movx	a,@r0
 	add	a,#0x10
@@ -6318,8 +6381,8 @@ _print_packet:
 	mov	r3,a
 	mov	_print_packet_sloc0_1_0,r3
 	mov	(_print_packet_sloc0_1_0 + 1),#0x00
-	C$ydrip.c$763$2$4 ==.
-;	apps/ydrip/ydrip.c:763: dex_num_decoder(pPkt->filtered)*2,				// 		Filtered BG Value
+	C$ydrip.c$682$2$4 ==.
+;	apps/ydrip/ydrip.c:682: dex_num_decoder(pPkt->filtered)*2,				// 		Filtered BG Value
 	mov	r0,#_print_packet_pPkt_1_1
 	movx	a,@r0
 	add	a,#0x0E
@@ -6354,8 +6417,8 @@ _print_packet:
 	mov	a,r7
 	rlc	a
 	mov	(_print_packet_sloc2_1_0 + 3),a
-	C$ydrip.c$762$2$4 ==.
-;	apps/ydrip/ydrip.c:762: dex_num_decoder(pPkt->raw),		 				// 		Raw BQ Value
+	C$ydrip.c$681$2$4 ==.
+;	apps/ydrip/ydrip.c:681: dex_num_decoder(pPkt->raw),		 				// 		Raw BQ Value
 	mov	r0,#_print_packet_pPkt_1_1
 	movx	a,@r0
 	add	a,#0x0C
@@ -6378,19 +6441,19 @@ _print_packet:
 	mov	r7,a
 	pop	ar4
 	pop	ar5
-	C$ydrip.c$761$2$4 ==.
-;	apps/ydrip/ydrip.c:761: transID,						 				// 		Transmitter ID - from packet in case only_listen_for_my_transmitter false
-	C$ydrip.c$760$2$4 ==.
-;	apps/ydrip/ydrip.c:760: pPkt->txId, 					 				// 		Transmission ID - unique-ish identifier
+	C$ydrip.c$680$2$4 ==.
+;	apps/ydrip/ydrip.c:680: transID,						 				// 		Transmitter ID - from packet in case only_listen_for_my_transmitter false
+	C$ydrip.c$679$2$4 ==.
+;	apps/ydrip/ydrip.c:679: pPkt->txId, 					 				// 		Transmission ID - unique-ish identifier
 	mov	dpl,r4
 	mov	dph,r5
 	movx	a,@dptr
 	mov	r4,a
 	mov	r5,#0x00
-	C$ydrip.c$759$2$4 ==.
-;	apps/ydrip/ydrip.c:759: wixFone_ID, 					 				// 		xDrip2g Device Identifier
-	C$ydrip.c$758$2$4 ==.
-;	apps/ydrip/ydrip.c:758: prtlen = sprintf(sprintfBuffer, "%s %hhu %s %lu %lu %d %d 100 -16.127100,51.241300",		// Includes home GPS coordinates for Dexie	
+	C$ydrip.c$678$2$4 ==.
+;	apps/ydrip/ydrip.c:678: wixFone_ID, 					 				// 		xDrip2g Device Identifier
+	C$ydrip.c$677$2$4 ==.
+;	apps/ydrip/ydrip.c:677: prtlen = sprintf(sprintfBuffer, "%s %hhu %s %lu %lu %d %d 100 -6.127100,53.241300",	// Includes home GPS coordinates for Dexie - change to yours
 	push	_print_packet_sloc1_1_0
 	push	(_print_packet_sloc1_1_0 + 1)
 	push	_print_packet_sloc0_1_0
@@ -6417,9 +6480,9 @@ _print_packet:
 	push	acc
 	clr	a
 	push	acc
-	mov	a,#__str_62
+	mov	a,#__str_63
 	push	acc
-	mov	a,#(__str_62 >> 8)
+	mov	a,#(__str_63 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -6434,15 +6497,15 @@ _print_packet:
 	mov	a,sp
 	add	a,#0xe6
 	mov	sp,a
-	C$ydrip.c$767$2$4 ==.
-;	apps/ydrip/ydrip.c:767: for(i = prtlen; i < 64; ++i)
+	C$ydrip.c$686$2$4 ==.
+;	apps/ydrip/ydrip.c:686: for(i = prtlen; i < 64; ++i)
 	mov	ar7,r6
 00108$:
 	cjne	r7,#0x40,00138$
 00138$:
 	jnc	00111$
-	C$ydrip.c$768$2$4 ==.
-;	apps/ydrip/ydrip.c:768: sprintfBuffer[i]=' ';							//		Fill rest of array with spaces
+	C$ydrip.c$687$2$4 ==.
+;	apps/ydrip/ydrip.c:687: sprintfBuffer[i]=' ';							//		Fill rest of array with spaces
 	mov	a,r7
 	add	a,#_print_packet_sprintfBuffer_1_1
 	mov	dpl,a
@@ -6451,18 +6514,18 @@ _print_packet:
 	mov	dph,a
 	mov	a,#0x20
 	movx	@dptr,a
-	C$ydrip.c$767$2$4 ==.
-;	apps/ydrip/ydrip.c:767: for(i = prtlen; i < 64; ++i)
+	C$ydrip.c$686$2$4 ==.
+;	apps/ydrip/ydrip.c:686: for(i = prtlen; i < 64; ++i)
 	inc	r7
 	sjmp	00108$
 00111$:
-	C$ydrip.c$770$2$4 ==.
-;	apps/ydrip/ydrip.c:770: if (encrypt_output==1) {							//		Check if to encode the output using AES-128 encryption
+	C$ydrip.c$689$2$4 ==.
+;	apps/ydrip/ydrip.c:689: if (encrypt_output==1) {							//		Check if to encode the output using AES-128 encryption
 	jb	_encrypt_output,00140$
 	ljmp	00104$
 00140$:
-	C$ydrip.c$771$3$6 ==.
-;	apps/ydrip/ydrip.c:771: AES128_CBC_encrypt_buffer(AESBuffer, sprintfBuffer, 64, key, iv);   //	encrypt(output, input, length, key, vector)
+	C$ydrip.c$690$3$6 ==.
+;	apps/ydrip/ydrip.c:690: AES128_CBC_encrypt_buffer(AESBuffer, sprintfBuffer, 64, key, iv);   //	encrypt(output, input, length, key, vector)
 	mov	dptr,#_AES128_CBC_encrypt_buffer_PARM_2
 	mov	a,#_print_packet_sprintfBuffer_1_1
 	movx	@dptr,a
@@ -6493,11 +6556,11 @@ _print_packet:
 	movx	@dptr,a
 	mov	dptr,#_print_packet_AESBuffer_1_1
 	lcall	_AES128_CBC_encrypt_buffer
-	C$ydrip.c$772$3$6 ==.
-;	apps/ydrip/ydrip.c:772: printf("sk:send(\"yDrip(AES): ");				//		Send the preamble to the Dexie Server first
-	mov	a,#__str_63
+	C$ydrip.c$691$3$6 ==.
+;	apps/ydrip/ydrip.c:691: printf("sk:send(\"yDrip(AES): ");				//		Send the preamble to the Dexie Server first
+	mov	a,#__str_64
 	push	acc
-	mov	a,#(__str_63 >> 8)
+	mov	a,#(__str_64 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -6505,15 +6568,15 @@ _print_packet:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$773$1$1 ==.
-;	apps/ydrip/ydrip.c:773: for(i = 0; i < 16; ++i)							
+	C$ydrip.c$692$1$1 ==.
+;	apps/ydrip/ydrip.c:692: for(i = 0; i < 16; ++i)							
 	mov	r7,#0x00
 00112$:
 	cjne	r7,#0x10,00141$
 00141$:
 	jnc	00115$
-	C$ydrip.c$774$3$6 ==.
-;	apps/ydrip/ydrip.c:774: printf("%02x", iv[i]);						//		Print initialisation vector as cleartext.  This is not a secret, just unique.
+	C$ydrip.c$693$3$6 ==.
+;	apps/ydrip/ydrip.c:693: printf("%02x", iv[i]);						//		Print initialisation vector as cleartext.  This is not a secret, just unique.
 	mov	a,r7
 	add	a,#_print_packet_iv_1_1
 	mov	dpl,a
@@ -6526,9 +6589,9 @@ _print_packet:
 	push	ar7
 	push	ar6
 	push	ar5
-	mov	a,#__str_64
+	mov	a,#__str_65
 	push	acc
-	mov	a,#(__str_64 >> 8)
+	mov	a,#(__str_65 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -6537,16 +6600,16 @@ _print_packet:
 	add	a,#0xfb
 	mov	sp,a
 	pop	ar7
-	C$ydrip.c$773$3$6 ==.
-;	apps/ydrip/ydrip.c:773: for(i = 0; i < 16; ++i)							
+	C$ydrip.c$692$3$6 ==.
+;	apps/ydrip/ydrip.c:692: for(i = 0; i < 16; ++i)							
 	inc	r7
 	sjmp	00112$
 00115$:
-	C$ydrip.c$775$3$6 ==.
-;	apps/ydrip/ydrip.c:775: printf(" ");									//		Separate IV from encrypted text with a delimiting space
-	mov	a,#__str_65
+	C$ydrip.c$694$3$6 ==.
+;	apps/ydrip/ydrip.c:694: printf(" ");									//		Separate IV from encrypted text with a delimiting space
+	mov	a,#__str_66
 	push	acc
-	mov	a,#(__str_65 >> 8)
+	mov	a,#(__str_66 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -6556,8 +6619,8 @@ _print_packet:
 	dec	sp
 	sjmp	00130$
 00104$:
-	C$ydrip.c$777$3$7 ==.
-;	apps/ydrip/ydrip.c:777: strcpy(AESBuffer, sprintfBuffer); 				// 		Just copy the characters that we want to send in the clear if no encryption
+	C$ydrip.c$696$3$7 ==.
+;	apps/ydrip/ydrip.c:696: strcpy(AESBuffer, sprintfBuffer); 				// 		Just copy the characters that we want to send in the clear if no encryption
 	mov	r0,#_strcpy_PARM_2
 	mov	a,#_print_packet_sprintfBuffer_1_1
 	movx	@r0,a
@@ -6570,11 +6633,11 @@ _print_packet:
 	mov	dptr,#_print_packet_AESBuffer_1_1
 	mov	b,#0x00
 	lcall	_strcpy
-	C$ydrip.c$778$3$7 ==.
-;	apps/ydrip/ydrip.c:778: printf("sk:send(\"yDrip: ");					//		Slightly different preamble so Dexie knows the/re is no encryption - and no IV needed
-	mov	a,#__str_66
+	C$ydrip.c$697$3$7 ==.
+;	apps/ydrip/ydrip.c:697: printf("sk:send(\"yDrip: ");					//		Slightly different preamble so Dexie knows the/re is no encryption - and no IV needed
+	mov	a,#__str_67
 	push	acc
-	mov	a,#(__str_66 >> 8)
+	mov	a,#(__str_67 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -6582,16 +6645,16 @@ _print_packet:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$ydrip.c$781$1$1 ==.
-;	apps/ydrip/ydrip.c:781: for(i = 0; i < 64; ++i) 							//		Loop through 64 character block of encrypted text
+	C$ydrip.c$700$1$1 ==.
+;	apps/ydrip/ydrip.c:700: for(i = 0; i < 64; ++i) 							//		Loop through 64 character block of encrypted text
 00130$:
 	mov	r7,#0x00
 00116$:
 	cjne	r7,#0x40,00143$
 00143$:
 	jnc	00119$
-	C$ydrip.c$782$2$4 ==.
-;	apps/ydrip/ydrip.c:782: printf("%02x", AESBuffer[i]);					//		and print each character, one by one
+	C$ydrip.c$701$2$4 ==.
+;	apps/ydrip/ydrip.c:701: printf("%02x", AESBuffer[i]);					//		and print each character, one by one
 	mov	a,r7
 	add	a,#_print_packet_AESBuffer_1_1
 	mov	dpl,a
@@ -6604,9 +6667,9 @@ _print_packet:
 	push	ar7
 	push	ar6
 	push	ar5
-	mov	a,#__str_64
+	mov	a,#__str_65
 	push	acc
-	mov	a,#(__str_64 >> 8)
+	mov	a,#(__str_65 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -6615,16 +6678,16 @@ _print_packet:
 	add	a,#0xfb
 	mov	sp,a
 	pop	ar7
-	C$ydrip.c$781$2$4 ==.
-;	apps/ydrip/ydrip.c:781: for(i = 0; i < 64; ++i) 							//		Loop through 64 character block of encrypted text
+	C$ydrip.c$700$2$4 ==.
+;	apps/ydrip/ydrip.c:700: for(i = 0; i < 64; ++i) 							//		Loop through 64 character block of encrypted text
 	inc	r7
 	sjmp	00116$
 00119$:
-	C$ydrip.c$784$2$4 ==.
-;	apps/ydrip/ydrip.c:784: printf("\\r\\n\")\r\n");	delayMs(defaultATWait);	// 		CR/LF
-	mov	a,#__str_67
+	C$ydrip.c$703$2$4 ==.
+;	apps/ydrip/ydrip.c:703: printf("\\r\\n\")\r\n");	delayMs(defaultWaitTime);	// 		CR/LF
+	mov	a,#__str_68
 	push	acc
-	mov	a,#(__str_67 >> 8)
+	mov	a,#(__str_68 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -6632,7 +6695,7 @@ _print_packet:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -6645,11 +6708,11 @@ _print_packet:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$786$2$4 ==.
-;	apps/ydrip/ydrip.c:786: printf("gpio.write(4, gpio.HIGH)\r\n"); delayMs(defaultATWait);	// Switch off blue LED
-	mov	a,#__str_30
+	C$ydrip.c$704$2$4 ==.
+;	apps/ydrip/ydrip.c:704: printf("gpio.write(4, gpio.HIGH)\r\n"); delayMs(defaultWaitTime);	// Switch off blue LED
+	mov	a,#__str_31
 	push	acc
-	mov	a,#(__str_30 >> 8)
+	mov	a,#(__str_31 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -6657,7 +6720,7 @@ _print_packet:
 	dec	sp
 	dec	sp
 	dec	sp
-	mov	dptr,#_defaultATWait
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -6670,9 +6733,9 @@ _print_packet:
 	mov	dpl,r4
 	mov	dph,r5
 	lcall	_delayMs
-	C$ydrip.c$788$2$4 ==.
-;	apps/ydrip/ydrip.c:788: delayMs(defaultATWait);									// Need to wait here also as sometimes missing ctrl-z
-	mov	dptr,#_defaultATWait
+	C$ydrip.c$705$2$4 ==.
+;	apps/ydrip/ydrip.c:705: delayMs(defaultWaitTime);									// Need to wait here also as sometimes missing ctrl-z
+	mov	dptr,#_defaultWaitTime
 	movx	a,@dptr
 	mov	r4,a
 	inc	dptr
@@ -6686,10 +6749,10 @@ _print_packet:
 	mov	dph,r5
 	lcall	_delayMs
 00107$:
-	C$ydrip.c$807$1$1 ==.
-;	apps/ydrip/ydrip.c:807: uartDisable();
+	C$ydrip.c$707$1$1 ==.
+;	apps/ydrip/ydrip.c:707: uartDisable();
 	lcall	_uartDisable
-	C$ydrip.c$808$1$1 ==.
+	C$ydrip.c$708$1$1 ==.
 	XG$print_packet$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -6698,14 +6761,14 @@ _print_packet:
 ;i                         Allocated with name '_makeAllOutputs_i_1_1'
 ;------------------------------------------------------------
 	G$makeAllOutputs$0$0 ==.
-	C$ydrip.c$810$1$1 ==.
-;	apps/ydrip/ydrip.c:810: void makeAllOutputs() {
+	C$ydrip.c$710$1$1 ==.
+;	apps/ydrip/ydrip.c:710: void makeAllOutputs() {
 ;	-----------------------------------------
 ;	 function makeAllOutputs
 ;	-----------------------------------------
 _makeAllOutputs:
-	C$ydrip.c$812$1$1 ==.
-;	apps/ydrip/ydrip.c:812: for (i=1; i < 16; i++) { // in the future, this should be set to only the channels being used for output, and add the one for input
+	C$ydrip.c$712$1$1 ==.
+;	apps/ydrip/ydrip.c:712: for (i=1; i < 16; i++) { // in the future, this should be set to only the channels being used for output, and add the one for input
 	mov	r6,#0x01
 	mov	r7,#0x00
 00101$:
@@ -6716,8 +6779,8 @@ _makeAllOutputs:
 	xrl	a,#0x80
 	subb	a,#0x80
 	jnc	00105$
-	C$ydrip.c$813$2$2 ==.
-;	apps/ydrip/ydrip.c:813: setDigitalOutput(i, LOW);
+	C$ydrip.c$715$2$2 ==.
+;	apps/ydrip/ydrip.c:715: setDigitalOutput(i, LOW);
 	mov	dpl,r6
 	clr	b[0]
 	push	ar7
@@ -6726,14 +6789,14 @@ _makeAllOutputs:
 	lcall	_setDigitalOutput
 	pop	ar6
 	pop	ar7
-	C$ydrip.c$812$1$1 ==.
-;	apps/ydrip/ydrip.c:812: for (i=1; i < 16; i++) { // in the future, this should be set to only the channels being used for output, and add the one for input
+	C$ydrip.c$712$1$1 ==.
+;	apps/ydrip/ydrip.c:712: for (i=1; i < 16; i++) { // in the future, this should be set to only the channels being used for output, and add the one for input
 	inc	r6
 	cjne	r6,#0x00,00101$
 	inc	r7
 	sjmp	00101$
 00105$:
-	C$ydrip.c$815$1$1 ==.
+	C$ydrip.c$717$1$1 ==.
 	XG$makeAllOutputs$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -6742,14 +6805,14 @@ _makeAllOutputs:
 ;i                         Allocated with name '_makeAllOutputsLow_i_1_1'
 ;------------------------------------------------------------
 	G$makeAllOutputsLow$0$0 ==.
-	C$ydrip.c$816$1$1 ==.
-;	apps/ydrip/ydrip.c:816: void makeAllOutputsLow() {
+	C$ydrip.c$718$1$1 ==.
+;	apps/ydrip/ydrip.c:718: void makeAllOutputsLow() {
 ;	-----------------------------------------
 ;	 function makeAllOutputsLow
 ;	-----------------------------------------
 _makeAllOutputsLow:
-	C$ydrip.c$818$1$1 ==.
-;	apps/ydrip/ydrip.c:818: for (i=0; i < 16; i++) {
+	C$ydrip.c$720$1$1 ==.
+;	apps/ydrip/ydrip.c:720: for (i=0; i < 16; i++) {
 	mov	r6,#0x00
 	mov	r7,#0x00
 00101$:
@@ -6760,8 +6823,8 @@ _makeAllOutputsLow:
 	xrl	a,#0x80
 	subb	a,#0x80
 	jnc	00105$
-	C$ydrip.c$819$2$2 ==.
-;	apps/ydrip/ydrip.c:819: setDigitalOutput(i, LOW);
+	C$ydrip.c$723$2$2 ==.
+;	apps/ydrip/ydrip.c:723: setDigitalOutput(i, LOW);
 	mov	dpl,r6
 	clr	b[0]
 	push	ar7
@@ -6770,14 +6833,14 @@ _makeAllOutputsLow:
 	lcall	_setDigitalOutput
 	pop	ar6
 	pop	ar7
-	C$ydrip.c$818$1$1 ==.
-;	apps/ydrip/ydrip.c:818: for (i=0; i < 16; i++) {
+	C$ydrip.c$720$1$1 ==.
+;	apps/ydrip/ydrip.c:720: for (i=0; i < 16; i++) {
 	inc	r6
 	cjne	r6,#0x00,00101$
 	inc	r7
 	sjmp	00101$
 00105$:
-	C$ydrip.c$821$1$1 ==.
+	C$ydrip.c$725$1$1 ==.
 	XG$makeAllOutputsLow$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -6786,14 +6849,14 @@ _makeAllOutputsLow:
 ;i                         Allocated with name '_reset_offsets_i_1_1'
 ;------------------------------------------------------------
 	G$reset_offsets$0$0 ==.
-	C$ydrip.c$823$1$1 ==.
-;	apps/ydrip/ydrip.c:823: void reset_offsets() {
+	C$ydrip.c$727$1$1 ==.
+;	apps/ydrip/ydrip.c:727: void reset_offsets() {
 ;	-----------------------------------------
 ;	 function reset_offsets
 ;	-----------------------------------------
 _reset_offsets:
-	C$ydrip.c$825$2$2 ==.
-;	apps/ydrip/ydrip.c:825: for(i=0; i<4; i++) {
+	C$ydrip.c$729$2$2 ==.
+;	apps/ydrip/ydrip.c:729: for(i=0; i<4; i++) {
 	mov	r6,#0x00
 	mov	r7,#0x00
 00101$:
@@ -6804,8 +6867,8 @@ _reset_offsets:
 	xrl	a,#0x80
 	subb	a,#0x80
 	jnc	00105$
-	C$ydrip.c$826$2$2 ==.
-;	apps/ydrip/ydrip.c:826: fOffset[i] = defaultfOffset[i];
+	C$ydrip.c$730$2$2 ==.
+;	apps/ydrip/ydrip.c:730: fOffset[i] = defaultfOffset[i];
 	mov	a,r6
 	add	a,#_fOffset
 	mov	r1,a
@@ -6818,40 +6881,40 @@ _reset_offsets:
 	movx	a,@dptr
 	mov	r5,a
 	movx	@r1,a
-	C$ydrip.c$825$1$1 ==.
-;	apps/ydrip/ydrip.c:825: for(i=0; i<4; i++) {
+	C$ydrip.c$729$1$1 ==.
+;	apps/ydrip/ydrip.c:729: for(i=0; i<4; i++) {
 	inc	r6
 	cjne	r6,#0x00,00101$
 	inc	r7
 	sjmp	00101$
 00105$:
-	C$ydrip.c$828$1$1 ==.
+	C$ydrip.c$732$1$1 ==.
 	XG$reset_offsets$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'killWithWatchdog'
 ;------------------------------------------------------------
 	G$killWithWatchdog$0$0 ==.
-	C$ydrip.c$830$1$1 ==.
-;	apps/ydrip/ydrip.c:830: void killWithWatchdog() {
+	C$ydrip.c$734$1$1 ==.
+;	apps/ydrip/ydrip.c:734: void killWithWatchdog() {
 ;	-----------------------------------------
 ;	 function killWithWatchdog
 ;	-----------------------------------------
 _killWithWatchdog:
-	C$ydrip.c$831$1$1 ==.
-;	apps/ydrip/ydrip.c:831: WDCTL = (WDCTL & ~0x03) | 0x00;
+	C$ydrip.c$735$1$1 ==.
+;	apps/ydrip/ydrip.c:735: WDCTL = (WDCTL & ~0x03) | 0x00;
 	mov	r7,_WDCTL
 	anl	ar7,#0xFC
 	mov	_WDCTL,r7
-	C$ydrip.c$832$1$1 ==.
-;	apps/ydrip/ydrip.c:832: WDCTL = (WDCTL & ~0x04) | 0x08;
+	C$ydrip.c$736$1$1 ==.
+;	apps/ydrip/ydrip.c:736: WDCTL = (WDCTL & ~0x04) | 0x08;		// This actually does a soft reset on the Wixel
 	mov	r7,_WDCTL
 	mov	a,#0xFB
 	anl	a,r7
 	orl	a,#0x08
 	mov	r7,a
 	mov	_WDCTL,r7
-	C$ydrip.c$833$1$1 ==.
+	C$ydrip.c$737$1$1 ==.
 	XG$killWithWatchdog$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -6862,8 +6925,8 @@ _killWithWatchdog:
 ;seconds                   Allocated with name '_goToSleep_seconds_1_1'
 ;------------------------------------------------------------
 	G$goToSleep$0$0 ==.
-	C$ydrip.c$835$1$1 ==.
-;	apps/ydrip/ydrip.c:835: XDATA void goToSleep (XDATA int16 seconds) {
+	C$ydrip.c$739$1$1 ==.
+;	apps/ydrip/ydrip.c:739: XDATA void goToSleep (XDATA int16 seconds) {
 ;	-----------------------------------------
 ;	 function goToSleep
 ;	-----------------------------------------
@@ -6875,169 +6938,169 @@ _goToSleep:
 	inc	dptr
 	mov	a,r7
 	movx	@dptr,a
-	C$ydrip.c$836$1$1 ==.
-;	apps/ydrip/ydrip.c:836: adcSetMillivoltCalibration(adcReadVddMillivolts());
+	C$ydrip.c$740$1$1 ==.
+;	apps/ydrip/ydrip.c:740: adcSetMillivoltCalibration(adcReadVddMillivolts());
 	lcall	_adcReadVddMillivolts
 	lcall	_adcSetMillivoltCalibration
-	C$ydrip.c$837$1$1 ==.
-;	apps/ydrip/ydrip.c:837: makeAllOutputsLow();
+	C$ydrip.c$741$1$1 ==.
+;	apps/ydrip/ydrip.c:741: makeAllOutputsLow();
 	lcall	_makeAllOutputsLow
-	C$ydrip.c$839$1$1 ==.
-;	apps/ydrip/ydrip.c:839: if(!needsTimingCalibration) {
+	C$ydrip.c$743$1$1 ==.
+;	apps/ydrip/ydrip.c:743: if(!needsTimingCalibration) {
 	jnb	_needsTimingCalibration,00134$
 	ljmp	00120$
 00134$:
-	C$ydrip.c$840$2$2 ==.
-;	apps/ydrip/ydrip.c:840: if(!usbPowerPresent()){
+	C$ydrip.c$744$2$2 ==.
+;	apps/ydrip/ydrip.c:744: if(!usbPowerPresent()){
 	lcall	_usbPowerPresent
 	jnc	00135$
 	ljmp	00117$
 00135$:
-	C$ydrip.c$846$3$2 ==.
-;	apps/ydrip/ydrip.c:846: uint8 savedPICTL = PICTL;
+	C$ydrip.c$750$3$2 ==.
+;	apps/ydrip/ydrip.c:750: uint8 savedPICTL = PICTL;
 	mov	r7,_PICTL
-	C$ydrip.c$847$3$2 ==.
-;	apps/ydrip/ydrip.c:847: BIT savedP0IE = P0IE;
+	C$ydrip.c$751$3$2 ==.
+;	apps/ydrip/ydrip.c:751: BIT savedP0IE = P0IE;
 	mov	c,_P0IE
 	mov	_goToSleep_savedP0IE_3_3,c
-	C$ydrip.c$848$3$2 ==.
-;	apps/ydrip/ydrip.c:848: uint8 savedP0SEL = P0SEL;
+	C$ydrip.c$752$3$2 ==.
+;	apps/ydrip/ydrip.c:752: uint8 savedP0SEL = P0SEL;
 	mov	r6,_P0SEL
-	C$ydrip.c$849$3$2 ==.
-;	apps/ydrip/ydrip.c:849: uint8 savedP0DIR = P0DIR;
+	C$ydrip.c$753$3$2 ==.
+;	apps/ydrip/ydrip.c:753: uint8 savedP0DIR = P0DIR;
 	mov	r5,_P0DIR
-	C$ydrip.c$850$3$2 ==.
-;	apps/ydrip/ydrip.c:850: uint8 savedP1SEL = P1SEL;
+	C$ydrip.c$754$3$2 ==.
+;	apps/ydrip/ydrip.c:754: uint8 savedP1SEL = P1SEL;
 	mov	r0,#_goToSleep_savedP1SEL_3_3
 	mov	a,_P1SEL
 	movx	@r0,a
-	C$ydrip.c$851$3$2 ==.
-;	apps/ydrip/ydrip.c:851: uint8 savedP1DIR = P1DIR;
+	C$ydrip.c$755$3$2 ==.
+;	apps/ydrip/ydrip.c:755: uint8 savedP1DIR = P1DIR;
 	mov	r0,#_goToSleep_savedP1DIR_3_3
 	mov	a,_P1DIR
 	movx	@r0,a
-	C$ydrip.c$853$3$3 ==.
-;	apps/ydrip/ydrip.c:853: sleepInit();
+	C$ydrip.c$757$3$3 ==.
+;	apps/ydrip/ydrip.c:757: sleepInit();
 	push	ar7
 	push	ar6
 	push	ar5
 	lcall	_sleepInit
-	C$ydrip.c$855$3$3 ==.
-;	apps/ydrip/ydrip.c:855: disableUsbPullup();
+	C$ydrip.c$759$3$3 ==.
+;	apps/ydrip/ydrip.c:759: disableUsbPullup();
 	lcall	_disableUsbPullup
-	C$ydrip.c$856$3$3 ==.
-;	apps/ydrip/ydrip.c:856: usbDeviceState = USB_STATE_DETACHED;
+	C$ydrip.c$760$3$3 ==.
+;	apps/ydrip/ydrip.c:760: usbDeviceState = USB_STATE_DETACHED;
 	mov	dptr,#_usbDeviceState
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$857$3$3 ==.
-;	apps/ydrip/ydrip.c:857: usbEnabled = 0;
+	C$ydrip.c$761$3$3 ==.
+;	apps/ydrip/ydrip.c:761: usbEnabled = 0;
 	clr	_usbEnabled
-	C$ydrip.c$858$3$3 ==.
-;	apps/ydrip/ydrip.c:858: SLEEP &= ~(1<<7);
+	C$ydrip.c$762$3$3 ==.
+;	apps/ydrip/ydrip.c:762: SLEEP &= ~(1<<7);
 	mov	r2,_SLEEP
 	anl	ar2,#0x7F
 	mov	_SLEEP,r2
-	C$ydrip.c$860$3$3 ==.
-;	apps/ydrip/ydrip.c:860: WORCTRL |= 0x03; // 2^5 periods
+	C$ydrip.c$764$3$3 ==.
+;	apps/ydrip/ydrip.c:764: WORCTRL |= 0x03; // 2^5 periods
 	orl	_WORCTRL,#0x03
-	C$ydrip.c$861$3$3 ==.
-;	apps/ydrip/ydrip.c:861: switchToRCOSC();
+	C$ydrip.c$765$3$3 ==.
+;	apps/ydrip/ydrip.c:765: switchToRCOSC();
 	lcall	_switchToRCOSC
 	pop	ar5
 	pop	ar6
 	pop	ar7
-	C$ydrip.c$863$3$3 ==.
-;	apps/ydrip/ydrip.c:863: storedDescHigh = DMA0CFGH;
+	C$ydrip.c$767$3$3 ==.
+;	apps/ydrip/ydrip.c:767: storedDescHigh = DMA0CFGH;
 	mov	r0,#_goToSleep_storedDescHigh_3_3
 	mov	a,_DMA0CFGH
 	movx	@r0,a
-	C$ydrip.c$864$3$3 ==.
-;	apps/ydrip/ydrip.c:864: storedDescLow = DMA0CFGL;
+	C$ydrip.c$768$3$3 ==.
+;	apps/ydrip/ydrip.c:768: storedDescLow = DMA0CFGL;
 	mov	r0,#_goToSleep_storedDescLow_3_3
 	mov	a,_DMA0CFGL
 	movx	@r0,a
-	C$ydrip.c$865$3$3 ==.
-;	apps/ydrip/ydrip.c:865: storedDma0Armed = DMAARM & 0x01;
+	C$ydrip.c$769$3$3 ==.
+;	apps/ydrip/ydrip.c:769: storedDma0Armed = DMAARM & 0x01;
 	mov	a,_DMAARM
 	anl	a,#0x01
 	add	a,#0xff
 	mov	_goToSleep_storedDma0Armed_3_3,c
-	C$ydrip.c$866$3$3 ==.
-;	apps/ydrip/ydrip.c:866: DMAARM |= 0x81;
+	C$ydrip.c$770$3$3 ==.
+;	apps/ydrip/ydrip.c:770: DMAARM |= 0x81;
 	orl	_DMAARM,#0x81
-	C$ydrip.c$867$3$3 ==.
-;	apps/ydrip/ydrip.c:867: dmaDesc[0] = ((unsigned int)& PM2_BUF) >> 8;
+	C$ydrip.c$771$3$3 ==.
+;	apps/ydrip/ydrip.c:771: dmaDesc[0] = ((unsigned int)& PM2_BUF) >> 8;
 	mov	r2,#_PM2_BUF
 	mov	r3,#(_PM2_BUF >> 8)
 	mov	ar2,r3
 	mov	dptr,#_dmaDesc
 	mov	a,r2
 	movx	@dptr,a
-	C$ydrip.c$868$3$3 ==.
-;	apps/ydrip/ydrip.c:868: dmaDesc[1] = (unsigned int)& PM2_BUF;
+	C$ydrip.c$772$3$3 ==.
+;	apps/ydrip/ydrip.c:772: dmaDesc[1] = (unsigned int)& PM2_BUF;
 	mov	r2,#_PM2_BUF
 	mov	r3,#(_PM2_BUF >> 8)
 	mov	dptr,#(_dmaDesc + 0x0001)
 	mov	a,r2
 	movx	@dptr,a
-	C$ydrip.c$870$3$3 ==.
-;	apps/ydrip/ydrip.c:870: DMA0CFGH = ((unsigned int)&dmaDesc) >> 8;
+	C$ydrip.c$774$3$3 ==.
+;	apps/ydrip/ydrip.c:774: DMA0CFGH = ((unsigned int)&dmaDesc) >> 8;
 	mov	r2,#_dmaDesc
 	mov	r3,#(_dmaDesc >> 8)
 	mov	_DMA0CFGH,r3
-	C$ydrip.c$871$3$3 ==.
-;	apps/ydrip/ydrip.c:871: DMA0CFGL = (unsigned int)&dmaDesc;
+	C$ydrip.c$775$3$3 ==.
+;	apps/ydrip/ydrip.c:775: DMA0CFGL = (unsigned int)&dmaDesc;
 	mov	r2,#_dmaDesc
 	mov	r3,#(_dmaDesc >> 8)
 	mov	_DMA0CFGL,r2
-	C$ydrip.c$872$3$3 ==.
-;	apps/ydrip/ydrip.c:872: DMAARM = 0x01;
+	C$ydrip.c$776$3$3 ==.
+;	apps/ydrip/ydrip.c:776: DMAARM = 0x01;
 	mov	_DMAARM,#0x01
-	C$ydrip.c$875$3$3 ==.
-;	apps/ydrip/ydrip.c:875: storedIEN0 = IEN0;
+	C$ydrip.c$779$3$3 ==.
+;	apps/ydrip/ydrip.c:779: storedIEN0 = IEN0;
 	mov	r3,_IEN0
-	C$ydrip.c$876$3$3 ==.
-;	apps/ydrip/ydrip.c:876: storedIEN1 = IEN1;
+	C$ydrip.c$780$3$3 ==.
+;	apps/ydrip/ydrip.c:780: storedIEN1 = IEN1;
 	mov	r0,#_goToSleep_storedIEN1_3_3
 	mov	a,_IEN1
 	movx	@r0,a
-	C$ydrip.c$877$3$3 ==.
-;	apps/ydrip/ydrip.c:877: storedIEN2 = IEN2;
+	C$ydrip.c$781$3$3 ==.
+;	apps/ydrip/ydrip.c:781: storedIEN2 = IEN2;
 	mov	r0,#_goToSleep_storedIEN2_3_3
 	mov	a,_IEN2
 	movx	@r0,a
-	C$ydrip.c$880$3$3 ==.
-;	apps/ydrip/ydrip.c:880: IEN0 |= 0xA0;
+	C$ydrip.c$784$3$3 ==.
+;	apps/ydrip/ydrip.c:784: IEN0 |= 0xA0;
 	orl	_IEN0,#0xA0
-	C$ydrip.c$883$3$3 ==.
-;	apps/ydrip/ydrip.c:883: IEN0 &= 0xA0;
+	C$ydrip.c$787$3$3 ==.
+;	apps/ydrip/ydrip.c:787: IEN0 &= 0xA0;
 	anl	_IEN0,#0xA0
-	C$ydrip.c$884$3$3 ==.
-;	apps/ydrip/ydrip.c:884: IEN1 &= ~0x3F;
+	C$ydrip.c$788$3$3 ==.
+;	apps/ydrip/ydrip.c:788: IEN1 &= ~0x3F;
 	mov	r2,_IEN1
 	anl	ar2,#0xC0
 	mov	_IEN1,r2
-	C$ydrip.c$885$3$3 ==.
-;	apps/ydrip/ydrip.c:885: IEN2 &= ~0x3F;
+	C$ydrip.c$789$3$3 ==.
+;	apps/ydrip/ydrip.c:789: IEN2 &= ~0x3F;
 	mov	r2,_IEN2
 	anl	ar2,#0xC0
 	mov	_IEN2,r2
-	C$ydrip.c$887$3$3 ==.
-;	apps/ydrip/ydrip.c:887: WORCTRL |= 0x04;  // Reset
+	C$ydrip.c$791$3$3 ==.
+;	apps/ydrip/ydrip.c:791: WORCTRL |= 0x04;  // Reset
 	orl	_WORCTRL,#0x04
-	C$ydrip.c$888$3$3 ==.
-;	apps/ydrip/ydrip.c:888: temp = WORTIME0;
+	C$ydrip.c$792$3$3 ==.
+;	apps/ydrip/ydrip.c:792: temp = WORTIME0;
 	mov	r2,_WORTIME0
-	C$ydrip.c$889$3$3 ==.
-;	apps/ydrip/ydrip.c:889: while(temp == WORTIME0) {};
+	C$ydrip.c$793$3$3 ==.
+;	apps/ydrip/ydrip.c:793: while(temp == WORTIME0) {};
 00101$:
 	mov	a,r2
 	cjne	a,_WORTIME0,00136$
 	sjmp	00101$
 00136$:
-	C$ydrip.c$890$1$1 ==.
-;	apps/ydrip/ydrip.c:890: WOREVT1 = seconds >> 8;
+	C$ydrip.c$794$1$1 ==.
+;	apps/ydrip/ydrip.c:794: WOREVT1 = seconds >> 8;
 	push	ar3
 	mov	dptr,#_goToSleep_seconds_1_1
 	movx	a,@dptr
@@ -7046,87 +7109,87 @@ _goToSleep:
 	movx	a,@dptr
 	mov	r4,a
 	mov	_WOREVT1,r4
-	C$ydrip.c$891$3$3 ==.
-;	apps/ydrip/ydrip.c:891: WOREVT0 = seconds;
+	C$ydrip.c$795$3$3 ==.
+;	apps/ydrip/ydrip.c:795: WOREVT0 = seconds;
 	mov	_WOREVT0,r3
-	C$ydrip.c$893$3$3 ==.
-;	apps/ydrip/ydrip.c:893: temp = WORTIME0;
+	C$ydrip.c$797$3$3 ==.
+;	apps/ydrip/ydrip.c:797: temp = WORTIME0;
 	mov	r2,_WORTIME0
-	C$ydrip.c$939$1$1 ==.
-;	apps/ydrip/ydrip.c:939: makeAllOutputs();
+	C$ydrip.c$843$1$1 ==.
+;	apps/ydrip/ydrip.c:843: makeAllOutputs();
 	pop	ar3
-	C$ydrip.c$894$3$3 ==.
-;	apps/ydrip/ydrip.c:894: while(temp == WORTIME0) {};
+	C$ydrip.c$798$3$3 ==.
+;	apps/ydrip/ydrip.c:798: while(temp == WORTIME0) {};
 00104$:
 	mov	a,r2
 	cjne	a,_WORTIME0,00137$
 	sjmp	00104$
 00137$:
-	C$ydrip.c$896$3$3 ==.
-;	apps/ydrip/ydrip.c:896: MEMCTR |= 0x02;
+	C$ydrip.c$800$3$3 ==.
+;	apps/ydrip/ydrip.c:800: MEMCTR |= 0x02;
 	orl	_MEMCTR,#0x02
-	C$ydrip.c$897$3$3 ==.
-;	apps/ydrip/ydrip.c:897: SLEEP = 0x06;
+	C$ydrip.c$801$3$3 ==.
+;	apps/ydrip/ydrip.c:801: SLEEP = 0x06;
 	mov	_SLEEP,#0x06
-	C$ydrip.c$898$3$3 ==.
-;	apps/ydrip/ydrip.c:898: __asm nop __endasm;
+	C$ydrip.c$802$3$3 ==.
+;	apps/ydrip/ydrip.c:802: __asm nop __endasm;
 	 nop 
-	C$ydrip.c$899$3$3 ==.
-;	apps/ydrip/ydrip.c:899: __asm nop __endasm;
+	C$ydrip.c$803$3$3 ==.
+;	apps/ydrip/ydrip.c:803: __asm nop __endasm;
 	 nop 
-	C$ydrip.c$900$3$3 ==.
-;	apps/ydrip/ydrip.c:900: __asm nop __endasm;
+	C$ydrip.c$804$3$3 ==.
+;	apps/ydrip/ydrip.c:804: __asm nop __endasm;
 	 nop 
-	C$ydrip.c$901$3$3 ==.
-;	apps/ydrip/ydrip.c:901: if(SLEEP & 0x03){
+	C$ydrip.c$805$3$3 ==.
+;	apps/ydrip/ydrip.c:805: if(SLEEP & 0x03){
 	mov	a,_SLEEP
 	anl	a,#0x03
 	jz	00108$
-	C$ydrip.c$902$4$6 ==.
-;	apps/ydrip/ydrip.c:902: __asm mov 0xD7, #0x01 __endasm;
+	C$ydrip.c$806$4$6 ==.
+;	apps/ydrip/ydrip.c:806: __asm mov 0xD7, #0x01 __endasm;
 	 mov 0xD7, #0x01 
-	C$ydrip.c$903$4$6 ==.
-;	apps/ydrip/ydrip.c:903: __asm nop __endasm;
+	C$ydrip.c$807$4$6 ==.
+;	apps/ydrip/ydrip.c:807: __asm nop __endasm;
 	 nop 
-	C$ydrip.c$904$4$6 ==.
-;	apps/ydrip/ydrip.c:904: __asm orl 0x87, #0x01 __endasm;
+	C$ydrip.c$808$4$6 ==.
+;	apps/ydrip/ydrip.c:808: __asm orl 0x87, #0x01 __endasm;
 	 orl 0x87, #0x01 
-	C$ydrip.c$905$4$6 ==.
-;	apps/ydrip/ydrip.c:905: __asm nop __endasm;
+	C$ydrip.c$809$4$6 ==.
+;	apps/ydrip/ydrip.c:809: __asm nop __endasm;
 	 nop 
 00108$:
-	C$ydrip.c$907$3$3 ==.
-;	apps/ydrip/ydrip.c:907: IEN0 = storedIEN0;
+	C$ydrip.c$811$3$3 ==.
+;	apps/ydrip/ydrip.c:811: IEN0 = storedIEN0;
 	mov	_IEN0,r3
-	C$ydrip.c$908$3$3 ==.
-;	apps/ydrip/ydrip.c:908: IEN1 = storedIEN1;
+	C$ydrip.c$812$3$3 ==.
+;	apps/ydrip/ydrip.c:812: IEN1 = storedIEN1;
 	mov	r0,#_goToSleep_storedIEN1_3_3
 	movx	a,@r0
 	mov	_IEN1,a
-	C$ydrip.c$909$3$3 ==.
-;	apps/ydrip/ydrip.c:909: IEN2 = storedIEN2;
+	C$ydrip.c$813$3$3 ==.
+;	apps/ydrip/ydrip.c:813: IEN2 = storedIEN2;
 	mov	r0,#_goToSleep_storedIEN2_3_3
 	movx	a,@r0
 	mov	_IEN2,a
-	C$ydrip.c$910$3$3 ==.
-;	apps/ydrip/ydrip.c:910: DMA0CFGH = storedDescHigh;
+	C$ydrip.c$814$3$3 ==.
+;	apps/ydrip/ydrip.c:814: DMA0CFGH = storedDescHigh;
 	mov	r0,#_goToSleep_storedDescHigh_3_3
 	movx	a,@r0
 	mov	_DMA0CFGH,a
-	C$ydrip.c$911$3$3 ==.
-;	apps/ydrip/ydrip.c:911: DMA0CFGL = storedDescLow;
+	C$ydrip.c$815$3$3 ==.
+;	apps/ydrip/ydrip.c:815: DMA0CFGL = storedDescLow;
 	mov	r0,#_goToSleep_storedDescLow_3_3
 	movx	a,@r0
 	mov	_DMA0CFGL,a
-	C$ydrip.c$912$3$3 ==.
-;	apps/ydrip/ydrip.c:912: if(storedDma0Armed){
+	C$ydrip.c$816$3$3 ==.
+;	apps/ydrip/ydrip.c:816: if(storedDma0Armed){
 	jnb	_goToSleep_storedDma0Armed_3_3,00110$
-	C$ydrip.c$913$4$7 ==.
-;	apps/ydrip/ydrip.c:913: DMAARM |= 0x01;
+	C$ydrip.c$817$4$7 ==.
+;	apps/ydrip/ydrip.c:817: DMAARM |= 0x01;
 	orl	_DMAARM,#0x01
 00110$:
-	C$ydrip.c$916$3$3 ==.
-;	apps/ydrip/ydrip.c:916: boardClockInit();
+	C$ydrip.c$820$3$3 ==.
+;	apps/ydrip/ydrip.c:820: boardClockInit();
 	push	ar7
 	push	ar6
 	push	ar5
@@ -7134,43 +7197,43 @@ _goToSleep:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-	C$ydrip.c$918$3$3 ==.
-;	apps/ydrip/ydrip.c:918: PICTL = savedPICTL;
+	C$ydrip.c$822$3$3 ==.
+;	apps/ydrip/ydrip.c:822: PICTL = savedPICTL;
 	mov	_PICTL,r7
-	C$ydrip.c$919$3$3 ==.
-;	apps/ydrip/ydrip.c:919: P0IE = savedP0IE;
+	C$ydrip.c$823$3$3 ==.
+;	apps/ydrip/ydrip.c:823: P0IE = savedP0IE;
 	mov	c,_goToSleep_savedP0IE_3_3
 	mov	_P0IE,c
-	C$ydrip.c$920$3$3 ==.
-;	apps/ydrip/ydrip.c:920: P0SEL = savedP0SEL;
+	C$ydrip.c$824$3$3 ==.
+;	apps/ydrip/ydrip.c:824: P0SEL = savedP0SEL;
 	mov	_P0SEL,r6
-	C$ydrip.c$921$3$3 ==.
-;	apps/ydrip/ydrip.c:921: P0DIR = savedP0DIR;
+	C$ydrip.c$825$3$3 ==.
+;	apps/ydrip/ydrip.c:825: P0DIR = savedP0DIR;
 	mov	_P0DIR,r5
-	C$ydrip.c$922$3$3 ==.
-;	apps/ydrip/ydrip.c:922: P1SEL = savedP1SEL;
+	C$ydrip.c$826$3$3 ==.
+;	apps/ydrip/ydrip.c:826: P1SEL = savedP1SEL;
 	mov	r0,#_goToSleep_savedP1SEL_3_3
 	movx	a,@r0
 	mov	_P1SEL,a
-	C$ydrip.c$923$3$3 ==.
-;	apps/ydrip/ydrip.c:923: P1DIR = savedP1DIR;
+	C$ydrip.c$827$3$3 ==.
+;	apps/ydrip/ydrip.c:827: P1DIR = savedP1DIR;
 	mov	r0,#_goToSleep_savedP1DIR_3_3
 	movx	a,@r0
 	mov	_P1DIR,a
-	C$ydrip.c$924$3$3 ==.
-;	apps/ydrip/ydrip.c:924: USBPOW = 1;
+	C$ydrip.c$828$3$3 ==.
+;	apps/ydrip/ydrip.c:828: USBPOW = 1;
 	mov	dptr,#_USBPOW
 	mov	a,#0x01
 	movx	@dptr,a
-	C$ydrip.c$925$3$3 ==.
-;	apps/ydrip/ydrip.c:925: USBCIE = 0b0111;
+	C$ydrip.c$829$3$3 ==.
+;	apps/ydrip/ydrip.c:829: USBCIE = 0b0111;
 	mov	dptr,#_USBCIE
 	mov	a,#0x07
 	movx	@dptr,a
 	ljmp	00120$
 00117$:
-	C$ydrip.c$927$3$8 ==.
-;	apps/ydrip/ydrip.c:927: uint32 start_waiting = getMs();
+	C$ydrip.c$831$3$8 ==.
+;	apps/ydrip/ydrip.c:831: uint32 start_waiting = getMs();
 	lcall	_getMs
 	mov	r0,#_goToSleep_start_waiting_3_8
 	push	acc
@@ -7185,27 +7248,27 @@ _goToSleep:
 	pop	acc
 	inc	r0
 	movx	@r0,a
-	C$ydrip.c$928$3$8 ==.
-;	apps/ydrip/ydrip.c:928: if(!usbEnabled) {
+	C$ydrip.c$832$3$8 ==.
+;	apps/ydrip/ydrip.c:832: if(!usbEnabled) {
 	jb	_usbEnabled,00112$
-	C$ydrip.c$929$4$9 ==.
-;	apps/ydrip/ydrip.c:929: usbDeviceState = USB_STATE_POWERED;
+	C$ydrip.c$833$4$9 ==.
+;	apps/ydrip/ydrip.c:833: usbDeviceState = USB_STATE_POWERED;
 	mov	dptr,#_usbDeviceState
 	mov	a,#0x02
 	movx	@dptr,a
-	C$ydrip.c$930$4$9 ==.
-;	apps/ydrip/ydrip.c:930: enableUsbPullup();
+	C$ydrip.c$834$4$9 ==.
+;	apps/ydrip/ydrip.c:834: enableUsbPullup();
 	lcall	_enableUsbPullup
-	C$ydrip.c$931$4$9 ==.
-;	apps/ydrip/ydrip.c:931: usbEnabled = 1;
+	C$ydrip.c$835$4$9 ==.
+;	apps/ydrip/ydrip.c:835: usbEnabled = 1;
 	setb	_usbEnabled
 00112$:
-	C$ydrip.c$933$3$8 ==.
-;	apps/ydrip/ydrip.c:933: delayMs(100);
+	C$ydrip.c$837$3$8 ==.
+;	apps/ydrip/ydrip.c:837: delayMs(100);
 	mov	dptr,#0x0064
 	lcall	_delayMs
-	C$ydrip.c$934$3$8 ==.
-;	apps/ydrip/ydrip.c:934: while((getMs() - start_waiting) < (seconds * 1000)) {
+	C$ydrip.c$838$3$8 ==.
+;	apps/ydrip/ydrip.c:838: while((getMs() - start_waiting) < (seconds * 1000)) {
 	mov	dptr,#_goToSleep_seconds_1_1
 	movx	a,@dptr
 	mov	r2,a
@@ -7272,15 +7335,15 @@ _goToSleep:
 	mov	a,(_goToSleep_sloc1_1_0 + 3)
 	subb	a,r7
 	jnc	00120$
-	C$ydrip.c$935$4$10 ==.
-;	apps/ydrip/ydrip.c:935: doServices();
+	C$ydrip.c$839$4$10 ==.
+;	apps/ydrip/ydrip.c:839: doServices();
 	lcall	_doServices
 	sjmp	00113$
 00120$:
-	C$ydrip.c$939$1$1 ==.
-;	apps/ydrip/ydrip.c:939: makeAllOutputs();
+	C$ydrip.c$843$1$1 ==.
+;	apps/ydrip/ydrip.c:843: makeAllOutputs();
 	lcall	_makeAllOutputs
-	C$ydrip.c$940$1$1 ==.
+	C$ydrip.c$844$1$1 ==.
 	XG$goToSleep$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -7289,8 +7352,8 @@ _goToSleep:
 ;c                         Allocated with name '_putchar_c_1_1'
 ;------------------------------------------------------------
 	G$putchar$0$0 ==.
-	C$ydrip.c$943$1$1 ==.
-;	apps/ydrip/ydrip.c:943: void putchar(XDATA char c) {
+	C$ydrip.c$847$1$1 ==.
+;	apps/ydrip/ydrip.c:847: void putchar(XDATA char c) {
 ;	-----------------------------------------
 ;	 function putchar
 ;	-----------------------------------------
@@ -7298,62 +7361,62 @@ _putchar:
 	mov	a,dpl
 	mov	dptr,#_putchar_c_1_1
 	movx	@dptr,a
-	C$ydrip.c$944$1$1 ==.
-;	apps/ydrip/ydrip.c:944: while(uart1TxAvailable() == 0) {								//  Loop until space in the TX buffer to send a character
+	C$ydrip.c$848$1$1 ==.
+;	apps/ydrip/ydrip.c:848: while(uart1TxAvailable() == 0) {								//  Loop until space in the TX buffer to send a character
 00101$:
 	lcall	_uart1TxAvailable
 	mov	a,dpl
 	jnz	00103$
-	C$ydrip.c$945$3$3 ==.
-;	apps/ydrip/ydrip.c:945: LED_RED(1);													// Error Indicator
+	C$ydrip.c$849$3$3 ==.
+;	apps/ydrip/ydrip.c:849: LED_RED(1);													// Error Indicator
 	orl	_P2DIR,#0x02
-	C$ydrip.c$946$2$2 ==.
-;	apps/ydrip/ydrip.c:946: boardService();
+	C$ydrip.c$850$2$2 ==.
+;	apps/ydrip/ydrip.c:850: boardService();
 	lcall	_boardService
 	sjmp	00101$
 00103$:
-	C$ydrip.c$949$1$1 ==.
-;	apps/ydrip/ydrip.c:949: uart1TxSendByte(c);
+	C$ydrip.c$853$1$1 ==.
+;	apps/ydrip/ydrip.c:853: uart1TxSendByte(c);
 	mov	dptr,#_putchar_c_1_1
 	movx	a,@dptr
 	mov	r7,a
 	mov	dpl,a
 	push	ar7
 	lcall	_uart1TxSendByte
-	C$ydrip.c$951$1$1 ==.
-;	apps/ydrip/ydrip.c:951: if (usbPowerPresent()) {
+	C$ydrip.c$855$1$1 ==.
+;	apps/ydrip/ydrip.c:855: if (usbPowerPresent()) {
 	lcall	_usbPowerPresent
 	pop	ar7
 	jnc	00108$
-	C$ydrip.c$952$2$4 ==.
-;	apps/ydrip/ydrip.c:952: while(usbComTxAvailable() == 0) {							//  Loop until space in the TX buffer to send a character
+	C$ydrip.c$856$2$4 ==.
+;	apps/ydrip/ydrip.c:856: while(usbComTxAvailable() == 0) {							//  Loop until space in the TX buffer to send a character
 00104$:
 	push	ar7
 	lcall	_usbComTxAvailable
 	mov	a,dpl
 	pop	ar7
 	jnz	00106$
-	C$ydrip.c$954$3$5 ==.
-;	apps/ydrip/ydrip.c:954: boardService();
+	C$ydrip.c$858$3$5 ==.
+;	apps/ydrip/ydrip.c:858: boardService();
 	push	ar7
 	lcall	_boardService
 	pop	ar7
 	sjmp	00104$
 00106$:
-	C$ydrip.c$956$2$4 ==.
-;	apps/ydrip/ydrip.c:956: usbComTxSendByte(c);
+	C$ydrip.c$860$2$4 ==.
+;	apps/ydrip/ydrip.c:860: usbComTxSendByte(c);
 	mov	dpl,r7
 	lcall	_usbComTxSendByte
-	C$ydrip.c$957$2$4 ==.
-;	apps/ydrip/ydrip.c:957: boardService();
+	C$ydrip.c$861$2$4 ==.
+;	apps/ydrip/ydrip.c:861: boardService();
 	lcall	_boardService
 00108$:
-	C$ydrip.c$960$2$6 ==.
-;	apps/ydrip/ydrip.c:960: LED_RED(0);														// Error gone
+	C$ydrip.c$864$2$6 ==.
+;	apps/ydrip/ydrip.c:864: LED_RED(0);														// Error gone
 	mov	r7,_P2DIR
 	anl	ar7,#0xFD
 	mov	_P2DIR,r7
-	C$ydrip.c$961$2$6 ==.
+	C$ydrip.c$865$2$6 ==.
 	XG$putchar$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -7363,8 +7426,8 @@ _putchar:
 ;i                         Allocated with name '_printfUSB_i_1_1'
 ;------------------------------------------------------------
 	G$printfUSB$0$0 ==.
-	C$ydrip.c$964$2$6 ==.
-;	apps/ydrip/ydrip.c:964: void printfUSB(char * stringForUSB) {
+	C$ydrip.c$868$2$6 ==.
+;	apps/ydrip/ydrip.c:868: void printfUSB(char * stringForUSB) {
 ;	-----------------------------------------
 ;	 function printfUSB
 ;	-----------------------------------------
@@ -7372,8 +7435,8 @@ _printfUSB:
 	mov	r5,dpl
 	mov	r6,dph
 	mov	r7,b
-	C$ydrip.c$967$1$1 ==.
-;	apps/ydrip/ydrip.c:967: if (usbPowerPresent()) {
+	C$ydrip.c$871$1$1 ==.
+;	apps/ydrip/ydrip.c:871: if (usbPowerPresent()) {
 	push	ar7
 	push	ar6
 	push	ar5
@@ -7384,8 +7447,8 @@ _printfUSB:
 	jc	00117$
 	ljmp	00110$
 00117$:
-	C$ydrip.c$969$2$2 ==.
-;	apps/ydrip/ydrip.c:969: length = strlen(stringForUSB);
+	C$ydrip.c$872$2$2 ==.
+;	apps/ydrip/ydrip.c:872: length = strlen(stringForUSB);
 	mov	dpl,r5
 	mov	dph,r6
 	mov	b,r7
@@ -7397,8 +7460,8 @@ _printfUSB:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-	C$ydrip.c$970$2$2 ==.
-;	apps/ydrip/ydrip.c:970: stringForUSB[length++] = ('/r');
+	C$ydrip.c$873$2$2 ==.
+;	apps/ydrip/ydrip.c:873: stringForUSB[length++] = ('/r');
 	mov	a,r3
 	inc	a
 	mov	r4,a
@@ -7414,8 +7477,8 @@ _printfUSB:
 	mov	b,r2
 	mov	a,#0x2F
 	lcall	__gptrput
-	C$ydrip.c$971$2$2 ==.
-;	apps/ydrip/ydrip.c:971: stringForUSB[length++] = ('/n');
+	C$ydrip.c$874$2$2 ==.
+;	apps/ydrip/ydrip.c:874: stringForUSB[length++] = ('/n');
 	inc	r3
 	inc	r3
 	mov	a,r4
@@ -7430,16 +7493,16 @@ _printfUSB:
 	mov	b,r4
 	mov	a,#0x2F
 	lcall	__gptrput
-	C$ydrip.c$973$2$1 ==.
-;	apps/ydrip/ydrip.c:973: for(i = 0; i < length; ++i) {
+	C$ydrip.c$876$2$1 ==.
+;	apps/ydrip/ydrip.c:876: for(i = 0; i < length; ++i) {
 	mov	r4,#0x00
 00106$:
 	clr	c
 	mov	a,r4
 	subb	a,r3
 	jnc	00110$
-	C$ydrip.c$974$3$3 ==.
-;	apps/ydrip/ydrip.c:974: while(usbComTxAvailable() == 0) {							//  Loop until space in the TX buffer to send each character
+	C$ydrip.c$877$3$3 ==.
+;	apps/ydrip/ydrip.c:877: while(usbComTxAvailable() == 0) {							//  Loop until space in the TX buffer to send each character
 00101$:
 	push	ar7
 	push	ar6
@@ -7454,8 +7517,8 @@ _printfUSB:
 	pop	ar6
 	pop	ar7
 	jnz	00103$
-	C$ydrip.c$975$4$4 ==.
-;	apps/ydrip/ydrip.c:975: doServices();
+	C$ydrip.c$878$4$4 ==.
+;	apps/ydrip/ydrip.c:878: doServices();
 	push	ar7
 	push	ar6
 	push	ar5
@@ -7469,8 +7532,8 @@ _printfUSB:
 	pop	ar7
 	sjmp	00101$
 00103$:
-	C$ydrip.c$977$3$3 ==.
-;	apps/ydrip/ydrip.c:977: usbComTxSendByte(stringForUSB[i]);		
+	C$ydrip.c$880$3$3 ==.
+;	apps/ydrip/ydrip.c:880: usbComTxSendByte(stringForUSB[i]);		
 	mov	a,r4
 	add	a,r5
 	mov	r0,a
@@ -7494,12 +7557,12 @@ _printfUSB:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-	C$ydrip.c$973$2$2 ==.
-;	apps/ydrip/ydrip.c:973: for(i = 0; i < length; ++i) {
+	C$ydrip.c$876$2$2 ==.
+;	apps/ydrip/ydrip.c:876: for(i = 0; i < length; ++i) {
 	inc	r4
 	sjmp	00106$
 00110$:
-	C$ydrip.c$983$2$1 ==.
+	C$ydrip.c$885$2$1 ==.
 	XG$printfUSB$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -7509,8 +7572,8 @@ _printfUSB:
 ;channel                   Allocated with name '_swap_channel_channel_1_1'
 ;------------------------------------------------------------
 	G$swap_channel$0$0 ==.
-	C$ydrip.c$986$2$1 ==.
-;	apps/ydrip/ydrip.c:986: void swap_channel(XDATA uint8 channel, XDATA uint8 newFSCTRL0) {
+	C$ydrip.c$888$2$1 ==.
+;	apps/ydrip/ydrip.c:888: void swap_channel(XDATA uint8 channel, XDATA uint8 newFSCTRL0) {
 ;	-----------------------------------------
 ;	 function swap_channel
 ;	-----------------------------------------
@@ -7518,65 +7581,65 @@ _swap_channel:
 	mov	a,dpl
 	mov	dptr,#_swap_channel_channel_1_1
 	movx	@dptr,a
-	C$ydrip.c$987$1$1 ==.
-;	apps/ydrip/ydrip.c:987: do {
+	C$ydrip.c$889$1$1 ==.
+;	apps/ydrip/ydrip.c:889: do {
 00101$:
-	C$ydrip.c$988$2$2 ==.
-;	apps/ydrip/ydrip.c:988: RFST = 4;   //SIDLE
+	C$ydrip.c$890$2$2 ==.
+;	apps/ydrip/ydrip.c:890: RFST = 4;   //SIDLE
 	mov	_RFST,#0x04
-	C$ydrip.c$989$1$1 ==.
-;	apps/ydrip/ydrip.c:989: } while (MARCSTATE != 0x01);
+	C$ydrip.c$891$1$1 ==.
+;	apps/ydrip/ydrip.c:891: } while (MARCSTATE != 0x01);
 	mov	dptr,#_MARCSTATE
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x01,00101$
-	C$ydrip.c$991$1$1 ==.
-;	apps/ydrip/ydrip.c:991: FSCTRL0 = newFSCTRL0;
+	C$ydrip.c$893$1$1 ==.
+;	apps/ydrip/ydrip.c:893: FSCTRL0 = newFSCTRL0;
 	mov	dptr,#_swap_channel_PARM_2
 	movx	a,@dptr
 	mov	dptr,#_FSCTRL0
 	movx	@dptr,a
-	C$ydrip.c$992$1$1 ==.
-;	apps/ydrip/ydrip.c:992: CHANNR = channel;
+	C$ydrip.c$894$1$1 ==.
+;	apps/ydrip/ydrip.c:894: CHANNR = channel;
 	mov	dptr,#_swap_channel_channel_1_1
 	movx	a,@dptr
 	mov	dptr,#_CHANNR
 	movx	@dptr,a
-	C$ydrip.c$993$1$1 ==.
-;	apps/ydrip/ydrip.c:993: RFST = 2;   //RX
+	C$ydrip.c$895$1$1 ==.
+;	apps/ydrip/ydrip.c:895: RFST = 2;   //RX
 	mov	_RFST,#0x02
-	C$ydrip.c$994$1$1 ==.
+	C$ydrip.c$896$1$1 ==.
 	XG$swap_channel$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'strobe_radio'
 ;------------------------------------------------------------
 	G$strobe_radio$0$0 ==.
-	C$ydrip.c$996$1$1 ==.
-;	apps/ydrip/ydrip.c:996: void strobe_radio(int radio_chan) {
+	C$ydrip.c$898$1$1 ==.
+;	apps/ydrip/ydrip.c:898: void strobe_radio(int radio_chan) {
 ;	-----------------------------------------
 ;	 function strobe_radio
 ;	-----------------------------------------
 _strobe_radio:
 	mov	r6,dpl
 	mov	r7,dph
-	C$ydrip.c$997$1$1 ==.
-;	apps/ydrip/ydrip.c:997: radioMacInit();
+	C$ydrip.c$899$1$1 ==.
+;	apps/ydrip/ydrip.c:899: radioMacInit();
 	push	ar7
 	push	ar6
 	lcall	_radioMacInit
-	C$ydrip.c$998$1$1 ==.
-;	apps/ydrip/ydrip.c:998: MCSM1 = 0;
+	C$ydrip.c$900$1$1 ==.
+;	apps/ydrip/ydrip.c:900: MCSM1 = 0;
 	mov	dptr,#_MCSM1
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$999$1$1 ==.
-;	apps/ydrip/ydrip.c:999: radioMacStrobe();
+	C$ydrip.c$901$1$1 ==.
+;	apps/ydrip/ydrip.c:901: radioMacStrobe();
 	lcall	_radioMacStrobe
 	pop	ar6
 	pop	ar7
-	C$ydrip.c$1000$1$1 ==.
-;	apps/ydrip/ydrip.c:1000: swap_channel(nChannels[radio_chan], fOffset[radio_chan]);
+	C$ydrip.c$902$1$1 ==.
+;	apps/ydrip/ydrip.c:902: swap_channel(nChannels[radio_chan], fOffset[radio_chan]);
 	mov	a,r6
 	add	a,#_nChannels
 	mov	r1,a
@@ -7590,7 +7653,7 @@ _strobe_radio:
 	movx	@dptr,a
 	mov	dpl,r5
 	lcall	_swap_channel
-	C$ydrip.c$1001$1$1 ==.
+	C$ydrip.c$903$1$1 ==.
 	XG$strobe_radio$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -7611,8 +7674,8 @@ _strobe_radio:
 ;transID                   Allocated with name '_WaitForPacket_transID_1_1'
 ;------------------------------------------------------------
 	G$WaitForPacket$0$0 ==.
-	C$ydrip.c$1004$1$1 ==.
-;	apps/ydrip/ydrip.c:1004: int WaitForPacket(XDATA uint16 milliseconds, Dexcom_packet* pkt, XDATA uint8 channel) {
+	C$ydrip.c$905$1$1 ==.
+;	apps/ydrip/ydrip.c:905: int WaitForPacket(XDATA uint16 milliseconds, Dexcom_packet* pkt, XDATA uint8 channel) {
 ;	-----------------------------------------
 ;	 function WaitForPacket
 ;	-----------------------------------------
@@ -7624,15 +7687,15 @@ _WaitForPacket:
 	inc	dptr
 	mov	a,r7
 	movx	@dptr,a
-	C$ydrip.c$1005$1$1 ==.
-;	apps/ydrip/ydrip.c:1005: XDATA uint32 start = getMs();
+	C$ydrip.c$906$1$1 ==.
+;	apps/ydrip/ydrip.c:906: XDATA uint32 start = getMs();
 	lcall	_getMs
 	mov	_WaitForPacket_sloc4_1_0,dpl
 	mov	(_WaitForPacket_sloc4_1_0 + 1),dph
 	mov	(_WaitForPacket_sloc4_1_0 + 2),b
 	mov	(_WaitForPacket_sloc4_1_0 + 3),a
-	C$ydrip.c$1008$1$1 ==.
-;	apps/ydrip/ydrip.c:1008: XDATA uint32 six_minutes = 360000;						//	SWITCH TO 3600 WHEN DEBUGGING
+	C$ydrip.c$909$1$1 ==.
+;	apps/ydrip/ydrip.c:909: XDATA uint32 six_minutes = 360000;
 	mov	dptr,#_WaitForPacket_six_minutes_1_1
 	mov	a,#0x40
 	movx	@dptr,a
@@ -7645,8 +7708,8 @@ _WaitForPacket:
 	inc	dptr
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$1010$1$1 ==.
-;	apps/ydrip/ydrip.c:1010: XDATA char transID[] = "BLANK"; 	// Line added
+	C$ydrip.c$912$1$1 ==.
+;	apps/ydrip/ydrip.c:912: XDATA char transID[] = "BLANK"; 	// Line added
 	mov	dptr,#_WaitForPacket_transID_1_1
 	mov	a,#0x42
 	movx	@dptr,a
@@ -7665,8 +7728,8 @@ _WaitForPacket:
 	mov	dptr,#(_WaitForPacket_transID_1_1 + 0x0005)
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$1011$1$1 ==.
-;	apps/ydrip/ydrip.c:1011: swap_channel(nChannels[channel], fOffset[channel]);
+	C$ydrip.c$913$1$1 ==.
+;	apps/ydrip/ydrip.c:913: swap_channel(nChannels[channel], fOffset[channel]);
 	mov	dptr,#_WaitForPacket_PARM_3
 	movx	a,@dptr
 	mov	r3,a
@@ -7684,9 +7747,9 @@ _WaitForPacket:
 	push	ar3
 	lcall	_swap_channel
 	pop	ar3
-	C$ydrip.c$1012$1$1 ==.
-;	apps/ydrip/ydrip.c:1012: if (debug_mode) six_minutes = 3000;
-	jnb	_debug_mode,00102$
+	C$ydrip.c$914$1$1 ==.
+;	apps/ydrip/ydrip.c:914: if (debug_mode) six_minutes = 3000;
+	jnb	_debug_mode,00126$
 	mov	dptr,#_WaitForPacket_six_minutes_1_1
 	mov	a,#0xB8
 	movx	@dptr,a
@@ -7698,14 +7761,9 @@ _WaitForPacket:
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-00102$:
-	C$ydrip.c$1014$2$2 ==.
-;	apps/ydrip/ydrip.c:1014: LED_RED(0);												// Error Indicator
-	mov	r2,_P2DIR
-	anl	ar2,#0xFD
-	mov	_P2DIR,r2
-	C$ydrip.c$1015$2$3 ==.
-;	apps/ydrip/ydrip.c:1015: while (!milliseconds || (getMs() - start) < milliseconds) {
+	C$ydrip.c$917$1$1 ==.
+;	apps/ydrip/ydrip.c:917: while (!milliseconds || (getMs() - start) < milliseconds) {
+00126$:
 	mov	dptr,#_WaitForPacket_six_minutes_1_1
 	movx	a,@dptr
 	mov	_WaitForPacket_sloc1_1_0,a
@@ -7770,16 +7828,16 @@ _WaitForPacket:
 	ljmp	00119$
 00132$:
 00118$:
-	C$ydrip.c$1016$2$3 ==.
-;	apps/ydrip/ydrip.c:1016: doServices();
+	C$ydrip.c$918$2$2 ==.
+;	apps/ydrip/ydrip.c:918: doServices();
 	push	ar3
 	lcall	_doServices
-	C$ydrip.c$1017$2$3 ==.
-;	apps/ydrip/ydrip.c:1017: blink_yellow_led();
+	C$ydrip.c$919$2$2 ==.
+;	apps/ydrip/ydrip.c:919: blink_yellow_led();
 	lcall	_blink_yellow_led
 	pop	ar3
-	C$ydrip.c$1018$2$3 ==.
-;	apps/ydrip/ydrip.c:1018: i++;
+	C$ydrip.c$920$2$2 ==.
+;	apps/ydrip/ydrip.c:920: i++;
 	inc	_WaitForPacket_sloc3_1_0
 	clr	a
 	cjne	a,_WaitForPacket_sloc3_1_0,00133$
@@ -7789,8 +7847,8 @@ _WaitForPacket:
 	cjne	a,(_WaitForPacket_sloc3_1_0 + 2),00133$
 	inc	(_WaitForPacket_sloc3_1_0 + 3)
 00133$:
-	C$ydrip.c$1019$1$1 ==.
-;	apps/ydrip/ydrip.c:1019: if(!(i % 40000)) {
+	C$ydrip.c$921$1$1 ==.
+;	apps/ydrip/ydrip.c:921: if(!(i % 40000)) {
 	mov	r0,#__modulong_PARM_2
 	mov	a,#0x40
 	movx	@r0,a
@@ -7817,8 +7875,8 @@ _WaitForPacket:
 	orl	a,r5
 	orl	a,r6
 	orl	a,r7
-	C$ydrip.c$1020$3$4 ==.
-;	apps/ydrip/ydrip.c:1020: strobe_radio(channel);
+	C$ydrip.c$922$3$3 ==.
+;	apps/ydrip/ydrip.c:922: strobe_radio(channel);
 	jnz	00104$
 	mov	ar6,r3
 	mov	r7,a
@@ -7828,8 +7886,8 @@ _WaitForPacket:
 	lcall	_strobe_radio
 	pop	ar3
 00104$:
-	C$ydrip.c$1022$2$3 ==.
-;	apps/ydrip/ydrip.c:1022: if(getMs() - start > six_minutes) {
+	C$ydrip.c$924$2$2 ==.
+;	apps/ydrip/ydrip.c:924: if(getMs() - start > six_minutes) {
 	push	ar3
 	lcall	_getMs
 	mov	r4,dpl
@@ -7860,21 +7918,21 @@ _WaitForPacket:
 	mov	a,(_WaitForPacket_sloc1_1_0 + 3)
 	subb	a,r7
 	jnc	00106$
-	C$ydrip.c$1023$3$5 ==.
-;	apps/ydrip/ydrip.c:1023: killWithWatchdog();
+	C$ydrip.c$925$3$4 ==.
+;	apps/ydrip/ydrip.c:925: killWithWatchdog();
 	push	ar3
 	lcall	_killWithWatchdog
-	C$ydrip.c$1024$3$5 ==.
-;	apps/ydrip/ydrip.c:1024: delayMs(2000);
+	C$ydrip.c$926$4$5 ==.
+;	apps/ydrip/ydrip.c:926: LED_RED(1);											// Error Indicator
+	orl	_P2DIR,#0x02
+	C$ydrip.c$927$3$4 ==.
+;	apps/ydrip/ydrip.c:927: delayMs(2000);
 	mov	dptr,#0x07D0
 	lcall	_delayMs
 	pop	ar3
-	C$ydrip.c$1025$4$6 ==.
-;	apps/ydrip/ydrip.c:1025: LED_RED(1);												// Error Indicator
-	orl	_P2DIR,#0x02
 00106$:
-	C$ydrip.c$1027$2$3 ==.
-;	apps/ydrip/ydrip.c:1027: if (packet = radioQueueRxCurrentPacket()) {
+	C$ydrip.c$929$2$2 ==.
+;	apps/ydrip/ydrip.c:929: if (packet = radioQueueRxCurrentPacket()) {
 	push	ar3
 	lcall	_radioQueueRxCurrentPacket
 	mov	r6,dpl
@@ -7887,14 +7945,14 @@ _WaitForPacket:
 	jnz	00136$
 	ljmp	00117$
 00136$:
-	C$ydrip.c$1028$3$7 ==.
-;	apps/ydrip/ydrip.c:1028: uint8 len = packet[0];
+	C$ydrip.c$930$3$6 ==.
+;	apps/ydrip/ydrip.c:930: uint8 len = packet[0];
 	mov	dpl,r4
 	mov	dph,r5
 	movx	a,@dptr
 	mov	r7,a
-	C$ydrip.c$1029$3$7 ==.
-;	apps/ydrip/ydrip.c:1029: fOffset[channel] += FREQEST;
+	C$ydrip.c$931$3$6 ==.
+;	apps/ydrip/ydrip.c:931: fOffset[channel] += FREQEST;
 	mov	a,r3
 	add	a,#_fOffset
 	mov	r1,a
@@ -7904,8 +7962,8 @@ _WaitForPacket:
 	movx	a,@dptr
 	add	a,r6
 	movx	@r1,a
-	C$ydrip.c$1030$1$1 ==.
-;	apps/ydrip/ydrip.c:1030: memcpy(pkt, packet, min8(len+2, sizeof(Dexcom_packet)));
+	C$ydrip.c$932$1$1 ==.
+;	apps/ydrip/ydrip.c:932: memcpy(pkt, packet, min8(len+2, sizeof(Dexcom_packet)));
 	push	ar3
 	mov	r0,#_WaitForPacket_PARM_2
 	movx	a,@r0
@@ -7951,16 +8009,16 @@ _WaitForPacket:
 	mov	b,r6
 	push	ar3
 	lcall	_memcpy
-	C$ydrip.c$1031$3$7 ==.
-;	apps/ydrip/ydrip.c:1031: if(radioCrcPassed()) {
+	C$ydrip.c$933$3$6 ==.
+;	apps/ydrip/ydrip.c:933: if(radioCrcPassed()) {
 	lcall	_radioCrcPassed
 	pop	ar3
 	pop	ar3
 	jc	00137$
 	ljmp	00112$
 00137$:
-	C$ydrip.c$1032$1$1 ==.
-;	apps/ydrip/ydrip.c:1032: dexcom_src_to_ascii(pkt->src_addr, transID);			// Get a human-readable version of the Dexcom Transmitter ID
+	C$ydrip.c$934$1$1 ==.
+;	apps/ydrip/ydrip.c:934: dexcom_src_to_ascii(pkt->src_addr, transID);			// Get a human-readable version of the Dexcom Transmitter ID
 	push	ar3
 	mov	r0,#_WaitForPacket_PARM_2
 	movx	a,@r0
@@ -8000,8 +8058,8 @@ _WaitForPacket:
 	push	ar6
 	push	ar3
 	lcall	_dexcom_src_to_ascii
-	C$ydrip.c$1034$4$8 ==.
-;	apps/ydrip/ydrip.c:1034: if(strcmp(transID,transmitter_id) == 0 || only_listen_for_my_transmitter == 0) { // strcmp will be zero if they match
+	C$ydrip.c$936$4$7 ==.
+;	apps/ydrip/ydrip.c:936: if(strcmp(transID,transmitter_id) == 0 || only_listen_for_my_transmitter == 0) { // strcmp will be zero if they match
 	mov	r0,#_strcmp_PARM_2
 	mov	a,#_transmitter_id
 	movx	@r0,a
@@ -8024,8 +8082,8 @@ _WaitForPacket:
 	jz	00107$
 	jb	_only_listen_for_my_transmitter,00108$
 00107$:
-	C$ydrip.c$1035$5$9 ==.
-;	apps/ydrip/ydrip.c:1035: pkt->txId -= channel;
+	C$ydrip.c$937$5$8 ==.
+;	apps/ydrip/ydrip.c:937: pkt->txId -= channel;			// Subtract the channel number from the txID to make it the same regardless of the channel
 	mov	a,#0x0B
 	add	a,r6
 	mov	r6,a
@@ -8040,56 +8098,56 @@ _WaitForPacket:
 	mov	dpl,r6
 	mov	dph,r7
 	movx	@dptr,a
-	C$ydrip.c$1036$5$9 ==.
-;	apps/ydrip/ydrip.c:1036: radioQueueRxDoneWithPacket();
+	C$ydrip.c$938$5$8 ==.
+;	apps/ydrip/ydrip.c:938: radioQueueRxDoneWithPacket();
 	push	ar3
 	lcall	_radioQueueRxDoneWithPacket
 	pop	ar3
-	C$ydrip.c$1037$6$10 ==.
-;	apps/ydrip/ydrip.c:1037: LED_YELLOW(0);
+	C$ydrip.c$939$6$9 ==.
+;	apps/ydrip/ydrip.c:939: LED_YELLOW(0);
 	mov	r7,_P2DIR
 	anl	ar7,#0xFB
 	mov	_P2DIR,r7
-	C$ydrip.c$1038$5$9 ==.
-;	apps/ydrip/ydrip.c:1038: last_catch_channel = channel;
+	C$ydrip.c$940$5$8 ==.
+;	apps/ydrip/ydrip.c:940: last_catch_channel = channel;	// last_catch_channel does not seem to be used anywhere so this may be obsolete code?
 	mov	r0,#_last_catch_channel
 	mov	a,r3
 	movx	@r0,a
-	C$ydrip.c$1040$5$9 ==.
-;	apps/ydrip/ydrip.c:1040: return 1;
+	C$ydrip.c$941$5$8 ==.
+;	apps/ydrip/ydrip.c:941: return 1;
 	mov	dptr,#0x0001
 	sjmp	00120$
 00108$:
-	C$ydrip.c$1042$5$11 ==.
-;	apps/ydrip/ydrip.c:1042: radioQueueRxDoneWithPacket();
+	C$ydrip.c$943$5$10 ==.
+;	apps/ydrip/ydrip.c:943: radioQueueRxDoneWithPacket();
 	push	ar3
 	lcall	_radioQueueRxDoneWithPacket
 	pop	ar3
 	ljmp	00117$
 00112$:
-	C$ydrip.c$1045$4$12 ==.
-;	apps/ydrip/ydrip.c:1045: radioQueueRxDoneWithPacket();
+	C$ydrip.c$946$4$11 ==.
+;	apps/ydrip/ydrip.c:946: radioQueueRxDoneWithPacket();
 	lcall	_radioQueueRxDoneWithPacket
-	C$ydrip.c$1046$5$13 ==.
-;	apps/ydrip/ydrip.c:1046: LED_YELLOW(0);
+	C$ydrip.c$947$5$12 ==.
+;	apps/ydrip/ydrip.c:947: LED_YELLOW(0);
 	mov	r7,_P2DIR
 	anl	ar7,#0xFB
 	mov	_P2DIR,r7
-	C$ydrip.c$1047$4$12 ==.
-;	apps/ydrip/ydrip.c:1047: return 0;
+	C$ydrip.c$948$4$11 ==.
+;	apps/ydrip/ydrip.c:948: return 0;
 	mov	dptr,#0x0000
 	sjmp	00120$
 00119$:
-	C$ydrip.c$1051$2$14 ==.
-;	apps/ydrip/ydrip.c:1051: LED_YELLOW(0);
+	C$ydrip.c$952$2$13 ==.
+;	apps/ydrip/ydrip.c:952: LED_YELLOW(0);
 	mov	r7,_P2DIR
 	anl	ar7,#0xFB
 	mov	_P2DIR,r7
-	C$ydrip.c$1052$1$1 ==.
-;	apps/ydrip/ydrip.c:1052: return nRet;
+	C$ydrip.c$953$1$1 ==.
+;	apps/ydrip/ydrip.c:953: return nRet;
 	mov	dptr,#0x0000
 00120$:
-	C$ydrip.c$1053$1$1 ==.
+	C$ydrip.c$954$1$1 ==.
 	XG$WaitForPacket$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -8099,8 +8157,8 @@ _WaitForPacket:
 ;wait_chan                 Allocated with name '_delayFor_wait_chan_1_1'
 ;------------------------------------------------------------
 	G$delayFor$0$0 ==.
-	C$ydrip.c$1055$1$1 ==.
-;	apps/ydrip/ydrip.c:1055: XDATA uint32 delayFor(XDATA int wait_chan) {
+	C$ydrip.c$956$1$1 ==.
+;	apps/ydrip/ydrip.c:956: XDATA uint32 delayFor(XDATA int wait_chan) {
 ;	-----------------------------------------
 ;	 function delayFor
 ;	-----------------------------------------
@@ -8112,11 +8170,11 @@ _delayFor:
 	inc	dptr
 	mov	a,r7
 	movx	@dptr,a
-	C$ydrip.c$1056$1$1 ==.
-;	apps/ydrip/ydrip.c:1056: if(needsTimingCalibration) {
+	C$ydrip.c$957$1$1 ==.
+;	apps/ydrip/ydrip.c:957: if(needsTimingCalibration) {
 	jnb	_needsTimingCalibration,00102$
-	C$ydrip.c$1057$2$2 ==.
-;	apps/ydrip/ydrip.c:1057: return delayedWaitTimes[wait_chan];
+	C$ydrip.c$958$2$2 ==.
+;	apps/ydrip/ydrip.c:958: return delayedWaitTimes[wait_chan];
 	mov	dptr,#_delayFor_wait_chan_1_1
 	movx	a,@dptr
 	mov	r6,a
@@ -8149,8 +8207,8 @@ _delayFor:
 	mov	b,r6
 	ljmp	00107$
 00102$:
-	C$ydrip.c$1059$1$1 ==.
-;	apps/ydrip/ydrip.c:1059: if(!wait_chan && sequential_missed_packets) {
+	C$ydrip.c$960$1$1 ==.
+;	apps/ydrip/ydrip.c:960: if(!wait_chan && sequential_missed_packets) {
 	mov	dptr,#_delayFor_wait_chan_1_1
 	movx	a,@dptr
 	mov	r6,a
@@ -8162,8 +8220,8 @@ _delayFor:
 	mov	r0,#_sequential_missed_packets
 	movx	a,@r0
 	jz	00104$
-	C$ydrip.c$1060$2$3 ==.
-;	apps/ydrip/ydrip.c:1060: return waitTimes[wait_chan] + (sequential_missed_packets * wake_earlier_for_next_miss * 2 * 1000);
+	C$ydrip.c$961$2$3 ==.
+;	apps/ydrip/ydrip.c:961: return waitTimes[wait_chan] + (sequential_missed_packets * wake_earlier_for_next_miss * 2 * 1000);
 	mov	ar4,r6
 	mov	a,r7
 	xch	a,r4
@@ -8228,8 +8286,8 @@ _delayFor:
 	mov	b,r3
 	sjmp	00107$
 00104$:
-	C$ydrip.c$1062$2$4 ==.
-;	apps/ydrip/ydrip.c:1062: return waitTimes[wait_chan];
+	C$ydrip.c$963$2$4 ==.
+;	apps/ydrip/ydrip.c:963: return waitTimes[wait_chan];
 	mov	a,r7
 	xch	a,r6
 	add	a,acc
@@ -8257,15 +8315,15 @@ _delayFor:
 	mov	dph,r5
 	mov	b,r6
 00107$:
-	C$ydrip.c$1064$1$1 ==.
+	C$ydrip.c$965$1$1 ==.
 	XG$delayFor$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'get_packet'
 ;------------------------------------------------------------
 	G$get_packet$0$0 ==.
-	C$ydrip.c$1066$1$1 ==.
-;	apps/ydrip/ydrip.c:1066: BIT get_packet(Dexcom_packet* pPkt) {
+	C$ydrip.c$967$1$1 ==.
+;	apps/ydrip/ydrip.c:967: BIT get_packet(Dexcom_packet* pPkt) {
 ;	-----------------------------------------
 ;	 function get_packet
 ;	-----------------------------------------
@@ -8277,8 +8335,8 @@ _get_packet:
 	inc	r0
 	mov	a,r7
 	movx	@r0,a
-	C$ydrip.c$1068$1$1 ==.
-;	apps/ydrip/ydrip.c:1068: for(nChannel = start_channel; nChannel < NUM_CHANNELS; nChannel++) {
+	C$ydrip.c$969$1$1 ==.
+;	apps/ydrip/ydrip.c:969: for(nChannel = start_channel; nChannel < NUM_CHANNELS; nChannel++) {
 	mov	dptr,#_start_channel
 	movx	a,@dptr
 	mov	r4,a
@@ -8293,8 +8351,8 @@ _get_packet:
 	xrl	a,#0x80
 	subb	a,#0x80
 	jnc	00107$
-	C$ydrip.c$1069$2$2 ==.
-;	apps/ydrip/ydrip.c:1069: switch(WaitForPacket(delayFor(nChannel), pPkt, nChannel)) {
+	C$ydrip.c$970$2$2 ==.
+;	apps/ydrip/ydrip.c:970: switch(WaitForPacket(delayFor(nChannel), pPkt, nChannel)) {
 	mov	dpl,r4
 	mov	dph,r5
 	push	ar5
@@ -8328,36 +8386,36 @@ _get_packet:
 00118$:
 	cjne	r6,#0x01,00106$
 	cjne	r7,#0x00,00106$
-	C$ydrip.c$1071$3$3 ==.
-;	apps/ydrip/ydrip.c:1071: needsTimingCalibration = 0;
+	C$ydrip.c$972$3$3 ==.
+;	apps/ydrip/ydrip.c:972: needsTimingCalibration = 0;
 	clr	_needsTimingCalibration
-	C$ydrip.c$1072$3$3 ==.
-;	apps/ydrip/ydrip.c:1072: sequential_missed_packets = 0;
+	C$ydrip.c$973$3$3 ==.
+;	apps/ydrip/ydrip.c:973: sequential_missed_packets = 0;
 	mov	r0,#_sequential_missed_packets
 	clr	a
 	movx	@r0,a
-	C$ydrip.c$1073$3$3 ==.
-;	apps/ydrip/ydrip.c:1073: return 1;
+	C$ydrip.c$974$3$3 ==.
+;	apps/ydrip/ydrip.c:974: return 1;
 	setb	c
-	C$ydrip.c$1076$1$1 ==.
-;	apps/ydrip/ydrip.c:1076: }
+	C$ydrip.c$977$1$1 ==.
+;	apps/ydrip/ydrip.c:977: }
 	sjmp	00110$
 00106$:
-	C$ydrip.c$1068$1$1 ==.
-;	apps/ydrip/ydrip.c:1068: for(nChannel = start_channel; nChannel < NUM_CHANNELS; nChannel++) {
+	C$ydrip.c$969$1$1 ==.
+;	apps/ydrip/ydrip.c:969: for(nChannel = start_channel; nChannel < NUM_CHANNELS; nChannel++) {
 	inc	r4
 	cjne	r4,#0x00,00104$
 	inc	r5
 	sjmp	00104$
 00107$:
-	C$ydrip.c$1078$1$1 ==.
-;	apps/ydrip/ydrip.c:1078: sequential_missed_packets ++;
+	C$ydrip.c$979$1$1 ==.
+;	apps/ydrip/ydrip.c:979: sequential_missed_packets ++;
 	mov	r0,#_sequential_missed_packets
 	movx	a,@r0
 	add	a,#0x01
 	movx	@r0,a
-	C$ydrip.c$1079$1$1 ==.
-;	apps/ydrip/ydrip.c:1079: if(sequential_missed_packets > misses_until_failure) {
+	C$ydrip.c$980$1$1 ==.
+;	apps/ydrip/ydrip.c:980: if(sequential_missed_packets > misses_until_failure) {
 	mov	r0,#_sequential_missed_packets
 	mov	r1,#_misses_until_failure
 	clr	c
@@ -8366,44 +8424,44 @@ _get_packet:
 	movx	a,@r1
 	subb	a,b
 	jnc	00109$
-	C$ydrip.c$1080$2$4 ==.
-;	apps/ydrip/ydrip.c:1080: sequential_missed_packets = 0;
+	C$ydrip.c$981$2$4 ==.
+;	apps/ydrip/ydrip.c:981: sequential_missed_packets = 0;
 	mov	r0,#_sequential_missed_packets
 	clr	a
 	movx	@r0,a
-	C$ydrip.c$1081$2$4 ==.
-;	apps/ydrip/ydrip.c:1081: needsTimingCalibration = 1;
+	C$ydrip.c$982$2$4 ==.
+;	apps/ydrip/ydrip.c:982: needsTimingCalibration = 1;
 	setb	_needsTimingCalibration
 00109$:
-	C$ydrip.c$1083$1$1 ==.
-;	apps/ydrip/ydrip.c:1083: reset_offsets();
+	C$ydrip.c$984$1$1 ==.
+;	apps/ydrip/ydrip.c:984: reset_offsets();
 	lcall	_reset_offsets
-	C$ydrip.c$1084$1$1 ==.
-;	apps/ydrip/ydrip.c:1084: last_catch_channel = 0;
+	C$ydrip.c$985$1$1 ==.
+;	apps/ydrip/ydrip.c:985: last_catch_channel = 0;
 	mov	r0,#_last_catch_channel
 	clr	a
 	movx	@r0,a
-	C$ydrip.c$1085$1$1 ==.
-;	apps/ydrip/ydrip.c:1085: return 0;
+	C$ydrip.c$986$1$1 ==.
+;	apps/ydrip/ydrip.c:986: return 0;
 	clr	c
 00110$:
-	C$ydrip.c$1086$1$1 ==.
+	C$ydrip.c$987$1$1 ==.
 	XG$get_packet$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'setADCInputs'
 ;------------------------------------------------------------
 	G$setADCInputs$0$0 ==.
-	C$ydrip.c$1088$1$1 ==.
-;	apps/ydrip/ydrip.c:1088: void setADCInputs() {
+	C$ydrip.c$989$1$1 ==.
+;	apps/ydrip/ydrip.c:989: void setADCInputs() {
 ;	-----------------------------------------
 ;	 function setADCInputs
 ;	-----------------------------------------
 _setADCInputs:
-	C$ydrip.c$1089$1$1 ==.
-;	apps/ydrip/ydrip.c:1089: P0INP=0; //set pull resistors on pins 0_0 - 0_5 to low
+	C$ydrip.c$990$1$1 ==.
+;	apps/ydrip/ydrip.c:990: P0INP=0; //set pull resistors on pins 0_0 - 0_5 to low
 	mov	_P0INP,#0x00
-	C$ydrip.c$1090$1$1 ==.
+	C$ydrip.c$991$1$1 ==.
 	XG$setADCInputs$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -8412,53 +8470,59 @@ _setADCInputs:
 ;Pkt                       Allocated with name '_main_Pkt_2_2'
 ;------------------------------------------------------------
 	G$main$0$0 ==.
-	C$ydrip.c$1093$1$1 ==.
-;	apps/ydrip/ydrip.c:1093: void main() {
+	C$ydrip.c$994$1$1 ==.
+;	apps/ydrip/ydrip.c:994: void main() {
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-	C$ydrip.c$1095$1$1 ==.
-;	apps/ydrip/ydrip.c:1095: systemInit();
+	C$ydrip.c$995$1$1 ==.
+;	apps/ydrip/ydrip.c:995: systemInit();
 	lcall	_systemInit
-	C$ydrip.c$1096$1$1 ==.
-;	apps/ydrip/ydrip.c:1096: initUart1();
+	C$ydrip.c$996$1$1 ==.
+;	apps/ydrip/ydrip.c:996: initUart1();
 	lcall	_initUart1
-	C$ydrip.c$1098$1$1 ==.
-;	apps/ydrip/ydrip.c:1098: P1DIR |= 0x08; // RTS
+	C$ydrip.c$998$1$1 ==.
+;	apps/ydrip/ydrip.c:998: P1DIR |= 0x08; // RTS
 	orl	_P1DIR,#0x08
-	C$ydrip.c$1099$1$1 ==.
-;	apps/ydrip/ydrip.c:1099: sleepInit();
+	C$ydrip.c$999$1$1 ==.
+;	apps/ydrip/ydrip.c:999: sleepInit();
 	lcall	_sleepInit
-	C$ydrip.c$1100$1$1 ==.
-;	apps/ydrip/ydrip.c:1100: makeAllOutputs();
+	C$ydrip.c$1000$1$1 ==.
+;	apps/ydrip/ydrip.c:1000: makeAllOutputs();
 	lcall	_makeAllOutputs
-	C$ydrip.c$1101$1$1 ==.
-;	apps/ydrip/ydrip.c:1101: setADCInputs();
+	C$ydrip.c$1001$1$1 ==.
+;	apps/ydrip/ydrip.c:1001: setADCInputs();
 	lcall	_setADCInputs
-	C$ydrip.c$1102$1$1 ==.
-;	apps/ydrip/ydrip.c:1102: delayMs(1000);
+	C$ydrip.c$1002$1$1 ==.
+;	apps/ydrip/ydrip.c:1002: delayMs(1000);
 	mov	dptr,#0x03E8
 	lcall	_delayMs
-	C$ydrip.c$1112$1$1 ==.
-;	apps/ydrip/ydrip.c:1112: radioQueueInit();
+	C$ydrip.c$1011$1$1 ==.
+;	apps/ydrip/ydrip.c:1011: radioQueueInit();
 	lcall	_radioQueueInit
-	C$ydrip.c$1113$1$1 ==.
-;	apps/ydrip/ydrip.c:1113: radioQueueAllowCrcErrors = 1;
+	C$ydrip.c$1012$1$1 ==.
+;	apps/ydrip/ydrip.c:1012: radioQueueAllowCrcErrors = 1;
 	setb	_radioQueueAllowCrcErrors
-	C$ydrip.c$1114$1$1 ==.
-;	apps/ydrip/ydrip.c:1114: MCSM1 = 0;
+	C$ydrip.c$1013$1$1 ==.
+;	apps/ydrip/ydrip.c:1013: MCSM1 = 0;
 	mov	dptr,#_MCSM1
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$1115$1$1 ==.
-;	apps/ydrip/ydrip.c:1115: enableESP();
+	C$ydrip.c$1014$1$1 ==.
+;	apps/ydrip/ydrip.c:1014: enableESP();					// Send ESP-12 asleep here so we don't get any noise while listening for Dexcom packets	
 	lcall	_enableESP
-	C$ydrip.c$1117$1$1 ==.
-;	apps/ydrip/ydrip.c:1117: while(1) {
-00113$:
-	C$ydrip.c$1119$2$2 ==.
-;	apps/ydrip/ydrip.c:1119: memset(&Pkt, 0, sizeof(Dexcom_packet));
+	C$ydrip.c$1015$1$1 ==.
+;	apps/ydrip/ydrip.c:1015: uartEnable();
+	lcall	_uartEnable
+	C$ydrip.c$1016$1$1 ==.
+;	apps/ydrip/ydrip.c:1016: ESPsleep();						// Disconnect and send the ESP-12 aseep
+	lcall	_ESPsleep
+	C$ydrip.c$1017$1$1 ==.
+;	apps/ydrip/ydrip.c:1017: while(1) {
+00112$:
+	C$ydrip.c$1019$2$2 ==.
+;	apps/ydrip/ydrip.c:1019: memset(&Pkt, 0, sizeof(Dexcom_packet));
 	mov	r0,#_memset_PARM_2
 	clr	a
 	movx	@r0,a
@@ -8471,85 +8535,72 @@ _main:
 	mov	dptr,#_main_Pkt_2_2
 	mov	b,#0x00
 	lcall	_memset
-	C$ydrip.c$1120$2$2 ==.
-;	apps/ydrip/ydrip.c:1120: boardService();
+	C$ydrip.c$1020$2$2 ==.
+;	apps/ydrip/ydrip.c:1020: boardService();
 	lcall	_boardService
-	C$ydrip.c$1122$2$2 ==.
-;	apps/ydrip/ydrip.c:1122: if (debug_mode) {
-	jnb	_debug_mode,00105$
-	C$ydrip.c$1123$3$3 ==.
-;	apps/ydrip/ydrip.c:1123: print_packet(&Pkt);	
+	C$ydrip.c$1022$2$2 ==.
+;	apps/ydrip/ydrip.c:1022: if (debug_mode) {
+	jnb	_debug_mode,00104$
+	C$ydrip.c$1023$3$3 ==.
+;	apps/ydrip/ydrip.c:1023: enableESP();
+	lcall	_enableESP
+	C$ydrip.c$1024$3$3 ==.
+;	apps/ydrip/ydrip.c:1024: print_packet(&Pkt);	
 	mov	dptr,#_main_Pkt_2_2
 	lcall	_print_packet
-	sjmp	00106$
-00105$:
-	C$ydrip.c$1125$3$4 ==.
-;	apps/ydrip/ydrip.c:1125: if(get_packet(&Pkt)) {
+	C$ydrip.c$1025$3$3 ==.
+;	apps/ydrip/ydrip.c:1025: ESPsleep();											// Disconnect and send the ESP asleep
+	lcall	_ESPsleep
+	C$ydrip.c$1026$3$3 ==.
+;	apps/ydrip/ydrip.c:1026: delayMs(5000);
+	mov	dptr,#0x1388
+	lcall	_delayMs
+	sjmp	00105$
+00104$:
+	C$ydrip.c$1028$3$4 ==.
+;	apps/ydrip/ydrip.c:1028: if(get_packet(&Pkt)) {
 	mov	dptr,#_main_Pkt_2_2
 	lcall	_get_packet
-	jnc	00102$
-	C$ydrip.c$1126$4$5 ==.
-;	apps/ydrip/ydrip.c:1126: RFST = 4;
+	jnc	00105$
+	C$ydrip.c$1029$4$5 ==.
+;	apps/ydrip/ydrip.c:1029: RFST = 4;
 	mov	_RFST,#0x04
-	C$ydrip.c$1127$4$5 ==.
-;	apps/ydrip/ydrip.c:1127: delayMs(100);
+	C$ydrip.c$1030$4$5 ==.
+;	apps/ydrip/ydrip.c:1030: delayMs(100);
 	mov	dptr,#0x0064
 	lcall	_delayMs
-	C$ydrip.c$1128$4$5 ==.
-;	apps/ydrip/ydrip.c:1128: radioMacSleep();
+	C$ydrip.c$1031$4$5 ==.
+;	apps/ydrip/ydrip.c:1031: radioMacSleep();									// Switch off radio before switching on ESP to save a bit of battery
 	lcall	_radioMacSleep
-	C$ydrip.c$1129$4$5 ==.
-;	apps/ydrip/ydrip.c:1129: print_packet(&Pkt);
+	C$ydrip.c$1032$4$5 ==.
+;	apps/ydrip/ydrip.c:1032: enableESP();
+	lcall	_enableESP
+	C$ydrip.c$1033$4$5 ==.
+;	apps/ydrip/ydrip.c:1033: print_packet(&Pkt);
 	mov	dptr,#_main_Pkt_2_2
 	lcall	_print_packet
-	C$ydrip.c$1130$4$5 ==.
-;	apps/ydrip/ydrip.c:1130: ESPsleep();											// Disconnect and send the fona asleep
+	C$ydrip.c$1034$4$5 ==.
+;	apps/ydrip/ydrip.c:1034: ESPsleep();											// Disconnect and send the ESP asleep
 	lcall	_ESPsleep
-	sjmp	00106$
-00102$:
-	C$ydrip.c$1133$4$6 ==.
-;	apps/ydrip/ydrip.c:1133: RFST = 4;
-	mov	_RFST,#0x04
-	C$ydrip.c$1134$4$6 ==.
-;	apps/ydrip/ydrip.c:1134: delayMs(100);
-	mov	dptr,#0x0064
-	lcall	_delayMs
-	C$ydrip.c$1135$4$6 ==.
-;	apps/ydrip/ydrip.c:1135: radioMacSleep();
-	lcall	_radioMacSleep
-	C$ydrip.c$1136$5$7 ==.
-;	apps/ydrip/ydrip.c:1136: LED_RED(1);	    LED_YELLOW(0);    delayMs(7000);	LED_RED(0);	    LED_YELLOW(0);    //		delayMs(3000);
-	orl	_P2DIR,#0x02
-	mov	r7,_P2DIR
-	anl	ar7,#0xFB
-	mov	_P2DIR,r7
-	mov	dptr,#0x1B58
-	lcall	_delayMs
-	mov	r7,_P2DIR
-	anl	ar7,#0xFD
-	mov	_P2DIR,r7
-	mov	r7,_P2DIR
-	anl	ar7,#0xFB
-	mov	_P2DIR,r7
-00106$:
-	C$ydrip.c$1144$2$2 ==.
-;	apps/ydrip/ydrip.c:1144: if(usbPowerPresent()){
+00105$:
+	C$ydrip.c$1037$2$2 ==.
+;	apps/ydrip/ydrip.c:1037: if(usbPowerPresent()){
 	lcall	_usbPowerPresent
-	jnc	00108$
-	C$ydrip.c$1145$3$11 ==.
-;	apps/ydrip/ydrip.c:1145: sequential_missed_packets++;	// Why only increment this if usb connected?  It is incremented in get_packet also so a bit confusing
+	jnc	00107$
+	C$ydrip.c$1038$3$6 ==.
+;	apps/ydrip/ydrip.c:1038: sequential_missed_packets++;	// Why only increment this if usb connected?  It is incremented in get_packet also so a bit confusing
 	mov	r0,#_sequential_missed_packets
 	movx	a,@r0
 	add	a,#0x01
 	movx	@r0,a
-00108$:
-	C$ydrip.c$1147$2$2 ==.
-;	apps/ydrip/ydrip.c:1147: if(sequential_missed_packets > 0) {
+00107$:
+	C$ydrip.c$1040$2$2 ==.
+;	apps/ydrip/ydrip.c:1040: if(sequential_missed_packets > 0) {
 	mov	r0,#_sequential_missed_packets
 	movx	a,@r0
-	jz	00110$
-	C$ydrip.c$1148$3$12 ==.
-;	apps/ydrip/ydrip.c:1148: int first_square = sequential_missed_packets * sequential_missed_packets * wake_earlier_for_next_miss;
+	jz	00109$
+	C$ydrip.c$1041$3$7 ==.
+;	apps/ydrip/ydrip.c:1041: int first_square = sequential_missed_packets * sequential_missed_packets * wake_earlier_for_next_miss;
 	mov	r0,#_sequential_missed_packets
 	movx	a,@r0
 	mov	b,a
@@ -8567,8 +8618,8 @@ _main:
 	lcall	__mulint
 	mov	r6,dpl
 	mov	r7,dph
-	C$ydrip.c$1149$3$12 ==.
-;	apps/ydrip/ydrip.c:1149: int second_square = (sequential_missed_packets - 1) * (sequential_missed_packets - 1) * wake_earlier_for_next_miss;
+	C$ydrip.c$1042$3$7 ==.
+;	apps/ydrip/ydrip.c:1042: int second_square = (sequential_missed_packets - 1) * (sequential_missed_packets - 1) * wake_earlier_for_next_miss;
 	mov	r0,#_sequential_missed_packets
 	movx	a,@r0
 	mov	r5,#0x00
@@ -8608,9 +8659,9 @@ _main:
 	mov	r5,dph
 	pop	ar6
 	pop	ar7
-	C$ydrip.c$1150$3$12 ==.
-;	apps/ydrip/ydrip.c:1150: int sleep_time = (245 - first_square + second_square);
-	mov	a,#0xF5
+	C$ydrip.c$1043$3$7 ==.
+;	apps/ydrip/ydrip.c:1043: int sleep_time = (220 - first_square + second_square);  // temp from 230
+	mov	a,#0xDC
 	clr	c
 	subb	a,r6
 	mov	r6,a
@@ -8623,37 +8674,43 @@ _main:
 	mov	a,r5
 	addc	a,r7
 	mov	dph,a
-	C$ydrip.c$1151$3$12 ==.
-;	apps/ydrip/ydrip.c:1151: goToSleep(sleep_time);
+	C$ydrip.c$1044$3$7 ==.
+;	apps/ydrip/ydrip.c:1044: goToSleep(sleep_time);
 	lcall	_goToSleep
-	sjmp	00111$
+	sjmp	00110$
+00109$:
+	C$ydrip.c$1046$3$8 ==.
+;	apps/ydrip/ydrip.c:1046: goToSleep(235);		// Wixel sleep for 245 seconds - temp from 245
+	mov	dptr,#0x00EB
+	lcall	_goToSleep
 00110$:
-	C$ydrip.c$1153$3$13 ==.
-;	apps/ydrip/ydrip.c:1153: goToSleep(260);		// Wixel sleep for 260 seconds
-	mov	dptr,#0x0104
-	lcall	_goToSleep
-00111$:
-	C$ydrip.c$1156$2$2 ==.
-;	apps/ydrip/ydrip.c:1156: radioMacResume();
+	C$ydrip.c$1051$2$2 ==.
+;	apps/ydrip/ydrip.c:1051: killWithWatchdog();									// Set interrupts to reset
+	lcall	_killWithWatchdog
+	C$ydrip.c$1052$3$9 ==.
+;	apps/ydrip/ydrip.c:1052: LED_RED(1);											// Error Indicator
+	orl	_P2DIR,#0x02
+	C$ydrip.c$1053$2$2 ==.
+;	apps/ydrip/ydrip.c:1053: delayMs(2000);										// Wait for interrupt to kick in and reset to occur
+	mov	dptr,#0x07D0
+	lcall	_delayMs
+	C$ydrip.c$1057$2$2 ==.
+;	apps/ydrip/ydrip.c:1057: radioMacResume();
 	lcall	_radioMacResume
-	C$ydrip.c$1157$2$2 ==.
-;	apps/ydrip/ydrip.c:1157: MCSM1 = 0;
+	C$ydrip.c$1058$2$2 ==.
+;	apps/ydrip/ydrip.c:1058: MCSM1 = 0;
 	mov	dptr,#_MCSM1
 	clr	a
 	movx	@dptr,a
-	C$ydrip.c$1158$2$2 ==.
-;	apps/ydrip/ydrip.c:1158: radioMacStrobe();
+	C$ydrip.c$1059$2$2 ==.
+;	apps/ydrip/ydrip.c:1059: radioMacStrobe();
 	lcall	_radioMacStrobe
-	ljmp	00113$
-	C$ydrip.c$1160$1$1 ==.
+	ljmp	00112$
+	C$ydrip.c$1061$1$1 ==.
 	XG$main$0$0 ==.
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
-Fydrip$apnString$0$0 == .
-_apnString:
-	.ascii "internet"
-	.db 0x00
 Fydrip$_str_1$0$0 == .
 __str_1:
 	.ascii "dofile("
@@ -8679,6 +8736,12 @@ __str_3:
 	.db 0x00
 Fydrip$_str_4$0$0 == .
 __str_4:
+	.ascii "-- Length is %d"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+Fydrip$_str_5$0$0 == .
+__str_5:
 	.ascii "file.open("
 	.db 0x22
 	.ascii "init.lua"
@@ -8691,50 +8754,50 @@ __str_4:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_5$0$0 == .
-__str_5:
-	.ascii "file.writeline([[gpio.mode(3, gpio.OUTPUT)]])"
-	.db 0x0D
-	.db 0x0A
-	.db 0x00
 Fydrip$_str_6$0$0 == .
 __str_6:
-	.ascii "file.writeline([[gpio.write(3, gpio.LOW)]])"
+	.ascii "file.writeline([[gpio.mode(3, gpio.OUTPUT)]])"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_7$0$0 == .
 __str_7:
-	.ascii "file.writeline([[gpio.mode(5, gpio.OUTPUT)]])"
+	.ascii "file.writeline([[gpio.write(3, gpio.LOW)]])"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_8$0$0 == .
 __str_8:
-	.ascii "file.writeline([[gpio.write(5, gpio.LOW)]])"
+	.ascii "file.writeline([[gpio.mode(5, gpio.OUTPUT)]])"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_9$0$0 == .
 __str_9:
-	.ascii "file.writeline([[gpio.mode(4, gpio.OUTPUT)]])"
+	.ascii "file.writeline([[gpio.write(5, gpio.LOW)]])"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_10$0$0 == .
 __str_10:
-	.ascii "file.close()"
+	.ascii "file.writeline([[gpio.mode(4, gpio.OUTPUT)]])"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_11$0$0 == .
 __str_11:
-	.ascii "file.remove('googletime.lua')"
+	.ascii "file.close()"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_12$0$0 == .
 __str_12:
+	.ascii "file.remove('googletime.lua')"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+Fydrip$_str_13$0$0 == .
+__str_13:
 	.ascii "file.open("
 	.db 0x22
 	.ascii "googletime.lua"
@@ -8747,14 +8810,14 @@ __str_12:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_13$0$0 == .
-__str_13:
+Fydrip$_str_14$0$0 == .
+__str_14:
 	.ascii "file.writeline([[connG=net.createConnection(net.TCP, 0)]])"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_14$0$0 == .
-__str_14:
+Fydrip$_str_15$0$0 == .
+__str_15:
 	.ascii "file.writeline([[connG:on("
 	.db 0x22
 	.ascii "connection"
@@ -8764,8 +8827,8 @@ __str_14:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_15$0$0 == .
-__str_15:
+Fydrip$_str_16$0$0 == .
+__str_16:
 	.ascii "file.writeline([[connG:send("
 	.db 0x22
 	.ascii "HEAD / HTTP/1.1"
@@ -8787,8 +8850,8 @@ __str_15:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_16$0$0 == .
-__str_16:
+Fydrip$_str_17$0$0 == .
+__str_17:
 	.ascii "file.writeline([["
 	.db 0x22
 	.ascii "User-Agent: Mozilla/4.0 (compatible; esp82"
@@ -8806,8 +8869,8 @@ __str_16:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_17$0$0 == .
-__str_17:
+Fydrip$_str_18$0$0 == .
+__str_18:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "connG:on("
@@ -8823,8 +8886,8 @@ __str_17:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_18$0$0 == .
-__str_18:
+Fydrip$_str_19$0$0 == .
+__str_19:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "print(string.sub(payload,string.find(payload"
@@ -8846,8 +8909,8 @@ __str_18:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_19$0$0 == .
-__str_19:
+Fydrip$_str_20$0$0 == .
+__str_20:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "string.sub(payload,string.find(payload,"
@@ -8869,8 +8932,8 @@ __str_19:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_20$0$0 == .
-__str_20:
+Fydrip$_str_21$0$0 == .
+__str_21:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "string.sub(payload,string.find(payload,"
@@ -8892,8 +8955,8 @@ __str_20:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_21$0$0 == .
-__str_21:
+Fydrip$_str_22$0$0 == .
+__str_22:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "string.sub(payload,string.find(payload,"
@@ -8915,8 +8978,8 @@ __str_21:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_22$0$0 == .
-__str_22:
+Fydrip$_str_23$0$0 == .
+__str_23:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "string.sub(payload,string.find(payload,"
@@ -8938,8 +9001,8 @@ __str_22:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_23$0$0 == .
-__str_23:
+Fydrip$_str_24$0$0 == .
+__str_24:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "string.sub(payload,string.find(payload,"
@@ -8961,8 +9024,8 @@ __str_23:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_24$0$0 == .
-__str_24:
+Fydrip$_str_25$0$0 == .
+__str_25:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "string.sub(payload,string.find(payload,"
@@ -8995,8 +9058,8 @@ __str_24:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_25$0$0 == .
-__str_25:
+Fydrip$_str_26$0$0 == .
+__str_26:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "connG:close()"
@@ -9005,8 +9068,8 @@ __str_25:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_26$0$0 == .
-__str_26:
+Fydrip$_str_27$0$0 == .
+__str_27:
 	.ascii "file.writeline("
 	.db 0x22
 	.ascii "end)"
@@ -9015,14 +9078,14 @@ __str_26:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_27$0$0 == .
-__str_27:
+Fydrip$_str_28$0$0 == .
+__str_28:
 	.ascii "file.writeline([[connG:connect(80,'google.com')]])"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_28$0$0 == .
-__str_28:
+Fydrip$_str_29$0$0 == .
+__str_29:
 	.ascii "print('connG ready"
 	.db 0x5C
 	.ascii "r"
@@ -9031,42 +9094,27 @@ __str_28:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_29$0$0 == .
-__str_29:
-	.ascii "print(wifi.sta.status())"
-	.db 0x0D
-	.db 0x0A
-	.db 0x00
 Fydrip$_str_30$0$0 == .
 __str_30:
-	.ascii "gpio.write(4, gpio.HIGH)"
+	.ascii "print(wifi.sta.status())"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_31$0$0 == .
 __str_31:
-	.ascii "gpio.write(4, gpio.LOW)"
+	.ascii "gpio.write(4, gpio.HIGH)"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_32$0$0 == .
 __str_32:
-	.ascii "wifi.sta.connect()"
+	.ascii "gpio.write(4, gpio.LOW)"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_33$0$0 == .
 __str_33:
-	.ascii "wifi.sta.config("
-	.db 0x22
-	.ascii "Intersect_1"
-	.db 0x22
-	.ascii ","
-	.db 0x22
-	.ascii "Alongkey123"
-	.db 0x22
-	.ascii ")  wifi.sta.conne"
-	.ascii "ct()"
+	.ascii "wifi.sta.connect()"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
@@ -9074,14 +9122,14 @@ Fydrip$_str_34$0$0 == .
 __str_34:
 	.ascii "wifi.sta.config("
 	.db 0x22
-	.ascii "TRENDnet653{downstairs}"
+	.ascii "HomeWifiName"
 	.db 0x22
 	.ascii ","
 	.db 0x22
-	.ascii "stonebr!dge"
+	.ascii "HomeWifiKey"
 	.db 0x22
-	.ascii ")  wi"
-	.ascii "fi.sta.connect()"
+	.ascii ")  wifi.sta.conn"
+	.ascii "ect()"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
@@ -9089,14 +9137,14 @@ Fydrip$_str_35$0$0 == .
 __str_35:
 	.ascii "wifi.sta.config("
 	.db 0x22
-	.ascii "TRENDnet653{upstairs}"
+	.ascii "SchoolWifiDdownstairs"
 	.db 0x22
 	.ascii ","
 	.db 0x22
-	.ascii "stonebr!dge"
+	.ascii "SchoolPassword"
 	.db 0x22
-	.ascii ")  wifi"
-	.ascii ".sta.connect()"
+	.ascii ")  w"
+	.ascii "ifi.sta.connect()"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
@@ -9104,14 +9152,14 @@ Fydrip$_str_36$0$0 == .
 __str_36:
 	.ascii "wifi.sta.config("
 	.db 0x22
-	.ascii "Hillside"
+	.ascii "SchoolUpstairs"
 	.db 0x22
 	.ascii ","
 	.db 0x22
-	.ascii "VariousChars"
+	.ascii "SchoolPassword"
 	.db 0x22
-	.ascii ")  wifi.sta.connect"
-	.ascii "()"
+	.ascii ")  wifi.sta"
+	.ascii ".connect()"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
@@ -9119,11 +9167,11 @@ Fydrip$_str_37$0$0 == .
 __str_37:
 	.ascii "wifi.sta.config("
 	.db 0x22
-	.ascii "Cagey_HTC"
+	.ascii "Hillside"
 	.db 0x22
 	.ascii ","
 	.db 0x22
-	.ascii "1234567890"
+	.ascii "RandomChars"
 	.db 0x22
 	.ascii ")  wifi.sta.connect("
 	.ascii ")"
@@ -9132,12 +9180,27 @@ __str_37:
 	.db 0x00
 Fydrip$_str_38$0$0 == .
 __str_38:
-	.ascii "sk=net.createConnection(net.TCP, 0)"
+	.ascii "wifi.sta.config("
+	.db 0x22
+	.ascii "Cagey_HTC"
+	.db 0x22
+	.ascii ","
+	.db 0x22
+	.ascii "Cagey1234567890"
+	.db 0x22
+	.ascii ")  wifi.sta.con"
+	.ascii "nect()"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_39$0$0 == .
 __str_39:
+	.ascii "sk=net.createConnection(net.TCP, 0)"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+Fydrip$_str_40$0$0 == .
+__str_40:
 	.ascii "sk:on("
 	.db 0x22
 	.ascii "receive"
@@ -9146,24 +9209,24 @@ __str_39:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_40$0$0 == .
-__str_40:
-	.ascii "sk:connect("
-	.db 0x00
 Fydrip$_str_41$0$0 == .
 __str_41:
-	.ascii ","
-	.db 0x22
+	.ascii "sk:connect("
 	.db 0x00
 Fydrip$_str_42$0$0 == .
 __str_42:
+	.ascii ","
+	.db 0x22
+	.db 0x00
+Fydrip$_str_43$0$0 == .
+__str_43:
 	.db 0x22
 	.ascii ")"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_43$0$0 == .
-__str_43:
+Fydrip$_str_44$0$0 == .
+__str_44:
 	.ascii "dofile("
 	.db 0x22
 	.ascii "googletime.lua"
@@ -9172,109 +9235,109 @@ __str_43:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_44$0$0 == .
-__str_44:
-	.ascii "-- **DEBUG** length of C is %d"
-	.db 0x0D
-	.db 0x0A
-	.db 0x00
 Fydrip$_str_45$0$0 == .
 __str_45:
+	.ascii "-- **DEBUG** length of C is %d"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_46$0$0 == .
 __str_46:
-	.ascii "Jan"
+	.db 0x0D
+	.db 0x0A
 	.db 0x00
 Fydrip$_str_47$0$0 == .
 __str_47:
-	.ascii "Feb"
+	.ascii "Jan"
 	.db 0x00
 Fydrip$_str_48$0$0 == .
 __str_48:
-	.ascii "Mar"
+	.ascii "Feb"
 	.db 0x00
 Fydrip$_str_49$0$0 == .
 __str_49:
-	.ascii "Apr"
+	.ascii "Mar"
 	.db 0x00
 Fydrip$_str_50$0$0 == .
 __str_50:
-	.ascii "May"
+	.ascii "Apr"
 	.db 0x00
 Fydrip$_str_51$0$0 == .
 __str_51:
-	.ascii "Jun"
+	.ascii "May"
 	.db 0x00
 Fydrip$_str_52$0$0 == .
 __str_52:
-	.ascii "Jul"
+	.ascii "Jun"
 	.db 0x00
 Fydrip$_str_53$0$0 == .
 __str_53:
-	.ascii "Aug"
+	.ascii "Jul"
 	.db 0x00
 Fydrip$_str_54$0$0 == .
 __str_54:
-	.ascii "Sep"
+	.ascii "Aug"
 	.db 0x00
 Fydrip$_str_55$0$0 == .
 __str_55:
-	.ascii "Oct"
+	.ascii "Sep"
 	.db 0x00
 Fydrip$_str_56$0$0 == .
 __str_56:
-	.ascii "Nov"
+	.ascii "Oct"
 	.db 0x00
 Fydrip$_str_57$0$0 == .
 __str_57:
-	.ascii "Dec"
+	.ascii "Nov"
 	.db 0x00
 Fydrip$_str_58$0$0 == .
 __str_58:
+	.ascii "Dec"
+	.db 0x00
+Fydrip$_str_59$0$0 == .
+__str_59:
 	.ascii "sk:close()"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_59$0$0 == .
-__str_59:
+Fydrip$_str_60$0$0 == .
+__str_60:
 	.ascii "node.dsleep(270000000)"
-	.db 0x0D
-	.db 0x0A
-	.db 0x00
-Fydrip$_str_61$0$0 == .
-__str_61:
-	.ascii "-- **DEBUG** iv is %s"
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
 Fydrip$_str_62$0$0 == .
 __str_62:
-	.ascii "%s %hhu %s %lu %lu %d %d 100 -16.127100,51.241300"
+	.ascii "-- **DEBUG** iv is %s"
+	.db 0x0D
+	.db 0x0A
 	.db 0x00
 Fydrip$_str_63$0$0 == .
 __str_63:
+	.ascii "%s %hhu %s %lu %lu %d %d 100 -6.127100,53.241300"
+	.db 0x00
+Fydrip$_str_64$0$0 == .
+__str_64:
 	.ascii "sk:send("
 	.db 0x22
 	.ascii "yDrip(AES): "
 	.db 0x00
-Fydrip$_str_64$0$0 == .
-__str_64:
-	.ascii "%02x"
-	.db 0x00
 Fydrip$_str_65$0$0 == .
 __str_65:
-	.ascii " "
+	.ascii "%02x"
 	.db 0x00
 Fydrip$_str_66$0$0 == .
 __str_66:
+	.ascii " "
+	.db 0x00
+Fydrip$_str_67$0$0 == .
+__str_67:
 	.ascii "sk:send("
 	.db 0x22
 	.ascii "yDrip: "
 	.db 0x00
-Fydrip$_str_67$0$0 == .
-__str_67:
+Fydrip$_str_68$0$0 == .
+__str_68:
 	.db 0x5C
 	.ascii "r"
 	.db 0x5C
@@ -9284,20 +9347,20 @@ __str_67:
 	.db 0x0D
 	.db 0x0A
 	.db 0x00
-Fydrip$_str_69$0$0 == .
-__str_69:
-	.ascii "6F5YP"
-	.db 0x00
 Fydrip$_str_70$0$0 == .
 __str_70:
-	.ascii "intersecting.DuckDNS.org"
+	.ascii "6F5YP"
 	.db 0x00
 Fydrip$_str_71$0$0 == .
 __str_71:
-	.ascii "17611"
+	.ascii "REPLACEME.DuckDNS.org"
 	.db 0x00
 Fydrip$_str_72$0$0 == .
 __str_72:
+	.ascii "17611"
+	.db 0x00
+Fydrip$_str_73$0$0 == .
+__str_73:
 	.ascii "GGyDrip"
 	.db 0x00
 	.area XINIT   (CODE)
@@ -9307,7 +9370,7 @@ __xinit__transmitter_id:
 	.db 0x00
 Fydrip$__xinit_dexie_host_address$0$0 == .
 __xinit__dexie_host_address:
-	.ascii "intersecting.DuckDNS.org"
+	.ascii "REPLACEME.DuckDNS.org"
 	.db 0x00
 Fydrip$__xinit_dexie_host_port$0$0 == .
 __xinit__dexie_host_port:
@@ -9319,13 +9382,13 @@ __xinit__wixFone_ID:
 	.db 0x00
 Fydrip$__xinit_key$0$0 == .
 __xinit__key:
-	.db #0x78	; 120	'x'
+	.db #0x4D	; 77	'M'
+	.db #0x79	; 121	'y'
+	.db #0x79	; 121	'y'
 	.db #0x44	; 68	'D'
 	.db #0x72	; 114	'r'
 	.db #0x7C	; 124
 	.db #0x50	; 80	'P'
-	.db #0x32	; 50	'2'
-	.db #0x67	; 103	'g'
 	.db #0x26	; 38
 	.db #0x41	; 65	'A'
 	.db #0x45	; 69	'E'
@@ -9366,8 +9429,8 @@ __xinit__dmaDesc:
 Fydrip$__xinit_AT_TIMEOUT$0$0 == .
 __xinit__AT_TIMEOUT:
 	.db #0x01	; 1
-Fydrip$__xinit_defaultATWait$0$0 == .
-__xinit__defaultATWait:
+Fydrip$__xinit_defaultWaitTime$0$0 == .
+__xinit__defaultWaitTime:
 	.byte #0xF4,#0x01,#0x00,#0x00	; 500
 Fydrip$__xinit_SrcNameTable$0$0 == .
 __xinit__SrcNameTable:
