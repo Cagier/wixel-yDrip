@@ -123,6 +123,10 @@ I will update these later to include all the yDrip references and the Dexie appl
 
 # WIRING DIAGRAM
 
-The yDrip is built with the following wiring:
+The basic yDrip is built with the following wiring:
 
 ![yDrip picture](./ydrip.png?raw=true "yDrip wiring diagram")
+
+but the more recent version uses a couple more components
+
+![yDrip picture](./ydrip-schematicfs.png?raw=true "yDrip schematic diagram")
