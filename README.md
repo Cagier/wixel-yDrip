@@ -112,6 +112,7 @@ And from me also, I need to thank kokke for the original AES-128-C code which I 
 
 
 # LINKS
+* [Dexie Server](https://github.com/Cagier/Dexie)
 * [The original xDrip Project Site](http://stephenblackwasalreadytaken.github.io/xDrip/)
 * [What you will need & Diagrams](https://github.com/StephenBlackWasAlreadyTaken/xDrip/blob/gh-pages/hardware_setup.md)
 * [Wixel App](https://github.com/StephenBlackWasAlreadyTaken/wixel-xDrip)
